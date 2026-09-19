@@ -515,7 +515,7 @@
               <button class="btn btn-ghost" style="padding:1px 8px;font-size:12.5px;flex:none" onClick="{{ zone.waveClear }}">Measured</button>
             </sc-if>
           </div>
-          <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.waveNote }}</div>
+          <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.waveNoteHead }}<sc-if value="{{ zone.waveNoteLinked }}" hint-placeholder-val="{{ false }}"><a href="https://greasyfork.org/en/scripts/595108-mwi-insight" target="_blank" rel="noopener" style="color:var(--color-accent-300);text-decoration:underline;text-underline-offset:2px">MWI Insight</a>{{ zone.waveNoteTail }}</sc-if></div>
           <sc-if value="{{ zone.waveBad }}" hint-placeholder-val="{{ false }}">
             <div style="font-size:12.5px;margin-top:3px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.waveError }}</div>
           </sc-if>
@@ -599,13 +599,26 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:3px;max-height:160px;overflow-y:auto;padding:2px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
         <sc-for list="{{ zone.runs }}" as="r" hint-placeholder-count="3">
-          <button class="btn" onClick="{{ r.pick }}" style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:baseline;text-align:left;padding:5px 9px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);flex:none;{{ r.style }}" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
-            <span style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.label }}</span>
-            <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums;justify-self:end;white-space:nowrap">{{ r.sub }}</span>
-            <sc-if value="{{ r.mark }}" hint-placeholder-val="{{ false }}">
-              <span class="tag tag-outline" style="font-size:10.5px;flex:none">{{ r.mark }}</span>
-            </sc-if>
-          </button>
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px;align-items:center;padding-right:6px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);flex:none;{{ r.style }}">
+            <button class="btn" onClick="{{ r.pick }}" style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:baseline;text-align:left;padding:5px 9px;border:none;background:transparent;min-width:0" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+              <span style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.label }}</span>
+              <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums;justify-self:end;white-space:nowrap">{{ r.sub }}</span>
+              <sc-if value="{{ r.mark }}" hint-placeholder-val="{{ false }}">
+                <span class="tag tag-outline" style="font-size:10.5px;flex:none">{{ r.mark }}</span>
+              </sc-if>
+            </button>
+            <div style="display:flex;gap:6px;align-items:center;flex:none">
+              <sc-if value="{{ r.saved }}" hint-placeholder-val="{{ false }}">
+                <span class="tag tag-accent" style="font-size:10.5px;flex:none" title="Kept in this browser; manage it on the Saved tab">saved</span>
+              </sc-if>
+              <sc-if value="{{ r.canSave }}" hint-placeholder-val="{{ false }}">
+                <button class="btn btn-secondary" style="padding:1px 9px;font-size:12.5px;flex:none" title="Keep this run after the page is reloaded, so a later run can be compared against it" onClick="{{ r.save }}">Save</button>
+              </sc-if>
+              <sc-if value="{{ r.canSetup }}" hint-placeholder-val="{{ false }}">
+                <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px;flex:none" title="Load this run's party, board and settings into Setup as the baseline, seed and hours pinned — change one thing and run to see what it was worth" onClick="{{ r.setup }}">Use as Baseline</button>
+              </sc-if>
+            </div>
+          </div>
         </sc-for>
       </div>
     </div>
@@ -625,14 +638,13 @@
         </span>
       </div>
       <div style="display:flex;flex-direction:column;gap:2px">
-        <div style="display:grid;grid-template-columns:minmax(126px,1fr) 90px 70px 78px minmax(146px,1.35fr) minmax(152px,1.35fr) 54px;gap:10px;padding:0 8px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase" class="text-muted">
-          <span>Zone · tier</span><span title="Encounters per hour on a planet; full dungeon clears per hour in a dungeon">EPH</span><span>Kills / h</span><span>Deaths / h</span><span>XP / h</span><span>Profit / day</span><span>Cowbells</span>
+        <div style="display:grid;grid-template-columns:175px 90px 78px minmax(0,1fr) minmax(0,1fr) 112px;gap:12px;padding:0 8px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase" class="text-muted">
+          <span>Zone · tier</span><span title="Encounters per hour on a planet; full dungeon clears per hour in a dungeon">EPH</span><span>Deaths / h</span><span>XP / h</span><span>Profit / day</span><span style="text-align:right;white-space:normal;line-height:1.25" title="Cowbells each player earns per day of play, from the loot table (the party total divided by the party size)">Cowbells / day<br>per player</span>
         </div>
         <sc-for list="{{ zone.rows }}" as="r" hint-placeholder-count="3">
-          <button onClick="{{ r.select }}" class="btn" style="display:grid;grid-template-columns:minmax(126px,1fr) 90px 70px 78px minmax(146px,1.35fr) minmax(152px,1.35fr) 54px;gap:10px;align-items:center;text-align:left;padding:5px 8px;border-radius:var(--radius-sm);border-color:transparent;background:{{ r.openBg }};white-space:nowrap" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
+          <button onClick="{{ r.select }}" class="btn" style="display:grid;grid-template-columns:175px 90px 78px minmax(0,1fr) minmax(0,1fr) 112px;gap:12px;align-items:center;text-align:left;padding:5px 8px;width:100%;min-width:0;box-sizing:border-box;border-radius:var(--radius-sm);border-color:transparent;background:{{ r.openBg }};white-space:nowrap" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
             <span style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis" title="{{ r.zoneTip }}">{{ r.zone }}</span>
             <span style="font-size:13.5px;font-variant-numeric:tabular-nums;min-width:0;overflow:hidden;text-overflow:ellipsis" title="{{ r.rateTip }}">{{ r.rateText }}</span>
-            <span style="font-size:13.5px;font-variant-numeric:tabular-nums">{{ r.killsText }}</span>
             <span style="font-size:13.5px;font-variant-numeric:tabular-nums" title="{{ r.deathsTip }}">{{ r.deathsText }}</span>
             <span style="display:flex;gap:7px;align-items:baseline;min-width:0;overflow:hidden" title="{{ r.xpTip }}">
               <span style="font-size:13.5px;font-variant-numeric:tabular-nums;color:var(--color-accent-300);flex:none">{{ r.xpText }}</span>
@@ -642,7 +654,7 @@
               <span style="font-size:13.5px;font-variant-numeric:tabular-nums;color:{{ r.profitColor }};flex:none">{{ r.profitText }}</span>
               <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums;min-width:0;overflow:hidden;text-overflow:ellipsis">{{ r.profitEachText }}</span>
             </span>
-            <span style="font-size:13.5px;font-variant-numeric:tabular-nums">{{ r.bellsText }}</span>
+            <span style="font-size:13.5px;font-variant-numeric:tabular-nums;text-align:right">{{ r.bellsText }}</span>
           </button>
         </sc-for>
       </div>
@@ -796,51 +808,26 @@
   <sc-if value="{{ view.saved }}" hint-placeholder-val="{{ false }}">
     <div style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
-        <h4 style="margin:0;font-size:15px">Runs</h4>
+        <h4 style="margin:0;font-size:15px">Saved runs</h4>
         <span class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.cmp.savedNote }}</span>
       </div>
       <sc-if value="{{ zone.cmp.hasSetupFrom }}" hint-placeholder-val="{{ false }}">
         <div style="padding:6px 10px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 22%, transparent);font-size:12.5px;color:var(--color-accent-300);text-wrap:pretty">{{ zone.cmp.setupFrom }}</div>
       </sc-if>
-      <div style="display:flex;flex-direction:column;gap:5px">
-        <div style="display:flex;gap:9px;align-items:baseline;flex-wrap:wrap">
-          <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">This session</span>
-          <input class="input" style="min-height:27px;padding:2px 7px;font-size:12.5px;width:190px" placeholder="Name the next save" value="{{ zone.cmp.saveName }}" onInput="{{ zone.cmp.setSaveName }}">
-        </div>
-        <sc-if value="{{ zone.cmp.hasSession }}" hint-placeholder-val="{{ false }}">
-          <sc-for list="{{ zone.cmp.session }}" as="r" hint-placeholder-count="2">
-            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:10px;align-items:baseline;padding:5px 9px;border:1px solid var(--color-divider);border-radius:var(--radius-sm)">
-              <span style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.label }}</span>
-              <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums;justify-self:end">{{ r.sub }}</span>
-              <div style="display:flex;gap:7px;align-items:center;flex:none">
-                <sc-if value="{{ r.saved }}" hint-placeholder-val="{{ false }}">
-                  <span class="tag tag-accent" style="font-size:10.5px;flex:none">{{ r.savedLabel }}</span>
-                </sc-if>
-                <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px;flex:none" title="Put this run's party, board and measurement back into Setup, pinned — change one thing and run" onClick="{{ r.setup }}">Set up from</button>
-                <button class="btn btn-secondary" style="padding:1px 9px;font-size:12.5px;flex:none" title="Keep this run's numbers so a later run can be compared against it" disabled="{{ r.saved }}" onClick="{{ r.save }}">Save</button>
-              </div>
-            </div>
-          </sc-for>
-        </sc-if>
-        <sc-if value="{{ zone.cmp.noSession }}" hint-placeholder-val="{{ true }}">
-          <div class="text-muted" style="font-size:13px;text-wrap:pretty;max-width:66ch">No runs yet this session. Every run you finish lands here, and stays until the page is reloaded — saving one is what keeps it.</div>
-        </sc-if>
-      </div>
       <sc-if value="{{ zone.cmp.hasSaves }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:3px;padding-top:var(--space-2)">
-          <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;padding-bottom:2px">Saved</div>
+        <div style="display:flex;flex-direction:column;gap:3px">
           <sc-for list="{{ zone.cmp.saves }}" as="sv" hint-placeholder-count="2">
-            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:10px;align-items:baseline;padding:5px 9px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
-              <span style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ sv.name }}</span>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:10px;align-items:center;padding:4px 9px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
+              <input class="input" id="{{ sv.inputId }}" style="min-height:27px;padding:2px 7px;font-size:13.5px;min-width:0;width:100%;box-sizing:border-box" title="Rename this saved run" placeholder="{{ sv.fallback }}" value="{{ sv.name }}" onInput="{{ sv.rename }}">
               <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ sv.sub }}</span>
-              <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px;flex:none" title="Put this run's party, board and measurement back into Setup, pinned — change one thing and run" onClick="{{ sv.setup }}">Set up from</button>
+              <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px;flex:none" title="Load this run's party, board and settings into Setup as the baseline, seed and hours pinned — change one thing and run to see what it was worth" onClick="{{ sv.setup }}">Use as Baseline</button>
               <button class="btn btn-ghost" style="padding:0 5px;font-size:12px;flex:none" title="Forget this saved run" onClick="{{ sv.remove }}">✕</button>
             </div>
           </sc-for>
         </div>
       </sc-if>
       <sc-if value="{{ zone.cmp.noSaves }}" hint-placeholder-val="{{ true }}">
-        <div class="text-muted" style="font-size:13px;text-wrap:pretty;max-width:66ch">Nothing saved yet. Finish a run, give it a name, and its numbers stay put — then edit a loadout, run again, and Compare tells you what the change was worth.</div>
+        <div class="text-muted" style="font-size:13px;text-wrap:pretty;max-width:66ch">Nothing saved yet. Press Save beside a run in the Results tab's Runs list and it stays put after a reload — then edit a loadout, run again, and Compare tells you what the change was worth.</div>
       </sc-if>
     </div>
   </sc-if>
@@ -1897,15 +1884,20 @@ class Component extends DCLogic {
     const today = new Date().toDateString();
     // The headline is what the party was (Baseline, or the change from it); the zone board is the sub-line.
     const entries = [
-      ...log.map(r => ({ id: r.id, at: r.at, label: r.title || r.label, where: r.label, rows: (r.candidates || []).length,
+      // A saved session run goes by its saved name, so a rename on the Saved tab shows here too.
+      ...log.map(r => ({ id: r.id, at: r.at, label: saves.find(x => x.fromRun === r.id)?.name || r.title || r.label, where: r.label, rows: (r.candidates || []).length,
         hours: r.hours, saved: savedFrom.has(r.id), session: true,
         baseline: !!r.isBaseline, linked: !!r.basedOn })),
       ...saves.filter(x => !x.fromRun || !log.some(r => r.id === x.fromRun))
-        .map(sv => ({ id: sv.id, at: sv.at || 0, label: sv.name, where: sv.title || sv.label || "", rows: (sv.candidates || []).length,
+        .map(sv => ({ id: sv.id, at: sv.at || 0, label: sv.name || sv.title || "Saved run", where: sv.title || sv.label || "", rows: (sv.candidates || []).length,
           hours: sv.hours, saved: true, session: false })),
     ].sort((a, b) => (b.at || 0) - (a.at || 0));
     // A run still on the wire is not in the log yet, so it gets its own row at the top while it lasts.
-    const live = s.zoneRunning || (!s.zoneShow && !!s.zoneResult && !log.some(r => r.id === s.zoneShow));
+    // A finished run is the log's newest entry and is marked there; only a run still on the wire (or a result the log
+    // does not hold) gets a row of its own. It used to test the log for `zoneShow` -- null for the latest run -- so a
+    // finished run was listed twice, as "This run" and as its logged self.
+    const latestOnScreen = !s.zoneRunning && !s.zoneShow && !!s.zoneResult && log.length > 0;
+    const live = s.zoneRunning || (!s.zoneShow && !!s.zoneResult && !log.length);
     // With nothing run this session the newest saved run is what Results opens, so it is the marked row.
     const autoId = !s.zoneShow && !s.zoneResult ? entries[0]?.id || null : null;
     const rows = [];
@@ -1915,10 +1907,13 @@ class Component extends DCLogic {
       label: e.label,
       sub: [e.where, `${nf(e.rows)} row${e.rows === 1 ? "" : "s"}`, `${nf(e.hours)} h`,
         new Date(e.at).toDateString() === today ? time(e.at) : day(e.at)].filter(Boolean).join(" · "),
-      // One tag, in order of what a reader needs: this is the baseline, this is measured against it, or how it
-      // is being kept.
-      mark: e.baseline ? "baseline" : e.linked ? "vs baseline" : e.saved ? "saved" : e.session ? "session" : "",
-      current: s.zoneShow === e.id || autoId === e.id, pick: () => set({ zoneShow: e.id, zoneOpen: 0 }),
+      // One tag for what the run is: the baseline, or measured against it. Whether it is kept is the saved tag or
+      // the Save button beside it; an unsaved session run is marked as one, since a reload drops it.
+      mark: e.baseline ? "baseline" : e.linked ? "vs baseline" : !e.saved && e.session ? "session" : "",
+      current: s.zoneShow === e.id || autoId === e.id || (latestOnScreen && e.id === log[0].id), pick: () => set({ zoneShow: e.id, zoneOpen: 0 }),
+      // Saving happens here, where the run is read; the Saved tab is for managing what has been kept.
+      saved: e.saved, canSave: e.session && !e.saved, save: () => this.saveLoggedRun(e.id),
+      canSetup: true, setup: () => this.useZoneBaseline(e.id),
     });
     return rows.map(r => ({ ...r,
       style: r.current
@@ -1930,10 +1925,12 @@ class Component extends DCLogic {
     if (!entry || (s.zoneSaves || []).some(x => x.fromRun === id)) return;
     const { id: _runId, label, rows, ...rest } = entry;
     const save = { ...rest, id: `s${Date.now().toString(36)}`, fromRun: id, label,
-      name: (s.zoneSaveName || "").trim()
-        || `${entry.title || label} · ${new Date(entry.at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}` };
+      // Named by its headline (every row already shows when it ran); the Saved tab renames it.
+      name: entry.title || label };
     this.writeZoneSaves([save, ...(s.zoneSaves || [])]);
-    this.setState({ zoneSaveName: "" });
+  }
+  renameZoneSave(id, name) {
+    this.writeZoneSaves((this.state.zoneSaves || []).map(x => x.id === id ? { ...x, name } : x));
   }
   // Two candidates side by side with per-stat deltas — each side is either a row of the run on screen or a row
   // of a saved run, so a loadout change can be measured by saving, editing and running again.
@@ -2018,10 +2015,12 @@ class Component extends DCLogic {
       if (grain === "totals") {
         push("XP / h, party", sum(A, p => p.experiencePerHour?.total), sum(B, p => p.experiencePerHour?.total), { d: 4 });
         push("Profit / day, party", sum(A, p => p.profitPerHour) * 24, sum(B, p => p.profitPerHour) * 24, { coins: true });
+        // Cowbells are summed per player by the server; the candidate itself carries none.
+        const bellsEach = cand => { const list = cand?.players || []; return list.length ? list.reduce((a, p) => a + (p.cowbellsPerHour || 0), 0) * 24 / list.length : 0; };
         push("Kills / h", A.cand.killsPerHour, B.cand.killsPerHour, { d: 1 });
         push("Deaths / h", A.cand.deathsPerHour, B.cand.deathsPerHour, { d: 2, lowerBetter: true });
         push("Encounters / h", A.cand.encountersPerHour, B.cand.encountersPerHour, { d: 1 });
-        push("Cowbells / day", (A.cand.cowbellsPerHour || 0) * 24, (B.cand.cowbellsPerHour || 0) * 24, { d: 1 });
+        push("Cowbells / day per player", bellsEach(A.cand), bellsEach(B.cand), { d: 0 });
       } else if (grain === "players") {
         const names = [...new Set([...ps(A), ...ps(B)].map(p => p.name))];
         for (const nm of names) { const a = ps(A).find(p => p.name === nm), b = ps(B).find(p => p.name === nm);
@@ -2086,15 +2085,17 @@ class Component extends DCLogic {
       // The public site gives saved runs and compare a tab each, so both need their own empty state.
       noSources: !live.length && !saves.length, noSaves: !saves.length,
       savedNote: saves.length
-        ? `${saves.length} saved run${saves.length === 1 ? "" : "s"} · this browser only, nothing uploaded`
+        ? `${saves.length} saved run${saves.length === 1 ? "" : "s"} · this browser only, nothing uploaded · save more from the Results tab's Runs list`
         : "This browser only — nothing is uploaded, because there is nowhere to upload to.",
-      // Set up from a saved run: its party, board and measurement become Setup's, pinned, so the next run is a
+      // Use a run as the baseline: its party, board and measurement become Setup's, pinned, so the next run is a
       // one-variable test against it.
       setupFrom: s.zoneSetupFrom
-        ? `Setup is now ${s.zoneSetupFrom.name}${s.zoneSetupFrom.loadouts ? "" : " — its loadouts were not stored, so the party in Setup is unchanged"}: ${nf(s.zoneSetupFrom.rows)} row${s.zoneSetupFrom.rows === 1 ? "" : "s"} queued, seed and hours pinned. Change one thing and run.`
+        ? `Baseline is now ${s.zoneSetupFrom.name}${s.zoneSetupFrom.loadouts ? "" : " — its loadouts were not stored, so the party in Setup is unchanged"}: ${nf(s.zoneSetupFrom.rows)} row${s.zoneSetupFrom.rows === 1 ? "" : "s"} queued, seed and hours pinned. Change one thing and run.`
         : "",
       hasSetupFrom: !!s.zoneSetupFrom,
-      saves: saves.map(sv => ({ id: sv.id, name: sv.name, setup: () => this.useZoneBaseline(sv.id),
+      saves: saves.map(sv => ({ id: sv.id, name: sv.name || "", inputId: `zone-save-name-${sv.id}`,
+        fallback: sv.title || "Saved run", rename: e => this.renameZoneSave(sv.id, e.target.value),
+        setup: () => this.useZoneBaseline(sv.id),
         sub: `${(sv.candidates || []).length} candidate${(sv.candidates || []).length === 1 ? "" : "s"} · ${nf(sv.hours)} h · seed ${sv.seed} · ${new Date(sv.at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`,
         remove: () => this.deleteZoneSave(sv.id) })),
       hasSaves: saves.length > 0 };
@@ -2719,18 +2720,19 @@ class Component extends DCLogic {
           deaths, deathsText: ok ? nf(deaths, 2) : "",
           deathsTip: ps.map(p => `${p.hrid} ${nf(p.deathsPerHour, 2)}`).join("\n"),
           xp: xpTotal, xpText: ok ? big(xpTotal) : "",
-          xpEachText: each.map(x => x.text).join(" "),
+          xpEachText: each.map(x => x.text).join(" · "),
           xpTip: each.map(x => `${x.name} ${x.text}`).join("\n"),
           profit: income - expenses,
           profitText: ok ? coin((income - expenses) * 24) : "",
           profitColor: income - expenses >= 0 ? "var(--color-accent-300)" : "var(--color-accent-2-300)",
           // Profit reads like XP: the party total, then each member's own day beside it. When every member's
           // figure is the same the loot is already being shared evenly, and repeating it would read as a split.
-          profitEachText: ok && !same ? eachCoin.map(x => x.text).join(" ") : "",
+          profitEachText: ok && !same ? eachCoin.map(x => x.text).join(" · ") : "",
           coinTip: ok ? [`per day: ${coin(income * 24)} in · ${coin(expenses * 24)} out`,
             same ? "every member the same — loot shared evenly" : "party total across members",
             ...(same ? [] : eachCoin.map(x => `${x.name} ${x.text}`))].join("\n") : "",
-          bellsText: bells > 0 ? nf(bells, 2) : "",
+          // Per player per day (operator): the party total read as one person's haul, and an hourly figure had no unit.
+          bellsText: bells > 0 ? nf(bells * 24 / Math.max(1, ps.length), 0) : "",
           select: () => set({ zoneOpen: i }) };
       });
       const key = s.zoneSort?.key || "queued", dir = s.zoneSort?.dir || 1;
@@ -2949,6 +2951,14 @@ class Component extends DCLogic {
       waveNote: wNoteSent
         ? (/empty/i.test(wNoteSent) ? wNoteSent : `${wNoteSent} Leave empty to use the measured table.`)
         : "The gap between clearing a wave and the next one starting, in milliseconds — the whole gap, not the part above three seconds. Leave empty to use the measured table.",
+      // The note names MWI Insight, the userscript that measures this; the page links the name (the served note is
+      // plain text), so it is split around it.
+      ...(() => { const n = wNoteSent
+          ? (/empty/i.test(wNoteSent) ? wNoteSent : `${wNoteSent} Leave empty to use the measured table.`)
+          : "The gap between clearing a wave and the next one starting, in milliseconds — the whole gap, not the part above three seconds. Leave empty to use the measured table.";
+        const at = n.indexOf("MWI Insight");
+        return at < 0 ? { waveNoteHead: n, waveNoteLinked: false, waveNoteTail: "" }
+          : { waveNoteHead: n.slice(0, at), waveNoteLinked: true, waveNoteTail: n.slice(at + "MWI Insight".length) }; })(),
       // The bound exists to catch one mistake: typing the tens of milliseconds above three seconds. Say so.
       waveError: wBad ? `Wave transition delay must be between ${nf(wMin)} and ${nf(wMax)} ms — the server refuses anything else. It is the whole gap${Number.isFinite(wMean) && wMean > 0 ? `, around ${nf(Math.round(wMean))}` : ""}, not the tens of milliseconds above three seconds.` : "",
       waveBad: wBad,
@@ -3008,7 +3018,7 @@ class Component extends DCLogic {
       running: s.zoneRunning, runError: s.zoneRunError || "", hasRunError: !!s.zoneRunError,
       hasResult: !!R && rows.length > 0, empty: !R && !s.zoneRunning && !runs.length,
       runs, hasRuns: runs.length > 0, pickerNote: `${runs.length} run${runs.length === 1 ? "" : "s"} to look at`,
-      header, rows, refused, hasRefused: refused.length > 0, sorts: [sortBtn("queued", "Queued"), sortBtn("rate", "EPH"), sortBtn("kills", "Kills"), sortBtn("xp", "XP"), sortBtn("profit", "Profit")],
+      header, rows, refused, hasRefused: refused.length > 0, sorts: [sortBtn("queued", "Queued"), sortBtn("rate", "EPH"), sortBtn("xp", "XP"), sortBtn("profit", "Profit")],
       detail, hasDetail: !!detail,
     };
   }
