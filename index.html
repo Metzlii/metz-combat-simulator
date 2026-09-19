@@ -19,6 +19,15 @@
     a { color: var(--color-accent-300); }
     a:hover { color: var(--color-accent-400); }
     select.input option { background: var(--color-surface); color: var(--color-text); }
+    /* About: long lists fold away, closed by default. */
+    .about-fold { border: 1px solid var(--color-divider); border-radius: var(--radius-sm); background: var(--color-surface); padding: 8px 12px; }
+    .about-fold > summary { cursor: pointer; font-size: 14px; font-weight: 600; list-style: none; display: flex; gap: 8px; align-items: baseline; }
+    .about-fold > summary::-webkit-details-marker { display: none; }
+    .about-fold > summary::before { content: "▸"; color: var(--color-text-muted, currentColor); font-size: 12px; }
+    .about-fold[open] > summary::before { content: "▾"; }
+    .about-fold[open] > summary { margin-bottom: 6px; }
+    .about-fold > summary:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; border-radius: 2px; }
+    .about-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; text-wrap: pretty; }
     input[type=range] { accent-color: var(--color-accent); }
     input[type=checkbox] { accent-color: var(--color-accent); width: 15px; height: 15px; margin: 0; }
     @keyframes gtsSpin { to { transform: rotate(360deg); } }
@@ -30,9 +39,14 @@
   <div aria-hidden="true" style="position:fixed;inset:0;z-index:-1;pointer-events:none;background:repeating-linear-gradient(104deg, transparent 0px, color-mix(in srgb, var(--color-accent-300) 5%, transparent) 84px, transparent 172px, transparent 330px);mask-image:linear-gradient(180deg, #000 0%, transparent 74%);-webkit-mask-image:linear-gradient(180deg, #000 0%, transparent 74%)"></div>
 
   <header class="nav" style="gap:var(--space-4);padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider);align-items:center;justify-content:center;position:relative">
-    <sc-if value="{{ showPartyScript }}" hint-placeholder-val="{{ true }}">
-      <a href="{{ partyScriptUrl }}" target="_blank" rel="noopener" style="position:absolute;left:var(--space-4);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:6px;font-size:12.5px;white-space:nowrap;color:var(--color-accent);text-decoration:none" title="A userscript for the game: open each party member's profile once, then paste the whole party here">Install the MWI Party Export script ↗</a>
-    </sc-if>
+    <div style="position:absolute;left:var(--space-4);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:14px;font-size:12.5px;white-space:nowrap">
+      <sc-if value="{{ showPartyScript }}" hint-placeholder-val="{{ true }}">
+        <a href="{{ partyScriptUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;color:var(--color-accent);text-decoration:none" title="A userscript for the game: open each party member's profile once, then paste the whole party here">Install the MWI Party Export script ↗</a>
+      </sc-if>
+      <sc-if value="{{ restored }}" hint-placeholder-val="{{ false }}">
+        <span class="text-muted" title="{{ restoredTip }}">Restored from cache</span>
+      </sc-if>
+    </div>
     <div class="nav-brand" style="display:flex;align-items:center;gap:9px;white-space:nowrap;font-size:16px;margin:0 auto"><svg viewBox="0 0 24 24" width="23" height="23" fill="none" aria-hidden="true" style="flex:none;color:var(--color-accent-2-500)"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"></circle><path d="M6.6 15.4c2.1-1.5 3.1-3.6 3.4-6 .3-2.2-.2-4-.9-5.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path><path d="M17.4 8.6c-2.1 1.5-3.1 3.6-3.4 6-.3 2.2.2 4 .9 5.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"></path><circle cx="12" cy="12" r="1.7" fill="currentColor"></circle></svg>Metz Combat Simulator</div>
     <div style="display:flex;align-items:center;gap:10px;font-size:12px;position:absolute;right:var(--space-4);top:50%;transform:translateY(-50%)" class="text-muted">
       <span style="width:7px;height:7px;border-radius:50%;background:{{ serverDot }};box-shadow:0 0 8px {{ serverDot }}"></span>
@@ -72,21 +86,7 @@
 
     <sc-if value="{{ onOptimize }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);line-height:1.5">
-        <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
-          <h3 style="margin:0;font-size:17px">Upgrade finder</h3>
-          <sc-if value="{{ up.onUpgrades }}" hint-placeholder-val="{{ true }}">
-            <span class="text-muted" style="font-size:12.5px;max-width:66ch;text-wrap:pretty">Every equipped item one enhancement level up, every ability five levels up — each tried on its own against the unchanged party on the same seeds, and ranked by what your goal gains per million coins.</span>
-          </sc-if>
-          <sc-if value="{{ up.onTriggers }}" hint-placeholder-val="{{ false }}">
-            <span class="text-muted" style="font-size:12.5px;max-width:66ch;text-wrap:pretty">Every enemy-HP trigger in the party, swept and kept: the walk goes biggest damage first, tunes one trigger at a time with the earlier winners in place, then walks them all again. Free to change, so the ranking is clear speed alone.</span>
-          </sc-if>
-          <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}">
-            <span class="text-muted" style="font-size:12.5px;max-width:66ch;text-wrap:pretty">What a month of levelling is worth, skill by skill: each curve is efficiency gained against the days it takes that player to reach it, so a slow skill and a fast one are on the same axis.</span>
-          </sc-if>
-        </div>
-        <sc-if value="{{ up.restored }}" hint-placeholder-val="{{ false }}">
-          <div style="padding:6px 10px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 20%, transparent);font-size:12.5px;color:var(--color-accent-300);text-wrap:pretty;max-width:70ch">{{ up.restoredNote }}</div>
-        </sc-if>
+        <h3 style="margin:0;font-size:17px">Upgrade finder</h3>
         <div class="seg" style="align-self:flex-start">
           <button class="seg-opt" style="font-size:13px;{{ up.modeUpgrades.style }}" onClick="{{ up.modeUpgrades.go }}">Upgrades</button>
           <button class="seg-opt" style="font-size:13px;{{ up.modeTriggers.style }}" onClick="{{ up.modeTriggers.go }}">Trigger values</button>
@@ -157,7 +157,7 @@
                 <sc-for list="{{ up.budgets }}" as="p" hint-placeholder-count="3">
                   <button class="{{ p.cls }}" style="padding:2px 10px;font-size:12.5px" onClick="{{ p.go }}">{{ p.label }}</button>
                 </sc-for>
-                <input class="input" type="number" min="1" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.budget }}" onChange="{{ up.setBudget }}">
+                <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.budget }}" onChange="{{ up.setBudget }}">
                 <span class="text-muted" style="font-size:12.5px">min</span>
               </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until three finalists stand. Anything left over keeps measuring those three.</div>
@@ -194,7 +194,7 @@
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
               </div>
-              <div class="text-muted" style="font-size:12px;text-wrap:pretty">Ability books are priced up to {{ up.premium }} over the lowest ask.</div>
+              <div class="text-muted" style="font-size:12px;text-wrap:pretty">Ability books are priced up to {{ up.premium }} over the lowest ask (an instant buy).</div>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.pouch }}" onChange="{{ up.togglePouch }}"><span>Include the pouch<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Little combat effect, and every party already has one.</span></span></label>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.charms }}" onChange="{{ up.toggleCharms }}"><span>Include charms<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">A charm raises its owner's XP without changing the fight, so cheap charm steps top every XP list.</span></span></label>
               </sc-if>
@@ -208,7 +208,7 @@
               </button>
               <sc-if value="{{ up.sec.enh.open }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;flex-direction:column;gap:8px;padding:9px 10px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
-                  <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.market }}" onChange="{{ up.toggleMarket }}"><span>Price by the market only<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">No enhancing: every item is bought at its ask, less what the held piece sells for.</span></span></label>
+                  <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.market }}" onChange="{{ up.toggleMarket }}"><span>Price by the market only<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">No enhancing: every item is bought instantly at its ask, less what the held piece sells for instantly at the bid.</span></span></label>
                   <sc-if value="{{ up.enhEditable }}" hint-placeholder-val="{{ true }}">
                     <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Professional enhancer loadout</div>
                     <div style="display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 9px;align-items:center;font-size:13px">
@@ -263,7 +263,7 @@
                         </select>
                       </div>
                       <label style="display:flex;gap:7px;align-items:center;font-size:13px"><input type="checkbox" checked="{{ up.decCatalytic }}" onChange="{{ up.toggleCatalytic }}">Catalytic Tea</label>
-                      <div class="text-muted" style="font-size:12px;text-wrap:pretty">A spare is worth its 2,000 essences sold at the bid, times the Decompose rate at the wearer's alchemy level. The catalyst is spent only on a success.</div>
+                      <div class="text-muted" style="font-size:12px;text-wrap:pretty">A spare is worth its 2,000 essences sold instantly at the bid, times the Decompose rate at the wearer's alchemy level. The catalyst is spent only on a success.</div>
                       <div style="display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 9px;align-items:center;font-size:13px">
                         <span class="text-muted" style="font-size:12.5px">Spares held</span>
                         <input class="input" type="number" min="0" step="1" placeholder="0" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.capeProtections }}" onChange="{{ up.setCapeProtections }}">
@@ -279,24 +279,37 @@
 
             <sc-if value="{{ up.onTriggers }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
-                <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Passes</div>
+                <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.sec.passes.toggle }}">
+                  <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.sec.passes.caret }} Passes</span>
+                  <span class="text-muted" style="font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto">{{ up.sec.passes.summary }}</span>
+                </button>
+                <sc-if value="{{ up.sec.passes.open }}" hint-placeholder-val="{{ false }}">
                 <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                   <span class="text-muted" style="font-size:12.5px">Walks of the list</span>
                   <input class="input" type="number" min="1" max="4" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.trig.passes }}" onChange="{{ up.trig.setPasses }}">
                 </div>
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Triggers interact, so the list is walked more than once: a second walk is worth more than a tighter first one. The time limit is split evenly across the slots, with a share held back for the final check.</div>
+                </sc-if>
               </div>
             </sc-if>
 
             <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
-                <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">The horizon</div>
+                <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.sec.horizon.toggle }}">
+                  <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.sec.horizon.caret }} Projection duration</span>
+                  <span class="text-muted" style="font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto">{{ up.sec.horizon.summary }}</span>
+                </button>
+                <sc-if value="{{ up.sec.horizon.open }}" hint-placeholder-val="{{ false }}">
                 <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                   <span class="text-muted" style="font-size:12.5px">Days ahead</span>
                   <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.skills.horizon }}" onChange="{{ up.skills.setHorizon }}">
-                  <span class="text-muted" style="font-size:12.5px">Points a curve</span>
+                  <span class="text-muted" style="font-size:12.5px">Samples per skill</span>
                   <input class="input" type="number" min="1" max="16" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.skills.points }}" onChange="{{ up.skills.setPoints }}">
                 </div>
+                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Levels are placed by time, not by number: a skill that levels in a day gets its samples spread over the projection, one that takes a month gets a single sample past its end. The charm decides how fast, so it moves every curve along the days axis.</div>
+                </sc-if>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
                 <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.skills.togglePer }}">
                   <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.skills.perCaret }} Charm per skill</span>
                   <span class="text-muted" style="font-size:12px;margin-left:auto">{{ up.skills.perCount }}</span>
@@ -315,11 +328,12 @@
                     <div class="text-muted" style="font-size:12px;text-wrap:pretty">A charm is focused on one skill, so each curve can assume the charm you would really wear while levelling that skill. Charms are read from the searched player's own bag; a skill they hold no charm for is costed on a Grandmaster +7, since that is what levelling it would actually mean. With the whole party in scope there is no single owner, so nothing is read.</div>
                   </div>
                 </sc-if>
-                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Levels are placed by time, not by number: a skill that levels in a day gets its points spread over the horizon, one that takes a month gets a single point past the edge. The charm decides how fast, so it moves every curve along the days axis.</div>
               </div>
             </sc-if>
 
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+            <!-- The run button, with what it will run on the line under it -- the same place in every tool. -->
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-start;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <sc-if value="{{ up.onUpgrades }}" hint-placeholder-val="{{ true }}">
                 <sc-if value="{{ up.running }}" hint-placeholder-val="{{ false }}">
                   <button class="btn btn-secondary" style="padding:4px 16px;font-size:14px" onClick="{{ up.stop }}">Stop</button>
@@ -340,7 +354,32 @@
                 </sc-if>
                 <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.skills.run }}">Measure the curves</button>
               </sc-if>
+              <sc-if value="{{ up.canClear }}" hint-placeholder-val="{{ false }}">
+                <button class="btn btn-secondary" style="padding:3px 12px;font-size:13px" title="Keep this answer in this browser after the 12-hour cache lets it go" onClick="{{ up.saveResults }}">Save results</button>
+                <button class="btn btn-ghost" style="padding:3px 12px;font-size:13px" title="Remove this tool's last answer from the page" onClick="{{ up.clearResults }}">Clear results</button>
+              </sc-if>
+              </div>
               <span class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.runNote }}</span>
+              <sc-if value="{{ up.hasSaveError }}" hint-placeholder-val="{{ false }}">
+                <span style="font-size:12px;color:var(--color-accent-2-300);text-wrap:pretty">{{ up.saveError }}</span>
+              </sc-if>
+              <sc-if value="{{ up.hasOptSaves }}" hint-placeholder-val="{{ false }}">
+                <div style="display:flex;flex-direction:column;gap:4px;width:100%;padding-top:var(--space-2)">
+                  <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" onClick="{{ up.toggleOptSaves }}">
+                    <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.optSavesCaret }} Saved results</span>
+                    <span class="text-muted" style="font-size:12px;margin-left:auto">{{ up.optSavesCount }}</span>
+                  </button>
+                  <sc-if value="{{ up.optSavesOpen }}" hint-placeholder-val="{{ false }}">
+                    <sc-for list="{{ up.optSaves }}" as="sv" hint-placeholder-count="2">
+                      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:6px;align-items:center;padding:3px 0">
+                        <span style="display:flex;flex-direction:column;min-width:0" title="{{ sv.name }}"><span style="font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ sv.name }}</span><span class="text-muted" style="font-size:11.5px">{{ sv.when }}</span></span>
+                        <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px" title="Put this answer back on the page" onClick="{{ sv.open }}">Open</button>
+                        <button class="btn btn-ghost" style="padding:0 5px;font-size:12px" title="Delete this saved result" onClick="{{ sv.remove }}">✕</button>
+                      </div>
+                    </sc-for>
+                  </sc-if>
+                </div>
+              </sc-if>
             </div>
           </div>
 
@@ -366,7 +405,13 @@
               <div class="card" style="max-width:66ch;gap:7px">
                 <div class="card-kicker">How the budget is spent</div>
                 <div style="font-size:13px;text-wrap:pretty">The finder screens every upgrade on a handful of seeds, then keeps halving: the better half is measured again on twice as many fresh seeds each round, until three finalists remain.</div>
-                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">A real five-player party reached its finalists in 10 minutes; their uncertainty fell from about ±6,000 XP/h after the screen to ±1,400–2,500. Upgrades are a month or more apart — an hour buys an answer worth acting on.</div>
+                <div class="card-kicker" style="margin-top:4px">For a sharper answer</div>
+                <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;text-wrap:pretty">
+                  <li><b>More time.</b> A 1 h or 2 h limit runs more rounds, so the finalists are measured on many more seeds.</li>
+                  <li><b>Fewer candidates.</b> Search one player instead of the whole party, and try +1 item levels only: the same time is spread over fewer upgrades.</li>
+                  <li><b>Longer runs.</b> More hours per seed makes each measurement steadier, at the cost of fewer of them in the time limit.</li>
+                  <li><b>The right fight.</b> Pick the zone and tier you actually farm, with your real shrine, account buffs and pricing: the ranking is only as good as what it measures.</li>
+                </ul>
               </div>
             </sc-if>
 
@@ -535,7 +580,7 @@
               <sc-if value="{{ up.skills.idle }}" hint-placeholder-val="{{ true }}">
                 <div class="card" style="max-width:66ch;gap:7px">
                   <div class="card-kicker">Why days, not levels</div>
-                  <div style="font-size:13px;text-wrap:pretty">A level is not a unit: early on you gain one a day, late you need a week. So each skill's points are placed at the levels the horizon's days actually reach for this player, with the charm you pick deciding the pace — and every curve spans the same axis.</div>
+                  <div style="font-size:13px;text-wrap:pretty">A level is not a unit: early on you gain one a day, late you need a week. So each skill's samples are placed at the levels the projection's days actually reach for this player, with the charm you pick deciding the pace — and every curve spans the same axis.</div>
                   <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">A skill your style does not train earns no combat XP, so it is measured but never ranked by rate.</div>
                 </div>
               </sc-if>
@@ -604,16 +649,53 @@
 
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
           <h4 style="margin:0;font-size:15px">Getting your export</h4>
-          <div style="font-size:13.5px;text-wrap:pretty">Open the combat simulator's export in-game, copy the whole thing, and paste it into <span style="color:var(--color-accent-300)">Setup → Character exports</span>. One export, or a whole team: an array, a players list, an object keyed by name or by slot number, or one export per line all read the same. Equipment, abilities, levels, house rooms and consumables come across with it; account-wide buffs and the guild shrine do not, so those are fields you set once and this browser remembers.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">Install <a href="https://greasyfork.org/en/scripts/596494-mwi-party-export" target="_blank" rel="noopener" style="color:var(--color-accent-300);text-decoration:underline;text-underline-offset:2px">MWI Party Export</a>, open each party member's profile in-game once, then copy the export and paste it into <span style="color:var(--color-accent-300)">Setup → Character exports</span>. The whole party comes across in one paste: equipment, abilities and their triggers, levels, house rooms, consumables and the guild shrine, plus each player's owned gear and their alchemy and enhancing setup, which the Optimize tab uses to price upgrades.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">A single character from another simulator's export works too, pasted the same way. Account-wide buffs (community buffs, Moo Pass, Wisdom Scroll) are not in any export, so those are fields you set once and this browser remembers.</div>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
           <h4 style="margin:0;font-size:15px">Accuracy, and what is approximated</h4>
-          <div class="card" style="gap:6px;border-color:var(--color-accent-800)">
-            <div class="card-kicker">Awaiting the kernel's own list</div>
-            <div style="font-size:13px;text-wrap:pretty">Two lists belong here and neither should be written from guesswork: where the kernel approximates rather than simulates, and where it is already truer than the simulator it was branched from. Both have been asked for in <span class="text-muted">requests/request-code-optimizer-and-wasm-2026-09-18.md</span>; this section fills in when the answer lands.</div>
-          </div>
-          <div style="font-size:13.5px;text-wrap:pretty">What is safe to say today: a run is a full combat simulation, not a formula — same seed, same inputs, same numbers — and market prices are a snapshot taken when the site was built, so profit moves with the market and the simulation does not.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">A run is a full combat simulation, not a formula: same seed, same inputs, same numbers. Market prices come from the game's public feed and refresh hourly. Checked against recorded play:</div>
+          <ul class="about-list">
+            <li>Pace: 18 back-to-back Pirate Cove T2 runs in a 4.16 h capture averaged 831.3 s; the kernel gives 831.3 s.</li>
+            <li>A 26 h session: 111 runs against 111.5 ± 1.2 simulated, XP/h within 0.8%. A 14.5 h session: XP/h within 0.3–0.4% for all five players.</li>
+            <li>Casts per hour within 2% on every ability of the recording player, read from the game's own cooldown messages.</li>
+            <li>Party totals against KikiMeter: damage −0.8%, healing −0.4%.</li>
+            <li>A solo open zone (Golem Cave T2, 210.9 h of combat): battles +1.1%, XP +1.3% and the high-count drops +0.7–2.1% above the game.</li>
+            <li>Armour and resistances: 20 of 20 values match five in-game Stats panels.</li>
+          </ul>
+          <details class="about-fold">
+            <summary>Where it approximates</summary>
+            <ul class="about-list">
+              <li>Wave transition: a measured 12-bin table (3,023–3,090 ms, mean 3,036.9 ms) over the server's 120 s clock cycle, not a flat 3 s. A delay you enter shifts every bin by the same offset. Runs use a fixed clock anchor, so the same inputs give the same numbers.</li>
+              <li>Server lag defaults to 0; if set, it is one constant delay on every action. An 8.8 h busy-hours capture found no per-action lag in any hour.</li>
+              <li>Dungeon wipe restart is a flat 3.0 s; an open-zone death is a flat 150 s respawn at full HP and MP (both measured).</li>
+              <li>Damage-over-time (3 s), regen (10 s), food/drink over-time (5 s) and enrage (60 s) ticks use the reference simulator's constants, not measured separately.</li>
+              <li>Dungeon waves draw from each lower wave table 1/8 of the time, fitted on 1,183 Pirate Cove T2 waves and applied to every dungeon.</li>
+              <li>Loot, drops and chests are expected values, not rolls: a run's luck shows in kills, clears and deaths, never in item counts. Every party member gets an equal share of the mean.</li>
+              <li>Party level-gap penalty: the game's "20% below" is read as (top level ÷ yours) − 1, one of two possible readings, with the game's 10-level floor.</li>
+              <li>Every run starts at full mana, so very short runs read a little high. Compare runs of the same length.</li>
+              <li>Life steal and mana leech round down; neither has been tested against the game.</li>
+              <li>Healing is credited to the player who receives it; KikiMeter credits the caster, so compare party totals.</li>
+              <li>Still open: XP per wave about 0.3% above the game and pace about 0.5% fast; 1.10% of Pirate Cove T2 runs fail against about 0.8% in the game; a solo open-zone session runs about 1.1% more battles per hour than the game.</li>
+              <li>Deaths per hour are not validated: real sessions are too short to measure them well.</li>
+            </ul>
+          </details>
+          <details class="about-fold">
+            <summary>Where it is truer than the simulator it came from</summary>
+            <ul class="about-list">
+              <li>The Task Badge counts: its Task Damage applies against the task monster you name, as in the game. The source simulators leave the badge out.</li>
+              <li>A stun, blind or silence runs its full length even when the monster that cast it dies first.</li>
+              <li>Players keep their attack rhythm across a wave transition, while new monsters start fresh.</li>
+              <li>The wave transition is a measured table, not a flat 3.000 s.</li>
+              <li>Dungeon waves sometimes draw from lower wave tables, which removes the source's dungeon XP overestimate: 201.8 monsters per run against 201.9–203.4 in captures.</li>
+              <li>Life Drain heals round up (15 of 15 captured casts).</li>
+              <li>Fury adds into the same damage and accuracy pool as other buffs instead of multiplying on top (12 of 12 Stats-panel readings).</li>
+              <li>The party level-gap penalty requires the game's 10-level difference.</li>
+              <li>Dungeon completion chests are modelled at all: 29.5% extra chests against 30.4% over a month of the game developer's data.</li>
+              <li>Fixed here: a player who died while stunned no longer comes back stunned at the dungeon clear, and a wave cleared by the swing that killed the last player restarts the dungeon instead of stalling it.</li>
+            </ul>
+          </details>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
@@ -623,12 +705,14 @@
 
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
           <h4 style="margin:0;font-size:15px">Credits</h4>
-          <div style="font-size:13.5px;text-wrap:pretty">The combat kernel is a Rust port of the community MWI Combat Simulator (MIT, © 2024 AmVoidGuy, carried on by shykai and azhu949), by gragatrim, used with permission. Weylan helped measure the wave transition delay between dungeon waves. Kim, Mango and Zhiwen tested it. Enhancement costs follow Enhancelator (MIT, © doh-nuts). Game data and art belong to Milky Way Idle. Full notices are in the site's repository.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">The combat kernel is a Rust port of the community MWI Combat Simulator (MIT, © 2024 AmVoidGuy, carried on by shykai and azhu949), by gragatrim, used with permission, and further optimized by Metzli: 4–9× faster per simulation, with identical results. Weylan helped measure the wave transition delay between dungeon waves. Kim, Mango and Zhiwen provided test data. Enhancement costs follow Enhancelator (MIT, © doh-nuts). Game data and art belong to Milky Way Idle. Full notices are in the site's repository.</div>
         </div>
 
-        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-          <h4 style="margin:0;font-size:15px">Changelog</h4>
-          <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 14px;font-size:13.5px;align-items:baseline">
+        <details class="about-fold">
+          <summary>Changelog</summary>
+          <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
+            <span style="text-wrap:pretty"><b>1.0.2</b>: a Refresh prices button and a tidier Pricing panel; every ask and bid says whether it is an instant or slow trade, and key materials can be bought either way. Optimizer answers can be saved and cleared; the optimizers default to 168 h, 5 seeds and 15 minutes; a Workers setting under Advanced sets how much of your machine a run uses. Compare shows every Results figure, a player at a time. Temporary-buff ceilings include Ripple, and the stats panel gains HP and mana regen. The About tab's accuracy notes are filled in and re-checked against recorded play.</span>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
             <span style="text-wrap:pretty"><b>1.0.1</b>: save a run and use it as your baseline straight from the Results tab's Runs list; the Saved tab now manages and renames saved runs. The results table drops kills per hour and fits every player's rates, and cowbells read per player per day.</span>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
@@ -638,7 +722,7 @@
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-18</span>
             <span style="text-wrap:pretty">Initial release. The simulator runs in the browser on a wasm kernel, split out of the planner it grew up in, on five tabs of its own.</span>
           </div>
-        </div>
+        </details>
       </div>
     </sc-if>
   </main>
@@ -670,6 +754,8 @@ class Component extends DCLogic {
   static SIM_TABS = ["setup", "results", "compare", "saved"];
 
   async componentDidMount() {
+    // Listening before anything mounts: ZoneSim reports a restored session from its first render.
+    globalThis.addEventListener?.("zone-restored", e => this.setState({ restoredAt: e.detail || null }));
     const t0 = (performance || Date).now();
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
@@ -677,8 +763,14 @@ class Component extends DCLogic {
       const { connectZoneOnly } = await import("./zoneApi.js");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
+      // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
+      globalThis.addEventListener?.("zone-lanes", () => {
+        this.setState({ lanesAt: Date.now() });
+        client.zoneLimits?.().then(limits => this.setState({ limits: limits || this.state.limits })).catch(() => {});
+      });
       this.loadZoneMeta(client);   // the zone list and the served upgrade defaults, for the Optimize form
       this.loadOptimize();         // and the last search's answer, if one was made in the past 12 hours
+      this.loadOptSaves();         // and the answers kept on purpose
       console.log(`%csimulator ready in ${Math.round((performance || Date).now() - t0)} ms · ${client.zoneLanes || client.workers || 1} lanes · wasm kernel`, "color:#9184d9");
     } catch (e) {
       console.error("the browser zone client failed to start", e);
@@ -699,7 +791,7 @@ class Component extends DCLogic {
     metric: "xp", skill: "", player: "", measure: "",
     // The board the operator reaches for first; any served zoneLimits().upgrades value replaces it.
     zone: "/actions/combat/pirate_cove", tier: 2, market: false,
-    budgetMinutes: 10, hours: 24, seeds: 3, steps: 1, abilityLevels: 5,
+    budgetMinutes: 15, hours: 168, seeds: 5, steps: 1, abilityLevels: 5,
     includePouch: false, includeCharms: false, bookPremium: 0.2,
     // The operator's baseline. zoneLimits().upgrades carries the served version and replaces every field here.
     enhancer: { level: 145, tool: { hrid: "/items/celestial_enhancer", level: 18 }, tea: "ultra", blessed: true, pouchLevel: 14, observatory: 8,
@@ -728,7 +820,7 @@ class Component extends DCLogic {
   static ALCHEMY_TEAS = [["none", "No alchemy tea"], ["alchemy", "Alchemy Tea"], ["super", "Super Alchemy Tea"], ["ultra", "Ultra Alchemy Tea"]];
   static CATALYSTS = [["none", "No catalyst"], ["catalyst", "Catalyst of Decomposition"], ["prime", "Prime Catalyst"]];
   static UP_TEAS = [["none", "No enhancing tea"], ["enhancing", "Enhancing Tea"], ["super", "Super Enhancing Tea"], ["ultra", "Ultra Enhancing Tea"]];
-  static UP_BUDGETS = [[10, "10 min"], [60, "1 h"], [120, "2 h"]];
+  static UP_BUDGETS = [[15, "15 min"], [60, "1 h"], [120, "2 h"]];
   static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books" };
 
   async loadZoneMeta(client) {
@@ -762,13 +854,50 @@ class Component extends DCLogic {
     this._optT = setTimeout(() => {
       const s = this.state;
       if (s.upRunning || s.trigRunning || s.skillRunning) return;   // a half-measured search is not an answer
-      if (!(s.upRows || []).length && !(s.trigSteps || []).length && !(s.skillRows || []).length) return;
+      if (!(s.upRows || []).length && !(s.trigSteps || []).length && !(s.skillRows || []).length) {
+        try { localStorage.removeItem(Component.OPT_KEY); } catch {}
+        return;
+      }
       const snap = { at: Date.now() };
       for (const k of Component.OPT_FIELDS) snap[k] = s[k];
       try { localStorage.setItem(Component.OPT_KEY, JSON.stringify(snap)); }
       catch { try { localStorage.setItem(Component.OPT_KEY, JSON.stringify({ ...snap, upRows: (s.upRows || []).slice(0, 40), skillRows: (s.skillRows || []).slice(0, 40) })); } catch {} }
     }, 1500);
   }
+  // Clear results (operator, 2026-09-19): drop one tool's answer, so a stale or failed search does not sit on the
+  // page until it expires. The storage write that follows keeps the other tools' answers.
+  static OPT_CLEAR = {
+    upgrades: { upRows: [], upHead: null, upDone: null, upError: "" },
+    triggers: { trigRows: [], trigSteps: [], trigHead: null, trigDone: null, trigError: "" },
+    skills: { skillRows: [], skillHead: null, skillDone: null, skillError: "" },
+  };
+  clearOptimize(mode) { this.setState({ ...Component.OPT_CLEAR[mode], optRestoredAt: null }); }
+  // Saved results (operator, 2026-09-19): an optimizer answer kept past the 12-hour cache, named, per tool, in this
+  // browser only -- like saved runs. Opening one puts it back on the page exactly as it was measured.
+  static OPT_SAVES_KEY = "gts.zone.optimize.saves.v1";
+  static OPT_MODE_LABEL = { upgrades: "Upgrades", triggers: "Trigger values", skills: "Skill levelling" };
+  loadOptSaves() {
+    try { const list = JSON.parse(localStorage.getItem(Component.OPT_SAVES_KEY) || "[]"); if (Array.isArray(list)) this.setState({ optSaves: list }); } catch {}
+  }
+  writeOptSaves(list) {
+    try { localStorage.setItem(Component.OPT_SAVES_KEY, JSON.stringify(list)); this.setState({ optSaves: list, optSaveError: "" }); return true; }
+    catch { this.setState({ optSaveError: "Could not save: this browser's storage is full. Delete a saved result or a saved run first." }); return false; }
+  }
+  saveOptimize(mode) {
+    const s = this.state, fields = Object.keys(Component.OPT_CLEAR[mode]).filter(k => !/Error$/.test(k));
+    const data = Object.fromEntries(fields.map(k => [k, s[k]]));
+    const head = mode === "upgrades" ? s.upHead : mode === "triggers" ? s.trigHead : s.skillHead;
+    const zone = (s.zones || []).find(z => z.hrid === head?.zone);
+    const where = zone ? `${zone.name} T${head?.difficultyTier ?? 0}` : "";
+    const who = head?.player || "whole party";
+    const name = [Component.OPT_MODE_LABEL[mode], where, who].filter(Boolean).join(" \u00b7 ");
+    this.writeOptSaves([{ id: `o${Date.now().toString(36)}`, mode, name, at: Date.now(), data }, ...(s.optSaves || [])]);
+  }
+  openOptSave(id) {
+    const sv = (this.state.optSaves || []).find(x => x.id === id);
+    if (sv) this.setState({ ...Component.OPT_CLEAR[sv.mode], ...sv.data, upMode: sv.mode, optRestoredAt: null });
+  }
+  deleteOptSave(id) { this.writeOptSaves((this.state.optSaves || []).filter(x => x.id !== id)); }
   componentDidUpdate() { this.queueOptimize(); }
   componentWillUnmount() { clearTimeout(this._optT); clearInterval(this._upTick); }
   noteParty(players, buffs) {
@@ -830,7 +959,7 @@ class Component extends DCLogic {
     if (measure) goal.player = measure;
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
-      budgetMinutes: num("budgetMinutes", 10), hours: num("hours", 24), seeds: num("seeds", 3),
+      budgetMinutes: num("budgetMinutes", 15), hours: num("hours", 168), seeds: num("seeds", 5),
       steps: num("steps", 1), abilityLevels: num("abilityLevels", 5),
       includePouch: !!this.upVal("includePouch"), includeCharms: !!this.upVal("includeCharms"),
       bookPremium: num("bookPremium", 0.2),
@@ -846,7 +975,7 @@ class Component extends DCLogic {
   // Both answer in the upgrade finder's shape — a streamed head, rows carrying an index, a done summary — so one
   // runner drives all three and each mode only says what to send and what to keep.
   static TRIG_DEFAULTS = { passes: 2 };
-  static SKILL_DEFAULTS = { horizonDays: 30, points: 8, charm: "current", charmLevel: 0 };
+  static SKILL_DEFAULTS = { horizonDays: 90, points: 10, charm: "current", charmLevel: 0 };
   modeState(mode) {
     return mode === "triggers"
       ? { running: "trigRunning", rows: "trigRows", head: "trigHead", done: "trigDone", error: "trigError", extra: "trigSteps" }
@@ -901,15 +1030,15 @@ class Component extends DCLogic {
     const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num(this.upVal("tier"), 0),
-      hours: num(this.upVal("hours"), 24), seeds: num(this.upVal("seeds"), 3),
-      budgetMinutes: num(this.upVal("budgetMinutes"), 10),
+      hours: num(this.upVal("hours"), 168), seeds: num(this.upVal("seeds"), 5),
+      budgetMinutes: Math.max(5, num(this.upVal("budgetMinutes"), 15)),
       accountBuffs: this.state.buffs || null,
     };
     if (this.upVal("player")) body.player = this.upVal("player");
     if (mode === "triggers") body.passes = num(this.modeVal("triggers", "passes"), 2);
     else {
-      body.horizonDays = num(this.modeVal("skills", "horizonDays"), 30);
-      body.points = num(this.modeVal("skills", "points"), 8);
+      body.horizonDays = num(this.modeVal("skills", "horizonDays"), 90);
+      body.points = num(this.modeVal("skills", "points"), 10);
       // The fallback for any skill the list leaves alone: that player's own charm, as they wear it today.
       body.charm = "current";
       body.charmLevel = 0;
@@ -1040,7 +1169,7 @@ class Component extends DCLogic {
     const rows = (s.skillRows || []).filter(Boolean);
     const done = s.skillDone || null;
     const curves = (done?.curves || []).filter(c => (c.points || []).length);
-    const horizon = Math.max(1, Number(this.modeVal("skills", "horizonDays")) || 30);
+    const horizon = Math.max(1, Number(this.modeVal("skills", "horizonDays")) || 90);
     const metric = s.skillMetric || "eph";
     // Every point carries both metrics, so the toggle plots the measurement rather than inferring one.
     const valOf = (c, p) => Number(metric === "xp" ? p.deltaXp : (p.deltaEph ?? p.delta)) || 0;
@@ -1064,7 +1193,7 @@ class Component extends DCLogic {
       color: hues[i % hues.length],
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
-        tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 +${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the horizon" : ""}` })),
+        tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 +${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the projection" : ""}` })),
     }; });
     const ranked = (done?.ranked || rows).slice().sort((a, b) => (Number(b.perHour) || 0) - (Number(a.perHour) || 0)).map(r => ({
       skill: `${r.skill} +${r.levels ?? 1}`,
@@ -1073,7 +1202,7 @@ class Component extends DCLogic {
       xp: r.deltaXp == null ? "" : `+${nf(r.deltaXp)} XP / h`,
       se: r.deltaSE == null ? "" : `\u00b1 ${(Number(r.deltaSE) || 0).toFixed(2)}`,
       cost: r.hours == null ? "not trained by this style"
-        : `${nf(r.xpCost)} XP \u00b7 ${(Number(r.days) || 0).toFixed(1)} days${r.beyondHorizon ? " (past the horizon)" : ""}`,
+        : `${nf(r.xpCost)} XP \u00b7 ${(Number(r.days) || 0).toFixed(1)} days${r.beyondHorizon ? " (past the projection)" : ""}`,
       // The rate the ranking is on: what a day spent levelling buys. Gains at the top end are fractions of an
       // encounter over months, so a fixed 3 decimals printed 0.000 for every row — the scale is chosen per row.
       per: (() => { const v = r.perHour != null ? Number(r.perHour) * 24
@@ -1084,9 +1213,9 @@ class Component extends DCLogic {
     }));
     return {
       horizon: String(this.modeVal("skills", "horizonDays")),
-      setHorizon: e => this.setMode("skills", { horizonDays: Math.max(1, Math.floor(Number(e.target.value) || 30)) }),
+      setHorizon: e => this.setMode("skills", { horizonDays: Math.max(1, Math.floor(Number(e.target.value) || 90)) }),
       points: String(this.modeVal("skills", "points")),
-      setPoints: e => this.setMode("skills", { points: Math.max(1, Math.floor(Number(e.target.value) || 8)) }),
+      setPoints: e => this.setMode("skills", { points: Math.max(1, Math.floor(Number(e.target.value) || 10)) }),
       charm: this.modeVal("skills", "charm"),
       setCharm: e => this.setMode("skills", { charm: e.target.value }),
       charmOpts: [{ value: "current", label: "the player's own charm" },
@@ -1197,7 +1326,7 @@ class Component extends DCLogic {
       };
     };
     const head = s.upHead || null;
-    const budget = Math.max(1, Number(v("budgetMinutes")) || 10);
+    const budget = Math.max(5, Number(v("budgetMinutes")) || 15);
     const elapsed = s.upRunning ? Math.max(Number(head?.elapsedMs) || 0, Date.now() - (this._upT0 || Date.now())) : Number(head?.elapsedMs) || 0;
     const enh = this.upEnhancer();
     const tea = (Component.UP_TEAS.find(t => t[0] === enh.tea) || ["none", "no tea"])[1];
@@ -1217,6 +1346,22 @@ class Component extends DCLogic {
       restoredNote: s.optRestoredAt ? (() => { const mins = Math.max(1, Math.round((Date.now() - s.optRestoredAt) / 60000));
         return `This answer was measured ${mins < 60 ? `${mins} min` : `${(mins / 60).toFixed(1)} h`} ago and restored with the page. Run again if the party has changed since.`; })() : "",
       mode, onUpgrades: mode === "upgrades", onTriggers: mode === "triggers", onSkills: mode === "skills",
+      // Clear results: only for the tool on screen, only when it holds an answer (or an error), never mid-search.
+      canClear: !(s.upRunning || s.trigRunning || s.skillRunning) && (mode === "upgrades"
+        ? !!((s.upRows || []).length || s.upHead || s.upError)
+        : mode === "triggers" ? !!((s.trigRows || []).length || (s.trigSteps || []).length || s.trigHead || s.trigError)
+        : !!((s.skillRows || []).length || s.skillHead || s.skillError)),
+      clearResults: () => this.clearOptimize(mode),
+      saveResults: () => this.saveOptimize(mode),
+      saveError: s.optSaveError || "", hasSaveError: !!s.optSaveError,
+      // This tool's saved answers, newest first.
+      optSaves: (s.optSaves || []).filter(x => x.mode === mode).map(x => ({ name: x.name,
+        when: new Date(x.at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }),
+        open: () => this.openOptSave(x.id), remove: () => this.deleteOptSave(x.id) })),
+      hasOptSaves: (s.optSaves || []).some(x => x.mode === mode),
+      optSavesOpen: !!s.optSavesOpen, optSavesCaret: s.optSavesOpen ? "\u25be" : "\u25b8",
+      optSavesCount: `${(s.optSaves || []).filter(x => x.mode === mode).length}`,
+      toggleOptSaves: () => this.setState({ optSavesOpen: !s.optSavesOpen }),
       modeUpgrades: modeBtn("upgrades"), modeTriggers: modeBtn("triggers"), modeSkills: modeBtn("skills"),
       // Each mode names the party section for what it searches, so "the whole party" reads right in all three.
       scopeLabel: mode === "triggers" ? "Whose triggers" : mode === "skills" ? "Whose skills" : "Whose upgrades",
@@ -1250,7 +1395,7 @@ class Component extends DCLogic {
       tierOpts: Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
       budgets: Component.UP_BUDGETS.map(([m, label]) => ({ label,
         cls: Number(v("budgetMinutes")) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => set({ budgetMinutes: m }) })),
-      budget: String(v("budgetMinutes")), setBudget: e => set({ budgetMinutes: e.target.value }),
+      budget: String(v("budgetMinutes")), setBudget: e => set({ budgetMinutes: String(Math.max(5, Math.floor(Number(e.target.value) || 15))) }),   // 5 minutes is the floor for a typed limit
       hours: String(v("hours")), setHours: e => set({ hours: e.target.value }),
       seeds: String(v("seeds")), setSeeds: e => set({ seeds: e.target.value }),
       steps: String(v("steps")), setSteps: e => set({ steps: Number(e.target.value) || 1 }),
@@ -1269,6 +1414,10 @@ class Component extends DCLogic {
           ["tries", `${["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)]} \u00b7 abilities +${v("abilityLevels")}${v("includeCharms") ? " \u00b7 charms" : ""}${v("includePouch") ? " \u00b7 pouch" : ""}`],
           ["measure", `${nf(v("hours"))} h \u00b7 ${nf(v("seeds"))} seeds`],
           ["enh", v("market") ? "market only" : `level ${enh.level} \u00b7 ${itemName(enh.tool.hrid)} +${enh.tool.level}`],
+          // Skill levelling only: how far ahead the curves look, and how many points each gets.
+          ["horizon", `${Number(this.modeVal("skills", "horizonDays")) || 90} days \u00b7 ${Number(this.modeVal("skills", "points")) || 10} samples`],
+          // Trigger values only: how many times the list is walked.
+          ["passes", (() => { const n = Number(this.modeVal("triggers", "passes")) || 1; return `${n} ${n === 1 ? "walk" : "walks"}`; })()],
         ];
         return Object.fromEntries(defs.map(([k, summary]) => [k, { summary, open: !!open[k],
           caret: open[k] ? "\u25be" : "\u25b8",
@@ -1371,6 +1520,9 @@ class Component extends DCLogic {
         : `runs in your browser · ${lanes} lane${lanes === 1 ? "" : "s"} · wasm kernel`,
       serverDot: s.booting || s.error ? "var(--color-neutral-600)" : "var(--color-accent)",
       showPartyScript: !s.partyScriptSeen, partyScriptUrl: Component.PARTY_SCRIPT_URL,
+      // The simulator's session came back from this browser's cache (ZoneSim's "zone-restored" event).
+      restored: !!s.restoredAt,
+      restoredTip: s.restoredAt ? `The party, the queue and this session's runs, saved ${(() => { const m = Math.max(1, Math.round((Date.now() - s.restoredAt) / 60000)); return m < 60 ? `${m} min ago` : `${(m / 60).toFixed(1)} h ago`; })()}. Import again if anything changed in the game; the cache is dropped after 12 hours.` : "",
     };
   }
 }

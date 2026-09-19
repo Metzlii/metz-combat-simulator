@@ -7,14 +7,29 @@
 // server's /zone-sim/* routes run (zone-web/zoneClient.js), with the kernel as wasm in Web Workers. The zone
 // tab needs nothing else, so this client carries only those methods, and a zone feature added to the
 // server's modules reaches the page with the next site build.
+
+// The visitor's Workers setting (Setup > Advanced), kept in this browser. Absent: every core but one.
+const WORKERS_KEY = "mwi.zone.workers";
+const savedWorkers = () => { try { const v = Number(localStorage.getItem(WORKERS_KEY)); return v >= 1 ? Math.floor(v) : null; } catch { return null; } };
+
 export async function connectZoneOnly() {
   const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js");
-  const zone = await createBrowserZoneClient();
+  const cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
+  const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)) });
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
   let lanes = null;
   try { lanes = Number((await zone.zoneLimits())?.concurrency) || null; } catch (e) { console.warn("zone limits unavailable", e); }
-  return {
+  const client = {
     source: "browser", workers: lanes || 1, zoneLanes: lanes, base: null, data: {},
+    // Setup > Advanced > Workers. `defaultWorkers` is what an unset field means; the header's lane count follows.
+    maxWorkers: zone.maxWorkers, defaultWorkers: Math.max(1, cores - 1), savedWorkers: savedWorkers(),
+    setZoneWorkers(n) {
+      const w = zone.setWorkers(n == null || n === "" ? Math.max(1, cores - 1) : n);   // empty: back to the default
+      try { if (n == null || n === "") localStorage.removeItem(WORKERS_KEY); else localStorage.setItem(WORKERS_KEY, String(w)); } catch { /* not kept */ }
+      client.workers = client.zoneLanes = w; client.savedWorkers = savedWorkers();
+      globalThis.dispatchEvent?.(new CustomEvent("zone-lanes", { detail: w }));
+      return w;
+    },
     subscribe() { return () => {}; },
     zones: () => zone.zones(),
     zoneImport: payload => zone.zoneImport(payload),
@@ -22,6 +37,8 @@ export async function connectZoneOnly() {
     zoneDerive: body => zone.zoneDerive(body),
     zoneRun: body => zone.zoneRun(body),
     zoneLimits: () => zone.zoneLimits(),
+    zoneMarket: () => zone.zoneMarket(),
+    zoneMarketRefresh: () => zone.zoneMarketRefresh(),
     zoneRunStream: (body, handlers) => zone.zoneRunStream(body, handlers),
     // ZONE-53 (1): the upgrade finder, passed through exactly as the rest are. Streamed is the form the page
     // uses — a search runs for minutes to hours, and the ranking fills in as rows land.
@@ -34,4 +51,5 @@ export async function connectZoneOnly() {
     zoneSkillsStream: (body, handlers) => zone.zoneSkillsStream(body, handlers),
     close: () => zone.close(),
   };
+  return client;
 }

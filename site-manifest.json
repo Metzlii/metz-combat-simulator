@@ -1,20 +1,20 @@
 {
- "builtAt": "2026-09-19T14:54:16.545Z",
- "commit": "467305d",
+ "builtAt": "2026-09-19T17:13:45.726Z",
+ "commit": "c38dca8",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
    "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
    "init_client_data.json"
   ],
-  "bytes": 6367657,
-  "gzip": 614157,
+  "bytes": 6369636,
+  "gzip": 614388,
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
   "files": 35,
-  "bytes": 15986751,
-  "gzip": 2556516
+  "bytes": 16019367,
+  "gzip": 2565299
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3762
   },
   "index.html": {
-   "bytes": 120035,
-   "gzip": 28625
+   "bytes": 135290,
+   "gzip": 32685
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -54,56 +54,56 @@
    "gzip": 1464
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
-   "bytes": 3616580,
-   "gzip": 409874
+   "bytes": 3618559,
+   "gzip": 410105
   },
   "server/abilities.mjs": {
    "bytes": 6802,
    "gzip": 2547
   },
   "server/chestValue.mjs": {
-   "bytes": 6338,
-   "gzip": 2635
+   "bytes": 6508,
+   "gzip": 2715
   },
   "server/enhanceCost.mjs": {
    "bytes": 8898,
    "gzip": 3721
   },
   "server/lootValue.mjs": {
-   "bytes": 7353,
-   "gzip": 3028
+   "bytes": 7497,
+   "gzip": 3079
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
    "gzip": 955
   },
   "server/zoneApi.mjs": {
-   "bytes": 3295,
-   "gzip": 1218
+   "bytes": 3599,
+   "gzip": 1369
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9039,
    "gzip": 3239
   },
   "server/zoneDerive.mjs": {
-   "bytes": 8667,
-   "gzip": 3239
+   "bytes": 8977,
+   "gzip": 3324
   },
   "server/zoneImport.mjs": {
    "bytes": 10541,
    "gzip": 3791
   },
   "server/zoneOptimize.mjs": {
-   "bytes": 16877,
-   "gzip": 6581
+   "bytes": 16880,
+   "gzip": 6583
   },
   "server/zoneSim.mjs": {
    "bytes": 10722,
    "gzip": 4365
   },
   "server/zoneUpgrades.mjs": {
-   "bytes": 13305,
-   "gzip": 5425
+   "bytes": 13626,
+   "gzip": 5588
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -134,20 +134,20 @@
    "gzip": 2595
   },
   "zone-web/zoneClient.js": {
-   "bytes": 4054,
-   "gzip": 1694
+   "bytes": 4719,
+   "gzip": 1911
   },
   "zone-web/zoneWorker.js": {
    "bytes": 258,
    "gzip": 201
   },
   "zoneApi.js": {
-   "bytes": 2417,
-   "gzip": 1049
+   "bytes": 3684,
+   "gzip": 1536
   },
   "ZoneSim.dc.html": {
-   "bytes": 251080,
-   "gzip": 62232
+   "bytes": 263278,
+   "gzip": 65488
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,

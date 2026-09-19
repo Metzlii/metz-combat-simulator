@@ -92,7 +92,7 @@
         <div style="font-size:13px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.zoneWarn }}</div>
       </sc-if>
       <sc-if value="{{ zone.hasCands }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:2px;max-height:230px;overflow-y:auto;padding-right:2px">
+        <div style="display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto;padding-right:2px">
           <sc-for list="{{ zone.cands }}" as="c" hint-placeholder-count="3">
             <div style="display:grid;grid-template-columns:18px minmax(0,1fr) auto auto;gap:8px;align-items:center;padding:3px 8px;border-radius:var(--radius-sm);background:var(--color-bg)">
               <span style="width:18px;height:18px;display:grid;place-items:center;flex:none;color:var(--color-accent-300)" title="{{ c.icon.title }}">
@@ -279,7 +279,7 @@
                     <dc-import name="IconPick" value="{{ ab.value }}" groups="{{ zone.editor.abilityGroups }}" on-pick="{{ ab.set }}"
                       placeholder="Empty" fallback-glyph="ph-lightning" hint-size="100%,29px"></dc-import>
                     <input class="input" type="number" min="1" max="{{ zone.editor.abilityMax }}" step="1" title="Ability level" style="min-height:27px;padding:1px 5px;font-size:12.5px;font-variant-numeric:tabular-nums" disabled="{{ ab.levelDisabled }}" value="{{ ab.level }}" onInput="{{ ab.setLevel }}">
-                    <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" title="Game defaults, whenever ready (an empty set), or your own conditions" disabled="{{ ab.modeDisabled }}" value="{{ ab.mode }}" onChange="{{ ab.setMode }}">
+                    <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" title="Game defaults, as soon as it is off cooldown, or your own conditions" disabled="{{ ab.modeDisabled }}" value="{{ ab.mode }}" onChange="{{ ab.setMode }}">
                       <sc-for list="{{ zone.editor.triggerModeOpts }}" as="t" hint-placeholder-count="3"><option value="{{ t.value }}">{{ t.label }}</option></sc-for>
                     </select>
                     <div style="display:flex;gap:2px">
@@ -303,7 +303,7 @@
                     <span class="text-muted" style="font-size:12px;text-wrap:pretty">{{ ab.modeNote }}</span>
                   </div>
                   <sc-for list="{{ ab.rows }}" as="tr" hint-placeholder-count="0">
-                    <div style="display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.2fr) minmax(0,0.8fr) 52px auto;gap:4px;align-items:center;padding-left:46px">
+                    <div style="display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.2fr) minmax(0,0.8fr) 88px 22px;gap:4px;align-items:center;padding-left:46px">
                       <select class="input" style="min-height:27px;padding:1px 5px;font-size:12.5px;min-width:0" value="{{ tr.dep }}" onChange="{{ tr.setDep }}">
                         <sc-for list="{{ tr.depOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
                       </select>
@@ -316,6 +316,8 @@
                       <sc-if value="{{ tr.takesValue }}" hint-placeholder-val="{{ true }}">
                         <input class="input" type="number" step="1" style="min-height:27px;padding:1px 4px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ tr.value }}" onInput="{{ tr.setValue }}">
                       </sc-if>
+                      <!-- A comparator with no value ("Is Inactive") keeps the value column empty, so every row's fields line up. -->
+                      <sc-if value="{{ tr.noValue }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true"></span></sc-if>
                       <button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;flex:none" title="Remove this condition" onClick="{{ tr.remove }}">✕</button>
                     </div>
                   </sc-for>
@@ -347,7 +349,7 @@
                         <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums" title="Slot order">{{ c.slot }}</span>
                         <dc-import name="IconPick" value="{{ c.value }}" groups="{{ c.groups }}" on-pick="{{ c.set }}"
                           placeholder="Empty" fallback-glyph="{{ c.slotGlyph }}" hint-size="100%,29px"></dc-import>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" title="Game defaults, whenever ready (an empty set), or your own conditions" disabled="{{ c.modeDisabled }}" value="{{ c.mode }}" onChange="{{ c.setMode }}">
+                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" title="Game defaults, as soon as it is off cooldown, or your own conditions" disabled="{{ c.modeDisabled }}" value="{{ c.mode }}" onChange="{{ c.setMode }}">
                           <sc-for list="{{ zone.editor.triggerModeOpts }}" as="t" hint-placeholder-count="3"><option value="{{ t.value }}">{{ t.label }}</option></sc-for>
                         </select>
                         <button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;flex:none" title="Empty this slot" onClick="{{ c.remove }}">✕</button>
@@ -357,7 +359,7 @@
                         <span class="text-muted" style="font-size:12px;text-wrap:pretty">{{ c.modeNote }}</span>
                       </div>
                       <sc-for list="{{ c.rows }}" as="tr" hint-placeholder-count="0">
-                        <div style="display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.2fr) minmax(0,0.8fr) 52px auto;gap:4px;align-items:center;padding-left:26px">
+                        <div style="display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.2fr) minmax(0,0.8fr) 88px 22px;gap:4px;align-items:center;padding-left:26px">
                           <select class="input" style="min-height:27px;padding:1px 5px;font-size:12.5px;min-width:0" value="{{ tr.dep }}" onChange="{{ tr.setDep }}">
                             <sc-for list="{{ tr.depOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
                           </select>
@@ -370,6 +372,8 @@
                           <sc-if value="{{ tr.takesValue }}" hint-placeholder-val="{{ true }}">
                             <input class="input" type="number" step="1" style="min-height:27px;padding:1px 4px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ tr.value }}" onInput="{{ tr.setValue }}">
                           </sc-if>
+                          <!-- A comparator with no value ("Is Inactive") keeps the value column empty, so every row's fields line up. -->
+                          <sc-if value="{{ tr.noValue }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true"></span></sc-if>
                           <button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;flex:none" title="Remove this condition" onClick="{{ tr.remove }}">✕</button>
                         </div>
                       </sc-for>
@@ -393,15 +397,16 @@
             <sc-if value="{{ zone.editor.sec.levels.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.sec.levels.badge }}</span></sc-if>
           </button>
           <sc-if value="{{ zone.editor.sec.levels.open }}" hint-placeholder-val="{{ true }}">
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:7px 20px">
+            <!-- Levels, house rooms and shrines share one grid (same tracks, same cell), so their columns line up when all three are open. -->
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:6px 10px">
               <sc-for list="{{ zone.editor.levels }}" as="lv" hint-placeholder-count="7">
-                <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;min-width:0">
+                <div style="display:grid;grid-template-columns:18px minmax(0,1fr) 56px;gap:6px;align-items:center;min-width:0">
                   <span style="width:18px;height:18px;display:grid;place-items:center;flex:none;color:var(--color-accent-300)" title="{{ lv.icon.title }}">
                     <sc-if value="{{ lv.icon.has }}" hint-placeholder-val="{{ false }}">{{ lv.icon.mark }}</sc-if>
                     <sc-if value="{{ lv.icon.glyph }}" hint-placeholder-val="{{ true }}"><i class="{{ lv.icon.glyph }}" style="font-size:13px;line-height:1" aria-hidden="true"></i></sc-if>
                   </span>
-                  <span class="text-muted" style="font-size:12.5px;min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ lv.label }}</span>
-                  <input class="input" type="number" min="1" max="200" step="1" style="min-height:27px;padding:1px 5px;font-size:12.5px;width:68px;flex:none;font-variant-numeric:tabular-nums" value="{{ lv.value }}" onInput="{{ lv.set }}">
+                  <span class="text-muted" style="font-size:12.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ lv.label }}">{{ lv.label }}</span>
+                  <input class="input" type="number" min="1" max="200" step="1" style="min-height:27px;padding:1px 5px;font-size:12.5px;width:56px;font-variant-numeric:tabular-nums" value="{{ lv.value }}" onInput="{{ lv.set }}">
                 </div>
               </sc-for>
             </div>
@@ -414,14 +419,14 @@
             <sc-if value="{{ zone.editor.sec.house.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.sec.house.badge }}</span></sc-if>
           </button>
           <sc-if value="{{ zone.editor.sec.house.open }}" hint-placeholder-val="{{ false }}">
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(166px,1fr));gap:5px">
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:6px 10px">
               <sc-for list="{{ zone.editor.rooms }}" as="rm" hint-placeholder-count="8">
-                <div style="display:flex;gap:6px;align-items:center;justify-content:space-between;min-width:0">
+                <div style="display:grid;grid-template-columns:18px minmax(0,1fr) 56px;gap:6px;align-items:center;min-width:0">
                   <span style="width:18px;height:18px;display:grid;place-items:center;flex:none;color:var(--color-accent-300)" title="{{ rm.icon.title }}">
                     <sc-if value="{{ rm.icon.has }}" hint-placeholder-val="{{ false }}">{{ rm.icon.mark }}</sc-if>
                     <sc-if value="{{ rm.icon.glyph }}" hint-placeholder-val="{{ true }}"><i class="{{ rm.icon.glyph }}" style="font-size:13px;line-height:1" aria-hidden="true"></i></sc-if>
                   </span>
-                  <span class="text-muted" style="font-size:12.5px;min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ rm.name }}</span>
+                  <span class="text-muted" style="font-size:12.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ rm.name }}">{{ rm.name }}</span>
                   <input class="input" type="number" min="0" max="8" step="1" style="min-height:27px;padding:1px 5px;font-size:12.5px;width:56px;font-variant-numeric:tabular-nums" value="{{ rm.value }}" onInput="{{ rm.set }}">
                 </div>
               </sc-for>
@@ -436,22 +441,23 @@
           </button>
           <sc-if value="{{ zone.editor.sec.buffs.open }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex;flex-direction:column;gap:6px">
-              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(214px,1fr));gap:5px">
+              <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(176px,1fr));gap:6px 10px">
                 <sc-for list="{{ zone.editor.buffs }}" as="bf" hint-placeholder-count="8">
-                  <div style="display:flex;gap:6px;align-items:center;justify-content:space-between;min-width:0">
+                  <div style="display:grid;grid-template-columns:18px minmax(0,1fr) 56px;gap:6px;align-items:center;min-width:0">
                     <span style="width:18px;height:18px;display:grid;place-items:center;flex:none;color:var(--color-accent-300)" title="{{ bf.icon.title }}">
                       <sc-if value="{{ bf.icon.has }}" hint-placeholder-val="{{ false }}">{{ bf.icon.mark }}</sc-if>
                       <sc-if value="{{ bf.icon.glyph }}" hint-placeholder-val="{{ true }}"><i class="{{ bf.icon.glyph }}" style="font-size:13px;line-height:1" aria-hidden="true"></i></sc-if>
                     </span>
-                    <span class="text-muted" style="font-size:12.5px;min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ bf.name }}</span>
-                    <sc-if value="{{ bf.assumed }}" hint-placeholder-val="{{ false }}">
-                      <span style="font-size:11px;color:var(--color-accent-2-300);flex:none" title="{{ bf.assumedTip }}">{{ bf.assumedMark }}</span>
-                    </sc-if>
+                    <span style="display:flex;gap:5px;align-items:baseline;min-width:0">
+                      <span class="text-muted" style="font-size:12.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ bf.name }}">{{ bf.name }}</span>
+                      <sc-if value="{{ bf.assumed }}" hint-placeholder-val="{{ false }}">
+                        <span style="font-size:11px;color:var(--color-accent-2-300);flex:none" title="{{ bf.assumedTip }}">{{ bf.assumedMark }}</span>
+                      </sc-if>
+                    </span>
                     <input class="input" type="number" min="0" max="{{ bf.max }}" step="1" title="{{ bf.tip }}" style="min-height:27px;padding:1px 5px;font-size:12.5px;width:56px;font-variant-numeric:tabular-nums;flex:none" value="{{ bf.value }}" onInput="{{ bf.set }}">
                   </div>
                 </sc-for>
               </div>
-              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.editor.buffNote }}</div>
             </div>
           </sc-if>
         </div>
@@ -520,18 +526,34 @@
             <div style="font-size:12.5px;margin-top:3px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.waveError }}</div>
           </sc-if>
         </div>
+        <sc-if value="{{ zone.hasWorkers }}" hint-placeholder-val="{{ false }}">
+          <div class="field" style="margin:0"><label>Workers</label>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <input class="input" id="zone-workers" type="number" min="1" max="{{ zone.workersMax }}" step="1" placeholder="{{ zone.workersDefault }}" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.workersValue }}" onChange="{{ zone.setWorkers }}">
+              <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.workersNow }}</span>
+            </div>
+            <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.workersNote }}</div>
+          </div>
+        </sc-if>
       </sc-if>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <div style="display:flex;flex-direction:column;gap:2px">
-        <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="Set how loot, consumables, keys and capes are priced" onClick="{{ zone.togglePrice }}">Pricing {{ zone.priceCaret }}</button>
-        <span class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.priceSummary }}</span>
-      </div>
+    <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
+      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="Set how loot, consumables, keys and capes are priced" onClick="{{ zone.togglePrice }}">Pricing {{ zone.priceCaret }}</button>
+      <sc-if value="{{ zone.priceClosed }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 12px;font-size:12.5px">
+          <sc-for list="{{ zone.priceFacts }}" as="f" hint-placeholder-count="8">
+            <div style="display:contents">
+              <span style="white-space:nowrap;font-weight:600">{{ f.label }}</span>
+              <span class="text-muted" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.value }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
       <sc-if value="{{ zone.priceOpen }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;gap:5px">
           <sc-for list="{{ zone.pricingSel }}" as="p" hint-placeholder-count="6">
-            <div style="display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:8px;align-items:center">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;align-items:center">
               <span class="text-muted" style="font-size:12.5px">{{ p.label }}</span>
               <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ p.value }}" onChange="{{ p.set }}">
                 <sc-for list="{{ p.options }}" as="o" hint-placeholder-count="2"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
@@ -541,7 +563,7 @@
           <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.artisanTea }}" onChange="{{ zone.toggleTea }}">Artisan tea cuts every key recipe</label>
           <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.concOverride }}" onChange="{{ zone.toggleConcOverride }}">Override drink concentration</label>
           <sc-if value="{{ zone.concOverride }}" hint-placeholder-val="{{ false }}">
-            <div style="display:grid;grid-template-columns:minmax(0,1fr) 128px;gap:8px;align-items:center">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;align-items:center">
               <span class="text-muted" style="font-size:12.5px">Drink concentration</span>
               <input class="input" type="number" min="0" max="1" step="0.01" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.drinkConc }}" onInput="{{ zone.setConc }}">
             </div>
@@ -550,19 +572,32 @@
           <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.taxNote }}</div>
         </div>
       </sc-if>
+      <sc-if value="{{ zone.hasMarketLine }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding-top:7px;border-top:1px solid var(--color-divider)">
+          <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+            <span class="text-muted" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase">Market prices</span>
+            <span style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.marketLine }}</span>
+            <sc-if value="{{ zone.hasMarketMsg }}" hint-placeholder-val="{{ false }}">
+              <span class="text-muted" style="font-size:11.5px;text-wrap:pretty">{{ zone.marketMsg }}</span>
+            </sc-if>
+          </div>
+          <button class="btn btn-ghost" style="padding:2px 9px;margin-left:-9px;font-size:12.5px;flex:none;white-space:nowrap" title="Check the game's price feed for newer prices now, instead of waiting up to an hour. The game publishes it about once an hour." disabled="{{ zone.marketBusy }}" onClick="{{ zone.refreshMarket }}">{{ zone.marketBtn }}</button>
+        </div>
+      </sc-if>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:6px">
       <div style="font-size:13px">Account buffs</div>
-      <div style="display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:6px 8px;align-items:center">
+      <div style="display:grid;grid-template-columns:minmax(0,max-content) 52px 5.5ch;gap:6px 8px;align-items:center">
         <span class="text-muted" style="font-size:12.5px">{{ zone.buffXpLabel }}</span>
         <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffXp }}" onInput="{{ zone.setBuffXp }}">
+        <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community XP bonus this level gives every player">{{ zone.buffXpPct }}</span>
         <span class="text-muted" style="font-size:12.5px">{{ zone.buffDropLabel }}</span>
         <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffDrop }}" onInput="{{ zone.setBuffDrop }}">
+        <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community drop quantity bonus this level gives every player">{{ zone.buffDropPct }}</span>
       </div>
       <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.wisdom }}" onChange="{{ zone.toggleWisdom }}">{{ zone.wisdomLabel }}</label>
       <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.mooPass }}" onChange="{{ zone.toggleMoo }}">{{ zone.mooLabel }}</label>
-      <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.buffNote }}</div>
     </div>
 
     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
@@ -576,7 +611,7 @@
       <sc-if value="{{ zone.pinned }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12.5px;color:var(--color-accent-300)">
           <span style="text-wrap:pretty">{{ zone.pinNote }}</span>
-          <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Run on the Seed and Hours in the fields instead — the run will not be directly comparable to the baseline" onClick="{{ zone.unpin }}">unpin</button>
+          <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Run on the Seed and Hours in the fields instead — the run will not be directly comparable to the baseline" onClick="{{ zone.unpin }}">Use my own seed and hours</button>
         </div>
       </sc-if>
       <sc-if value="{{ zone.stopped }}" hint-placeholder-val="{{ false }}">
@@ -868,7 +903,7 @@
               <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px;flex:none;{{ g.style }}" onClick="{{ g.go }}">{{ g.label }}</button>
             </sc-for>
           </div>
-          <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(90px,0.7fr) minmax(90px,0.7fr) minmax(96px,0.8fr) 62px;gap:8px;padding:0 8px 4px">
+          <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(90px,0.7fr) minmax(90px,0.7fr) minmax(96px,0.8fr) 62px;gap:8px;padding:0 8px 4px;visibility:{{ zone.cmp.headVisibility }}">
             <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Stat</span>
             <span class="text-muted" style="font-size:12px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ zone.cmp.aLabel }}">A</span>
             <span class="text-muted" style="font-size:12px;text-align:right;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ zone.cmp.bLabel }}">B</span>
@@ -876,13 +911,22 @@
             <span class="text-muted" style="font-size:12px;text-align:right">%</span>
           </div>
           <sc-for list="{{ zone.cmp.rows }}" as="row" hint-placeholder-count="6">
+            <sc-if value="{{ row.isGroup }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-ghost" style="display:flex;gap:7px;align-items:baseline;justify-content:flex-start;padding:4px 8px;border-color:transparent;width:100%;text-align:left" onClick="{{ row.toggle }}">
+                <span class="text-muted" style="font-size:12px;width:10px;flex:none">{{ row.caret }}</span>
+                <span style="font-size:13px;font-weight:600">{{ row.label }}</span>
+                <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ row.sub }}</span>
+              </button>
+            </sc-if>
+            <sc-if value="{{ row.isRow }}" hint-placeholder-val="{{ true }}">
             <div style="display:grid;grid-template-columns:minmax(0,1.5fr) minmax(90px,0.7fr) minmax(90px,0.7fr) minmax(96px,0.8fr) 62px;gap:8px;padding:3px 8px;border-radius:var(--radius-sm);background:var(--color-bg);align-items:baseline">
-              <span style="font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ row.label }}</span>
+              <span style="font-size:13px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-left:{{ row.indent }}">{{ row.label }}</span>
               <span style="font-size:13px;text-align:right;font-variant-numeric:tabular-nums">{{ row.a }}</span>
               <span style="font-size:13px;text-align:right;font-variant-numeric:tabular-nums">{{ row.b }}</span>
               <span style="font-size:13px;text-align:right;font-variant-numeric:tabular-nums;color:{{ row.color }}">{{ row.delta }}</span>
               <span style="font-size:12.5px;text-align:right;font-variant-numeric:tabular-nums;color:{{ row.color }}">{{ row.pct }}</span>
             </div>
+            </sc-if>
           </sc-for>
         </div>
       </sc-if>
@@ -924,10 +968,11 @@ class Component extends DCLogic {
     // Default view (operator, 2026-09-16): every panel starts collapsed — the operator opens what they need.
     zoneEditSec: { equipment: false, abilities: false, consumables: false, levels: false, house: false, buffs: false, task: false },
     zoneStatOpen: null, zoneStale: false, zoneDerivedOpen: false,
+    zoneMarket: null, zoneMarketBusy: false, zoneMarketMsg: "", zoneMarketAt: 0,
     zoneSaves: [], zoneSaveName: "", zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneSetupFrom: null,
     zoneRestoredAt: null, zoneCmp: { a: null, b: null }, zoneCmpGrain: "totals",
     // Default view (operator, 2026-09-16): every result section collapsed to its header, which carries the total.
-    zoneSecOpen: { rates: false, xp: false, damage: false, consumables: false, lootIn: false, lootOut: false },
+    zoneSecOpen: { rates: true, xp: false, damage: false, consumables: false, lootIn: false, lootOut: false },
   };
   // The client, the public-page flag and whether the tab is showing all come from whoever mounted us.
   get client() { return this.props.client; }
@@ -1036,11 +1081,19 @@ class Component extends DCLogic {
         // it measures the party as Setup runs it only if it is sent the same buffs.
         if (sig !== this._partySig) { this._partySig = sig; Promise.resolve().then(() => this.props.onParty?.(seated, buffs)); }
       }
+      // The public site shows "Restored from cache" in its header instead of a box here: the restore time goes up
+      // as a window event whenever it changes (null once the party is cleared), like the Workers setting's lanes.
+      if (this.zoneOnly) {
+        const at = s.zoneRestoredAt && (s.zoneParty || []).length ? s.zoneRestoredAt : null;
+        if (at !== this._restoredSent) { this._restoredSent = at;
+          Promise.resolve().then(() => globalThis.dispatchEvent?.(new CustomEvent("zone-restored", { detail: at }))); }
+      }
       if (this.props.active === false) return out;
       if (!s.zoneList && !this._zonesReq && this.client?.zones) { this._zonesReq = true; this.loadZones(); }
       if (!s.zoneLimits && !this._zoneLimitsReq && this.client?.zoneLimits) { this._zoneLimitsReq = true; this.loadZoneLimits(); }
       if (!s.zoneCatalog && !s.zoneCatalogError && !this._zoneCatReq && this.client?.zoneCatalog) { this._zoneCatReq = true; this.loadZoneCatalog(); }
       if (!this._savesRead) { this._savesRead = true; this.loadZoneSaves(); }
+      if (!this._zoneMarketReq && this.client?.zoneMarket) { this._zoneMarketReq = true; this.loadZoneMarket(); }
       if (s.zoneCatalog && !this._spriteKey && this.zoneSpriteUrls(s.zoneCatalog).length) this.loadZoneSprite(s.zoneCatalog);
       // Any loadout edit clears zoneDerived, so this is also how the panel refreshes after an edit. The derive
       // body depends on more than the party — the open candidate supplies zone/tier and the account buffs
@@ -1096,7 +1149,7 @@ class Component extends DCLogic {
   }
   // Operator's pricing defaults (2026-09-15). They differ from the server's own, so the run sends the full set
   // explicitly rather than letting omitted keys fall back to the endpoint's defaults.
-  static ZONE_PRICE_DEFAULTS = { loot: "bid", consumables: "ask", keys: "craft", capes: "zero", catalyst: "none", mode: "standard", artisanTea: true };
+  static ZONE_PRICE_DEFAULTS = { loot: "bid", consumables: "ask", keys: "craft", keyMaterials: "ask", capes: "zero", catalyst: "none", mode: "standard", artisanTea: true };
   setZoneBuffs(patch) {
     this.setState(s => { const zoneBuffs = this.normZoneBuffs({ ...s.zoneBuffs, ...patch });
       try { localStorage.setItem("gts.zoneBuffs", JSON.stringify(zoneBuffs)); } catch {}
@@ -1203,6 +1256,24 @@ class Component extends DCLogic {
   async loadZoneLimits() {
     try { this.setState({ zoneLimits: await this.client.zoneLimits() }); }
     catch { this._zoneLimitsReq = false; }   // defaults stand; the server refuses anything past its own bound
+  }
+  // The price feed's age, and the Pricing panel's Refresh: prices are otherwise kept an hour. A refresh changes what
+  // the next run is priced at, never a result already on screen.
+  async loadZoneMarket() {
+    try { this.setState({ zoneMarket: await this.client.zoneMarket() }); } catch { /* no line: runs still price */ }
+  }
+  async refreshZoneMarket() {
+    if (this.state.zoneMarketBusy || !this.client?.zoneMarketRefresh) return;
+    this.setState({ zoneMarketBusy: true, zoneMarketMsg: "" });
+    try {
+      const m = await this.client.zoneMarketRefresh();
+      this.setState({ zoneMarket: m, zoneMarketBusy: false, zoneMarketAt: Date.now(),
+        zoneMarketMsg: !m?.available ? "Could not reach the price feed."
+          : m.newer ? (this.state.zoneResult ? "Updated · run again to use them" : "Updated just now")
+          : "Checked just now · no newer prices yet" });
+    } catch (e) {
+      this.setState({ zoneMarketBusy: false, zoneMarketMsg: "Could not reach the price feed." });
+    }
   }
   async runZoneSim() {
     const s = this.state;
@@ -1678,7 +1749,7 @@ class Component extends DCLogic {
   zoneDeriveSig(s) { return JSON.stringify(this.zoneDeriveBody(s)); }
   async loadZoneDerived() {
     const s = this.state;
-    if (!(s.zoneParty || []).length || !this.client.zoneDerive) return;
+    if (!(s.zoneParty || []).length || !this.client?.zoneDerive) return;   // not before the client is up
     const body = this.zoneDeriveBody(s), sig = JSON.stringify(body);
     this._deriveSig = sig; this._deriving = true;
     try { const r = await this.client.zoneDerive(body);
@@ -1999,52 +2070,84 @@ class Component extends DCLogic {
         label: `${sv.name} · ${cand.name} T${cand.difficultyTier ?? 0}${sv.lag > 0 ? ` · lag ${sv.lag} ms` : ""}${sv.wave > 0 ? ` · wave ${sv.wave} ms` : ""}`,
         hours: sv.hours, seed: sv.seed, lag: sv.lag, wave: sv.wave }; };
     const A = resolve(s.zoneCmp?.a), B = resolve(s.zoneCmp?.b);
-    const grain = s.zoneCmpGrain || "totals";
+    const grain = ["totals", "players", "damage", "consumables", "monsters"].includes(s.zoneCmpGrain) ? s.zoneCmpGrain : "totals";   // "loot", "xp" and "derived" were retired 2026-09-19
     const ps = c => (c?.cand?.players || []);
     const sum = (c, fn) => ps(c).reduce((a, p) => a + (fn(p) || 0), 0);
     const rows = [];
-    const push = (label, a, b, { d = 1, lowerBetter = false, coins = false, per = "" } = {}) => {
+    const push = (label, a, b, { d = 1, lowerBetter = false, coins = false, per = "", unit = "" } = {}) => {
       const av = Number(a) || 0, bv = Number(b) || 0, delta = bv - av;
       const good = lowerBetter ? delta < 0 : delta > 0;
-      rows.push({ label, a: coins ? coin(av) : nf(av, d), b: coins ? coin(bv) : nf(bv, d),
-        delta: `${delta > 0 ? "+" : delta < 0 ? "−" : ""}${coins ? coin(Math.abs(delta)) : nf(Math.abs(delta), d)}${per}`,
-        pct: av ? `${delta > 0 ? "+" : "−"}${nf(Math.abs(delta / av) * 100, 1)}%` : "",
+      rows.push({ isRow: true, isGroup: false, indent: inGroup ? "18px" : "0", label, a: (coins ? coin(av) : nf(av, d)) + unit, b: (coins ? coin(bv) : nf(bv, d)) + unit,
+        delta: `${delta > 0 ? "+" : delta < 0 ? "−" : ""}${coins ? coin(Math.abs(delta)) : nf(Math.abs(delta), d)}${unit}${per}`,
+        pct: av && delta ? `${delta > 0 ? "+" : "−"}${nf(Math.abs(delta / av) * 100, 1)}%` : "",
         color: delta === 0 ? "var(--color-neutral-400)" : good ? "var(--color-accent-300)" : "var(--color-accent-2-300)" });
     };
+    // One collapsible block per player (default closed, operator 2026-09-19): a header row, then that player's rows
+    // only while it is open. Open state is kept per view, so opening Metzli under Per player leaves Damage alone.
+    let inGroup = false;
+    const cmpOpen = s.zoneCmpOpen || {};
+    const group = (nm, sub, fill) => {
+      const key = `${grain}:${nm}`, open = !!cmpOpen[key];
+      rows.push({ isGroup: true, isRow: false, label: nm, sub, caret: open ? "\u25be" : "\u25b8",
+        toggle: () => this.setState(st => ({ zoneCmpOpen: { ...(st.zoneCmpOpen || {}), [key]: !(st.zoneCmpOpen || {})[key] } })) });
+      if (open) { inGroup = true; fill(); inGroup = false; }
+    };
+    // Every figure the Results tab shows, side by side, except the loot-in and loot-out item lists: profit / day
+    // stands for them (operator, 2026-09-19). Per-player rows pair players by name.
+    // A run's players carry their name as `hrid` (the kernel's unit id is the character name); `name` is kept for
+    // anything older. Reading only `name` put every player under one "undefined" row.
+    const pname = p => p?.name || p?.hrid || "";
+    const names = () => [...new Set([...ps(A), ...ps(B)].map(pname))];
+    const pair = nm => [ps(A).find(p => pname(p) === nm), ps(B).find(p => pname(p) === nm)];
+    const keysOf = (fn, a, b) => [...new Set([...Object.keys(fn(a) || {}), ...Object.keys(fn(b) || {})])]
+      .sort((x, y) => ((fn(b) || {})[y] || (fn(a) || {})[y] || 0) - ((fn(b) || {})[x] || (fn(a) || {})[x] || 0));
+    const consumableCost = p => { const items = p?.loot?.expenses?.items || [];
+      return Object.keys(p?.consumablesUsedPerHour || {}).reduce((t, k) => t + (items.find(x => x.itemHrid === k)?.coinsPerHour || 0), 0); };
     if (A && B) {
       if (grain === "totals") {
+        // EPH as the results table reads it: dungeon clears an hour, or encounters an hour on a planet.
+        const eph = c => (c.isDungeon ? (c.dungeonsCompletedPerHour || 0) : (c.encountersPerHour || 0));
+        push(A.cand.isDungeon || B.cand.isDungeon ? "EPH (clears / h)" : "EPH (encounters / h)", eph(A.cand), eph(B.cand), { d: 2 });
+        push("Deaths / h", A.cand.deathsPerHour, B.cand.deathsPerHour, { d: 2, lowerBetter: true });
         push("XP / h, party", sum(A, p => p.experiencePerHour?.total), sum(B, p => p.experiencePerHour?.total), { d: 4 });
         push("Profit / day, party", sum(A, p => p.profitPerHour) * 24, sum(B, p => p.profitPerHour) * 24, { coins: true });
         // Cowbells are summed per player by the server; the candidate itself carries none.
         const bellsEach = cand => { const list = cand?.players || []; return list.length ? list.reduce((a, p) => a + (p.cowbellsPerHour || 0), 0) * 24 / list.length : 0; };
-        push("Kills / h", A.cand.killsPerHour, B.cand.killsPerHour, { d: 1 });
-        push("Deaths / h", A.cand.deathsPerHour, B.cand.deathsPerHour, { d: 2, lowerBetter: true });
-        push("Encounters / h", A.cand.encountersPerHour, B.cand.encountersPerHour, { d: 1 });
         push("Cowbells / day per player", bellsEach(A.cand), bellsEach(B.cand), { d: 0 });
+        push("Kills / h", A.cand.killsPerHour, B.cand.killsPerHour, { d: 1 });
+        push("Encounters / h", A.cand.encountersPerHour, B.cand.encountersPerHour, { d: 1 });
       } else if (grain === "players") {
-        const names = [...new Set([...ps(A), ...ps(B)].map(p => p.name))];
-        for (const nm of names) { const a = ps(A).find(p => p.name === nm), b = ps(B).find(p => p.name === nm);
-          push(`${nm} · damage / s`, (a?.damagePerHour || 0) / 3600, (b?.damagePerHour || 0) / 3600, { d: 1 });
-          push(`${nm} · taken / s`, ((a?.damageTakenPerHour || 0) + (a?.hpSpentPerHour || 0)) / 3600, ((b?.damageTakenPerHour || 0) + (b?.hpSpentPerHour || 0)) / 3600, { d: 1, lowerBetter: true });
-          push(`${nm} · healing / s`, (a?.healingReceivedPerHour || 0) / 3600, (b?.healingReceivedPerHour || 0) / 3600, { d: 1 });
-          push(`${nm} · deaths / h`, a?.deathsPerHour, b?.deathsPerHour, { d: 2, lowerBetter: true });
-          push(`${nm} · profit / day`, (a?.profitPerHour || 0) * 24, (b?.profitPerHour || 0) * 24, { coins: true }); }
-      } else if (grain === "xp") {
-        const keys = [...new Set([...ps(A), ...ps(B)].flatMap(p => Object.keys(p.experiencePerHour || {})))].filter(k => k !== "total");
-        push("Total", sum(A, p => p.experiencePerHour?.total), sum(B, p => p.experiencePerHour?.total), { d: 4 });
-        for (const k of keys) push(nice(k), sum(A, p => p.experiencePerHour?.[k]), sum(B, p => p.experiencePerHour?.[k]), { d: 4 });
-      } else if (grain === "loot") {
-        push("Income / h", sum(A, p => p.loot?.income?.coinsPerHour ?? p.incomePerHour), sum(B, p => p.loot?.income?.coinsPerHour ?? p.incomePerHour), { coins: true });
-        push("Expenses / h", sum(A, p => p.loot?.expenses?.coinsPerHour ?? p.expensesPerHour), sum(B, p => p.loot?.expenses?.coinsPerHour ?? p.expensesPerHour), { coins: true, lowerBetter: true });
-        push("Profit / h", sum(A, p => p.profitPerHour), sum(B, p => p.profitPerHour), { coins: true });
-        push("Profit / day", sum(A, p => p.profitPerHour) * 24, sum(B, p => p.profitPerHour) * 24, { coins: true });
-      } else if (grain === "derived") {
-        const da = A.derived || [], db = B.derived || [];
-        const names = [...new Set([...da, ...db].map(x => x.name))];
-        for (const nm of names) { const a = da.find(x => x.name === nm), b = db.find(x => x.name === nm);
-          const labels = [...new Set([...(a?.stats || []), ...(b?.stats || [])].map(x => x.label))];
-          for (const L of labels) push(`${nm} · ${L}`, (a?.stats || []).find(x => x.label === L)?.total,
-            (b?.stats || []).find(x => x.label === L)?.total, { d: 2 }); }
+        // The Rates section, then each player's XP and profit.
+        for (const nm of names()) { const [a, b] = pair(nm);
+          const pd = p => (p?.profitPerHour || 0) * 24, dps = p => (p?.damagePerHour || 0) / 3600, xph = p => p?.experiencePerHour?.total || 0;
+          group(nm, [`${nf(dps(a), 1)} \u2192 ${nf(dps(b), 1)} dmg / s`, `XP / h ${nf(xph(a) / 1e6, 3)}M \u2192 ${nf(xph(b) / 1e6, 3)}M`,
+            `profit / day ${coin(pd(a))} \u2192 ${coin(pd(b))}`].join(" \u00b7 "), () => {
+            push("Damage / s", (a?.damagePerHour || 0) / 3600, (b?.damagePerHour || 0) / 3600, { d: 1 });
+            push("Damage taken / s", ((a?.damageTakenPerHour || 0) + (a?.hpSpentPerHour || 0)) / 3600, ((b?.damageTakenPerHour || 0) + (b?.hpSpentPerHour || 0)) / 3600, { d: 1, lowerBetter: true });
+            push("Healing / s", (a?.healingReceivedPerHour ?? a?.healingPerHour ?? 0) / 3600, (b?.healingReceivedPerHour ?? b?.healingPerHour ?? 0) / 3600, { d: 1 });
+            push("Hit rate", (a?.hitRate || 0) * 100, (b?.hitRate || 0) * 100, { d: 1, unit: "%" });
+            push("Deaths / h", a?.deathsPerHour, b?.deathsPerHour, { d: 2, lowerBetter: true });
+            push("Actions / min", (a?.actionsTaken || 0) / ((A.hours || 1) * 60), (b?.actionsTaken || 0) / ((B.hours || 1) * 60), { d: 1 });
+            push("Mana exhaustion", (a?.manaExhaustionFraction || 0) * 100, (b?.manaExhaustionFraction || 0) * 100, { d: 1, unit: "%", lowerBetter: true });
+            push("XP / h", a?.experiencePerHour?.total, b?.experiencePerHour?.total, { d: 4 });
+            push("Profit / day", pd(a), pd(b), { coins: true }); }); }
+      } else if (grain === "damage") {
+        for (const nm of names()) { const [a, b] = pair(nm);
+          const dps = p => (p?.damagePerHour || 0) / 3600;
+          group(nm, `${nf(dps(a), 1)} \u2192 ${nf(dps(b), 1)} dmg / s`, () => {
+            for (const k of keysOf(p => p?.damageBySourcePerHour, a, b)) {
+              push(`${nice(k)} / s`, (a?.damageBySourcePerHour?.[k] || 0) / 3600, (b?.damageBySourcePerHour?.[k] || 0) / 3600, { d: 1 });
+              if (a?.abilityCastsPerHour?.[k] != null || b?.abilityCastsPerHour?.[k] != null)
+                push(`${nice(k)} casts / h`, a?.abilityCastsPerHour?.[k], b?.abilityCastsPerHour?.[k], { d: 1 }); } }); }
+      } else if (grain === "consumables") {
+        for (const nm of names()) { const [a, b] = pair(nm);
+          group(nm, `${coin(consumableCost(a) * 24)} \u2192 ${coin(consumableCost(b) * 24)} / day`, () => {
+            push("Consumables / day", consumableCost(a) * 24, consumableCost(b) * 24, { coins: true, lowerBetter: true });
+            for (const k of keysOf(p => p?.consumablesUsedPerHour, a, b))
+              push(`${nice(k)} / h`, a?.consumablesUsedPerHour?.[k], b?.consumablesUsedPerHour?.[k], { d: 1, lowerBetter: true }); }); }
+      } else if (grain === "monsters") {
+        for (const k of keysOf(c => c?.killsByMonsterPerHour, A.cand, B.cand))
+          push(`${nice(k)} / h`, A.cand.killsByMonsterPerHour?.[k], B.cand.killsByMonsterPerHour?.[k], { d: 1 });
       }
     }
     return {
@@ -2054,7 +2157,10 @@ class Component extends DCLogic {
       setB: e => set({ zoneCmp: { ...(s.zoneCmp || {}), b: e.target.value } }),
       aLabel: A?.label || "—", bLabel: B?.label || "—",
       ready: !!(A && B), rows, hasRows: rows.length > 0,
-      grains: [["totals", "Party totals"], ["players", "Per player"], ["xp", "XP by skill"], ["loot", "Profit & loot"], ["derived", "Derived stats"]]
+      // Every player collapsed leaves only header rows: the column heading has nothing under it, so its text is
+      // hidden -- but its row keeps its place, so opening a player does not shift the table down.
+      headVisibility: rows.some(r => r.isRow) ? "visible" : "hidden",
+      grains: [["totals", "Party totals"], ["players", "Per player"], ["damage", "Damage by source"], ["consumables", "Consumables"], ["monsters", "Kills by monster"]]
         .map(([id, label]) => ({ id, label, active: grain === id,
           style: grain === id ? "color:var(--color-accent-300);border-color:var(--color-accent-600)" : "",
           go: () => set({ zoneCmpGrain: id }) })),
@@ -2306,7 +2412,7 @@ class Component extends DCLogic {
         const allowed = cond?.allowedComparatorHrids || (V?.comparators || []).map(c => c.hrid);
         const cmp = (V?.comparators || []).find(c => c.hrid === row.comparatorHrid) || null;
         return { k, dep: row.dependencyHrid || "", cond: row.conditionHrid || "", cmp: row.comparatorHrid || "",
-          value: row.value === undefined ? "" : String(row.value), takesValue: !!cmp?.allowValue,
+          value: row.value === undefined ? "" : String(row.value), takesValue: !!cmp?.allowValue, noValue: !cmp?.allowValue,
           depOpts: (V?.dependencies || []).map(d => ({ value: d.hrid, label: d.name })),
           condOpts: (V?.conditions || []).map(c => ({ value: c.hrid, label: c.name })),
           cmpOpts: (V?.comparators || []).filter(c => allowed.includes(c.hrid)).map(c => ({ value: c.hrid, label: c.name })),
@@ -2351,7 +2457,7 @@ class Component extends DCLogic {
           mode, modeDisabled: !cur,
           modeNote: !cur ? "" : mode === "default"
             ? (def?.defaultTriggers?.length ? `${def.defaultTriggers.length} default condition${def.defaultTriggers.length === 1 ? " applies" : "s apply"}` : "No default conditions — used when the slot is ready")
-            : mode === "ready" ? "Sent as an empty set: as soon as the slot is off cooldown" : "",
+            : "",   // "As soon as it is off cooldown" says it all; the dropdown needs no note
           rows: rowVals(conTrig(e), (j, patch) => this.zoneEditTrigger(i, cur, j, patch)),
           canAddRow: !!V && !!cur && (Array.isArray(conTrig(e)) ? conTrig(e).length : 0) < Component.ZONE_MAX_TRIGGERS,
           atTriggerCap: (Array.isArray(conTrig(e)) ? conTrig(e).length : 0) >= Component.ZONE_MAX_TRIGGERS,
@@ -2480,10 +2586,10 @@ class Component extends DCLogic {
           hastedText: def && def.cooldownSeconds && abilityHaste > 0 ? `${secs(hastedCd(def.cooldownSeconds))} s` : "",
           hastedTip: def && def.cooldownSeconds && abilityHaste > 0
             ? `${def.cooldownSeconds} s base ÷ (1 + ${hastePct} ability haste) = ${secs(hastedCd(def.cooldownSeconds))} s` : "",
-          mode, modeLabel: mode === "default" ? "Game defaults" : mode === "ready" ? "Whenever ready" : "Custom",
+          mode, modeLabel: mode === "default" ? "Game defaults" : mode === "ready" ? "As soon as it is off cooldown" : "Custom",
           modeNote: mode === "default"
             ? (def?.defaultTriggers?.length ? `${def.defaultTriggers.length} default condition${def.defaultTriggers.length === 1 ? " applies" : "s apply"}` : "No default conditions — fires when ready")
-            : mode === "ready" ? "Sent as an empty set: as soon as it is off cooldown" : "",
+            : "",   // "As soon as it is off cooldown" says it all; the dropdown needs no note
           rows: trigRows(a.hrid), canEditTriggers: !!V, isCustom: mode === "custom",
           // An ability imported with no conditions is on its game defaults; adding one is the same gesture as
           // for a custom set, so the button is offered from any mode and switches the mode itself.
@@ -2517,7 +2623,7 @@ class Component extends DCLogic {
           remove: () => this.zoneSetAbility(i, k, "") }; }),
       abilityGroups,
       abilityMax: String(cat?.maxAbilityLevel ?? 200),
-      triggerModeOpts: [{ value: "default", label: "Game defaults" }, { value: "ready", label: "Whenever ready" }, { value: "custom", label: "Custom conditions" }],
+      triggerModeOpts: [{ value: "default", label: "Game defaults" }, { value: "ready", label: "As soon as it is off cooldown" }, { value: "custom", label: "Custom conditions" }],
       consumables: [{ kind: "food", label: "Food", items: consumableItems("food") },
         { kind: "drinks", label: "Drinks", items: consumableItems("drinks") }],
       rooms: roomDefs.map(r => ({ hrid: r.hrid, name: r.name, value: String(p.record?.rooms?.[r.hrid] ?? 0),
@@ -2540,7 +2646,6 @@ class Component extends DCLogic {
           assumedTip: !inf ? "" : inferredFrom[bd.key] ? `Not in this export — read from ${inferredFrom[bd.key]}'s` : "Nobody in the party carries shrine levels — 0, not a guess",
           dirty: (own[bd.key] ?? null) !== (b?.record?.guildCombatBuffLevels?.[bd.key] ?? null),
           set: e => this.zoneSetBuff(i, bd.key, e.target.value) }; }),
-      buffNote: "A shrine's value at level N is boost + levelBonus × (N − 1) per buff it feeds — tempo feeds attack speed and cast speed, spirit feeds max HP and MP. A level this export lacks is read from another party member's — a party is normally one guild — and otherwise is 0, never the party's highest: a guessed level would inflate the result invisibly.",
       // `format` is the server's rendering hint; sources sum to the total exactly, so they are shown as-is.
       // `percent` carries the kernel's own ratio — 0.1068 is 10.68% — because that is the number the
       // simulation multiplies by, and pre-rounding it would break the promise that sources sum to the total.
@@ -2610,15 +2715,12 @@ class Component extends DCLogic {
     const h = Math.max(Number(LIM.minHours) || 0.0167, Number(hours) || 0);
     return Math.max(1, Math.min(LIM.maxCandidates, Math.floor(LIM.maxCandidateHours / h)));
   }
-  // The export carries the pouch and its enhancement, so the page can say WHICH pouch the number should come from.
-  // It does not know the stat that pouch grants — no invented curve here; the operator types the value.
-  zonePouches(party) {
-    return (party || []).map(p => { const eq = (p.loadout?.equipment || [])
-        .find(x => /guzzling_pouch/.test(String(x.itemHrid || "")));
-      return eq ? { name: p.record?.name || "", enh: Number(eq.enhancementLevel) || 0 } : null;
-    }).filter(Boolean).sort((a, b) => b.enh - a.enh);
-  }
   zoneVals(s, set) {
+    // Ask and bid alone confuse players, so every one says which kind of trade it is: loot is sold, consumables and
+    // keys are bought. Selling at the bid or buying at the ask fills an order already listed (instant); selling at
+    // the ask or buying at the bid waits as a listing (slow).
+    const side = (k, v) => (v !== "ask" && v !== "bid") ? "" : `${((k === "loot") === (v === "bid")) ? "instant" : "slow"} ${k === "loot" ? "sell" : "buy"}`;
+    const sideShort = (k, v) => { const w = side(k, v); return w ? `${v} (${w.split(" ")[0]})` : v; };
     const nf = (v, d = 0) => Number(v || 0).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
     const coin = v => { const x = Number(v || 0), a = Math.abs(x);
       return (x < 0 ? "−" : "") + (a >= 1e9 ? (a / 1e9).toFixed(2) + "B" : a >= 1e6 ? (a / 1e6).toFixed(1) + "M" : a >= 1e3 ? Math.round(a / 1e3) + "K" : String(Math.round(a))); };
@@ -2684,7 +2786,6 @@ class Component extends DCLogic {
     const runs = this.zoneRunPicker(s, set, { nf });
     const pr = { ...Component.ZONE_PRICE_DEFAULTS, ...(s.zonePricing || {}) };
     const setPr = (k, v) => this.setZonePrefs({ zonePricing: { ...(s.zonePricing || {}), [k]: v } });
-    const pouches = this.zonePouches(seated);
     const bf = s.zoneBuffs || {};
     const pct = v => `${Math.round((Number(v) || 0) * 1000) / 10}`;
 
@@ -2746,7 +2847,7 @@ class Component extends DCLogic {
       // While the stream is open there is no wall time yet — the row count stands in for it.
       const timing = s.zoneRunning ? `${list.length} of ${(R.candidates || []).length} back`
         : sec < 1 ? `${Math.round(sec * 1000)} ms` : `${nf(sec, 1)} s`;
-      header = `${(R.party || []).length} players · ${nf(R.hours, R.hours < 1 ? 2 : 0)} h · seed ${R.seed}${Number(R.serverLagMs) > 0 ? ` · server lag ${nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0)} ms` : ""}${Number(R.waveTransitionDelayMs) > 0 ? ` · wave gap ${nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0)} ms` : ""} · loot ${R.pricing?.loot} · consumables ${R.pricing?.consumables} · keys ${R.pricing?.keys}${R.pricing?.mode === "iron" ? " · iron" : ""} · ${timing}`;
+      header = `${(R.party || []).length} players · ${nf(R.hours, R.hours < 1 ? 2 : 0)} h · seed ${R.seed}${Number(R.serverLagMs) > 0 ? ` · server lag ${nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0)} ms` : ""}${Number(R.waveTransitionDelayMs) > 0 ? ` · wave gap ${nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0)} ms` : ""} · loot ${sideShort("loot", R.pricing?.loot)} · consumables ${sideShort("consumables", R.pricing?.consumables)} · keys ${sideShort("keys", R.pricing?.keys)}${R.pricing?.keys === "craft" && R.pricing?.keyMaterials ? ` from materials ${sideShort("keyMaterials", R.pricing.keyMaterials)}` : ""}${R.pricing?.mode === "iron" ? " · iron" : ""} · ${timing}`;
       const secOpen = s.zoneSecOpen || {}, secDefs = [["rates", "Rates"], ["xp", "XP / h"],
         ["damage", "Damage by source"], ["consumables", "Consumables"], ["lootIn", "Loot in"], ["lootOut", "Loot out"]];
       if (c && c.ok !== false) detail = { title: `${c.name} · T${c.difficultyTier}`,
@@ -2768,7 +2869,7 @@ class Component extends DCLogic {
           rates: [["Damage / s", rate(p.damagePerHour / 3600)],
             ["Damage taken / s", rate(((p.damageTakenPerHour || 0) + (p.hpSpentPerHour || 0)) / 3600),
               (p.hpSpentPerHour || 0) > 0
-                ? `taken ${rate((p.damageTakenPerHour || 0) / 3600)} / s · HP spent on Insanity ${rate(p.hpSpentPerHour / 3600)} / s — the in-game meter counts both`
+                ? `taken ${rate((p.damageTakenPerHour || 0) / 3600)} / s · HP spent on Insanity ${rate(p.hpSpentPerHour / 3600)} / s — KikiMeter counts both`
                 : ""],
             ["Healing / s", rate((p.healingReceivedPerHour ?? p.healingPerHour ?? 0) / 3600),
               Object.entries(p.healingBySourcePerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
@@ -2832,6 +2933,10 @@ class Component extends DCLogic {
     const pace = this.zoneOnly ? this.zonePace() : null;
     const perCandHour = pace?.secondsPerCandidateHour > 0 ? pace.secondsPerCandidateHour : LIM.secondsPerCandidateHour;
     const estSec = Math.ceil(cands.length / Math.max(1, LIM.concurrency)) * hours * perCandHour;
+    // "under a second", "about 12 seconds", "about 3 minutes": an estimate as a player reads it.
+    const secText = v => { const x = Number(v) || 0;
+      return x < 1 ? "under a second" : x < 90 ? `about ${Math.round(x)} second${Math.round(x) === 1 ? "" : "s"}`
+        : x < 5400 ? `about ${Math.round(x / 60)} minutes` : `about ${nf(x / 3600, 1)} hours`; };
     const laneLabel = this.zoneOnly ? `${LIM.concurrency} lane${LIM.concurrency === 1 ? "" : "s"} in your browser` : `${LIM.concurrency} at a time`;
     const estSource = this.zoneOnly ? "the simulator's own estimate" : "the server's own estimate";
     const paceNote = !this.zoneOnly ? ""
@@ -2854,7 +2959,7 @@ class Component extends DCLogic {
         set({ zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
           zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneRestoredAt: null }); },
       hasParty: party.length > 0, partyCount: seated.length,
-      restored: !!s.zoneRestoredAt && party.length > 0,
+      restored: !this.zoneOnly && !!s.zoneRestoredAt && party.length > 0,   // the public site says it in its header
       restoredNote: s.zoneRestoredAt ? (() => { const mins = Math.max(1, Math.round((Date.now() - s.zoneRestoredAt) / 60000));
         const when = mins < 60 ? `${mins} min ago` : `${(mins / 60).toFixed(1)} h ago`;
         return `Restored from your last session, saved ${when} — the party, the queue and this session's runs. Import again if anything changed in the game; it is dropped after 12 hours.`; })() : "",
@@ -2921,6 +3026,18 @@ class Component extends DCLogic {
       hours: s.zoneHours, setHours: e => this.setZonePrefs({ zoneHours: e.target.value }),
       hoursNote: hours < 24 ? "Short runs are noisy — a dungeon party sees four clears in an hour." : `${nf(hours)} h ≈ ${nf(hours / 168, 1)} weeks of play, about ${nf(hours * 0.02, 0)} s per candidate.`,
       advOpen: !!s.zoneAdv, toggleAdv: () => this.setZonePrefs({ zoneAdv: !s.zoneAdv }),
+      // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
+      // for other things; runs and optimizer searches just take longer. Kept in this browser, not in the session.
+      hasWorkers: !!this.client?.setZoneWorkers,
+      workersMax: String(this.client?.maxWorkers || 1),
+      workersDefault: String(this.client?.defaultWorkers || 1),
+      workersValue: this.client?.savedWorkers ? String(this.client.savedWorkers) : "",
+      workersNow: this.client?.setZoneWorkers ? `${this.client.zoneLanes || this.client.workers || 1} of ${this.client.maxWorkers || 1} cores` : "",
+      setWorkers: e => { if (!this.client?.setZoneWorkers) return;
+        const raw = String(e.target.value || "").trim();
+        this.client.setZoneWorkers(raw === "" ? null : Math.max(1, Math.min(this.client.maxWorkers || 1, Math.floor(Number(raw)) || 1)));
+        this._zoneLimitsReq = true; this.loadZoneLimits(); this.setState({ zoneWorkersAt: Date.now() }); },
+      workersNote: `How many simulations run at once. Lower it to keep your computer responsive while a long run or an optimizer search works; everything takes longer in proportion. Leave empty for ${this.client?.defaultWorkers || 1} (every core but one).`,
       seed: s.zoneSeed, setSeed: e => this.setZonePrefs({ zoneSeed: e.target.value }),
       // ZONE-46 — server lag. The suggested value comes from /zone-sim/limits, never from the page: it moves
       // as more sessions are fitted. Empty is off; the field is only sent when above 0.
@@ -2963,16 +3080,39 @@ class Component extends DCLogic {
       waveError: wBad ? `Wave transition delay must be between ${nf(wMin)} and ${nf(wMax)} ms — the server refuses anything else. It is the whole gap${Number.isFinite(wMean) && wMean > 0 ? `, around ${nf(Math.round(wMean))}` : ""}, not the tens of milliseconds above three seconds.` : "",
       waveBad: wBad,
       priceOpen: !!s.zonePriceOpen, togglePrice: () => set({ zonePriceOpen: !s.zonePriceOpen }),
+      // The feed's age, read from its own timestamp at render time (the page re-renders often enough for minutes).
+      hasMarketLine: !!this.client?.zoneMarketRefresh,
+      marketLine: (() => { const m = s.zoneMarket;
+        if (!m) return "checking…";
+        if (!m.available) return "unavailable · items are unpriced";
+        const age = m.timestamp ? Math.max(0, Date.now() - m.timestamp) : null;
+        const txt = age == null ? "age unknown" : age < 90e3 ? "just now" : age < 90 * 60e3 ? `${Math.round(age / 60e3)} min old` : `${Math.round(age / 36e5)} h old`;
+        const published = age == null ? "age unknown" : age < 90e3 ? "published just now" : `published ${txt.replace(" old", " ago")}`;
+        return published; })(),
+      marketBusy: !!s.zoneMarketBusy, marketBtn: s.zoneMarketBusy ? "Checking…" : "↻ Refresh",
+      refreshMarket: () => this.refreshZoneMarket(),
+      marketMsg: s.zoneMarketMsg || "", hasMarketMsg: !!s.zoneMarketMsg,
       priceCaret: s.zonePriceOpen ? "▾" : "▸",
+      // Closed, the panel shows its settings as label/value pairs; open, the selects replace them.
+      priceClosed: !s.zonePriceOpen,
+      priceFacts: [["Loot", sideShort("loot", pr.loot)], ["Consumables", sideShort("consumables", pr.consumables)], ["Keys", sideShort("keys", pr.keys)],
+        ...(pr.keys === "craft" || pr.mode === "iron" ? [["Key materials", sideShort("keyMaterials", pr.keyMaterials)]] : []), ["Cape", pr.capes],
+        ["Catalyst", pr.catalyst === "none" ? "none" : nice(pr.catalyst).replace(/ Catalyst$/, "")], ["Mode", pr.mode],
+        ["Artisan tea", pr.artisanTea ? "on" : "off"], ["Drink conc.", s.zoneConcOverride ? String(pr.drinkConcentration ?? 0) : "pouch"]]
+        .map(([label, value]) => ({ label, value: String(value).replace(/^./, c => c.toUpperCase()) })),
       priceSummary: [`loot ${pr.loot}`, `consumables ${pr.consumables}`, `keys ${pr.keys}`, `cape ${pr.capes}`,
         `catalyst ${pr.catalyst === "none" ? "none" : nice(pr.catalyst)}`, pr.mode,
         `artisan tea ${pr.artisanTea ? "on" : "off"}`,
         s.zoneConcOverride ? `concentration ${pr.drinkConcentration ?? 0}` : "concentration per pouch"].join(" · "),
       pricingSel: [["loot", "Loot sells at", ["bid", "ask"]], ["consumables", "Consumables cost", ["ask", "bid"]],
-        ["keys", "Keys", ["ask", "bid", "craft"]], ["capes", "Unsellable cape", ["mirror", "coinify", "decompose", "zero"]],
+        ["keys", "Keys", ["ask", "bid", "craft"]], ["keyMaterials", "Key materials", ["ask", "bid"]], ["capes", "Cape Value", ["mirror", "coinify", "decompose", "zero"]],
         ["catalyst", "Decompose catalyst", ["none", "/items/decomposition_catalyst", "/items/prime_catalyst"]],
-        ["mode", "Mode", ["standard", "iron"]]].map(([k, label, opts]) => ({ key: k, label, value: pr[k],
-          set: e => setPr(k, e.target.value), options: opts.map(o => ({ value: o, label: o.startsWith("/") ? nice(o) : o })) })),
+        ["mode", "Mode", ["standard", "iron"]]]
+        // Key materials only matter when keys are crafted (iron mode always crafts).
+        .filter(([k]) => k !== "keyMaterials" || pr.keys === "craft" || pr.mode === "iron")
+        .map(([k, label, opts]) => ({ key: k, label, value: pr[k],
+          set: e => setPr(k, e.target.value), options: opts.map(o => ({ value: o,
+            label: o.startsWith("/") ? nice(o) : side(k, o) ? `${o} (${side(k, o)})` : o })) })),
       artisanTea: !!pr.artisanTea, toggleTea: () => setPr("artisanTea", !pr.artisanTea),
       // Per player, not per party: with keys: "craft" each player makes their own keys, so the tea cut follows
       // that player's own Guzzling Pouch. Not sent unless overridden — the server reads each pouch from the loadout.
@@ -2982,7 +3122,7 @@ class Component extends DCLogic {
       toggleConcOverride: () => this.setZonePrefs({ zoneConcOverride: !s.zoneConcOverride }),
       concNote: s.zoneConcOverride
         ? `Sent as ${pr.drinkConcentration ?? 0} for every player, overriding their own pouches. An explicit 0 is an override too.`
-        : `Read by the server from each player's own Guzzling Pouch, enhancement included — crafted keys cost each player their own, so their key rows differ. The editor's Drink concentration stat shows each player's, with the pouch named as its source. ${pouches.length ? `In the party: ${pouches.map(x => `${x.name} +${x.enh}`).join(", ")}.` : "No Guzzling Pouch in the imported party."}`,
+        : "Key prices are based on each player's Guzzling Pouch level.",
       taxNote: "Market sales are net of the 5% marketplace tax. The run echoes the pricing it actually used.",
       buffXp: this.zoneBuffLevel("communityExperience", bf.communityExperience),
       setBuffXp: e => this.setZoneBuffs({ communityExperience: this.zoneBuffFraction("communityExperience", e.target.value) }),
@@ -2997,23 +3137,25 @@ class Component extends DCLogic {
       buffMax: String(this.zoneBuffDef("communityExperience").maxLevel),
       buffXpLabel: `Community XP level (0–${this.zoneBuffDef("communityExperience").maxLevel})`,
       buffDropLabel: `Community drop level (0–${this.zoneBuffDef("communityDropQuantity").maxLevel})`,
-      // Read from the fields, never a fixed percentage — the levels are what the operator sets.
-      buffNote: `Exports carry no account-wide buffs. Applied to every player: +${pct(bf.communityExperience)}% community XP, +${pct(bf.communityDropQuantity)}% drops${bf.personalWisdom ? `, +${pct(this.zoneAcctDef("personalWisdom", 0.2).value)}% Wisdom Scroll` : ""}${bf.mooPass ? `, +${pct(this.zoneAcctDef("mooPass", 0.05).value)}% Moo Pass` : ""}. Sent as fractions.`,
-      runDisabled: !!block || s.zoneRunning, runLabel: s.zoneRunning ? "Simulating…" : block || `Run ${cands.length} candidate${cands.length === 1 ? "" : "s"}`,
+      // The rate each level gives, beside its field: read from the fields, never a fixed percentage.
+      buffXpPct: `+${pct(bf.communityExperience)}%`, buffDropPct: `+${pct(bf.communityDropQuantity)}%`,
+      runDisabled: !!block || s.zoneRunning, runLabel: s.zoneRunning ? "Simulating…" : block || `Simulate ${cands.length} ${cands.length === 1 ? "zone" : "zones"}`,
+      // Plain words for players: how many zones, how long, and what happens as it runs. The batching and pace
+      // detail stays in the code; it is not something a player acts on.
       runNote: s.zoneRunning
         ? (s.zoneProgress
-            ? `${s.zoneProgress.done} of ${s.zoneProgress.total} candidates back${s.zoneProgress.estimatedSeconds != null ? ` · about ${nf(s.zoneProgress.estimatedSeconds, s.zoneProgress.estimatedSeconds < 10 ? 1 : 0)} s in total, ${estSource}` : ""} · ${laneLabel}${reqCount > 1 ? ` · ${nf(reqCount)} requests` : ""}. Rows appear as they finish; Stop keeps what has landed.`
-            : `About ${nf(estSec, estSec < 10 ? 1 : 0)} s — the form stays editable while it runs.`)
-        : cands.length ? `${cands.length} × ${nf(hours, hours < 1 ? 2 : 0)} h = ${nf(cands.length * hours)} candidate-hours ≈ ${nf(estSec, estSec < 10 ? 1 : 0)} s, ${reqCount === 1 ? "one streamed request" : `${nf(reqCount)} streamed requests of up to ${nf(chunkRows)} (${this.zoneOnly ? "the" : "the server's"} ${nf(LIM.maxCandidateHours)} candidate-hours a request)`}${paceNote}` : "",
+            ? `${s.zoneProgress.done} of ${s.zoneProgress.total} done${s.zoneProgress.estimatedSeconds != null ? ` · ${secText(s.zoneProgress.estimatedSeconds)} in total` : ""}. Results appear as each one finishes; Stop keeps what is done.`
+            : `Takes ${secText(estSec)}. You can keep editing while it runs.`)
+        : cands.length ? `${cands.length} ${cands.length === 1 ? "zone" : "zones"} × ${nf(hours, hours < 1 ? 2 : 0)} simulated hours · takes ${secText(estSec)}.` : "",
       // The pin, when this board already has a baseline: it is stated rather than applied silently, because it
       // overrides the Seed and Hours fields above.
       pinned: !!(s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands)),
       pinNote: s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands)
-        ? `Pinned to this board's baseline — seed ${s.zoneBaseline.seed} · ${nf(s.zoneBaseline.hours, s.zoneBaseline.hours < 1 ? 2 : 0)} h${s.zoneBaseline.lag > 0 ? ` · lag ${nf(s.zoneBaseline.lag)} ms` : ""}${s.zoneBaseline.wave > 0 ? ` · wave ${nf(s.zoneBaseline.wave)} ms` : ""}, so the run subtracts cleanly from it.` : "",
+        ? `Matching your baseline (seed ${s.zoneBaseline.seed}, ${nf(s.zoneBaseline.hours, s.zoneBaseline.hours < 1 ? 2 : 0)} h${s.zoneBaseline.lag > 0 ? `, ${nf(s.zoneBaseline.lag)} ms lag` : ""}${s.zoneBaseline.wave > 0 ? `, ${nf(s.zoneBaseline.wave)} ms wave delay` : ""}), so any difference in the results comes from your changes.` : "",
       unpin: () => set({ zoneBaseline: null }),
       stop: () => this.stopZoneSim(),
       stopped: !!R?.stopped,
-      stoppedNote: R?.stopped ? `Stopped — ${nf((R.candidates || []).length)} of ${nf(cands.length)} candidates ran. Nothing else was started.` : "",
+      stoppedNote: R?.stopped ? `Stopped: ${nf((R.candidates || []).length)} of ${nf(cands.length)} zones ran.` : "",
       run: () => this.runZoneSim(),
       running: s.zoneRunning, runError: s.zoneRunError || "", hasRunError: !!s.zoneRunError,
       hasResult: !!R && rows.length > 0, empty: !R && !s.zoneRunning && !runs.length,
