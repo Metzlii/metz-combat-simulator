@@ -956,7 +956,7 @@ class Component extends DCLogic {
     zoneShowSingles: false,
     // ZONE-46: an optional fitted per-action delay that models server load. Empty (not 0) is "off" so the
     // field can be blank; it is only sent when above 0, and the suggested value is read from /zone-sim/limits.
-    zoneHours: 1000, zoneSeed: 1, zoneLagMs: "", zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
+    zoneHours: 1000, zoneSeed: 1, zoneLagMs: "14", zoneWaveMs: "3095", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
     // Both community buffs default to level 20 — 0.2 + 0.005 × 19 = 0.295 each, which is what the live
     // websocket capture shows for drop quantity too. Local storage overrides these once the operator edits them.
     zoneBuffs: { communityExperience: 0.295, communityDropQuantity: 0.295, personalWisdom: false, mooPass: true, _v: 2 },
@@ -1076,10 +1076,15 @@ class Component extends DCLogic {
       // in the game, not an edit to the sim. Deferred a microtask so the parent's setState is not a render.
       if (this.props.onParty) {
         const seated = this.zoneActiveParty(s), buffs = s.zoneBuffs || null;
-        const sig = JSON.stringify([seated, buffs]);
+        // Lag and the wave gap as a run would send them (empty or 0 sends nothing), so an optimizer search measures
+        // the party the way Setup's runs do.
+        const lagMs = Number(s.zoneLagMs), waveRaw = String(s.zoneWaveMs ?? "").trim(), waveMs = Number(waveRaw);
+        const measure = { ...(Number.isFinite(lagMs) && lagMs > 0 ? { serverLagMs: lagMs } : {}),
+          ...(waveRaw !== "" && Number.isFinite(waveMs) ? { waveTransitionDelayMs: waveMs } : {}) };
+        const sig = JSON.stringify([seated, buffs, measure]);
         // The account buffs travel with the party: the upgrade search prepares its runs the way zoneRun does, so
         // it measures the party as Setup runs it only if it is sent the same buffs.
-        if (sig !== this._partySig) { this._partySig = sig; Promise.resolve().then(() => this.props.onParty?.(seated, buffs)); }
+        if (sig !== this._partySig) { this._partySig = sig; Promise.resolve().then(() => this.props.onParty?.(seated, buffs, measure)); }
       }
       // The public site shows "Restored from cache" in its header instead of a box here: the restore time goes up
       // as a window event whenever it changes (null once the party is cleared), like the Workers setting's lanes.

@@ -900,8 +900,8 @@ class Component extends DCLogic {
   deleteOptSave(id) { this.writeOptSaves((this.state.optSaves || []).filter(x => x.id !== id)); }
   componentDidUpdate() { this.queueOptimize(); }
   componentWillUnmount() { clearTimeout(this._optT); clearInterval(this._upTick); }
-  noteParty(players, buffs) {
-    this.setState({ party: Array.isArray(players) ? players : [], buffs: buffs || null });
+  noteParty(players, buffs, measure) {
+    this.setState({ party: Array.isArray(players) ? players : [], buffs: buffs || null, measure: measure || {} });
     if (!this.state.partyScriptSeen && Component.fromPartyScript(players)) {
       this.setState({ partyScriptSeen: true });
       try { localStorage.setItem(Component.PARTY_SCRIPT_KEY, "1"); } catch {}
@@ -967,6 +967,8 @@ class Component extends DCLogic {
       // The route prepares its runs the way zoneRun does, so the community buffs, the Moo Pass and the shrine
       // reach the search: without them it would measure a different party from the one Setup runs.
       accountBuffs: this.state.buffs || null,
+      // Setup's server lag and wave gap, so the search measures the way Setup's runs do.
+      ...(this.state.measure || {}),
     };
     if (player) body.player = player;
     return body;
@@ -1033,6 +1035,7 @@ class Component extends DCLogic {
       hours: num(this.upVal("hours"), 168), seeds: num(this.upVal("seeds"), 5),
       budgetMinutes: Math.max(5, num(this.upVal("budgetMinutes"), 15)),
       accountBuffs: this.state.buffs || null,
+      ...(this.state.measure || {}),
     };
     if (this.upVal("player")) body.player = this.upVal("player");
     if (mode === "triggers") body.passes = num(this.modeVal("triggers", "passes"), 2);
