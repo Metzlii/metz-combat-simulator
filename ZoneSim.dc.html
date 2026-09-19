@@ -2864,13 +2864,14 @@ class Component extends DCLogic {
           name: p.hrid, sub: `combat ${nf(p.combatLevel, 1)}${p.debuffOnLevelGap ? ` · level-gap debuff ${pct(p.debuffOnLevelGap)}%` : ""}`,
           // Healing is the RECEIVED figure (7bce483) — every HP restore credited to this player, which is what the
           // in-game meter reports; healingPerHour is the pre-7bce483 ability-only field, kept as a fallback.
-          // The in-game damage-taken meter counts the Insanity HP sacrifice, so the row is taken + spent and the
-          // tooltip splits it. Only Insanity carriers spend any, so for everyone else the two figures agree.
+          // Damage taken is what lands plus the Insanity HP sacrifice: KikiMeter counts both, and the party total
+          // matches it (63.5 against 64.9 / s, ZONE-18). What was AIMED at the player, evasion and armour not yet
+          // applied (CORR-16, the Guild Trial panel's count), is a hover note (operator, 2026-09-19): about 3x more.
           rates: [["Damage / s", rate(p.damagePerHour / 3600)],
             ["Damage taken / s", rate(((p.damageTakenPerHour || 0) + (p.hpSpentPerHour || 0)) / 3600),
-              (p.hpSpentPerHour || 0) > 0
-                ? `taken ${rate((p.damageTakenPerHour || 0) / 3600)} / s · HP spent on Insanity ${rate(p.hpSpentPerHour / 3600)} / s — KikiMeter counts both`
-                : ""],
+              [(p.hpSpentPerHour || 0) > 0 ? `landed ${rate((p.damageTakenPerHour || 0) / 3600)} / s · HP spent on Insanity ${rate(p.hpSpentPerHour / 3600)} / s — KikiMeter counts both` : "",
+                p.damageRolledAt != null ? `aimed at this player: ${rate((p.damageRolledAtPerHour || 0) / 3600)} / s before evasion and armour` : ""]
+                .filter(Boolean).join("\n")],
             ["Healing / s", rate((p.healingReceivedPerHour ?? p.healingPerHour ?? 0) / 3600),
               Object.entries(p.healingBySourcePerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
                 .map(([k2, v2]) => `${nice(k2)} ${rate(v2 / 3600)} / s`).join("\n")],
