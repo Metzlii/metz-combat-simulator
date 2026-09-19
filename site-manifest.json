@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-19T17:20:19.295Z",
- "commit": "4566369",
+ "builtAt": "2026-09-19T18:24:05.709Z",
+ "commit": "94336c3",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 35,
-  "bytes": 16019656,
-  "gzip": 2565420
+  "bytes": 16020144,
+  "gzip": 2565544
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3762
   },
   "index.html": {
-   "bytes": 135290,
-   "gzip": 32685
+   "bytes": 135648,
+   "gzip": 32774
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -94,8 +94,8 @@
    "gzip": 3791
   },
   "server/zoneOptimize.mjs": {
-   "bytes": 16880,
-   "gzip": 6583
+   "bytes": 17010,
+   "gzip": 6618
   },
   "server/zoneSim.mjs": {
    "bytes": 10722,

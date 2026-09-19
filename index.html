@@ -1120,12 +1120,14 @@ class Component extends DCLogic {
   // answer — every winner together against the party as it came in, which is the only number worth headlining.
   triggerVals(s, { nf }) {
     const d = n => `${Number(n) >= 0 ? "+" : "\u2212"}${Math.abs(Number(n) || 0).toFixed(2)}`;
+    const xpd = n => `${Number(n) >= 0 ? "+" : "\u2212"}${nf(Math.abs(Number(n) || 0))}`;
     const steps = (s.trigSteps || []).map((x, i) => ({
       key: `${i}`, who: x.player || "", ability: x.abilityName || "",
       pass: `pass ${x.pass ?? 1}`, cond: x.condition || "",
       move: x.changed ? `${nf(x.from)} \u2192 ${nf(x.to)}` : `kept ${nf(x.from)}`,
       changed: !!x.changed,
-      gain: x.changed ? `${d(x.delta)} EPH \u00b1 ${(Number(x.deltaSE) || 0).toFixed(2)}` : "",
+      // EPH decides each step; its XP change on the same seeds is shown beside it.
+      gain: x.changed ? `${d(x.delta)} EPH \u00b1 ${(Number(x.deltaSE) || 0).toFixed(2)}${x.deltaXp == null ? "" : ` \u00b7 ${xpd(x.deltaXp)} XP / h`}` : "",
       style: x.changed ? "color:var(--color-accent-300)" : "",
     }));
     const done = s.trigDone || null;
@@ -1145,7 +1147,7 @@ class Component extends DCLogic {
       stage: head ? `${head.stage || "measuring"}${head.partyDps ? ` \u00b7 party DPS ${nf(head.partyDps)}` : ""}` : "measuring the party as it stands\u2026",
       targets, hasTargets: targets.length > 0,
       steps, hasSteps: steps.length > 0,
-      combined: combined ? `${d(combined.delta ?? combined.deltaEph)} encounters per hour \u00b1 ${(Number(combined.deltaSE) || 0).toFixed(2)} on ${nf(combined.seeds)} fresh seeds` : "",
+      combined: combined ? `${d(combined.delta ?? combined.deltaEph)} encounters per hour \u00b1 ${(Number(combined.deltaSE) || 0).toFixed(2)}${combined.deltaXp == null ? "" : ` \u00b7 ${xpd(combined.deltaXp)} XP / h \u00b1 ${nf(Number(combined.deltaXpSE) || 0)}`} on ${nf(combined.seeds)} fresh seeds` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
       noChange: !!done && !changes.length,
