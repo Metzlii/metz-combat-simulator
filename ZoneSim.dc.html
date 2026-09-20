@@ -492,14 +492,14 @@
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:var(--space-4) var(--space-6);align-items:start;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
     <div style="display:flex;flex-direction:column;gap:6px">
       <div class="field" style="margin:0"><label>Hours</label>
-        <input class="input" type="number" min="1" max="8760" step="1" style="font-variant-numeric:tabular-nums" value="{{ zone.hours }}" onInput="{{ zone.setHours }}">
+        <input class="input" type="number" min="1" max="8760" step="1" style="font-variant-numeric:tabular-nums" value="{{ zone.hours }}" onInput="{{ zone.setHours }}" disabled="{{ zone.hoursDisabled }}">
       </div>
       <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.hoursNote }}</div>
       <button class="btn btn-ghost" style="padding:1px 0;font-size:12.5px;justify-content:flex-start;border-color:transparent" onClick="{{ zone.toggleAdv }}">Advanced</button>
       <sc-if value="{{ zone.advOpen }}" hint-placeholder-val="{{ false }}">
         <div class="field" style="margin:0"><label>Seed</label>
-          <input class="input" type="number" min="1" step="1" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.seed }}" onInput="{{ zone.setSeed }}">
-          <div class="text-muted" style="font-size:12.5px;margin-top:4px">Same seed, same inputs, same numbers.</div>
+          <input class="input" type="number" min="1" step="1" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.seed }}" onInput="{{ zone.setSeed }}" disabled="{{ zone.seedDisabled }}">
+          <div class="text-muted" style="font-size:12.5px;margin-top:4px">{{ zone.seedNote }}</div>
         </div>
         <div class="field" style="margin:0"><label>Server lag</label>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -2816,6 +2816,11 @@ class Component extends DCLogic {
     const allTiers = String(s.zoneTier) === "all";
     const tier = allTiers ? 0 : Math.min(maxT, Math.max(0, Math.floor(Number(s.zoneTier) || 0)));
     const hours = Math.min(8760, Math.max(1 / 60, Number(s.zoneHours) || 1000));
+    // `runZoneSim` replaces the submitted seed and hours with the baseline's whenever one is pinned to this
+    // exact board, so that an upgrade is measured against the same dice. The two fields below read from these
+    // rather than from the prefs, or they would accept edits the run then discards.
+    const pinnedBaseline = s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands) ? s.zoneBaseline : null;
+    const hoursPinned = !!pinnedBaseline;
     const fits = d => !d || !seated.length || seated.length <= d.maxPartySize;
     // ZONE-P7: the queue cap is the server's row cap; the work bound (Σ candidates × hours ≤ maxCandidateHours)
     // decides how many requests it takes — one at 1,000 h up to 210 rows, several only past the bound.
@@ -3087,8 +3092,15 @@ class Component extends DCLogic {
       // them. The run itself is untouched — this clears what is queued, not what has already been measured.
       clearCands: () => set({ zoneCands: [] }),
       clearCandsLabel: `Clear ${nf(cands.length)}`,
-      hours: s.zoneHours, setHours: e => this.setZonePrefs({ zoneHours: e.target.value }),
-      hoursNote: hours < 24 ? "Short runs are noisy — a dungeon party sees four clears in an hour." : `${nf(hours)} h ≈ ${nf(hours / 168, 1)} weeks of play, about ${nf(hours * 0.02, 0)} s per candidate.`,
+      // A pinned baseline overrides Seed and Hours when the run is submitted (`runZoneSim`), so these two
+      // fields have to SAY so: an editable box whose value the run ignores reads as a broken box (operator,
+      // 2026-09-20: "changing the hours in the textbox does not actually change how long the sim runs for").
+      hours: hoursPinned ? String(pinnedBaseline.hours) : s.zoneHours,
+      hoursDisabled: hoursPinned,
+      setHours: e => this.setZonePrefs({ zoneHours: e.target.value }),
+      hoursNote: hoursPinned
+        ? `Pinned to your baseline at ${nf(pinnedBaseline.hours, pinnedBaseline.hours < 1 ? 2 : 0)} h so the comparison holds. Use your own seed and hours, below the Run button, to change it.`
+        : hours < 24 ? "Short runs are noisy — a dungeon party sees four clears in an hour." : `${nf(hours)} h ≈ ${nf(hours / 168, 1)} weeks of play, about ${nf(hours * 0.02, 0)} s per candidate.`,
       advOpen: !!s.zoneAdv, toggleAdv: () => this.setZonePrefs({ zoneAdv: !s.zoneAdv }),
       // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
       // for other things; runs and optimizer searches just take longer. Kept in this browser, not in the session.
@@ -3102,7 +3114,10 @@ class Component extends DCLogic {
         this.client.setZoneWorkers(raw === "" ? null : Math.max(1, Math.min(this.client.maxWorkers || 1, Math.floor(Number(raw)) || 1)));
         this._zoneLimitsReq = true; this.loadZoneLimits(); this.setState({ zoneWorkersAt: Date.now() }); },
       workersNote: `How many simulations run at once. Lower it to keep your computer responsive while a long run or an optimizer search works; everything takes longer in proportion. Leave empty for ${this.client?.defaultWorkers || 1} (every core but one).`,
-      seed: s.zoneSeed, setSeed: e => this.setZonePrefs({ zoneSeed: e.target.value }),
+      seed: hoursPinned ? String(pinnedBaseline.seed) : s.zoneSeed,
+      seedDisabled: hoursPinned,
+      seedNote: hoursPinned ? "Pinned to your baseline." : "Same seed, same inputs, same numbers.",
+      setSeed: e => this.setZonePrefs({ zoneSeed: e.target.value }),
       // ZONE-46 — server lag. The suggested value comes from /zone-sim/limits, never from the page: it moves
       // as more sessions are fitted. Empty is off; the field is only sent when above 0.
       lagMs: s.zoneLagMs ?? "", setLagMs: e => this.setZonePrefs({ zoneLagMs: e.target.value }),
