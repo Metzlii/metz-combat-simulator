@@ -672,11 +672,12 @@
       </div>
     </div>
   </sc-if>
-  <sc-if value="{{ zone.hasResult }}" hint-placeholder-val="{{ false }}">
+  <sc-if value="{{ zone.hasAnything }}" hint-placeholder-val="{{ false }}">
     <div style="display:flex;flex-direction:column;gap:var(--space-4)">
       <sc-if value="{{ zone.editor.stale }}" hint-placeholder-val="{{ false }}">
         <div style="font-size:13px;color:var(--color-accent-2-300);text-wrap:pretty;padding:5px 8px;border:1px solid var(--color-accent-2-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-2-700) 16%, transparent)">{{ zone.editor.staleNote }}</div>
       </sc-if>
+      <sc-if value="{{ zone.hasRows }}" hint-placeholder-val="{{ true }}">
       <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
         <span class="text-muted" style="font-size:13px;font-variant-numeric:tabular-nums">{{ zone.header }}</span>
         <span style="display:flex;gap:6px;align-items:baseline;margin-left:auto">
@@ -686,10 +687,15 @@
           </sc-for>
         </span>
       </div>
+      </sc-if>
+      <sc-if value="{{ zone.hasRows }}" hint-placeholder-val="{{ true }}">
       <div style="display:flex;flex-direction:column;gap:2px">
         <div style="display:grid;grid-template-columns:175px 90px 78px minmax(0,1fr) minmax(0,1fr) 112px;gap:12px;padding:0 8px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase" class="text-muted">
           <span>Zone · tier</span><span title="{{ zone.rateHeadTip }}">{{ zone.rateLabel }}</span><span>Deaths / h</span><span>XP / h</span><span>Profit / day</span><span style="text-align:right;white-space:normal;line-height:1.25" title="Cowbells each player earns per day of play, from the loot table (the party total divided by the party size)">Cowbells / day<br>per player</span>
         </div>
+        <!-- ZONE-66: the rows scroll, the header does not. A board of every zone at every tier is 66 rows, and
+             rendered at full height it pushed the detail card and the refusal list off the bottom of the page. -->
+        <div style="display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto;padding-right:2px">
         <sc-for list="{{ zone.rows }}" as="r" hint-placeholder-count="3">
           <button onClick="{{ r.select }}" class="btn" style="display:grid;grid-template-columns:175px 90px 78px minmax(0,1fr) minmax(0,1fr) 112px;gap:12px;align-items:center;text-align:left;padding:5px 8px;width:100%;min-width:0;box-sizing:border-box;border-radius:var(--radius-sm);border-color:transparent;background:{{ r.openBg }};white-space:nowrap" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
             <span style="font-size:13.5px;min-width:0;overflow:hidden;text-overflow:ellipsis" title="{{ r.zoneTip }}">{{ r.zone }}</span>
@@ -706,9 +712,14 @@
             <span style="font-size:13.5px;font-variant-numeric:tabular-nums;text-align:right">{{ r.bellsText }}</span>
           </button>
         </sc-for>
+        </div>
       </div>
+      </sc-if>
       <sc-if value="{{ zone.hasRefused }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:2px">
+        <sc-if value="{{ zone.allRefused }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:13px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.allRefusedNote }}</div>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:2px;max-height:160px;overflow-y:auto;padding-right:2px">
           <sc-for list="{{ zone.refused }}" as="r" hint-placeholder-count="1">
             <div style="display:grid;grid-template-columns:minmax(150px,1.15fr) minmax(0,1fr);gap:10px;padding:5px 8px;border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-2-700) 14%, transparent)">
               <span style="font-size:13.5px">{{ r.zone }}</span>
@@ -2940,6 +2951,9 @@ class Component extends DCLogic {
     const wBad = wRaw !== "" && (!Number.isFinite(wVal) || wVal < wMin || wVal > wMax);
     const wNoteTxt = String(wLim.note || "").trim();
     const wNoteSent = wNoteTxt ? (/[.!?]$/.test(wNoteTxt) ? wNoteTxt : `${wNoteTxt}.`) : "";
+    // ZONE-66: what this party can actually enter, and how much the size hides.
+    const fitPlanets = fullPlanets.filter(fits);
+    const hiddenByParty = zones.filter(z => (z.isDungeon || listed(z)) && !fits(z)).length;
     const chunkRows = this.zoneChunkRows(LIM, hours);
     const addOne = (hrid, t, list) => { const l = list || cands.slice();
       if (l.length >= MAX_CANDIDATES || l.some(c => c.zone === hrid && c.difficultyTier === t)) return l;
@@ -3163,13 +3177,18 @@ class Component extends DCLogic {
       pickZone: pick, setZone: e => set({ zonePick: typeof e === "string" ? e : e.target.value, zoneTier: 0 }),
       // One grouped list for the picker: batches first, then dungeons, then planets — the same order the
       // native select had.
+      // ZONE-66: a zone this party cannot enter is not offered. A five-player party can only run dungeons --
+      // planets cap at three -- and queueing 66 planets on five players produced a board where every row was
+      // refused, which read as the page being broken rather than as the party being too big.
       zoneGroups: [
-        ...(fullPlanets.length ? [{ label: "Batches", items: [{ value: ALL_PLANETS, label: `Every full-party planet (${fullPlanets.length})`, glyph: "ph-stack" }] }] : []),
-        { label: "Dungeons", items: zones.filter(z => z.isDungeon).map(zOpt) },
-        { label: "Planets", items: zones.filter(z => !z.isDungeon && listed(z)).map(zOpt) }],
-      dungeonOpts: zones.filter(z => z.isDungeon).map(zOpt), planetOpts: zones.filter(z => !z.isDungeon && listed(z)).map(zOpt),
-      batchOpts: fullPlanets.length ? [{ value: ALL_PLANETS, label: `Every full-party planet (${fullPlanets.length})` }] : [],
-      hasBatchOpts: fullPlanets.length > 0,
+        ...(fitPlanets.length ? [{ label: "Batches", items: [{ value: ALL_PLANETS, label: `Every full-party planet (${fitPlanets.length})`, glyph: "ph-stack" }] }] : []),
+        { label: "Dungeons", items: zones.filter(z => z.isDungeon && fits(z)).map(zOpt) },
+        { label: "Planets", items: zones.filter(z => !z.isDungeon && listed(z) && fits(z)).map(zOpt) }]
+        .filter(g => g.items.length),
+      dungeonOpts: zones.filter(z => z.isDungeon && fits(z)).map(zOpt),
+      planetOpts: zones.filter(z => !z.isDungeon && listed(z) && fits(z)).map(zOpt),
+      batchOpts: fitPlanets.length ? [{ value: ALL_PLANETS, label: `Every full-party planet (${fitPlanets.length})` }] : [],
+      hasBatchOpts: fitPlanets.length > 0,
       showSingles, singlesCount: zones.filter(isSingle).length,
       singlesLabel: `Show single-monster zones (${zones.filter(isSingle).length})`,
       toggleSingles: () => set({ zoneShowSingles: !showSingles }),
@@ -3178,17 +3197,21 @@ class Component extends DCLogic {
       tierOpts: [...Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
         { value: "all", label: "Every tier" }],
       addDisabled: (!def && !bulkZones) || cands.length >= MAX_CANDIDATES,
-      addNote: (() => { const targets = bulkZones ? fullPlanets : def ? [def] : [];
+      addNote: (() => { const targets = bulkZones ? fitPlanets : def ? [def] : [];
         const n = targets.reduce((a, z) => a + (allTiers ? z.maxDifficulty + 1 : 1), 0);
         return n > 1 ? `adds ${nf(n)} rows` : ""; })(),
       add: () => { let l = cands.slice();
-        for (const z of bulkZones ? fullPlanets : def ? [def] : []) {
+        for (const z of bulkZones ? fitPlanets : def ? [def] : []) {
           if (allTiers) for (let t = 0; t <= z.maxDifficulty; t++) l = addOne(z.hrid, t, l);
           else l = addOne(z.hrid, Math.min(z.maxDifficulty, tier), l);
         }
         set({ zoneCands: l }); },
       candNote: `${nf(cands.length)} of ${nf(MAX_CANDIDATES)} queued${cands.length ? ` · ${nf(estSec, estSec < 10 ? 1 : 0)} s estimated` : ""}${cands.length >= MAX_CANDIDATES ? ` · the server's row cap for one board` : reqCount > 1 ? ` · over ${nf(LIM.maxCandidateHours)} candidate-hours at ${nf(hours, hours < 1 ? 2 : 0)} h, so ${nf(reqCount)} requests of up to ${nf(chunkRows)}` : ""}`,
-      zoneWarn: def && !fits(def) ? `${def.name} allows a party of ${def.maxPartySize}; this party is ${seated.length}. It can still be queued — the server refuses that row on its own and runs the rest.` : "",
+      zoneWarn: def && !fits(def)
+        ? `${def.name} allows a party of ${def.maxPartySize}; this party is ${seated.length}. It can still be queued — the server refuses that row on its own and runs the rest.`
+        : hiddenByParty > 0
+          ? `${hiddenByParty === 1 ? "One zone is" : `${hiddenByParty} zones are`} not listed: a party of ${seated.length} does not fit ${hiddenByParty === 1 ? "it" : "them"}. Planets take three players, dungeons five — seat fewer to see the rest.`
+          : "",
       cands: cands.map((c, i) => { const d = byHrid(c.zone);
         return { label: `${d ? d.name : c.zone} · T${c.difficultyTier}`,
           icon: this.zoneIcon("zone", c.zone, d, d ? d.name : c.zone),
@@ -3345,7 +3368,16 @@ class Component extends DCLogic {
       stoppedNote: R?.stopped ? `Stopped: ${nf((R.candidates || []).length)} of ${nf(cands.length)} zones ran.` : "",
       run: () => this.runZoneSim(),
       running: s.zoneRunning, runError: s.zoneRunError || "", hasRunError: !!s.zoneRunError,
-      hasResult: !!R && rows.length > 0, empty: !R && !s.zoneRunning && !runs.length,
+      // ZONE-66: the panel opens for a run that produced REFUSALS and nothing else. It used to need a
+      // successful row, and the refusal list lived inside that same condition -- so a board every candidate
+      // refused (five players against planets, which cap at three) rendered nothing at all, reason included.
+      hasResult: !!R && rows.length > 0, hasRows: rows.length > 0,
+      hasAnything: !!R && (rows.length > 0 || refused.length > 0),
+      allRefused: rows.length === 0 && refused.length > 0,
+      allRefusedNote: rows.length === 0 && refused.length > 0
+        ? `Nothing in this board ran. ${refused.length === 1 ? "The one candidate was refused" : `All ${refused.length} candidates were refused`}, for the reasons below — a party of ${(s.zoneParty || []).filter(p => p && p.seated !== false).length || (s.zoneParty || []).length} is the usual cause, since a planet takes at most three.`
+        : "",
+      empty: !R && !s.zoneRunning && !runs.length,
       runs, hasRuns: runs.length > 0, pickerNote: `${runs.length} run${runs.length === 1 ? "" : "s"} to look at`,
       // ZONE-58: the whole pile of unsaved runs in one go, which is what a cluttered list actually needs.
       unsavedRuns: runs.filter(r => r.canRemove).length,
