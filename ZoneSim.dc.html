@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+<script src="./support.js?v=d037e6b2a84d"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d037e6b2a84d">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d037e6b2a84d">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d037e6b2a84d"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -734,7 +734,11 @@
           <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
             <h4 style="margin:0;font-size:15px">{{ zone.detail.title }}</h4>
           </div>
-          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:var(--space-4)">
+          <!-- ZONE-73: auto-FILL, not auto-fit. Both wrap the same way as the window narrows, but auto-fit
+               collapses the empty tracks, so a solo run stretched one card across the whole page and put its
+               label at one edge and its number at the other, unreadable (operator, 2026-09-20). auto-fill keeps
+               the tracks, so one card is exactly as wide as it would be in a full party. -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:var(--space-4)">
             <sc-for list="{{ zone.detail.players }}" as="p" hint-placeholder-count="5">
               <div class="card elev-sm" style="gap:6px;padding:var(--space-3);min-width:0">
                 <div>
