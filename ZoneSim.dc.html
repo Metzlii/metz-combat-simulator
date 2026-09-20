@@ -3081,7 +3081,17 @@ class Component extends DCLogic {
                 .map(([k2, v2]) => `${nice(k2)} ${rate(v2 / 3600)} / s`).join("\n")],
             ["Hit rate", `${nf((p.hitRate || 0) * 100, 1)}%`], ["Deaths / h", nf(p.deathsPerHour, 2)],
             ["Actions / min", (() => { const v = this.zoneActionsPerMin(p, c, R); return v == null ? "—" : nf(v, 1); })()],
-            ["Mana exhaustion", `${nf((p.manaExhaustionFraction || 0) * 100, 1)}%`]].map(([k, v, tip]) => ({ k, v, tip: tip || "" })),
+            // ZONE-69: where the bar sits leads, because it is the figure a starved build actually shows.
+            // "Exhaustion" alone reads 0% for anyone who can still afford their CHEAPEST spell, which is most
+            // builds that feel starved, so it moves into the tooltip beside the refusals it never counted.
+            ["Mana", p.meanManaFraction == null ? `${nf((p.manaExhaustionFraction || 0) * 100, 1)}% dry`
+              : `${nf(p.meanManaFraction * 100, 0)}% bar`,
+              [p.meanManaFraction == null ? "" : `the mana bar averages ${nf(p.meanManaFraction * 100, 1)}% of its maximum over the run`,
+                `fully dry ${nf((p.manaExhaustionFraction || 0) * 100, 1)}% of the time — unable to afford even the cheapest ability`,
+                p.manaDeniedCastsPerHour == null ? ""
+                  : `${nf(p.manaDeniedCastsPerHour, 0)} casts / h refused for mana, ${nf((p.manaDeniedShare || 0) * 100, 1)}% of everything the triggers asked for`]
+                .filter(Boolean).join("
+")]].map(([k, v, tip]) => ({ k, v, tip: tip || "" })),
           // The Rates header carries this player's damage a second — the one number read most often, and the
           // reason the section is opened at all.
           dpsTotal: `${rate(p.damagePerHour / 3600)} dmg / s`,

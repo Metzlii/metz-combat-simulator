@@ -1,20 +1,20 @@
 {
- "builtAt": "2026-09-20T11:59:25.268Z",
- "commit": "93ef802",
+ "builtAt": "2026-09-20T12:44:28.877Z",
+ "commit": "5bdc834",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
    "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
    "init_client_data.json"
   ],
-  "bytes": 6397454,
-  "gzip": 625266,
+  "bytes": 6397785,
+  "gzip": 625344,
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
   "files": 37,
-  "bytes": 16077151,
-  "gzip": 2586396
+  "bytes": 16078755,
+  "gzip": 2586886
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -54,8 +54,8 @@
    "gzip": 1464
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
-   "bytes": 3646377,
-   "gzip": 420983
+   "bytes": 3646708,
+   "gzip": 421061
   },
   "server/abilities.mjs": {
    "bytes": 6802,
@@ -98,8 +98,8 @@
    "gzip": 6618
   },
   "server/zoneSim.mjs": {
-   "bytes": 11459,
-   "gzip": 4607
+   "bytes": 11788,
+   "gzip": 4715
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 13626,
@@ -154,8 +154,8 @@
    "gzip": 2013
   },
   "ZoneSim.dc.html": {
-   "bytes": 281513,
-   "gzip": 71234
+   "bytes": 282457,
+   "gzip": 71538
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
