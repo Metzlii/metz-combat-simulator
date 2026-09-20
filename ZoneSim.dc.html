@@ -751,6 +751,15 @@
                       <sc-for list="{{ p.rates }}" as="x" hint-placeholder-count="7">
                         <span class="text-muted" title="{{ x.tip }}">{{ x.k }}</span><span style="font-variant-numeric:tabular-nums" title="{{ x.tip }}">{{ x.v }}</span>
                       </sc-for>
+                      <button class="btn" style="display:flex;gap:5px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left;font-size:12.5px" style-hover="color:var(--color-accent-300)" title="{{ p.manaLeadTip }}" onClick="{{ zone.detail.manaToggle }}">
+                        <span class="text-muted" style="font-size:10px">{{ zone.detail.manaCaret }}</span><span class="text-muted">Casts refused</span>
+                      </button>
+                      <span style="font-variant-numeric:tabular-nums" title="{{ p.manaLeadTip }}">{{ p.manaLead }}</span>
+                      <sc-if value="{{ zone.detail.manaOpen }}" hint-placeholder-val="{{ false }}">
+                        <sc-for list="{{ p.mana }}" as="m" hint-placeholder-count="4">
+                          <span class="text-muted" style="padding-left:11px;font-size:12px" title="{{ m.tip }}">{{ m.k }}</span><span class="text-muted" style="font-variant-numeric:tabular-nums;font-size:12px" title="{{ m.tip }}">{{ m.v }}</span>
+                        </sc-for>
+                      </sc-if>
                     </div>
                   </sc-if>
                 </div>
@@ -995,6 +1004,7 @@ class Component extends DCLogic {
     zoneStatOpen: null, zoneStale: false, zoneDerivedOpen: false,
     zoneMarket: null, zoneMarketBusy: false, zoneMarketMsg: "", zoneMarketAt: 0,
     zoneSaves: [], zoneSaveName: "", zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneSetupFrom: null,
+    zoneManaOpen: false,
     zoneRestoredAt: null, zoneCmp: { a: null, b: null }, zoneCmpGrain: "totals",
     // Default view (operator, 2026-09-16): every result section collapsed to its header, which carries the total.
     zoneSecOpen: { rates: true, xp: false, damage: false, consumables: false, lootIn: false, lootOut: false },
@@ -3061,6 +3071,9 @@ class Component extends DCLogic {
           return [k, { label, open: on, caret: on ? "▾" : "▸",
             // Functional update: two headers clicked in the same frame must not overwrite each other.
             toggle: () => this.setState(st => ({ zoneSecOpen: { ...st.zoneSecOpen, [k]: !(st.zoneSecOpen?.[k] !== false) } })) }]; })),
+        // One click opens the mana breakdown in every player column at once, so the columns stay row-aligned.
+        manaOpen: !!s.zoneManaOpen, manaCaret: s.zoneManaOpen ? "▾" : "▸",
+        manaToggle: () => this.setState(st => ({ zoneManaOpen: !st.zoneManaOpen })),
         monsters: Object.entries(c.killsByMonsterPerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
           .map(([k, v]) => ({ text: `${nice(k)} · ${nf(v, 1)} / h` })),
         notes: (c.lootNotes || []).map(t => ({ text: t })),
@@ -3081,19 +3094,27 @@ class Component extends DCLogic {
                 .map(([k2, v2]) => `${nice(k2)} ${rate(v2 / 3600)} / s`).join("\n")],
             ["Hit rate", `${nf((p.hitRate || 0) * 100, 1)}%`], ["Deaths / h", nf(p.deathsPerHour, 2)],
             ["Actions / min", (() => { const v = this.zoneActionsPerMin(p, c, R); return v == null ? "—" : nf(v, 1); })()],
-            // ZONE-69: where the bar sits leads, because it is the figure a starved build actually shows.
-            // "Exhaustion" alone reads 0% for anyone who can still afford their CHEAPEST spell, which is most
-            // builds that feel starved, so it moves into the tooltip beside the refusals it never counted.
-            ["Mana", p.meanManaFraction == null ? `${nf((p.manaExhaustionFraction || 0) * 100, 1)}% dry`
-              : `${nf(p.meanManaFraction * 100, 0)}% bar`,
-              [p.meanManaFraction == null ? "" : `the mana bar averages ${nf(p.meanManaFraction * 100, 1)}% of its maximum over the run`,
-                p.belowPriciestFraction == null ? ""
-                  : `short of the most expensive ability ${nf(p.belowPriciestFraction * 100, 0)}% of the time`,
-                `fully dry ${nf((p.manaExhaustionFraction || 0) * 100, 1)}% of the time — unable to afford even the cheapest ability`,
-                p.manaDeniedCastsPerHour == null ? ""
-                  : `${nf(p.manaDeniedCastsPerHour, 0)} casts / h refused for mana, ${nf((p.manaDeniedShare || 0) * 100, 1)}% of everything the triggers asked for`]
-                .filter(Boolean).join("
-")]].map(([k, v, tip]) => ({ k, v, tip: tip || "" })),
+          ].map(([k, v, tip]) => ({ k, v, tip: tip || "" })),
+          // ZONE-70: the last row of Rates was "Mana exhaustion", which reads 0% for most builds that feel
+          // starved. It is now the figure people act on -- casts mana refused -- and the row opens onto the
+          // other three: how often the priciest ability was unaffordable, where the bar sat, and that same
+          // fully-dry share, kept but demoted to what it is.
+          manaLead: p.manaDeniedCastsPerHour == null
+            ? (p.meanManaFraction == null ? "—" : `${nf(p.meanManaFraction * 100, 0)}% bar`)
+            : `${nf(p.manaDeniedCastsPerHour, p.manaDeniedCastsPerHour < 10 ? 1 : 0)} refused / h`,
+          manaLeadTip: p.manaDeniedCastsPerHour == null ? "this run predates the mana figures"
+            : `casts a trigger asked for and mana could not pay for${p.manaDeniedShare == null ? "" : `, ${nf(p.manaDeniedShare * 100, 1)}% of everything the triggers asked for`}`,
+          // The lead figure is not repeated inside its own fold.
+          mana: [
+            ["Share of casts asked for", p.manaDeniedShare == null ? "—" : `${nf(p.manaDeniedShare * 100, 1)}%`,
+              "refused casts against refused plus landed"],
+            ["Short of the priciest", p.belowPriciestFraction == null ? "—" : `${nf(p.belowPriciestFraction * 100, 0)}%`,
+              "the share of the run this player could not afford their most expensive ability"],
+            ["Mana bar", p.meanManaFraction == null ? "—" : `${nf(p.meanManaFraction * 100, 0)}%`,
+              "averaged over the run, as a share of maximum MP"],
+            ["Fully dry", `${nf((p.manaExhaustionFraction || 0) * 100, 1)}%`,
+              "unable to afford even the cheapest ability — zero for most builds that still feel starved, which is why it does not lead"],
+          ].map(([k, v, tip]) => ({ k, v, tip })),
           // The Rates header carries this player's damage a second — the one number read most often, and the
           // reason the section is opened at all.
           dpsTotal: `${rate(p.damagePerHour / 3600)} dmg / s`,
