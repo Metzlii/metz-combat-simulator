@@ -682,7 +682,7 @@
       </div>
       <div style="display:flex;flex-direction:column;gap:2px">
         <div style="display:grid;grid-template-columns:175px 90px 78px minmax(0,1fr) minmax(0,1fr) 112px;gap:12px;padding:0 8px;font-size:12px;letter-spacing:0.06em;text-transform:uppercase" class="text-muted">
-          <span>Zone · tier</span><span title="Encounters per hour on a planet; full dungeon clears per hour in a dungeon">EPH</span><span>Deaths / h</span><span>XP / h</span><span>Profit / day</span><span style="text-align:right;white-space:normal;line-height:1.25" title="Cowbells each player earns per day of play, from the loot table (the party total divided by the party size)">Cowbells / day<br>per player</span>
+          <span>Zone · tier</span><span title="{{ zone.rateHeadTip }}">{{ zone.rateLabel }}</span><span>Deaths / h</span><span>XP / h</span><span>Profit / day</span><span style="text-align:right;white-space:normal;line-height:1.25" title="Cowbells each player earns per day of play, from the loot table (the party total divided by the party size)">Cowbells / day<br>per player</span>
         </div>
         <sc-for list="{{ zone.rows }}" as="r" hint-placeholder-count="3">
           <button onClick="{{ r.select }}" class="btn" style="display:grid;grid-template-columns:175px 90px 78px minmax(0,1fr) minmax(0,1fr) 112px;gap:12px;align-items:center;text-align:left;padding:5px 8px;width:100%;min-width:0;box-sizing:border-box;border-radius:var(--radius-sm);border-color:transparent;background:{{ r.openBg }};white-space:nowrap" style-hover="background:color-mix(in srgb, var(--color-text) 6%, transparent)">
@@ -1987,6 +1987,16 @@ class Component extends DCLogic {
             lag: Number(entry.serverLagMs) || 0, wave: Number(entry.waveTransitionDelayMs) || 0 }
         : st.zoneBaseline }));
   }
+  // ZONE-57: a dungeon's clear speed reads as the time one run takes, the way it is timed in game -- 14:03, not
+  // 4.27 clears an hour. Seconds matter here: two builds a hundredth of a clear apart are eleven seconds apart per
+  // run, which the rate hides and the clock shows. Runs past the hour carry an hours field.
+  zoneRunTime(seconds) {
+    const v = Number(seconds);
+    if (!Number.isFinite(v) || v <= 0) return "—";
+    const t = Math.round(v), h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), sec = t % 60;
+    const pad = n => String(n).padStart(2, "0");
+    return h > 0 ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
+  }
   // A board is the set of queued zone·tier rows: the same set re-run is the same board, whatever order it was
   // queued in. Runs of different boards are not comparable and are never pinned to each other.
   zoneBoardSig(cands) {
@@ -2132,11 +2142,13 @@ class Component extends DCLogic {
     const ps = c => (c?.cand?.players || []);
     const sum = (c, fn) => ps(c).reduce((a, p) => a + (fn(p) || 0), 0);
     const rows = [];
-    const push = (label, a, b, { d = 1, lowerBetter = false, coins = false, per = "", unit = "" } = {}) => {
+    const push = (label, a, b, { d = 1, lowerBetter = false, coins = false, per = "", unit = "", fmt = null } = {}) => {
       const av = Number(a) || 0, bv = Number(b) || 0, delta = bv - av;
       const good = lowerBetter ? delta < 0 : delta > 0;
-      rows.push({ isRow: true, isGroup: false, indent: inGroup ? "18px" : "0", label, a: (coins ? coin(av) : nf(av, d)) + unit, b: (coins ? coin(bv) : nf(bv, d)) + unit,
-        delta: `${delta > 0 ? "+" : delta < 0 ? "−" : ""}${coins ? coin(Math.abs(delta)) : nf(Math.abs(delta), d)}${unit}${per}`,
+      // `fmt` renders a row that is not a plain number -- a clock, for the average run time.
+      const show = v => fmt ? fmt(v) : (coins ? coin(v) : nf(v, d)) + unit;
+      rows.push({ isRow: true, isGroup: false, indent: inGroup ? "18px" : "0", label, a: show(av), b: show(bv),
+        delta: `${delta > 0 ? "+" : delta < 0 ? "−" : ""}${fmt ? fmt(Math.abs(delta)) : (coins ? coin(Math.abs(delta)) : nf(Math.abs(delta), d)) + unit}${per}`,
         pct: av && delta ? `${delta > 0 ? "+" : "−"}${nf(Math.abs(delta / av) * 100, 1)}%` : "",
         color: delta === 0 ? "var(--color-neutral-400)" : good ? "var(--color-accent-300)" : "var(--color-accent-2-300)" });
     };
@@ -2163,9 +2175,16 @@ class Component extends DCLogic {
       return Object.keys(p?.consumablesUsedPerHour || {}).reduce((t, k) => t + (items.find(x => x.itemHrid === k)?.coinsPerHour || 0), 0); };
     if (A && B) {
       if (grain === "totals") {
-        // EPH as the results table reads it: dungeon clears an hour, or encounters an hour on a planet.
-        const eph = c => (c.isDungeon ? (c.dungeonsCompletedPerHour || 0) : (c.encountersPerHour || 0));
-        push(A.cand.isDungeon || B.cand.isDungeon ? "EPH (clears / h)" : "EPH (encounters / h)", eph(A.cand), eph(B.cand), { d: 2 });
+        // Pace as the results table reads it: a dungeon's average run time (lower is better), or encounters an
+        // hour on a planet. A pair that is one dungeon and one planet has no shared pace figure, so it falls back
+        // to encounters an hour, which both sides do carry.
+        if (A.cand.isDungeon && B.cand.isDungeon)
+          push("Average run time", A.cand.averageRunSeconds, B.cand.averageRunSeconds,
+            { lowerBetter: true, fmt: v => this.zoneRunTime(v) });
+        else if (A.cand.isDungeon || B.cand.isDungeon)
+          push("EPH (clears / h)", A.cand.isDungeon ? A.cand.dungeonsCompletedPerHour : A.cand.encountersPerHour,
+            B.cand.isDungeon ? B.cand.dungeonsCompletedPerHour : B.cand.encountersPerHour, { d: 2 });
+        else push("EPH (encounters / h)", A.cand.encountersPerHour, B.cand.encountersPerHour, { d: 2 });
         push("Deaths / h", A.cand.deathsPerHour, B.cand.deathsPerHour, { d: 2, lowerBetter: true });
         push("XP / h, party", sum(A, p => p.experiencePerHour?.total), sum(B, p => p.experiencePerHour?.total), { d: 4 });
         push("Profit / day, party", sum(A, p => p.profitPerHour) * 24, sum(B, p => p.profitPerHour) * 24, { coins: true });
@@ -2859,6 +2878,9 @@ class Component extends DCLogic {
 
     // ── the candidate table ──
     let rows = [], refused = [], detail = null, header = "";
+    // ZONE-57: a board of nothing but dungeons is headed by the run clock; anything with a planet in it keeps EPH,
+    // since a planet has no run to time and the column has to mean one thing for every row under it.
+    let rateLabel = "EPH", rateHeadTip = "Encounters per hour on a planet; average time for one full run in a dungeon";
     if (R) {
       // While the stream is open the array is pre-sized with empty slots, so only landed rows are rendered.
       const list = (R.candidates || []).filter(Boolean);
@@ -2880,10 +2902,12 @@ class Component extends DCLogic {
           zone: `${c.name} · T${c.difficultyTier}`,
           zoneTip: `${kind}${c.isDungeon ? ` · ${c.maxWaves || byHrid(c.zone)?.maxWaves || "?"} waves` : ""}`,
           error: ok ? "" : c.error || "refused",
-          rate, rateText: ok ? `${nf(rate, 2)} ${c.isDungeon ? "clears" : "enc"}` : "—",
-          rateTip: ok ? [c.isDungeon ? "clears / h" : "encounters / h",
-            c.isDungeon ? `${nf(c.averageDungeonMinutes, 1)} min per run` : "",
-            c.isDungeon && (c.dungeonsFailedPerHour || 0) > 0 ? `${nf(c.dungeonsFailedPerHour, 2)} wipes / h` : ""].filter(Boolean).join(" · ") : "",
+          rate, rateText: ok ? (c.isDungeon ? this.zoneRunTime(c.averageRunSeconds) : `${nf(rate, 2)} enc`) : "—",
+          rateTip: ok ? (c.isDungeon
+            ? ["average time for one full run, counting the time lost to failed attempts",
+              `${nf(rate, 2)} clears / h`,
+              (c.dungeonsFailedPerHour || 0) > 0 ? `${nf(c.dungeonsFailedPerHour, 2)} wipes / h` : ""].filter(Boolean).join(" · ")
+            : "encounters / h") : "",
           wipesFlag: ok && c.isDungeon && (c.dungeonsFailedPerHour || 0) > 0,
           kills: c.killsPerHour || 0, killsText: ok ? nf(c.killsPerHour, 1) : "",
           deaths, deathsText: ok ? nf(deaths, 2) : "",
@@ -2904,6 +2928,11 @@ class Component extends DCLogic {
           bellsText: bells > 0 ? nf(bells * 24 / Math.max(1, ps.length), 0) : "",
           select: () => set({ zoneOpen: i }) };
       });
+      const shown = list.filter(c => c.ok !== false);
+      if (shown.length > 0 && shown.every(c => c.isDungeon)) {
+        rateLabel = "Avg run";
+        rateHeadTip = "Average time for one full run, counting the time lost to failed attempts — a session's length divided by the clears it produced, the way a run is timed in game";
+      }
       const key = s.zoneSort?.key || "queued", dir = s.zoneSort?.dir || 1;
       // A candidate the party cannot enter is refused on its own; it is listed under the table, never ranked in it.
       refused = rows.filter(r => !r.ok);
@@ -3239,7 +3268,10 @@ class Component extends DCLogic {
       running: s.zoneRunning, runError: s.zoneRunError || "", hasRunError: !!s.zoneRunError,
       hasResult: !!R && rows.length > 0, empty: !R && !s.zoneRunning && !runs.length,
       runs, hasRuns: runs.length > 0, pickerNote: `${runs.length} run${runs.length === 1 ? "" : "s"} to look at`,
-      header, rows, refused, hasRefused: refused.length > 0, sorts: [sortBtn("queued", "Queued"), sortBtn("rate", "EPH"), sortBtn("xp", "XP"), sortBtn("profit", "Profit")],
+      header, rows, refused, hasRefused: refused.length > 0, rateLabel, rateHeadTip,
+      // The sort value stays the pace either way (higher is faster), so a mixed board ranks in one direction even
+      // though the dungeon rows print a clock, where the smaller number is the better one.
+      sorts: [sortBtn("queued", "Queued"), sortBtn("rate", rateLabel), sortBtn("xp", "XP"), sortBtn("profit", "Profit")],
       detail, hasDetail: !!detail,
     };
   }
