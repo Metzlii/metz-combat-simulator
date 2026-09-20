@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=04be4d65b22e"></script>
+<script src="./support.js?v=936062228950"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=04be4d65b22e">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=936062228950">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=04be4d65b22e">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=04be4d65b22e"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=936062228950">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=936062228950"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -80,7 +80,7 @@
             <sc-for list="{{ zone.tierOpts }}" as="t" hint-placeholder-count="3"><option value="{{ t.value }}">{{ t.label }}</option></sc-for>
           </select>
         </div>
-        <button class="btn btn-primary" style="padding:0 20px;min-height:30px;font-size:14px;font-weight:600;letter-spacing:0.02em;flex:none" disabled="{{ zone.addDisabled }}" onClick="{{ zone.add }}">Add</button>
+        <button class="btn btn-primary" style="padding:0 20px;min-height:30px;font-size:14px;font-weight:600;letter-spacing:0.02em;flex:none" disabled="{{ zone.addDisabled }}" onClick="{{ zone.add }}">Add to Queue</button>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <sc-if value="{{ zone.addNote }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:13px">{{ zone.addNote }}</span></sc-if>
