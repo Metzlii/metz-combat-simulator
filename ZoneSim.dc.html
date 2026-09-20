@@ -3106,12 +3106,12 @@ class Component extends DCLogic {
             : `casts a trigger asked for and mana could not pay for${p.manaDeniedShare == null ? "" : `, ${nf(p.manaDeniedShare * 100, 1)}% of everything the triggers asked for`}`,
           // The lead figure is not repeated inside its own fold.
           mana: [
-            ["Share of casts asked for", p.manaDeniedShare == null ? "—" : `${nf(p.manaDeniedShare * 100, 1)}%`,
-              "refused casts against refused plus landed"],
-            ["Short of the priciest", p.belowPriciestFraction == null ? "—" : `${nf(p.belowPriciestFraction * 100, 0)}%`,
-              "the share of the run this player could not afford their most expensive ability"],
-            ["Mana bar", p.meanManaFraction == null ? "—" : `${nf(p.meanManaFraction * 100, 0)}%`,
-              "averaged over the run, as a share of maximum MP"],
+            ["% of casts refused", p.manaDeniedShare == null ? "—" : `${nf(p.manaDeniedShare * 100, 1)}%`,
+              "the refused casts against every cast the triggers asked for, refused plus landed"],
+            // `belowPriciestFraction` is still in the result for anyone reading the API; the operator judged it
+            // one row too many on the card (2026-09-20).
+            ["Average mana pool", p.meanManaFraction == null ? "—" : `${nf(p.meanManaFraction * 100, 0)}%`,
+              "current MP against maximum, averaged over the whole run"],
             ["Fully dry", `${nf((p.manaExhaustionFraction || 0) * 100, 1)}%`,
               "unable to afford even the cheapest ability — zero for most builds that still feel starved, which is why it does not lead"],
           ].map(([k, v, tip]) => ({ k, v, tip })),

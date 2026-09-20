@@ -1648,7 +1648,12 @@
       const pre = res ? res[url] : void 0;
       const target = typeof pre === "string" && pre ? pre : url;
       const blob = bundledBlob(target);
-      (blob ? blob.text() : fetch(target).then((res2) => {
+      // ZONE-72: a component is fetched at a fixed path, so a browser holding yesterday's copy pairs it with
+      // today's everything else and the page fails to compile. The build stamps `window.__siteVersion` with a
+      // hash of what it emitted; the lookup above keeps the clean url, only the fetch carries the stamp.
+      const stamped = window.__siteVersion && target.indexOf("?") < 0
+        ? target + "?v=" + window.__siteVersion : target;
+      (blob ? blob.text() : fetch(stamped).then((res2) => {
         if (!res2.ok) {
           console.error(
             '[dc-runtime] sibling fetch for "' + name + '" failed:',
