@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T14:48:48.641Z",
- "commit": "fd292e4",
+ "builtAt": "2026-09-20T14:52:50.793Z",
+ "commit": "0da4901",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16086185,
-  "gzip": 2589609
+  "bytes": 16086647,
+  "gzip": 2589811
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -39,11 +39,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3780
+   "gzip": 3779
   },
   "index.html": {
    "bytes": 145324,
-   "gzip": 36177
+   "gzip": 36178
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -67,11 +67,11 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 8913,
-   "gzip": 3734
+   "gzip": 3735
   },
   "server/lootValue.mjs": {
    "bytes": 7712,
-   "gzip": 3187
+   "gzip": 3192
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -79,7 +79,7 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 3704,
-   "gzip": 1387
+   "gzip": 1388
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
@@ -90,12 +90,12 @@
    "gzip": 3324
   },
   "server/zoneImport.mjs": {
-   "bytes": 10541,
-   "gzip": 3791
+   "bytes": 10608,
+   "gzip": 3806
   },
   "server/zoneOptimize.mjs": {
    "bytes": 17040,
-   "gzip": 6632
+   "gzip": 6634
   },
   "server/zoneSim.mjs": {
    "bytes": 11563,
@@ -103,7 +103,7 @@
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 13671,
-   "gzip": 5604
+   "gzip": 5606
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -135,7 +135,7 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 4864,
-   "gzip": 1948
+   "gzip": 1949
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
@@ -143,19 +143,19 @@
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 146
+   "gzip": 145
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 217
+   "gzip": 216
   },
   "zoneApi.js": {
    "bytes": 4996,
    "gzip": 2028
   },
   "ZoneSim.dc.html": {
-   "bytes": 286452,
-   "gzip": 73154
+   "bytes": 286847,
+   "gzip": 73331
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,

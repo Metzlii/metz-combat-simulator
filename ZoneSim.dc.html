@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=05d5bbe10e42"></script>
+<script src="./support.js?v=6ef594a9fbca"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=05d5bbe10e42">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=6ef594a9fbca">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=05d5bbe10e42">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=05d5bbe10e42"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=6ef594a9fbca">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=6ef594a9fbca"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1022,6 +1022,9 @@ class Component extends DCLogic {
   // if one ever moves, both move.
   static PARTY_SCRIPT_URL = "https://greasyfork.org/en/scripts/596494-mwi-party-export";
   static PARTY_SCRIPT_KEY = "mwi.zone.partyScriptSeen";
+  // What the import is called in the status line. The detector's names are for code; these are for people,
+  // and "party-export export" is why the suffix is baked in per entry rather than appended.
+  static FORMAT_LABEL = { "party-export": "MWI Party Export", toolasha: "Toolasha export", kernel: "kernel export", optimizer: "optimizer export" };
   // The script runs on the game's pages, so this one cannot see it installed. What it CAN see is an import the
   // script made: only it writes a character's `skilling` block. Zones.dc.html hides the header link on the same
   // key, so one import retires both prompts in this browser, and a party pasted from another simulator retires
@@ -3212,7 +3215,7 @@ class Component extends DCLogic {
       text: s.zoneText, setText: e => { set({ zoneText: e.target.value, zoneImportError: null, zoneNotExport: false }); this.queueZoneAutoImport(); },
       importing: !!s.zoneImporting,
       importNote: party.length
-        ? `${party.length} character${party.length === 1 ? "" : "s"}${party.length > seated.length ? ` · ${seated.length} in the party` : ""}${s.zoneFormat ? ` · ${s.zoneFormat} export` : ""}${this._zoneSplit ? ` · ${this._zoneSplit}` : ""}`
+        ? `${party.length} character${party.length === 1 ? "" : "s"}${party.length > seated.length ? ` · ${seated.length} in the party` : ""}${s.zoneFormat ? ` · ${Component.FORMAT_LABEL[s.zoneFormat] || `${s.zoneFormat} export`}` : ""}${this._zoneSplit ? ` · ${this._zoneSplit}` : ""}`
         : "",
       importError: s.zoneImportError || "", hasImportError: !!s.zoneImportError,
       notExport: !!s.zoneNotExport && !!String(s.zoneText || "").trim() && !s.zoneImporting,
