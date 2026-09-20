@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="936062228950"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="71eb524e6065"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=936062228950"></script>
+<script src="./support.js?v=71eb524e6065"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=936062228950">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=71eb524e6065">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=936062228950">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=936062228950"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=71eb524e6065">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=71eb524e6065"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -718,6 +718,8 @@
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 14px;font-size:13.5px;align-items:baseline;padding-top:4px">
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-20</span>
+            <span style="text-wrap:pretty"><b>1.0.4</b>: mana is reported as Casts refused — casts a trigger asked for that mana could not pay for, per hour — in the row Mana exhaustion used to hold, opening onto the share of casts refused, the average mana pool and the fully-dry share. The old figure counted only being completely dry, which read 0.0% for a build that was plainly running out of mana in game. Paste an export into the import box and it imports itself, so the Import button is gone; Simulate wears the gold this site uses for the thing to press; Add is Add to Queue. A zone your party cannot enter is no longer offered — five players see dungeons only — and a board where every candidate was refused now says so, and why, instead of showing nothing at all. Long boards scroll with their header fixed. Advanced is Seed, Workers and the wave transition delay; server lag is retired, having measured zero in every hour of an 8.8 h capture of busy play. Iron mode values nothing in coins but coins, since an ironcow cannot use the marketplace. Accuracy: ten more runs timed in game put the run-to-run spread at 32 ± 8 s against the simulated 27 s, no difference the data can see; the dungeon XP comparison is withdrawn until there is a recording made against this kernel. The MWI Party Export userscript is 0.2. Fixed: a solo run stretched its one card across the page; every stored dungeon candidate carried a copy of the game’s data file, 1,469 KB where 23 will do; and a new release now reaches an open tab without a hard refresh.</span>
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-20</span>
             <span style="text-wrap:pretty"><b>1.0.3</b>: a wave spawning now cancels whatever spell was mid-cast and starts a fresh one, in dungeons as well as on planets — watched in game and confirmed against recorded play, where damage lands after the new cast begins in 2,083 of 2,093 player-waves. That closes the gap open zones had: a 211 h solo Golem Cave session goes from 1.1% to 0.35% off the game, and every ability's cast rate lands within 0.6%. A dungeon's clear speed now reads as the average run time — 13:52, not 4.3 clears an hour — counting the time lost to failed attempts, the way a run is timed in game; against 8 runs timed in game it is within 0.25%. The skill optimizer measures only the skills you tick, so a mage no longer pays for a ranged curve, and each skill keeps its own colour on the graph with a pattern per player. Triggers warn when one can never fire, and only the conditions a dependency really takes are offered. The trigger tuner shows the XP change beside EPH. Unsaved runs can be dropped from the Runs list one at a time or all at once, and the list says when Hours and Seed are pinned to a baseline rather than silently ignoring an edit. Damage aimed at a player is a hover note on Damage taken. Server lag stays off and the wave gap stays on its measured table by default, which is what almost everyone wants, and the core probe stops a browser that hides your core count from costing you lanes. Fixed: "Actions / min" printed thousands on a run restored from an earlier session.</span>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
             <span style="text-wrap:pretty"><b>1.0.2</b>: a Refresh prices button and a tidier Pricing panel; every ask and bid says whether it is an instant or slow trade, and key materials can be bought either way. Optimizer answers can be saved and cleared; the optimizers default to 168 h, 5 seeds and 15 minutes; a Workers setting under Advanced sets how much of your machine a run uses. Compare shows every Results figure, a player at a time. Temporary-buff ceilings include Ripple, and the stats panel gains HP and mana regen. The About tab's accuracy notes are filled in and re-checked against recorded play.</span>
@@ -768,7 +770,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=936062228950");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=71eb524e6065");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.

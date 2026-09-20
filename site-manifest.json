@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T14:03:30.618Z",
- "commit": "7bbf828",
+ "builtAt": "2026-09-20T14:11:11.711Z",
+ "commit": "8af07f1",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16081656,
-  "gzip": 2588124
+  "bytes": 16083336,
+  "gzip": 2588662
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3780
   },
   "index.html": {
-   "bytes": 143516,
-   "gzip": 35581
+   "bytes": 145196,
+   "gzip": 36141
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -51,7 +51,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1480
+   "gzip": 1477
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3647087,
@@ -71,7 +71,7 @@
   },
   "server/lootValue.mjs": {
    "bytes": 7712,
-   "gzip": 3193
+   "gzip": 3191
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -79,11 +79,11 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 3704,
-   "gzip": 1391
+   "gzip": 1389
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
-   "gzip": 3257
+   "gzip": 3254
   },
   "server/zoneDerive.mjs": {
    "bytes": 8977,
@@ -95,15 +95,15 @@
   },
   "server/zoneOptimize.mjs": {
    "bytes": 17040,
-   "gzip": 6636
+   "gzip": 6634
   },
   "server/zoneSim.mjs": {
    "bytes": 11563,
-   "gzip": 4617
+   "gzip": 4615
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 13671,
-   "gzip": 5607
+   "gzip": 5605
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -135,7 +135,7 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 4864,
-   "gzip": 1953
+   "gzip": 1950
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
@@ -147,15 +147,15 @@
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 219
+   "gzip": 218
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2030
+   "gzip": 2029
   },
   "ZoneSim.dc.html": {
    "bytes": 283731,
-   "gzip": 72226
+   "gzip": 72225
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
