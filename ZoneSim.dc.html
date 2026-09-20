@@ -1867,7 +1867,7 @@ class Component extends DCLogic {
       .filter(c => c && c.zone);
     const patch = {
       zoneCands: cands,
-      zoneHours: src.hours ?? s.zoneHours,
+      zoneHours: this.zoneRunHours(src) || s.zoneHours,
       zoneSeed: src.seed ?? s.zoneSeed,
       zoneLagMs: Number(src.serverLagMs) > 0 ? String(src.serverLagMs) : "",
       zoneWaveMs: Number(src.waveTransitionDelayMs) > 0 ? String(src.waveTransitionDelayMs) : "",
@@ -2004,6 +2004,25 @@ class Component extends DCLogic {
     const pad = n => String(n).padStart(2, "0");
     return h > 0 ? `${h}:${pad(m)}:${pad(sec)}` : `${m}:${pad(sec)}`;
   }
+  // ZONE-59: actions a minute, from the per-hour rate the server sends. This used to be the raw count divided by
+  // the RUN's `hours` -- a field of the envelope, not of the candidate -- so a stored run that had lost it printed
+  // a figure inflated by the whole run length: 39.0 an hour became 39,022.4 on a 1,000 h run, which is what the
+  // operator caught. A run stored by an older build still carries only the count, so it falls back to the
+  // candidate's OWN simulated hours, and prints nothing at all when there is nothing to divide by.
+  zoneActionsPerMin(player, candidate, run) {
+    if (player?.actionsPerHour != null) return player.actionsPerHour / 60;
+    if (player?.actionsTaken == null) return null;
+    const hours = Number(candidate?.simulatedHours) || Number(run?.hours) || 0;
+    return hours > 0 ? player.actionsTaken / (hours * 60) : null;
+  }
+  /**
+   * How long a stored run was, for the runs list and for re-pinning Hours from it. A run stored by a build that
+   * did not keep the envelope's `hours` still knows its own length -- every candidate carries `simulatedHours` --
+   * so read that rather than print "0 h" (ZONE-59, the same missing field that inflated actions a minute).
+   */
+  zoneRunHours(run) {
+    return Number(run?.hours) || Number((run?.candidates || []).find(Boolean)?.simulatedHours) || 0;
+  }
   // A board is the set of queued zone·tier rows: the same set re-run is the same board, whatever order it was
   // queued in. Runs of different boards are not comparable and are never pinned to each other.
   zoneBoardSig(cands) {
@@ -2032,11 +2051,11 @@ class Component extends DCLogic {
     const entries = [
       // A saved session run goes by its saved name, so a rename on the Saved tab shows here too.
       ...log.map(r => ({ id: r.id, at: r.at, label: saves.find(x => x.fromRun === r.id)?.name || r.title || r.label, where: r.label, rows: (r.candidates || []).length,
-        hours: r.hours, saved: savedFrom.has(r.id), session: true,
+        hours: this.zoneRunHours(r), saved: savedFrom.has(r.id), session: true,
         baseline: !!r.isBaseline, linked: !!r.basedOn })),
       ...saves.filter(x => !x.fromRun || !log.some(r => r.id === x.fromRun))
         .map(sv => ({ id: sv.id, at: sv.at || 0, label: sv.name || sv.title || "Saved run", where: sv.title || sv.label || "", rows: (sv.candidates || []).length,
-          hours: sv.hours, saved: true, session: false })),
+          hours: this.zoneRunHours(sv), saved: true, session: false })),
     ].sort((a, b) => (b.at || 0) - (a.at || 0));
     // A run still on the wire is not in the log yet, so it gets its own row at the top while it lasts.
     // A finished run is the log's newest entry and is marked there; only a run still on the wire (or a result the log
@@ -2051,7 +2070,7 @@ class Component extends DCLogic {
       mark: s.zoneRunning ? "live" : "", current: !s.zoneShow, pick: () => set({ zoneShow: null, zoneOpen: 0 }) });
     for (const e of entries) rows.push({
       label: e.label,
-      sub: [e.where, `${nf(e.rows)} row${e.rows === 1 ? "" : "s"}`, `${nf(e.hours)} h`,
+      sub: [e.where, `${nf(e.rows)} row${e.rows === 1 ? "" : "s"}`, e.hours > 0 ? `${nf(e.hours)} h` : "",
         new Date(e.at).toDateString() === today ? time(e.at) : day(e.at)].filter(Boolean).join(" · "),
       // One tag for what the run is: the baseline, or measured against it. Whether it is kept is the saved tag or
       // the Save button beside it; an unsaved run of this session is marked as one, since it is the kind that
@@ -2244,7 +2263,9 @@ class Component extends DCLogic {
             push("Healing / s", (a?.healingReceivedPerHour ?? a?.healingPerHour ?? 0) / 3600, (b?.healingReceivedPerHour ?? b?.healingPerHour ?? 0) / 3600, { d: 1 });
             push("Hit rate", (a?.hitRate || 0) * 100, (b?.hitRate || 0) * 100, { d: 1, unit: "%" });
             push("Deaths / h", a?.deathsPerHour, b?.deathsPerHour, { d: 2, lowerBetter: true });
-            push("Actions / min", (a?.actionsTaken || 0) / ((A.hours || 1) * 60), (b?.actionsTaken || 0) / ((B.hours || 1) * 60), { d: 1 });
+            { const av = this.zoneActionsPerMin(a, A.cand, A), bv = this.zoneActionsPerMin(b, B.cand, B);
+              // A run too old to carry either figure has no row here rather than a row of zeroes.
+              if (av != null || bv != null) push("Actions / min", av, bv, { d: 1 }); }
             push("Mana exhaustion", (a?.manaExhaustionFraction || 0) * 100, (b?.manaExhaustionFraction || 0) * 100, { d: 1, unit: "%", lowerBetter: true });
             push("XP / h", a?.experiencePerHour?.total, b?.experiencePerHour?.total, { d: 4 });
             push("Profit / day", pd(a), pd(b), { coins: true }); }); }
@@ -3013,7 +3034,7 @@ class Component extends DCLogic {
               Object.entries(p.healingBySourcePerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
                 .map(([k2, v2]) => `${nice(k2)} ${rate(v2 / 3600)} / s`).join("\n")],
             ["Hit rate", `${nf((p.hitRate || 0) * 100, 1)}%`], ["Deaths / h", nf(p.deathsPerHour, 2)],
-            ["Actions / min", nf((p.actionsTaken || 0) / ((R.hours || 1) * 60), 1)],
+            ["Actions / min", (() => { const v = this.zoneActionsPerMin(p, c, R); return v == null ? "—" : nf(v, 1); })()],
             ["Mana exhaustion", `${nf((p.manaExhaustionFraction || 0) * 100, 1)}%`]].map(([k, v, tip]) => ({ k, v, tip: tip || "" })),
           // The Rates header carries this player's damage a second — the one number read most often, and the
           // reason the section is opened at all.
