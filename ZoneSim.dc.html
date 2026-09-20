@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4dd4ed92d525"></script>
+<script src="./support.js?v=a412d847834b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4dd4ed92d525">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=a412d847834b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=4dd4ed92d525">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4dd4ed92d525"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=a412d847834b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=a412d847834b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -50,6 +50,14 @@
         </div>
         <textarea class="input" rows="5" placeholder="Paste one character export, or a whole team" style="font-size:13px;line-height:1.45;resize:vertical;margin-top:4px" value="{{ zone.text }}" onInput="{{ zone.setText }}"></textarea>
       </div>
+      <!-- ZONE-79: the script link was a 12.5px line in the top-left corner of the header, and visitors kept
+           missing it. It says its piece where the question is actually asked: under the empty box. -->
+      <sc-if value="{{ zone.noParty }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;gap:9px;align-items:flex-start;padding:9px 11px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 22%, transparent);font-size:12.5px;text-wrap:pretty">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" aria-hidden="true" style="flex:none;margin-top:2px;color:var(--color-accent-300)"><path d="M12 3v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path><path d="M7.5 10.5 12 15l4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.5 18.5h15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
+          <div>Nothing to paste yet? Install <a href="{{ zone.scriptUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent);font-weight:600;text-decoration:underline;text-underline-offset:2px">MWI Party Export ↗</a>, a userscript for the game. Open each party member's profile in game once, copy what it gives you, and paste it above — the whole party lands in one go.</div>
+        </div>
+      </sc-if>
       <sc-if value="{{ zone.notExport }}" hint-placeholder-val="{{ false }}">
         <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.notExportNote }}</div>
       </sc-if>
@@ -1008,6 +1016,9 @@ class Component extends DCLogic {
   // The client, the public-page flag and whether the tab is showing all come from whoever mounted us.
   get client() { return this.props.client; }
   get zoneOnly() { return !!this.props.zoneOnly; }
+  // Kept beside the import box it advertises. Zones.dc.html holds the same url for its header link;
+  // if one ever moves, both move.
+  static PARTY_SCRIPT_URL = "https://greasyfork.org/en/scripts/596494-mwi-party-export";
   // One instance, one tab at a time: the public site passes the showing tab as `view` and the sections it does
   // not name stay out of the tree, so the party, the edits and the last run survive every tab change. Mounted
   // without a view — the way the guild planner mounts this file — every section shows, as it always did.
@@ -3200,7 +3211,7 @@ class Component extends DCLogic {
         this._zoneAutoText = null;
         set({ zoneText: "", zoneNotExport: false, zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
           zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneRestoredAt: null }); },
-      hasParty: party.length > 0, partyCount: seated.length,
+      hasParty: party.length > 0, noParty: party.length === 0, scriptUrl: Component.PARTY_SCRIPT_URL, partyCount: seated.length,
       restored: !this.zoneOnly && !!s.zoneRestoredAt && party.length > 0,   // the public site says it in its header
       restoredNote: s.zoneRestoredAt ? (() => { const mins = Math.max(1, Math.round((Date.now() - s.zoneRestoredAt) / 60000));
         const when = mins < 60 ? `${mins} min ago` : `${(mins / 60).toFixed(1)} h ago`;
