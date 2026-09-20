@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T04:56:59.026Z",
- "commit": "e974ff5",
+ "builtAt": "2026-09-20T05:14:34.421Z",
+ "commit": "b824e55",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16043652,
-  "gzip": 2574812
+  "bytes": 16045123,
+  "gzip": 2575301
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -154,8 +154,8 @@
    "gzip": 2013
   },
   "ZoneSim.dc.html": {
-   "bytes": 266756,
-   "gzip": 66451
+   "bytes": 268227,
+   "gzip": 66940
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
