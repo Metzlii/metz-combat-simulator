@@ -661,28 +661,28 @@
           <h4 style="margin:0;font-size:15px">Accuracy, and what is approximated</h4>
           <div style="font-size:13.5px;text-wrap:pretty">A run is a full combat simulation, not a formula: same seed, same inputs, same numbers. Market prices come from the game's public feed and refresh hourly. Checked against recorded play:</div>
           <ul class="about-list">
-            <li>Pace: 18 back-to-back Pirate Cove T2 runs in a 4.16 h capture averaged 831.3 s; the kernel gives 831.3 s.</li>
-            <li>A 26 h session: 111 runs against 111.5 ± 1.2 simulated, XP/h within 0.8%. A 14.5 h session: XP/h within 0.3–0.4% for all five players.</li>
-            <li>Casts per hour within 2% on every ability of the recording player, read from the game's own cooldown messages.</li>
+            <li>Pace: 8 Pirate Cove T2 runs timed in game averaged 13:52 a run (832.1 ± 12.7 s); the kernel's own run clock over 3,574 simulated runs reads 13:54. Within 0.25%.</li>
+            <li>A 22 h dungeon session: XP/h within 0.5%, clears within 0.5%.</li>
+            <li>Casts per hour within 0.6% on every ability of the recording player over a 1,184-battle capture, read from the game's own cooldown messages.</li>
             <li>Party totals against KikiMeter: damage −0.8%, healing −0.4%.</li>
-            <li>A solo open zone (Golem Cave T2, 210.9 h of combat): battles +1.1%, XP +1.3% and the high-count drops +0.7–2.1% above the game.</li>
-            <li>Armour and resistances: 20 of 20 values match five in-game Stats panels.</li>
+            <li>A solo open zone (Golem Cave T2, 210.9 h of combat): battles +0.35%, XP +0.61%, coin +0.46% and essence +1.04% above the game.</li>
+            <li>Armour and resistances: 20 of 20 values match five in-game Stats panels; a T2 Golem's whole stat block matches on 68 of 68 figures.</li>
           </ul>
           <details class="about-fold">
             <summary>Where it approximates</summary>
             <ul class="about-list">
-              <li>Wave transition: a measured 12-bin table (3,023–3,090 ms, mean 3,036.9 ms) over the server's 120 s clock cycle, not a flat 3 s. Checked against 2,395 dungeon transitions of our own: the same pattern, bin for bin. A reading from your own client sits above it by however long the wave message took to reach you, which moves what you see and not what the game does, so the field is for the server's gap and is best left empty. Runs use a fixed clock anchor, so the same inputs give the same numbers.</li>
+              <li>Wave transition: a measured 12-bin table (3,023–3,090 ms, mean 3,036.9 ms) over the server's 120 s clock cycle, not a flat 3 s. Checked against 2,395 dungeon transitions of our own: the same pattern, bin for bin. A later 144-transition reading, timed from the last monster reaching 0 HP, came out 25 ms above the table — the message latency the next sentence describes. A reading from your own client sits above it by however long the wave message took to reach you, which moves what you see and not what the game does, so the field is for the server's gap and is best left empty. Runs use a fixed clock anchor, so the same inputs give the same numbers.</li>
               <li>Server lag defaults to 0; if set, it is one constant delay on every action. An 8.8 h busy-hours capture found no per-action lag in any hour.</li>
               <li>Dungeon wipe restart is a flat 3.0 s; an open-zone death is a flat 150 s respawn at full HP and MP (both measured).</li>
               <li>Damage-over-time (3 s), regen (10 s), food/drink over-time (5 s) and enrage (60 s) ticks use the reference simulator's constants, not measured separately.</li>
-              <li>Dungeon waves draw from each lower wave table 1/8 of the time, fitted on 1,183 Pirate Cove T2 waves and applied to every dungeon.</li>
+              <li>Dungeon waves draw from each lower wave table 1/8 of the time, fitted on 2,192 Pirate Cove T2 waves and applied to every dungeon.</li>
               <li>Loot, drops and chests are expected values, not rolls: a run's luck shows in kills, clears and deaths, never in item counts. Every party member gets an equal share of the mean.</li>
               <li>Party level-gap penalty: the game's "20% below" is read as (top level ÷ yours) − 1, one of two possible readings, with the game's 10-level floor.</li>
               <li>Every run starts at full mana, so very short runs read a little high. Compare runs of the same length.</li>
               <li>Life steal and mana leech round down; neither has been tested against the game.</li>
               <li>Healing is credited to the player who receives it; KikiMeter credits the caster, so compare party totals.</li>
-              <li>Still open: XP per wave about 0.3% above the game and pace about 0.5% fast; 1.10% of Pirate Cove T2 runs fail against about 0.8% in the game; a solo open-zone session runs about 1.1% more battles per hour than the game.</li>
-              <li>Deaths per hour are not validated: real sessions are too short to measure them well.</li>
+              <li>Still open: XP per dungeon clear about 0.9% above the game, which no change to pace can explain — the two are almost independent. 1.10% of Pirate Cove T2 runs fail here; 8 runs timed in game had none, which is too few to compare.</li>
+              <li>Deaths per hour are not validated: real sessions are too short to measure them well. A 30-minute capture's only deaths were three on one boss wave, against about 0.25 a run here — two boss fights is not evidence either way.</li>
             </ul>
           </details>
           <details class="about-fold">
@@ -690,7 +690,7 @@
             <ul class="about-list">
               <li>The Task Badge counts: its Task Damage applies against the task monster you name, as in the game. The source simulators leave the badge out.</li>
               <li>A stun, blind or silence runs its full length even when the monster that cast it dies first.</li>
-              <li>Players keep their attack rhythm across a wave transition, while new monsters start fresh.</li>
+              <li>A wave spawning cancels whatever spell was mid-cast and starts a fresh one, on planets and in dungeons alike — watched in game, and confirmed in a capture: damage lands after the new cast begins in 442 of 443 player-waves. Auto-attack rhythm carries across the transition; new monsters start fresh. The source simulators carry the cast through.</li>
               <li>The wave transition is a measured table, not a flat 3.000 s.</li>
               <li>Dungeon waves sometimes draw from lower wave tables, which removes the source's dungeon XP overestimate: 201.8 monsters per run against 201.9–203.4 in captures.</li>
               <li>Life Drain heals round up (15 of 15 captured casts).</li>
@@ -715,6 +715,8 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-20</span>
+            <span style="text-wrap:pretty"><b>1.0.3</b>: a wave spawning now cancels whatever spell was mid-cast and starts a fresh one, in dungeons as well as on planets — watched in game and confirmed against recorded play, where damage lands after the new cast begins in 442 of 443 player-waves. That closes the gap open zones had: a 211 h solo Golem Cave session goes from 1.1% to 0.35% off the game, and every ability's cast rate lands within 0.6%. A dungeon's clear speed now reads as the average run time — 13:52, not 4.3 clears an hour — counting the time lost to failed attempts, the way a run is timed in game; against 8 runs timed in game it is within 0.25%. The skill optimizer measures only the skills you tick, so a mage no longer pays for a ranged curve, and each skill keeps its own colour on the graph with a pattern per player. Triggers warn when one can never fire, and only the conditions a dependency really takes are offered. The trigger tuner shows the XP change beside EPH. Unsaved runs can be dropped from the Runs list one at a time or all at once, and the list says when Hours and Seed are pinned to a baseline rather than silently ignoring an edit. Damage aimed at a player is a hover note on Damage taken. Server lag and the wave gap carry measured defaults, and the core probe stops a browser that hides your core count from costing you lanes. Fixed: "Actions / min" printed thousands on a run restored from an earlier session.</span>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
             <span style="text-wrap:pretty"><b>1.0.2</b>: a Refresh prices button and a tidier Pricing panel; every ask and bid says whether it is an instant or slow trade, and key materials can be bought either way. Optimizer answers can be saved and cleared; the optimizers default to 168 h, 5 seeds and 15 minutes; a Workers setting under Advanced sets how much of your machine a run uses. Compare shows every Results figure, a player at a time. Temporary-buff ceilings include Ripple, and the stats panel gains HP and mana regen. The About tab's accuracy notes are filled in and re-checked against recorded play.</span>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
