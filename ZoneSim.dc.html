@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=483950c10155"></script>
+<script src="./support.js?v=0a9a97ff3195"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=483950c10155">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0a9a97ff3195">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=483950c10155">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=483950c10155"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=0a9a97ff3195">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0a9a97ff3195"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -38,7 +38,11 @@
       <div class="field" style="margin:0">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <label style="margin:0">Character exports</label>
-          <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;margin-left:auto" disabled="{{ zone.importDisabled }}" onClick="{{ zone.doImport }}">{{ zone.importLabel }}</button>
+          <!-- ZONE-75: no Import button. A paste imports itself, and a second click over no decision was part of
+               why the page read as having two things to press and no obvious one. -->
+          <sc-if value="{{ zone.importing }}" hint-placeholder-val="{{ false }}">
+            <span class="text-muted" style="font-size:12.5px;margin-left:auto">Reading…</span>
+          </sc-if>
           <sc-if value="{{ zone.hasParty }}" hint-placeholder-val="{{ false }}">
             <button class="btn btn-ghost" style="padding:3px 8px;font-size:13px;flex:none" onClick="{{ zone.clearParty }}">Clear party</button>
           </sc-if>
@@ -46,6 +50,9 @@
         </div>
         <textarea class="input" rows="5" placeholder="Paste one character export, or a whole team" style="font-size:13px;line-height:1.45;resize:vertical;margin-top:4px" value="{{ zone.text }}" onInput="{{ zone.setText }}"></textarea>
       </div>
+      <sc-if value="{{ zone.notExport }}" hint-placeholder-val="{{ false }}">
+        <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.notExportNote }}</div>
+      </sc-if>
       <sc-if value="{{ zone.hasImportError }}" hint-placeholder-val="{{ false }}">
         <div style="font-size:13.5px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.importError }}</div>
       </sc-if>
@@ -610,7 +617,10 @@
 
     <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-        <button class="btn btn-primary" style="padding:4px 14px;font-size:14px;flex:none" disabled="{{ zone.runDisabled }}" onClick="{{ zone.run }}">{{ zone.runLabel }}</button>
+        <!-- ZONE-75: people were not finding how to start a run, so the button wears the brand's gold
+             (accent-2, the colour of the mark in the header) instead of sharing the accent every other control
+             uses. Nothing else on the page is this colour. -->
+        <button class="btn" style="padding:5px 18px;font-size:14px;font-weight:600;flex:none;color:var(--color-accent-2-200);border-color:color-mix(in srgb, var(--color-accent-2-500) 65%, transparent);background:color-mix(in srgb, var(--color-accent-2-700) 30%, transparent)" style-hover="background:color-mix(in srgb, var(--color-accent-2-600) 42%, transparent);color:var(--color-accent-2-100)" disabled="{{ zone.runDisabled }}" onClick="{{ zone.run }}">{{ zone.runLabel }}</button>
         <sc-if value="{{ zone.running }}" hint-placeholder-val="{{ false }}">
           <button class="btn btn-ghost" style="padding:3px 10px;font-size:13px;flex:none" title="The candidates already running finish; nothing else starts" onClick="{{ zone.stop }}">Stop</button>
         </sc-if>
@@ -1008,7 +1018,7 @@ class Component extends DCLogic {
     zoneStatOpen: null, zoneStale: false, zoneDerivedOpen: false,
     zoneMarket: null, zoneMarketBusy: false, zoneMarketMsg: "", zoneMarketAt: 0,
     zoneSaves: [], zoneSaveName: "", zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneSetupFrom: null,
-    zoneManaOpen: false,
+    zoneManaOpen: false, zoneNotExport: false,
     zoneRestoredAt: null, zoneCmp: { a: null, b: null }, zoneCmpGrain: "totals",
     // Default view (operator, 2026-09-16): every result section collapsed to its header, which carries the total.
     zoneSecOpen: { rates: true, xp: false, damage: false, consumables: false, lootIn: false, lootOut: false },
@@ -1278,7 +1288,10 @@ class Component extends DCLogic {
       const text = String(this.state.zoneText || "").trim();
       if (!text || text === this._zoneAutoText) return;
       if (this.state.zoneImporting || !this.client) return;
-      if (this.zoneParsePaste(text).count === 0) return;   // not an export yet, so say nothing
+      // ZONE-75: with the button gone, silence here is a dead end -- there is nothing left to press to hear
+      // what is wrong. A paste that has settled and still does not read as an export says so instead.
+      if (this.zoneParsePaste(text).count === 0) { this.setState({ zoneNotExport: true }); return; }
+      this.setState({ zoneNotExport: false });
       this._zoneAutoText = text;
       this.importZoneParty();
     }, 350);
@@ -3190,15 +3203,20 @@ class Component extends DCLogic {
 
     return {
       intro: "One to five characters, pasted from their combat-simulator exports, run through every zone and tier you queue. Rates come from a full combat simulation of the imported party; XP per hour is within a few percent of in-game tracking for a five-player dungeon party.",
-      text: s.zoneText, setText: e => { set({ zoneText: e.target.value, zoneImportError: null }); this.queueZoneAutoImport(); },
-      importDisabled: !s.zoneText.trim() || s.zoneImporting || !this.client, importLabel: s.zoneImporting ? "Reading…" : "Import",
+      text: s.zoneText, setText: e => { set({ zoneText: e.target.value, zoneImportError: null, zoneNotExport: false }); this.queueZoneAutoImport(); },
+      importing: !!s.zoneImporting,
       importNote: party.length
         ? `${party.length} character${party.length === 1 ? "" : "s"}${party.length > seated.length ? ` · ${seated.length} in the party` : ""}${s.zoneFormat ? ` · ${s.zoneFormat} export` : ""}${this._zoneSplit ? ` · ${this._zoneSplit}` : ""}`
         : "One export, or a whole team — an array, a players list, an object keyed by name or by slot number, or one export per line.",
       importError: s.zoneImportError || "", hasImportError: !!s.zoneImportError,
-      doImport: () => { this._zoneAutoText = String(s.zoneText || "").trim(); this.importZoneParty(); },
+      notExport: !!s.zoneNotExport && !!String(s.zoneText || "").trim() && !s.zoneImporting,
+      notExportNote: "That does not read as a character export yet — paste the whole thing, or a whole team, and it imports itself.",
+
+      // The box empties with the party. Leaving the paste behind would strand it: it has already been read, so
+      // nothing would read it again, and there is no longer a button to force it.
       clearParty: () => { try { localStorage.removeItem(Component.ZONE_SESSION_KEY); } catch {}
-        set({ zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
+        this._zoneAutoText = null;
+        set({ zoneText: "", zoneNotExport: false, zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
           zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneRestoredAt: null }); },
       hasParty: party.length > 0, partyCount: seated.length,
       restored: !this.zoneOnly && !!s.zoneRestoredAt && party.length > 0,   // the public site says it in its header
