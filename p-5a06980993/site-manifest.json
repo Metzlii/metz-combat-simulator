@@ -1,0 +1,169 @@
+{
+ "builtAt": "2026-09-20T04:56:59.026Z",
+ "commit": "e974ff5",
+ "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
+ "firstLoad": {
+  "files": [
+   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
+   "init_client_data.json"
+  ],
+  "bytes": 6386207,
+  "gzip": 621082,
+  "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
+ },
+ "site": {
+  "files": 37,
+  "bytes": 16043652,
+  "gzip": 2574812
+ },
+ "files": {
+  "assets/actions_sprite.svg": {
+   "bytes": 314040,
+   "gzip": 52449
+  },
+  "assets/combat_monsters_sprite.svg": {
+   "bytes": 1137576,
+   "gzip": 250060
+  },
+  "assets/items_sprite.svg": {
+   "bytes": 3936186,
+   "gzip": 702768
+  },
+  "assets/misc_sprite.svg": {
+   "bytes": 313491,
+   "gzip": 54579
+  },
+  "assets/skills_sprite.svg": {
+   "bytes": 27086,
+   "gzip": 6979
+  },
+  "IconPick.dc.html": {
+   "bytes": 11178,
+   "gzip": 3762
+  },
+  "index.html": {
+   "bytes": 136207,
+   "gzip": 32974
+  },
+  "init_client_data.json": {
+   "bytes": 2751077,
+   "gzip": 204283
+  },
+  "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
+   "bytes": 3651,
+   "gzip": 1464
+  },
+  "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
+   "bytes": 3635130,
+   "gzip": 416799
+  },
+  "server/abilities.mjs": {
+   "bytes": 6802,
+   "gzip": 2547
+  },
+  "server/chestValue.mjs": {
+   "bytes": 6508,
+   "gzip": 2715
+  },
+  "server/enhanceCost.mjs": {
+   "bytes": 8898,
+   "gzip": 3721
+  },
+  "server/lootValue.mjs": {
+   "bytes": 7497,
+   "gzip": 3079
+  },
+  "server/marketCore.mjs": {
+   "bytes": 1826,
+   "gzip": 955
+  },
+  "server/zoneApi.mjs": {
+   "bytes": 3599,
+   "gzip": 1369
+  },
+  "server/zoneCatalog.mjs": {
+   "bytes": 9039,
+   "gzip": 3239
+  },
+  "server/zoneDerive.mjs": {
+   "bytes": 8977,
+   "gzip": 3324
+  },
+  "server/zoneImport.mjs": {
+   "bytes": 10541,
+   "gzip": 3791
+  },
+  "server/zoneOptimize.mjs": {
+   "bytes": 17010,
+   "gzip": 6618
+  },
+  "server/zoneSim.mjs": {
+   "bytes": 11137,
+   "gzip": 4540
+  },
+  "server/zoneUpgrades.mjs": {
+   "bytes": 13626,
+   "gzip": 5588
+  },
+  "spira-theme.css": {
+   "bytes": 3113,
+   "gzip": 1430
+  },
+  "support.js": {
+   "bytes": 69150,
+   "gzip": 19050
+  },
+  "vendor/babel-standalone-7.29.0-babel.min.js": {
+   "bytes": 3137752,
+   "gzip": 655353
+  },
+  "vendor/react-18.3.1-umd-react.production.min.js": {
+   "bytes": 10751,
+   "gzip": 4269
+  },
+  "vendor/react-dom-18.3.1-umd-react-dom.production.min.js": {
+   "bytes": 131835,
+   "gzip": 43022
+  },
+  "zone-web/icons.json": {
+   "bytes": 22539,
+   "gzip": 6176
+  },
+  "zone-web/parity.html": {
+   "bytes": 5910,
+   "gzip": 2595
+  },
+  "zone-web/zoneClient.js": {
+   "bytes": 4759,
+   "gzip": 1929
+  },
+  "zone-web/zoneProbe.js": {
+   "bytes": 1305,
+   "gzip": 730
+  },
+  "zone-web/zoneProbeWorker.js": {
+   "bytes": 147,
+   "gzip": 132
+  },
+  "zone-web/zoneWorker.js": {
+   "bytes": 258,
+   "gzip": 201
+  },
+  "zoneApi.js": {
+   "bytes": 4966,
+   "gzip": 2013
+  },
+  "ZoneSim.dc.html": {
+   "bytes": 266756,
+   "gzip": 66451
+  },
+  "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
+   "bytes": 13029,
+   "gzip": 3644
+  },
+  "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js": {
+   "bytes": 300,
+   "gzip": 214
+  }
+ }
+}
