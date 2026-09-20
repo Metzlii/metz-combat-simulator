@@ -661,9 +661,9 @@
           <h4 style="margin:0;font-size:15px">Accuracy, and what is approximated</h4>
           <div style="font-size:13.5px;text-wrap:pretty">A run is a full combat simulation, not a formula: same seed, same inputs, same numbers. Market prices come from the game's public feed and refresh hourly. Checked against recorded play:</div>
           <ul class="about-list">
-            <li>Pace: 8 Pirate Cove T2 runs timed in game averaged 13:52 a run (832.1 ± 12.7 s); the kernel's own run clock over 3,574 simulated runs reads 13:54. Within 0.25%.</li>
-            <li>A 22 h dungeon session: XP/h within 0.5%, clears within 0.5%.</li>
+            <li>Pace: a 27.7 h Pirate Cove T2 recording of 116 completed runs averaged 13:57, and 8 separately timed runs averaged 13:52; the kernel's own completed-run clock over 5,723 simulated runs reads 13:54, between the two. The Avg run column reads a little higher than either, because it charges failed attempts to the runs that finished.</li>
             <li>Casts per hour within 0.6% on every ability of the recording player over a 1,184-battle capture, read from the game's own cooldown messages.</li>
+            <li>XP over the same 27.7 h recording: 1.132M an hour in game against 1.134M simulated, within 0.2%.</li>
             <li>Party totals against KikiMeter: damage −0.8%, healing −0.4%.</li>
             <li>A solo open zone (Golem Cave T2, 210.9 h of combat): battles +0.35%, XP +0.61%, coin +0.46% and essence +1.04% above the game.</li>
             <li>Armour and resistances: 20 of 20 values match five in-game Stats panels; a T2 Golem's whole stat block matches on 68 of 68 figures.</li>
@@ -681,7 +681,7 @@
               <li>Every run starts at full mana, so very short runs read a little high. Compare runs of the same length.</li>
               <li>Life steal and mana leech round down; neither has been tested against the game.</li>
               <li>Healing is credited to the player who receives it; KikiMeter credits the caster, so compare party totals.</li>
-              <li>Still open: XP per dungeon clear about 0.9% above the game, which no change to pace can explain — the two are almost independent. 1.10% of Pirate Cove T2 runs fail here; 8 runs timed in game had none, which is too few to compare.</li>
+              <li>Thinly checked: how often a run fails, and how far run times spread. 1.10–1.14% of Pirate Cove T2 runs fail here against 2 of 118 attempts recorded in game — the same figure within the error two failures carry, which is most of a percent. Over 116 recorded runs the game ranged 12:48 to 16:42; 5,723 simulated runs range 12:29 to 18:39, and a 116-run sample of them reaches both of the game's extremes about 2% of the time, so the spread here may be slightly narrower than the game's.</li>
               <li>Deaths per hour are not validated: real sessions are too short to measure them well. A 30-minute capture's only deaths were three on one boss wave, against about 0.25 a run here — two boss fights is not evidence either way.</li>
             </ul>
           </details>
