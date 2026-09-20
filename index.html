@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="b72e7a518ca1"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="4dd4ed92d525"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=b72e7a518ca1"></script>
+<script src="./support.js?v=4dd4ed92d525"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b72e7a518ca1">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4dd4ed92d525">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=b72e7a518ca1">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b72e7a518ca1"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=4dd4ed92d525">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4dd4ed92d525"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -661,30 +661,33 @@
           <h4 style="margin:0;font-size:15px">Accuracy, and what is approximated</h4>
           <div style="font-size:13.5px;text-wrap:pretty">A run is a full combat simulation, not a formula: same seed, same inputs, same numbers. Market prices come from the game's public feed and refresh hourly. Checked against recorded play:</div>
           <ul class="about-list">
-            <li>Pace, from three independent readings of the same party on Pirate Cove T2: a 27.7 h recording of 118 attempts averaged 13:57 an attempt, 8 separately timed runs averaged 13:52, and 10 complete wipe-free runs timed from the game's own wave messages averaged 14:02 ± 10 s. The kernel reads 13:54 over 5,723 simulated runs — inside all three, and 0.8 sigma from the tightest of them.</li>
+            <li>Pace on Pirate Cove T2, read three ways, all of them per attempt: a 27.7 h recording of 118 attempts averaged 13:57, 10 complete wipe-free runs timed from the game's own wave messages averaged 14:02 ± 10 s, and 8 separately timed runs averaged 13:52. The kernel reads 13:55 over 5,797 simulated attempts — inside all three, and 0.7 sigma from the tightest of them. The Avg run column divides by clears instead, where the kernel reads 14:04 against that recording's 14:11.</li>
             <li>Casts per hour within 0.6% on every ability of the recording player over a 1,184-battle capture, read from the game's own cooldown messages.</li>
             <li>XP over the same 27.7 h recording: 1.132M an hour in game against 1.134M simulated, within 0.2%.</li>
-            <li>Party totals against KikiMeter: damage −0.8%, healing −0.4%.</li>
+            <li>Party totals against KikiMeter: damage −0.8%, healing −0.4%. Totals, because healing is credited here to the player who receives it and by KikiMeter to the caster.</li>
             <li>A solo open zone (Golem Cave T2, 210.9 h of combat): battles +0.35%, XP +0.61%, coin +0.46% and essence +1.04% above the game.</li>
             <li>Run-to-run spread: 10 runs timed in game vary by a standard deviation of 32 ± 8 s against the simulated 27 s, and 13% of 10-run samples drawn from the kernel scatter at least that widely. No difference the data can see.</li>
+<li>Timing after a death: a dungeon wipe restarts at wave 1 a flat 3.0 s later, exactly 3.0 s in each of four captured wipes; an open-zone death is a flat 150 s respawn at full HP and MP, which the server states outright in the unit's own respawn deadline.</li>
             <li>Armour and resistances: 20 of 20 values match five in-game Stats panels; a T2 Golem's whole stat block matches on 68 of 68 figures.</li>
           </ul>
           <details class="about-fold">
             <summary>Where it approximates</summary>
             <ul class="about-list">
               <li>Wave transition: a measured 12-bin table (3,023–3,090 ms, mean 3,036.9 ms) over the server's 120 s clock cycle, not a flat 3 s. Checked against 2,395 dungeon transitions of our own: the same pattern, bin for bin. Two later readings, timed from the last monster reaching 0 HP over 144 and then 695 transitions, came out 25 and 28 ms above the table — the message latency the next sentence describes. A reading from your own client sits above it by however long the wave message took to reach you, which moves what you see and not what the game does, so the field is for the server's gap and is best left empty. Runs use a fixed clock anchor, so the same inputs give the same numbers.</li>
-              <li>Server lag defaults to 0; if set, it is one constant delay on every action. An 8.8 h busy-hours capture found no per-action lag in any hour.</li>
-              <li>Dungeon wipe restart is a flat 3.0 s; an open-zone death is a flat 150 s respawn at full HP and MP (both measured).</li>
               <li>Damage-over-time (3 s), regen (10 s), food/drink over-time (5 s) and enrage (60 s) ticks use the reference simulator's constants, not measured separately.</li>
-              <li>Dungeon waves draw from each lower wave table 1/8 of the time, fitted on 2,192 Pirate Cove T2 waves and applied to every dungeon.</li>
+              <li>Dungeon waves draw from each lower wave table 1/8 of the time, fitted on 2,192 Pirate Cove T2 waves and applied to every dungeon. It gives 201.8 monsters a run against 201.9–203.4 in captures, and it is what removes the source simulator's dungeon XP overestimate.</li>
               <li>Avg run is per CLEAR: the whole session divided by the runs that finished, so every failed attempt's time is charged to them. Trackers differ on this — MWI Insight averages per attempt, Toolasha prints both — so the per-attempt figure is in the column's tooltip to compare against directly. With a 1% fail rate the two sit about 9 s apart.</li>
               <li>Loot, drops and chests are expected values, not rolls: a run's luck shows in kills, clears and deaths, never in item counts. Every party member gets an equal share of the mean.</li>
               <li>Party level-gap penalty: the game's "20% below" is read as (top level ÷ yours) − 1, one of two possible readings, with the game's 10-level floor.</li>
               <li>Every run starts at full mana, so very short runs read a little high. Compare runs of the same length.</li>
+            </ul>
+          </details>
+          <details class="about-fold">
+            <summary>What is not checked yet</summary>
+            <ul class="about-list">
+              <li>How often a run fails, which is also what sets the Avg run figure. 1.14% of Pirate Cove T2 attempts wipe here against 2 of 118 recorded in game (1.69%), and none at all in a later 10-run stretch — the same number within the error two failures carry, which is about a percentage point either way. It matters because Avg run divides by CLEARS: per attempt the kernel and that recording agree to 0.3%, per clear they differ by 0.8%, and the whole of that 0.8% is the fail rate.</li>
+              <li>Deaths per hour. Real sessions are too short to measure them well. A 30-minute capture's only deaths were three on one boss wave, against about 0.25 a run here — two boss fights is not evidence either way.</li>
               <li>Life steal and mana leech round down; neither has been tested against the game.</li>
-              <li>Healing is credited to the player who receives it; KikiMeter credits the caster, so compare party totals.</li>
-              <li>Thinly checked: how often a run fails, which is also what sets the Avg run figure. 1.14% of Pirate Cove T2 attempts wipe here against 2 of 118 recorded in game (1.69%), and none at all in a later 10-run stretch — the same number within the error two failures carry, which is about a percentage point either way. It matters because Avg run divides by CLEARS: per attempt the kernel and that recording agree to 0.3%, per clear they differ by 0.8%, and the whole of that 0.8% is the fail rate.</li>
-              <li>Deaths per hour are not validated: real sessions are too short to measure them well. A 30-minute capture's only deaths were three on one boss wave, against about 0.25 a run here — two boss fights is not evidence either way.</li>
             </ul>
           </details>
           <details class="about-fold">
@@ -694,10 +697,8 @@
               <li>A stun, blind or silence runs its full length even when the monster that cast it dies first.</li>
               <li>A wave spawning cancels whatever spell was mid-cast and starts a fresh one, on planets and in dungeons alike — watched in game, and confirmed in a capture: damage lands after the new cast begins in 2,083 of 2,093 player-waves. Auto-attack rhythm carries across the transition; new monsters start fresh. The source simulators carry the cast through.</li>
               <li>The wave transition is a measured table, not a flat 3.000 s.</li>
-              <li>Dungeon waves sometimes draw from lower wave tables, which removes the source's dungeon XP overestimate: 201.8 monsters per run against 201.9–203.4 in captures.</li>
               <li>Life Drain heals round up (15 of 15 captured casts).</li>
               <li>Fury adds into the same damage and accuracy pool as other buffs instead of multiplying on top (12 of 12 Stats-panel readings).</li>
-              <li>The party level-gap penalty requires the game's 10-level difference.</li>
               <li>Dungeon completion chests are modelled at all: 29.5% extra chests against 30.4% over a month of the game developer's data.</li>
               <li>Fixed here: a player who died while stunned no longer comes back stunned at the dungeon clear, and a wave cleared by the swing that killed the last player restarts the dungeon instead of stalling it.</li>
             </ul>
@@ -770,7 +771,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=b72e7a518ca1");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=4dd4ed92d525");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
