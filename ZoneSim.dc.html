@@ -2966,6 +2966,7 @@ class Component extends DCLogic {
           rate, rateText: ok ? (c.isDungeon ? this.zoneRunTime(c.averageRunSeconds) : `${nf(rate, 2)} enc`) : "—",
           rateTip: ok ? (c.isDungeon
             ? ["average time for one full run, counting the time lost to failed attempts",
+              c.averageAttemptSeconds ? `${this.zoneRunTime(c.averageAttemptSeconds)} per attempt` : "",
               `${nf(rate, 2)} clears / h`,
               (c.dungeonsFailedPerHour || 0) > 0 ? `${nf(c.dungeonsFailedPerHour, 2)} wipes / h` : ""].filter(Boolean).join(" · ")
             : "encounters / h") : "",

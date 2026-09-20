@@ -661,7 +661,7 @@
           <h4 style="margin:0;font-size:15px">Accuracy, and what is approximated</h4>
           <div style="font-size:13.5px;text-wrap:pretty">A run is a full combat simulation, not a formula: same seed, same inputs, same numbers. Market prices come from the game's public feed and refresh hourly. Checked against recorded play:</div>
           <ul class="about-list">
-            <li>Pace: a 27.7 h Pirate Cove T2 recording of 116 completed runs averaged 13:57, and 8 separately timed runs averaged 13:52; the kernel's own completed-run clock over 5,723 simulated runs reads 13:54, between the two. The Avg run column reads a little higher than either, because it charges failed attempts to the runs that finished.</li>
+            <li>Pace: a 27.7 h Pirate Cove T2 recording of 118 attempts — 116 clears and 2 wipes — averaged 13:57 an attempt; the kernel averages 13:55 over 8 × 168 h. Within 0.3%.</li>
             <li>Casts per hour within 0.6% on every ability of the recording player over a 1,184-battle capture, read from the game's own cooldown messages.</li>
             <li>XP over the same 27.7 h recording: 1.132M an hour in game against 1.134M simulated, within 0.2%.</li>
             <li>Party totals against KikiMeter: damage −0.8%, healing −0.4%.</li>
@@ -676,12 +676,13 @@
               <li>Dungeon wipe restart is a flat 3.0 s; an open-zone death is a flat 150 s respawn at full HP and MP (both measured).</li>
               <li>Damage-over-time (3 s), regen (10 s), food/drink over-time (5 s) and enrage (60 s) ticks use the reference simulator's constants, not measured separately.</li>
               <li>Dungeon waves draw from each lower wave table 1/8 of the time, fitted on 2,192 Pirate Cove T2 waves and applied to every dungeon.</li>
+              <li>Avg run is per CLEAR: the whole session divided by the runs that finished, so every failed attempt's time is charged to them. Trackers differ on this — MWI Insight averages per attempt, Toolasha prints both — so the per-attempt figure is in the column's tooltip to compare against directly. With a 1% fail rate the two sit about 9 s apart.</li>
               <li>Loot, drops and chests are expected values, not rolls: a run's luck shows in kills, clears and deaths, never in item counts. Every party member gets an equal share of the mean.</li>
               <li>Party level-gap penalty: the game's "20% below" is read as (top level ÷ yours) − 1, one of two possible readings, with the game's 10-level floor.</li>
               <li>Every run starts at full mana, so very short runs read a little high. Compare runs of the same length.</li>
               <li>Life steal and mana leech round down; neither has been tested against the game.</li>
               <li>Healing is credited to the player who receives it; KikiMeter credits the caster, so compare party totals.</li>
-              <li>Thinly checked: how often a run fails, and how far run times spread. 1.10–1.14% of Pirate Cove T2 runs fail here against 2 of 118 attempts recorded in game — the same figure within the error two failures carry, which is most of a percent. Over 116 recorded runs the game ranged 12:48 to 16:42; 5,723 simulated runs range 12:29 to 18:39, and a 116-run sample of them reaches both of the game's extremes about 2% of the time, so the spread here may be slightly narrower than the game's.</li>
+              <li>Thinly checked: how often a run fails, which is also what sets the Avg run figure. 1.14% of Pirate Cove T2 attempts wipe here against 2 of 118 recorded in game (1.69%) — the same number within the error two failures carry, which is about a percentage point either way. It matters because Avg run divides by CLEARS: per attempt the kernel and that recording agree to 0.3%, per clear they differ by 0.8%, and the whole of that 0.8% is the fail rate. Over 116 recorded runs the game ranged 12:48 to 16:42; 5,723 simulated runs range 12:29 to 18:39, and a 116-run sample of them reaches both of the game's extremes about 2% of the time, so the spread here may be slightly narrower than the game's.</li>
               <li>Deaths per hour are not validated: real sessions are too short to measure them well. A 30-minute capture's only deaths were three on one boss wave, against about 0.25 a run here — two boss fights is not evidence either way.</li>
             </ul>
           </details>
