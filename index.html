@@ -317,7 +317,8 @@
                 <sc-if value="{{ up.skills.perOpen }}" hint-placeholder-val="{{ false }}">
                   <div style="display:flex;flex-direction:column;gap:5px">
                     <sc-for list="{{ up.skills.perSkills }}" as="k" hint-placeholder-count="7">
-                      <div style="display:grid;grid-template-columns:86px minmax(0,1fr) 58px;gap:6px;align-items:center;font-size:12.5px">
+                      <div style="display:grid;grid-template-columns:18px 86px minmax(0,1fr) 58px;gap:6px;align-items:center;font-size:12.5px;{{ k.rowStyle }}">
+                        <input type="checkbox" style="margin:0" checked="{{ k.on }}" onChange="{{ k.toggle }}" title="{{ k.title }}">
                         <span class="text-muted" style="display:flex;gap:5px;align-items:baseline" title="{{ k.title }}">{{ k.label }}<span style="font-size:10.5px;color:var(--color-accent-300)">{{ k.owned }}</span></span>
                         <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" value="{{ k.charm }}" onChange="{{ k.setCharm }}">
                           <sc-for list="{{ up.skills.perOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
@@ -325,7 +326,7 @@
                         <input class="input" type="number" min="0" max="20" step="1" placeholder="lv" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" disabled="{{ k.levelDisabled }}" value="{{ k.level }}" onChange="{{ k.setLevel }}">
                       </div>
                     </sc-for>
-                    <div class="text-muted" style="font-size:12px;text-wrap:pretty">A charm is focused on one skill, so each curve can assume the charm you would really wear while levelling that skill. Charms are read from the searched player's own bag; a skill they hold no charm for is costed on a Grandmaster +7, since that is what levelling it would actually mean. With the whole party in scope there is no single owner, so nothing is read.</div>
+                    <div class="text-muted" style="font-size:12px;text-wrap:pretty">Unticking a skill drops it from the search entirely, so the budget is not spent measuring a curve you would never act on — a mage has no use for ranged or melee. A charm is focused on one skill, so each curve can assume the charm you would really wear while levelling that skill. Charms are read from the searched player's own bag; a skill they hold no charm for is costed on a Grandmaster +7, since that is what levelling it would actually mean. With the whole party in scope there is no single owner, so nothing is read.</div>
                   </div>
                 </sc-if>
               </div>
@@ -352,7 +353,10 @@
                 <sc-if value="{{ up.skills.running }}" hint-placeholder-val="{{ false }}">
                   <button class="btn btn-secondary" style="padding:4px 16px;font-size:14px" onClick="{{ up.stop }}">Stop</button>
                 </sc-if>
-                <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.skills.run }}">Measure the curves</button>
+                <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.skillsRunDisabled }}" onClick="{{ up.skills.run }}">Measure the curves</button>
+                  <sc-if value="{{ up.skills.noneOn }}" hint-placeholder-val="{{ false }}">
+                    <span class="text-muted" style="font-size:12.5px">Every skill is unticked under Charm per skill — there is nothing to measure.</span>
+                  </sc-if>
               </sc-if>
               <sc-if value="{{ up.canClear }}" hint-placeholder-val="{{ false }}">
                 <button class="btn btn-secondary" style="padding:3px 12px;font-size:13px" title="Keep this answer in this browser after the 12-hour cache lets it go" onClick="{{ up.saveResults }}">Save results</button>
@@ -997,6 +1001,19 @@ class Component extends DCLogic {
   static CHARM_TIERS = ["trainee", "basic", "advanced", "expert", "master", "grandmaster"];
   // What a skill with no charm in the bag is costed on: the charm the operator would go and buy.
   static CHARM_FALLBACK = { charm: "grandmaster", charmLevel: 7 };
+  // ZONE-62: which skills the search measures at all. The charm row IS the opt-in -- a mage never needs ranged or
+  // melee costed, and at a high level intelligence is worth about what magic is, so measuring them spends the
+  // budget on answers nobody asked for (operator, 2026-09-20). All seven are on until one is turned off.
+  skillsOn() {
+    const v = this.modeVal("skills", "skills");
+    return Array.isArray(v) ? v.filter(k => Component.UP_SKILLS.includes(k)) : [...Component.UP_SKILLS];
+  }
+  toggleSkill(k) {
+    const on = new Set(this.skillsOn());
+    on.has(k) ? on.delete(k) : on.add(k);
+    // Kept in the declared order, so the request and the panel read the same way whatever order they were clicked.
+    this.setMode("skills", { skills: Component.UP_SKILLS.filter(x => on.has(x)) });
+  }
   // Scoped to one character: a charm is a thing THIS player owns, and lending a teammate's Grandmaster charm to
   // another player's curve prices a level nobody can buy. With the whole party in scope there is no single owner, so
   // nothing is prefilled and the default picker stands.
@@ -1048,8 +1065,11 @@ class Component extends DCLogic {
       // A charm is focused on one skill, so the honest question is per skill: what would you put on each while
       // levelling it. Only the skills the operator actually set are sent; the rest take the default above.
       const per = this.modeVal("skills", "charms") || {}, owned = this.ownedCharms(this.upVal("player"));
+      // ZONE-62: a skill whose charm is switched off is not measured, so it is in neither `skills` nor `charms`.
+      const on = this.skillsOn();
+      body.skills = on;
       const charms = {};
-      for (const k of Component.UP_SKILLS) { const c = per[k], o = owned[k] || Component.CHARM_FALLBACK;
+      for (const k of on) { const c = per[k], o = owned[k] || Component.CHARM_FALLBACK;
         if (c && (c.charm || c.charmLevel != null)) charms[k] = { charm: c.charm || o.charm, charmLevel: num(c.charmLevel, o.charmLevel) };
         else charms[k] = { charm: o.charm, charmLevel: o.charmLevel }; }
       if (Object.keys(charms).length) body.charms = charms;
@@ -1183,19 +1203,34 @@ class Component extends DCLogic {
     const maxY = Math.max(0.001, ...curves.flatMap(c => (c.points || []).map(p => valOf(c, p))));
     const x = days => PAD + (Math.min(horizon, Math.max(0, Number(days) || 0)) / horizon) * (W - PAD - 86);
     const y = val => H - 22 - (Math.max(0, Number(val) || 0) / maxY) * (H - 22 - 10);
-    // Seven near-white lines are indistinguishable on a mono palette, so each series differs on three axes at
-    // once — ramp step, dash pattern, and its own name written at the end of the line.
-    const hues = ["var(--color-accent)", "var(--color-accent-200)", "var(--color-neutral-100)",
-      "var(--color-accent-400)", "var(--color-neutral-300)", "var(--color-accent-100)", "var(--color-neutral-400)"];
-    const dashes = ["", "7 3", "2 3", "9 3 2 3", "4 3", "1 3", "12 4"];
-    const lines = curves.map((c, i) => { const pts = c.points || [];
+    // ZONE-62: a skill's line keeps its COLOUR wherever it lands, because the index is the skill's own place in
+    // UP_SKILLS and not its position in whatever came back -- otherwise unticking one skill silently recolours
+    // the rest, and two runs of the same party cannot be read side by side. The player is the DASH, so a party
+    // of five shows five patterns of one colour per skill rather than repeating a palette every seven curves.
+    //
+    // The seven were chosen by measuring rather than by eye: the previous ramp had `neutral-100` and
+    // `accent-100` at a CIE76 distance of 2.7 in the cyan theme and 1.5 in the violet one -- the same colour at
+    // a 2 px stroke. These are the most separable seven of the tokens that clear 3:1 on the dark surface in
+    // BOTH themes; the closest pair is 11.2 (cyan) and 12.4 (violet).
+    // Assigned per skill rather than by ramp order, because which skills share a chart is not random: a player
+    // trains ONE of magic/ranged/melee, so those three almost never appear together and can take the neutrals,
+    // while attack, defense, stamina and intelligence show up alongside whichever style it is and take the
+    // coloured steps. Ordered by ramp position instead, a mage's three curves all came out grey.
+    const HUE = {
+      magic: "var(--color-neutral-100)", ranged: "var(--color-neutral-300)", melee: "var(--color-neutral-400)",
+      stamina: "var(--color-accent-300)", intelligence: "var(--color-accent-2-400)",
+      attack: "var(--color-accent-500)", defense: "var(--color-accent-2-600)",
+    };
+    const dashes = ["", "7 3", "2 3", "9 3 2 3", "4 3"];
+    const partyOrder = (s.party || []).map(pl => pl?.record?.name || "");
+    const lines = curves.map(c => { const pts = c.points || [];
       const last = pts[pts.length - 1] || null;
       return {
-      dash: dashes[i % dashes.length],
+      dash: dashes[Math.max(0, partyOrder.indexOf(c.player)) % dashes.length],
       endX: last ? (x(last.days) + 5).toFixed(1) : "0", endY: last ? (y(valOf(c, last)) + 3).toFixed(1) : "0",
       short: c.skill,
       name: `${c.skill}${(s.party || []).length > 1 ? ` \u00b7 ${c.player}` : ""}${c.charm?.charm ? ` (${c.charm.charm}${c.charm.charmLevel ? ` +${c.charm.charmLevel}` : ""})` : ""}`,
-      color: hues[i % hues.length],
+      color: HUE[c.skill] || "var(--color-neutral-100)",
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
         tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 +${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the projection" : ""}` })),
@@ -1232,24 +1267,31 @@ class Component extends DCLogic {
       perCaret: s.skillPerOpen ? "\u25be" : "\u25b8",
       perCount: (() => { const per = this.modeVal("skills", "charms") || {}, who = this.upVal("player");
         const owned = this.ownedCharms(who);
-        const set = Component.UP_SKILLS.filter(k => per[k]?.charm).length;
-        const own = Component.UP_SKILLS.filter(k => !per[k]?.charm && owned[k]).length;
-        return [set ? `${set} set` : "", own ? `${own} from ${who}'s bag` : "",
+        const on = this.skillsOn();
+        const set = on.filter(k => per[k]?.charm).length;
+        const own = on.filter(k => !per[k]?.charm && owned[k]).length;
+        // How many skills will actually be measured leads, because that is what the run costs.
+        const which = on.length === Component.UP_SKILLS.length ? "all 7 skills" : `${on.length} of ${Component.UP_SKILLS.length} skills`;
+        return [which, set ? `${set} set` : "", own ? `${own} from ${who}'s bag` : "",
           !set && !own ? (who ? "held, or Grandmaster +7" : "one player at a time") : ""]
           .filter(Boolean).join(" \u00b7 "); })(),
-      perSkills: (() => { const owned = this.ownedCharms(this.upVal("player"));
+      perSkills: (() => { const owned = this.ownedCharms(this.upVal("player")), on = new Set(this.skillsOn());
         return Component.UP_SKILLS.map(k => { const per = (this.modeVal("skills", "charms") || {})[k] || {}, o = owned[k];
         const setPer = patch => this.setMode("skills", { charms: { ...(this.modeVal("skills", "charms") || {}), [k]: { ...per, ...patch } } });
-        const eff = o || Component.CHARM_FALLBACK;
+        const eff = o || Component.CHARM_FALLBACK, want = on.has(k);
         return { key: k, label: k[0].toUpperCase() + k.slice(1),
+          // The charm switch IS the skill switch: off means this curve is not measured at all.
+          on: want, toggle: () => this.toggleSkill(k), rowStyle: want ? "opacity:1" : "opacity:0.4",
           charm: per.charm || eff.charm, setCharm: e => setPer({ charm: e.target.value }),
           level: String(per.charm ? (per.charmLevel ?? 0) : eff.charmLevel),
           levelDisabled: false,
           owned: !per.charm && o ? "owned" : "",
-          title: o ? `held: ${o.charm} charm +${o.charmLevel}` : "Not in the bag — costed on a Grandmaster charm +7",
+          title: want ? (o ? `held: ${o.charm} charm +${o.charmLevel}` : "Not in the bag — costed on a Grandmaster charm +7")
+            : "Not measured — tick it to put this skill back in the search",
           setLevel: e => setPer({ charm: per.charm || eff.charm, charmLevel: Math.max(0, Math.floor(Number(e.target.value) || 0)) }) }; }); })(),
       perOpts: [{ value: "", label: "the charm they hold, or Grandmaster +7" },
         ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: `${t[0].toUpperCase()}${t.slice(1)} charm` }))],
+      noneOn: this.skillsOn().length === 0,
       running: !!s.skillRunning, error: s.skillError || "", noClears: this.noClearsNote(s, s.skillHead, "skills"),
       idle: !s.skillRunning && !rows.length && !done && !s.skillError,
       run: () => this.runMode("skills"),
@@ -1472,6 +1514,9 @@ class Component extends DCLogic {
       observatory: String(enh.observatory), setObservatory: e => this.setEnh({ observatory: Number(e.target.value) || 0 }),
       running: !!s.upRunning, idleButton: !s.upRunning,
       runDisabled: !ready || !has,
+      // ZONE-62: the skills run additionally needs at least one skill ticked. The other two modes are unaffected,
+      // which is why this is its own flag rather than a term in the shared one.
+      skillsRunDisabled: !ready || !has || this.skillsOn().length === 0,
       runNote: !has ? "" : !(s.party || []).length ? "" : !v("zone") ? "pick a zone first"
         : `${names.length} player${names.length === 1 ? "" : "s"} \u00b7 ${zone ? `${zone.name} T${tier}` : ""} \u00b7 up to ${budget} min`,
       run: () => this.findUpgrades(), stop: () => this.stopUpgrades(),

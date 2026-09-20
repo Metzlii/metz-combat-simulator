@@ -1,20 +1,20 @@
 {
- "builtAt": "2026-09-20T09:53:24.730Z",
- "commit": "3c76801",
+ "builtAt": "2026-09-20T10:37:36.168Z",
+ "commit": "d932bee",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
    "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
    "init_client_data.json"
   ],
-  "bytes": 6397437,
-  "gzip": 625264,
+  "bytes": 6397454,
+  "gzip": 625266,
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
   "files": 37,
-  "bytes": 16065039,
-  "gzip": 2582304
+  "bytes": 16068793,
+  "gzip": 2583630
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3762
   },
   "index.html": {
-   "bytes": 136207,
-   "gzip": 32974
+   "bytes": 139944,
+   "gzip": 34298
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -54,8 +54,8 @@
    "gzip": 1464
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
-   "bytes": 3646360,
-   "gzip": 420981
+   "bytes": 3646377,
+   "gzip": 420983
   },
   "server/abilities.mjs": {
    "bytes": 6802,
