@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="6ef594a9fbca"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="4cce1058c5d3"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=6ef594a9fbca"></script>
+<script src="./support.js?v=4cce1058c5d3"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=6ef594a9fbca">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4cce1058c5d3">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=6ef594a9fbca">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=6ef594a9fbca"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=4cce1058c5d3">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4cce1058c5d3"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -30,6 +30,25 @@
     .about-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; text-wrap: pretty; }
     input[type=range] { accent-color: var(--color-accent); }
     input[type=checkbox] { accent-color: var(--color-accent); width: 15px; height: 15px; margin: 0; }
+    /* Chart labels and points live in HTML OVER the svg, not inside it: the runtime wraps every {{ }} in a
+       <span>, and a span inside an svg <text> renders nothing at all -- which is why the curve end labels were
+       never visible. Positions are percentages of the chart box, so they hold at every width, and the labels
+       keep their own px size instead of shrinking with the drawing. */
+    .ch-wrap { position: relative; max-width: 620px; }
+    .ch-lab { position: absolute; font-size: 10px; font-variant-numeric: tabular-nums; pointer-events: none; }
+    .ch-pt { position: absolute; width: 22px; height: 22px; margin: -11px 0 0 -11px; border-radius: 50%; }
+    .ch-pt .ch-ring { position: absolute; inset: 5px; border-radius: 50%; border: 2px solid currentColor; opacity: 0; transition: opacity .08s ease; }
+    .ch-pt .ch-tip { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); white-space: nowrap;
+      background: var(--color-section); border: 1px solid currentColor; border-radius: 3px; padding: 3px 7px;
+      font-size: 11px; font-variant-numeric: tabular-nums; color: var(--color-text);
+      opacity: 0; pointer-events: none; transition: opacity .08s ease; }
+    .ch-pt.flip .ch-tip { left: auto; right: 15px; }
+    /* :focus as well as :hover, and not focus-visible -- a phone has no pointer at all, so a tap is the only
+       way to read a point there, and a click is the obvious thing to try when a hover has already shown one. */
+    .ch-pt { cursor: pointer; }
+    .ch-pt:hover, .ch-pt:focus { z-index: 5; outline: none; }
+    .ch-pt:hover .ch-tip, .ch-pt:focus .ch-tip, .ch-pt:hover .ch-ring, .ch-pt:focus .ch-ring { opacity: 1; }
+    @media (prefers-reduced-motion: reduce) { .ch-pt .ch-tip, .ch-pt .ch-ring { transition: none; } }
     @keyframes gtsSpin { to { transform: rotate(360deg); } }
   </style>
 </helmet>
@@ -598,19 +617,36 @@
                     </div>
                     <span class="text-muted" style="font-size:12.5px">0 to {{ up.skills.axisX }} · up to {{ up.skills.axisY }}</span>
                   </div>
-                  <svg viewBox="0 0 560 210" style="width:100%;height:auto;max-width:620px" role="img" aria-label="Efficiency gained against days of levelling, one line per skill">
-                    <line x1="34" y1="188" x2="548" y2="188" stroke="var(--color-divider)" stroke-width="1"></line>
-                    <line x1="34" y1="10" x2="34" y2="188" stroke="var(--color-divider)" stroke-width="1"></line>
-                    <sc-for list="{{ up.skills.lines }}" as="ln" hint-placeholder-count="4">
-                      <polyline points="{{ ln.points }}" fill="none" stroke="{{ ln.color }}" stroke-dasharray="{{ ln.dash }}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
-                    </sc-for>
-                    <sc-for list="{{ up.skills.lines }}" as="ln" hint-placeholder-count="4">
-                      <sc-for list="{{ ln.dots }}" as="d" hint-placeholder-count="6">
-                        <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="3" fill="{{ ln.color }}"><title>{{ d.tip }}</title></circle>
+                  <div class="ch-wrap">
+                    <svg viewBox="0 0 560 196" style="width:100%;height:auto;display:block" role="img" aria-label="{{ up.skills.chartLabel }}">
+                      <sc-for list="{{ up.skills.yTicks }}" as="t" hint-placeholder-count="5">
+                        <line x1="34" y1="{{ t.y }}" x2="474" y2="{{ t.y }}" stroke="var(--color-divider)" stroke-width="1" opacity="0.3"></line>
                       </sc-for>
-                      <text x="{{ ln.endX }}" y="{{ ln.endY }}" fill="{{ ln.color }}" style="font-size:10px">{{ ln.short }}</text>
+                      <line x1="34" y1="188" x2="548" y2="188" stroke="var(--color-divider)" stroke-width="1"></line>
+                      <line x1="34" y1="10" x2="34" y2="188" stroke="var(--color-divider)" stroke-width="1"></line>
+                      <sc-for list="{{ up.skills.xTicks }}" as="t" hint-placeholder-count="5">
+                        <line x1="{{ t.x }}" y1="188" x2="{{ t.x }}" y2="192" stroke="var(--color-divider)" stroke-width="1"></line>
+                      </sc-for>
+                      <sc-for list="{{ up.skills.lines }}" as="ln" hint-placeholder-count="4">
+                        <polyline points="{{ ln.points }}" fill="none" stroke="{{ ln.color }}" stroke-dasharray="{{ ln.dash }}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+                      </sc-for>
+                      <sc-for list="{{ up.skills.dots }}" as="d" hint-placeholder-count="24">
+                        <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="3" fill="{{ d.color }}"></circle>
+                      </sc-for>
+                    </svg>
+                    <sc-for list="{{ up.skills.yTicks }}" as="t" hint-placeholder-count="5">
+                      <span class="ch-lab text-muted" style="left:0;width:5.2%;text-align:right;top:{{ t.topPct }}%;transform:translateY(-50%)">{{ t.label }}</span>
                     </sc-for>
-                  </svg>
+                    <sc-for list="{{ up.skills.xTicks }}" as="t" hint-placeholder-count="5">
+                      <span class="ch-lab text-muted" style="left:{{ t.leftPct }}%;top:100%;transform:translate(-50%,3px)">{{ t.label }}</span>
+                    </sc-for>
+                    <sc-for list="{{ up.skills.dots }}" as="d" hint-placeholder-count="24">
+                      <div class="ch-pt {{ d.flip }}" tabindex="0" style="left:{{ d.leftPct }}%;top:{{ d.topPct }}%;color:{{ d.color }}">
+                        <span class="ch-ring"></span><span class="ch-tip">{{ d.tip }}</span>
+                      </div>
+                    </sc-for>
+                  </div>
+                  <div class="text-muted" style="text-align:center;max-width:620px;font-size:10.5px;margin-top:18px">days of levelling</div>
                   <div style="display:flex;gap:10px;flex-wrap:wrap">
                     <sc-for list="{{ up.skills.lines }}" as="ln" hint-placeholder-count="4">
                       <span style="display:flex;gap:5px;align-items:center;font-size:12.5px">
@@ -771,7 +807,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=6ef594a9fbca");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=4cce1058c5d3");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1230,18 +1266,36 @@ class Component extends DCLogic {
     };
     const dashes = ["", "7 3", "2 3", "9 3 2 3", "4 3"];
     const partyOrder = (s.party || []).map(pl => pl?.record?.name || "");
-    const lines = curves.map(c => { const pts = c.points || [];
-      const last = pts[pts.length - 1] || null;
-      return {
+    const lines = curves.map(c => ({
       dash: dashes[Math.max(0, partyOrder.indexOf(c.player)) % dashes.length],
-      endX: last ? (x(last.days) + 5).toFixed(1) : "0", endY: last ? (y(valOf(c, last)) + 3).toFixed(1) : "0",
-      short: c.skill,
       name: `${c.skill}${(s.party || []).length > 1 ? ` \u00b7 ${c.player}` : ""}${c.charm?.charm ? ` (${c.charm.charm}${c.charm.charmLevel ? ` +${c.charm.charmLevel}` : ""})` : ""}`,
       color: HUE[c.skill] || "var(--color-neutral-100)",
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
         tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 +${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the projection" : ""}` })),
-    }; });
+    }));
+    // Ticks at the quarters of each axis. The header states the exact extents, so these are rounded: they are
+    // for reading a point off the chart, and a label wider than the 34px gutter would cost more than it gives.
+    const FRACS = [0, 0.25, 0.5, 0.75, 1];
+    const fmtDays = v => horizon >= 8 ? String(Math.round(v)) : v.toFixed(1);
+    const fmtVal = v => metric === "xp"
+      ? (v >= 1000 ? `${(v / 1000).toFixed(v >= 10000 ? 0 : 1)}k` : String(Math.round(v)))
+      : (v >= 1 ? v.toFixed(2) : v.toFixed(3));
+    // The svg is 560x206 of viewBox and scales with the column, so a label placed at a PERCENTAGE of the box
+    // lands on its tick at every width while keeping its own pixel size -- which is the point of putting the
+    // text in HTML over the drawing rather than inside it.
+    const PX = v => (Number(v) / 560 * 100).toFixed(2), PY = v => (Number(v) / 196 * 100).toFixed(2);
+    const xTicks = FRACS.map(f => ({ x: x(f * horizon).toFixed(1), leftPct: PX(x(f * horizon)), label: fmtDays(f * horizon) }));
+    const yTicks = FRACS.map(f => ({ y: y(f * maxY).toFixed(1), topPct: PY(y(f * maxY)), label: fmtVal(f * maxY) }));
+    // Every point of every line in one flat list, so the readouts draw after all the lines instead of being
+    // painted over by whichever curve came next. The box is sized from the text because SVG will not do it:
+    // 9.5px tabular digits measure just under 4.9px a character, and the border is the curve's own colour so a
+    // reading is attributable when several lines cross. It flips to the left of the point near the right edge.
+    // Every point of every line in one flat list. The readout is an HTML box, so it sizes itself to its text
+    // instead of being guessed at in viewBox units, and it flips to the left of the point on the right half of
+    // the chart, where a box opening rightwards would run off the edge.
+    const dots = lines.flatMap(ln => ln.dots.map(d => ({ ...d, color: ln.color,
+      leftPct: PX(d.cx), topPct: PY(d.cy), flip: Number(d.cx) > 300 ? "flip" : "" })));
     const ranked = (done?.ranked || rows).slice().sort((a, b) => (Number(b.perHour) || 0) - (Number(a.perHour) || 0)).map(r => ({
       skill: `${r.skill} +${r.levels ?? 1}`,
       who: (s.party || []).length > 1 ? (r.player || "") : "",
@@ -1304,7 +1358,9 @@ class Component extends DCLogic {
       run: () => this.runMode("skills"),
       stage: s.skillHead?.stage || "measuring how fast each skill levels\u2026",
       lines, hasCurves: lines.length > 0,
-      axisY: `${metric === "xp" ? nf(maxY) : maxY.toFixed(1)} ${unit}`, axisX: `${horizon} days`,
+      axisY: `${metric === "xp" ? nf(maxY) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`, axisX: `${horizon} days`,
+      xTicks, yTicks, dots, unit,
+      chartLabel: `${unit} gained against days of levelling, one line per skill, 0 to ${horizon} days by 0 to ${fmtVal(maxY)} ${unit}`,
       metricEph: metric === "eph", metricXp: metric === "xp",
       ephStyle: metric === "eph" ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
       xpStyle: metric === "xp" ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
