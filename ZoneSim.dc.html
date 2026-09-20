@@ -1054,7 +1054,7 @@ class Component extends DCLogic {
     if (!(s.zoneParty || []).length && !(s.zoneRunLog || []).length) return;
     // Older runs keep their headline and drop their candidates: the list still reads, and the storage ceiling
     // is a few megabytes.
-    const log = (s.zoneRunLog || []).map((r, i) => i < Component.ZONE_SESSION_RUNS ? r
+    const log = (s.zoneRunLog || []).map((r, i) => i < Component.ZONE_SESSION_RUNS ? this.zoneSlimRun(r)
       : { ...r, candidates: [], derived: null, players: null, trimmed: true });
     const snap = { at: Date.now(), party: s.zoneParty || [], base: s.zoneBase || null,
       active: s.zoneActive || null, format: s.zoneFormat || null,
@@ -1856,9 +1856,23 @@ class Component extends DCLogic {
     try { const raw = localStorage.getItem(Component.ZONE_SAVE_KEY);
       if (raw) this.setState({ zoneSaves: JSON.parse(raw) || [] }); } catch {}
   }
+  // ZONE-67: what a STORED run does not need. `encounterSeconds` and `encounterCasts` are capture-comparison
+  // diagnostics kept for reading the kernel against recorded play -- nothing on this page touches them -- and on
+  // an open-zone candidate they are 36 KB of 57. A live result keeps them; only the copy going to storage is
+  // trimmed, so a saved run stays a record of what the page can actually show.
+  static ZONE_STORED_DROP = ["encounterSeconds", "encounterCasts"];
+  zoneSlimRun(run) {
+    if (!run || !Array.isArray(run.candidates)) return run;
+    return { ...run, candidates: run.candidates.map(c => {
+      if (!c || typeof c !== "object") return c;
+      const out = { ...c };
+      for (const k of Component.ZONE_STORED_DROP) delete out[k];
+      return out;
+    }) };
+  }
   writeZoneSaves(list) {
     this.setState({ zoneSaves: list });
-    try { localStorage.setItem(Component.ZONE_SAVE_KEY, JSON.stringify(list)); } catch {}
+    try { localStorage.setItem(Component.ZONE_SAVE_KEY, JSON.stringify(list.map(x => this.zoneSlimRun(x)))); } catch {}
   }
   saveZoneRun() {
     const s = this.state, R = s.zoneResult;

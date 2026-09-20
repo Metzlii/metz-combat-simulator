@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T11:38:36.199Z",
- "commit": "f996119",
+ "builtAt": "2026-09-20T11:45:25.558Z",
+ "commit": "23c32f9",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16076026,
-  "gzip": 2585983
+  "bytes": 16076861,
+  "gzip": 2586304
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -70,8 +70,8 @@
    "gzip": 3721
   },
   "server/lootValue.mjs": {
-   "bytes": 7497,
-   "gzip": 3079
+   "bytes": 7488,
+   "gzip": 3068
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -154,8 +154,8 @@
    "gzip": 2013
   },
   "ZoneSim.dc.html": {
-   "bytes": 280669,
-   "gzip": 70902
+   "bytes": 281513,
+   "gzip": 71234
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
