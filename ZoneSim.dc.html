@@ -1054,7 +1054,7 @@ class Component extends DCLogic {
       catch { try { put({ ...snap, runLog: [] }); } catch {} } }
   }
   componentDidUpdate() { this.queueZoneSession(); }
-  componentWillUnmount() { clearTimeout(this._sessionT); this.writeZoneSession(); }
+  componentWillUnmount() { clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); this.writeZoneSession(); }
   // The run settings — hours, seed, server lag, wave delay, the pricing block and whether Advanced is open —
   // describe how this visitor measures, not what they are measuring, so they outlive a refresh. Only these keys
   // are read back: an unknown key in storage from an older build is ignored rather than restored into state.
@@ -1240,6 +1240,23 @@ class Component extends DCLogic {
       if (has ? act.length <= 1 : act.length >= Component.ZONE_MAX_PARTY) return null;
       return { zoneActive: has ? act.filter(n => n !== name) : [...act, name],
         zoneStale: !!s.zoneResult, zoneDerived: null }; });
+  }
+  // ZONE-65: a pasted export imports itself (operator, 2026-09-20). The paste IS the intent -- nobody pastes a
+  // character export and then decides against importing it -- so the button was a second click over no decision.
+  // Three things keep it from firing when it should not: the text has to PARSE as one or more exports, which a
+  // half-arrived paste does not; the same text never imports twice, so nothing loops and re-pasting what is
+  // already loaded is free; and a short delay lets a multi-line paste land whole before it is read. The button
+  // stays for the case the gate refuses and the visitor wants the error said out loud.
+  queueZoneAutoImport() {
+    clearTimeout(this._zoneAutoT);
+    this._zoneAutoT = setTimeout(() => {
+      const text = String(this.state.zoneText || "").trim();
+      if (!text || text === this._zoneAutoText) return;
+      if (this.state.zoneImporting || !this.client) return;
+      if (this.zoneParsePaste(text).count === 0) return;   // not an export yet, so say nothing
+      this._zoneAutoText = text;
+      this.importZoneParty();
+    }, 350);
   }
   async importZoneParty() {
     this.setState({ zoneImporting: true, zoneImportError: null });
@@ -3108,13 +3125,13 @@ class Component extends DCLogic {
 
     return {
       intro: "One to five characters, pasted from their combat-simulator exports, run through every zone and tier you queue. Rates come from a full combat simulation of the imported party; XP per hour is within a few percent of in-game tracking for a five-player dungeon party.",
-      text: s.zoneText, setText: e => set({ zoneText: e.target.value, zoneImportError: null }),
+      text: s.zoneText, setText: e => { set({ zoneText: e.target.value, zoneImportError: null }); this.queueZoneAutoImport(); },
       importDisabled: !s.zoneText.trim() || s.zoneImporting || !this.client, importLabel: s.zoneImporting ? "Reading…" : "Import",
       importNote: party.length
         ? `${party.length} character${party.length === 1 ? "" : "s"}${party.length > seated.length ? ` · ${seated.length} in the party` : ""}${s.zoneFormat ? ` · ${s.zoneFormat} export` : ""}${this._zoneSplit ? ` · ${this._zoneSplit}` : ""}`
         : "One export, or a whole team — an array, a players list, an object keyed by name or by slot number, or one export per line.",
       importError: s.zoneImportError || "", hasImportError: !!s.zoneImportError,
-      doImport: () => this.importZoneParty(),
+      doImport: () => { this._zoneAutoText = String(s.zoneText || "").trim(); this.importZoneParty(); },
       clearParty: () => { try { localStorage.removeItem(Component.ZONE_SESSION_KEY); } catch {}
         set({ zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
           zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneRestoredAt: null }); },
