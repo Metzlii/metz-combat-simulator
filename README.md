@@ -29,6 +29,7 @@ ran: a seed makes a run reproducible.
 - The combat kernel is a Rust port of the community MWI Combat Simulator (AmVoidGuy, shykai, azhu949), by gragatrim,
   used with permission, and further optimized by Metzli: 4–9× faster per simulation, with identical results.
 - Weylan helped measure the wave transition delay between dungeon waves.
+- Star wrote the core-count probe, so a browser that hides how many cores you have no longer costs you lanes.
 - Kim, Mango and Zhiwen provided test data.
 - Enhancement costs follow [Enhancelator](https://github.com/doh-nuts/Enhancelator) by doh-nuts.
 

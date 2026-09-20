@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-19T18:41:00.768Z",
- "commit": "e0eec64",
+ "builtAt": "2026-09-20T00:11:33.096Z",
+ "commit": "da5a7bc",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -12,9 +12,9 @@
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
-  "files": 35,
-  "bytes": 16020841,
-  "gzip": 2565729
+  "files": 37,
+  "bytes": 16023723,
+  "gzip": 2567130
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3762
   },
   "index.html": {
-   "bytes": 135845,
-   "gzip": 32827
+   "bytes": 135953,
+   "gzip": 32871
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -134,16 +134,24 @@
    "gzip": 2595
   },
   "zone-web/zoneClient.js": {
-   "bytes": 4719,
-   "gzip": 1911
+   "bytes": 4759,
+   "gzip": 1929
+  },
+  "zone-web/zoneProbe.js": {
+   "bytes": 1305,
+   "gzip": 730
+  },
+  "zone-web/zoneProbeWorker.js": {
+   "bytes": 147,
+   "gzip": 132
   },
   "zone-web/zoneWorker.js": {
    "bytes": 258,
    "gzip": 201
   },
   "zoneApi.js": {
-   "bytes": 3684,
-   "gzip": 1536
+   "bytes": 4966,
+   "gzip": 2013
   },
   "ZoneSim.dc.html": {
    "bytes": 264067,

@@ -14,8 +14,8 @@ const savedWorkers = () => { try { const v = Number(localStorage.getItem(WORKERS
 
 export async function connectZoneOnly() {
   const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js");
-  const cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
-  const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)) });
+  let cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
+  const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
   let lanes = null;
   try { lanes = Number((await zone.zoneLimits())?.concurrency) || null; } catch (e) { console.warn("zone limits unavailable", e); }
@@ -51,5 +51,26 @@ export async function connectZoneOnly() {
     zoneSkillsStream: (body, handlers) => zone.zoneSkillsStream(body, handlers),
     close: () => zone.close(),
   };
+
+  // Firefox's fingerprinting protection under-reports navigator.hardwareConcurrency (4 on a 16-core machine,
+  // bug 1630089), and Chrome can too; no API gives a page its machine's real core count. zoneProbe measures it
+  // (from Star, 2026-09-19): how many lanes run the same CPU burn in parallel without slowing down, floored at
+  // the browser's own report, so it can only ever RAISE the budget. It runs in the background -- the page is
+  // usable immediately on the reported figure -- and when it finishes the ceiling, the default and the pool
+  // follow, with the header's lane count updated through the same event the Workers setting uses.
+  (async () => {
+    try {
+      const { probeLanes } = await import("./zone-web/zoneProbe.js");
+      const measured = Math.max(1, await probeLanes());
+      if (measured <= cores) return;
+      cores = measured;
+      zone.setMaxWorkers(cores);
+      client.maxWorkers = cores;
+      client.defaultWorkers = Math.max(1, cores - 1);
+      if (savedWorkers() == null) client.setZoneWorkers(null);   // no saved choice: take the wider default
+      else globalThis.dispatchEvent?.(new CustomEvent("zone-lanes", { detail: client.workers }));
+    } catch (e) { console.warn("core probe unavailable", e); }
+  })();
+
   return client;
 }
