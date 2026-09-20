@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=51d79221d939"></script>
+<script src="./support.js?v=501e9ad053b4"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=51d79221d939">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=501e9ad053b4">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=51d79221d939">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=51d79221d939"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=501e9ad053b4">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=501e9ad053b4"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -508,24 +508,15 @@
           <input class="input" type="number" min="1" step="1" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.seed }}" onInput="{{ zone.setSeed }}" disabled="{{ zone.seedDisabled }}">
           <div class="text-muted" style="font-size:12.5px;margin-top:4px">{{ zone.seedNote }}</div>
         </div>
-        <div class="field" style="margin:0"><label>Server lag</label>
-          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-            <input class="input" type="number" min="0" max="{{ zone.lagMax }}" step="0.5" placeholder="ms" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.lagMs }}" onInput="{{ zone.setLagMs }}">
-            <sc-if value="{{ zone.lagHasSuggest }}" hint-placeholder-val="{{ false }}">
-              <button class="btn btn-ghost" style="padding:1px 8px;font-size:12.5px;flex:none" onClick="{{ zone.useLagSuggest }}">{{ zone.lagSuggestLabel }}</button>
-            </sc-if>
-            <sc-if value="{{ zone.lagIsOff }}" hint-placeholder-val="{{ false }}">
-              <span class="text-muted" style="font-size:12.5px">off</span>
-            </sc-if>
-            <sc-if value="{{ zone.lagIsOn }}" hint-placeholder-val="{{ false }}">
-              <button class="btn btn-ghost" style="padding:1px 8px;font-size:12.5px;flex:none" onClick="{{ zone.lagOff }}">Off</button>
-            </sc-if>
+        <sc-if value="{{ zone.hasWorkers }}" hint-placeholder-val="{{ false }}">
+          <div class="field" style="margin:0"><label>Workers</label>
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+              <input class="input" id="zone-workers" type="number" min="1" max="{{ zone.workersMax }}" step="1" placeholder="{{ zone.workersDefault }}" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.workersValue }}" onChange="{{ zone.setWorkers }}">
+              <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.workersNow }}</span>
+            </div>
+            <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.workersNote }}</div>
           </div>
-          <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.lagNote }}</div>
-          <sc-if value="{{ zone.lagBad }}" hint-placeholder-val="{{ false }}">
-            <div style="font-size:12.5px;margin-top:3px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.lagError }}</div>
-          </sc-if>
-        </div>
+        </sc-if>
         <div class="field" style="margin:0"><label>Wave transition delay</label>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <input class="input" type="number" min="{{ zone.waveMin }}" max="{{ zone.waveMax }}" step="1" placeholder="{{ zone.wavePlaceholder }}" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.waveMs }}" onInput="{{ zone.setWaveMs }}">
@@ -541,15 +532,6 @@
             <div style="font-size:12.5px;margin-top:3px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.waveError }}</div>
           </sc-if>
         </div>
-        <sc-if value="{{ zone.hasWorkers }}" hint-placeholder-val="{{ false }}">
-          <div class="field" style="margin:0"><label>Workers</label>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <input class="input" id="zone-workers" type="number" min="1" max="{{ zone.workersMax }}" step="1" placeholder="{{ zone.workersDefault }}" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.workersValue }}" onChange="{{ zone.setWorkers }}">
-              <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.workersNow }}</span>
-            </div>
-            <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.workersNote }}</div>
-          </div>
-        </sc-if>
       </sc-if>
     </div>
 
@@ -1004,7 +986,7 @@ class Component extends DCLogic {
     zoneShowSingles: false,
     // ZONE-46: an optional fitted per-action delay that models server load. Empty (not 0) is "off" so the
     // field can be blank; it is only sent when above 0, and the suggested value is read from /zone-sim/limits.
-    zoneHours: 1000, zoneSeed: 1, zoneLagMs: "", zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
+    zoneHours: 1000, zoneSeed: 1, zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
     // Both community buffs default to level 20 — 0.2 + 0.005 × 19 = 0.295 each, which is what the live
     // websocket capture shows for drop quantity too. Local storage overrides these once the operator edits them.
     zoneBuffs: { communityExperience: 0.295, communityDropQuantity: 0.295, personalWisdom: false, mooPass: true, _v: 2 },
@@ -1094,7 +1076,7 @@ class Component extends DCLogic {
   // describe how this visitor measures, not what they are measuring, so they outlive a refresh. Only these keys
   // are read back: an unknown key in storage from an older build is ignored rather than restored into state.
   static ZONE_PREFS_KEY = "gts.zone.prefs.v1";
-  static ZONE_PREFS_FIELDS = ["zoneHours", "zoneSeed", "zoneLagMs", "zoneWaveMs", "zoneAdv",
+  static ZONE_PREFS_FIELDS = ["zoneHours", "zoneSeed", "zoneWaveMs", "zoneAdv",
     "zonePricing", "zoneConcOverride", "zonePriceOpen"];
   loadZonePrefs() {
     try { const p = JSON.parse(localStorage.getItem(Component.ZONE_PREFS_KEY) || "null");
@@ -1125,11 +1107,10 @@ class Component extends DCLogic {
       // in the game, not an edit to the sim. Deferred a microtask so the parent's setState is not a render.
       if (this.props.onParty) {
         const seated = this.zoneActiveParty(s), buffs = s.zoneBuffs || null;
-        // Lag and the wave gap as a run would send them (empty or 0 sends nothing), so an optimizer search measures
-        // the party the way Setup's runs do.
-        const lagMs = Number(s.zoneLagMs), waveRaw = String(s.zoneWaveMs ?? "").trim(), waveMs = Number(waveRaw);
-        const measure = { ...(Number.isFinite(lagMs) && lagMs > 0 ? { serverLagMs: lagMs } : {}),
-          ...(waveRaw !== "" && Number.isFinite(waveMs) ? { waveTransitionDelayMs: waveMs } : {}) };
+        // The wave gap as a run would send it (empty sends nothing), so an optimizer search measures the party
+        // the way Setup's runs do. ZONE-77: server lag is retired and no longer sent by anything.
+        const waveRaw = String(s.zoneWaveMs ?? "").trim(), waveMs = Number(waveRaw);
+        const measure = { ...(waveRaw !== "" && Number.isFinite(waveMs) ? { waveTransitionDelayMs: waveMs } : {}) };
         const sig = JSON.stringify([seated, buffs, measure]);
         // The account buffs travel with the party: the upgrade search prepares its runs the way zoneRun does, so
         // it measures the party as Setup runs it only if it is sent the same buffs.
@@ -1383,15 +1364,11 @@ class Component extends DCLogic {
     // the difference would be mostly variance. The pin is shown next to Run, and can be dropped there.
     const bl = s.zoneBaseline;
     if (bl && bl.board === this.zoneBoardSig(all)) { body.seed = bl.seed; body.hours = bl.hours;
-      // Lag and the wave delay scale every rate, so they are pinned with the seed and the hours: a pinned run
-      // that changed one of them would show a difference that is not the loadout's.
-      if (bl.lag > 0) body.serverLagMs = bl.lag; else delete body.serverLagMs;
+      // The wave delay scales every rate, so it is pinned with the seed and the hours: a pinned run that
+      // changed it would show a difference that is not the loadout's.
       if (bl.wave > 0) body.waveTransitionDelayMs = bl.wave; else delete body.waveTransitionDelayMs; }
-    // ZONE-46: omitted means off. An empty field or 0 sends nothing, so the pure combat model is the default.
-    const lagMs = Number(s.zoneLagMs);
-    if (Number.isFinite(lagMs) && lagMs > 0) body.serverLagMs = lagMs;
     // ZONE-50: the WHOLE gap in ms. Empty is not "no delay" — it leaves the kernel's measured table alone, so
-    // nothing is sent. Independent of serverLagMs: time between waves, not time inside a fight.
+    // nothing is sent. Time between waves, not time inside a fight.
     const waveRaw = String(s.zoneWaveMs ?? "").trim(), waveMs = Number(waveRaw);
     if (waveRaw !== "" && Number.isFinite(waveMs)) body.waveTransitionDelayMs = waveMs;
     if (!this.client.zoneRunStream) {   // a server older than ZONE-P7: one plain request, no rows until the end
@@ -1952,7 +1929,6 @@ class Component extends DCLogic {
       zoneCands: cands,
       zoneHours: this.zoneRunHours(src) || s.zoneHours,
       zoneSeed: src.seed ?? s.zoneSeed,
-      zoneLagMs: Number(src.serverLagMs) > 0 ? String(src.serverLagMs) : "",
       zoneWaveMs: Number(src.waveTransitionDelayMs) > 0 ? String(src.waveTransitionDelayMs) : "",
       zonePricing: clone(src.pricing) || s.zonePricing,
       zoneResult: null, zoneStale: false, zoneDerived: null,
@@ -2990,13 +2966,6 @@ class Component extends DCLogic {
     const LIM = { ...Component.ZONE_LIMIT_DEFAULTS, ...(s.zoneLimits || {}) };
     const MAX_CANDIDATES = Math.max(1, LIM.maxCandidates);
     // ZONE-46: served bounds, with an empty field reading as off rather than 0.
-    const lagLim = { ...Component.ZONE_LIMIT_DEFAULTS.serverLag, ...(LIM.serverLag || {}) };
-    const lagRaw = String(s.zoneLagMs ?? "").trim(), lagVal = lagRaw === "" ? 0 : Number(lagRaw);
-    const lagSuggestRaw = Number(lagLim.suggestedMs);
-    const lagSuggest = Number.isFinite(lagSuggestRaw) && lagSuggestRaw > 0 ? lagSuggestRaw : 0;
-    const lagNoteTxt = String(lagLim.note || "").trim();
-    const lagNoteSent = lagNoteTxt ? (/[.!?]$/.test(lagNoteTxt) ? lagNoteTxt : `${lagNoteTxt}.`) : "";
-    const lagBad = lagRaw !== "" && (!Number.isFinite(lagVal) || lagVal < 0 || lagVal > (lagLim.maxMs ?? 1000));
     // ZONE-50: served bounds and helper line for the wave transition delay. Empty reads as the measured table.
     const wLim = { ...Component.ZONE_LIMIT_DEFAULTS.waveTransitionDelay, ...(LIM.waveTransitionDelay || {}) };
     const wMin = Number.isFinite(Number(wLim.minMs)) ? Number(wLim.minMs) : 1000;
@@ -3212,7 +3181,7 @@ class Component extends DCLogic {
       : " · pace not measured here yet — the built-in figure until your first run";
     // Past the work bound the queue simply goes out as several requests; nothing to block.
     const reqCount = Math.max(1, Math.ceil(cands.length / chunkRows));
-    const block = !party.length ? "Import a character first" : !cands.length ? "Queue a zone and tier" : lagBad ? "Server lag is out of range" : "";
+    const block = !party.length ? "Import a character first" : !cands.length ? "Queue a zone and tier" : "";
 
     return {
       intro: "One to five characters, pasted from their combat-simulator exports, run through every zone and tier you queue. Rates come from a full combat simulation of the imported party; XP per hour is within a few percent of in-game tracking for a five-player dungeon party.",
@@ -3331,22 +3300,6 @@ class Component extends DCLogic {
       setSeed: e => this.setZonePrefs({ zoneSeed: e.target.value }),
       // ZONE-46 — server lag. The suggested value comes from /zone-sim/limits, never from the page: it moves
       // as more sessions are fitted. Empty is off; the field is only sent when above 0.
-      lagMs: s.zoneLagMs ?? "", setLagMs: e => this.setZonePrefs({ zoneLagMs: e.target.value }),
-      lagMax: String(lagLim.maxMs ?? 1000), lagSuggest: String(lagSuggest),
-      lagSuggestLabel: `Use suggested (${nf(lagSuggest, lagSuggest % 1 ? 1 : 0)} ms)`,
-      useLagSuggest: () => this.setZonePrefs({ zoneLagMs: String(lagSuggest) }),
-      // A "Use suggested (0 ms)" button says nothing an empty field does not, so it only exists for a non-zero
-      // suggestion — and returns by itself if a party is ever fitted above 0 again.
-      lagHasSuggest: lagSuggest > 0,
-      lagOff: () => this.setZonePrefs({ zoneLagMs: "" }), lagIsOff: !(lagVal > 0), lagIsOn: lagVal > 0,
-      // The served note takes the whole slot: it describes the mechanism itself and carries the current evidence,
-      // which moves without a page release. Only a server that serves no note gets the page's own wording, and that
-      // wording claims nothing about a fitted value — the page has no evidence of its own.
-      lagNote: lagNoteSent
-        ? `${lagNoteSent} Leave empty for the pure combat model.`
-        : "Adds this delay to every attack and cast, to model server load. Leave empty for the pure combat model.",
-      lagError: lagBad ? `Server lag must be between 0 and ${nf(lagLim.maxMs ?? 1000)} ms — the server refuses anything else.` : "",
-      lagBad,
       // ZONE-50 — wave transition delay, read off MWI Insight. No suggest button: the right value is whatever
       // that player's own connection reports, and the operator reads it from another tool. The placeholder is the
       // served measured mean rather than 0, because 0 is not a sensible value here and empty is not "no delay".
