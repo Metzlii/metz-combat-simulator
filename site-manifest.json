@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T11:45:25.558Z",
- "commit": "23c32f9",
+ "builtAt": "2026-09-20T11:59:25.268Z",
+ "commit": "93ef802",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16076861,
-  "gzip": 2586304
+  "bytes": 16077151,
+  "gzip": 2586396
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3762
   },
   "index.html": {
-   "bytes": 143099,
-   "gzip": 35443
+   "bytes": 143389,
+   "gzip": 35535
   },
   "init_client_data.json": {
    "bytes": 2751077,
