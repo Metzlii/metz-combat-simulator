@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=0a9a97ff3195"></script>
+<script src="./support.js?v=51d79221d939"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0a9a97ff3195">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=51d79221d939">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=0a9a97ff3195">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0a9a97ff3195"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=51d79221d939">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=51d79221d939"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1214,7 +1214,10 @@ class Component extends DCLogic {
     // from the top of what it can clear, so the whole list — every picker reads this one — is inverted here.
     try { const list = (await this.client.zones() || []).slice()
         .sort((a, b) => (Number(b.sortIndex) || 0) - (Number(a.sortIndex) || 0) || String(a.hrid).localeCompare(String(b.hrid)));
-      this.setState({ zoneList: list, zoneListError: null }); }
+      // ZONE-76: a restored session can hold both a five-player party and the planets it queued before the
+      // fifth was seated. This is the first moment maxPartySize is known, so it is where those rows go.
+      this.setState(st => ({ zoneList: list, zoneListError: null,
+        zoneCands: this.zoneFitCands(st.zoneCands, this.zoneActiveNames({ ...st, zoneList: list }).length, list) })); }
     catch (e) { this._zonesReq = false;
       const msg = `${e.message || e}`.replace(/^(\d{3})\s*\{.*"error"\s*:\s*"([^"]*)".*\}$/, "$1 $2").replace(/^(\d{3})\s*$/, "$1");
       this.setState({ zoneListError: `Zone list unavailable: ${msg}` }); }
@@ -1269,11 +1272,20 @@ class Component extends DCLogic {
     const act = new Set(this.zoneActiveNames(s));
     return (s.zoneParty || []).filter((p, i) => act.has(this.zonePartyName(p, i)));
   }
+  // ZONE-76: the queue holds only what the party can actually enter. Seating a fifth player makes every planet
+  // impossible -- they cap at three -- and leaving those rows queued produced a board where each of them came
+  // back refused. The picker stopped OFFERING them at ZONE-66; this drops the ones already there.
+  zoneFitCands(cands, seatedCount, zones) {
+    if (!seatedCount || !Array.isArray(zones) || !zones.length) return cands;
+    const byHrid = new Map(zones.map(z => [z.hrid, z]));
+    return (cands || []).filter(c => { const z = byHrid.get(c.zone); return !z || seatedCount <= z.maxPartySize; });
+  }
   // A seat toggle changes what the run sends, so it marks the last result stale and drops derived stats.
   zoneToggleActive(name) {
     this.setState(s => { const act = this.zoneActiveNames(s), has = act.includes(name);
       if (has ? act.length <= 1 : act.length >= Component.ZONE_MAX_PARTY) return null;
-      return { zoneActive: has ? act.filter(n => n !== name) : [...act, name],
+      const next = has ? act.filter(n => n !== name) : [...act, name];
+      return { zoneActive: next, zoneCands: this.zoneFitCands(s.zoneCands, next.length, s.zoneList),
         zoneStale: !!s.zoneResult, zoneDerived: null }; });
   }
   // ZONE-65: a pasted export imports itself (operator, 2026-09-20). The paste IS the intent -- nobody pastes a
@@ -1303,6 +1315,8 @@ class Component extends DCLogic {
     try { const r = await this.client.zoneImport(payload);
       const filled = this.zoneSortParty(this.zoneFillSlots(this.zoneFillShrine(r.players || []), this.state.zoneCatalog));
       this.setState(s => ({ zoneImporting: false, zoneParty: filled, zoneActive: null,
+        // ZONE-76: an import can seat a fifth player in one step, which makes every queued planet impossible.
+        zoneCands: this.zoneFitCands(s.zoneCands, this.zoneActiveNames({ ...s, zoneParty: filled, zoneActive: null }).length, s.zoneList),
         zoneBase: JSON.parse(JSON.stringify(filled)), zoneSel: 0, zoneStale: false, zoneDerived: null, zoneDeriveError: null,
         zoneFormat: r.format || null,
         // The import counts the inventory rows it dropped for not being combat gear. That is the whole bag
@@ -2994,7 +3008,6 @@ class Component extends DCLogic {
     const wNoteSent = wNoteTxt ? (/[.!?]$/.test(wNoteTxt) ? wNoteTxt : `${wNoteTxt}.`) : "";
     // ZONE-66: what this party can actually enter, and how much the size hides.
     const fitPlanets = fullPlanets.filter(fits);
-    const hiddenByParty = zones.filter(z => (z.isDungeon || listed(z)) && !fits(z)).length;
     const chunkRows = this.zoneChunkRows(LIM, hours);
     const addOne = (hrid, t, list) => { const l = list || cands.slice();
       if (l.length >= MAX_CANDIDATES || l.some(c => c.zone === hrid && c.difficultyTier === t)) return l;
@@ -3278,9 +3291,7 @@ class Component extends DCLogic {
       candNote: `${nf(cands.length)} of ${nf(MAX_CANDIDATES)} queued${cands.length ? ` · ${nf(estSec, estSec < 10 ? 1 : 0)} s estimated` : ""}${cands.length >= MAX_CANDIDATES ? ` · the server's row cap for one board` : reqCount > 1 ? ` · over ${nf(LIM.maxCandidateHours)} candidate-hours at ${nf(hours, hours < 1 ? 2 : 0)} h, so ${nf(reqCount)} requests of up to ${nf(chunkRows)}` : ""}`,
       zoneWarn: def && !fits(def)
         ? `${def.name} allows a party of ${def.maxPartySize}; this party is ${seated.length}. It can still be queued — the server refuses that row on its own and runs the rest.`
-        : hiddenByParty > 0
-          ? `${hiddenByParty === 1 ? "One zone is" : `${hiddenByParty} zones are`} not listed: a party of ${seated.length} does not fit ${hiddenByParty === 1 ? "it" : "them"}. Planets take three players, dungeons five — seat fewer to see the rest.`
-          : "",
+        : "",
       cands: cands.map((c, i) => { const d = byHrid(c.zone);
         return { label: `${d ? d.name : c.zone} · T${c.difficultyTier}`,
           icon: this.zoneIcon("zone", c.zone, d, d ? d.name : c.zone),
