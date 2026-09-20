@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T13:57:35.569Z",
- "commit": "7ea3ed7",
+ "builtAt": "2026-09-20T14:01:07.798Z",
+ "commit": "ea358b7",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16081954,
-  "gzip": 2588218
+  "bytes": 16081647,
+  "gzip": 2588080
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -39,11 +39,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3780
+   "gzip": 3779
   },
   "index.html": {
    "bytes": 143516,
-   "gzip": 35579
+   "gzip": 35577
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -83,7 +83,7 @@
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
-   "gzip": 3254
+   "gzip": 3253
   },
   "server/zoneDerive.mjs": {
    "bytes": 8977,
@@ -98,12 +98,12 @@
    "gzip": 6633
   },
   "server/zoneSim.mjs": {
-   "bytes": 11870,
-   "gzip": 4744
+   "bytes": 11563,
+   "gzip": 4615
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 13671,
-   "gzip": 5606
+   "gzip": 5604
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -135,23 +135,23 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 4864,
-   "gzip": 1950
+   "gzip": 1949
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 741
+   "gzip": 742
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 147
+   "gzip": 146
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 218
+   "gzip": 217
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2029
+   "gzip": 2028
   },
   "ZoneSim.dc.html": {
    "bytes": 283722,
