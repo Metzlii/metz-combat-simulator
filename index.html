@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="4cce1058c5d3"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="c8b21f21434e"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4cce1058c5d3"></script>
+<script src="./support.js?v=c8b21f21434e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4cce1058c5d3">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=c8b21f21434e">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=4cce1058c5d3">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4cce1058c5d3"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=c8b21f21434e">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=c8b21f21434e"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -788,7 +788,7 @@ class Component extends DCLogic {
     party: [], zones: null, limits: null,
     upForm: {}, upEnh: {}, upSec: {}, upMode: "upgrades", optRestoredAt: null,
     trigForm: {}, trigRunning: false, trigRows: [], trigSteps: [], trigHead: null, trigDone: null, trigError: "",
-    skillForm: {}, skillMetric: "eph", skillPerOpen: false, skillRunning: false, skillRows: [], skillHead: null, skillDone: null, skillError: "",
+    skillForm: {}, skillMetric: "xp", skillPerOpen: false, skillRunning: false, skillRows: [], skillHead: null, skillDone: null, skillError: "",
     upRunning: false, upRows: [], upHead: null, upDone: null, upError: "" };
   static TABS = [
     { id: "setup", label: "Setup", glyph: "ph-sliders-horizontal" },
@@ -807,7 +807,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=4cce1058c5d3");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=c8b21f21434e");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1238,7 +1238,7 @@ class Component extends DCLogic {
     const done = s.skillDone || null;
     const curves = (done?.curves || []).filter(c => (c.points || []).length);
     const horizon = Math.max(1, Number(this.modeVal("skills", "horizonDays")) || 90);
-    const metric = s.skillMetric || "eph";
+    const metric = s.skillMetric || "xp";
     // Every point carries both metrics, so the toggle plots the measurement rather than inferring one.
     const valOf = (c, p) => Number(metric === "xp" ? p.deltaXp : (p.deltaEph ?? p.delta)) || 0;
     const unit = metric === "xp" ? "XP / h" : "EPH";
@@ -1278,9 +1278,12 @@ class Component extends DCLogic {
     // for reading a point off the chart, and a label wider than the 34px gutter would cost more than it gives.
     const FRACS = [0, 0.25, 0.5, 0.75, 1];
     const fmtDays = v => horizon >= 8 ? String(Math.round(v)) : v.toFixed(1);
-    const fmtVal = v => metric === "xp"
-      ? (v >= 1000 ? `${(v / 1000).toFixed(v >= 10000 ? 0 : 1)}k` : String(Math.round(v)))
-      : (v >= 1 ? v.toFixed(2) : v.toFixed(3));
+    // One precision for the whole axis, chosen from its MAXIMUM rather than per label -- deciding per value
+    // put "4.5k" next to "13k" on the same axis, which reads as two different scales.
+    const kDec = maxY / 1000 >= 100 ? 0 : 1, eDec = maxY >= 1 ? 2 : 3;
+    const fmtVal = v => v === 0 ? "0"
+      : metric === "xp" ? (maxY >= 1000 ? `${(v / 1000).toFixed(kDec)}k` : String(Math.round(v)))
+      : v.toFixed(eDec);
     // The svg is 560x206 of viewBox and scales with the column, so a label placed at a PERCENTAGE of the box
     // lands on its tick at every width while keeping its own pixel size -- which is the point of putting the
     // text in HTML over the drawing rather than inside it.
