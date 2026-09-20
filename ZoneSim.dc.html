@@ -639,6 +639,9 @@
       <div style="display:flex;gap:9px;align-items:baseline;flex-wrap:wrap">
         <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Runs</span>
         <span class="text-muted" style="font-size:12.5px">{{ zone.pickerNote }}</span>
+        <sc-if value="{{ zone.canClearUnsaved }}" hint-placeholder-val="{{ false }}">
+          <button class="btn btn-ghost" style="padding:0 7px;font-size:12px;flex:none" title="Discard every run in this list that was never saved. Saved runs stay." onClick="{{ zone.clearUnsaved }}">{{ zone.clearUnsavedLabel }}</button>
+        </sc-if>
       </div>
       <div style="display:flex;flex-direction:column;gap:3px;max-height:160px;overflow-y:auto;padding:2px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
         <sc-for list="{{ zone.runs }}" as="r" hint-placeholder-count="3">
@@ -655,10 +658,13 @@
                 <span class="tag tag-accent" style="font-size:10.5px;flex:none" title="Kept in this browser; manage it on the Saved tab">saved</span>
               </sc-if>
               <sc-if value="{{ r.canSave }}" hint-placeholder-val="{{ false }}">
-                <button class="btn btn-secondary" style="padding:1px 9px;font-size:12.5px;flex:none" title="Keep this run after the page is reloaded, so a later run can be compared against it" onClick="{{ r.save }}">Save</button>
+                <button class="btn btn-secondary" style="padding:1px 9px;font-size:12.5px;flex:none" title="Keep this run for good. Unsaved runs are dropped 12 hours after the session they belong to, or whenever you clear them" onClick="{{ r.save }}">Save</button>
               </sc-if>
               <sc-if value="{{ r.canSetup }}" hint-placeholder-val="{{ false }}">
                 <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px;flex:none" title="Load this run's party, board and settings into Setup as the baseline, seed and hours pinned — change one thing and run to see what it was worth" onClick="{{ r.setup }}">Use as Baseline</button>
+              </sc-if>
+              <sc-if value="{{ r.canRemove }}" hint-placeholder-val="{{ false }}">
+                <button class="btn btn-ghost" style="padding:0 5px;font-size:12px;flex:none" title="Discard this run — it was never saved, so nothing is kept of it" onClick="{{ r.remove }}">✕</button>
               </sc-if>
             </div>
           </div>
@@ -1883,9 +1889,10 @@ class Component extends DCLogic {
     this.setZonePrefs(patch);
     if (src.buffs) this.setZoneBuffs(clone(src.buffs));   // through its own setter, so it persists as buffs do
   }
-  // Every run finished since the page loaded, so a run is not lost by running the next one: the log is this
-  // session only (never localStorage — saving is the deliberate act that persists one), and each entry is
-  // already the shape a save takes, so saving from the list is a name and a write.
+  // Every run finished since the page loaded, so a run is not lost by running the next one. The log rides along
+  // in the session snapshot and so survives a reload for its 12 hours, which is why it needs clearing (ZONE-58)
+  // — a save is what carries a run past that, and each entry is already the shape a save takes, so saving from
+  // the list is a name and a write.
   static ZONE_LOG_CAP = 20;
   // What tells two runs apart is not the zone — the same board is usually re-run — but what the party was. So a
   // run is headlined by its distance from the import: "Baseline" when nothing was touched, otherwise the change
@@ -2047,12 +2054,15 @@ class Component extends DCLogic {
       sub: [e.where, `${nf(e.rows)} row${e.rows === 1 ? "" : "s"}`, `${nf(e.hours)} h`,
         new Date(e.at).toDateString() === today ? time(e.at) : day(e.at)].filter(Boolean).join(" · "),
       // One tag for what the run is: the baseline, or measured against it. Whether it is kept is the saved tag or
-      // the Save button beside it; an unsaved session run is marked as one, since a reload drops it.
+      // the Save button beside it; an unsaved run of this session is marked as one, since it is the kind that
+      // ages out of the snapshot and the kind the ✕ discards.
       mark: e.baseline ? "baseline" : e.linked ? "vs baseline" : !e.saved && e.session ? "session" : "",
       current: s.zoneShow === e.id || autoId === e.id || (latestOnScreen && e.id === log[0].id), pick: () => set({ zoneShow: e.id, zoneOpen: 0 }),
       // Saving happens here, where the run is read; the Saved tab is for managing what has been kept.
       saved: e.saved, canSave: e.session && !e.saved, save: () => this.saveLoggedRun(e.id),
       canSetup: true, setup: () => this.useZoneBaseline(e.id),
+      // Only an unsaved run is discarded from here. A saved one is managed where it is kept, on the Saved tab.
+      canRemove: e.session && !e.saved, remove: () => this.removeLoggedRun(e.id),
     });
     return rows.map(r => ({ ...r,
       style: r.current
@@ -2067,6 +2077,36 @@ class Component extends DCLogic {
       // Named by its headline (every row already shows when it ran); the Saved tab renames it.
       name: entry.title || label };
     this.writeZoneSaves([save, ...(s.zoneSaves || [])]);
+  }
+  // ZONE-58: a run can be dropped from the list. The log outlives a reload -- it rides along in the session
+  // snapshot -- so an afternoon of trial runs leaves a picker that is mostly runs nobody wants again (operator,
+  // 2026-09-20). Only unsaved runs go this way: keeping one is the deliberate act, and the Saved tab unkeeps it.
+  removeLoggedRun(id) {
+    this.setState(st => {
+      const log = st.zoneRunLog || [];
+      if (!log.some(r => r.id === id)) return null;
+      const wasOnScreen = st.zoneShow === id || (!st.zoneShow && log[0]?.id === id);
+      const patch = { zoneRunLog: log.filter(r => r.id !== id) };
+      // Reading a run that has just gone would leave Results on a dead id, or -- for the newest run, which is
+      // shown as `zoneResult` with no id at all -- leave it on screen after its row went. Either way the view
+      // falls back to whatever is left.
+      if (wasOnScreen) { patch.zoneShow = null; patch.zoneOpen = 0; patch.zoneResult = null; patch.zoneDerived = null; }
+      // Hours and seed are pinned to the baseline run; unpin rather than pin them to something deleted.
+      if (st.zoneBaseline && st.zoneBaseline.id === id) patch.zoneBaseline = null;
+      return patch;
+    });
+  }
+  /** Every unsaved run at once, for the case the operator actually reported: a list full of runs to discard. */
+  clearUnsavedRuns() {
+    this.setState(st => {
+      const saves = st.zoneSaves || [];
+      const kept = (st.zoneRunLog || []).filter(r => saves.some(x => x.fromRun === r.id));
+      if (kept.length === (st.zoneRunLog || []).length) return null;
+      const patch = { zoneRunLog: kept, zoneShow: null, zoneOpen: 0, zoneResult: null, zoneDerived: null };
+      if (st.zoneBaseline && !kept.some(r => r.id === st.zoneBaseline.id)
+        && !saves.some(x => x.id === st.zoneBaseline.id)) patch.zoneBaseline = null;
+      return patch;
+    });
   }
   renameZoneSave(id, name) {
     this.writeZoneSaves((this.state.zoneSaves || []).map(x => x.id === id ? { ...x, name } : x));
@@ -3268,6 +3308,11 @@ class Component extends DCLogic {
       running: s.zoneRunning, runError: s.zoneRunError || "", hasRunError: !!s.zoneRunError,
       hasResult: !!R && rows.length > 0, empty: !R && !s.zoneRunning && !runs.length,
       runs, hasRuns: runs.length > 0, pickerNote: `${runs.length} run${runs.length === 1 ? "" : "s"} to look at`,
+      // ZONE-58: the whole pile of unsaved runs in one go, which is what a cluttered list actually needs.
+      unsavedRuns: runs.filter(r => r.canRemove).length,
+      canClearUnsaved: runs.filter(r => r.canRemove).length > 1,
+      clearUnsavedLabel: `Clear ${runs.filter(r => r.canRemove).length} unsaved`,
+      clearUnsaved: () => this.clearUnsavedRuns(),
       header, rows, refused, hasRefused: refused.length > 0, rateLabel, rateHeadTip,
       // The sort value stays the pace either way (higher is faster), so a mixed board ranks in one direction even
       // though the dungeon rows print a clock, where the smaller number is the better one.
