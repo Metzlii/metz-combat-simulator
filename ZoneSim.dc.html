@@ -956,7 +956,7 @@ class Component extends DCLogic {
     zoneShowSingles: false,
     // ZONE-46: an optional fitted per-action delay that models server load. Empty (not 0) is "off" so the
     // field can be blank; it is only sent when above 0, and the suggested value is read from /zone-sim/limits.
-    zoneHours: 1000, zoneSeed: 1, zoneLagMs: "14", zoneWaveMs: "3095", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
+    zoneHours: 1000, zoneSeed: 1, zoneLagMs: "", zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
     // Both community buffs default to level 20 — 0.2 + 0.005 × 19 = 0.295 each, which is what the live
     // websocket capture shows for drop quantity too. Local storage overrides these once the operator edits them.
     zoneBuffs: { communityExperience: 0.295, communityDropQuantity: 0.295, personalWisdom: false, mooPass: true, _v: 2 },

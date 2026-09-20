@@ -667,7 +667,7 @@
           <details class="about-fold">
             <summary>Where it approximates</summary>
             <ul class="about-list">
-              <li>Wave transition: a measured 12-bin table (3,023–3,090 ms, mean 3,036.9 ms) over the server's 120 s clock cycle, not a flat 3 s. A delay you enter shifts every bin by the same offset. Runs use a fixed clock anchor, so the same inputs give the same numbers.</li>
+              <li>Wave transition: a measured 12-bin table (3,023–3,090 ms, mean 3,036.9 ms) over the server's 120 s clock cycle, not a flat 3 s. Checked against 2,395 dungeon transitions of our own: the same pattern, bin for bin. A reading from your own client sits above it by however long the wave message took to reach you, which moves what you see and not what the game does, so the field is for the server's gap and is best left empty. Runs use a fixed clock anchor, so the same inputs give the same numbers.</li>
               <li>Server lag defaults to 0; if set, it is one constant delay on every action. An 8.8 h busy-hours capture found no per-action lag in any hour.</li>
               <li>Dungeon wipe restart is a flat 3.0 s; an open-zone death is a flat 150 s respawn at full HP and MP (both measured).</li>
               <li>Damage-over-time (3 s), regen (10 s), food/drink over-time (5 s) and enrage (60 s) ticks use the reference simulator's constants, not measured separately.</li>
@@ -705,7 +705,7 @@
 
         <div style="display:flex;flex-direction:column;gap:var(--space-2)">
           <h4 style="margin:0;font-size:15px">Credits</h4>
-          <div style="font-size:13.5px;text-wrap:pretty">The combat kernel is a Rust port of the community MWI Combat Simulator (MIT, © 2024 AmVoidGuy, carried on by shykai and azhu949), by gragatrim, used with permission, and further optimized by Metzli: 4–9× faster per simulation, with identical results. Weylan helped measure the wave transition delay between dungeon waves. Star wrote the core-count probe, so a browser that hides how many cores you have no longer costs you lanes. Kim, Mango and Zhiwen provided test data. Enhancement costs follow Enhancelator (MIT, © doh-nuts). Game data and art belong to Milky Way Idle. Full notices are in the site's repository.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">The combat kernel is a Rust port of the community MWI Combat Simulator (MIT, © 2024 AmVoidGuy, carried on by shykai and azhu949), by gragatrim, used with permission, and further optimized by Metzli: 4–9× faster per simulation, with identical results. Weylan measured the gap between one fight ending and the next starting, on planets. Star wrote the core-count probe, so a browser that hides how many cores you have no longer costs you lanes. Kim, Mango and Zhiwen provided test data. Enhancement costs follow Enhancelator (MIT, © doh-nuts). Game data and art belong to Milky Way Idle. Full notices are in the site's repository.</div>
         </div>
 
         <details class="about-fold">

@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-20T00:11:33.096Z",
- "commit": "da5a7bc",
+ "builtAt": "2026-09-20T02:46:28.167Z",
+ "commit": "83cf37e",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 37,
-  "bytes": 16023723,
-  "gzip": 2567130
+  "bytes": 16024270,
+  "gzip": 2567372
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -42,8 +42,8 @@
    "gzip": 3762
   },
   "index.html": {
-   "bytes": 135953,
-   "gzip": 32871
+   "bytes": 136207,
+   "gzip": 32974
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -98,8 +98,8 @@
    "gzip": 6618
   },
   "server/zoneSim.mjs": {
-   "bytes": 10722,
-   "gzip": 4365
+   "bytes": 11021,
+   "gzip": 4512
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 13626,
@@ -154,8 +154,8 @@
    "gzip": 2013
   },
   "ZoneSim.dc.html": {
-   "bytes": 264067,
-   "gzip": 65741
+   "bytes": 264061,
+   "gzip": 65733
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
