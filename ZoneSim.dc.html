@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=b517750977ed"></script>
+<script src="./support.js?v=61b7f44ea932"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b517750977ed">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=61b7f44ea932">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=b517750977ed">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b517750977ed"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=61b7f44ea932">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=61b7f44ea932"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1123,7 +1123,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=b517750977ed").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=61b7f44ea932").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2047,7 +2047,7 @@ class Component extends DCLogic {
     // baseline mark, so the pickers group it like any other run.
     const logged = (s.zoneRunLog || []).find(r => this.zoneBoardSig(r.candidates) === this.zoneBoardSig(R.candidates));
     const t = this.zoneRunTitle(this.zoneActiveParty(s));
-    const name = (s.zoneSaveName || "").trim() || `${Component.t(logged?.title || t.title)} · ${new Date().toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`;
+    const name = (s.zoneSaveName || "").trim() || `${Component.t(logged?.title || t.title)} · ${new Date().toLocaleString(document.documentElement.lang || undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`;
     const save = { id: `s${Date.now().toString(36)}`, name, at: Date.now(),
       title: logged?.title || t.title, board: this.zoneBoardSig(R.candidates),
       isBaseline: logged ? !!logged.isBaseline : t.count === 0, basedOn: logged?.basedOn || null,
@@ -2258,8 +2258,8 @@ class Component extends DCLogic {
   zoneRunPicker(s, set, { nf }) {
     const log = s.zoneRunLog || [], saves = s.zoneSaves || [];
     const savedFrom = new Set(saves.map(x => x.fromRun).filter(Boolean));
-    const time = at => new Date(at).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
-    const day = at => new Date(at).toLocaleDateString(undefined, { month: "short", day: "numeric" });
+    const time = at => new Date(at).toLocaleTimeString(document.documentElement.lang || undefined, { hour: "numeric", minute: "2-digit" });
+    const day = at => new Date(at).toLocaleDateString(document.documentElement.lang || undefined, { month: "short", day: "numeric" });
     const today = new Date().toDateString();
     // The headline is what the party was (Baseline, or the change from it); the zone board is the sub-line.
     const entries = [
@@ -2354,7 +2354,7 @@ class Component extends DCLogic {
     // were in the session log, so the closed picker was in fact holding an older save and the current run, both
     // of which an option labelled with nothing but its zone renders as "Bear With It · T1".
     const log = s.zoneRunLog || [];
-    const stamp = at => new Date(at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    const stamp = at => new Date(at).toLocaleString(document.documentElement.lang || undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
     const asSource = (r, kind) => ({
       id: r.id, kind, at: r.at || 0, candidates: r.candidates || [], derived: r.derived || null,
       board: this.zoneBoardSig(r.candidates), isBaseline: !!r.isBaseline, basedOn: r.basedOn || null,
@@ -2536,7 +2536,7 @@ class Component extends DCLogic {
       // This session's finished runs, newest first: each one savable from the list, and marked once it is.
       session: (s.zoneRunLog || []).map(r => { const saved = saves.some(x => x.fromRun === r.id);
         return { label: r.title || r.label, saved, savedLabel: saved ? "saved" : "",
-          sub: `${r.label} · ${r.rows === 1 ? Component.tf("{n} row", { n: nf(r.rows) }) : Component.tf("{n} rows", { n: nf(r.rows) })} · ${nf(r.hours)} h · ${new Date(r.at).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" })}`,
+          sub: `${r.label} · ${r.rows === 1 ? Component.tf("{n} row", { n: nf(r.rows) }) : Component.tf("{n} rows", { n: nf(r.rows) })} · ${nf(r.hours)} h · ${new Date(r.at).toLocaleTimeString(document.documentElement.lang || undefined, { hour: "numeric", minute: "2-digit" })}`,
           setup: () => this.useZoneBaseline(r.id),
           save: () => this.saveLoggedRun(r.id) }; }),
       hasSession: (s.zoneRunLog || []).length > 0, noSession: !(s.zoneRunLog || []).length,
@@ -2554,7 +2554,7 @@ class Component extends DCLogic {
       saves: saves.map(sv => ({ id: sv.id, name: sv.name || "", inputId: `zone-save-name-${sv.id}`,
         fallback: sv.title || "Saved run", rename: e => this.renameZoneSave(sv.id, e.target.value),
         setup: () => this.useZoneBaseline(sv.id),
-        sub: `${(sv.candidates || []).length === 1 ? Component.tf("{n} candidate", { n: 1 }) : Component.tf("{n} candidates", { n: (sv.candidates || []).length })}${Component.tf(" · {h} h · seed {seed}", { h: nf(sv.hours), seed: sv.seed })} · ${new Date(sv.at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`,
+        sub: `${(sv.candidates || []).length === 1 ? Component.tf("{n} candidate", { n: 1 }) : Component.tf("{n} candidates", { n: (sv.candidates || []).length })}${Component.tf(" · {h} h · seed {seed}", { h: nf(sv.hours), seed: sv.seed })} · ${new Date(sv.at).toLocaleString(document.documentElement.lang || undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`,
         remove: () => this.deleteZoneSave(sv.id) })),
       hasSaves: saves.length > 0 };
   }

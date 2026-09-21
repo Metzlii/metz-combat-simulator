@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="b517750977ed"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="61b7f44ea932"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=b517750977ed"></script>
+<script src="./support.js?v=61b7f44ea932"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b517750977ed">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=61b7f44ea932">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=b517750977ed">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b517750977ed"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=61b7f44ea932">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=61b7f44ea932"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -956,7 +956,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=b517750977ed");
+      const i18n = await import("./i18n.js?v=61b7f44ea932");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -979,7 +979,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=b517750977ed");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=61b7f44ea932");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1123,6 +1123,52 @@ class Component extends DCLogic {
     try { localStorage.setItem(Component.OPT_SAVES_KEY, JSON.stringify(list)); this.setState({ optSaves: list, optSaveError: "" }); return true; }
     catch { this.setState({ optSaveError: Component.t("Could not save: this browser's storage is full. Delete a saved result or a saved run first.") }); return false; }
   }
+  /** A game noun by hrid, else the hrid's own words -- for parts of a server sentence that name an item. */
+  static hridName(h) {
+    const v = Component.t(String(h || ""));
+    return v !== h ? v : String(h || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+  }
+  /**
+   * The cost note, composed HERE from the row's parts rather than shown as the server wrote it, so it can be
+   * said in the reader's language. Books: count, price and premium. Enhancing: the Enhancelator model line,
+   * mirrors, protection and the hours -- the same bits enhanceCost.mjs joins, from the same numbers.
+   */
+  costNote(cost) {
+    if (!cost) return "";
+    const num = v => Number(v || 0).toLocaleString("en-US");
+    const coins = v => v >= 1e9 ? `${(v / 1e9).toFixed(2)} B` : v >= 1e6 ? `${(v / 1e6).toFixed(1)} M` : num(Math.round(v));
+    if (cost.route === "books" && cost.books != null && cost.perBook != null)
+      return Component.tf("{count} books at {price} (lowest ask, instant buy, +{premium}%)",
+        { count: num(cost.books), price: num(Math.round(cost.perBook)), premium: ((Number(cost.premium) || 0) * 100).toFixed(0) });
+    if (Array.isArray(cost.steps) && cost.steps.length) {
+      const mirrors = cost.steps.filter(s => s?.route === "mirror").length;
+      const bits = [Component.t(mirrors ? "Enhancelator model, Philosopher's Mirror where cheaper" : "Enhancelator model, enhancing the held item")];
+      if (mirrors) bits.push(Component.tf(mirrors === 1 ? "{n} Philosopher's Mirror" : "{n} Philosopher's Mirrors", { n: mirrors }));
+      const p = cost.protection;
+      if (p && Number(p.spares) > 0.005) bits.push(Component.tf("protected with {n} spare {item}", { n: Number(p.spares).toFixed(1), item: p.spareHrid ? Component.hridName(p.spareHrid) : "" }));
+      if (p && Number(p.mirrors) > 0.005) bits.push(Component.tf("{n} Mirrors of Protection", { n: Number(p.mirrors).toFixed(1) }));
+      if (Number(cost.timeCoins) > 0 && Number(cost.hours) > 0)
+        bits.push(Component.tf("{h} h at {rate}/h", { h: Number(cost.hours).toFixed(1), rate: coins(Number(cost.timeCoins) / Number(cost.hours)) }));
+      return bits.join("; ");
+    }
+    return cost.note ? Component.t(cost.note) : "";
+  }
+  /** The fill warning, by the same rule the server applies: more books needed than the feed traded recently. */
+  costWarning(cost) {
+    if (cost?.route === "books" && cost.volume != null && Number(cost.books) > Number(cost.volume))
+      return Component.tf("needs {count} books; about {volume} trade recently, so this will probably not fill at this price in one go",
+        { count: Number(cost.books).toLocaleString("en-US"), volume: Number(cost.volume).toLocaleString("en-US") });
+    return cost?.warning ? Component.t(cost.warning) : "";
+  }
+  /** A saved answer's name, rebuilt from its stored parts so it reads in the current language, not the one it was saved in. */
+  optSaveLabel(x) {
+    const d = x?.data || {}, head = d.upHead || d.trigHead || d.skillHead || null;
+    if (!head) return x?.name || "";
+    const zone = (this.state.zones || []).find(z => z.hrid === head.zone);
+    const where = zone ? `${Component.t(zone.name)} T${head.difficultyTier ?? 0}` : "";
+    const who = head.player || Component.t("whole party");
+    return [Component.t(Component.OPT_MODE_LABEL[x.mode] || ""), where, who].filter(Boolean).join(" \u00b7 ");
+  }
   /** The record for one answer. A hand save and an automatic one are the same thing but for `auto`. */
   optSaveRecord(mode, auto) {
     const s = this.state, fields = Object.keys(Component.OPT_CLEAR[mode]).filter(k => !/Error$/.test(k));
@@ -1180,7 +1226,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=b517750977ed");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=61b7f44ea932");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1201,7 +1247,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=b517750977ed");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=61b7f44ea932");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1429,7 +1475,7 @@ class Component extends DCLogic {
     const text = Math.abs(secs) < 0.05 ? Component.t("no change to the run") : (secs < 0 ? Component.tf("{t} faster per run", { t: span(secs) }) : Component.tf("{t} slower per run", { t: span(secs) }));
     // A column already headed "Faster a run" does not need every cell to repeat it; a line standing on its
     // own does. Both forms, used where each belongs.
-    const short = Math.abs(secs) < 0.05 ? "no change" : (secs < 0 ? Component.tf("{t} faster", { t: span(secs) }) : Component.tf("{t} slower", { t: span(secs) }));
+    const short = Math.abs(secs) < 0.05 ? Component.t("no change") : (secs < 0 ? Component.tf("{t} faster", { t: span(secs) }) : Component.tf("{t} slower", { t: span(secs) }));
     return { secs, se, text, short, withError: `${text}${se == null ? "" : ` \u00b1 ${se.toFixed(1)} s`}`,
       from: mmss(3600 / C), to: mmss(3600 / (C + d)) };
   }
@@ -1520,10 +1566,16 @@ class Component extends DCLogic {
     // same word on every row.
     const multi = (s.party || []).length > 1;
     const whoOf = v => (multi && v ? `${v} \u00b7 ` : "");
+    // The ability by hrid, and the condition from its three hrids -- the game's own words for both. The server's
+    // English text stays as the fallback for a row from before the hrids were carried.
+    const abName = x => (h => { const v = h ? Component.t(h) : ""; return h && v !== h ? v : (x.abilityName || x.ability || ""); })(x.abilityHrid);
+    const condText = x => x.dependencyHrid && x.conditionHrid
+      ? `${Component.t(x.dependencyHrid)} ${Component.t(x.conditionHrid)} ${/greater/.test(x.comparatorHrid || "") ? "\u2265" : "\u2264"}`
+      : (x.condition || "");
     const steps = (s.trigSteps || []).map((x, i) => ({
-      key: `${i}`, who: whoOf(x.player), ability: x.abilityName || "",
-      full: `${whoOf(x.player)}${x.abilityName || ""} ${x.condition || ""}`.trim(),
-      pass: Component.tf("pass {n}", { n: x.pass ?? 1 }), cond: x.condition || "",
+      key: `${i}`, who: whoOf(x.player), ability: abName(x),
+      full: `${whoOf(x.player)}${abName(x)} ${condText(x)}`.trim(),
+      pass: Component.tf("pass {n}", { n: x.pass ?? 1 }), cond: condText(x),
       move: x.changed ? `${nf(x.from)} \u2192 ${nf(x.to)}` : Component.tf("kept {v}", { v: nf(x.from) }),
       changed: !!x.changed,
       // EPH decides each step; its XP change on the same seeds is shown beside it.
@@ -1542,7 +1594,7 @@ class Component extends DCLogic {
       .map((c, i) => ({ c, i, at: seat.has(c.player) ? seat.get(c.player) : Number.MAX_SAFE_INTEGER }))
       .sort((a, b) => a.at - b.at || String(a.c.player || "").localeCompare(String(b.c.player || "")) || a.i - b.i)
       .map(({ c }) => ({
-        head: `${c.player ? `${c.player} \u00b7 ` : ""}${c.abilityName || c.ability} \u00b7 ${c.condition} ${nf(c.from)} \u2192 `,
+        head: `${c.player ? `${c.player} \u00b7 ` : ""}${abName(c)} \u00b7 ${condText(c)} ${nf(c.from)} \u2192 `,
         to: nf(c.to) }));
     const head = s.trigHead || null;
     const targets = (head?.targets || []).map(t => ({
@@ -1632,7 +1684,7 @@ class Component extends DCLogic {
     const partyOrder = (s.party || []).map(pl => pl?.record?.name || "");
     const lines = curves.map(c => ({
       dash: dashes[Math.max(0, partyOrder.indexOf(c.player)) % dashes.length],
-      name: `${c.skill}${(s.party || []).length > 1 ? ` \u00b7 ${c.player}` : ""}${c.charm?.charm ? ` (${c.charm.charm}${c.charm.charmLevel ? ` +${c.charm.charmLevel}` : ""})` : ""}`,
+      name: `${Component.t(String(c.skill || "").replace(/^./, ch => ch.toUpperCase()))}${(s.party || []).length > 1 ? ` \u00b7 ${c.player}` : ""}${c.charm?.charm ? ` (${Component.t(String(c.charm.charm).replace(/^./, ch => ch.toUpperCase()))}${c.charm.charmLevel ? ` +${c.charm.charmLevel}` : ""})` : ""}`,
       color: HUE[c.skill] || "var(--color-neutral-100)",
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
@@ -1665,7 +1717,7 @@ class Component extends DCLogic {
     const dots = lines.flatMap(ln => ln.dots.map(d => ({ ...d, color: ln.color,
       leftPct: PX(d.cx), topPct: PY(d.cy), flip: Number(d.cx) > 300 ? "flip" : "" })));
     const ranked = (done?.ranked || rows).slice().sort((a, b) => (Number(b.perHour) || 0) - (Number(a.perHour) || 0)).map(r => ({
-      skill: `${r.skill} +${r.levels ?? 1}`,
+      skill: `${Component.t(String(r.skill || "").replace(/^./, ch => ch.toUpperCase()))} +${r.levels ?? 1}`,
       who: (s.party || []).length > 1 ? (r.player || "") : "",
       gain: asTime ? (this.runTimeOf(base, r.delta)?.short || "") : Component.tf("+{n} EPH", { n: (Number(r.delta) || 0).toFixed(2) }),
       xp: r.deltaXp == null ? "" : Component.tf("+{n} XP / h", { n: nf(r.deltaXp) }),
@@ -1689,7 +1741,7 @@ class Component extends DCLogic {
       charm: this.modeVal("skills", "charm"),
       setCharm: e => this.setMode("skills", { charm: e.target.value }),
       charmOpts: [{ value: "current", label: Component.t("the player's own charm") },
-        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: Component.tf("{name} charm", { name: `${t[0].toUpperCase()}${t.slice(1)}` }) }))],
+        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: Component.tf("{name} charm", { name: Component.t(`${t[0].toUpperCase()}${t.slice(1)}`) }) }))],
       charmLevel: String(this.modeVal("skills", "charmLevel")),
       setCharmLevel: e => this.setMode("skills", { charmLevel: Math.max(0, Math.floor(Number(e.target.value) || 0)) }),
       perOpen: !!s.skillPerOpen,
@@ -1701,7 +1753,7 @@ class Component extends DCLogic {
         const set = on.filter(k => per[k]?.charm).length;
         const own = on.filter(k => !per[k]?.charm && owned[k]).length;
         // How many skills will actually be measured leads, because that is what the run costs.
-        const which = on.length === Component.UP_SKILLS.length ? "all 7 skills" : Component.tf("{n} of {total} skills", { n: on.length, total: Component.UP_SKILLS.length });
+        const which = on.length === Component.UP_SKILLS.length ? Component.tf("all {n} skills", { n: Component.UP_SKILLS.length }) : Component.tf("{n} of {total} skills", { n: on.length, total: Component.UP_SKILLS.length });
         return [which, set ? Component.tf("{name} set", { name: set }) : "", own ? Component.tf("{item} from {who}'s bag", { item: own, who }) : "",
           !set && !own ? (who ? Component.t("held, or Grandmaster +7") : Component.t("one player at a time")) : ""]
           .filter(Boolean).join(" \u00b7 "); })(),
@@ -1709,18 +1761,18 @@ class Component extends DCLogic {
         return Component.UP_SKILLS.map(k => { const per = (this.modeVal("skills", "charms") || {})[k] || {}, o = owned[k];
         const setPer = patch => this.setMode("skills", { charms: { ...(this.modeVal("skills", "charms") || {}), [k]: { ...per, ...patch } } });
         const eff = o || Component.CHARM_FALLBACK, want = on.has(k);
-        return { key: k, label: k[0].toUpperCase() + k.slice(1),
+        return { key: k, label: Component.t(k[0].toUpperCase() + k.slice(1)),
           // The charm switch IS the skill switch: off means this curve is not measured at all.
           on: want, toggle: () => this.toggleSkill(k), rowStyle: want ? "opacity:1" : "opacity:0.4",
           charm: per.charm || eff.charm, setCharm: e => setPer({ charm: e.target.value }),
           level: String(per.charm ? (per.charmLevel ?? 0) : eff.charmLevel),
           levelDisabled: false,
-          owned: !per.charm && o ? "owned" : "",
-          title: want ? (o ? Component.tf("held: {charm} charm +{level}", { charm: o.charm, level: o.charmLevel }) : Component.t("Not in the bag — costed on a Grandmaster charm +7"))
+          owned: !per.charm && o ? Component.t("owned") : "",
+          title: want ? (o ? Component.tf("held: {charm} charm +{level}", { charm: Component.t(String(o.charm || "").replace(/^./, ch => ch.toUpperCase())), level: o.charmLevel }) : Component.t("Not in the bag — costed on a Grandmaster charm +7"))
             : Component.t("Not measured — tick it to put this skill back in the search"),
           setLevel: e => setPer({ charm: per.charm || eff.charm, charmLevel: Math.max(0, Math.floor(Number(e.target.value) || 0)) }) }; }); })(),
       perOpts: [{ value: "", label: Component.t("the charm they hold, or Grandmaster +7") },
-        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: Component.tf("{name} charm", { name: `${t[0].toUpperCase()}${t.slice(1)}` }) }))],
+        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: Component.tf("{name} charm", { name: Component.t(`${t[0].toUpperCase()}${t.slice(1)}`) }) }))],
       noneOn: this.skillsOn().length === 0,
       running: !!s.skillRunning, error: s.skillError || "", noClears: this.noClearsNote(s, s.skillHead, "skills"),
       idle: !s.skillRunning && !rows.length && !done && !s.skillError,
@@ -1736,8 +1788,8 @@ class Component extends DCLogic {
       }),
       xTicks, yTicks, dots, unit, asTime,
       gainHead: asTime ? Component.t("Faster per run") : "EPH",
-      perHead: asTime ? "s / day" : "EPH / day",
-      ephLabel: asTime ? "Run time" : "EPH",
+      perHead: asTime ? Component.t("s / day") : Component.t("EPH / day"),
+      ephLabel: asTime ? Component.t("Run time") : "EPH",
       chartLabel: Component.tf("{unit} gained against days of levelling, one line per skill, 0 to {days} days by 0 to {max} {unit}", { unit, days: horizon, max: fmtVal(maxY) }),
       metricEph: metric === "eph", metricXp: metric === "xp",
       ephStyle: metric === "eph" ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
@@ -1817,7 +1869,7 @@ class Component extends DCLogic {
         bg: fin ? "color-mix(in srgb, var(--color-accent-800) 26%, transparent)" : "var(--color-bg)",
         player: names.length > 1 ? (r.player || "") : "",
         glyph: r.kind === "ability" ? "ph-book-open-text" : "ph-arrow-fat-line-up",
-        title: `${r.name || itemName(r.itemHrid || r.abilityHrid)} ${r.from} \u2192 ${r.to}`,
+        title: `${(r.itemHrid || r.abilityHrid) ? itemName(r.itemHrid || r.abilityHrid) : (r.name || "")} ${r.from} \u2192 ${r.to}`,
         gain: paceAsTime ? (this.runTimeOf(upBase, d)?.short || "") : `${d >= 0 ? "+" : "\u2212"}${nf(Math.abs(d))} ${unit}`,
         se: m.se == null ? "" : paceAsTime ? `\u00b1 ${(this.runTimeOf(upBase, d, m.se)?.se ?? 0).toFixed(1)} s` : `\u00b1 ${nf(m.se)}`,
         pctLine: pct ? Component.tf("{pct} of baseline", { pct }) : "",
@@ -1832,20 +1884,20 @@ class Component extends DCLogic {
           : paceAsTime ? (() => { const sec = -(this.runTimeOf(upBase, Number(m.per))?.secs ?? 0) * 1000, a = Math.abs(sec);
             return a >= 1 ? sec.toFixed(2) : a >= 0.01 ? sec.toFixed(3) : a > 0 ? sec.toExponential(1) : "0"; })()
           : Number(m.per).toFixed(Number(m.per) < 10 ? 2 : 1),
-        cost: cost.priced ? Component.tf("{n} coins", { n: coin(cost.coins) }) : "no price",
+        cost: cost.priced ? Component.tf("{n} coins", { n: coin(cost.coins) }) : Component.t("no price"),
         // Materials and time are now separate figures: two rows with the same materials and very different
         // chain lengths are not the same price, and the split is the only way to see which is which.
         split: cost.timeCoins != null && Number(cost.timeCoins) > 0
           ? Component.tf("{materials} materials + {time} over {hours} h", { materials: coin(cost.materialCoins), time: coin(cost.timeCoins), hours: (Number(cost.hours) || 0).toFixed(1) }) : "",
-        noteLine: cost.note || "",
-        route: Component.UP_ROUTES[cost.route] || cost.route || "",
-        note: cost.note || "",
+        noteLine: this.costNote(cost),
+        route: Component.t(Component.UP_ROUTES[cost.route] || cost.route || ""),
+        note: this.costNote(cost),
         copy: step?.copy ? Component.tf("make a +{level} {item} and mirror it", { level: step.copy.level, item: itemName(step.copy.hrid) }) : "",
-        alt: cost.alternative ? Component.tf("next cheapest: {route} {coins}", { route: Component.t((Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || "").toLowerCase()), coins: coin(cost.alternative.coins) }) : "",
-        warning: cost.warning || "",
+        alt: cost.alternative ? Component.tf("next cheapest: {route} {coins}", { route: Component.t(Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || ""), coins: coin(cost.alternative.coins) }) : "",
+        warning: this.costWarning(cost),
         // A twin carries the index of the candidate it copies — index 0 is a real one, so the test is != null.
         sameAs: r.sameAs == null ? "" : (() => { const o = byIndex.get(r.sameAs);
-          return Component.tf("same stats as {what}", { what: o ? `${o.name || itemName(o.itemHrid || o.abilityHrid)} +${o.to}` : Component.tf("candidate {n}", { n: r.sameAs }) }); })(),
+          return Component.tf("same stats as {what}", { what: o ? `${(o.itemHrid || o.abilityHrid) ? itemName(o.itemHrid || o.abilityHrid) : (o.name || "")} +${o.to}` : Component.tf("candidate {n}", { n: r.sameAs }) }); })(),
         meas: Component.tf("{seeds} seeds \u00b7 round {round}", { seeds: nf(r.seeds), round: r.rounds ?? "\u2014" }),
         risk: r.deathsPerHour == null ? "" : Component.tf("{deaths} deaths/h \u00b7 {failed} failed/h", { deaths: Number(r.deathsPerHour).toFixed(2), failed: Number(r.failedPerHour || 0).toFixed(2) }),
       };
@@ -1886,8 +1938,8 @@ class Component extends DCLogic {
       importCsv: e => this.importSkillCsv(e),
       saveError: s.optSaveError || "", hasSaveError: !!s.optSaveError,
       // This tool's saved answers, newest first.
-      optSaves: (s.optSaves || []).filter(x => x.mode === mode).map(x => ({ name: x.name,
-        when: new Date(x.at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }),
+      optSaves: (s.optSaves || []).filter(x => x.mode === mode).map(x => ({ name: this.optSaveLabel(x),
+        when: new Date(x.at).toLocaleString(document.documentElement.lang || undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" }),
         open: () => this.openOptSave(x.id), remove: () => this.deleteOptSave(x.id) })),
       hasOptSaves: (s.optSaves || []).some(x => x.mode === mode),
       optSavesOpen: !!s.optSavesOpen, optSavesCaret: s.optSavesOpen ? "\u25be" : "\u25b8",
@@ -1895,7 +1947,7 @@ class Component extends DCLogic {
       toggleOptSaves: () => this.setState({ optSavesOpen: !s.optSavesOpen }),
       modeUpgrades: modeBtn("upgrades"), modeTriggers: modeBtn("triggers"), modeSkills: modeBtn("skills"),
       // Each mode names the party section for what it searches, so "the whole party" reads right in all three.
-      scopeLabel: mode === "triggers" ? "Whose triggers" : mode === "skills" ? "Whose skills" : "Whose upgrades",
+      scopeLabel: Component.t(mode === "triggers" ? "Whose triggers" : mode === "skills" ? "Whose skills" : "Whose upgrades"),
       trig: this.triggerVals(s, { nf }),
       skills: this.skillVals(s, { nf }),
       unavailable: !!s.client && !has,
@@ -1919,10 +1971,10 @@ class Component extends DCLogic {
       profitStyle: metric === "profit" ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)",
       pickXp: () => set({ metric: "xp" }), pickProfit: () => set({ metric: "profit" }),
       pickPace: () => set({ metric: "eph" }),
-      paceLabel: upDungeon ? "Run time" : "Encounters / h",
+      paceLabel: upDungeon ? Component.t("Run time") : Component.t("Encounters / h"),
       paceStyle: metric === "eph" ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)",
       skill: v("skill") || "", setSkill: e => set({ skill: e.target.value }),
-      skillOpts: [{ value: "", label: "Every skill" }, ...Component.UP_SKILLS.map(k => ({ value: k, label: k[0].toUpperCase() + k.slice(1) }))],
+      skillOpts: [{ value: "", label: Component.t("Every skill") }, ...Component.UP_SKILLS.map(k => ({ value: k, label: Component.t(k[0].toUpperCase() + k.slice(1)) }))],
       zone: v("zone") || "", setZone: e => set({ zone: e.target.value, tier: 0 }),
       zoneOpts: [{ value: "", label: zones.length ? Component.t("Pick a zone") : Component.t("loading the zone list\u2026") }, ...zones.map(z => ({ value: z.hrid, label: Component.t(z.name) }))],
       tier: String(tier), setTier: e => set({ tier: Number(e.target.value) || 0 }),
@@ -1947,7 +1999,7 @@ class Component extends DCLogic {
       sec: (() => { const open = s.upSec || {};
         const defs = [
           ["scope", v("player") ? `${v("player")}${v("measure") ? Component.tf(" \u00b7 {name}'s share", { name: v("measure") }) : ""}` : Component.tf("the whole party ({n})", { n: names.length })],
-          ["where", zone ? `${zone.name} \u00b7 T${tier}` : "no zone picked"],
+          ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
           ["budget", Component.tf("{n} min", { n: budget })],
           ["tries", `${Component.t(["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)])}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
           ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(v("hours")), seeds: nf(v("seeds")) })],
@@ -2009,7 +2061,7 @@ class Component extends DCLogic {
       // which is why this is its own flag rather than a term in the shared one.
       skillsRunDisabled: !ready || !has || this.skillsOn().length === 0,
       runNote: !has ? "" : !(s.party || []).length ? "" : !v("zone") ? Component.t("pick a zone first")
-        : (names.length === 1 ? Component.tf("{n} player", { n: names.length }) : Component.tf("{n} players", { n: names.length })) + ` \u00b7 ${zone ? `${zone.name} T${tier}` : ""}` + Component.tf(" \u00b7 up to {n} min", { n: budget }),
+        : (names.length === 1 ? Component.tf("{n} player", { n: names.length }) : Component.tf("{n} players", { n: names.length })) + ` \u00b7 ${zone ? `${Component.t(zone.name)} T${tier}` : ""}` + Component.tf(" \u00b7 up to {n} min", { n: budget }),
       run: () => this.findUpgrades(), stop: () => this.stopUpgrades(),
       error: s.upError || "",
       stage: head ? `${Component.t(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.upRunning ? ` \u00b7 ${this.runClock()}` : ""}`
