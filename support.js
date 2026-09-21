@@ -41,7 +41,10 @@
     const close = src.lastIndexOf("</x-dc>");
     if (close === -1 || close < openMatch.index) return null;
     const template = src.slice(openMatch.index + openMatch[0].length, close);
-    const doc = new DOMParser().parseFromString(src, "text/html");
+    // Parsed shielded (see shieldValidatedAttrs): this document is read only for its script element, and the
+    // parser validates a number input's value and an SVG length here too -- this was the parse that logged
+    // "Unexpected value {{ t.y }} parsing y1 attribute" on every load (operator, 2026-09-21).
+    const doc = new DOMParser().parseFromString(shieldValidatedAttrs(src), "text/html");
     const scriptEl = doc.querySelector("script[data-dc-script]");
     const { props, preview } = parseDataProps(
       scriptEl?.getAttribute("data-props") ?? null

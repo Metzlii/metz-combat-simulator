@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="dac5782d2800"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="2d245b50f1a2"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=dac5782d2800"></script>
+<script src="./support.js?v=2d245b50f1a2"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=dac5782d2800">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=2d245b50f1a2">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=dac5782d2800">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=dac5782d2800"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=2d245b50f1a2">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=2d245b50f1a2"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -61,9 +61,9 @@
     <div style="position:absolute;left:var(--space-4);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:14px;font-size:12.5px;white-space:nowrap">
       <sc-if value="{{ hasLangs }}" hint-placeholder-val="{{ false }}">
         <label class="text-muted" style="display:flex;align-items:center;gap:6px;margin:0;font-size:12px">Language
-          <select class="input" aria-label="Language" style="padding:1px 4px;font-size:12px;width:auto;min-height:0" value="{{ lang }}" onChange="{{ setLang }}">
+          <select class="input" aria-label="Language" style="padding:1px 4px;font-size:12px;width:auto;min-height:0" dc-attr-value="{{ lang }}" onChange="{{ setLang }}">
             <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
-              <option value="{{ l.value }}">{{ l.label }}</option>
+              <option dc-attr-value="{{ l.value }}">{{ l.label }}</option>
             </sc-for>
           </select>
         </label>
@@ -138,14 +138,14 @@
                 <span class="text-muted" style="font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto">{{ up.sec.scope.summary }}</span>
               </button>
               <sc-if value="{{ up.sec.scope.open }}" hint-placeholder-val="{{ false }}">
-              <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px" value="{{ up.scope }}" onChange="{{ up.setScope }}">
-                <sc-for list="{{ up.scopeOpts }}" as="o" hint-placeholder-count="2"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+              <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px" dc-attr-value="{{ up.scope }}" onChange="{{ up.setScope }}">
+                <sc-for list="{{ up.scopeOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
               </select>
               <sc-if value="{{ up.onePlayer }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;gap:7px;align-items:center">
                   <span class="text-muted" style="font-size:12.5px;flex:none">measured by</span>
-                  <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.measure }}" onChange="{{ up.setMeasure }}">
-                    <sc-for list="{{ up.measureOpts }}" as="o" hint-placeholder-count="2"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.measure }}" onChange="{{ up.setMeasure }}">
+                    <sc-for list="{{ up.measureOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                   </select>
                 </div>
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ up.measureNote }}</div>
@@ -161,11 +161,11 @@
               </button>
               <sc-if value="{{ up.sec.where.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;gap:6px">
-                <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:1;min-width:0" value="{{ up.zone }}" onChange="{{ up.setZone }}">
-                  <sc-for list="{{ up.zoneOpts }}" as="o" hint-placeholder-count="6"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:1;min-width:0" dc-attr-value="{{ up.zone }}" onChange="{{ up.setZone }}">
+                  <sc-for list="{{ up.zoneOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                 </select>
-                <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:none;width:72px" value="{{ up.tier }}" onChange="{{ up.setTier }}">
-                  <sc-for list="{{ up.tierOpts }}" as="o" hint-placeholder-count="6"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:none;width:72px" dc-attr-value="{{ up.tier }}" onChange="{{ up.setTier }}">
+                  <sc-for list="{{ up.tierOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                 </select>
               </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">One zone and one tier — an upgrade is ranked where you intend to farm, not averaged over a queue.</div>
@@ -182,7 +182,7 @@
                 <sc-for list="{{ up.budgets }}" as="p" hint-placeholder-count="3">
                   <button class="{{ p.cls }}" style="padding:2px 10px;font-size:12.5px" onClick="{{ p.go }}">{{ p.label }}</button>
                 </sc-for>
-                <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.budget }}" onChange="{{ up.setBudget }}">
+                <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.budget }}" onChange="{{ up.setBudget }}">
                 <span class="text-muted" style="font-size:12.5px">min</span>
               </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until three finalists stand. Anything left over keeps measuring those three.</div>
@@ -197,9 +197,9 @@
               <sc-if value="{{ up.sec.measure.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                 <span class="text-muted" style="font-size:12.5px">Hours per seed</span>
-                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.hours }}" onChange="{{ up.setHours }}">
+                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.hours }}" onChange="{{ up.setHours }}">
                 <span class="text-muted" style="font-size:12.5px">Seeds in the screen</span>
-                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.seeds }}" onChange="{{ up.setSeeds }}">
+                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.seeds }}" onChange="{{ up.setSeeds }}">
               </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round doubles the seeds, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div>
               </sc-if>
@@ -213,11 +213,11 @@
               <sc-if value="{{ up.sec.tries.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                 <span class="text-muted" style="font-size:12.5px">Item levels</span>
-                <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.steps }}" onChange="{{ up.setSteps }}">
-                  <sc-for list="{{ up.stepOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.steps }}" onChange="{{ up.setSteps }}">
+                  <sc-for list="{{ up.stepOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                 </select>
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
-                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
+                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
               </div>
               <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.booksNote }}</div>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.pouch }}" onChange="{{ up.togglePouch }}"><span>Include the pouch<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Little combat effect, and every party already has one.</span></span></label>
@@ -238,24 +238,24 @@
                     <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Professional enhancer loadout</div>
                     <div style="display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 9px;align-items:center;font-size:13px">
                       <span class="text-muted" style="font-size:12.5px">Level</span>
-                      <input class="input" type="number" min="1" max="200" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.enhLevel }}" onChange="{{ up.setEnhLevel }}">
+                      <input class="input" type="number" min="1" max="200" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.enhLevel }}" onChange="{{ up.setEnhLevel }}">
                       <span class="text-muted" style="font-size:12.5px">Tool</span>
                       <div style="display:flex;gap:5px;min-width:0">
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;flex:1;min-width:0" value="{{ up.enhTool }}" onChange="{{ up.setEnhTool }}">
-                          <sc-for list="{{ up.toolOpts }}" as="o" hint-placeholder-count="8"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;flex:1;min-width:0" dc-attr-value="{{ up.enhTool }}" onChange="{{ up.setEnhTool }}">
+                          <sc-for list="{{ up.toolOpts }}" as="o" hint-placeholder-count="8"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                         </select>
-                        <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:60px;flex:none" value="{{ up.enhToolLevel }}" onChange="{{ up.setEnhToolLevel }}">
+                        <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:60px;flex:none" dc-attr-value="{{ up.enhToolLevel }}" onChange="{{ up.setEnhToolLevel }}">
                       </div>
                       <span class="text-muted" style="font-size:12.5px">Tea</span>
-                      <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.tea }}" onChange="{{ up.setTea }}">
-                        <sc-for list="{{ up.teaOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                      <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.tea }}" onChange="{{ up.setTea }}">
+                        <sc-for list="{{ up.teaOpts }}" as="o" hint-placeholder-count="4"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                       </select>
                       <span class="text-muted" style="font-size:12.5px">Guzzling Pouch</span>
-                      <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.pouchLevel }}" onChange="{{ up.setPouchLevel }}">
+                      <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.pouchLevel }}" onChange="{{ up.setPouchLevel }}">
                       <span class="text-muted" style="font-size:12.5px">Observatory</span>
-                      <input class="input" type="number" min="0" max="8" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.observatory }}" onChange="{{ up.setObservatory }}">
+                      <input class="input" type="number" min="0" max="8" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.observatory }}" onChange="{{ up.setObservatory }}">
                       <span class="text-muted" style="font-size:12.5px">Rate, M / h</span>
-                      <input class="input" type="number" min="0" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.rateM }}" onChange="{{ up.setRateM }}">
+                      <input class="input" type="number" min="0" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.rateM }}" onChange="{{ up.setRateM }}">
                     </div>
                     <label style="display:flex;gap:7px;align-items:center;font-size:13px"><input type="checkbox" checked="{{ up.blessed }}" onChange="{{ up.toggleBlessed }}">Blessed Tea</label>
                     <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
@@ -266,10 +266,10 @@
                     </div>
                       <sc-for list="{{ up.speedGear }}" as="g" hint-placeholder-count="5">
                         <div style="display:grid;grid-template-columns:minmax(0,1fr) 58px auto;gap:6px;align-items:center">
-                          <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" value="{{ g.value }}" onChange="{{ g.setItem }}">
-                            <sc-for list="{{ up.speedOpts }}" as="o" hint-placeholder-count="7"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                          <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" dc-attr-value="{{ g.value }}" onChange="{{ g.setItem }}">
+                            <sc-for list="{{ up.speedOpts }}" as="o" hint-placeholder-count="7"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                           </select>
-                          <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" value="{{ g.level }}" onChange="{{ g.setLevel }}">
+                          <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" dc-attr-value="{{ g.level }}" onChange="{{ g.setLevel }}">
                           <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Drop this piece" onClick="{{ g.remove }}">✕</button>
                         </div>
                       </sc-for>
@@ -279,19 +279,19 @@
                       <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Cape protections</div>
                       <div style="display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 9px;align-items:center;font-size:13px">
                         <span class="text-muted" style="font-size:12.5px">Alchemy tea</span>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.alchemyTea }}" onChange="{{ up.setAlchemyTea }}">
-                          <sc-for list="{{ up.alchemyTeaOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.alchemyTea }}" onChange="{{ up.setAlchemyTea }}">
+                          <sc-for list="{{ up.alchemyTeaOpts }}" as="o" hint-placeholder-count="4"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                         </select>
                         <span class="text-muted" style="font-size:12.5px">Catalyst</span>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.catalyst }}" onChange="{{ up.setCatalyst }}">
-                          <sc-for list="{{ up.catalystOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.catalyst }}" onChange="{{ up.setCatalyst }}">
+                          <sc-for list="{{ up.catalystOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                         </select>
                       </div>
                       <label style="display:flex;gap:7px;align-items:center;font-size:13px"><input type="checkbox" checked="{{ up.decCatalytic }}" onChange="{{ up.toggleCatalytic }}">Catalytic Tea</label>
                       <div class="text-muted" style="font-size:12px;text-wrap:pretty">A spare is worth its 2,000 essences sold instantly at the bid, times the Decompose rate at the wearer's alchemy level. The catalyst is spent only on a success.</div>
                       <div style="display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 9px;align-items:center;font-size:13px">
                         <span class="text-muted" style="font-size:12.5px">Spares held</span>
-                        <input class="input" type="number" min="0" step="1" placeholder="0" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.capeProtections }}" onChange="{{ up.setCapeProtections }}">
+                        <input class="input" type="number" min="0" step="1" placeholder="0" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.capeProtections }}" onChange="{{ up.setCapeProtections }}">
                       </div>
                       <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.capeProtNote }}</div>
                     </div>
@@ -311,7 +311,7 @@
                 <sc-if value="{{ up.sec.passes.open }}" hint-placeholder-val="{{ false }}">
                 <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                   <span class="text-muted" style="font-size:12.5px">Walks of the list</span>
-                  <input class="input" type="number" min="1" max="4" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.trig.passes }}" onChange="{{ up.trig.setPasses }}">
+                  <input class="input" type="number" min="1" max="4" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.trig.passes }}" onChange="{{ up.trig.setPasses }}">
                 </div>
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Triggers interact, so the list is walked more than once: a second walk is worth more than a tighter first one. The time limit is split evenly across the slots, with a share held back for the final check.</div>
                 </sc-if>
@@ -327,9 +327,9 @@
                 <sc-if value="{{ up.sec.horizon.open }}" hint-placeholder-val="{{ false }}">
                 <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                   <span class="text-muted" style="font-size:12.5px">Days ahead</span>
-                  <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.skills.horizon }}" onChange="{{ up.skills.setHorizon }}">
+                  <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.skills.horizon }}" onChange="{{ up.skills.setHorizon }}">
                   <span class="text-muted" style="font-size:12.5px">Samples per skill</span>
-                  <input class="input" type="number" min="1" max="16" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.skills.points }}" onChange="{{ up.skills.setPoints }}">
+                  <input class="input" type="number" min="1" max="16" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.skills.points }}" onChange="{{ up.skills.setPoints }}">
                 </div>
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Levels are placed by time, not by number: a skill that levels in a day gets its samples spread over the projection, one that takes a month gets a single sample past its end. The charm decides how fast, so it moves every curve along the days axis.</div>
                 </sc-if>
@@ -345,10 +345,10 @@
                       <div style="display:grid;grid-template-columns:18px 86px minmax(0,1fr) 58px;gap:6px;align-items:center;font-size:12.5px;{{ k.rowStyle }}">
                         <input type="checkbox" style="margin:0" checked="{{ k.on }}" onChange="{{ k.toggle }}" title="{{ k.title }}">
                         <span class="text-muted" style="display:flex;gap:5px;align-items:baseline" title="{{ k.title }}">{{ k.label }}<span style="font-size:10.5px;color:var(--color-accent-300)">{{ k.owned }}</span></span>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" value="{{ k.charm }}" onChange="{{ k.setCharm }}">
-                          <sc-for list="{{ up.skills.perOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" dc-attr-value="{{ k.charm }}" onChange="{{ k.setCharm }}">
+                          <sc-for list="{{ up.skills.perOpts }}" as="o" hint-placeholder-count="5"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                         </select>
-                        <input class="input" type="number" min="0" max="20" step="1" placeholder="lv" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" disabled="{{ k.levelDisabled }}" value="{{ k.level }}" onChange="{{ k.setLevel }}">
+                        <input class="input" type="number" min="0" max="20" step="1" placeholder="lv" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" disabled="{{ k.levelDisabled }}" dc-attr-value="{{ k.level }}" onChange="{{ k.setLevel }}">
                       </div>
                     </sc-for>
                     <div class="text-muted" style="font-size:12px;text-wrap:pretty">Unticking a skill drops it from the search entirely, so the budget is not spent measuring a curve you would never act on — a mage has no use for ranged or melee. A charm is focused on one skill, so each curve can assume the charm you would really wear while levelling that skill. Charms are read from the searched player's own bag; a skill they hold no charm for is costed on a Grandmaster +7, since that is what levelling it would actually mean. With the whole party in scope there is no single owner, so nothing is read.</div>
@@ -466,8 +466,8 @@
                     <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.paceStyle }}" onClick="{{ up.pickPace }}">{{ up.paceLabel }}</button>
                   </div>
                   <sc-if value="{{ up.isXp }}" hint-placeholder-val="{{ true }}">
-                    <select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;flex:none;width:130px" value="{{ up.skill }}" onChange="{{ up.setSkill }}">
-                      <sc-for list="{{ up.skillOpts }}" as="o" hint-placeholder-count="8"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                    <select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;flex:none;width:130px" dc-attr-value="{{ up.skill }}" onChange="{{ up.setSkill }}">
+                      <sc-for list="{{ up.skillOpts }}" as="o" hint-placeholder-count="8"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                     </select>
                   </sc-if>
                   <span class="text-muted" style="font-size:12.5px;text-wrap:pretty;min-width:0">{{ up.rankNote }}</span>
@@ -639,18 +639,18 @@
                   <div class="ch-wrap">
                     <svg viewBox="0 0 560 196" style="width:100%;height:auto;display:block" role="img" aria-label="{{ up.skills.chartLabel }}">
                       <sc-for list="{{ up.skills.yTicks }}" as="t" hint-placeholder-count="5">
-                        <line x1="34" y1="{{ t.y }}" x2="474" y2="{{ t.y }}" stroke="var(--color-divider)" stroke-width="1" opacity="0.3"></line>
+                        <line x1="34" dc-attr-y1="{{ t.y }}" x2="474" dc-attr-y2="{{ t.y }}" stroke="var(--color-divider)" stroke-width="1" opacity="0.3"></line>
                       </sc-for>
                       <line x1="34" y1="188" x2="548" y2="188" stroke="var(--color-divider)" stroke-width="1"></line>
                       <line x1="34" y1="10" x2="34" y2="188" stroke="var(--color-divider)" stroke-width="1"></line>
                       <sc-for list="{{ up.skills.xTicks }}" as="t" hint-placeholder-count="5">
-                        <line x1="{{ t.x }}" y1="188" x2="{{ t.x }}" y2="192" stroke="var(--color-divider)" stroke-width="1"></line>
+                        <line dc-attr-x1="{{ t.x }}" y1="188" dc-attr-x2="{{ t.x }}" y2="192" stroke="var(--color-divider)" stroke-width="1"></line>
                       </sc-for>
                       <sc-for list="{{ up.skills.lines }}" as="ln" hint-placeholder-count="4">
-                        <polyline points="{{ ln.points }}" fill="none" stroke="{{ ln.color }}" stroke-dasharray="{{ ln.dash }}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
+                        <polyline dc-attr-points="{{ ln.points }}" fill="none" stroke="{{ ln.color }}" stroke-dasharray="{{ ln.dash }}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>
                       </sc-for>
                       <sc-for list="{{ up.skills.dots }}" as="d" hint-placeholder-count="24">
-                        <circle cx="{{ d.cx }}" cy="{{ d.cy }}" r="3" fill="{{ d.color }}"></circle>
+                        <circle dc-attr-cx="{{ d.cx }}" dc-attr-cy="{{ d.cy }}" r="3" fill="{{ d.color }}"></circle>
                       </sc-for>
                     </svg>
                     <sc-for list="{{ up.skills.yTicks }}" as="t" hint-placeholder-count="5">
@@ -975,7 +975,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=dac5782d2800");
+      const i18n = await import("./i18n.js?v=2d245b50f1a2");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -998,7 +998,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=dac5782d2800");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=2d245b50f1a2");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1245,7 +1245,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=dac5782d2800");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=2d245b50f1a2");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1266,7 +1266,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=dac5782d2800");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=2d245b50f1a2");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
