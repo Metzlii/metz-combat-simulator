@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=9e5837f7507d"></script>
+<script src="./support.js?v=71ce6e047960"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=9e5837f7507d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=71ce6e047960">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=9e5837f7507d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=9e5837f7507d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=71ce6e047960">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=71ce6e047960"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -65,7 +65,7 @@
             <div>Need an export? Install <a href="{{ zone.scriptUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent);font-weight:600;text-decoration:underline;text-underline-offset:2px">MWI Party Export ↗</a>, a userscript for the game — open each party member's profile once, then paste what it gives you below.</div>
           </div>
         </sc-if>
-        <textarea class="input" rows="5" placeholder="Paste one character export, or a whole team" style="font-size:13px;line-height:1.45;resize:vertical;margin-top:4px" value="{{ zone.text }}" onInput="{{ zone.setText }}"></textarea>
+        <textarea id="zone-export-paste" class="input" rows="5" placeholder="Paste one character export, or a whole team" style="font-size:13px;line-height:1.45;resize:vertical;margin-top:4px" value="{{ zone.text }}" onInput="{{ zone.setText }}"></textarea>
         </sc-if>
       </div>
       <sc-if value="{{ zone.exportShown }}" hint-placeholder-val="{{ true }}">
@@ -78,13 +78,21 @@
       <sc-if value="{{ zone.restored }}" hint-placeholder-val="{{ false }}">
         <div style="padding:6px 10px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 20%, transparent);font-size:12.5px;color:var(--color-accent-300);text-wrap:pretty">{{ zone.restoredNote }}</div>
       </sc-if>
-      <sc-if value="{{ zone.hasWarnings }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:4px;padding:var(--space-3);border:1px solid var(--color-accent-2-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-2-700) 16%, transparent)">
-          <sc-for list="{{ zone.warnings }}" as="w" hint-placeholder-count="1">
-            <div style="font-size:13.5px;color:var(--color-accent-2-300);text-wrap:pretty">{{ w.text }}</div>
-          </sc-for>
-        </div>
       </sc-if>
+      <!-- Import warnings, as one line that opens (operator, 2026-09-21): the paste box folds once a party is in,
+           and the list used to fold with it, so a gear problem went unseen. Closed by default; the count says
+           there is something to read. -->
+      <sc-if value="{{ zone.hasWarnings }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <button class="btn btn-ghost" style="padding:1px 8px;font-size:12.5px;align-self:flex-start;color:var(--color-accent-2-300);border-color:color-mix(in srgb, var(--color-accent-2-500) 45%, transparent);background:color-mix(in srgb, var(--color-accent-2-700) 18%, transparent)" title="What the import could not use" onClick="{{ zone.toggleWarnings }}">{{ zone.warningsLabel }}</button>
+          <sc-if value="{{ zone.warningsOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:4px;padding:var(--space-3);border:1px solid var(--color-accent-2-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-2-800) 18%, transparent)">
+              <sc-for list="{{ zone.warnings }}" as="w" hint-placeholder-count="1">
+                <div style="font-size:13px;color:var(--color-accent-2-300);text-wrap:pretty">{{ w.text }}</div>
+              </sc-for>
+            </div>
+          </sc-if>
+        </div>
       </sc-if>
       <!-- The queue is BUILT here and READ on the right (operator, 2026-09-21): zone, tier, hours, Add to Queue,
            the count, then the Run button. The export box above collapses once an import is in. -->
@@ -1177,7 +1185,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=9e5837f7507d").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=71ce6e047960").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -3576,6 +3584,8 @@ class Component extends DCLogic {
         const when = mins < 60 ? Component.tf("{n} min ago", { n: mins }) : Component.tf("{n} h ago", { n: (mins / 60).toFixed(1) });
         return Component.tf("Restored from your last session, saved {when} — the party, the queue and this session's runs. Import again if anything changed in the game; it is dropped after 12 hours.", { when }); })() : "",
       warnings: (s.zoneWarnings || []).map(text => ({ text })), hasWarnings: (s.zoneWarnings || []).length > 0,
+      warningsOpen: !!s.zoneWarnOpen, toggleWarnings: () => this.setState({ zoneWarnOpen: !s.zoneWarnOpen }),
+      warningsLabel: `${Component.tf("Import incomplete · {n} notes", { n: (s.zoneWarnings || []).length })} ${s.zoneWarnOpen ? "▾" : "▸"}`,
       party: party.map((p, i) => { const l = p.loadout || {}, nm = p.record?.name || Component.tf("Player {n}", { n: i + 1 });
         const ab = (l.abilities || []).length, fd = (l.food?.["/action_types/combat"] || []).length, dk = (l.drinks?.["/action_types/combat"] || []).length;
         const eq = (l.equipment || []).length, L = p.record?.levels || {};

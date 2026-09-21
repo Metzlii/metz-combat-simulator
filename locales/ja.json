@@ -2223,6 +2223,7 @@
  "Import CSV": "CSV をインポート",
  "Import a character first": "先にキャラクターをインポートしてください",
  "Import and Run unlock the moment it lands.": "取得が終わり次第、インポートと実行が使えるようになります。",
+ "Import incomplete · {n} notes": "インポート未完了 · {n} 件の注記",
  "In the party — uncheck to bench": "パーティー内 — チェックを外すと控えに",
  "In this order": "この順序で",
  "Include charms": "チャームを含める",

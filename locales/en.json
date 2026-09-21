@@ -133,6 +133,7 @@
  "How the walk goes": "How the walk goes",
  "Import and Run unlock the moment it lands.": "Import and Run unlock the moment it lands.",
  "Import CSV": "Import CSV",
+ "Import incomplete · {n} notes": "Import incomplete · {n} notes",
  "In this order": "In this order",
  "in-game. Numbers that look off are worth reporting with the export and the zone you ran — a seed makes it reproducible, and reproducible is fixable.": "in-game. Numbers that look off are worth reporting with the export and the zone you ran — a seed makes it reproducible, and reproducible is fixable.",
  "Include charms": "Include charms",

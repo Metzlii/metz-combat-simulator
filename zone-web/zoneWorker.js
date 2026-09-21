@@ -1,1 +1,1 @@
-import t,{simulate as a}from"../kernel-zone/wasm/pkg/mwi_zone_wasm.js?v=9e5837f7507d";const n=t();self.onmessage=async({data:o})=>{const{id:s,jobJson:r}=o;try{await n,self.postMessage({id:s,resultJson:a(r)})}catch(e){self.postMessage({id:s,error:String(e?.message||e)})}};
+import t,{simulate as a}from"../kernel-zone/wasm/pkg/mwi_zone_wasm.js?v=71ce6e047960";const n=t();self.onmessage=async({data:o})=>{const{id:s,jobJson:r}=o;try{await n,self.postMessage({id:s,resultJson:a(r)})}catch(e){self.postMessage({id:s,error:String(e?.message||e)})}};
