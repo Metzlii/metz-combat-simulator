@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-21T18:27:28.279Z",
- "commit": "fe64e76",
+ "builtAt": "2026-09-21T18:37:20.313Z",
+ "commit": "5cde9cf",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 48,
-  "bytes": 17741916,
-  "gzip": 3060585
+  "bytes": 17742459,
+  "gzip": 3060779
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -46,8 +46,8 @@
    "gzip": 3780
   },
   "index.html": {
-   "bytes": 196923,
-   "gzip": 51627
+   "bytes": 197217,
+   "gzip": 51724
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -55,7 +55,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1480
+   "gzip": 1479
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3647087,
@@ -107,7 +107,7 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 8913,
-   "gzip": 3736
+   "gzip": 3735
   },
   "server/lootValue.mjs": {
    "bytes": 7712,
@@ -119,11 +119,11 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 3704,
-   "gzip": 1389
+   "gzip": 1388
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
-   "gzip": 3256
+   "gzip": 3255
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -134,8 +134,8 @@
    "gzip": 3324
   },
   "server/zoneImport.mjs": {
-   "bytes": 10995,
-   "gzip": 3973
+   "bytes": 11032,
+   "gzip": 3988
   },
   "server/zoneOptimize.mjs": {
    "bytes": 17138,
@@ -147,7 +147,7 @@
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 14206,
-   "gzip": 5771
+   "gzip": 5770
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -187,19 +187,19 @@
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 147
+   "gzip": 146
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 218
+   "gzip": 217
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2030
+   "gzip": 2029
   },
   "ZoneSim.dc.html": {
-   "bytes": 326277,
-   "gzip": 84232
+   "bytes": 326489,
+   "gzip": 84322
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
