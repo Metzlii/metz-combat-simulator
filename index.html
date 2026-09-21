@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="847c98008d8a"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="a3dcbafc1199"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=847c98008d8a"></script>
+<script src="./support.js?v=a3dcbafc1199"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=847c98008d8a">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=a3dcbafc1199">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=847c98008d8a">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=847c98008d8a"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=a3dcbafc1199">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=a3dcbafc1199"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -906,7 +906,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=847c98008d8a");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=a3dcbafc1199");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1065,7 +1065,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=847c98008d8a");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=a3dcbafc1199");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1086,7 +1086,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=847c98008d8a");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=a3dcbafc1199");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(`that CSV is a ${meta.mode} answer, and this is the skill tool`);
       this.setState({
@@ -1375,6 +1375,12 @@ class Component extends DCLogic {
     }));
     const done = s.trigDone || null;
     const combined = done?.combined || null;
+    // Whose XP this is. `metricOf` sums `experiencePerHour.total` over the players the goal names, so with no
+    // goal.player it is the WHOLE PARTY added up -- which reads exactly like a per-player figure unless it says
+    // otherwise. Taken from the answer, not from the picker above it, so a restored answer describes itself.
+    const measured = (done || s.trigHead)?.goal?.player || null;   // `head` is declared below this line
+    const partyN = (s.party || []).length;
+    const scope = measured ? `for ${measured}` : partyN ? `summed across ${partyN} players` : "summed across the party";
     const changes = (done?.changes || []).map(c => ({
       text: `${c.player ? `${c.player} \u00b7 ` : ""}${c.abilityName || c.ability} \u00b7 ${c.condition} ${nf(c.from)} \u2192 ${nf(c.to)}` }));
     const head = s.trigHead || null;
@@ -1390,7 +1396,7 @@ class Component extends DCLogic {
       stage: head ? `${head.stage || "measuring"}${head.partyDps ? ` \u00b7 party DPS ${nf(head.partyDps)}` : ""}${s.trigRunning ? ` \u00b7 ${this.runClock()}` : ""}` : "measuring the party as it stands\u2026",
       targets, hasTargets: targets.length > 0,
       steps, hasSteps: steps.length > 0,
-      combined: combined ? `${d(combined.delta ?? combined.deltaEph)} encounters per hour \u00b1 ${(Number(combined.deltaSE) || 0).toFixed(2)}${combined.deltaXp == null ? "" : ` \u00b7 ${xpd(combined.deltaXp)} XP / h \u00b1 ${nf(Number(combined.deltaXpSE) || 0)}`} on ${nf(combined.seeds)} fresh seeds` : "",
+      combined: combined ? `${d(combined.delta ?? combined.deltaEph)} encounters per hour \u00b1 ${(Number(combined.deltaSE) || 0).toFixed(2)}${combined.deltaXp == null ? "" : ` \u00b7 ${xpd(combined.deltaXp)} XP / h \u00b1 ${nf(Number(combined.deltaXpSE) || 0)} ${scope}`} · ${nf(combined.seeds)} fresh seeds` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
       noChange: !!done && !changes.length,
