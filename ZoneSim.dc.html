@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=25592ed21d5d"></script>
+<script src="./support.js?v=9e245bab61a3"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=25592ed21d5d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=9e245bab61a3">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=25592ed21d5d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=25592ed21d5d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=9e245bab61a3">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=9e245bab61a3"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -37,10 +37,14 @@
     <div style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div class="field" style="margin:0">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <!-- Once a party is in, the header is a button like Pricing's (operator, 2026-09-21: "the small chevron
+               is easy to miss"); before that the box is open and there is nothing to toggle. -->
           <sc-if value="{{ zone.hasParty }}" hint-placeholder-val="{{ false }}">
-            <button class="btn btn-ghost" style="padding:0 6px;font-size:13px;flex:none" title="Show or hide the paste box" onClick="{{ zone.toggleExport }}">{{ zone.exportCaret }}</button>
+            <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none" title="Show or hide the paste box" onClick="{{ zone.toggleExport }}">Character exports {{ zone.exportCaret }}</button>
           </sc-if>
-          <label style="margin:0">Character exports</label>
+          <sc-if value="{{ zone.noParty }}" hint-placeholder-val="{{ true }}">
+            <label style="margin:0">Character exports</label>
+          </sc-if>
           <!-- ZONE-75: no Import button. A paste imports itself, and a second click over no decision was part of
                why the page read as having two things to press and no obvious one. -->
           <sc-if value="{{ zone.importing }}" hint-placeholder-val="{{ false }}">
@@ -100,10 +104,15 @@
           <input class="input" type="number" min="1" max="8760" step="1" style="font-variant-numeric:tabular-nums" value="{{ zone.hours }}" onInput="{{ zone.setHours }}">
         </div>
         <button class="btn btn-primary" style="padding:0 20px;min-height:30px;font-size:14px;font-weight:600;letter-spacing:0.02em;flex:none" disabled="{{ zone.addDisabled }}" onClick="{{ zone.add }}">Add to Queue</button>
+        <!-- Beside Add to Queue rather than at the foot of the column (operator, 2026-09-21: "we have the space,
+             so let's use less lines"). -->
+        <div style="display:flex;gap:6px;align-items:center;font-size:12.5px;grid-column:2 / -1;align-self:center" class="text-muted" title="Solo encounters are hidden by default — a party never sims them">
+          <input type="checkbox" style="cursor:pointer;flex:none" checked="{{ zone.showSingles }}" onChange="{{ zone.toggleSingles }}"><span>{{ zone.singlesLabel }}</span>
+        </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <sc-if value="{{ zone.addNote }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:13px">{{ zone.addNote }}</span></sc-if>
-        <span class="text-muted" style="font-size:13px">{{ zone.candNote }}</span>
+        <span class="text-muted" style="font-size:13px;text-wrap:pretty">{{ zone.queueLine }}</span>
       </div>
       <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.hoursNote }}</div>
       <!-- The Run button sits right under Add to Queue (operator, 2026-09-21: "some people have been getting
@@ -129,8 +138,8 @@
           </div>
           <span style="font-size:12.5px;font-variant-numeric:tabular-nums;flex:none;min-width:3.5ch;text-align:right;color:var(--color-accent-2-200)">{{ zone.progressLabel }}</span>
         </div>
+        <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.runNote }}</div>
       </sc-if>
-      <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.runNote }}</div>
       <sc-if value="{{ zone.pinned }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12.5px;color:var(--color-accent-300)">
           <span style="text-wrap:pretty">{{ zone.pinNote }}</span>
@@ -143,6 +152,14 @@
           <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Set every queued row to the hours the baseline ran it for, so the next run is pinned to it" onClick="{{ zone.matchBaselineHours }}">Match the baseline's hours</button>
         </div>
       </sc-if>
+      <!-- A run of an edited party is not a baseline, and until now nothing said so: the pin line simply never
+           appeared (operator, 2026-09-21, "the baseline text doesn't seem to be showing anymore"). -->
+      <sc-if value="{{ zone.noBase }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12.5px" class="text-muted">
+          <span style="text-wrap:pretty">{{ zone.noBaseNote }}</span>
+          <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Load that run's party as the import and pin its seed, so the next run is compared against it" onClick="{{ zone.useLastAsBaseline }}">Use it as the baseline</button>
+        </div>
+      </sc-if>
       <sc-if value="{{ zone.stopped }}" hint-placeholder-val="{{ false }}">
         <div style="font-size:12.5px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.stoppedNote }}</div>
       </sc-if>
@@ -150,9 +167,6 @@
         <div style="font-size:13.5px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.runError }}</div>
       </sc-if>
     </div>
-      <div style="display:flex;gap:6px;align-items:center;font-size:12.5px;align-self:flex-start" class="text-muted" title="Solo encounters are hidden by default — a party never sims them">
-        <input type="checkbox" style="cursor:pointer;flex:none" checked="{{ zone.showSingles }}" onChange="{{ zone.toggleSingles }}"><span>{{ zone.singlesLabel }}</span>
-      </div>
       <sc-if value="{{ zone.hasListError }}" hint-placeholder-val="{{ false }}">
         <div style="font-size:13.5px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.listError }}</div>
       </sc-if>
@@ -895,19 +909,31 @@
                   </sc-if>
                 </div>
                 <div style="display:flex;gap:8px;align-items:baseline;border-top:1px solid var(--color-divider);padding-top:5px">
-                  <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Profit / day</span>
+                  <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.detail.profitLabel }}</span>
                   <span style="font-size:13.5px;font-variant-numeric:tabular-nums;margin-left:auto;color:{{ p.profitColor }}">{{ p.profit }}</span>
                 </div>
               </div>
             </sc-for>
           </div>
           <div style="display:flex;flex-direction:column;gap:3px">
-            <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Kills / h by monster</span>
-              <sc-for list="{{ zone.detail.monsters }}" as="m" hint-placeholder-count="3">
-                <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ m.text }}</span>
-              </sc-for>
-            </div>
+            <!-- The pricing the run used, where the eye lands, instead of prose about how keys are priced
+                 (operator, 2026-09-21). Kills by monster fold away by default; the tax moved into the Profit / day
+                 label; the notes that explained the model are gone from the page (the CSV and the API keep them). -->
+            <div class="text-muted" style="font-size:12.5px;text-wrap:pretty"><span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Pricing</span> — {{ zone.detail.pricingLine }}</div>
+            <sc-if value="{{ zone.detail.hasMonsters }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:3px">
+                <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;align-self:flex-start" onClick="{{ zone.detail.monstersToggle }}">
+                  <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.detail.monstersCaret }} {{ zone.detail.monstersLabel }}</span>
+                </button>
+                <sc-if value="{{ zone.detail.monstersOpen }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;gap:10px;flex-wrap:wrap">
+                    <sc-for list="{{ zone.detail.monsters }}" as="m" hint-placeholder-count="3">
+                      <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ m.text }}</span>
+                    </sc-for>
+                  </div>
+                </sc-if>
+              </div>
+            </sc-if>
             <sc-for list="{{ zone.detail.notes }}" as="n" hint-placeholder-count="2">
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ n.text }}</div>
             </sc-for>
@@ -1151,7 +1177,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=25592ed21d5d").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=9e245bab61a3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1167,7 +1193,10 @@ class Component extends DCLogic {
   // crash, or closing the tab mid-session) costs nothing, short enough that tomorrow's session starts clean
   // rather than on a party whose gear has since changed in the game.
   static ZONE_SESSION_KEY = "gts.zone.session.v1";
-  static ZONE_SESSION_TTL = 12 * 3600 * 1000;
+  // Three days, not twelve hours: the party in a session is pasted work, and the page dropped it when a stored
+  // session's stamp aged out between two reloads (2026-09-21, the operator's preview). The stamp is now refreshed
+  // on every successful restore, so a session that keeps being opened never ages out at all.
+  static ZONE_SESSION_TTL = 3 * 24 * 3600 * 1000;
   static ZONE_SESSION_RUNS = 5;   // full results are megabytes; the newest few fit, the rest keep their headline
   loadZoneSession() {
     try {
@@ -1188,6 +1217,8 @@ class Component extends DCLogic {
       if (Array.isArray(p.runLog)) patch.zoneRunLog = p.runLog;
       if (p.baseline) patch.zoneBaseline = p.baseline;
       this.setState(patch);
+      // Touch the stamp in place: the full write below can fail on quota and leave the old stamp standing.
+      try { localStorage.setItem(Component.ZONE_SESSION_KEY, JSON.stringify({ ...p, at: Date.now() })); } catch {}
     } catch {}
   }
   queueZoneSession() {
@@ -1207,7 +1238,7 @@ class Component extends DCLogic {
     const put = payload => localStorage.setItem(Component.ZONE_SESSION_KEY, JSON.stringify(payload));
     try { put(snap); }
     catch { try { put({ ...snap, runLog: log.slice(0, 1).map(r => ({ ...r, derived: null })) }); }
-      catch { try { put({ ...snap, runLog: [] }); } catch {} } }
+      catch { try { put({ ...snap, runLog: [] }); } catch (e) { console.warn("zone session not stored:", e?.message || e); } } }
   }
   componentDidUpdate() { this.queueZoneSession(); }
   componentWillUnmount() {
@@ -3372,9 +3403,30 @@ class Component extends DCLogic {
         // One click opens the mana breakdown in every player column at once, so the columns stay row-aligned.
         manaOpen: !!s.zoneManaOpen, manaCaret: s.zoneManaOpen ? "▾" : "▸",
         manaToggle: () => this.setState(st => ({ zoneManaOpen: !st.zoneManaOpen })),
-        monsters: Object.entries(c.killsByMonsterPerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
-          .map(([k, v]) => ({ text: `${nice(k)} · ${nf(v, 1)} / h` })),
-        notes: (c.lootNotes || []).map(t => ({ text: Component.t(t) })),
+        ...(() => {
+          const monsters = Object.entries(c.killsByMonsterPerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
+            .map(([k, v]) => ({ text: `${nice(k)} · ${nf(v, 1)} / h` }));
+          const notes = c.lootNotes || [];
+          // The tax note becomes part of the Profit / day label; the notes that describe the model are dropped from
+          // the page; what stays is what the reader must act on (no feed, iron mode, an unpriced item, a missing monster).
+          const tax = notes.map(t => /^market sales are net of the (\d+)% marketplace tax/.exec(t)).find(Boolean);
+          const DROP = [/^market sales are net of/, /^keys are crafted per player/, /^dungeon completion rewards assume/, /^artisan tea cuts/, /^dungeon monsters drop nothing/];
+          const pr = c.pricing || R.pricing || {};
+          const facts = [[Component.t("Loot"), sideShort("loot", pr.loot)], [Component.t("Consumables"), sideShort("consumables", pr.consumables)], [Component.t("Keys"), sideShort("keys", pr.keys)],
+            ...(pr.keys === "craft" || pr.mode === "iron" ? [[Component.t("Key materials"), sideShort("keyMaterials", pr.keyMaterials)]] : []),
+            ...(pr.capes ? [[Component.t("Cape"), Component.t(pr.capes)]] : []),
+            ...(pr.catalyst ? [[Component.t("Catalyst"), pr.catalyst === "none" ? Component.t("none") : nice(pr.catalyst).replace(/ Catalyst$/, "")]] : []),
+            ...(pr.mode ? [[Component.t("Mode"), Component.t(pr.mode)]] : []),
+            [Component.t("Artisan tea"), Component.t(pr.artisanTea ? "on" : "off")],
+            ...(pr.drinkConcentration != null ? [[Component.t("Drink conc."), String(pr.drinkConcentration)]] : [])];
+          return { monsters, hasMonsters: monsters.length > 0,
+            monstersLabel: `${Component.t("Kills / h by monster")} (${monsters.length})`,
+            monstersOpen: !!s.zoneMonstersOpen, monstersCaret: s.zoneMonstersOpen ? "▾" : "▸",
+            monstersToggle: () => this.setState(st => ({ zoneMonstersOpen: !st.zoneMonstersOpen })),
+            profitLabel: tax ? Component.tf("Profit / day − {pct}% tax", { pct: tax[1] }) : Component.t("Profit / day"),
+            pricingLine: facts.filter(([, v]) => v).map(([k, v]) => `${k}: ${v}`).join(" · "),
+            notes: notes.filter(t => !DROP.some(re => re.test(t))).map(t => ({ text: Component.t(t) })) };
+        })(),
         players: (() => { const built = (c.players || []).map(p => ({
           name: p.hrid, sub: Component.tf("combat {n}", { n: nf(p.combatLevel, 1) }) + (p.debuffOnLevelGap ? Component.tf(" · level-gap debuff {pct}%", { pct: pct(p.debuffOnLevelGap) }) : ""),
           // Healing is the RECEIVED figure (7bce483) — every HP restore credited to this player, which is what the
@@ -3487,6 +3539,14 @@ class Component extends DCLogic {
     // Past the work bound the queue simply goes out as several requests; nothing to block.
     const reqCount = Math.max(1, this.zoneChunks(LIM, cands, hours).length);
     const block = !party.length ? Component.t("Import a character first") : !cands.length ? Component.t("Queue a zone and tier") : "";
+    const candNoteText = Component.tf("{n} of {max} queued", { n: nf(cands.length), max: nf(MAX_CANDIDATES) }) + (cands.length >= MAX_CANDIDATES ? Component.t(" · the server's row cap for one board") : reqCount > 1 ? Component.tf(" · over {ch} candidate-hours at {h} h, so {req} requests of up to {rows}", { ch: nf(LIM.maxCandidateHours), h: nf(hours, hours < 1 ? 2 : 0), req: nf(reqCount), rows: nf(chunkRows) }) : "");
+    const runNoteText = s.zoneRunning
+      ? (s.zoneProgress
+          ? Component.tf("{done} of {total} done{est}. Results appear as each one finishes; Stop keeps what is done.", { done: s.zoneProgress.done, total: s.zoneProgress.total, est: s.zoneProgress.estimatedSeconds != null ? Component.tf(" · {t} in total", { t: secText(s.zoneProgress.estimatedSeconds) }) : "" })
+          : Component.tf("Takes {t}. You can keep editing while it runs.", { t: secText(estSec) }))
+      : cands.length ? (cands.length === 1 ? Component.tf("1 zone × {h} simulated hours · takes {t}.", { h: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })
+        : uniformHours ? Component.tf("{n} zones × {h} simulated hours · takes {t}.", { n: cands.length, h: nf(candHours / cands.length, candHours / cands.length < 1 ? 2 : 0), t: secText(estSec) })
+        : Component.tf("{n} zones · {total} simulated hours in all · takes {t}.", { n: cands.length, total: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })) : "";
 
     return {
       intro: Component.t("One to five characters, pasted from their combat-simulator exports, run through every zone and tier you queue. Rates come from a full combat simulation of the imported party; XP per hour is within a few percent of in-game tracking for a five-player dungeon party."),
@@ -3508,6 +3568,7 @@ class Component extends DCLogic {
       hasParty: party.length > 0, showScriptBadge: !s.zoneScriptSeen, scriptUrl: Component.PARTY_SCRIPT_URL, partyCount: seated.length,
       // The paste box is shown until an import lands, then folds to its header; the caret brings it back.
       exportShown: party.length === 0 || !!s.zoneExportOpen,
+      noParty: party.length === 0,
       exportCaret: s.zoneExportOpen ? "▾" : "▸",
       toggleExport: () => this.setState({ zoneExportOpen: !s.zoneExportOpen }),
       restored: !this.zoneOnly && !!s.zoneRestoredAt && party.length > 0,   // the public site says it in its header
@@ -3568,7 +3629,7 @@ class Component extends DCLogic {
         set({ zoneCands: l }); },
       // One estimate, and it is the run line's: this row used to carry "0.9 s estimated" against the Hours
       // note's flat "about 10 s per candidate" and the run line's "under a second" (operator, 2026-09-21).
-      candNote: Component.tf("{n} of {max} queued", { n: nf(cands.length), max: nf(MAX_CANDIDATES) }) + (cands.length >= MAX_CANDIDATES ? Component.t(" · the server's row cap for one board") : reqCount > 1 ? Component.tf(" · over {ch} candidate-hours at {h} h, so {req} requests of up to {rows}", { ch: nf(LIM.maxCandidateHours), h: nf(hours, hours < 1 ? 2 : 0), req: nf(reqCount), rows: nf(chunkRows) }) : ""),
+      candNote: candNoteText,
       zoneWarn: def && !fits(def)
         ? Component.tf("{zone} allows a party of {max}; this party is {n}. It can still be queued — the server refuses that row on its own and runs the rest.", { zone: Component.t(def.name), max: def.maxPartySize, n: seated.length })
         : "",
@@ -3720,19 +3781,25 @@ class Component extends DCLogic {
       ...(() => { const f = this.zoneProgressFraction(s), pct = Math.round(f * 100);
         return { progressPct: pct, progressLabel: `${pct}%`,
           progressStyle: `height:100%;width:${(f * 100).toFixed(1)}%;border-radius:99px;background:linear-gradient(90deg, var(--color-accent-2-600), var(--color-accent-2-300));transition:width 0.45s linear` }; })(),
-      runNote: s.zoneRunning
-        ? (s.zoneProgress
-            ? Component.tf("{done} of {total} done{est}. Results appear as each one finishes; Stop keeps what is done.", { done: s.zoneProgress.done, total: s.zoneProgress.total, est: s.zoneProgress.estimatedSeconds != null ? Component.tf(" · {t} in total", { t: secText(s.zoneProgress.estimatedSeconds) }) : "" })
-            : Component.tf("Takes {t}. You can keep editing while it runs.", { t: secText(estSec) }))
-        : cands.length ? (cands.length === 1 ? Component.tf("1 zone × {h} simulated hours · takes {t}.", { h: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })
-          : uniformHours ? Component.tf("{n} zones × {h} simulated hours · takes {t}.", { n: cands.length, h: nf(candHours / cands.length, candHours / cands.length < 1 ? 2 : 0), t: secText(estSec) })
-          : Component.tf("{n} zones · {total} simulated hours in all · takes {t}.", { n: cands.length, total: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })) : "",
+      // Idle, the estimate shares the queued row ("1 of 200 queued · 1 zone × 509 simulated hours · takes about
+      // 13 seconds"); running, the progress text sits under the bar instead.
+      runNote: s.zoneRunning ? runNoteText : "",
+      queueLine: candNoteText + (!s.zoneRunning && runNoteText ? " · " + runNoteText : ""),
       // The pin, when this board already has a baseline: it is stated rather than applied silently, because it
       // overrides the Seed and Hours fields above.
       pinned: seedPinned,
       pinNote: seedPinned
         ? Component.t("Baseline set. Make changes and sim again to use the Compare tool.") : "",
       unpin: () => set({ zoneBaseline: null }),
+      // No baseline for this queue, and the newest run of it carried changes: say so, and offer that run.
+      ...(() => {
+        if (pinnedBaseline || pinMiss || !cands.length || s.zoneRunning) return { noBase: false };
+        const last = (s.zoneRunLog || []).find(r => r.board === boardSig);
+        if (!last || last.isBaseline) return { noBase: false };
+        return { noBase: true,
+          noBaseNote: Component.tf("No baseline yet: the last run of this queue had changes from the import ({title}).", { title: Component.t(String(last.title || "").split(" — ")[0]) }),   // the change, not the roster after the dash
+          useLastAsBaseline: () => this.useZoneBaseline(last.id) };
+      })(),
       pinMiss: !!pinMiss,
       pinMissNote: pinMiss
         ? Component.tf("{zone} · T{tier} is queued at {h} h and your baseline ran it at {bh} h, so the runs would not be comparable.", {
