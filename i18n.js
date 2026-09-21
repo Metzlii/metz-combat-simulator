@@ -139,11 +139,20 @@ export function translate(root = document.body) {
 export function watch() {
   if (!globalThis.MutationObserver) return;
   let queued = false;
-  const run = () => { queued = false; translate(document.body); };
+  const run = () => translate(document.body);
+  // Two separate faults lived here. `(globalThis.requestAnimationFrame || setTimeout)(run)` throws "Illegal
+  // invocation" -- a native method called detached from `window` has no receiver -- and rAF does not fire in a
+  // hidden tab either way. Both ended the same: the first mutation set `queued` and nothing ever cleared it, so
+  // the About tab stayed entirely English while the tabs above it were Chinese.
+  // A timer, NOT requestAnimationFrame. rAF does not fire in a hidden or background tab, so a page rendered
+  // while the tab was in the background stayed English until something brought it forward -- and the queue flag
+  // sat true the whole time. Swapping text is not animation and has no reason to wait for a paint.
+  const soon = (fn) => setTimeout(fn, 0);
   new MutationObserver(() => {
     if (queued || lang === "en") return;
     queued = true;
-    (globalThis.requestAnimationFrame || setTimeout)(run);
+    // And it cannot be allowed to wedge again: whatever happens, `queued` is released.
+    soon(() => { try { run(); } finally { queued = false; } });
   }).observe(document.body, { childList: true, characterData: true, subtree: true });
 }
 
