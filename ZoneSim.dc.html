@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=df4c4e2c3324"></script>
+<script src="./support.js?v=364f9a13cb34"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=df4c4e2c3324">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=364f9a13cb34">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=df4c4e2c3324">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=df4c4e2c3324"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=364f9a13cb34">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=364f9a13cb34"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1075,7 +1075,7 @@ class Component extends DCLogic {
   }
   static t = s => s;
   componentDidMount() {
-    import("./i18n.js?v=df4c4e2c3324").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=364f9a13cb34").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2560,8 +2560,10 @@ class Component extends DCLogic {
     const dirtyCount = k => dirtyKeys(k).length;
     const changed = new Set(dirtyKeys(i));
     const secOpen = s.zoneEditSec || {};
-    const sec = (key, label, changed) => ({ open: !!secOpen[key], caret: secOpen[key] ? "▾" : "▸", label,
-      badge: changed ? "edited" : "", hasBadge: !!changed,
+    // One factory behind Equipment, Levels, Abilities, Food & drinks, House rooms, Guild shrine and Task
+    // monster -- so these two calls translate every section header on the card.
+    const sec = (key, label, changed) => ({ open: !!secOpen[key], caret: secOpen[key] ? "▾" : "▸", label: Component.t(label),
+      badge: changed ? Component.t("edited") : "", hasBadge: !!changed,
       toggle: () => set({ zoneEditSec: { ...secOpen, [key]: !secOpen[key] } }),
       revert: () => this.zoneRevert(key, i) });
     if (!p) return { has: false, rail: [], slots: [], levels: [], abilities: [], consumables: [], rooms: [], buffs: [],
@@ -2776,7 +2778,7 @@ class Component extends DCLogic {
       has: true, one: party.length === 1,
       railNote: party.length > Component.ZONE_MAX_PARTY
         ? `${actNames.length} of ${Component.ZONE_MAX_PARTY} seated · ${party.length} imported`
-        : `${actNames.length} seated`,
+        : `${actNames.length} ${Component.t("seated")}`,
       rail: party.map((q, k) => { const nm = this.zonePartyName(q, k), L = q.record?.levels || {};
         const st = ["melee", "ranged", "magic"].reduce((a, key) => (L[key] || 0) > (L[a] || 0) ? key : a, "magic");
         const n = dirtyCount(k), seated = actSet.has(nm);
@@ -2786,8 +2788,8 @@ class Component extends DCLogic {
         const tool = sk?.enhancingTool
           ? `${String(sk.enhancingTool.itemHrid || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}${sk.enhancingTool.enhancementLevel ? ` +${sk.enhancingTool.enhancementLevel}` : ""}`
           : "no tool";
-        return { name: nm, sub: `${nice(st)} ${L[st] || 0}${seated ? "" : " · benched"}`, active: k === i, dirty: n > 0,
-          skillSub: sk?.enhancingLevel ? `enhancing ${sk.enhancingLevel} \u00b7 ${tool}${sk.alchemyLevel ? ` \u00b7 alchemy ${sk.alchemyLevel}` : ""}` : "",
+        return { name: nm, sub: `${Component.t(nice(st))} ${L[st] || 0}${seated ? "" : ` · ${Component.t("benched")}`}`, active: k === i, dirty: n > 0,
+          skillSub: sk?.enhancingLevel ? `${Component.t("enhancing")} ${sk.enhancingLevel} \u00b7 ${tool}${sk.alchemyLevel ? ` \u00b7 ${Component.t("alchemy")} ${sk.alchemyLevel}` : ""}` : "",
           badge: n ? String(n) : "", hasBadge: n > 0,
           seated,
           // The last seat cannot be emptied and a sixth cannot be filled — the checkbox goes flat instead.
@@ -2953,7 +2955,7 @@ class Component extends DCLogic {
       // simulation multiplies by, and pre-rounding it would break the promise that sources sum to the total.
       derivedOpen: derivedOpen, derivedCaret: derivedOpen ? "▾" : "▸",
       toggleDerived: () => set({ zoneDerivedOpen: !derivedOpen }),
-      derivedSummary: D ? `${shownStats.length} stats` : "",
+      derivedSummary: D ? `${shownStats.length} ${Component.t("stats")}` : "",
       contextNote: styleNote, hasContextNote: !!styleNote,
       // Alphabetical by label (operator, 2026-09-16): 21 stats in the server's own order is a list you scan
       // top to bottom every time; by name it is a list you can look something up in.
@@ -3341,12 +3343,12 @@ class Component extends DCLogic {
       batchOpts: fitPlanets.length ? [{ value: ALL_PLANETS, label: `Every full-party planet (${fitPlanets.length})` }] : [],
       hasBatchOpts: fitPlanets.length > 0,
       showSingles, singlesCount: zones.filter(isSingle).length,
-      singlesLabel: `Show single-monster zones (${zones.filter(isSingle).length})`,
+      singlesLabel: `${Component.t("Show single-monster zones")} (${zones.filter(isSingle).length})`,
       toggleSingles: () => set({ zoneShowSingles: !showSingles }),
       pickTier: allTiers ? "all" : String(tier),
       setTier: e => set({ zoneTier: e.target.value === "all" ? "all" : (Number(e.target.value) || 0) }),
       tierOpts: [...Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
-        { value: "all", label: "Every tier" }],
+        { value: "all", label: Component.t("Every tier") }],
       addDisabled: (!def && !bulkZones) || cands.length >= MAX_CANDIDATES,
       addNote: (() => { const targets = bulkZones ? fitPlanets : def ? [def] : [];
         const n = targets.reduce((a, z) => a + (allTiers ? z.maxDifficulty + 1 : 1), 0);
@@ -3364,7 +3366,7 @@ class Component extends DCLogic {
       cands: cands.map((c, i) => { const d = byHrid(c.zone);
         return { label: `${d ? Component.t(d.name) : c.zone} · T${c.difficultyTier}`,
           icon: this.zoneIcon("zone", c.zone, d, d ? d.name : c.zone),
-          note: d ? (d.isDungeon ? `${d.maxWaves} waves` : d.maxPartySize > 1 ? "planet" : "single monster") : "unknown zone",
+          note: d ? (d.isDungeon ? `${d.maxWaves} ${Component.t("waves")}` : d.maxPartySize > 1 ? "planet" : "single monster") : "unknown zone",
           fine: !d || fits(d),
           remove: () => set({ zoneCands: cands.filter((_, k) => k !== i) }) }; }),
       hasCands: cands.length > 0,
@@ -3438,7 +3440,7 @@ class Component extends DCLogic {
         const txt = age == null ? "age unknown" : age < 90e3 ? "just now" : age < 90 * 60e3 ? `${Math.round(age / 60e3)} min old` : `${Math.round(age / 36e5)} h old`;
         const published = age == null ? "age unknown" : age < 90e3 ? "published just now" : `published ${txt.replace(" old", " ago")}`;
         return published; })(),
-      marketBusy: !!s.zoneMarketBusy, marketBtn: s.zoneMarketBusy ? "Checking…" : "↻ Refresh",
+      marketBusy: !!s.zoneMarketBusy, marketBtn: s.zoneMarketBusy ? Component.t("Checking…") : `↻ ${Component.t("Refresh")}`,
       refreshMarket: () => this.refreshZoneMarket(),
       marketMsg: s.zoneMarketMsg || "", hasMarketMsg: !!s.zoneMarketMsg,
       priceCaret: s.zonePriceOpen ? "▾" : "▸",
@@ -3448,7 +3450,10 @@ class Component extends DCLogic {
         ...(pr.keys === "craft" || pr.mode === "iron" ? [["Key materials", sideShort("keyMaterials", pr.keyMaterials)]] : []), ["Cape", pr.capes],
         ["Catalyst", pr.catalyst === "none" ? "none" : nice(pr.catalyst).replace(/ Catalyst$/, "")], ["Mode", pr.mode],
         ["Artisan tea", pr.artisanTea ? "on" : "off"], ["Drink conc.", s.zoneConcOverride ? String(pr.drinkConcentration ?? 0) : "pouch"]]
-        .map(([label, value]) => ({ label, value: String(value).replace(/^./, c => c.toUpperCase()) })),
+        // Both halves: the row is "Loot / Bid (instant)", and a half-translated row reads worse than an
+        // untranslated one.
+        .map(([label, value]) => ({ label: Component.t(label),
+          value: Component.t(String(value).replace(/^./, c => c.toUpperCase())) })),
       priceSummary: [`loot ${pr.loot}`, `consumables ${pr.consumables}`, `keys ${pr.keys}`, `cape ${pr.capes}`,
         `catalyst ${pr.catalyst === "none" ? "none" : nice(pr.catalyst)}`, pr.mode,
         `artisan tea ${pr.artisanTea ? "on" : "off"}`,
@@ -3484,8 +3489,8 @@ class Component extends DCLogic {
       mooLabel: (() => { const d = this.zoneAcctDef("mooPass", 0.05);
         return `Moo Pass (+${pct(d.value)}% XP)`; })(),
       buffMax: String(this.zoneBuffDef("communityExperience").maxLevel),
-      buffXpLabel: `Community XP level (0–${this.zoneBuffDef("communityExperience").maxLevel})`,
-      buffDropLabel: `Community drop level (0–${this.zoneBuffDef("communityDropQuantity").maxLevel})`,
+      buffXpLabel: `${Component.t("Community XP level")} (0–${this.zoneBuffDef("communityExperience").maxLevel})`,
+      buffDropLabel: `${Component.t("Community drop level")} (0–${this.zoneBuffDef("communityDropQuantity").maxLevel})`,
       // The rate each level gives, beside its field: read from the fields, never a fixed percentage.
       buffXpPct: `+${pct(bf.communityExperience)}%`, buffDropPct: `+${pct(bf.communityDropQuantity)}%`,
       runDisabled: !!block || s.zoneRunning, runLabel: s.zoneRunning ? "Simulating…" : block || `Simulate ${cands.length} ${cands.length === 1 ? "zone" : "zones"}`,
