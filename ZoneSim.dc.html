@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=5a5a477f039b"></script>
+<script src="./support.js?v=e39d53846ca3"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=5a5a477f039b">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e39d53846ca3">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=5a5a477f039b">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=5a5a477f039b"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=e39d53846ca3">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e39d53846ca3"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1140,7 +1140,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=5a5a477f039b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=e39d53846ca3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -3425,7 +3425,7 @@ class Component extends DCLogic {
     const estSec = (candHours / Math.max(1, LIM.concurrency)) * perCandHour;
     // "under a second", "about 12 seconds", "about 3 minutes": an estimate as a player reads it.
     const secText = v => { const x = Number(v) || 0;
-      return x < 1 ? "under a second" : x < 90 ? (Math.round(x) === 1 ? Component.t("about 1 second") : Component.tf("about {n} seconds", { n: Math.round(x) }))
+      return x < 1 ? Component.t("under a second") : x < 90 ? (Math.round(x) === 1 ? Component.t("about 1 second") : Component.tf("about {n} seconds", { n: Math.round(x) }))
         : x < 5400 ? Component.tf("about {n} minutes", { n: Math.round(x / 60) }) : Component.tf("about {n} hours", { n: nf(x / 3600, 1) }); };
     const laneLabel = this.zoneOnly ? (LIM.concurrency === 1 ? Component.t("1 lane in your browser") : Component.tf("{n} lanes in your browser", { n: LIM.concurrency })) : Component.tf("{n} at a time", { n: LIM.concurrency });
     const estSource = this.zoneOnly ? Component.t("the simulator's own estimate") : Component.t("the server's own estimate");
@@ -3514,7 +3514,9 @@ class Component extends DCLogic {
           else l = addOne(z.hrid, Math.min(z.maxDifficulty, tier), l);
         }
         set({ zoneCands: l }); },
-      candNote: Component.tf("{n} of {max} queued", { n: nf(cands.length), max: nf(MAX_CANDIDATES) }) + (cands.length ? Component.tf(" · {s} s estimated", { s: nf(estSec, estSec < 10 ? 1 : 0) }) : "") + (cands.length >= MAX_CANDIDATES ? Component.t(" · the server's row cap for one board") : reqCount > 1 ? Component.tf(" · over {ch} candidate-hours at {h} h, so {req} requests of up to {rows}", { ch: nf(LIM.maxCandidateHours), h: nf(hours, hours < 1 ? 2 : 0), req: nf(reqCount), rows: nf(chunkRows) }) : ""),
+      // One estimate, and it is the run line's: this row used to carry "0.9 s estimated" against the Hours
+      // note's flat "about 10 s per candidate" and the run line's "under a second" (operator, 2026-09-21).
+      candNote: Component.tf("{n} of {max} queued", { n: nf(cands.length), max: nf(MAX_CANDIDATES) }) + (cands.length >= MAX_CANDIDATES ? Component.t(" · the server's row cap for one board") : reqCount > 1 ? Component.tf(" · over {ch} candidate-hours at {h} h, so {req} requests of up to {rows}", { ch: nf(LIM.maxCandidateHours), h: nf(hours, hours < 1 ? 2 : 0), req: nf(reqCount), rows: nf(chunkRows) }) : ""),
       zoneWarn: def && !fits(def)
         ? Component.tf("{zone} allows a party of {max}; this party is {n}. It can still be queued — the server refuses that row on its own and runs the rest.", { zone: Component.t(def.name), max: def.maxPartySize, n: seated.length })
         : "",
@@ -3535,7 +3537,7 @@ class Component extends DCLogic {
       // 2026-09-20: "changing the hours in the textbox does not actually change how long the sim runs for").
       hours: s.zoneHours,
       setHours: e => this.setZonePrefs({ zoneHours: e.target.value }),
-      hoursNote: hours < 24 ? Component.t("Short runs are noisy — a dungeon party sees four clears in an hour.") : Component.tf("{h} h ≈ {weeks} weeks of play, about {s} s per candidate.", { h: nf(hours), weeks: nf(hours / 168, 1), s: nf(hours * 0.02, 0) }),
+      hoursNote: hours < 24 ? Component.t("Short runs are noisy — a dungeon party sees four clears in an hour.") : Component.tf("{h} h ≈ {weeks} weeks of play.", { h: nf(hours), weeks: nf(hours / 168, 1) }),
       advOpen: !!s.zoneAdv, toggleAdv: () => this.setZonePrefs({ zoneAdv: !s.zoneAdv }), advCaret: s.zoneAdv ? "▾" : "▸",
       buffsOpen: !!s.zoneBuffsOpen, toggleBuffs: () => this.setZonePrefs({ zoneBuffsOpen: !s.zoneBuffsOpen }), buffsCaret: s.zoneBuffsOpen ? "▾" : "▸",
       // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
