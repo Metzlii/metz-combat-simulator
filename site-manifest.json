@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-21T16:50:38.812Z",
- "commit": "205e8d5",
+ "builtAt": "2026-09-21T17:53:43.873Z",
+ "commit": "b7600bb",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 48,
-  "bytes": 17738753,
-  "gzip": 3059561
+  "bytes": 17739556,
+  "gzip": 3059894
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -43,11 +43,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3780
+   "gzip": 3781
   },
   "index.html": {
-   "bytes": 195971,
-   "gzip": 51307
+   "bytes": 196387,
+   "gzip": 51454
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -55,7 +55,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1477
+   "gzip": 1478
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3647087,
@@ -107,11 +107,11 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 8913,
-   "gzip": 3736
+   "gzip": 3737
   },
   "server/lootValue.mjs": {
    "bytes": 7712,
-   "gzip": 3190
+   "gzip": 3191
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -123,7 +123,7 @@
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
-   "gzip": 3254
+   "gzip": 3255
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -134,20 +134,20 @@
    "gzip": 3324
   },
   "server/zoneImport.mjs": {
-   "bytes": 10608,
-   "gzip": 3806
+   "bytes": 10995,
+   "gzip": 3973
   },
   "server/zoneOptimize.mjs": {
    "bytes": 17138,
-   "gzip": 6652
+   "gzip": 6653
   },
   "server/zoneSim.mjs": {
    "bytes": 11995,
-   "gzip": 4745
+   "gzip": 4747
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 14206,
-   "gzip": 5770
+   "gzip": 5772
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -179,7 +179,7 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 4864,
-   "gzip": 1950
+   "gzip": 1952
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
@@ -187,7 +187,7 @@
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 146
+   "gzip": 147
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
@@ -195,11 +195,11 @@
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2028
+   "gzip": 2030
   },
   "ZoneSim.dc.html": {
    "bytes": 325134,
-   "gzip": 83981
+   "gzip": 83985
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
