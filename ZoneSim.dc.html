@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=0a02fe7903d9"></script>
+<script src="./support.js?v=363c7e66cfaa"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0a02fe7903d9">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=363c7e66cfaa">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=0a02fe7903d9">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0a02fe7903d9"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=363c7e66cfaa">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=363c7e66cfaa"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -541,6 +541,16 @@
             <div style="font-size:12.5px;margin-top:3px;color:var(--color-accent-2-300);text-wrap:pretty">{{ zone.waveError }}</div>
           </sc-if>
         </div>
+        <!-- ZONE-85: a visitor who loaded the site before the storage fixes is carrying their old copies, and the
+             page cannot reach into them from a later release. This is the button for that, and for everyone who
+             has been told to "hard refresh" and does not know the shortcut. -->
+        <div class="field" style="margin:0"><label>Stored data</label>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+            <button class="btn btn-ghost" style="padding:1px 10px;font-size:12.5px;flex:none" onClick="{{ zone.clearCache }}">Clear cache and reload</button>
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.cacheSize }}</span>
+          </div>
+          <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.cacheNote }}</div>
+        </div>
       </sc-if>
     </div>
 
@@ -1022,6 +1032,30 @@ class Component extends DCLogic {
   // if one ever moves, both move.
   static PARTY_SCRIPT_URL = "https://greasyfork.org/en/scripts/596494-mwi-party-export";
   static PARTY_SCRIPT_KEY = "mwi.zone.partyScriptSeen";
+  // What "clear cache" means here: everything this page can BUILD AGAIN -- the working session, the optimizer's
+  // 12-hour cache, the market prices and the learned pace. Saved runs, saved results, the pricing and account
+  // buffs and the Advanced settings are things a visitor decided, so they are not a cache and are not touched.
+  // The party goes with the session, because the session is where the old oversized copies live and the party is
+  // one paste away; the note says so before the button is pressed rather than after.
+  static CACHE_KEYS = ["gts.zone.session.v1", "gts.zone.optimize.v1", "gts.zone.market.v1", "gts.zone.pace.v1"];
+  static KEPT_KEYS = ["gts.zone.saves.v1", "gts.zone.optimize.saves.v1", "gts.zone.prefs.v1", "gts.zoneBuffs",
+    "mwi.zone.workers", "mwi.zone.partyScriptSeen"];
+  static storedBytes(keys) {
+    let n = 0;
+    try { for (const k of keys) n += (localStorage.getItem(k) || "").length; } catch {}
+    return n;
+  }
+  static sizeText(bytes) { return bytes >= 1024 * 1024 ? `${(bytes / 1048576).toFixed(1)} MB` : `${Math.round(bytes / 1024)} KB`; }
+  clearZoneCache() {
+    try { for (const k of Component.CACHE_KEYS) localStorage.removeItem(k); } catch {}
+    // A plain reload is allowed to serve the document the browser already holds, which is the whole reason people
+    // are told to hard refresh. A one-shot query cannot be answered from that cache, so the document comes back
+    // from the server; ZONE-72's stamps carry everything under it. The page drops the query once it is up, so it
+    // never ends up in a bookmark or a shared link.
+    const url = new URL(globalThis.location.href);
+    url.searchParams.set("fresh", Date.now().toString(36));
+    globalThis.location.replace(url.toString());
+  }
   // What the import is called in the status line. The detector's names are for code; these are for people,
   // and "party-export export" is why the suffix is baked in per entry rather than appended.
   static FORMAT_LABEL = { "party-export": "MWI Party Export", toolasha: "Toolasha export", kernel: "kernel export", optimizer: "optimizer export" };
@@ -3312,6 +3346,12 @@ class Component extends DCLogic {
       // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
       // for other things; runs and optimizer searches just take longer. Kept in this browser, not in the session.
       hasWorkers: !!this.client?.setZoneWorkers,
+      cacheSize: (() => { const b = Component.storedBytes(Component.CACHE_KEYS); return b ? Component.sizeText(b) : "nothing cached"; })(),
+      cacheNote: (() => {
+        const kept = Component.storedBytes(Component.KEPT_KEYS);
+        return `Drops the working session, the optimizer's 12-hour cache, market prices and the learned pace, then fetches the page fresh — the same thing a hard refresh does. Your party is re-imported from your export afterwards. Saved runs and saved results are kept${kept ? ` (${Component.sizeText(kept)})` : ""}, along with pricing, buffs and these settings.`;
+      })(),
+      clearCache: () => this.clearZoneCache(),
       workersMax: String(this.client?.maxWorkers || 1),
       workersDefault: String(this.client?.defaultWorkers || 1),
       workersValue: this.client?.savedWorkers ? String(this.client.savedWorkers) : "",
