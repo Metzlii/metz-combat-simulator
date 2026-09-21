@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=b57d7f74de42"></script>
+<script src="./support.js?v=5a5a477f039b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b57d7f74de42">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=5a5a477f039b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=b57d7f74de42">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b57d7f74de42"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=5a5a477f039b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=5a5a477f039b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -559,8 +559,62 @@
 
   <!-- run options -->
   <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:var(--space-4) var(--space-6);align-items:start;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <button class="btn btn-ghost" style="padding:1px 0;font-size:12.5px;justify-content:flex-start;border-color:transparent" onClick="{{ zone.toggleAdv }}">Advanced</button>
+    <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
+      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="Set how loot, consumables, keys and capes are priced" onClick="{{ zone.togglePrice }}">Pricing {{ zone.priceCaret }}</button>
+      <sc-if value="{{ zone.priceOpen }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:5px">
+          <sc-for list="{{ zone.pricingSel }}" as="p" hint-placeholder-count="6">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;align-items:center">
+              <span class="text-muted" style="font-size:12.5px">{{ p.label }}</span>
+              <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ p.value }}" onChange="{{ p.set }}">
+                <sc-for list="{{ p.options }}" as="o" hint-placeholder-count="2"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+              </select>
+            </div>
+          </sc-for>
+          <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.artisanTea }}" onChange="{{ zone.toggleTea }}">Artisan tea cuts every key recipe</label>
+          <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.concOverride }}" onChange="{{ zone.toggleConcOverride }}">Override drink concentration</label>
+          <sc-if value="{{ zone.concOverride }}" hint-placeholder-val="{{ false }}">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;align-items:center">
+              <span class="text-muted" style="font-size:12.5px">Drink concentration</span>
+              <input class="input" type="number" min="0" max="1" step="0.01" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.drinkConc }}" onInput="{{ zone.setConc }}">
+            </div>
+          </sc-if>
+          <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.concNote }}</div>
+          <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.taxNote }}</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ zone.marketShown }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding-top:7px;border-top:1px solid var(--color-divider)">
+          <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+            <span class="text-muted" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase">Market prices</span>
+            <span style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.marketLine }}</span>
+            <sc-if value="{{ zone.hasMarketMsg }}" hint-placeholder-val="{{ false }}">
+              <span class="text-muted" style="font-size:11.5px;text-wrap:pretty">{{ zone.marketMsg }}</span>
+            </sc-if>
+          </div>
+          <button class="btn btn-ghost" style="padding:2px 9px;margin-left:-9px;font-size:12.5px;flex:none;white-space:nowrap" title="Check the game's price feed for newer prices now, instead of waiting up to an hour. The game publishes it about once an hour." disabled="{{ zone.marketBusy }}" onClick="{{ zone.refreshMarket }}">{{ zone.marketBtn }}</button>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
+      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="The community buffs and passes every player gets" onClick="{{ zone.toggleBuffs }}">Account buffs {{ zone.buffsCaret }}</button>
+      <sc-if value="{{ zone.buffsOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="display:grid;grid-template-columns:minmax(0,max-content) 52px 5.5ch;gap:6px 8px;align-items:center">
+        <span class="text-muted" style="font-size:12.5px">{{ zone.buffXpLabel }}</span>
+        <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffXp }}" onInput="{{ zone.setBuffXp }}">
+        <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community XP bonus this level gives every player">{{ zone.buffXpPct }}</span>
+        <span class="text-muted" style="font-size:12.5px">{{ zone.buffDropLabel }}</span>
+        <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffDrop }}" onInput="{{ zone.setBuffDrop }}">
+        <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community drop quantity bonus this level gives every player">{{ zone.buffDropPct }}</span>
+      </div>
+      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.wisdom }}" onChange="{{ zone.toggleWisdom }}">{{ zone.wisdomLabel }}</label>
+      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.mooPass }}" onChange="{{ zone.toggleMoo }}">{{ zone.mooLabel }}</label>
+      </sc-if>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
+      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="Seed, server lag, wave delay, workers and stored data" onClick="{{ zone.toggleAdv }}">Advanced {{ zone.advCaret }}</button>
       <sc-if value="{{ zone.advOpen }}" hint-placeholder-val="{{ false }}">
         <div class="field" style="margin:0"><label>Seed</label>
           <input class="input" type="number" min="1" step="1" style="width:110px;font-variant-numeric:tabular-nums" value="{{ zone.seed }}" onInput="{{ zone.setSeed }}" disabled="{{ zone.seedDisabled }}">
@@ -608,68 +662,6 @@
           </div>
         </div>
       </sc-if>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
-      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="Set how loot, consumables, keys and capes are priced" onClick="{{ zone.togglePrice }}">Pricing {{ zone.priceCaret }}</button>
-      <sc-if value="{{ zone.priceClosed }}" hint-placeholder-val="{{ true }}">
-        <div style="display:grid;grid-template-columns:max-content minmax(0,1fr);gap:3px 12px;font-size:12.5px">
-          <sc-for list="{{ zone.priceFacts }}" as="f" hint-placeholder-count="8">
-            <div style="display:contents">
-              <span style="white-space:nowrap;font-weight:600">{{ f.label }}</span>
-              <span class="text-muted" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.value }}</span>
-            </div>
-          </sc-for>
-        </div>
-      </sc-if>
-      <sc-if value="{{ zone.priceOpen }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:5px">
-          <sc-for list="{{ zone.pricingSel }}" as="p" hint-placeholder-count="6">
-            <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;align-items:center">
-              <span class="text-muted" style="font-size:12.5px">{{ p.label }}</span>
-              <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ p.value }}" onChange="{{ p.set }}">
-                <sc-for list="{{ p.options }}" as="o" hint-placeholder-count="2"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
-              </select>
-            </div>
-          </sc-for>
-          <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.artisanTea }}" onChange="{{ zone.toggleTea }}">Artisan tea cuts every key recipe</label>
-          <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.concOverride }}" onChange="{{ zone.toggleConcOverride }}">Override drink concentration</label>
-          <sc-if value="{{ zone.concOverride }}" hint-placeholder-val="{{ false }}">
-            <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:8px;align-items:center">
-              <span class="text-muted" style="font-size:12.5px">Drink concentration</span>
-              <input class="input" type="number" min="0" max="1" step="0.01" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.drinkConc }}" onInput="{{ zone.setConc }}">
-            </div>
-          </sc-if>
-          <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.concNote }}</div>
-          <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.taxNote }}</div>
-        </div>
-      </sc-if>
-      <sc-if value="{{ zone.hasMarketLine }}" hint-placeholder-val="{{ false }}">
-        <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding-top:7px;border-top:1px solid var(--color-divider)">
-          <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
-            <span class="text-muted" style="font-size:11px;letter-spacing:0.06em;text-transform:uppercase">Market prices</span>
-            <span style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.marketLine }}</span>
-            <sc-if value="{{ zone.hasMarketMsg }}" hint-placeholder-val="{{ false }}">
-              <span class="text-muted" style="font-size:11.5px;text-wrap:pretty">{{ zone.marketMsg }}</span>
-            </sc-if>
-          </div>
-          <button class="btn btn-ghost" style="padding:2px 9px;margin-left:-9px;font-size:12.5px;flex:none;white-space:nowrap" title="Check the game's price feed for newer prices now, instead of waiting up to an hour. The game publishes it about once an hour." disabled="{{ zone.marketBusy }}" onClick="{{ zone.refreshMarket }}">{{ zone.marketBtn }}</button>
-        </div>
-      </sc-if>
-    </div>
-
-    <div style="display:flex;flex-direction:column;gap:6px">
-      <div style="font-size:13px">Account buffs</div>
-      <div style="display:grid;grid-template-columns:minmax(0,max-content) 52px 5.5ch;gap:6px 8px;align-items:center">
-        <span class="text-muted" style="font-size:12.5px">{{ zone.buffXpLabel }}</span>
-        <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffXp }}" onInput="{{ zone.setBuffXp }}">
-        <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community XP bonus this level gives every player">{{ zone.buffXpPct }}</span>
-        <span class="text-muted" style="font-size:12.5px">{{ zone.buffDropLabel }}</span>
-        <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffDrop }}" onInput="{{ zone.setBuffDrop }}">
-        <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community drop quantity bonus this level gives every player">{{ zone.buffDropPct }}</span>
-      </div>
-      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.wisdom }}" onChange="{{ zone.toggleWisdom }}">{{ zone.wisdomLabel }}</label>
-      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.mooPass }}" onChange="{{ zone.toggleMoo }}">{{ zone.mooLabel }}</label>
     </div>
 
   </div>
@@ -1038,7 +1030,7 @@ class Component extends DCLogic {
     zoneShowSingles: false,
     // ZONE-46: an optional fitted per-action delay that models server load. Empty (not 0) is "off" so the
     // field can be blank; it is only sent when above 0, and the suggested value is read from /zone-sim/limits.
-    zoneHours: 1000, zoneSeed: 1, zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zonePricing: {}, zoneConcOverride: false,
+    zoneHours: 1000, zoneSeed: 1, zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zoneBuffsOpen: false, zonePricing: {}, zoneConcOverride: false,
     // Both community buffs default to level 20 — 0.2 + 0.005 × 19 = 0.295 each, which is what the live
     // websocket capture shows for drop quantity too. Local storage overrides these once the operator edits them.
     zoneBuffs: { communityExperience: 0.295, communityDropQuantity: 0.295, personalWisdom: false, mooPass: true, _v: 2 },
@@ -1148,7 +1140,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=b57d7f74de42").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=5a5a477f039b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1214,7 +1206,7 @@ class Component extends DCLogic {
   // are read back: an unknown key in storage from an older build is ignored rather than restored into state.
   static ZONE_PREFS_KEY = "gts.zone.prefs.v1";
   static ZONE_PREFS_FIELDS = ["zoneHours", "zoneSeed", "zoneWaveMs", "zoneAdv",
-    "zonePricing", "zoneConcOverride", "zonePriceOpen"];
+    "zonePricing", "zoneConcOverride", "zonePriceOpen", "zoneBuffsOpen"];
   loadZonePrefs() {
     try { const p = JSON.parse(localStorage.getItem(Component.ZONE_PREFS_KEY) || "null");
       if (!p || typeof p !== "object") return;
@@ -3544,7 +3536,8 @@ class Component extends DCLogic {
       hours: s.zoneHours,
       setHours: e => this.setZonePrefs({ zoneHours: e.target.value }),
       hoursNote: hours < 24 ? Component.t("Short runs are noisy — a dungeon party sees four clears in an hour.") : Component.tf("{h} h ≈ {weeks} weeks of play, about {s} s per candidate.", { h: nf(hours), weeks: nf(hours / 168, 1), s: nf(hours * 0.02, 0) }),
-      advOpen: !!s.zoneAdv, toggleAdv: () => this.setZonePrefs({ zoneAdv: !s.zoneAdv }),
+      advOpen: !!s.zoneAdv, toggleAdv: () => this.setZonePrefs({ zoneAdv: !s.zoneAdv }), advCaret: s.zoneAdv ? "▾" : "▸",
+      buffsOpen: !!s.zoneBuffsOpen, toggleBuffs: () => this.setZonePrefs({ zoneBuffsOpen: !s.zoneBuffsOpen }), buffsCaret: s.zoneBuffsOpen ? "▾" : "▸",
       // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
       // for other things; runs and optimizer searches just take longer. Kept in this browser, not in the session.
       hasWorkers: !!this.client?.setZoneWorkers,
@@ -3602,6 +3595,7 @@ class Component extends DCLogic {
       priceOpen: !!s.zonePriceOpen, togglePrice: () => set({ zonePriceOpen: !s.zonePriceOpen }),
       // The feed's age, read from its own timestamp at render time (the page re-renders often enough for minutes).
       hasMarketLine: !!this.client?.zoneMarketRefresh,
+      marketShown: !!this.client?.zoneMarketRefresh && !!s.zonePriceOpen,
       marketLine: (() => { const m = s.zoneMarket;
         if (!m) return "checking…";
         if (!m.available) return Component.t("unavailable · items are unpriced");
