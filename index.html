@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="0461699b54e2"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="7d72a9b7df80"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=0461699b54e2"></script>
+<script src="./support.js?v=7d72a9b7df80"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0461699b54e2">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7d72a9b7df80">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=0461699b54e2">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0461699b54e2"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=7d72a9b7df80">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7d72a9b7df80"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -59,8 +59,14 @@
 
   <header class="nav" style="gap:var(--space-4);padding:var(--space-3) var(--space-4);border-bottom:1px solid var(--color-divider);align-items:center;justify-content:center;position:relative">
     <div style="position:absolute;left:var(--space-4);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:14px;font-size:12.5px;white-space:nowrap">
-      <sc-if value="{{ showPartyScript }}" hint-placeholder-val="{{ true }}">
-        <a href="{{ partyScriptUrl }}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:6px;color:var(--color-accent);text-decoration:none" title="A userscript for the game: open each party member's profile once, then paste the whole party here">Install the MWI Party Export script ↗</a>
+      <sc-if value="{{ hasLangs }}" hint-placeholder-val="{{ false }}">
+        <label class="text-muted" style="display:flex;align-items:center;gap:6px;margin:0;font-size:12px">Language
+          <select class="input" aria-label="Language" style="padding:1px 4px;font-size:12px;width:auto;min-height:0" value="{{ lang }}" onChange="{{ setLang }}">
+            <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
+              <option value="{{ l.value }}">{{ l.label }}</option>
+            </sc-for>
+          </select>
+        </label>
       </sc-if>
       <sc-if value="{{ restored }}" hint-placeholder-val="{{ false }}">
         <span class="text-muted" title="{{ restoredTip }}">Restored from cache</span>
@@ -70,13 +76,6 @@
     <div style="display:flex;align-items:center;gap:10px;font-size:12px;position:absolute;right:var(--space-4);top:50%;transform:translateY(-50%)" class="text-muted">
       <span style="width:7px;height:7px;border-radius:50%;background:{{ serverDot }};box-shadow:0 0 8px {{ serverDot }}"></span>
       <span style="white-space:nowrap">{{ serverStatus }}</span>
-      <sc-if value="{{ hasLangs }}" hint-placeholder-val="{{ false }}">
-        <select class="input" aria-label="Language" title="Language" style="padding:1px 4px;font-size:12px;width:auto;min-height:0" value="{{ lang }}" onChange="{{ setLang }}">
-          <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
-            <option value="{{ l.value }}">{{ l.label }}</option>
-          </sc-for>
-        </select>
-      </sc-if>
     </div>
   </header>
 
@@ -220,7 +219,7 @@
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
               </div>
-              <div class="text-muted" style="font-size:12px;text-wrap:pretty">Ability books are priced up to {{ up.premium }} over the lowest ask (an instant buy).</div>
+              <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.booksNote }}</div>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.pouch }}" onChange="{{ up.togglePouch }}"><span>Include the pouch<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Little combat effect, and every party already has one.</span></span></label>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.charms }}" onChange="{{ up.toggleCharms }}"><span>Include charms<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">A charm raises its owner's XP without changing the fight, so cheap charm steps top every XP list.</span></span></label>
               </sc-if>
@@ -635,7 +634,7 @@
                       <button class="seg-opt" style="font-size:12.5px;{{ up.skills.ephStyle }}" onClick="{{ up.skills.pickEph }}">{{ up.skills.ephLabel }}</button>
                       <button class="seg-opt" style="font-size:12.5px;{{ up.skills.xpStyle }}" onClick="{{ up.skills.pickXp }}">XP / h</button>
                     </div>
-                    <span class="text-muted" style="font-size:12.5px">0 to {{ up.skills.axisX }} · up to {{ up.skills.axisY }}</span>
+                    <span class="text-muted" style="font-size:12.5px">{{ up.skills.axisNote }}</span>
                   </div>
                   <div class="ch-wrap">
                     <svg viewBox="0 0 560 196" style="width:100%;height:auto;display:block" role="img" aria-label="{{ up.skills.chartLabel }}">
@@ -774,6 +773,16 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-21</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.7</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Eight more languages.</b> Español, Français, 日本語, 한국어, Português, Русский, 简体中文 and 繁體中文, with the picker at the top left and your browser's language chosen on the first visit. Every item, ability, monster, zone, skill and house room carries the game's own name in each language, taken from the game's own files — so a name here is the name on your screen. Everything outside this About tab is translated; the About tab stays English.</li>
+                <li><b>Text the page builds now translates too</b> — “15 of 16 cores”, “published 43 min ago”, the run summary line, the optimizer's status — which had stayed English in Chinese as well. The number now lands wherever the language puts it, rather than always where English does.</li>
+                <li><b>Only the Chinese has a reviewer.</b> The other seven are machine-quality and unreviewed, by choice: a rough translation you can act on beats an instruction you cannot use. Corrections are welcome.</li>
+                <li>Two item names corrected against the game's own: Blessed Tea and Guzzling Pouch.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-21</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.6</b></div>
@@ -921,6 +930,18 @@ class Component extends DCLogic {
    * reached -- so wrapping a string is always safe and never has to be undone.
    */
   static t = s => s;
+  /**
+   * A translated sentence with its values put back inside it.
+   *
+   * For the few strings where the number cannot sit outside the words: `{name}` in the template is replaced
+   * AFTER translation, so a language that orders the clause differently -- or inflects around the number -- can
+   * put the value wherever it belongs. Used twice. The rest of the file keeps the number outside the key.
+   */
+  static tf(template, vars) {
+    let out = Component.t(template);
+    for (const [k, v] of Object.entries(vars)) out = out.split(`{${k}}`).join(v);
+    return out;
+  }
   static TABS = [
     { id: "setup", label: "Setup", glyph: "ph-sliders-horizontal" },
     { id: "results", label: "Results", glyph: "ph-table" },
@@ -935,7 +956,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=0461699b54e2");
+      const i18n = await import("./i18n.js?v=7d72a9b7df80");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -958,7 +979,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=0461699b54e2");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=7d72a9b7df80");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -976,7 +997,7 @@ class Component extends DCLogic {
       // visitor cannot act on either, so name the files instead and keep the raw text in the console.
       const msg = String(e?.message || e);
       this.setState({ booting: false, error: /dynamically imported module|Failed to fetch/i.test(msg)
-        ? "The simulator's own files (zone-web/, the game data and the wasm kernel) did not load from this site."
+        ? Component.t("The simulator's own files (zone-web/, the game data and the wasm kernel) did not load from this site.")
         : msg });
     }
   }
@@ -1016,7 +1037,7 @@ class Component extends DCLogic {
   static SPEED_ITEMS = ["enhancers_top", "enhancers_bottoms", "enchanted_gloves", "chance_cape",
     "chance_cape_refined", "necklace_of_speed", "philosophers_necklace"].map(k => `/items/${k}`);
   static ALCHEMY_TEAS = [["none", "No alchemy tea"], ["alchemy", "Alchemy Tea"], ["super", "Super Alchemy Tea"], ["ultra", "Ultra Alchemy Tea"]];
-  static CATALYSTS = [["none", "No catalyst"], ["catalyst", "Catalyst of Decomposition"], ["prime", "Prime Catalyst"]];
+  static CATALYSTS = [["none", "No catalyst"], ["catalyst", "Catalyst Of Decomposition"], ["prime", "Prime Catalyst"]];
   static UP_TEAS = [["none", "No enhancing tea"], ["enhancing", "Enhancing Tea"], ["super", "Super Enhancing Tea"], ["ultra", "Ultra Enhancing Tea"]];
   static UP_BUDGETS = [[15, "15 min"], [60, "1 h"], [120, "2 h"]];
   static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books" };
@@ -1100,7 +1121,7 @@ class Component extends DCLogic {
   }
   writeOptSaves(list) {
     try { localStorage.setItem(Component.OPT_SAVES_KEY, JSON.stringify(list)); this.setState({ optSaves: list, optSaveError: "" }); return true; }
-    catch { this.setState({ optSaveError: "Could not save: this browser's storage is full. Delete a saved result or a saved run first." }); return false; }
+    catch { this.setState({ optSaveError: Component.t("Could not save: this browser's storage is full. Delete a saved result or a saved run first.") }); return false; }
   }
   /** The record for one answer. A hand save and an automatic one are the same thing but for `auto`. */
   optSaveRecord(mode, auto) {
@@ -1159,7 +1180,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=0461699b54e2");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=7d72a9b7df80");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1180,9 +1201,9 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=0461699b54e2");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=7d72a9b7df80");
       const { meta, ranked, curves } = fromCsv(await file.text());
-      if (meta.mode && meta.mode !== "skills") throw new Error(`that CSV is a ${meta.mode} answer, and this is the skill tool`);
+      if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
         ...Component.OPT_CLEAR.skills, upMode: "skills", optSaveError: "", optRestoredAt: null,
         skillHead: { zone: meta.zone, difficultyTier: meta.difficultyTier, player: meta.player, hours: meta.hours,
@@ -1202,9 +1223,9 @@ class Component extends DCLogic {
   }
   // The party export userscript runs on the game's pages, not here, so the page cannot see it running. What it can
   // see is an import the script made: only the script writes the `skilling` block (enhancing/alchemy) on a
-  // character. Once one has been imported the header's install link stays hidden in this browser (operator,
-  // 2026-09-19).
-  static PARTY_SCRIPT_URL = "https://greasyfork.org/en/scripts/596494-mwi-party-export";
+  // character. Once one has been imported, the badge ZoneSim shows above the import box stays hidden in this
+  // browser (operator, 2026-09-19). The flag is WRITTEN here and READ there, through the shared key below --
+  // this file no longer shows a link of its own, since the header's left slot is the language picker now.
   static PARTY_SCRIPT_KEY = "mwi.zone.partyScriptSeen";
   static fromPartyScript(players) { return (Array.isArray(players) ? players : []).some(p => p?.record?.skilling || p?.skilling); }
   static partyScriptSeenBefore() { try { return localStorage.getItem(Component.PARTY_SCRIPT_KEY) === "1"; } catch { return false; } }
@@ -1243,7 +1264,7 @@ class Component extends DCLogic {
     const free = Component.SPEED_ITEMS.find(h => !list.some(g => g.itemHrid === h)) || Component.SPEED_ITEMS[0];
     this.setEnh({ speedGear: [...list, { itemHrid: free, enhancementLevel: 0 }] });
   }
-  upNames() { return (this.state.party || []).map((p, i) => p?.record?.name || `Player ${i + 1}`); }
+  upNames() { return (this.state.party || []).map((p, i) => p?.record?.name || Component.tf("Player {n}", { n: i + 1 })); }
   upBody() {
     const num = (k, fb) => { const n = Number(this.upVal(k)); return Number.isFinite(n) ? n : fb; };
     const metric = this.upVal("metric"), skill = this.upVal("skill"), player = this.upVal("player"), measure = this.upVal("measure");
@@ -1379,9 +1400,9 @@ class Component extends DCLogic {
     const n = Number(this.upVal("budgetMinutes")), budget = Number.isFinite(n) ? n : 15;
     const left = budget * 60000 - (Date.now() - (this._upT0 || Date.now()));
     if (!Number.isFinite(left)) return "";
-    if (left <= 0) return `past ${budget} min \u00b7 finishing this round`;
+    if (left <= 0) return Component.tf("past {budget} min \u00b7 finishing this round", { budget });
     const t = Math.round(left / 1000);
-    return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")} left of ${budget} min`;
+    return Component.tf("{time} left of {budget} min", { time: `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`, budget });
   }
   /**
    * A gain measured in clears an hour, said as what it does to the average run time.
@@ -1405,10 +1426,10 @@ class Component extends DCLogic {
     // "13:60", which is not a time. The m suffix says these are minutes and seconds, not seconds and tenths.
     const mmss = t => { const r = Math.round(t); return `${Math.floor(r / 60)}:${String(r % 60).padStart(2, "0")}m`; };
     // "faster" and "slower" rather than a signed number of seconds, which is a riddle.
-    const text = Math.abs(secs) < 0.05 ? "no change to the run" : `${span(secs)} ${secs < 0 ? "faster" : "slower"} per run`;
+    const text = Math.abs(secs) < 0.05 ? Component.t("no change to the run") : (secs < 0 ? Component.tf("{t} faster per run", { t: span(secs) }) : Component.tf("{t} slower per run", { t: span(secs) }));
     // A column already headed "Faster a run" does not need every cell to repeat it; a line standing on its
     // own does. Both forms, used where each belongs.
-    const short = Math.abs(secs) < 0.05 ? "no change" : `${span(secs)} ${secs < 0 ? "faster" : "slower"}`;
+    const short = Math.abs(secs) < 0.05 ? "no change" : (secs < 0 ? Component.tf("{t} faster", { t: span(secs) }) : Component.tf("{t} slower", { t: span(secs) }));
     return { secs, se, text, short, withError: `${text}${se == null ? "" : ` \u00b1 ${se.toFixed(1)} s`}`,
       from: mmss(3600 / C), to: mmss(3600 / (C + d)) };
   }
@@ -1490,7 +1511,7 @@ class Component extends DCLogic {
     // each other, and the word "average" is doing real work. The error divides with it, exactly, because
     // dividing by a constant divides the spread by the same constant.
     const xpEach = !measured && partyN > 1;
-    const scope = measured ? `for ${measured}` : xpEach ? `per player, averaged over ${partyN}` : "";
+    const scope = measured ? Component.tf("for {who}", { who: measured }) : xpEach ? Component.tf("per player, averaged over {n}", { n: partyN }) : "";
     const d = n => `${Number(n) >= 0 ? "+" : "\u2212"}${Math.abs(Number(n) || 0).toFixed(2)}`;
     const xpd = n => `${Number(n) >= 0 ? "+" : "\u2212"}${nf(Math.abs(Number(n) || 0))}`;
     // Whose trigger it is. Three players in one party can all carry Frenzy and Berserk, so the ability name
@@ -1502,11 +1523,11 @@ class Component extends DCLogic {
     const steps = (s.trigSteps || []).map((x, i) => ({
       key: `${i}`, who: whoOf(x.player), ability: x.abilityName || "",
       full: `${whoOf(x.player)}${x.abilityName || ""} ${x.condition || ""}`.trim(),
-      pass: `pass ${x.pass ?? 1}`, cond: x.condition || "",
-      move: x.changed ? `${nf(x.from)} \u2192 ${nf(x.to)}` : `kept ${nf(x.from)}`,
+      pass: Component.tf("pass {n}", { n: x.pass ?? 1 }), cond: x.condition || "",
+      move: x.changed ? `${nf(x.from)} \u2192 ${nf(x.to)}` : Component.tf("kept {v}", { v: nf(x.from) }),
       changed: !!x.changed,
       // EPH decides each step; its XP change on the same seeds is shown beside it.
-      gain: x.changed ? `${(t => (t ? t.withError : `${d(x.delta)} EPH \u00b1 ${(Number(x.deltaSE) || 0).toFixed(2)}`))(this.runTimeOf(base, x.delta, x.deltaSE))}${x.deltaXp == null ? "" : ` \u00b7 ${xpd(x.deltaXp / (xpEach ? partyN : 1))} XP / h${xpEach ? " a player" : ""}`}` : "",
+      gain: x.changed ? `${(t => (t ? t.withError : Component.tf("{d} EPH \u00b1 {se}", { d: d(x.delta), se: (Number(x.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, x.delta, x.deltaSE))}${x.deltaXp == null ? "" : (xpEach ? Component.tf(" \u00b7 {xp} XP / h a player", { xp: xpd(x.deltaXp / partyN) }) : Component.tf(" \u00b7 {xp} XP / h", { xp: xpd(x.deltaXp) }))}` : "",
       style: x.changed ? "color:var(--color-accent-300)" : "",
     }));
     const done = s.trigDone || null;
@@ -1526,17 +1547,17 @@ class Component extends DCLogic {
     const head = s.trigHead || null;
     const targets = (head?.targets || []).map(t => ({
       text: `${whoOf(t.player)}${t.abilityName || t.ability} \u00b7 ${t.condition} ${nf(t.value)}`,
-      share: t.damagePerHour ? `${nf(t.damagePerHour)} dmg/h` : "" }));
+      share: t.damagePerHour ? Component.tf("{n} dmg/h", { n: nf(t.damagePerHour) }) : "" }));
     return {
       passes: String(this.modeVal("triggers", "passes")),
       setPasses: e => this.setMode("triggers", { passes: Math.max(1, Math.floor(Number(e.target.value) || 1)) }),
       running: !!s.trigRunning, idle: !s.trigRunning && !(s.trigSteps || []).length && !s.trigDone && !s.trigError,
       error: s.trigError || "", noClears: this.noClearsNote(s, head, "triggers"),
       run: () => this.runMode("triggers"),
-      stage: head ? `${head.stage || "measuring"}${head.partyDps ? ` \u00b7 party DPS ${nf(head.partyDps)}` : ""}${s.trigRunning ? ` \u00b7 ${this.runClock()}` : ""}` : "measuring the party as it stands\u2026",
+      stage: head ? `${Component.t(head.stage || "measuring")}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.runClock()}` : ""}` : Component.t("measuring the party as it stands\u2026"),
       targets, hasTargets: targets.length > 0,
       steps, hasSteps: steps.length > 0,
-      combined: combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : `${d(combined.delta ?? combined.deltaEph)} encounters per hour \u00b1 ${(Number(combined.deltaSE) || 0).toFixed(2)}`))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : ` \u00b7 ${xpd(combined.deltaXp / (xpEach ? partyN : 1))} XP / h \u00b1 ${nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1))}${scope ? ` ${scope}` : ""}`} · ${nf(combined.seeds)} fresh seeds` : "",
+      combined: combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
       // Send the tuned values to the party on Setup. Only ever from a FINISHED answer: a half-walked list is
@@ -1546,7 +1567,7 @@ class Component extends DCLogic {
         { detail: { changes: s.trigDone?.changes || [] } })),
       applyNote: (() => { const a = s.trigApplied;
         if (!a) return "";
-        return `${a.applied} value${a.applied === 1 ? "" : "s"} written to the party on Setup${a.missed ? ` \u00b7 ${a.missed} no longer in it` : ""}`; })(),
+        return (a.applied === 1 ? Component.tf("{n} value written to the party on Setup", { n: a.applied }) : Component.tf("{n} values written to the party on Setup", { n: a.applied })) + (a.missed ? Component.tf(" \u00b7 {n} no longer in it", { n: a.missed }) : ""); })(),
       hasApplyNote: !!s.trigApplied,
       noChange: !!done && !changes.length,
     };
@@ -1558,10 +1579,10 @@ class Component extends DCLogic {
     const b = head?.baseline;
     if (!b || !b.dungeon || Number(b.clearsPerHour) > 0) return "";
     const z = (s.zones || []).find(x => x.hrid === head.zone);
-    const where = `${z?.name || "this dungeon"} T${head.difficultyTier ?? 0}`;
-    const what = mode === "triggers" ? "no trigger value can show a gain" : "no level can show a gain in clears";
-    const next = mode === "triggers" ? "Try an easier tier, or a stronger party." : "Try an easier tier, or switch the graph to XP / h, which still moves.";
-    return `This party does not clear ${where}: 0 full clears per hour as it stands (${Number(b.deathsPerHour || 0).toFixed(1)} deaths/h), so ${what} and every EPH figure reads zero. ${next}`;
+    const where = `${z?.name || Component.t("this dungeon")} T${head.difficultyTier ?? 0}`;
+    const what = mode === "triggers" ? Component.t("no trigger value can show a gain") : Component.t("no level can show a gain in clears");
+    const next = mode === "triggers" ? Component.t("Try an easier tier, or a stronger party.") : Component.t("Try an easier tier, or switch the graph to XP / h, which still moves.");
+    return Component.tf("This party does not clear {where}: 0 full clears per hour as it stands ({deaths} deaths/h), so {what} and every EPH figure reads zero. {next}", { where, deaths: Number(b.deathsPerHour || 0).toFixed(1), what, next });
   }
   // The skill curves: efficiency gained against days of levelling, one line per skill, and the same points as a
   // ranked list. Every curve spans the same horizon, so the lines are comparable by eye.
@@ -1615,7 +1636,7 @@ class Component extends DCLogic {
       color: HUE[c.skill] || "var(--color-neutral-100)",
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
-        tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 ${asTime ? (this.runTimeOf(base, p.deltaEph ?? p.delta)?.text || "") : `+${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH`}${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the projection" : ""}` })),
+        tip: Component.tf("{skill} +{levels} \u00b7 {days} days \u00b7 {gain}", { skill: c.skill, levels: p.levels, days: (Number(p.days) || 0).toFixed(1), gain: asTime ? (this.runTimeOf(base, p.deltaEph ?? p.delta)?.text || "") : Component.tf("+{n} EPH", { n: (Number(p.deltaEph ?? p.delta) || 0).toFixed(2) }) }) + (p.deltaXp == null ? "" : Component.tf(" \u00b7 +{n} XP/h", { n: nf(p.deltaXp) })) + (p.beyondHorizon ? Component.t(" \u00b7 past the projection") : "") })),
     }));
     // Ticks at the quarters of each axis. The header states the exact extents, so these are rounded: they are
     // for reading a point off the chart, and a label wider than the 34px gutter would cost more than it gives.
@@ -1646,11 +1667,11 @@ class Component extends DCLogic {
     const ranked = (done?.ranked || rows).slice().sort((a, b) => (Number(b.perHour) || 0) - (Number(a.perHour) || 0)).map(r => ({
       skill: `${r.skill} +${r.levels ?? 1}`,
       who: (s.party || []).length > 1 ? (r.player || "") : "",
-      gain: asTime ? (this.runTimeOf(base, r.delta)?.short || "") : `+${(Number(r.delta) || 0).toFixed(2)} EPH`,
-      xp: r.deltaXp == null ? "" : `+${nf(r.deltaXp)} XP / h`,
+      gain: asTime ? (this.runTimeOf(base, r.delta)?.short || "") : Component.tf("+{n} EPH", { n: (Number(r.delta) || 0).toFixed(2) }),
+      xp: r.deltaXp == null ? "" : Component.tf("+{n} XP / h", { n: nf(r.deltaXp) }),
       se: r.deltaSE == null ? "" : asTime ? `\u00b1 ${(this.runTimeOf(base, r.delta, r.deltaSE)?.se ?? 0).toFixed(1)} s` : `\u00b1 ${(Number(r.deltaSE) || 0).toFixed(2)}`,
-      cost: r.hours == null ? "not trained by this style"
-        : `${nf(r.xpCost)} XP \u00b7 ${(Number(r.days) || 0).toFixed(1)} days${r.beyondHorizon ? " (past the projection)" : ""}`,
+      cost: r.hours == null ? Component.t("not trained by this style")
+        : Component.tf("{xp} XP \u00b7 {days} days", { xp: nf(r.xpCost), days: (Number(r.days) || 0).toFixed(1) }) + (r.beyondHorizon ? Component.t(" (past the projection)") : ""),
       // The rate the ranking is on: what a day spent levelling buys. Gains at the top end are fractions of an
       // encounter over months, so a fixed 3 decimals printed 0.000 for every row — the scale is chosen per row.
       per: (() => { const v = r.perHour != null ? Number(r.perHour) * 24
@@ -1667,8 +1688,8 @@ class Component extends DCLogic {
       setPoints: e => this.setMode("skills", { points: Math.max(1, Math.floor(Number(e.target.value) || 10)) }),
       charm: this.modeVal("skills", "charm"),
       setCharm: e => this.setMode("skills", { charm: e.target.value }),
-      charmOpts: [{ value: "current", label: "the player's own charm" },
-        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: `${t[0].toUpperCase()}${t.slice(1)} charm` }))],
+      charmOpts: [{ value: "current", label: Component.t("the player's own charm") },
+        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: Component.tf("{name} charm", { name: `${t[0].toUpperCase()}${t.slice(1)}` }) }))],
       charmLevel: String(this.modeVal("skills", "charmLevel")),
       setCharmLevel: e => this.setMode("skills", { charmLevel: Math.max(0, Math.floor(Number(e.target.value) || 0)) }),
       perOpen: !!s.skillPerOpen,
@@ -1680,9 +1701,9 @@ class Component extends DCLogic {
         const set = on.filter(k => per[k]?.charm).length;
         const own = on.filter(k => !per[k]?.charm && owned[k]).length;
         // How many skills will actually be measured leads, because that is what the run costs.
-        const which = on.length === Component.UP_SKILLS.length ? "all 7 skills" : `${on.length} of ${Component.UP_SKILLS.length} skills`;
-        return [which, set ? `${set} set` : "", own ? `${own} from ${who}'s bag` : "",
-          !set && !own ? (who ? "held, or Grandmaster +7" : "one player at a time") : ""]
+        const which = on.length === Component.UP_SKILLS.length ? "all 7 skills" : Component.tf("{n} of {total} skills", { n: on.length, total: Component.UP_SKILLS.length });
+        return [which, set ? Component.tf("{name} set", { name: set }) : "", own ? Component.tf("{item} from {who}'s bag", { item: own, who }) : "",
+          !set && !own ? (who ? Component.t("held, or Grandmaster +7") : Component.t("one player at a time")) : ""]
           .filter(Boolean).join(" \u00b7 "); })(),
       perSkills: (() => { const owned = this.ownedCharms(this.upVal("player")), on = new Set(this.skillsOn());
         return Component.UP_SKILLS.map(k => { const per = (this.modeVal("skills", "charms") || {})[k] || {}, o = owned[k];
@@ -1695,29 +1716,35 @@ class Component extends DCLogic {
           level: String(per.charm ? (per.charmLevel ?? 0) : eff.charmLevel),
           levelDisabled: false,
           owned: !per.charm && o ? "owned" : "",
-          title: want ? (o ? `held: ${o.charm} charm +${o.charmLevel}` : "Not in the bag — costed on a Grandmaster charm +7")
-            : "Not measured — tick it to put this skill back in the search",
+          title: want ? (o ? Component.tf("held: {charm} charm +{level}", { charm: o.charm, level: o.charmLevel }) : Component.t("Not in the bag — costed on a Grandmaster charm +7"))
+            : Component.t("Not measured — tick it to put this skill back in the search"),
           setLevel: e => setPer({ charm: per.charm || eff.charm, charmLevel: Math.max(0, Math.floor(Number(e.target.value) || 0)) }) }; }); })(),
-      perOpts: [{ value: "", label: "the charm they hold, or Grandmaster +7" },
-        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: `${t[0].toUpperCase()}${t.slice(1)} charm` }))],
+      perOpts: [{ value: "", label: Component.t("the charm they hold, or Grandmaster +7") },
+        ...((s.limits?.skills?.charmTiers) || []).map(t => ({ value: t, label: Component.tf("{name} charm", { name: `${t[0].toUpperCase()}${t.slice(1)}` }) }))],
       noneOn: this.skillsOn().length === 0,
       running: !!s.skillRunning, error: s.skillError || "", noClears: this.noClearsNote(s, s.skillHead, "skills"),
       idle: !s.skillRunning && !rows.length && !done && !s.skillError,
       run: () => this.runMode("skills"),
-      stage: `${s.skillHead?.stage || "measuring how fast each skill levels\u2026"}${s.skillRunning ? ` \u00b7 ${this.runClock()}` : ""}`,
+      stage: `${Component.t(s.skillHead?.stage || "measuring how fast each skill levels\u2026")}${s.skillRunning ? ` \u00b7 ${this.runClock()}` : ""}`,
       lines, hasCurves: lines.length > 0,
-      axisY: `${metric === "xp" ? nf(maxY) : asTime ? maxY.toFixed(1) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`, axisX: `${horizon} days`,
+      axisY: `${metric === "xp" ? nf(maxY) : asTime ? maxY.toFixed(1) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`, axisX: Component.tf("{n} days", { n: horizon }),
+      // Same reason: "0 to X · up to Y" is a range, and where the word "to" sits inside one is the language's
+      // business, not the markup's.
+      axisNote: Component.tf("0 to {x} · up to {y}", {
+        x: Component.tf("{n} days", { n: horizon }),
+        y: `${metric === "xp" ? nf(maxY) : asTime ? maxY.toFixed(1) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`,
+      }),
       xTicks, yTicks, dots, unit, asTime,
-      gainHead: asTime ? "Faster per run" : "EPH",
+      gainHead: asTime ? Component.t("Faster per run") : "EPH",
       perHead: asTime ? "s / day" : "EPH / day",
       ephLabel: asTime ? "Run time" : "EPH",
-      chartLabel: `${unit} gained against days of levelling, one line per skill, 0 to ${horizon} days by 0 to ${fmtVal(maxY)} ${unit}`,
+      chartLabel: Component.tf("{unit} gained against days of levelling, one line per skill, 0 to {days} days by 0 to {max} {unit}", { unit, days: horizon, max: fmtVal(maxY) }),
       metricEph: metric === "eph", metricXp: metric === "xp",
       ephStyle: metric === "eph" ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
       xpStyle: metric === "xp" ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
       pickEph: () => this.setState({ skillMetric: "eph" }), pickXp: () => this.setState({ skillMetric: "xp" }),
       ranked, hasRanked: ranked.length > 0,
-      note: "A level also speeds up its own levelling; that is not compounded in — each point is the rate at the new level.",
+      note: Component.t("A level also speeds up its own levelling; that is not compounded in — each point is the rate at the new level."),
     };
   }
   upgradeVals() {
@@ -1784,7 +1811,7 @@ class Component extends DCLogic {
         title: `${r.name || itemName(r.itemHrid || r.abilityHrid)} ${r.from} \u2192 ${r.to}`,
         gain: paceAsTime ? (this.runTimeOf(upBase, d)?.short || "") : `${d >= 0 ? "+" : "\u2212"}${nf(Math.abs(d))} ${unit}`,
         se: m.se == null ? "" : paceAsTime ? `\u00b1 ${(this.runTimeOf(upBase, d, m.se)?.se ?? 0).toFixed(1)} s` : `\u00b1 ${nf(m.se)}`,
-        pctLine: pct ? `${pct} of baseline` : "",
+        pctLine: pct ? Component.tf("{pct} of baseline", { pct }) : "",
         per: m.per == null ? "\u2014"
           // Seconds saved per million coins is inherently small -- an upgrade costs hundreds of millions -- so
           // a fixed 2 decimals printed 0.00 on every row and threw away the column's whole job, which is to
@@ -1796,29 +1823,29 @@ class Component extends DCLogic {
           : paceAsTime ? (() => { const sec = -(this.runTimeOf(upBase, Number(m.per))?.secs ?? 0) * 1000, a = Math.abs(sec);
             return a >= 1 ? sec.toFixed(2) : a >= 0.01 ? sec.toFixed(3) : a > 0 ? sec.toExponential(1) : "0"; })()
           : Number(m.per).toFixed(Number(m.per) < 10 ? 2 : 1),
-        cost: cost.priced ? `${coin(cost.coins)} coins` : "no price",
+        cost: cost.priced ? Component.tf("{n} coins", { n: coin(cost.coins) }) : "no price",
         // Materials and time are now separate figures: two rows with the same materials and very different
         // chain lengths are not the same price, and the split is the only way to see which is which.
         split: cost.timeCoins != null && Number(cost.timeCoins) > 0
-          ? `${coin(cost.materialCoins)} materials + ${coin(cost.timeCoins)} over ${(Number(cost.hours) || 0).toFixed(1)} h` : "",
+          ? Component.tf("{materials} materials + {time} over {hours} h", { materials: coin(cost.materialCoins), time: coin(cost.timeCoins), hours: (Number(cost.hours) || 0).toFixed(1) }) : "",
         noteLine: cost.note || "",
         route: Component.UP_ROUTES[cost.route] || cost.route || "",
         note: cost.note || "",
-        copy: step?.copy ? `make a +${step.copy.level} ${itemName(step.copy.hrid)} and mirror it` : "",
-        alt: cost.alternative ? `next cheapest: ${(Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || "").toLowerCase()} ${coin(cost.alternative.coins)}` : "",
+        copy: step?.copy ? Component.tf("make a +{level} {item} and mirror it", { level: step.copy.level, item: itemName(step.copy.hrid) }) : "",
+        alt: cost.alternative ? Component.tf("next cheapest: {route} {coins}", { route: Component.t((Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || "").toLowerCase()), coins: coin(cost.alternative.coins) }) : "",
         warning: cost.warning || "",
         // A twin carries the index of the candidate it copies — index 0 is a real one, so the test is != null.
         sameAs: r.sameAs == null ? "" : (() => { const o = byIndex.get(r.sameAs);
-          return `same stats as ${o ? `${o.name || itemName(o.itemHrid || o.abilityHrid)} +${o.to}` : `candidate ${r.sameAs}`}`; })(),
-        meas: `${nf(r.seeds)} seeds \u00b7 round ${r.rounds ?? "\u2014"}`,
-        risk: r.deathsPerHour == null ? "" : `${Number(r.deathsPerHour).toFixed(2)} deaths/h \u00b7 ${Number(r.failedPerHour || 0).toFixed(2)} failed/h`,
+          return Component.tf("same stats as {what}", { what: o ? `${o.name || itemName(o.itemHrid || o.abilityHrid)} +${o.to}` : Component.tf("candidate {n}", { n: r.sameAs }) }); })(),
+        meas: Component.tf("{seeds} seeds \u00b7 round {round}", { seeds: nf(r.seeds), round: r.rounds ?? "\u2014" }),
+        risk: r.deathsPerHour == null ? "" : Component.tf("{deaths} deaths/h \u00b7 {failed} failed/h", { deaths: Number(r.deathsPerHour).toFixed(2), failed: Number(r.failedPerHour || 0).toFixed(2) }),
       };
     };
     const head = s.upHead || null;
     const budget = Math.max(5, Number(v("budgetMinutes")) || 15);
     const elapsed = s.upRunning ? Math.max(Number(head?.elapsedMs) || 0, Date.now() - (this._upT0 || Date.now())) : Number(head?.elapsedMs) || 0;
     const enh = this.upEnhancer();
-    const tea = (Component.UP_TEAS.find(t => t[0] === enh.tea) || ["none", "no tea"])[1];
+    const tea = Component.t((Component.UP_TEAS.find(t => t[0] === enh.tea) || ["none", "no tea"])[1]);
     // The eight enhancer hrids come from zoneLimits().upgrades.enhancerTools, checked against the game data on
     // the kernel's side, so the page keeps no list of its own — only the tool in hand if the limits never land.
     const tools = s.limits?.upgrades?.enhancerTools || [enh.tool.hrid];
@@ -1833,7 +1860,7 @@ class Component extends DCLogic {
     return {
       restored: !!s.optRestoredAt && !s.upRunning && !s.trigRunning && !s.skillRunning,
       restoredNote: s.optRestoredAt ? (() => { const mins = Math.max(1, Math.round((Date.now() - s.optRestoredAt) / 60000));
-        return `This answer was measured ${mins < 60 ? `${mins} min` : `${(mins / 60).toFixed(1)} h`} ago and restored with the page. Run again if the party has changed since.`; })() : "",
+        return Component.tf("This answer was measured {ago} ago and restored with the page. Run again if the party has changed since.", { ago: mins < 60 ? Component.tf("{n} min", { n: mins }) : Component.tf("{n} h", { n: (mins / 60).toFixed(1) }) }); })() : "",
       mode, onUpgrades: mode === "upgrades", onTriggers: mode === "triggers", onSkills: mode === "skills",
       // Clear results: only for the tool on screen, only when it holds an answer (or an error), never mid-search.
       canClear: !(s.upRunning || s.trigRunning || s.skillRunning) && (mode === "upgrades"
@@ -1866,16 +1893,16 @@ class Component extends DCLogic {
       noParty: !s.booting && !(s.party || []).length,
       goSetup: () => this.pick("setup"),
       scope: v("player") || "", setScope: e => set({ player: e.target.value, measure: "" }),
-      scopeOpts: [{ value: "", label: `The whole party (${names.length})` },
-        ...names.map(n => ({ value: n, label: n === this.importerName() ? `${n} — your character` : n }))],
+      scopeOpts: [{ value: "", label: Component.tf("The whole party ({n})", { n: names.length }) },
+        ...names.map(n => ({ value: n, label: n === this.importerName() ? Component.tf("{name} — your character", { name: n }) : n }))],
       // `goal.player` measures one member's share whether or not the search is narrowed to that member's items:
       // on a party search it answers "which upgrade, anyone's, helps me most" — so the field is always offered.
       onePlayer: names.length > 0,
-      measureNote: v("player") ? "Only this player's items and abilities are offered. The whole party still fights."
-        : "Every member's upgrades are offered — including a teammate's, which can speed up your own clears.",
+      measureNote: v("player") ? Component.t("Only this player's items and abilities are offered. The whole party still fights.")
+        : Component.t("Every member's upgrades are offered — including a teammate's, which can speed up your own clears."),
       measure: v("measure") || "", setMeasure: e => set({ measure: e.target.value }),
-      measureOpts: [{ value: "", label: v("player") ? "their own share" : "the whole party" },
-        ...names.map(n => ({ value: n, label: `${n}'s share` }))],
+      measureOpts: [{ value: "", label: v("player") ? Component.t("their own share") : Component.t("the whole party") },
+        ...names.map(n => ({ value: n, label: Component.tf("{name}'s share", { name: n }) }))],
       isXp: metric === "xp",
       // .seg-opt is the design system's radio label and paints no ground of its own, so both states are named
       // here — an unpainted <button> would fall back to the browser's own grey chrome on a dark page.
@@ -1888,7 +1915,7 @@ class Component extends DCLogic {
       skill: v("skill") || "", setSkill: e => set({ skill: e.target.value }),
       skillOpts: [{ value: "", label: "Every skill" }, ...Component.UP_SKILLS.map(k => ({ value: k, label: k[0].toUpperCase() + k.slice(1) }))],
       zone: v("zone") || "", setZone: e => set({ zone: e.target.value, tier: 0 }),
-      zoneOpts: [{ value: "", label: zones.length ? "Pick a zone" : "loading the zone list\u2026" }, ...zones.map(z => ({ value: z.hrid, label: z.name }))],
+      zoneOpts: [{ value: "", label: zones.length ? Component.t("Pick a zone") : Component.t("loading the zone list\u2026") }, ...zones.map(z => ({ value: z.hrid, label: Component.t(z.name) }))],
       tier: String(tier), setTier: e => set({ tier: Number(e.target.value) || 0 }),
       tierOpts: Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
       budgets: Component.UP_BUDGETS.map(([m, label]) => ({ label,
@@ -1901,35 +1928,39 @@ class Component extends DCLogic {
       abilityLevels: String(v("abilityLevels")), setAbilityLevels: e => set({ abilityLevels: e.target.value }),
       pouch: !!v("includePouch"), togglePouch: () => set({ includePouch: !v("includePouch") }),
       charms: !!v("includeCharms"), toggleCharms: () => set({ includeCharms: !v("includeCharms") }),
-      premium: `${Math.round((Number(v("bookPremium")) || 0) * 100)} %`,
+      // One sentence, one node: the percentage is substituted after translation so the clause can be ordered
+      // however the language needs. It used to be "Ability books are priced up to" + value + "over the lowest
+      // ask", which only reads as a sentence in a language shaped like English.
+      booksNote: Component.tf("Ability books are priced up to {premium} over the lowest ask (an instant buy).",
+        { premium: `${Math.round((Number(v("bookPremium")) || 0) * 100)} %` }),
       // Every part of the form is a section that opens, and all of them start closed: the answer each one holds
       // is on its own header, so the column reads as a summary of the search until something needs changing.
       sec: (() => { const open = s.upSec || {};
         const defs = [
-          ["scope", v("player") ? `${v("player")}${v("measure") ? ` \u00b7 ${v("measure")}'s share` : ""}` : `the whole party (${names.length})`],
+          ["scope", v("player") ? `${v("player")}${v("measure") ? Component.tf(" \u00b7 {name}'s share", { name: v("measure") }) : ""}` : Component.tf("the whole party ({n})", { n: names.length })],
           ["where", zone ? `${zone.name} \u00b7 T${tier}` : "no zone picked"],
-          ["budget", `${budget} min`],
-          ["tries", `${["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)]} \u00b7 abilities +${v("abilityLevels")}${v("includeCharms") ? " \u00b7 charms" : ""}${v("includePouch") ? " \u00b7 pouch" : ""}`],
-          ["measure", `${nf(v("hours"))} h \u00b7 ${nf(v("seeds"))} seeds`],
-          ["enh", v("market") ? "market only" : `level ${enh.level} \u00b7 ${itemName(enh.tool.hrid)} +${enh.tool.level}`],
+          ["budget", Component.tf("{n} min", { n: budget })],
+          ["tries", `${Component.t(["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)])}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
+          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(v("hours")), seeds: nf(v("seeds")) })],
+          ["enh", v("market") ? "market only" : Component.tf("level {level} \u00b7 {tool} +{toolLevel}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level })],
           // Skill levelling only: how far ahead the curves look, and how many points each gets.
-          ["horizon", `${Number(this.modeVal("skills", "horizonDays")) || 90} days \u00b7 ${Number(this.modeVal("skills", "points")) || 10} samples`],
+          ["horizon", Component.tf("{days} days \u00b7 {samples} samples", { days: Number(this.modeVal("skills", "horizonDays")) || 90, samples: Number(this.modeVal("skills", "points")) || 10 })],
           // Trigger values only: how many times the list is walked.
-          ["passes", (() => { const n = Number(this.modeVal("triggers", "passes")) || 1; return `${n} ${n === 1 ? "walk" : "walks"}`; })()],
+          ["passes", (() => { const n = Number(this.modeVal("triggers", "passes")) || 1; return (n === 1 ? Component.tf("{n} walk", { n }) : Component.tf("{n} walks", { n })); })()],
         ];
         return Object.fromEntries(defs.map(([k, summary]) => [k, { summary, open: !!open[k],
           caret: open[k] ? "\u25be" : "\u25b8",
           toggle: () => this.setState(st => ({ upSec: { ...st.upSec, [k]: !st.upSec?.[k] } })) }])); })(),
       enhEditable: !v("market"),
-      enhSummary: v("market") ? "priced by the market alone \u2014 no enhancing"
-        : `enhancing ${enh.level} \u00b7 ${itemName(enh.tool.hrid)} +${enh.tool.level} \u00b7 ${tea}${enh.blessed ? " \u00b7 blessed" : ""} \u00b7 pouch +${enh.pouchLevel} \u00b7 observatory ${enh.observatory} \u00b7 ${(Number(enh.capeProtections) || 0) > 0 ? `${nf(Number(enh.capeProtections))} protection capes` : "capes on mirrors"}${(Number(enh.ratePerHour) || 0) > 0 ? ` \u00b7 ${coin(Number(enh.ratePerHour))}/h` : ""}`,
+      enhSummary: v("market") ? Component.t("priced by the market alone \u2014 no enhancing")
+        : Component.tf("enhancing {level} \u00b7 {tool} +{toolLevel} \u00b7 {tea}{blessed} \u00b7 pouch +{pouch} \u00b7 observatory {obs} \u00b7 {capes}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level, tea, blessed: enh.blessed ? Component.t(" \u00b7 blessed") : "", pouch: enh.pouchLevel, obs: enh.observatory, capes: (Number(enh.capeProtections) || 0) > 0 ? Component.tf("{n} protection capes", { n: nf(Number(enh.capeProtections)) }) : Component.t("capes on mirrors") }) + ((Number(enh.ratePerHour) || 0) > 0 ? ` \u00b7 ${coin(Number(enh.ratePerHour))}/h` : ""),
       market: !!v("market"), toggleMarket: () => set({ market: !v("market") }),
       enhLevel: String(enh.level), setEnhLevel: e => this.setEnh({ level: Number(e.target.value) || 0 }),
       enhTool: enh.tool.hrid, setEnhTool: e => this.setEnhTool({ hrid: e.target.value }),
       toolOpts: tools.map(h => ({ value: h, label: itemName(h) })),
       enhToolLevel: String(enh.tool.level), setEnhToolLevel: e => this.setEnhTool({ level: Number(e.target.value) || 0 }),
       tea: enh.tea, setTea: e => this.setEnh({ tea: e.target.value }),
-      teaOpts: Component.UP_TEAS.map(([value, label]) => ({ value, label })),
+      teaOpts: Component.UP_TEAS.map(([value, label]) => ({ value, label: Component.t(label) })),
       blessed: !!enh.blessed, toggleBlessed: () => this.setEnh({ blessed: !enh.blessed }),
       // Decomposing is what makes a spare worth anything — a cape cannot be sold, so its coin value is its
       // essences at the wearer's alchemy level.
@@ -1937,9 +1968,9 @@ class Component extends DCLogic {
       decCatalytic: !!enh.decompose?.catalyticTea,
       toggleCatalytic: () => this.setDec({ catalyticTea: !enh.decompose?.catalyticTea }),
       alchemyTea: enh.decompose?.alchemyTea || "none", setAlchemyTea: e => this.setDec({ alchemyTea: e.target.value }),
-      alchemyTeaOpts: Component.ALCHEMY_TEAS.map(([value, label]) => ({ value, label })),
+      alchemyTeaOpts: Component.ALCHEMY_TEAS.map(([value, label]) => ({ value, label: Component.t(label) })),
       catalyst: enh.decompose?.catalyst || "none", setCatalyst: e => this.setDec({ catalyst: e.target.value }),
-      catalystOpts: Component.CATALYSTS.map(([value, label]) => ({ value, label })),
+      catalystOpts: Component.CATALYSTS.map(([value, label]) => ({ value, label: Component.t(label) })),
       // The speed pieces, one editable row each. Only the best piece per slot counts, so a duplicate slot is
       // harmless rather than wrong — no validation beyond what the kernel already does.
       speedGear: (enh.speedGear || []).map((g, i) => ({
@@ -1954,13 +1985,13 @@ class Component extends DCLogic {
       rateM: String(Math.round(((Number(enh.ratePerHour) || 0) / 1e6) * 10) / 10),
       setRateM: e => this.setEnh({ ratePerHour: Math.max(0, Math.round((Number(e.target.value) || 0) * 1e6)) }),
       rateNote: (Number(enh.ratePerHour) || 0) > 0
-        ? "Charged against the hours a chain takes, so faster enhancing gear lowers a row's price without changing a single material."
-        : "No hourly charge: a chain costs only its materials, however long it takes.",
+        ? Component.t("Charged against the hours a chain takes, so faster enhancing gear lowers a row's price without changing a single material.")
+        : Component.t("No hourly charge: a chain costs only its materials, however long it takes."),
       capeProtections: String(Number(enh.capeProtections) || 0),
       setCapeProtections: e => this.setEnh({ capeProtections: Math.max(0, Math.floor(Number(e.target.value) || 0)) }),
       capeProtNote: (Number(enh.capeProtections) || 0) > 0
-        ? `The first ${nf(Number(enh.capeProtections) || 0)} protects spend spares you hold — valued at what decomposing them into essences fetches — and every protect after that is a Mirror of Protection.`
-        : "Capes cannot be bought, so every protect is priced as a Mirror of Protection. Raise this if you hold spares of that kind and would burn them first.",
+        ? Component.tf("The first {n} protects spend spares you hold — valued at what decomposing them into essences fetches — and every protect after that is a Mirror of Protection.", { n: nf(Number(enh.capeProtections) || 0) })
+        : Component.t("Capes cannot be bought, so every protect is priced as a Mirror of Protection. Raise this if you hold spares of that kind and would burn them first."),
       pouchLevel: String(enh.pouchLevel), setPouchLevel: e => this.setEnh({ pouchLevel: Number(e.target.value) || 0 }),
       observatory: String(enh.observatory), setObservatory: e => this.setEnh({ observatory: Number(e.target.value) || 0 }),
       running: !!s.upRunning, idleButton: !s.upRunning,
@@ -1968,27 +1999,27 @@ class Component extends DCLogic {
       // ZONE-62: the skills run additionally needs at least one skill ticked. The other two modes are unaffected,
       // which is why this is its own flag rather than a term in the shared one.
       skillsRunDisabled: !ready || !has || this.skillsOn().length === 0,
-      runNote: !has ? "" : !(s.party || []).length ? "" : !v("zone") ? "pick a zone first"
-        : `${names.length} player${names.length === 1 ? "" : "s"} \u00b7 ${zone ? `${zone.name} T${tier}` : ""} \u00b7 up to ${budget} min`,
+      runNote: !has ? "" : !(s.party || []).length ? "" : !v("zone") ? Component.t("pick a zone first")
+        : (names.length === 1 ? Component.tf("{n} player", { n: names.length }) : Component.tf("{n} players", { n: names.length })) + ` \u00b7 ${zone ? `${zone.name} T${tier}` : ""}` + Component.tf(" \u00b7 up to {n} min", { n: budget }),
       run: () => this.findUpgrades(), stop: () => this.stopUpgrades(),
       error: s.upError || "",
-      stage: head ? `${head.stage}${head.refining ? " \u00b7 refining" : ""} \u00b7 ${nf(head.live)} left \u00b7 ${nf(head.seedsPerCandidate)} seeds each${s.upRunning ? ` \u00b7 ${this.runClock()}` : ""}`
-        : "screening every upgrade\u2026",
+      stage: head ? `${Component.t(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.upRunning ? ` \u00b7 ${this.runClock()}` : ""}`
+        : Component.t("screening every upgrade\u2026"),
       pct: `${Math.min(100, (elapsed / (budget * 60000)) * 100).toFixed(1)}%`,
       idle: !rows.length && !s.upRunning && !s.upError,
       hasRows: priced.length > 0,
       rows: priced.map(mkRow),
       unpriced: unpriced.map(mkRow), hasUnpriced: unpriced.length > 0,
       // "Δ s a run" is not a column heading. Seconds off the run reads as its own thing.
-      gainHead: paceAsTime ? "Faster per run" : `\u0394 ${unit}`,
-      perHead: paceAsTime ? "s per 1 B" : `${unit} per 1 M`,
+      gainHead: paceAsTime ? Component.t("Faster per run") : `\u0394 ${unit}`,
+      perHead: paceAsTime ? "s per 1 B" : Component.tf("{unit} per 1 M", { unit }),
       // Changing the metric changes what the NEXT search refines on, not what these rows were measured for —
       // the finalists were chosen by the metric that was picked when Find upgrades ran.
       refinedNote: head?.refinedOn && head.refinedOn !== metric
-        ? `the finalists were chosen on ${head.refinedOn === "profit" ? "profit" : "XP"}, so this order is measured on the same seeds but not selected for` : "",
-      rankNote: s.upRunning ? "best so far \u2014 rows re-rank as rounds add seeds"
-        : `by gain per million coins, rows measured furthest first${maxRounds > 1 ? ` \u00b7 ${maxRounds} rounds deep` : ""}`,
-      done: s.upDone ? `${nf(s.upDone.evaluated ?? s.upDone.candidates)} upgrades measured in ${((Number(s.upDone.ms) || 0) / 60000).toFixed(1)} min${s.upDone.stoppedBy ? ` \u00b7 stopped by ${s.upDone.stoppedBy}` : s.upDone.stopped ? " \u00b7 stopped early" : ""}` : "",
+        ? Component.tf("the finalists were chosen on {metric}, so this order is measured on the same seeds but not selected for", { metric: head.refinedOn === "profit" ? Component.t("profit") : "XP" }) : "",
+      rankNote: s.upRunning ? Component.t("best so far \u2014 rows re-rank as rounds add seeds")
+        : Component.t("by gain per million coins, rows measured furthest first") + (maxRounds > 1 ? Component.tf(" \u00b7 {n} rounds deep", { n: maxRounds }) : ""),
+      done: s.upDone ? Component.tf("{n} upgrades measured in {min} min", { n: nf(s.upDone.evaluated ?? s.upDone.candidates), min: ((Number(s.upDone.ms) || 0) / 60000).toFixed(1) }) + (s.upDone.stoppedBy ? Component.tf(" \u00b7 stopped by {who}", { who: s.upDone.stoppedBy }) : s.upDone.stopped ? Component.t(" \u00b7 stopped early") : "") : "",
     };
   }
 
@@ -2028,13 +2059,12 @@ class Component extends DCLogic {
       onOptimize: s.tab === "optimize", onAbout: s.tab === "about",
       up: this.upgradeVals(),
       // Where the work happens, rather than which server answered — there is none.
-      serverStatus: s.booting ? "loading the simulator…" : s.error ? "the simulator did not load"
-        : `runs in your browser · ${lanes} lane${lanes === 1 ? "" : "s"} · wasm kernel`,
+      serverStatus: s.booting ? Component.t("loading the simulator…") : s.error ? Component.t("the simulator did not load")
+        : (lanes === 1 ? Component.tf("runs in your browser · {n} lane · wasm kernel", { n: lanes }) : Component.tf("runs in your browser · {n} lanes · wasm kernel", { n: lanes })),
       serverDot: s.booting || s.error ? "var(--color-neutral-600)" : "var(--color-accent)",
-      showPartyScript: !s.partyScriptSeen, partyScriptUrl: Component.PARTY_SCRIPT_URL,
       // The simulator's session came back from this browser's cache (ZoneSim's "zone-restored" event).
       restored: !!s.restoredAt,
-      restoredTip: s.restoredAt ? `The party, the queue and this session's runs, saved ${(() => { const m = Math.max(1, Math.round((Date.now() - s.restoredAt) / 60000)); return m < 60 ? `${m} min ago` : `${(m / 60).toFixed(1)} h ago`; })()}. Import again if anything changed in the game; the cache is dropped after 12 hours.` : "",
+      restoredTip: s.restoredAt ? Component.tf("The party, the queue and this session's runs, saved {ago}. Import again if anything changed in the game; the cache is dropped after 12 hours.", { ago: (() => { const m = Math.max(1, Math.round((Date.now() - s.restoredAt) / 60000)); return m < 60 ? Component.tf("{n} min ago", { n: m }) : Component.tf("{n} h ago", { n: (m / 60).toFixed(1) }); })() }) : "",
     };
   }
 }

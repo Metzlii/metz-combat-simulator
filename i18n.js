@@ -21,15 +21,36 @@ const STORE = "mwi.zone.lang";
 
 // A language is listed here once its file exists. `native` is what the language calls ITSELF, because a reader
 // looking for their own language is not helped by its English name.
+//
+// These are the eight the GAME ships, plus English, so every one of them is a language a player can already set
+// their client to -- and our names for the game's things are the game's own, pulled from its locale bundles by
+// scripts/pull-game-locales.mjs. What differs between them is how much of OUR prose is translated: Chinese has
+// the chrome and the About tab, the rest so far have the nouns. `tags` are the browser tags that should land
+// here, longest match first, which is the whole reason zh-Hant can exist beside zh.
 export const LANGUAGES = [
-  { code: "en", native: "English" },
-  { code: "zh", native: "中文" },
+  { code: "en", native: "English", tags: ["en"] },
+  { code: "es", native: "Español", tags: ["es"] },
+  { code: "fr", native: "Français", tags: ["fr"] },
+  { code: "ja", native: "日本語", tags: ["ja"] },
+  { code: "ko", native: "한국어", tags: ["ko"] },
+  { code: "pt", native: "Português", tags: ["pt"] },
+  { code: "ru", native: "Русский", tags: ["ru"] },
+  { code: "zh", native: "中文（简体）", tags: ["zh-cn", "zh-sg", "zh-hans", "zh"] },
+  { code: "zh-Hant", native: "中文（繁體）", tags: ["zh-tw", "zh-hk", "zh-mo", "zh-hant"] },
 ];
 
 let dict = Object.create(null);
 let lang = "en";
 
-/** The saved choice, else the browser's own language, else English. `zh-CN`, `zh-TW` and `zh` all mean zh. */
+/**
+ * The saved choice, else the browser's own language, else English.
+ *
+ * Matched LONGEST FIRST, one browser tag at a time: `zh-TW` has to reach Traditional before the bare `zh` rule
+ * can send it to Simplified, and a reader whose client is Traditional being handed Simplified is exactly the
+ * mismatch this whole feature exists to avoid. A tag nobody claims falls back to its base (`pt-BR` -> `pt`,
+ * `en-GB` -> `en`) before the next tag in the browser's list is tried at all, because the visitor's first
+ * preference beats a better match on their second.
+ */
 export function preferred() {
   try {
     const saved = localStorage.getItem(STORE);
@@ -38,9 +59,12 @@ export function preferred() {
   const tags = (globalThis.navigator?.languages?.length ? navigator.languages : [globalThis.navigator?.language])
     .filter(Boolean).map(String);
   for (const tag of tags) {
-    const base = tag.toLowerCase().split("-")[0];
-    const hit = LANGUAGES.find(l => l.code === base);
-    if (hit) return hit.code;
+    const parts = tag.toLowerCase().split("-");
+    for (let n = parts.length; n > 0; n--) {
+      const candidate = parts.slice(0, n).join("-");
+      const hit = LANGUAGES.find(l => l.tags.includes(candidate));
+      if (hit) return hit.code;
+    }
   }
   return "en";
 }
