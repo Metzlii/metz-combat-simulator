@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="ec403f115d23"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="8505ed23948b"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=ec403f115d23"></script>
+<script src="./support.js?v=8505ed23948b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ec403f115d23">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=8505ed23948b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=ec403f115d23">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ec403f115d23"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=8505ed23948b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=8505ed23948b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -451,6 +451,7 @@
                   <div class="seg" style="flex:none">
                     <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.xpStyle }}" onClick="{{ up.pickXp }}">XP / h</button>
                     <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.profitStyle }}" onClick="{{ up.pickProfit }}">Profit / h</button>
+                    <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.paceStyle }}" onClick="{{ up.pickPace }}">{{ up.paceLabel }}</button>
                   </div>
                   <sc-if value="{{ up.isXp }}" hint-placeholder-val="{{ true }}">
                     <select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;flex:none;width:130px" value="{{ up.skill }}" onChange="{{ up.setSkill }}">
@@ -618,7 +619,7 @@
                   <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
                     <h4 style="margin:0;font-size:15px">Gain against days of levelling</h4>
                     <div class="seg" style="flex:none">
-                      <button class="seg-opt" style="font-size:12.5px;{{ up.skills.ephStyle }}" onClick="{{ up.skills.pickEph }}">EPH</button>
+                      <button class="seg-opt" style="font-size:12.5px;{{ up.skills.ephStyle }}" onClick="{{ up.skills.pickEph }}">{{ up.skills.ephLabel }}</button>
                       <button class="seg-opt" style="font-size:12.5px;{{ up.skills.xpStyle }}" onClick="{{ up.skills.pickXp }}">XP / h</button>
                     </div>
                     <span class="text-muted" style="font-size:12.5px">0 to {{ up.skills.axisX }} · up to {{ up.skills.axisY }}</span>
@@ -666,7 +667,7 @@
               <sc-if value="{{ up.skills.hasRanked }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;flex-direction:column;gap:4px">
                   <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px 140px 150px 110px;gap:10px;padding:0 10px;font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase" class="text-muted">
-                    <span>Skill</span><span>EPH</span><span>XP / h</span><span>Cost</span><span style="text-align:right" title="The gain divided by the days of levelling it takes to reach — what the ranking is on">EPH / day</span>
+                    <span>Skill</span><span>{{ up.skills.gainHead }}</span><span>XP / h</span><span>Cost</span><span style="text-align:right" title="The gain divided by the days of levelling it takes to reach — what the ranking is on">{{ up.skills.perHead }}</span>
                   </div>
                   <sc-for list="{{ up.skills.ranked }}" as="r" hint-placeholder-count="5">
                     <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px 140px 150px 110px;gap:10px;align-items:baseline;padding:6px 10px;border-radius:var(--radius-sm);background:var(--color-bg);font-size:13px">
@@ -906,7 +907,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=ec403f115d23");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=8505ed23948b");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1065,7 +1066,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=ec403f115d23");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=8505ed23948b");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1086,7 +1087,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=ec403f115d23");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=8505ed23948b");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(`that CSV is a ${meta.mode} answer, and this is the skill tool`);
       this.setState({
@@ -1310,7 +1311,10 @@ class Component extends DCLogic {
     const mmss = t => `${Math.floor(t / 60)}:${String(Math.round(t % 60)).padStart(2, "0")}`;
     // "faster" and "slower" rather than a signed number of seconds, which is a riddle.
     const text = Math.abs(secs) < 0.05 ? "no change to the run" : `${span(secs)} ${secs < 0 ? "faster" : "slower"} a run`;
-    return { secs, se, text, withError: `${text}${se == null ? "" : ` \u00b1 ${se.toFixed(1)} s`}`,
+    // A column already headed "Faster a run" does not need every cell to repeat it; a line standing on its
+    // own does. Both forms, used where each belongs.
+    const short = Math.abs(secs) < 0.05 ? "no change" : `${span(secs)} ${secs < 0 ? "faster" : "slower"}`;
+    return { secs, se, text, short, withError: `${text}${se == null ? "" : ` \u00b1 ${se.toFixed(1)} s`}`,
       from: mmss(3600 / C), to: mmss(3600 / (C + d)) };
   }
   async runMode(mode) {
@@ -1448,9 +1452,20 @@ class Component extends DCLogic {
     const curves = (done?.curves || []).filter(c => (c.points || []).length);
     const horizon = Math.max(1, Number(this.modeVal("skills", "horizonDays")) || 90);
     const metric = s.skillMetric || "xp";
+    // A dungeon's speed is its average run time, here as everywhere else (ZONE-90). The efficiency figures are
+    // converted at the baseline and reported as SECONDS SAVED, positive being faster, so the column still reads
+    // "bigger is better". The ranking does not move: 3600/(C+d) is strictly decreasing in d, so seconds saved
+    // and clears gained are the same order. Open zones keep EPH, where encounters an hour is the real figure.
+    const base = s.skillDone?.baseline || s.skillHead?.baseline || null;
+    // A dungeon is a dungeon whichever way the graph is toggled: the ranked table carries its own efficiency
+    // column and the toggle has to be labelled for the mode it switches TO, so this does not depend on the
+    // metric. Only the CHART's plotted values do, below.
+    const asTime = !!base?.dungeon && Number(base.clearsPerHour) > 0;
+    const savedSecs = d => { const t = this.runTimeOf(base, d); return t ? -t.secs : 0; };
     // Every point carries both metrics, so the toggle plots the measurement rather than inferring one.
-    const valOf = (c, p) => Number(metric === "xp" ? p.deltaXp : (p.deltaEph ?? p.delta)) || 0;
-    const unit = metric === "xp" ? "XP / h" : "EPH";
+    const valOf = (c, p) => { const v = Number(metric === "xp" ? p.deltaXp : (p.deltaEph ?? p.delta)) || 0;
+      return metric !== "xp" && asTime ? savedSecs(v) : v; };
+    const unit = metric === "xp" ? "XP / h" : asTime ? "s a run" : "EPH";
     const W = 560, H = 210, PAD = 34;
     const maxY = Math.max(0.001, ...curves.flatMap(c => (c.points || []).map(p => valOf(c, p))));
     const x = days => PAD + (Math.min(horizon, Math.max(0, Number(days) || 0)) / horizon) * (W - PAD - 86);
@@ -1481,7 +1496,7 @@ class Component extends DCLogic {
       color: HUE[c.skill] || "var(--color-neutral-100)",
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
-        tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 +${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the projection" : ""}` })),
+        tip: `${c.skill} +${p.levels} \u00b7 ${(Number(p.days) || 0).toFixed(1)} days \u00b7 ${asTime ? (this.runTimeOf(base, p.deltaEph ?? p.delta)?.text || "") : `+${(Number(p.deltaEph ?? p.delta) || 0).toFixed(2)} EPH`}${p.deltaXp == null ? "" : ` \u00b7 +${nf(p.deltaXp)} XP/h`}${p.beyondHorizon ? " \u00b7 past the projection" : ""}` })),
     }));
     // Ticks at the quarters of each axis. The header states the exact extents, so these are rounded: they are
     // for reading a point off the chart, and a label wider than the 34px gutter would cost more than it gives.
@@ -1492,6 +1507,7 @@ class Component extends DCLogic {
     const kDec = maxY / 1000 >= 100 ? 0 : 1, eDec = maxY >= 1 ? 2 : 3;
     const fmtVal = v => v === 0 ? "0"
       : metric === "xp" ? (maxY >= 1000 ? `${(v / 1000).toFixed(kDec)}k` : String(Math.round(v)))
+      : asTime ? v.toFixed(1)
       : v.toFixed(eDec);
     // The svg is 560x206 of viewBox and scales with the column, so a label placed at a PERCENTAGE of the box
     // lands on its tick at every width while keeping its own pixel size -- which is the point of putting the
@@ -1511,9 +1527,9 @@ class Component extends DCLogic {
     const ranked = (done?.ranked || rows).slice().sort((a, b) => (Number(b.perHour) || 0) - (Number(a.perHour) || 0)).map(r => ({
       skill: `${r.skill} +${r.levels ?? 1}`,
       who: (s.party || []).length > 1 ? (r.player || "") : "",
-      gain: `+${(Number(r.delta) || 0).toFixed(2)} EPH`,
+      gain: asTime ? (this.runTimeOf(base, r.delta)?.short || "") : `+${(Number(r.delta) || 0).toFixed(2)} EPH`,
       xp: r.deltaXp == null ? "" : `+${nf(r.deltaXp)} XP / h`,
-      se: r.deltaSE == null ? "" : `\u00b1 ${(Number(r.deltaSE) || 0).toFixed(2)}`,
+      se: r.deltaSE == null ? "" : asTime ? `\u00b1 ${(this.runTimeOf(base, r.delta, r.deltaSE)?.se ?? 0).toFixed(1)} s` : `\u00b1 ${(Number(r.deltaSE) || 0).toFixed(2)}`,
       cost: r.hours == null ? "not trained by this style"
         : `${nf(r.xpCost)} XP \u00b7 ${(Number(r.days) || 0).toFixed(1)} days${r.beyondHorizon ? " (past the projection)" : ""}`,
       // The rate the ranking is on: what a day spent levelling buys. Gains at the top end are fractions of an
@@ -1521,6 +1537,7 @@ class Component extends DCLogic {
       per: (() => { const v = r.perHour != null ? Number(r.perHour) * 24
           : (Number(r.days) > 0 ? (Number(r.delta) || 0) / Number(r.days) : null);
         if (v == null || !Number.isFinite(v)) return "\u2014";
+        if (asTime) { const sec = savedSecs(v); return `${sec.toFixed(Math.abs(sec) >= 1 ? 1 : 2)} s`; }
         const a = Math.abs(v);
         return a >= 1 ? v.toFixed(2) : a >= 0.01 ? v.toFixed(3) : a > 0 ? v.toExponential(1) : "0"; })(),
     }));
@@ -1570,8 +1587,11 @@ class Component extends DCLogic {
       run: () => this.runMode("skills"),
       stage: `${s.skillHead?.stage || "measuring how fast each skill levels\u2026"}${s.skillRunning ? ` \u00b7 ${this.runClock()}` : ""}`,
       lines, hasCurves: lines.length > 0,
-      axisY: `${metric === "xp" ? nf(maxY) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`, axisX: `${horizon} days`,
-      xTicks, yTicks, dots, unit,
+      axisY: `${metric === "xp" ? nf(maxY) : asTime ? maxY.toFixed(1) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`, axisX: `${horizon} days`,
+      xTicks, yTicks, dots, unit, asTime,
+      gainHead: asTime ? "Faster a run" : "EPH",
+      perHead: asTime ? "s / day" : "EPH / day",
+      ephLabel: asTime ? "Run time" : "EPH",
       chartLabel: `${unit} gained against days of levelling, one line per skill, 0 to ${horizon} days by 0 to ${fmtVal(maxY)} ${unit}`,
       metricEph: metric === "eph", metricXp: metric === "xp",
       ephStyle: metric === "eph" ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
@@ -1589,7 +1609,23 @@ class Component extends DCLogic {
         : a >= 1e6 ? `${(x / 1e6).toFixed(1)} M` : a >= 1e3 ? `${(x / 1e3).toFixed(1)} k` : nf(x); };
     const itemName = hrid => String(hrid || "").replace(/^\/[a-z_]+\//, "").replace(/_refined$/, "_star")
       .replace(/_/g, " ").replace(/\b\w/g, ch => ch.toUpperCase()).replace(/ Star$/, " \u2605");
-    const metric = v("metric"), unit = metric === "profit" ? "coins/h" : "XP/h";
+    const metric = v("metric");
+    // ZONE-91: a third goal, the party's own pace. In a dungeon that is said as seconds off the average run,
+    // the unit this site uses everywhere else; on a planet it stays encounters an hour, which is the figure
+    // people there actually use. `upBase` is the party's own clear rate, which the conversion needs.
+    // The head carries the party's own clear rate from round 1, so rows convert while the search is still
+    // running rather than only once it finishes. Until then there is nothing to convert against, and the unit
+    // below says clears an hour instead of wearing a label it has not earned.
+    const upBase = s.upDone?.baseline || s.upHead?.baseline || null;
+    // An ANSWER on screen says what it was measured on and wins; before there is one, the zone picked in
+    // this panel does, so the toggle is labelled correctly the moment a dungeon is chosen rather than
+    // after the first search.
+    const upDungeon = !!(s.upDone?.baseline?.dungeon ?? s.upHead?.dungeon
+      ?? (s.zones || []).find(z => z.hrid === v("zone"))?.isDungeon);
+    const paceAsTime = metric === "eph" && upDungeon && Number(upBase?.clearsPerHour) > 0;
+    const unit = metric === "profit" ? "coins/h"
+      : metric === "eph" ? (paceAsTime ? "s a run" : upDungeon ? "clears/h" : "enc/h")
+      : "XP/h";
     const names = this.upNames();
     // One zone and one tier: single-monster actions are not what a party sims, so they stay out of the picker.
     const zones = (s.zones || []).filter(z => (z.maxPartySize || 1) > 1);
@@ -1609,6 +1645,8 @@ class Component extends DCLogic {
     // re-ranks the rows in hand instead of only changing what the next search optimises.
     const pick = r => metric === "profit"
       ? { d: r.deltaProfit ?? r.delta, se: r.deltaProfitSE ?? r.deltaSE, per: r.perMillionCoinsProfit ?? r.perMillionCoins }
+      : metric === "eph"
+      ? { d: r.deltaEph ?? r.delta, se: r.deltaEphSE ?? r.deltaSE, per: r.perMillionCoinsEph ?? r.perMillionCoins }
       : { d: r.deltaXp ?? r.delta, se: r.deltaXpSE ?? r.deltaSE, per: r.perMillionCoinsXp ?? r.perMillionCoins };
     const priced = rows.filter(r => pick(r).per != null).sort(byRank);
     const unpriced = rows.filter(r => pick(r).per == null).sort((a, b) => (Number(pick(b).d) || 0) - (Number(pick(a).d) || 0));
@@ -1625,10 +1663,20 @@ class Component extends DCLogic {
         player: names.length > 1 ? (r.player || "") : "",
         glyph: r.kind === "ability" ? "ph-book-open-text" : "ph-arrow-fat-line-up",
         title: `${r.name || itemName(r.itemHrid || r.abilityHrid)} ${r.from} \u2192 ${r.to}`,
-        gain: `${d >= 0 ? "+" : "\u2212"}${nf(Math.abs(d))} ${unit}`,
-        se: m.se == null ? "" : `\u00b1 ${nf(m.se)}`,
+        gain: paceAsTime ? (this.runTimeOf(upBase, d)?.short || "") : `${d >= 0 ? "+" : "\u2212"}${nf(Math.abs(d))} ${unit}`,
+        se: m.se == null ? "" : paceAsTime ? `\u00b1 ${(this.runTimeOf(upBase, d, m.se)?.se ?? 0).toFixed(1)} s` : `\u00b1 ${nf(m.se)}`,
         pctLine: pct ? `${pct} of baseline` : "",
-        per: m.per == null ? "\u2014" : Number(m.per).toFixed(Number(m.per) < 10 ? 2 : 1),
+        per: m.per == null ? "\u2014"
+          // Seconds saved per million coins is inherently small -- an upgrade costs hundreds of millions -- so
+          // a fixed 2 decimals printed 0.00 on every row and threw away the column's whole job, which is to
+          // rank them against each other. The scale is chosen per row, as the skill table's already is.
+          // Per BILLION, not per million: an upgrade costs hundreds of millions, so seconds-per-million is
+          // 1e-4 on every row -- a column that ranks correctly and communicates nothing. The conversion is
+          // near-linear at these sizes, so the seconds scale with the coins rather than being re-derived from a
+          // gain 1000x larger than any measured.
+          : paceAsTime ? (() => { const sec = -(this.runTimeOf(upBase, Number(m.per))?.secs ?? 0) * 1000, a = Math.abs(sec);
+            return a >= 1 ? sec.toFixed(2) : a >= 0.01 ? sec.toFixed(3) : a > 0 ? sec.toExponential(1) : "0"; })()
+          : Number(m.per).toFixed(Number(m.per) < 10 ? 2 : 1),
         cost: cost.priced ? `${coin(cost.coins)} coins` : "no price",
         // Materials and time are now separate figures: two rows with the same materials and very different
         // chain lengths are not the same price, and the split is the only way to see which is which.
@@ -1715,6 +1763,9 @@ class Component extends DCLogic {
       xpStyle: metric === "xp" ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)",
       profitStyle: metric === "profit" ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)",
       pickXp: () => set({ metric: "xp" }), pickProfit: () => set({ metric: "profit" }),
+      pickPace: () => set({ metric: "eph" }),
+      paceLabel: upDungeon ? "Run time" : "Encounters / h",
+      paceStyle: metric === "eph" ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)",
       skill: v("skill") || "", setSkill: e => set({ skill: e.target.value }),
       skillOpts: [{ value: "", label: "Every skill" }, ...Component.UP_SKILLS.map(k => ({ value: k, label: k[0].toUpperCase() + k.slice(1) }))],
       zone: v("zone") || "", setZone: e => set({ zone: e.target.value, tier: 0 }),
@@ -1809,7 +1860,9 @@ class Component extends DCLogic {
       hasRows: priced.length > 0,
       rows: priced.map(mkRow),
       unpriced: unpriced.map(mkRow), hasUnpriced: unpriced.length > 0,
-      gainHead: `\u0394 ${unit}`, perHead: `${unit} per 1 M`,
+      // "Δ s a run" is not a column heading. Seconds off the run reads as its own thing.
+      gainHead: paceAsTime ? "Faster a run" : `\u0394 ${unit}`,
+      perHead: paceAsTime ? "s per 1 B" : `${unit} per 1 M`,
       // Changing the metric changes what the NEXT search refines on, not what these rows were measured for —
       // the finalists were chosen by the metric that was picked when Find upgrades ran.
       refinedNote: head?.refinedOn && head.refinedOn !== metric
