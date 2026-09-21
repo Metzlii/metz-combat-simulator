@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="61b7f44ea932"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="80da163a700f"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=61b7f44ea932"></script>
+<script src="./support.js?v=80da163a700f"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=61b7f44ea932">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=80da163a700f">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=61b7f44ea932">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=61b7f44ea932"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=80da163a700f">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=80da163a700f"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -796,6 +796,7 @@
                 <li><b>The value to type is bold and gold</b>, a run-time gain carries its error, and a timer carries its unit — 13:56m, where the page was previously capable of printing 13:60.</li>
                 <li><b>A finished trigger answer can be written into the Setup party.</b> One button, change by change, and it reports how many landed. You were typing every value twice: once into the game, once into the simulator.</li>
                 <li><b>Stored data</b>, under Setup › Advanced, adds up. One total for everything this site keeps in your browser, then what <b>Clear cache</b> removes and what it keeps, each with its own size. The single figure it used to show was the market price file, and read as though it were your saved work.</li>
+                <li><b>The Run button sits right under Add to Queue, with Hours beside Zone and Tier.</b> People were not finding how to start a run: the button lived at the foot of the page beside the account buffs, a long way from where the queue is built. What is left down there — seed, workers, wave delay — is the advanced settings that rarely change.</li>
                 <li><b>MWI Party Export 0.3</b> works on a client that is not in English. It looked for the words “Edit Party” to find the party, so on 中文 it found nothing and never appeared — which is exactly the player the translation was for.</li>
               </ul>
             </div>
@@ -956,7 +957,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=61b7f44ea932");
+      const i18n = await import("./i18n.js?v=80da163a700f");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -979,7 +980,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=61b7f44ea932");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=80da163a700f");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1226,7 +1227,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=61b7f44ea932");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=80da163a700f");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1247,7 +1248,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=61b7f44ea932");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=80da163a700f");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
