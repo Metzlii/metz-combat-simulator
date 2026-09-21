@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=bcf0f28d70bb"></script>
+<script src="./support.js?v=d5555a2f0ba3"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=bcf0f28d70bb">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d5555a2f0ba3">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=bcf0f28d70bb">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=bcf0f28d70bb"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d5555a2f0ba3">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d5555a2f0ba3"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1138,7 +1138,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=bcf0f28d70bb").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=d5555a2f0ba3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1477,7 +1477,7 @@ class Component extends DCLogic {
   }
   async runZoneSim() {
     const s = this.state;
-    const all = (s.zoneCands || []).slice();
+    let all = (s.zoneCands || []).slice();
     // Only the party is simulated — benched imports stay in the editor and are not sent.
     const players = this.zoneActiveParty(s).map(p => ({ ...p, record: { ...p.record, taskMonsterHrid: s.zoneTasks[p.record?.name] || null } }));
     // The headline belongs to the party as it was when Run was pressed: the form stays editable while a run is in
@@ -1495,6 +1495,7 @@ class Component extends DCLogic {
     // the difference would be mostly variance. The pin is shown next to Run, and can be dropped there.
     const bl = s.zoneBaseline;
     if (bl && bl.board === this.zoneBoardSig(all)) { body.seed = bl.seed; body.hours = bl.hours;
+      all = all.map(c => ({ ...c, hours: bl.hours })); body.candidates = all;
       // The wave delay scales every rate, so it is pinned with the seed and the hours: a pinned run that
       // changed it would show a difference that is not the loadout's.
       if (bl.wave > 0) body.waveTransitionDelayMs = bl.wave; else delete body.waveTransitionDelayMs; }
@@ -1515,15 +1516,14 @@ class Component extends DCLogic {
     // The work bound decides the request count: one for any ordinary board, several only when
     // candidates × hours exceeds maxCandidateHours. Row indices are offset so the table keeps queue order.
     const LIM = { ...Component.ZONE_LIMIT_DEFAULTS, ...(s.zoneLimits || {}) };
-    const rowsPer = this.zoneChunkRows(LIM, body.hours);
-    const starts = []; for (let i = 0; i < all.length; i += rowsPer) starts.push(i);
+    const starts = []; { let o = 0; for (const g of this.zoneChunks(LIM, all, body.hours)) { starts.push([o, g]); o += g.length; } }
     this.setState({ zoneRunning: true, zoneRunError: null, zoneResult: null, zoneOpen: 0,
       zoneProgress: { done: 0, total: all.length, estimatedSeconds: null } });
     this._zoneStopped = false;
     try { let tail = null;
-      for (const offset of starts) {
+      for (const [offset, group] of starts) {
         if (this._zoneStopped) break;
-        const stream = this.client.zoneRunStream({ ...body, candidates: all.slice(offset, offset + rowsPer) }, {
+        const stream = this.client.zoneRunStream({ ...body, candidates: group }, {
           // head lands before the first candidate runs: the envelope the table reads, with empty rows to fill.
           onHead: h => this.setState(st => ({
             zoneResult: offset > 0 && st.zoneResult ? st.zoneResult : { ...h, candidates: new Array(all.length).fill(null) },
@@ -3112,6 +3112,21 @@ class Component extends DCLogic {
     const h = Math.max(Number(LIM.minHours) || 0.0167, Number(hours) || 0);
     return Math.max(1, Math.min(LIM.maxCandidates, Math.floor(LIM.maxCandidateHours / h)));
   }
+  /**
+   * The queue cut into requests, each within the server's row and candidate-hour caps. Greedy in queue order,
+   * so the table keeps its order; rows may carry their own hours, so the cut is by the running sum of them.
+   */
+  zoneChunks(LIM, cands, defaultHours) {
+    const capH = Number(LIM.maxCandidateHours) || Infinity, capRows = Number(LIM.maxCandidates) || Infinity;
+    const groups = []; let cur = [], curH = 0;
+    for (const c of cands) {
+      const h = Number(c?.hours) || Number(defaultHours) || 0;
+      if (cur.length && (cur.length >= capRows || curH + h > capH)) { groups.push(cur); cur = []; curH = 0; }
+      cur.push(c); curH += h;
+    }
+    if (cur.length) groups.push(cur);
+    return groups;
+  }
   zoneVals(s, set) {
     // Ask and bid alone confuse players, so every one says which kind of trade it is: loot is sold, consumables and
     // keys are bought. Selling at the bid or buying at the ask fills an order already listed (instant); selling at
@@ -3176,9 +3191,16 @@ class Component extends DCLogic {
     // ZONE-66: what this party can actually enter, and how much the size hides.
     const fitPlanets = fullPlanets.filter(fits);
     const chunkRows = this.zoneChunkRows(LIM, hours);
-    const addOne = (hrid, t, list) => { const l = list || cands.slice();
-      if (l.length >= MAX_CANDIDATES || l.some(c => c.zone === hrid && c.difficultyTier === t)) return l;
-      l.push({ zone: hrid, difficultyTier: t }); return l; };
+    // Each row carries the hours it was queued at (operator, 2026-09-21): the field sits beside Add to Queue,
+    // and a queue that read as per-row now is. Adding a zone already queued sets its hours instead of doing
+    // nothing, which is what a second press over a changed field means.
+    const addOne = (hrid, t, list) => { const l = list || cands.slice(), h = Number(hours) || 1000;
+      const at = l.findIndex(c => c.zone === hrid && c.difficultyTier === t);
+      // Stamped unconditionally: a row from before the stamp has no hours of its own and would otherwise
+      // compare equal to the field it follows, and never be pinned to a value.
+      if (at >= 0) { if (Number(l[at].hours) !== h) l[at] = { ...l[at], hours: h }; return l; }
+      if (l.length >= MAX_CANDIDATES) return l;
+      l.push({ zone: hrid, difficultyTier: t, hours: h }); return l; };
     const zOpt = d => ({ value: d.hrid, label: Component.t(d.name), iconId: d.iconId || null,
       glyph: d.isDungeon ? "ph-castle-turret" : d.maxPartySize === 1 ? "ph-skull" : "ph-planet",
       note: fits(d) ? "" : Component.tf("party of {n} max", { n: d.maxPartySize }) });
@@ -3212,7 +3234,7 @@ class Component extends DCLogic {
         const kind = c.isDungeon ? "dungeon" : byHrid(c.zone)?.maxPartySize > 1 ? "planet" : "single monster";
         // One line per row: the sub-figures that used to stack under a cell live in that cell's tooltip.
         return { i, ok, openBg: i === Math.min(s.zoneOpen, list.length - 1) ? "color-mix(in srgb, var(--color-accent) 10%, transparent)" : "transparent",
-          zone: `${Component.t(c.name)} · T${c.difficultyTier}`,
+          zone: `${Component.t(c.name)} · T${c.difficultyTier}${c.hours != null && R?.hours != null && Number(c.hours) !== Number(R.hours) ? ` · ${nf(c.hours)} h` : ""}`,
           zoneTip: `${kind}${c.isDungeon ? Component.tf(" · {n} waves", { n: c.maxWaves || byHrid(c.zone)?.maxWaves || "?" }) : ""}`,
           error: ok ? "" : c.error || "refused",
           rate, rateText: ok ? (c.isDungeon ? this.zoneRunTime(c.averageRunSeconds) : Component.tf("{n} enc", { n: nf(rate, 2) })) : "—",
@@ -3261,7 +3283,7 @@ class Component extends DCLogic {
       header = Component.tf("{players} players · {h} h · seed {seed}", { players: (R.party || []).length, h: nf(R.hours, R.hours < 1 ? 2 : 0), seed: R.seed }) + (Number(R.serverLagMs) > 0 ? Component.tf(" · server lag {n} ms", { n: nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0) }) : "") + (Number(R.waveTransitionDelayMs) > 0 ? Component.tf(" · wave gap {n} ms", { n: nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0) }) : "") + Component.tf(" · loot {loot} · consumables {consumables} · keys {keys}", { loot: sideShort("loot", R.pricing?.loot), consumables: sideShort("consumables", R.pricing?.consumables), keys: sideShort("keys", R.pricing?.keys) }) + (R.pricing?.keys === "craft" && R.pricing?.keyMaterials ? Component.tf(" from materials {v}", { v: sideShort("keyMaterials", R.pricing.keyMaterials) }) : "") + (R.pricing?.mode === "iron" ? Component.t(" · iron") : "") + ` · ${timing}`;
       const secOpen = s.zoneSecOpen || {}, secDefs = [["rates", Component.t("Rates")], ["xp", Component.t("XP / h")],
         ["damage", Component.t("Damage by source")], ["consumables", Component.t("Consumables")], ["lootIn", Component.t("Loot in")], ["lootOut", Component.t("Loot out")]];
-      if (c && c.ok !== false) detail = { title: `${Component.t(c.name)} · T${c.difficultyTier}`,
+      if (c && c.ok !== false) detail = { title: `${Component.t(c.name)} · T${c.difficultyTier}${c.hours != null && R?.hours != null && Number(c.hours) !== Number(R.hours) ? ` · ${nf(c.hours)} h` : ""}`,
         // Each section collapses to its own header inside every card; one click applies to every player column
         // at once, so the columns stay row-aligned.
         sec: Object.fromEntries(secDefs.map(([k, label]) => { const on = secOpen[k] !== false;
@@ -3367,7 +3389,11 @@ class Component extends DCLogic {
     // (recordZonePace); the served figure is the server's fit and only stands until the first run here.
     const pace = this.zoneOnly ? this.zonePace() : null;
     const perCandHour = pace?.secondsPerCandidateHour > 0 ? pace.secondsPerCandidateHour : LIM.secondsPerCandidateHour;
-    const estSec = Math.ceil(cands.length / Math.max(1, LIM.concurrency)) * hours * perCandHour;
+    // Rows may carry different hours now, so the work is their sum; a row from before the stamp counts as the
+    // field's hours, which is what it will run at.
+    const candHours = cands.reduce((a, c) => a + (Number(c.hours) || hours), 0);
+    const uniformHours = cands.every(c => (Number(c.hours) || hours) === (Number(cands[0]?.hours) || hours));
+    const estSec = (candHours / Math.max(1, LIM.concurrency)) * perCandHour;
     // "under a second", "about 12 seconds", "about 3 minutes": an estimate as a player reads it.
     const secText = v => { const x = Number(v) || 0;
       return x < 1 ? "under a second" : x < 90 ? (Math.round(x) === 1 ? Component.t("about 1 second") : Component.tf("about {n} seconds", { n: Math.round(x) }))
@@ -3378,7 +3404,7 @@ class Component extends DCLogic {
       : pace ? (pace.samples === 1 ? Component.tf(" · pace {p} s a candidate-hour a lane, learned from your last run on this machine", { p: nf(perCandHour, 3) }) : Component.tf(" · pace {p} s a candidate-hour a lane, learned from your last {n} runs on this machine", { p: nf(perCandHour, 3), n: pace.samples }))
       : Component.t(" · pace not measured here yet — the built-in figure until your first run");
     // Past the work bound the queue simply goes out as several requests; nothing to block.
-    const reqCount = Math.max(1, Math.ceil(cands.length / chunkRows));
+    const reqCount = Math.max(1, this.zoneChunks(LIM, cands, hours).length);
     const block = !party.length ? Component.t("Import a character first") : !cands.length ? Component.t("Queue a zone and tier") : "";
 
     return {
@@ -3466,7 +3492,8 @@ class Component extends DCLogic {
       cands: cands.map((c, i) => { const d = byHrid(c.zone);
         return { label: `${d ? Component.t(d.name) : c.zone} · T${c.difficultyTier}`,
           icon: this.zoneIcon("zone", c.zone, d, d ? d.name : c.zone),
-          note: d ? (d.isDungeon ? `${d.maxWaves} ${Component.t("waves")}` : d.maxPartySize > 1 ? "planet" : "single monster") : "unknown zone",
+          note: [d ? (d.isDungeon ? `${d.maxWaves} ${Component.t("waves")}` : d.maxPartySize > 1 ? Component.t("planet") : Component.t("single monster")) : Component.t("unknown zone"),
+            `${nf(Number(c.hours) || hours, (Number(c.hours) || hours) < 1 ? 2 : 0)} h`].join(" \u00b7 "),
           fine: !d || fits(d),
           remove: () => set({ zoneCands: cands.filter((_, k) => k !== i) }) }; }),
       hasCands: cands.length > 0,
@@ -3612,7 +3639,9 @@ class Component extends DCLogic {
         ? (s.zoneProgress
             ? Component.tf("{done} of {total} done{est}. Results appear as each one finishes; Stop keeps what is done.", { done: s.zoneProgress.done, total: s.zoneProgress.total, est: s.zoneProgress.estimatedSeconds != null ? Component.tf(" · {t} in total", { t: secText(s.zoneProgress.estimatedSeconds) }) : "" })
             : Component.tf("Takes {t}. You can keep editing while it runs.", { t: secText(estSec) }))
-        : cands.length ? (cands.length === 1 ? Component.tf("1 zone × {h} simulated hours · takes {t}.", { h: nf(hours, hours < 1 ? 2 : 0), t: secText(estSec) }) : Component.tf("{n} zones × {h} simulated hours · takes {t}.", { n: cands.length, h: nf(hours, hours < 1 ? 2 : 0), t: secText(estSec) })) : "",
+        : cands.length ? (cands.length === 1 ? Component.tf("1 zone × {h} simulated hours · takes {t}.", { h: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })
+          : uniformHours ? Component.tf("{n} zones × {h} simulated hours · takes {t}.", { n: cands.length, h: nf(candHours / cands.length, candHours / cands.length < 1 ? 2 : 0), t: secText(estSec) })
+          : Component.tf("{n} zones · {total} simulated hours in all · takes {t}.", { n: cands.length, total: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })) : "",
       // The pin, when this board already has a baseline: it is stated rather than applied silently, because it
       // overrides the Seed and Hours fields above.
       pinned: !!(s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands)),
