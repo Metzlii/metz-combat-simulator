@@ -369,7 +369,17 @@
       (_, sp, name, eq) => sp + CAMEL_ATTR + name.replace(/[A-Z]/g, (c) => "-" + c.toLowerCase()) + eq
     );
   }
+  // A number input's value and an SVG length are validated by the parser itself, so a {{ }} binding there is
+  // reported as unparsable before the compiler has replaced it -- one console line per binding per render, on a
+  // page that does nothing wrong. Those attributes travel through the parse as dc-attr-<name>; collectProps
+  // restores the name. Only real HTML/SVG tags: an <sc-if value="{{ }}"> is the compiler's own and stays as is.
+  var VALIDATED_ATTR_TAGS = /<(input|textarea|select|option|progress|meter|line|polyline|polygon|circle|ellipse|rect|path|text|svg|use|image)(\s[^>]*?)(\/?)>/gi;
+  var VALIDATED_ATTR_RE = /(\s)(value|min|max|step|x|y|x1|x2|y1|y2|cx|cy|r|rx|ry|points|d|width|height|dx|dy)=("\{\{[^"]*\}\}")/gi;
+  function shieldValidatedAttrs(html) {
+    return html.replace(VALIDATED_ATTR_TAGS, (m, tag, attrs, close) => "<" + tag + attrs.replace(VALIDATED_ATTR_RE, "$1dc-attr-$2=$3") + close + ">");
+  }
   function encodeCase(html) {
+    html = shieldValidatedAttrs(html);
     html = html.replace(
       IMPORT_SELF_CLOSE_RE,
       (_, t, a) => "<" + t + a + "></" + t + ">"
@@ -419,6 +429,7 @@
     for (const { name, value } of [...node.attributes]) {
       if (name === "sc-name" || name === "data-dc-tpl") continue;
       let key = name;
+      if (key.startsWith("dc-attr-")) key = key.slice(8);   // shielded through the parse; see shieldValidatedAttrs
       if (key.startsWith(CAMEL_ATTR))
         key = kebabToCamel(key.slice(CAMEL_ATTR.length));
       if (key === "hint-size") {

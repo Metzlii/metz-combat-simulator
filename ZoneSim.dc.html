@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4a2f42a5f424"></script>
+<script src="./support.js?v=dac5782d2800"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4a2f42a5f424">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=dac5782d2800">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=4a2f42a5f424">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4a2f42a5f424"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=dac5782d2800">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=dac5782d2800"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1189,7 +1189,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=4a2f42a5f424").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=dac5782d2800").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1316,7 +1316,10 @@ class Component extends DCLogic {
       // Any loadout edit clears zoneDerived, so this is also how the panel refreshes after an edit. The derive
       // body depends on more than the party — the open candidate supplies zone/tier and the account buffs
       // travel with it — so the gate compares the whole body, not just zoneDerived being empty.
-      if ((s.zoneParty || []).length && !this._deriving && this.zoneDeriveSig(s) !== this._deriveSig) this.loadZoneDerived();
+      // ... and when the panel is empty with no error, whatever the signature says: an import that seats the
+      // same five as before (a whole-guild paste after a party paste, 2026-09-21) cleared zoneDerived while the
+      // body stayed identical, so nothing ever asked again and the panel said "working out" for good.
+      if ((s.zoneParty || []).length && !this._deriving && (this.zoneDeriveSig(s) !== this._deriveSig || (!s.zoneDerived && !s.zoneDeriveError))) this.loadZoneDerived();
       return out;
     } catch (e) { console.error("ZoneSim renderVals failed", e); throw e; }
   }
