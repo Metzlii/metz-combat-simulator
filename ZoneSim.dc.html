@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=205147b9a82e"></script>
+<script src="./support.js?v=95e5f71a5d62"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=205147b9a82e">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=95e5f71a5d62">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=205147b9a82e">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=205147b9a82e"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=95e5f71a5d62">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=95e5f71a5d62"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -119,6 +119,17 @@
           <button class="btn btn-ghost" style="padding:3px 10px;font-size:13px;flex:none" title="The candidates already running finish; nothing else starts" onClick="{{ zone.stop }}">Stop</button>
         </sc-if>
       </div>
+      <!-- Progress, asked for by players (2026-09-21): a run is silent between the click and its first row. The
+           bar moves on the estimate while the current candidates run and lands on each row as it arrives, so it
+           climbs steadily and never goes back. -->
+      <sc-if value="{{ zone.running }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:10px;align-items:center;align-self:stretch;max-width:520px">
+          <div role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ zone.progressPct }}" style="flex:1;height:7px;border-radius:99px;overflow:hidden;background:color-mix(in srgb, var(--color-accent-2-500) 16%, transparent)">
+            <div style="{{ zone.progressStyle }}"></div>
+          </div>
+          <span style="font-size:12.5px;font-variant-numeric:tabular-nums;flex:none;min-width:3.5ch;text-align:right;color:var(--color-accent-2-200)">{{ zone.progressLabel }}</span>
+        </div>
+      </sc-if>
       <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.runNote }}</div>
       <sc-if value="{{ zone.pinned }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12.5px;color:var(--color-accent-300)">
@@ -1140,7 +1151,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=205147b9a82e").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=95e5f71a5d62").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1200,7 +1211,7 @@ class Component extends DCLogic {
   }
   componentDidUpdate() { this.queueZoneSession(); }
   componentWillUnmount() {
-    if (this._onApplyTriggers) globalThis.removeEventListener?.("zone-apply-triggers", this._onApplyTriggers); clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); this.writeZoneSession(); }
+    if (this._onApplyTriggers) globalThis.removeEventListener?.("zone-apply-triggers", this._onApplyTriggers); clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); clearInterval(this._zoneTicker); this.writeZoneSession(); }
   // The run settings — hours, seed, server lag, wave delay, the pricing block and whether Advanced is open —
   // describe how this visitor measures, not what they are measuring, so they outlive a refresh. Only these keys
   // are read back: an unknown key in storage from an older build is ignored rather than restored into state.
@@ -1506,6 +1517,7 @@ class Component extends DCLogic {
     // nothing is sent. Time between waves, not time inside a fight.
     const waveRaw = String(s.zoneWaveMs ?? "").trim(), waveMs = Number(waveRaw);
     if (waveRaw !== "" && Number.isFinite(waveMs)) body.waveTransitionDelayMs = waveMs;
+    this.startZoneTicker();
     if (!this.client.zoneRunStream) {   // a server older than ZONE-P7: one plain request, no rows until the end
       this.setState({ zoneRunning: true, zoneRunError: null, zoneProgress: null });
       try { const r = await this.client.zoneRun(body);
@@ -1568,6 +1580,30 @@ class Component extends DCLogic {
   // /zone-sim/limits. With no server the runs happen here, so the page fits the visitor's machine the same way:
   // an EMA over its own finished runs, kept in localStorage so the next session opens with their pace rather than
   // the server's. Only zone-only mode learns — against a server the served figure is the authority.
+  // The progress bar's clock: while a run is on, the page re-renders twice a second so the bar can move on the
+  // estimate between rows. It stops itself the first tick after the run ends, so no finish path has to remember.
+  startZoneTicker() {
+    this._zoneRunStart = Date.now();
+    clearInterval(this._zoneTicker);
+    this._zoneTicker = setInterval(() => { if (!this.state.zoneRunning) { clearInterval(this._zoneTicker); this._zoneTicker = null; return; } this.forceUpdate(); }, 500);
+  }
+  /**
+   * 0..1 for the bar. Finished rows are exact; the rows in flight move on the clock against the estimate for the
+   * whole run, held under the next row's share so the bar never has to step back when the row lands. With no
+   * estimate (a server that sent none) the bar is the finished share alone.
+   */
+  zoneProgressFraction(s) {
+    const p = s.zoneProgress; if (!s.zoneRunning) return 0;
+    const total = Math.max(1, Number(p?.total) || 1), done = Math.min(total, Number(p?.done) || 0);
+    const est = Number(p?.estimatedSeconds) || 0;
+    const byRows = done / total;
+    if (!(est > 0)) return byRows;
+    const elapsed = (Date.now() - (this._zoneRunStart || Date.now())) / 1000;
+    const byClock = Math.min(0.98, elapsed / est);
+    // The clock may run ahead of the rows (a slow candidate) or behind them (a fast one); take the larger, but
+    // never claim the next row is done before it is.
+    return Math.max(byRows, Math.min(byClock, (done + 0.98) / total));
+  }
   static ZONE_PACE_KEY = "gts.zone.pace.v1";
   zonePace() {
     if (this._zonePace === undefined) { try { this._zonePace = JSON.parse(localStorage.getItem(Component.ZONE_PACE_KEY) || "null"); } catch { this._zonePace = null; } }
@@ -3681,6 +3717,9 @@ class Component extends DCLogic {
       runDisabled: !!block || s.zoneRunning, runLabel: s.zoneRunning ? Component.t("Simulating…") : block || (cands.length === 1 ? Component.t("Simulate 1 zone") : Component.tf("Simulate {n} zones", { n: cands.length })),
       // Plain words for players: how many zones, how long, and what happens as it runs. The batching and pace
       // detail stays in the code; it is not something a player acts on.
+      ...(() => { const f = this.zoneProgressFraction(s), pct = Math.round(f * 100);
+        return { progressPct: pct, progressLabel: `${pct}%`,
+          progressStyle: `height:100%;width:${(f * 100).toFixed(1)}%;border-radius:99px;background:linear-gradient(90deg, var(--color-accent-2-600), var(--color-accent-2-300));transition:width 0.45s linear` }; })(),
       runNote: s.zoneRunning
         ? (s.zoneProgress
             ? Component.tf("{done} of {total} done{est}. Results appear as each one finishes; Stop keeps what is done.", { done: s.zoneProgress.done, total: s.zoneProgress.total, est: s.zoneProgress.estimatedSeconds != null ? Component.tf(" · {t} in total", { t: secText(s.zoneProgress.estimatedSeconds) }) : "" })
