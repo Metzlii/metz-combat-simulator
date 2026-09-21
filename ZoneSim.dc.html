@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=ed3b16f696d9"></script>
+<script src="./support.js?v=b57d7f74de42"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ed3b16f696d9">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b57d7f74de42">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=ed3b16f696d9">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ed3b16f696d9"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=b57d7f74de42">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b57d7f74de42"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -97,7 +97,7 @@
         <!-- Hours moved up from the foot of the page (operator, 2026-09-21): it is set with the queue, not with
              the advanced settings it used to sit beside. -->
         <div class="field" style="margin:0;width:104px;flex:none"><label>Hours</label>
-          <input class="input" type="number" min="1" max="8760" step="1" style="font-variant-numeric:tabular-nums" value="{{ zone.hours }}" onInput="{{ zone.setHours }}" disabled="{{ zone.hoursDisabled }}">
+          <input class="input" type="number" min="1" max="8760" step="1" style="font-variant-numeric:tabular-nums" value="{{ zone.hours }}" onInput="{{ zone.setHours }}">
         </div>
         <button class="btn btn-primary" style="padding:0 20px;min-height:30px;font-size:14px;font-weight:600;letter-spacing:0.02em;flex:none" disabled="{{ zone.addDisabled }}" onClick="{{ zone.add }}">Add to Queue</button>
       </div>
@@ -123,7 +123,13 @@
       <sc-if value="{{ zone.pinned }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12.5px;color:var(--color-accent-300)">
           <span style="text-wrap:pretty">{{ zone.pinNote }}</span>
-          <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Run on the Seed and Hours in the fields instead — the run will not be directly comparable to the baseline" onClick="{{ zone.unpin }}">Use my own seed and hours</button>
+          <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Run on the Seed in the field instead — the run will not be directly comparable to the baseline" onClick="{{ zone.unpin }}">Use my own seed</button>
+        </div>
+      </sc-if>
+      <sc-if value="{{ zone.pinMiss }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;gap:7px;align-items:baseline;flex-wrap:wrap;font-size:12.5px;color:var(--color-accent-2-300)">
+          <span style="text-wrap:pretty">{{ zone.pinMissNote }}</span>
+          <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Set every queued row to the hours the baseline ran it for, so the next run is pinned to it" onClick="{{ zone.matchBaselineHours }}">Match the baseline's hours</button>
         </div>
       </sc-if>
       <sc-if value="{{ zone.stopped }}" hint-placeholder-val="{{ false }}">
@@ -1142,7 +1148,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=ed3b16f696d9").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=b57d7f74de42").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1481,7 +1487,7 @@ class Component extends DCLogic {
   }
   async runZoneSim() {
     const s = this.state;
-    let all = (s.zoneCands || []).slice();
+    const all = (s.zoneCands || []).slice();
     // Only the party is simulated — benched imports stay in the editor and are not sent.
     const players = this.zoneActiveParty(s).map(p => ({ ...p, record: { ...p.record, taskMonsterHrid: s.zoneTasks[p.record?.name] || null } }));
     // The headline belongs to the party as it was when Run was pressed: the form stays editable while a run is in
@@ -1494,12 +1500,13 @@ class Component extends DCLogic {
     if (!s.zoneConcOverride) delete pricing.drinkConcentration;   // the server reads it off the pouch
     const body = { players, candidates: all, hours: Number(s.zoneHours) || 1000,
       seed: Math.floor(Number(s.zoneSeed) || 1) || 1, pricing, accountBuffs: s.zoneBuffs };
-    // Pinned to this board's baseline: same seed, same hours. A single upgrade moves XP by a fraction of a
-    // percent, so a run measured on other seeds or over other hours cannot be subtracted from the baseline —
-    // the difference would be mostly variance. The pin is shown next to Run, and can be dropped there.
+    // Pinned to this board's baseline: same seed. A single upgrade moves XP by a fraction of a percent, so a
+    // run measured on other seeds or over other hours cannot be subtracted from the baseline — the difference
+    // would be mostly variance. The hours are part of the board now (each row carries its own), so a board
+    // that matches already runs every row for the hours the baseline did; only the seed is left to pin. The
+    // pin is shown next to Run, and can be dropped there.
     const bl = s.zoneBaseline;
-    if (bl && bl.board === this.zoneBoardSig(all)) { body.seed = bl.seed; body.hours = bl.hours;
-      all = all.map(c => ({ ...c, hours: bl.hours })); body.candidates = all;
+    if (bl && bl.board === this.zoneBoardSig(all, body.hours)) { body.seed = bl.seed;
       // The wave delay scales every rate, so it is pinned with the seed and the hours: a pinned run that
       // changed it would show a difference that is not the loadout's.
       if (bl.wave > 0) body.waveTransitionDelayMs = bl.wave; else delete body.waveTransitionDelayMs; }
@@ -2064,11 +2071,11 @@ class Component extends DCLogic {
     if (!R || !(R.candidates || []).length) return;
     // Saved from the Compare tab rather than from the session list: it carries the same headline, board and
     // baseline mark, so the pickers group it like any other run.
-    const logged = (s.zoneRunLog || []).find(r => this.zoneBoardSig(r.candidates) === this.zoneBoardSig(R.candidates));
+    const logged = (s.zoneRunLog || []).find(r => this.zoneBoardSig(r.candidates, r.hours) === this.zoneBoardSig(R.candidates, R.hours));
     const t = this.zoneRunTitle(this.zoneActiveParty(s));
     const name = (s.zoneSaveName || "").trim() || `${Component.t(logged?.title || t.title)} · ${new Date().toLocaleString(document.documentElement.lang || undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`;
     const save = { id: `s${Date.now().toString(36)}`, name, at: Date.now(),
-      title: logged?.title || t.title, board: this.zoneBoardSig(R.candidates),
+      title: logged?.title || t.title, board: this.zoneBoardSig(R.candidates, R.hours),
       isBaseline: logged ? !!logged.isBaseline : t.count === 0, basedOn: logged?.basedOn || null,
       hours: R.hours, seed: R.seed, serverLagMs: Number(R.serverLagMs) || 0,
       waveTransitionDelayMs: Number(R.waveTransitionDelayMs) || 0, pricing: R.pricing, party: (R.party || []).slice(),
@@ -2088,9 +2095,12 @@ class Component extends DCLogic {
     if (!src) return;
     const clone = o => (o == null ? null : JSON.parse(JSON.stringify(o)));
     const players = clone(src.players) || null;
-    const board = src.board || this.zoneBoardSig(src.candidates);
-    const cands = (src.cands && src.cands.length ? src.cands
-      : (src.candidates || []).filter(Boolean).map(c => ({ zone: c.zone, difficultyTier: c.difficultyTier ?? 0 })))
+    const board = src.board || this.zoneBoardSig(src.candidates, src.hours);
+    // Each row comes back at the hours it ran for, so the loaded queue IS the baseline's board and the next
+    // run is pinned to it; a run stored before rows carried hours ran every row at the run's.
+    const runH = this.zoneRunHours(src);
+    const cands = (src.cands && src.cands.length ? src.cands.map(c => ({ ...c, hours: Number(c.hours) || runH || undefined }))
+      : (src.candidates || []).filter(Boolean).map(c => ({ zone: c.zone, difficultyTier: c.difficultyTier ?? 0, hours: Component.rowHours(c, runH) || undefined })))
       .filter(c => c && c.zone);
     const patch = {
       zoneCands: cands,
@@ -2199,7 +2209,7 @@ class Component extends DCLogic {
     // Who fought is part of telling two runs apart — a five-player board and a solo test of the same zone are
     // different runs. A party is five at most, so every name is named.
     const whoLine = whoAtStart ?? seated.map((q, k) => q?.record?.name || Component.tf("Player {n}", { n: k + 1 })).join(", ");
-    const board = this.zoneBoardSig(R.candidates);
+    const board = this.zoneBoardSig(R.candidates, R.hours);
     const bl = s.zoneBaseline;
     const linked = bl && bl.board === board && t.count > 0 ? bl.id : null;
     const entry = { id: `r${Date.now().toString(36)}`, at: Date.now(),
@@ -2216,7 +2226,7 @@ class Component extends DCLogic {
       // just a column of numbers.
       players: JSON.parse(JSON.stringify(seated)),
       buffs: s.zoneBuffs ? JSON.parse(JSON.stringify(s.zoneBuffs)) : null,
-      cands: (s.zoneCands || []).map(c => ({ zone: c.zone, difficultyTier: c.difficultyTier })),
+      cands: (s.zoneCands || []).map(c => ({ zone: c.zone, difficultyTier: c.difficultyTier, hours: Number(c.hours) || R.hours })),
       tasks: { ...(s.zoneTasks || {}) } };
     // A finished run is the newest run, not a pick from the list — so the stale warning applies to it again.
     this.setState(st => ({ zoneShow: null, zoneStale: false, zoneRunLog: [entry, ...(st.zoneRunLog || [])].slice(0, Component.ZONE_LOG_CAP),
@@ -2256,11 +2266,21 @@ class Component extends DCLogic {
   zoneRunHours(run) {
     return Number(run?.hours) || Number((run?.candidates || []).find(Boolean)?.simulatedHours) || 0;
   }
-  // A board is the set of queued zone·tier rows: the same set re-run is the same board, whatever order it was
-  // queued in. Runs of different boards are not comparable and are never pinned to each other.
-  zoneBoardSig(cands) {
+  // A board is the set of queued zone·tier rows, each at its hours: the same set re-run is the same board,
+  // whatever order it was queued in. Runs of different boards are not comparable and are never pinned to each
+  // other. A row that carries no hours of its own (a queue from before rows were stamped, a result from an
+  // older server) counts at the run's hours, which is what it ran for.
+  zoneBoardSig(cands, defaultHours) {
     return (cands || []).filter(Boolean)
-      .map(c => `${c.zone || c.zoneHrid || c.name}@${c.difficultyTier ?? 0}`).sort().join(";");
+      .map(c => `${c.zone || c.zoneHrid || c.name}@${c.difficultyTier ?? 0}@${Component.rowHours(c, defaultHours)}`).sort().join(";");
+  }
+  static rowHours(c, defaultHours) {
+    return Number(c?.hours) || Number(c?.simulatedHours) || Number(defaultHours) || 0;
+  }
+  // The rows of a board signature, for telling a queue which of its rows is off the baseline.
+  zoneBoardRows(sig) {
+    return String(sig || "").split(";").filter(Boolean).map(x => { const [zone, tier, hours] = x.split("@");
+      return { zone, difficultyTier: Number(tier) || 0, hours: Number(hours) || 0 }; });
   }
   // Results reads whichever run is picked — a finished run of this session, or a saved one. `zoneShow` null is
   // the run on the wire (or one from before this state existed), which is `zoneResult` itself.
@@ -2376,7 +2396,7 @@ class Component extends DCLogic {
     const stamp = at => new Date(at).toLocaleString(document.documentElement.lang || undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
     const asSource = (r, kind) => ({
       id: r.id, kind, at: r.at || 0, candidates: r.candidates || [], derived: r.derived || null,
-      board: this.zoneBoardSig(r.candidates), isBaseline: !!r.isBaseline, basedOn: r.basedOn || null,
+      board: this.zoneBoardSig(r.candidates, r.hours), isBaseline: !!r.isBaseline, basedOn: r.basedOn || null,
       hours: r.hours, seed: r.seed, lag: Number(r.serverLagMs) || 0, wave: Number(r.waveTransitionDelayMs) || 0,
       // A saved run keeps the name it was given; a session run is named by its headline.
       name: kind === "save" ? (r.name || r.title || "Saved run") : (r.title || r.label || "Run"),
@@ -2386,9 +2406,9 @@ class Component extends DCLogic {
       ...(s.zoneSaves || []).filter(sv => !sv.fromRun || !log.some(r => r.id === sv.fromRun)).map(r => asSource(r, "save")),
     ];
     // Servers older than the run log answer without one; the run on the wire is then its own source.
-    if (live.length && !log.some(r => this.zoneBoardSig(r.candidates) === this.zoneBoardSig(live)))
+    if (live.length && !log.some(r => this.zoneBoardSig(r.candidates, r.hours) === this.zoneBoardSig(live, R?.hours)))
       sources.unshift({ id: "cur", kind: "cur", at: Date.now(), candidates: live, derived: s.zoneDerived,
-        board: this.zoneBoardSig(live), isBaseline: false, basedOn: null, hours: R?.hours, seed: R?.seed,
+        board: this.zoneBoardSig(live, R?.hours), isBaseline: false, basedOn: null, hours: R?.hours, seed: R?.seed,
         lag: Number(R?.serverLagMs) || 0, wave: Number(R?.waveTransitionDelayMs) || 0, name: "This run" });
     const newest = (x, y) => (y.at || 0) - (x.at || 0);
     // A run belongs under a baseline only if it was actually measured against it: the same board AND the same
@@ -3172,11 +3192,24 @@ class Component extends DCLogic {
     const allTiers = String(s.zoneTier) === "all";
     const tier = allTiers ? 0 : Math.min(maxT, Math.max(0, Math.floor(Number(s.zoneTier) || 0)));
     const hours = Math.min(8760, Math.max(1 / 60, Number(s.zoneHours) || 1000));
-    // `runZoneSim` replaces the submitted seed and hours with the baseline's whenever one is pinned to this
-    // exact board, so that an upgrade is measured against the same dice. The two fields below read from these
-    // rather than from the prefs, or they would accept edits the run then discards.
-    const pinnedBaseline = s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands) ? s.zoneBaseline : null;
-    const hoursPinned = !!pinnedBaseline;
+    // `runZoneSim` replaces the submitted seed with the baseline's whenever one is pinned to this exact board
+    // (the same rows at the same hours), so that an upgrade is measured against the same dice. The Seed field
+    // reads from the pin rather than from the prefs, or it would accept edits the run then discards. Hours is
+    // not pinned any more: each row carries its own, and a row at other hours is simply a different board.
+    const boardSig = this.zoneBoardSig(cands, hours);
+    const pinnedBaseline = s.zoneBaseline && s.zoneBaseline.board === boardSig ? s.zoneBaseline : null;
+    const seedPinned = !!pinnedBaseline;
+    // The same zones at other hours: the pin is off, and the reason is one row's hours. Name the first such
+    // row, and offer to put the queue back on the baseline's hours.
+    const pinMiss = (() => {
+      const bl = s.zoneBaseline; if (!bl || pinnedBaseline || !cands.length) return null;
+      const blRows = this.zoneBoardRows(bl.board);
+      const rowKey = c => `${c.zone}@${c.difficultyTier ?? 0}`;
+      const blHours = new Map(blRows.map(r => [rowKey(r), r.hours]));
+      if (blRows.length !== cands.length || !cands.every(c => blHours.has(rowKey(c)))) return null;
+      const offRow = cands.find(c => Component.rowHours(c, hours) !== blHours.get(rowKey(c)));
+      return offRow ? { row: offRow, baseHours: blHours.get(rowKey(offRow)), want: blHours } : null;
+    })();
     const fits = d => !d || !seated.length || seated.length <= d.maxPartySize;
     // ZONE-P7: the queue cap is the server's row cap; the work bound (Σ candidates × hours ≤ maxCandidateHours)
     // decides how many requests it takes — one at 1,000 h up to 210 rows, several only past the bound.
@@ -3508,12 +3541,9 @@ class Component extends DCLogic {
       // A pinned baseline overrides Seed and Hours when the run is submitted (`runZoneSim`), so these two
       // fields have to SAY so: an editable box whose value the run ignores reads as a broken box (operator,
       // 2026-09-20: "changing the hours in the textbox does not actually change how long the sim runs for").
-      hours: hoursPinned ? String(pinnedBaseline.hours) : s.zoneHours,
-      hoursDisabled: hoursPinned,
+      hours: s.zoneHours,
       setHours: e => this.setZonePrefs({ zoneHours: e.target.value }),
-      hoursNote: hoursPinned
-        ? Component.tf("Pinned to your baseline at {h} h so the comparison holds. Use your own seed and hours, below the Run button, to change it.", { h: nf(pinnedBaseline.hours, pinnedBaseline.hours < 1 ? 2 : 0) })
-        : hours < 24 ? Component.t("Short runs are noisy — a dungeon party sees four clears in an hour.") : Component.tf("{h} h ≈ {weeks} weeks of play, about {s} s per candidate.", { h: nf(hours), weeks: nf(hours / 168, 1), s: nf(hours * 0.02, 0) }),
+      hoursNote: hours < 24 ? Component.t("Short runs are noisy — a dungeon party sees four clears in an hour.") : Component.tf("{h} h ≈ {weeks} weeks of play, about {s} s per candidate.", { h: nf(hours), weeks: nf(hours / 168, 1), s: nf(hours * 0.02, 0) }),
       advOpen: !!s.zoneAdv, toggleAdv: () => this.setZonePrefs({ zoneAdv: !s.zoneAdv }),
       // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
       // for other things; runs and optimizer searches just take longer. Kept in this browser, not in the session.
@@ -3541,9 +3571,9 @@ class Component extends DCLogic {
         this.client.setZoneWorkers(raw === "" ? null : Math.max(1, Math.min(this.client.maxWorkers || 1, Math.floor(Number(raw)) || 1)));
         this._zoneLimitsReq = true; this.loadZoneLimits(); this.setState({ zoneWorkersAt: Date.now() }); },
       workersNote: Component.tf("How many simulations run at once. Lower it to keep your computer responsive while a long run or an optimizer search works; everything takes longer in proportion. Leave empty for {n} (every core but one).", { n: this.client?.defaultWorkers || 1 }),
-      seed: hoursPinned ? String(pinnedBaseline.seed) : s.zoneSeed,
-      seedDisabled: hoursPinned,
-      seedNote: hoursPinned ? Component.t("Pinned to your baseline.") : Component.t("Same seed, same inputs, same numbers."),
+      seed: seedPinned ? String(pinnedBaseline.seed) : s.zoneSeed,
+      seedDisabled: seedPinned,
+      seedNote: seedPinned ? Component.t("Pinned to your baseline.") : Component.t("Same seed, same inputs, same numbers."),
       setSeed: e => this.setZonePrefs({ zoneSeed: e.target.value }),
       // ZONE-46 — server lag. The suggested value comes from /zone-sim/limits, never from the page: it moves
       // as more sessions are fitted. Empty is off; the field is only sent when above 0.
@@ -3648,10 +3678,17 @@ class Component extends DCLogic {
           : Component.tf("{n} zones · {total} simulated hours in all · takes {t}.", { n: cands.length, total: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })) : "",
       // The pin, when this board already has a baseline: it is stated rather than applied silently, because it
       // overrides the Seed and Hours fields above.
-      pinned: !!(s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands)),
-      pinNote: s.zoneBaseline && s.zoneBaseline.board === this.zoneBoardSig(cands)
-        ? Component.tf("Matching your baseline (seed {seed}, {h} h{lag}{wave}), so any difference in the results comes from your changes.", { seed: s.zoneBaseline.seed, h: nf(s.zoneBaseline.hours, s.zoneBaseline.hours < 1 ? 2 : 0), lag: s.zoneBaseline.lag > 0 ? Component.tf(", {n} ms lag", { n: nf(s.zoneBaseline.lag) }) : "", wave: s.zoneBaseline.wave > 0 ? Component.tf(", {n} ms wave delay", { n: nf(s.zoneBaseline.wave) }) : "" }) : "",
+      pinned: seedPinned,
+      pinNote: seedPinned
+        ? Component.tf("Matching your baseline (seed {seed}{lag}{wave}, the same zones at the same hours), so any difference in the results comes from your changes.", { seed: pinnedBaseline.seed, lag: pinnedBaseline.lag > 0 ? Component.tf(", {n} ms lag", { n: nf(pinnedBaseline.lag) }) : "", wave: pinnedBaseline.wave > 0 ? Component.tf(", {n} ms wave delay", { n: nf(pinnedBaseline.wave) }) : "" }) : "",
       unpin: () => set({ zoneBaseline: null }),
+      pinMiss: !!pinMiss,
+      pinMissNote: pinMiss
+        ? Component.tf("{zone} · T{tier} is queued at {h} h and your baseline ran it at {bh} h, so the runs would not be comparable.", {
+            zone: Component.t(byHrid(pinMiss.row.zone)?.name || pinMiss.row.zone), tier: pinMiss.row.difficultyTier ?? 0,
+            h: nf(Component.rowHours(pinMiss.row, hours), Component.rowHours(pinMiss.row, hours) < 1 ? 2 : 0), bh: nf(pinMiss.baseHours, pinMiss.baseHours < 1 ? 2 : 0) }) : "",
+      matchBaselineHours: () => { if (!pinMiss) return;
+        set({ zoneCands: cands.map(c => ({ ...c, hours: pinMiss.want.get(`${c.zone}@${c.difficultyTier ?? 0}`) || Component.rowHours(c, hours) })) }); },
       stop: () => this.stopZoneSim(),
       stopped: !!R?.stopped,
       stoppedNote: R?.stopped ? Component.tf("Stopped: {n} of {total} zones ran.", { n: nf((R.candidates || []).length), total: nf(cands.length) }) : "",
