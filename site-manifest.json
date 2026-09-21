@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-21T05:04:28.642Z",
- "commit": "3e798e0",
+ "builtAt": "2026-09-21T05:12:50.340Z",
+ "commit": "4b44ba4",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 38,
-  "bytes": 16117903,
-  "gzip": 2599644
+  "bytes": 16118464,
+  "gzip": 2599874
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -39,11 +39,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3781
+   "gzip": 3780
   },
   "index.html": {
-   "bytes": 169751,
-   "gzip": 43376
+   "bytes": 170312,
+   "gzip": 43609
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -83,7 +83,7 @@
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
-   "gzip": 3254
+   "gzip": 3257
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -139,27 +139,27 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 4864,
-   "gzip": 1952
+   "gzip": 1951
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 742
+   "gzip": 743
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 147
+   "gzip": 146
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 219
+   "gzip": 217
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2030
+   "gzip": 2029
   },
   "ZoneSim.dc.html": {
    "bytes": 290157,
-   "gzip": 74392
+   "gzip": 74391
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
