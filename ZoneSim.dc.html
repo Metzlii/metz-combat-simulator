@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=e39d53846ca3"></script>
+<script src="./support.js?v=205147b9a82e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e39d53846ca3">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=205147b9a82e">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=e39d53846ca3">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e39d53846ca3"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=205147b9a82e">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=205147b9a82e"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1140,7 +1140,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=e39d53846ca3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=205147b9a82e").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1512,7 +1512,7 @@ class Component extends DCLogic {
         this.setState({ zoneRunning: false, zoneResult: r, zoneOpen: 0 });
         this.logZoneRun(r);
         this.props.onResults?.();
-        this.recordZonePace({ seconds: (Number(r?.ms) || 0) / 1000, candidates: (r?.candidates || []).length, hours: body.hours, lanes: this.zoneLanes() });
+        this.recordZonePace({ seconds: (Number(r?.ms) || 0) / 1000, laneHours: Component.laneHours(all.map(c => Component.rowHours(c, body.hours)), this.zoneLanes()) });
       } catch (e) { this.setState({ zoneRunning: false, zoneRunError: `${e.message || e}`.replace(/^\d{3}\s*/, "") }); }
       return;
     }
@@ -1553,7 +1553,7 @@ class Component extends DCLogic {
         return { zoneRunning: false, zoneProgress: null, zoneOpen: 0, zoneResult: finished }; });
       this.logZoneRun(finished);
       this.props.onResults?.();
-      if (!tail?.stopped && !this._zoneStopped) this.recordZonePace({ seconds: (Number(tail?.ms) || 0) / 1000, candidates: tail?.evaluated || all.length, hours: body.hours, lanes: this.zoneLanes() });
+      if (!tail?.stopped && !this._zoneStopped) this.recordZonePace({ seconds: (Number(tail?.ms) || 0) / 1000, laneHours: Component.laneHours(all.map(c => Component.rowHours(c, body.hours)), this.zoneLanes()) });
     } catch (e) {
       if (`${e?.name}` === "AbortError") this.setState(st => { const R = st.zoneResult || {};
         return { zoneRunning: false, zoneProgress: null,
@@ -1573,14 +1573,28 @@ class Component extends DCLogic {
     if (this._zonePace === undefined) { try { this._zonePace = JSON.parse(localStorage.getItem(Component.ZONE_PACE_KEY) || "null"); } catch { this._zonePace = null; } }
     return this._zonePace;
   }
-  recordZonePace({ seconds, candidates, hours, lanes }) {
+  /**
+   * The candidate-hours the busiest lane carries when the rows are dealt over the lanes, longest first onto the
+   * least loaded lane -- the same rule as the server's `laneHours`. One row is one lane's work however many lanes
+   * there are: a single 509 h row takes 509 candidate-hours of wall time, not 509 / lanes (operator, 2026-09-21:
+   * the idle estimate said "under a second" against a measured 13 s).
+   */
+  static laneHours(hoursList, lanes) {
+    const L = Math.max(1, Math.floor(Number(lanes)) || 1);
+    const load = new Array(L).fill(0);
+    for (const h of hoursList.map(Number).filter(h => h > 0).sort((a, b) => b - a)) {
+      let k = 0; for (let i = 1; i < L; i++) if (load[i] < load[k]) k = i;
+      load[k] += h;
+    }
+    return Math.max(0, ...load);
+  }
+  recordZonePace({ seconds, laneHours }) {
     if (!this.zoneOnly) return;
-    const waves = Math.ceil(Number(candidates) / Math.max(1, Number(lanes) || 1));
-    const per = Number(seconds) / (waves * Number(hours));
+    const per = Number(seconds) / Number(laneHours);
     if (!Number.isFinite(per) || per <= 0) return;
     const prev = this.zonePace();
     const next = { secondsPerCandidateHour: prev?.secondsPerCandidateHour > 0 ? prev.secondsPerCandidateHour * 0.7 + per * 0.3 : per,
-      samples: (prev?.samples || 0) + 1, lanes: Number(lanes) || 1, at: new Date().toISOString() };
+      samples: (prev?.samples || 0) + 1, lanes: this.zoneLanes(), at: new Date().toISOString() };
     this._zonePace = next;
     try { localStorage.setItem(Component.ZONE_PACE_KEY, JSON.stringify(next)); } catch {}
     this.forceUpdate();
@@ -3422,7 +3436,9 @@ class Component extends DCLogic {
     // field's hours, which is what it will run at.
     const candHours = cands.reduce((a, c) => a + (Number(c.hours) || hours), 0);
     const uniformHours = cands.every(c => (Number(c.hours) || hours) === (Number(cands[0]?.hours) || hours));
-    const estSec = (candHours / Math.max(1, LIM.concurrency)) * perCandHour;
+    // Wall time is the busiest lane's candidate-hours at the pace, not the total spread evenly: one row cannot
+    // be split across lanes, so a lone 509 h row is 509 candidate-hours of waiting on any machine.
+    const estSec = Component.laneHours(cands.map(c => Component.rowHours(c, hours)), LIM.concurrency) * perCandHour;
     // "under a second", "about 12 seconds", "about 3 minutes": an estimate as a player reads it.
     const secText = v => { const x = Number(v) || 0;
       return x < 1 ? Component.t("under a second") : x < 90 ? (Math.round(x) === 1 ? Component.t("about 1 second") : Component.tf("about {n} seconds", { n: Math.round(x) }))
