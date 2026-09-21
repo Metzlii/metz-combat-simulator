@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=d910b47a47eb"></script>
+<script src="./support.js?v=4381f7617626"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d910b47a47eb">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4381f7617626">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=d910b47a47eb">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d910b47a47eb"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=4381f7617626">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4381f7617626"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1078,6 +1078,10 @@ class Component extends DCLogic {
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
     this.loadZoneSession();
+    // ZONE-95: the Optimize tab hands tuned trigger values back. It is the ONE thing that writes into the party
+    // from outside -- an upgrade or a levelling plan is an errand in the game, but a trigger value is a number
+    // this page owns, and retyping twelve of them by hand is how they get mistyped.
+    globalThis.addEventListener?.("zone-apply-triggers", this._onApplyTriggers = e => this.applyTunedTriggers(e.detail?.changes || []));
   }
   // ——— The session, across a refresh ———
   // A refresh used to cost the imported party, every run of the session and the whole editor state, none of
@@ -1128,7 +1132,8 @@ class Component extends DCLogic {
       catch { try { put({ ...snap, runLog: [] }); } catch {} } }
   }
   componentDidUpdate() { this.queueZoneSession(); }
-  componentWillUnmount() { clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); this.writeZoneSession(); }
+  componentWillUnmount() {
+    if (this._onApplyTriggers) globalThis.removeEventListener?.("zone-apply-triggers", this._onApplyTriggers); clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); this.writeZoneSession(); }
   // The run settings — hours, seed, server lag, wave delay, the pricing block and whether Advanced is open —
   // describe how this visitor measures, not what they are measuring, so they outlive a refresh. Only these keys
   // are read back: an unknown key in storage from an older build is ignored rather than restored into state.
@@ -1515,6 +1520,38 @@ class Component extends DCLogic {
   // ——— LOAD-1: the per-player loadout editor ———
   // Edits sit on top of the import: zoneBase keeps the imported party verbatim so any grain can be reverted
   // and every changed field can be marked. An edit never silently invalidates a run — it marks it stale.
+  /**
+   * Tuned trigger values onto the seated party, one change at a time.
+   *
+   * Change by change rather than swapping the optimizer's whole party in: that party is a snapshot from when the
+   * search STARTED, and the visitor may have edited gear, abilities or seats since. Writing it back wholesale
+   * would silently undo all of that. A change whose ability or trigger slot no longer exists is counted and
+   * reported rather than dropped, because "12 applied" and "9 applied, 3 gone" are different situations.
+   */
+  applyTunedTriggers(changes) {
+    const list = Array.isArray(changes) ? changes : [];
+    if (!list.length) return;
+    this.setState(s => {
+      const party = (s.zoneParty || []).slice();
+      const names = party.map(p => p?.record?.name || "");
+      let applied = 0, missed = 0;
+      for (const c of list) {
+        const i = names.indexOf(c.player);
+        const p = i >= 0 ? party[i] : null;
+        const slot = p?.loadout?.abilityTriggers?.[c.abilityHrid];
+        if (!slot || !slot[c.triggerIndex]) { missed++; continue; }
+        const trig = slot.slice();
+        trig[c.triggerIndex] = { ...trig[c.triggerIndex], value: c.to };
+        party[i] = { ...p, loadout: { ...p.loadout, abilityTriggers: { ...p.loadout.abilityTriggers, [c.abilityHrid]: trig } } };
+        applied++;
+      }
+      // Reported back rather than asserted: the Optimize tab cannot see this party, so only here knows what
+      // actually landed. `zoneStale` is the same flag any hand edit sets -- the run on screen is now of a
+      // different party.
+      globalThis.dispatchEvent?.(new CustomEvent("zone-triggers-applied", { detail: { applied, missed } }));
+      return { zoneParty: party, zoneStale: !!s.zoneResult, zoneDerived: null };
+    });
+  }
   patchPlayer(i, fn) {
     this.setState(s => { const party = (s.zoneParty || []).slice();
       const p = party[i]; if (!p) return null;
