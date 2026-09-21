@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=d5555a2f0ba3"></script>
+<script src="./support.js?v=ed3b16f696d9"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d5555a2f0ba3">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ed3b16f696d9">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=d5555a2f0ba3">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d5555a2f0ba3"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=ed3b16f696d9">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ed3b16f696d9"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -104,9 +104,6 @@
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <sc-if value="{{ zone.addNote }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:13px">{{ zone.addNote }}</span></sc-if>
         <span class="text-muted" style="font-size:13px">{{ zone.candNote }}</span>
-        <sc-if value="{{ zone.hasCands }}" hint-placeholder-val="{{ false }}">
-          <button class="btn btn-ghost" style="padding:1px 8px;font-size:12.5px;flex:none;margin-left:auto" title="Empty the queue — measured runs are kept" onClick="{{ zone.clearCands }}">{{ zone.clearCandsLabel }}</button>
-        </sc-if>
       </div>
       <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.hoursNote }}</div>
       <!-- The Run button sits right under Add to Queue (operator, 2026-09-21: "some people have been getting
@@ -149,7 +146,14 @@
 
     <!-- candidates -->
     <div style="display:flex;flex-direction:column;gap:var(--space-3)">
-      <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Queue</div>
+      <!-- Clear belongs to the queue it empties (operator, 2026-09-21: "not stranded in the page"), on the
+           heading's right, where the ✕ of each row already is. -->
+      <div style="display:flex;gap:8px;align-items:baseline">
+        <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Queue</div>
+        <sc-if value="{{ zone.hasCands }}" hint-placeholder-val="{{ false }}">
+          <button class="btn btn-ghost" style="padding:1px 8px;font-size:12.5px;flex:none;margin-left:auto" title="Empty the queue — measured runs are kept" onClick="{{ zone.clearCands }}">{{ zone.clearCandsLabel }}</button>
+        </sc-if>
+      </div>
       <sc-if value="{{ zone.hasCands }}" hint-placeholder-val="{{ false }}">
         <div style="display:flex;flex-direction:column;gap:2px;max-height:140px;overflow-y:auto;padding-right:2px">
           <sc-for list="{{ zone.cands }}" as="c" hint-placeholder-count="3">
@@ -1138,7 +1142,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=d5555a2f0ba3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=ed3b16f696d9").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
