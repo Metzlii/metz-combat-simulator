@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=24c3cb0ecf4b"></script>
+<script src="./support.js?v=b517750977ed"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=24c3cb0ecf4b">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b517750977ed">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=24c3cb0ecf4b">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=24c3cb0ecf4b"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=b517750977ed">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b517750977ed"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1123,7 +1123,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=24c3cb0ecf4b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=b517750977ed").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2047,7 +2047,7 @@ class Component extends DCLogic {
     // baseline mark, so the pickers group it like any other run.
     const logged = (s.zoneRunLog || []).find(r => this.zoneBoardSig(r.candidates) === this.zoneBoardSig(R.candidates));
     const t = this.zoneRunTitle(this.zoneActiveParty(s));
-    const name = (s.zoneSaveName || "").trim() || `${logged?.title || t.title} · ${new Date().toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`;
+    const name = (s.zoneSaveName || "").trim() || `${Component.t(logged?.title || t.title)} · ${new Date().toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" })}`;
     const save = { id: `s${Date.now().toString(36)}`, name, at: Date.now(),
       title: logged?.title || t.title, board: this.zoneBoardSig(R.candidates),
       isBaseline: logged ? !!logged.isBaseline : t.count === 0, basedOn: logged?.basedOn || null,
@@ -2171,7 +2171,7 @@ class Component extends DCLogic {
   logZoneRun(R) {
     if (!R || !(R.candidates || []).length) return;
     const s = this.state, first = R.candidates.find(Boolean) || {};
-    const zones = [...new Set(R.candidates.filter(Boolean).map(c => `${c.name} · T${c.difficultyTier ?? 0}`))];
+    const zones = [...new Set(R.candidates.filter(Boolean).map(c => `${Component.t(c.name)} · T${c.difficultyTier ?? 0}`))];
     // The party the run actually simulated, as objects: `R.party` is the server's echo, which carries no loadout.
     const seated = this.zoneActiveParty(s);
     const m = this._runMeta;   // the snapshot taken when Run was pressed, if this run came from the Run button
@@ -2186,7 +2186,7 @@ class Component extends DCLogic {
     const entry = { id: `r${Date.now().toString(36)}`, at: Date.now(),
       title: whoLine ? `${t.title} — ${whoLine}` : t.title,
       diffs: t.count, board, isBaseline: t.count === 0, basedOn: linked,
-      label: zones.length > 1 ? Component.tf("{zone} · T{tier} +{n} more", { zone: first.name, tier: first.difficultyTier ?? 0, n: zones.length - 1 }) : zones[0] || "Run",
+      label: zones.length > 1 ? Component.tf("{zone} · T{tier} +{n} more", { zone: Component.t(first.name), tier: first.difficultyTier ?? 0, n: zones.length - 1 }) : zones[0] || "Run",
       rows: R.candidates.filter(Boolean).length,
       hours: R.hours, seed: R.seed, serverLagMs: Number(R.serverLagMs) || 0,
       waveTransitionDelayMs: Number(R.waveTransitionDelayMs) || 0, pricing: R.pricing, party: (R.party || []).slice(),
@@ -2258,8 +2258,8 @@ class Component extends DCLogic {
   zoneRunPicker(s, set, { nf }) {
     const log = s.zoneRunLog || [], saves = s.zoneSaves || [];
     const savedFrom = new Set(saves.map(x => x.fromRun).filter(Boolean));
-    const time = at => new Date(at).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" });
-    const day = at => new Date(at).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+    const time = at => new Date(at).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+    const day = at => new Date(at).toLocaleDateString(undefined, { month: "short", day: "numeric" });
     const today = new Date().toDateString();
     // The headline is what the party was (Baseline, or the change from it); the zone board is the sub-line.
     const entries = [
@@ -2289,7 +2289,7 @@ class Component extends DCLogic {
       // One tag for what the run is: the baseline, or measured against it. Whether it is kept is the saved tag or
       // the Save button beside it; an unsaved run of this session is marked as one, since it is the kind that
       // ages out of the snapshot and the kind the ✕ discards.
-      mark: e.baseline ? "baseline" : e.linked ? "vs baseline" : !e.saved && e.session ? "session" : "",
+      mark: e.baseline ? Component.t("baseline") : e.linked ? Component.t("vs baseline") : !e.saved && e.session ? Component.t("session") : "",
       current: s.zoneShow === e.id || autoId === e.id || (latestOnScreen && e.id === log[0].id), pick: () => set({ zoneShow: e.id, zoneOpen: 0 }),
       // Saving happens here, where the run is read; the Saved tab is for managing what has been kept.
       saved: e.saved, canSave: e.session && !e.saved, save: () => this.saveLoggedRun(e.id),
@@ -2354,7 +2354,7 @@ class Component extends DCLogic {
     // were in the session log, so the closed picker was in fact holding an older save and the current run, both
     // of which an option labelled with nothing but its zone renders as "Bear With It · T1".
     const log = s.zoneRunLog || [];
-    const stamp = at => new Date(at).toLocaleString("en-US", { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
+    const stamp = at => new Date(at).toLocaleString(undefined, { month: "short", day: "numeric", hour: "numeric", minute: "2-digit" });
     const asSource = (r, kind) => ({
       id: r.id, kind, at: r.at || 0, candidates: r.candidates || [], derived: r.derived || null,
       board: this.zoneBoardSig(r.candidates), isBaseline: !!r.isBaseline, basedOn: r.basedOn || null,
@@ -2400,7 +2400,7 @@ class Component extends DCLogic {
       const who = `${sv.name}${tag ? ` (${tag})` : ""}${sv.at ? ` · ${stamp(sv.at)}` : ""}`;
       for (const [k, c] of (sv.candidates || []).filter(Boolean).entries())
         srcOpts[0].items.push({ value: `${sv.id}:${k}`,
-          label: `${indent}${c.name} · T${c.difficultyTier ?? 0} — ${who}` });
+          label: `${indent}${Component.t(c.name)} · T${c.difficultyTier ?? 0} — ${who}` });
     }
     const resolve = key => { if (!key) return null;
       const [src, idx] = String(key).split(":"); const k = Number(idx);
@@ -2680,7 +2680,7 @@ class Component extends DCLogic {
     const abilityGroups = (() => { const g = new Map();
       for (const a of abilityDefs) { const k = a.isSpecial ? "Special" : a.style ? nice(a.style.split("/").pop()) : a.kind ? nice(a.kind) : "Any style";
         if (!g.has(k)) g.set(k, []);
-        g.get(k).push({ value: a.abilityHrid, label: a.name, iconId: a.iconId || null,
+        g.get(k).push({ value: a.abilityHrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(a.abilityHrid, a.name), iconId: a.iconId || null,
           glyph: a.isSpecial ? "ph-star-four" : /magic/.test(String(a.style || "")) ? "ph-sparkle"
             : /ranged/.test(String(a.style || "")) ? "ph-crosshair-simple" : /melee/.test(String(a.style || "")) ? "ph-sword" : "ph-lightning",
           note: a.manaCost ? Component.tf("{n} mana", { n: a.manaCost }) : "" }); }
@@ -2688,7 +2688,7 @@ class Component extends DCLogic {
       // before the whole ability list by style.
       const ownedAb = abilityDefs.filter(a => ownedAbilities.has(a.abilityHrid)).map(a => {
         const r = ownedAbilities.get(a.abilityHrid), lv = Number(r?.level) || 0;
-        return { value: lv ? `${a.abilityHrid}${OWN_SEP}${lv}` : a.abilityHrid, label: a.name,
+        return { value: lv ? `${a.abilityHrid}${OWN_SEP}${lv}` : a.abilityHrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(a.abilityHrid, a.name),
           iconId: a.iconId || null, glyph: "ph-lightning",
           note: [lv ? Component.tf("level {n}", { n: nf(lv) }) : "", r?.equipped ? "slotted" : ""].filter(Boolean).join(" · ") }; });
       return [{ label: "", items: [{ value: "", label: "Empty", glyph: "ph-prohibit" }] },
@@ -2705,7 +2705,7 @@ class Component extends DCLogic {
       const rest = sortGear((catList || (kind === "food" ? ownedFood : ownedDrink).map(h => ({ itemHrid: h, name: iname(h), level: 0 })))
         .filter(x => !mine.includes(x.itemHrid))
         .map(x => ({ itemHrid: x.itemHrid, name: cname(x), level: Number(x.level) || 0, iconId: x.iconId || null })))
-        .map(x => ({ value: x.itemHrid, label: x.name, iconId: x.iconId || null, note: x.level ? Component.tf("lv {n}", { n: x.level }) : "" }));
+        .map(x => ({ value: x.itemHrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(String(x.itemHrid || "").replace(/_refined$/, ""), x.name), iconId: x.iconId || null, note: x.level ? Component.tf("lv {n}", { n: x.level }) : "" }));
       return { owned, rest, restLabel: catList ? Component.t("Catalogue") : Component.t("Elsewhere in the party") };
     };
     const myFood = ((p.loadout?.food || {})[COMBAT] || []).map(x => x.itemHrid);
@@ -2740,7 +2740,9 @@ class Component extends DCLogic {
     const hastedCd = cd => (Number(cd) || 0) / (1 + abilityHaste);
     const secs = v => `${Math.round(v * 100) / 100}`;
     const hastePct = `${Math.round(abilityHaste * 10000) / 100}%`;
-    const weaponName = weaponWorn ? title(weaponWorn.itemHrid) : "";
+    // By hrid, self-contained: `nm` lives in another method, and this one only has `title` in scope.
+    const weaponName = weaponWorn ? (h => { const b = String(h).replace(/_refined$/, ""); const v = Component.t(b);
+      return v !== b ? v + (/_refined$/.test(h) ? " ★" : "") : title(h); })(weaponWorn.itemHrid) : "";
     const styleNote = !D ? ""
       : isMagicWeapon ? Component.tf("{weapon} is a magic weapon — attack interval and attack speed do not apply.", { weapon: weaponName })
       : isPhysicalWeapon ? (weaponStyles.some(x => /ranged/.test(x)) ? Component.tf("{weapon} is a ranged weapon — cast speed does not apply.", { weapon: weaponName }) : Component.tf("{weapon} is a melee weapon — cast speed does not apply.", { weapon: weaponName }))
@@ -2779,9 +2781,9 @@ class Component extends DCLogic {
         const cmp = (V?.comparators || []).find(c => c.hrid === row.comparatorHrid) || null;
         return { k, dep: row.dependencyHrid || "", cond: row.conditionHrid || "", cmp: row.comparatorHrid || "",
           value: row.value === undefined ? "" : String(row.value), takesValue: !!cmp?.allowValue, noValue: !cmp?.allowValue,
-          depOpts: (V?.dependencies || []).map(d => ({ value: d.hrid, label: d.name })),
-          condOpts: this.zoneConditionsFor(row.dependencyHrid).map(c => ({ value: c.hrid, label: c.name })),
-          cmpOpts: (V?.comparators || []).filter(c => allowed.includes(c.hrid)).map(c => ({ value: c.hrid, label: c.name })),
+          depOpts: (V?.dependencies || []).map(d => ({ value: d.hrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(d.hrid, d.name) })),
+          condOpts: this.zoneConditionsFor(row.dependencyHrid).map(c => ({ value: c.hrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(c.hrid, c.name) })),
+          cmpOpts: (V?.comparators || []).filter(c => allowed.includes(c.hrid)).map(c => ({ value: c.hrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(c.hrid, c.name) })),
           setDep: e => onEdit(k, { dependencyHrid: e.target.value }),
           setCond: e => onEdit(k, { conditionHrid: e.target.value }),
           setCmp: e => onEdit(k, { comparatorHrid: e.target.value }),
@@ -2873,7 +2875,7 @@ class Component extends DCLogic {
           remove: () => set({ zoneParty: party.filter((_, j) => j !== k), zoneBase: base.filter((_, j) => j !== k), zoneSel: 0, zoneResult: s.zoneResult, zoneStale: !!s.zoneResult }) }; }),
       name: p.record?.name || Component.tf("Player {n}", { n: i + 1 }),
       task: (s.zoneTasks || {})[p.record?.name] || "",
-      taskLabel: (() => { const t = (s.zoneTasks || {})[p.record?.name] || ""; return t ? title(t) : "none"; })(),
+      taskLabel: (() => { const t = (s.zoneTasks || {})[p.record?.name] || ""; return t ? (h => { const v = Component.t(h); return v !== h ? v : title(h); })(t) : Component.t("none"); })(),
       setTask: v => set({ zoneTasks: { ...(s.zoneTasks || {}), [p.record?.name]: typeof v === "string" ? v : v.target.value }, zoneStale: !!s.zoneResult }),
       editedCount: dirtyCount(i), isEdited: dirtyCount(i) > 0,
       editedNote: dirtyCount(i) > 0 ? (dirtyCount(i) === 1 ? Component.t("1 section changed from the import") : Component.tf("{n} sections changed from the import", { n: dirtyCount(i) })) : "",
@@ -2903,7 +2905,7 @@ class Component extends DCLogic {
           .map(h => { const d = defOf(h); return { itemHrid: h, name: d ? cname(d) : iname(h), level: Number(d?.level) || 0 }; });
         const restAll = sortGear((catItems ? catItems.map(x => ({ itemHrid: x.itemHrid, name: cname(x), level: Number(x.level) || 0, iconId: x.iconId || null })) : partyWorn)
           .filter(x => x.itemHrid !== cur?.itemHrid))
-          .map(x => ({ value: x.itemHrid, label: x.name, iconId: x.iconId || null, note: x.level ? Component.tf("lv {n}", { n: x.level }) : "" }));
+          .map(x => ({ value: x.itemHrid, label: ((h, fb) => { const v = Component.t(h); return v !== h ? v : fb; })(String(x.itemHrid || "").replace(/_refined$/, ""), x.name), iconId: x.iconId || null, note: x.level ? Component.tf("lv {n}", { n: x.level }) : "" }));
         const { own: ownedForSlot, other: rest } = splitOwned(restAll);
         // The slot caption is the game's own word for the equipment type (主手, 副手, 双手): our slots are
         // /item_locations/*, the game's names are keyed /equipment_types/*, same tail.
@@ -2956,7 +2958,7 @@ class Component extends DCLogic {
           icon: iconOf("ability", a.hrid, def, title(a.hrid)),
           empty: false, filled: true, levelDisabled: false, modeDisabled: false,
           dirty: abDirty(k),
-          special: !!def?.isSpecial, specialMark: def?.isSpecial ? "special" : "",
+          special: !!def?.isSpecial, specialMark: def?.isSpecial ? Component.t("special") : "",
           meta: def ? `${def.manaCost ? Component.tf("{n} mana", { n: def.manaCost }) : ""}${def.cooldownSeconds ? ` · ${def.cooldownSeconds} s` : ""}`.replace(/^ · /, "") : "",
           hastedText: def && def.cooldownSeconds && abilityHaste > 0 ? `${secs(hastedCd(def.cooldownSeconds))} s` : "",
           hastedTip: def && def.cooldownSeconds && abilityHaste > 0
@@ -3016,11 +3018,14 @@ class Component extends DCLogic {
         const tip = (bd.buffs || []).map(x => { const val = (x.flatBoost || x.flatBoostLevelBonus)
             ? Component.tf("+{n} flat", { n: nf((x.flatBoost || 0) + (x.flatBoostLevelBonus || 0) * Math.max(0, v - 1), 3) })
             : `+${nf(((x.ratioBoost || 0) + (x.ratioBoostLevelBonus || 0) * Math.max(0, v - 1)) * 100, 1)}%`;
-          return `${nice(x.typeHrid.split("/").pop())} ${val}`; }).join(" · ");
-        return { key: bd.key, name: bd.name, icon, value: String(v), max: String(bd.maxLevel ?? 20),
+          return `${nice(x.typeHrid)} ${val}`; }).join(" · ");
+        // The shrine's name is the game's own (guildShrineNames, keyed /guild_shrines/<key>); the server's
+        // English is the fallback for a key the locale lacks.
+        return { key: bd.key, name: (h => { const w = Component.t(h); return w !== h ? w : bd.name; })(`/guild_shrines/${bd.key}`),
+          icon, value: String(v), max: String(bd.maxLevel ?? 20),
           tip: v > 0 && tip ? Component.tf("At level {n}: {tip}", { n: v, tip }) : "",
-          assumed: inf, assumedMark: inf ? "inferred" : "",
-          assumedTip: !inf ? "" : inferredFrom[bd.key] ? Component.tf("Not in this export — read from {who}'s", { who: inferredFrom[bd.key] }) : "Nobody in the party carries shrine levels — 0, not a guess",
+          assumed: inf, assumedMark: inf ? Component.t("inferred") : "",
+          assumedTip: !inf ? "" : inferredFrom[bd.key] ? Component.tf("Not in this export — read from {who}'s", { who: inferredFrom[bd.key] }) : Component.t("Nobody in the party carries shrine levels — 0, not a guess"),
           dirty: (own[bd.key] ?? null) !== (b?.record?.guildCombatBuffLevels?.[bd.key] ?? null),
           set: e => this.zoneSetBuff(i, bd.key, e.target.value) }; }),
       // `format` is the server's rendering hint; sources sum to the total exactly, so they are shown as-is.
@@ -3037,12 +3042,12 @@ class Component extends DCLogic {
         // A stat whose only source was a zero Base has nothing left to expand, so it loses its caret and reads
         // as the flat row it is.
         const shown = (st.sources || []).filter(x => !(/^base$/i.test(String(x.label || "").trim()) && !Number(x.value)));
-        return { label: st.label, total: fmt(st.total), expandable: shown.length > 0,
+        return { label: Component.t(st.label), total: fmt(st.total), expandable: shown.length > 0,
           open: s.zoneStatOpen === key && shown.length > 0, caret: shown.length === 0 ? "·" : s.zoneStatOpen === key ? "▾" : "▸",
           toggle: () => { if (shown.length) set({ zoneStatOpen: s.zoneStatOpen === key ? null : key }); },
           // A "Base" row of zero says nothing — every character has the same zero — so it is dropped. Any other
           // zero row stays: it is a source that could have contributed and did not.
-          sources: shown.map(x => ({ label: x.label, detail: x.detail || "", hasDetail: !!x.detail, value: fmt(x.value),
+          sources: shown.map(x => ({ label: Component.t(x.label), detail: x.detail || "", hasDetail: !!x.detail, value: fmt(x.value),
             hasIcon: !!x.iconId,
             icon: this.zoneIcon(x.iconSheet === "skills" ? "skill" : x.iconSheet === "misc" ? "room" : "source", x.label, x, x.label) })) }; }),
       hasDerived: !!shownStats.length,
@@ -3072,7 +3077,7 @@ class Component extends DCLogic {
               open, caret: !stats.length ? "·" : open ? "▾" : "▸",
               toggle: () => { if (stats.length) set({ zoneTempRow: s.zoneTempRow === key ? null : key }); },
               // value is the change while the buff is up; total is what the stat reads while it is up.
-              stats: stats.map(x => ({ label: x.label || nice(String(x.key || "").replace(/([A-Z])/g, " $1")),
+              stats: stats.map(x => ({ label: Component.t(x.label || nice(String(x.key || "").replace(/([A-Z])/g, " $1"))),
                 value: fmtDelta(x.value, x.format), total: fmtStat(x.total, x.format),
                 detail: x.lowerIsBetter ? Component.t("lower is better") : "" })) };
           }) };
@@ -3097,7 +3102,7 @@ class Component extends DCLogic {
     // keys are bought. Selling at the bid or buying at the ask fills an order already listed (instant); selling at
     // the ask or buying at the bid waits as a listing (slow).
     const side = (k, v) => (v !== "ask" && v !== "bid") ? "" : `${Component.t(((k === "loot") === (v === "bid")) ? "instant" : "slow")} ${Component.t(k === "loot" ? "sell" : "buy")}`;
-    const sideShort = (k, v) => { const w = side(k, v); return w ? `${v} (${w.split(" ")[0]})` : v; };
+    const sideShort = (k, v) => { const w = side(k, v); return w ? `${Component.t(v)} (${w.split(" ")[0]})` : Component.t(v); };
     const nf = (v, d = 0) => Number(v || 0).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
     const coin = v => { const x = Number(v || 0), a = Math.abs(x);
       return (x < 0 ? "−" : "") + (a >= 1e9 ? (a / 1e9).toFixed(2) + "B" : a >= 1e6 ? (a / 1e6).toFixed(1) + "M" : a >= 1e3 ? Math.round(a / 1e3) + "K" : String(Math.round(a))); };
@@ -3224,7 +3229,7 @@ class Component extends DCLogic {
       });
       const shown = list.filter(c => c.ok !== false);
       if (shown.length > 0 && shown.every(c => c.isDungeon)) {
-        rateLabel = "Avg run";
+        rateLabel = Component.t("Avg run");
         rateHeadTip = Component.t("Average time for one full run, counting the time lost to failed attempts — a session's length divided by the clears it produced, the way a run is timed in game");
       }
       const key = s.zoneSort?.key || "queued", dir = s.zoneSort?.dir || 1;
@@ -3253,7 +3258,7 @@ class Component extends DCLogic {
         manaToggle: () => this.setState(st => ({ zoneManaOpen: !st.zoneManaOpen })),
         monsters: Object.entries(c.killsByMonsterPerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1])
           .map(([k, v]) => ({ text: `${nice(k)} · ${nf(v, 1)} / h` })),
-        notes: (c.lootNotes || []).map(t => ({ text: t })),
+        notes: (c.lootNotes || []).map(t => ({ text: Component.t(t) })),
         players: (() => { const built = (c.players || []).map(p => ({
           name: p.hrid, sub: Component.tf("combat {n}", { n: nf(p.combatLevel, 1) }) + (p.debuffOnLevelGap ? Component.tf(" · level-gap debuff {pct}%", { pct: pct(p.debuffOnLevelGap) }) : ""),
           // Healing is the RECEIVED figure (7bce483) — every HP restore credited to this player, which is what the
@@ -3299,7 +3304,7 @@ class Component extends DCLogic {
           xpTotal: xp4(p.experiencePerHour?.total),
           xpTip: Component.tf("{n} XP / h total", { n: nf(p.experiencePerHour?.total || 0, 4) }),
           xp: Object.entries(p.experiencePerHour || {}).filter(([k, v]) => k !== "total" && v > 0).sort((a, b) => b[1] - a[1])
-            .map(([k, v]) => ({ k: k[0].toUpperCase() + k.slice(1), v: xp4(v), tip: `${nf(v, 4)} XP / h` })),
+            .map(([k, v]) => ({ k: Component.t(k[0].toUpperCase() + k.slice(1)), v: xp4(v), tip: `${nf(v, 4)} XP / h` })),
           damage: Object.entries(p.damageBySourcePerHour || {}).sort((a, b) => b[1] - a[1]).map(([k, v]) => ({
             k: nice(k), v: big(v),
             casts: p.abilityCastsPerHour?.[k] != null ? `${nf(p.abilityCastsPerHour[k], 1)}/h` : "",
@@ -3312,7 +3317,7 @@ class Component extends DCLogic {
           consumablesCost: (() => { const items = p.loot?.expenses?.items || [];
             const t = Object.keys(p.consumablesUsedPerHour || {}).reduce((a, k) =>
               a + (items.find(x => x.itemHrid === k)?.coinsPerHour || 0), 0);
-            return t > 0 ? `${coin(t * 24)} / day` : ""; })(),
+            return t > 0 ? Component.tf("{n} / day", { n: coin(t * 24) }) : ""; })(),
           consumablesTip: (() => { const items = p.loot?.expenses?.items || [];
             const t = Object.keys(p.consumablesUsedPerHour || {}).reduce((a, k) =>
               a + (items.find(x => x.itemHrid === k)?.coinsPerHour || 0), 0);
@@ -3396,7 +3401,7 @@ class Component extends DCLogic {
       monsterOpts: zones.filter(z => !z.isDungeon && z.maxPartySize === 1)
         .map(z => ({ value: `/monsters/${z.hrid.split("/").pop()}`, label: Component.t(z.name),
           iconId: z.iconId || z.hrid.split("/").pop(), glyph: "ph-skull" })),
-      taskGroups: [{ label: "", items: [{ value: "", label: "None", glyph: "ph-prohibit" }] },
+      taskGroups: [{ label: "", items: [{ value: "", label: Component.t("None"), glyph: "ph-prohibit" }] },
         { label: "Task monster", items: zones.filter(z => !z.isDungeon && z.maxPartySize === 1)
           .map(z => ({ value: `/monsters/${z.hrid.split("/").pop()}`, label: Component.t(z.name),
             iconId: z.iconId || z.hrid.split("/").pop(), glyph: "ph-skull" })) }],
@@ -3536,7 +3541,7 @@ class Component extends DCLogic {
       priceClosed: !s.zonePriceOpen,
       priceFacts: [["Loot", sideShort("loot", pr.loot)], ["Consumables", sideShort("consumables", pr.consumables)], ["Keys", sideShort("keys", pr.keys)],
         ...(pr.keys === "craft" || pr.mode === "iron" ? [["Key materials", sideShort("keyMaterials", pr.keyMaterials)]] : []), ["Cape", pr.capes],
-        ["Catalyst", pr.catalyst === "none" ? "none" : nice(pr.catalyst).replace(/ Catalyst$/, "")], ["Mode", pr.mode],
+        [Component.t("Catalyst"), pr.catalyst === "none" ? Component.t("none") : nice(pr.catalyst).replace(/ Catalyst$/, "")], [Component.t("Mode"), Component.t(pr.mode)],
         ["Artisan tea", pr.artisanTea ? "on" : "off"], ["Drink conc.", s.zoneConcOverride ? String(pr.drinkConcentration ?? 0) : "pouch"]]
         // Both halves: the row is "Loot / Bid (instant)", and a half-translated row reads worse than an
         // untranslated one.
@@ -3581,7 +3586,7 @@ class Component extends DCLogic {
       buffDropLabel: `${Component.t("Community drop level")} (0–${this.zoneBuffDef("communityDropQuantity").maxLevel})`,
       // The rate each level gives, beside its field: read from the fields, never a fixed percentage.
       buffXpPct: `+${pct(bf.communityExperience)}%`, buffDropPct: `+${pct(bf.communityDropQuantity)}%`,
-      runDisabled: !!block || s.zoneRunning, runLabel: s.zoneRunning ? "Simulating…" : block || (cands.length === 1 ? Component.t("Simulate 1 zone") : Component.tf("Simulate {n} zones", { n: cands.length })),
+      runDisabled: !!block || s.zoneRunning, runLabel: s.zoneRunning ? Component.t("Simulating…") : block || (cands.length === 1 ? Component.t("Simulate 1 zone") : Component.tf("Simulate {n} zones", { n: cands.length })),
       // Plain words for players: how many zones, how long, and what happens as it runs. The batching and pace
       // detail stays in the code; it is not something a player acts on.
       runNote: s.zoneRunning
@@ -3619,7 +3624,7 @@ class Component extends DCLogic {
       header, rows, refused, hasRefused: refused.length > 0, rateLabel, rateHeadTip,
       // The sort value stays the pace either way (higher is faster), so a mixed board ranks in one direction even
       // though the dungeon rows print a clock, where the smaller number is the better one.
-      sorts: [sortBtn("queued", "Queued"), sortBtn("rate", rateLabel), sortBtn("xp", "XP"), sortBtn("profit", "Profit")],
+      sorts: [sortBtn("queued", Component.t("Queued")), sortBtn("rate", rateLabel), sortBtn("xp", "XP"), sortBtn("profit", Component.t("Profit"))],
       detail, hasDetail: !!detail,
     };
   }
