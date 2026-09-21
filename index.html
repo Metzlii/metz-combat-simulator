@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="363c7e66cfaa"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="e5ce0bae382d"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=363c7e66cfaa"></script>
+<script src="./support.js?v=e5ce0bae382d"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=363c7e66cfaa">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e5ce0bae382d">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=363c7e66cfaa">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=363c7e66cfaa"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=e5ce0bae382d">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e5ce0bae382d"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -759,21 +759,105 @@
 
         <details class="about-fold">
           <summary>Changelog</summary>
-          <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+          <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-20</span>
-            <span style="text-wrap:pretty"><b>1.0.4</b>: mana is reported as Casts refused — casts a trigger asked for that mana could not pay for, per hour — in the row Mana exhaustion used to hold, opening onto the share of casts refused, the average mana pool and the fully-dry share. The old figure counted only being completely dry, which read 0.0% for a build that was plainly running out of mana in game. Paste an export into the import box and it imports itself, so the Import button is gone; Simulate wears the gold this site uses for the thing to press; Add is Add to Queue. A zone your party cannot enter is no longer offered — five players see dungeons only — and a board where every candidate was refused now says so, and why, instead of showing nothing at all. Long boards scroll with their header fixed. Advanced is Seed, Workers and the wave transition delay; server lag is retired, having measured zero in every hour of an 8.8 h capture of busy play. Iron mode values nothing in coins but coins, since an ironcow cannot use the marketplace. Accuracy: ten more runs timed in game put the run-to-run spread at 32 ± 8 s against the simulated 27 s, no difference the data can see; and dungeon XP, which had been carrying a figure measured on an older party and an older kernel, is re-checked against a 27.7 h recording of this one — 1.134M an hour simulated against 1.132M in game. The MWI Party Export userscript is 0.2. Fixed: a solo run stretched its one card across the page; every stored dungeon candidate carried a copy of the game’s data file, 1,469 KB where 23 will do; and a new release now reaches an open tab without a hard refresh.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.5</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>The levelling graph has scales at last: both axes are labelled and ruled, and every point says its skill, the days it costs and what it buys when you hover it — or tap it, on a phone.</li>
+                <li>That graph opens on XP / h. The efficiency figures it used to open on span 0.000 to 0.042 over a whole projection, which is not a scale anyone can read.</li>
+                <li>A skill answer exports as a CSV — the ranked table and every curve point in one file — and imports straight back onto the page, so a result can go to a spreadsheet, or to someone who will not run the simulator.</li>
+                <li><b>Clear cache and reload</b>, under Setup › Advanced: it drops what the page can build again and fetches the page fresh, which is what people mean by a hard refresh. Saved runs, saved results and your settings are not a cache and are kept.</li>
+                <li>Optimizer answers are about fifty times smaller. Every measured row carried thousands of raw per-seed numbers it had already averaged, which is why saving one could fill this browser's storage; the same answer is now about 14 KB.</li>
+                <li>The same answer is also no longer written twice under one key.</li>
+                <li>The MWI Party Export script is pointed to from under the import box, rather than only from a line in the corner of the header.</li>
+                <li>An import from that script now says so, instead of crediting Toolasha — it writes the Toolasha shape deliberately, and was being taken at its word.</li>
+                <li>The accuracy notes say whether a pace figure is per attempt (13:55) or per clear (14:04, which is what <b>Avg run</b> shows), and are regrouped so that an approximation, a figure nobody has checked yet, and a measurement no longer read alike.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-20</span>
-            <span style="text-wrap:pretty"><b>1.0.3</b>: a wave spawning now cancels whatever spell was mid-cast and starts a fresh one, in dungeons as well as on planets — watched in game and confirmed against recorded play, where damage lands after the new cast begins in 2,083 of 2,093 player-waves. That closes the gap open zones had: a 211 h solo Golem Cave session goes from 1.1% to 0.35% off the game, and every ability's cast rate lands within 0.6%. A dungeon's clear speed now reads as the average run time — 13:52, not 4.3 clears an hour — counting the time lost to failed attempts, the way a run is timed in game; against 8 runs timed in game it is within 0.25%. The skill optimizer measures only the skills you tick, so a mage no longer pays for a ranged curve, and each skill keeps its own colour on the graph with a pattern per player. Triggers warn when one can never fire, and only the conditions a dependency really takes are offered. The trigger tuner shows the XP change beside EPH. Unsaved runs can be dropped from the Runs list one at a time or all at once, and the list says when Hours and Seed are pinned to a baseline rather than silently ignoring an edit. Damage aimed at a player is a hover note on Damage taken. Server lag stays off and the wave gap stays on its measured table by default, which is what almost everyone wants, and the core probe stops a browser that hides your core count from costing you lanes. Fixed: "Actions / min" printed thousands on a run restored from an earlier session.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.4</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>Mana reads as <b>Casts refused</b> — casts a trigger asked for that mana could not pay for, per hour — in the row Mana exhaustion used to hold, opening onto the share of casts refused, the average mana pool and the fully-dry share. The old figure counted only being completely dry, so it read 0.0% for a build that was plainly running out of mana in game.</li>
+                <li>Paste an export into the import box and it imports itself. The Import button is gone.</li>
+                <li>Simulate wears the gold this site uses for the thing to press, and Add is now Add to Queue.</li>
+                <li>A zone your party cannot enter is no longer offered — five players see dungeons only — and a board where every candidate was refused says so, and why, instead of showing nothing at all.</li>
+                <li>Long boards scroll with their header fixed.</li>
+                <li>Advanced is Seed, Workers and the wave transition delay. Server lag is retired, having measured zero in every hour of an 8.8 h capture of busy play.</li>
+                <li>Iron mode values nothing in coins but coins, since an ironcow cannot use the marketplace.</li>
+                <li>Ten more runs timed in game put the run-to-run spread at 32 ± 8 s against the simulated 27 s — no difference the data can see.</li>
+                <li>Dungeon XP, which had been carrying a figure measured on an older party and an older kernel, is re-checked against a 27.7 h recording of this one: 1.134M an hour simulated against 1.132M in game.</li>
+                <li>The MWI Party Export userscript is 0.2.</li>
+                <li>Fixed: a solo run stretched its one card across the page.</li>
+                <li>Fixed: every stored dungeon candidate carried a copy of the game's data file — 1,469 KB where 23 will do.</li>
+                <li>Fixed: a new release reaches an open tab without a hard refresh.</li>
+              </ul>
+            </div>
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-20</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.3</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>A wave spawning now cancels whatever spell was mid-cast and starts a fresh one, in dungeons as well as on planets — watched in game and confirmed against recorded play, where damage lands after the new cast begins in 2,083 of 2,093 player-waves.</li>
+                <li>That closes the gap open zones had: a 211 h solo Golem Cave session goes from 1.1% to 0.35% off the game, and every ability's cast rate lands within 0.6%.</li>
+                <li>A dungeon's clear speed reads as the average run time — 13:52, not 4.3 clears an hour — counting the time lost to failed attempts, the way a run is timed in game. Against 8 runs timed in game it is within 0.25%.</li>
+                <li>The skill optimizer measures only the skills you tick, so a mage no longer pays for a ranged curve, and each skill keeps its own colour on the graph with a pattern per player.</li>
+                <li>Triggers warn when one can never fire, and only the conditions a dependency really takes are offered.</li>
+                <li>The trigger tuner shows the XP change beside EPH.</li>
+                <li>Unsaved runs can be dropped from the Runs list one at a time or all at once, and the list says when Hours and Seed are pinned to a baseline rather than silently ignoring an edit.</li>
+                <li>Damage aimed at a player is a hover note on Damage taken.</li>
+                <li>Server lag stays off and the wave gap stays on its measured table by default, which is what almost everyone wants.</li>
+                <li>The core probe stops a browser that hides your core count from costing you lanes.</li>
+                <li>Fixed: “Actions / min” printed thousands on a run restored from an earlier session.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
-            <span style="text-wrap:pretty"><b>1.0.2</b>: a Refresh prices button and a tidier Pricing panel; every ask and bid says whether it is an instant or slow trade, and key materials can be bought either way. Optimizer answers can be saved and cleared; the optimizers default to 168 h, 5 seeds and 15 minutes; a Workers setting under Advanced sets how much of your machine a run uses. Compare shows every Results figure, a player at a time. Temporary-buff ceilings include Ripple, and the stats panel gains HP and mana regen. The About tab's accuracy notes are filled in and re-checked against recorded play.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.2</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>A Refresh prices button and a tidier Pricing panel. Every ask and bid says whether it is an instant or a slow trade, and key materials can be bought either way.</li>
+                <li>Optimizer answers can be saved and cleared.</li>
+                <li>The optimizers default to 168 h, 5 seeds and 15 minutes.</li>
+                <li>A Workers setting under Advanced sets how much of your machine a run uses.</li>
+                <li>Compare shows every Results figure, a player at a time.</li>
+                <li>Temporary-buff ceilings include Ripple, and the stats panel gains HP and mana regen.</li>
+                <li>The About tab's accuracy notes are filled in and re-checked against recorded play.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
-            <span style="text-wrap:pretty"><b>1.0.1</b>: save a run and use it as your baseline straight from the Results tab's Runs list; the Saved tab now manages and renames saved runs. The results table drops kills per hour and fits every player's rates, and cowbells read per player per day.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.1</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>Save a run and use it as your baseline straight from the Results tab's Runs list.</li>
+                <li>The Saved tab manages and renames saved runs.</li>
+                <li>The results table drops kills per hour and fits every player's rates, and cowbells read per player per day.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-19</span>
-            <span style="text-wrap:pretty"><b>1.0</b>, the first public release. Three optimizers: upgrades priced through enhancing, mirrors and books, with capes costed on the player who wears them; trigger values tuned two passes deep; and skill levelling drawn as curves over the days it takes. Your session survives a refresh, and the MWI Party Export userscript imports a whole party from their profiles.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0</b>, the first public release.</div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>The upgrade finder prices every item and ability upgrade through enhancing, mirrors and books, with capes costed on the player who wears them.</li>
+                <li>Trigger values tuned two passes deep.</li>
+                <li>Skill levelling drawn as curves over the days it takes.</li>
+                <li>Your session survives a refresh.</li>
+                <li>The MWI Party Export userscript imports a whole party from their profiles.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-18</span>
-            <span style="text-wrap:pretty">Optimize opens: the upgrade finder ranks every equipped item one enhancement level up and every ability five levels up by what your goal gains per million coins, priced through enhancing, mirroring, the market or books.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>Optimize opens</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>The upgrade finder ranks every equipped item one enhancement level up and every ability five levels up by what your goal gains per million coins, priced through enhancing, mirroring, the market or books.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-18</span>
-            <span style="text-wrap:pretty">Initial release. The simulator runs in the browser on a wasm kernel, split out of the planner it grew up in, on five tabs of its own.</span>
+            <div>
+              <div style="text-wrap:pretty"><b>Initial release</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>The simulator runs in the browser on a wasm kernel, split out of the planner it grew up in, on five tabs of its own.</li>
+              </ul>
+            </div>
           </div>
         </details>
       </div>
@@ -822,7 +906,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=363c7e66cfaa");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=e5ce0bae382d");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -981,7 +1065,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=363c7e66cfaa");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=e5ce0bae382d");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1002,7 +1086,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=363c7e66cfaa");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=e5ce0bae382d");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(`that CSV is a ${meta.mode} answer, and this is the skill tool`);
       this.setState({
