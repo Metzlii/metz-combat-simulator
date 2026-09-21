@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=7d72a9b7df80"></script>
+<script src="./support.js?v=24c3cb0ecf4b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7d72a9b7df80">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=24c3cb0ecf4b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=7d72a9b7df80">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7d72a9b7df80"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=24c3cb0ecf4b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=24c3cb0ecf4b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1123,7 +1123,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=7d72a9b7df80").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=24c3cb0ecf4b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2108,8 +2108,15 @@ class Component extends DCLogic {
     const base = this.state.zoneBase || [];
     // A fresh import IS the baseline — there is nothing it could differ from yet.
     if (!base.length || !(party || []).length) return { title: "Baseline", count: 0 };
-    const nm = h => String(h || "").replace(/^\/[a-z_]+\//, "").replace(/_refined$/, " ★")
-      .replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+    // Same as Zones' itemName: the title-cased hrid is the game's English name, translated before the star.
+    const nm = h => {
+      // By HRID first -- the only lookup that survives the game's punctuation ("Magician's Hat").
+      const full = String(h || ""), refined = /_refined$/.test(full), baseHrid = full.replace(/_refined$/, "");
+      const named = Component.t(baseHrid);
+      if (named !== baseHrid) return named + (refined ? " ★" : "");
+      const base = baseHrid.replace(/^\/[a-z_]+\//, "").replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+      return Component.t(base) + (refined ? " ★" : "");
+    };
     const many = party.length > 1;
     const changes = [];
     for (const p of party) {
@@ -2558,7 +2565,13 @@ class Component extends DCLogic {
     const p = party[i] || null, b = base[i] || null;
     const same = (x, y) => JSON.stringify(x ?? null) === JSON.stringify(y ?? null);
     const title = h => nice(String(h || "").split("/").pop() || "");
-    const iname = h => this.itemText(title(h));      // item hrid → label, refined tier as " ★"
+    // item hrid → label, refined tier as " ★". By HRID first: `title()` hands `nice()` only the last segment,
+    // which is not a key, so the hrid lookup has to happen here before falling back to the rebuilt English.
+    const iname = h => {
+      const full = String(h || ""), refined = /_refined$/.test(full), base = full.replace(/_refined$/, "");
+      const v = Component.t(base);
+      return v !== base ? v + (refined ? " ★" : "") : this.itemText(title(h));
+    };
     // Catalogue order: highest gear level first, alphabetical within a level — but a refined item and its plain
     // twin are the same piece of gear and stay adjacent, so the PAIR is placed at its stronger variant's level
     // and the refined one leads. (Sorting on level alone scatters them: refined sits a tier above its base.)
@@ -2570,7 +2583,13 @@ class Component extends DCLogic {
       return list.slice().sort((x, y) => (top.get(gearBase(y)) || 0) - (top.get(gearBase(x)) || 0)
         || gearName(x).localeCompare(gearName(y), undefined, { sensitivity: "base" })
         || (Number(y.level) || 0) - (Number(x.level) || 0)); };
-    const cname = x => this.itemText(x?.name || title(x?.itemHrid));
+    // Catalog entries carry the server's English `name`; the game's own word for the hrid wins when the locale
+    // has it, and the refined star goes back on after.
+    const cname = x => {
+      const full = String(x?.itemHrid || ""), refined = /_refined$/.test(full), base = full.replace(/_refined$/, "");
+      const v = Component.t(base);
+      return v !== base ? v + (refined ? " ★" : "") : this.itemText(x?.name || title(full));
+    };
     const COMBAT = "/action_types/combat";
     const LEVELS = [["stamina", "Stamina"], ["intelligence", "Intelligence"], ["attack", "Attack"],
       ["melee", "Melee"], ["ranged", "Ranged"], ["magic", "Magic"], ["defense", "Defense"]];
@@ -2834,7 +2853,10 @@ class Component extends DCLogic {
         // which makes it part of who they are here, not a detail buried in a row.
         const sk = q.record?.skilling || null;
         const tool = sk?.enhancingTool
-          ? `${String(sk.enhancingTool.itemHrid || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())}${sk.enhancingTool.enhancementLevel ? ` +${sk.enhancingTool.enhancementLevel}` : ""}`
+          // Title-casing the hrid rebuilds the game's English item name ("celestial_enhancer" -> "Celestial
+          // Enhancer"), and that name is a key the noun pull answers in every language -- so the lookup goes
+          // through t(). Derived at render time, which is why no scanner of this file ever saw it as English.
+          ? `${Component.t(String(sk.enhancingTool.itemHrid || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()))}${sk.enhancingTool.enhancementLevel ? ` +${sk.enhancingTool.enhancementLevel}` : ""}`
           : "no tool";
         return { name: nm, sub: `${Component.t(nice(st))} ${L[st] || 0}${seated ? "" : ` · ${Component.t("benched")}`}`, active: k === i, dirty: n > 0,
           skillSub: sk?.enhancingLevel ? `${Component.t("enhancing")} ${sk.enhancingLevel} \u00b7 ${tool}${sk.alchemyLevel ? ` \u00b7 ${Component.t("alchemy")} ${sk.alchemyLevel}` : ""}` : "",
@@ -2883,7 +2905,10 @@ class Component extends DCLogic {
           .filter(x => x.itemHrid !== cur?.itemHrid))
           .map(x => ({ value: x.itemHrid, label: x.name, iconId: x.iconId || null, note: x.level ? Component.tf("lv {n}", { n: x.level }) : "" }));
         const { own: ownedForSlot, other: rest } = splitOwned(restAll);
-        return { hrid: sd.hrid, name: sd.name, value: cur?.itemHrid || "", itemLabel: cur ? iname(cur.itemHrid) : "Empty",
+        // The slot caption is the game's own word for the equipment type (主手, 副手, 双手): our slots are
+        // /item_locations/*, the game's names are keyed /equipment_types/*, same tail.
+        return { hrid: sd.hrid, name: (k => { const v = Component.t(k); return v !== k ? v : sd.name; })(String(sd.hrid || "").replace("/item_locations/", "/equipment_types/")),
+          value: cur?.itemHrid || "", itemLabel: cur ? iname(cur.itemHrid) : Component.t("Empty"),
           icon: iconOf("equip", sd.hrid, defOf(cur?.itemHrid), cur ? iname(cur.itemHrid) : sd.name),
           slotGlyph: iconOf("equip", sd.hrid, null, sd.name).glyph,
           enh: cur ? String(cur.enhancementLevel ?? 0) : "", enhDisabled: !cur, filled: !!cur,
@@ -3082,10 +3107,13 @@ class Component extends DCLogic {
     // Per-second figures are small enough to read plainly: a decimal under 100, whole numbers above.
     const rate = v => { const x = Number(v) || 0; return x >= 1e6 ? (x / 1e6).toFixed(2) + "M" : nf(x, x < 100 ? 1 : 0); };
     const nice = h => { const k = String(h || "");
-      if (k === "/auto_attack") return "Auto attack";
-      if (k === "/parry") return "Parry";
+      if (k === "/auto_attack") return Component.t("Auto attack");
+      if (k === "/parry") return Component.t("Parry");
       if (k === "/damage_over_time") return Component.t("Damage over time");
-      return k.replace(/^\/[a-z_]+\/(combat\/)?/, "").replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()); };
+      // By HRID first (the locales carry the game's name under the hrid), then the title-cased English as a key.
+      const known = Component.t(k);
+      if (known !== k) return known;
+      return Component.t(k.replace(/^\/[a-z_]+\/(combat\/)?/, "").replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase())); };
     const zones = s.zoneList || [], party = s.zoneParty || [], cands = s.zoneCands || [], tasks = s.zoneTasks || {};
     // PARTY-1: `party` is everything imported; `seated` is what a run actually sends.
     const seated = this.zoneActiveParty(s);
@@ -3545,7 +3573,7 @@ class Component extends DCLogic {
       wisdom: !!bf.personalWisdom, toggleWisdom: () => this.setZoneBuffs({ personalWisdom: !bf.personalWisdom }),
       mooPass: !!bf.mooPass, toggleMoo: () => this.setZoneBuffs({ mooPass: !bf.mooPass }),
       wisdomLabel: (() => { const d = this.zoneAcctDef("personalWisdom", 0.2);
-        return Component.tf("Wisdom Scroll (+{pct}%)", { pct: pct(d.value) }); })(),
+        return Component.tf("Scroll Of Wisdom (+{pct}%)", { pct: pct(d.value) }); })(),
       mooLabel: (() => { const d = this.zoneAcctDef("mooPass", 0.05);
         return Component.tf("Moo Pass (+{pct}% XP)", { pct: pct(d.value) }); })(),
       buffMax: String(this.zoneBuffDef("communityExperience").maxLevel),

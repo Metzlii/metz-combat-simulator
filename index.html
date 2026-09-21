@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="7d72a9b7df80"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="24c3cb0ecf4b"</script><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=7d72a9b7df80"></script>
+<script src="./support.js?v=24c3cb0ecf4b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7d72a9b7df80">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=24c3cb0ecf4b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=7d72a9b7df80">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7d72a9b7df80"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=24c3cb0ecf4b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=24c3cb0ecf4b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -956,7 +956,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=7d72a9b7df80");
+      const i18n = await import("./i18n.js?v=24c3cb0ecf4b");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -979,7 +979,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=7d72a9b7df80");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=24c3cb0ecf4b");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1180,7 +1180,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=7d72a9b7df80");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=24c3cb0ecf4b");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1201,7 +1201,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=7d72a9b7df80");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=24c3cb0ecf4b");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1753,8 +1753,17 @@ class Component extends DCLogic {
     const coin = n => { const x = Number(n) || 0, a = Math.abs(x);
       return a >= 1e12 ? `${(x / 1e12).toFixed(2)} T` : a >= 1e9 ? `${(x / 1e9).toFixed(2)} B`
         : a >= 1e6 ? `${(x / 1e6).toFixed(1)} M` : a >= 1e3 ? `${(x / 1e3).toFixed(1)} k` : nf(x); };
-    const itemName = hrid => String(hrid || "").replace(/^\/[a-z_]+\//, "").replace(/_refined$/, "_star")
-      .replace(/_/g, " ").replace(/\b\w/g, ch => ch.toUpperCase()).replace(/ Star$/, " \u2605");
+    // The title-cased hrid IS the game's English name, which the noun pull answers in every language -- so the
+    // base name goes through t() before the refined star is put back on, or the key would never match.
+    // By HRID first: the locales carry the game's name under the hrid itself, which is the only lookup that
+    // survives punctuation ("magicians_hat" title-cases to "Magicians Hat"; the game says "Magician's Hat").
+    const itemName = hrid => {
+      const full = String(hrid || ""), refined = /_refined$/.test(full), baseHrid = full.replace(/_refined$/, "");
+      const byHrid = Component.t(baseHrid);
+      if (byHrid !== baseHrid) return byHrid + (refined ? " \u2605" : "");
+      const base = baseHrid.replace(/^\/[a-z_]+\//, "").replace(/_/g, " ").replace(/\b\w/g, ch => ch.toUpperCase());
+      return Component.t(base) + (refined ? " \u2605" : "");
+    };
     const metric = v("metric");
     // ZONE-91: a third goal, the party's own pace. In a dungeon that is said as seconds off the average run,
     // the unit this site uses everywhere else; on a planet it stays encounters an hour, which is the figure
