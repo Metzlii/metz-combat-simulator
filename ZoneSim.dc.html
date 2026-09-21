@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=04167ece5ab5"></script>
+<script src="./support.js?v=0461699b54e2"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=04167ece5ab5">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0461699b54e2">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=04167ece5ab5">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=04167ece5ab5"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=0461699b54e2">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0461699b54e2"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -547,9 +547,16 @@
         <div class="field" style="margin:0"><label>Stored data</label>
           <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
             <button class="btn btn-ghost" style="padding:1px 10px;font-size:12.5px;flex:none" onClick="{{ zone.clearCache }}">Clear cache and reload</button>
-            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">{{ zone.cacheSize }}</span>
+            <span class="text-muted" style="font-size:12.5px"><span style="font-variant-numeric:tabular-nums">{{ zone.totalSize }}</span> stored by this site</span>
           </div>
-          <div class="text-muted" style="font-size:12.5px;margin-top:4px;text-wrap:pretty">{{ zone.cacheNote }}</div>
+          <div class="text-muted" style="font-size:12.5px;margin-top:5px;text-wrap:pretty;display:grid;gap:4px">
+            <div><b style="color:var(--color-text)">Cleared</b> <span style="font-variant-numeric:tabular-nums">{{ zone.cacheSize }}</span> — the working session and the party in it, the optimizer's 12-hour cache, market prices, the learned pace, and anything left by an older version of this page. All of it can be built again; your party comes back from one paste of your export.</div>
+            <div><b style="color:var(--color-text)">Kept</b> <span style="font-variant-numeric:tabular-nums">{{ zone.keptSize }}</span> — saved runs, saved optimizer results, pricing, account buffs, language and these settings. Nothing you chose or saved is removed.</div>
+            <sc-if value="{{ zone.hasOther }}" hint-placeholder-val="{{ false }}">
+              <div><b style="color:var(--color-text)">Other</b> <span style="font-variant-numeric:tabular-nums">{{ zone.otherSize }}</span> — stored by other pages on this address, and not this page's to remove.</div>
+            </sc-if>
+            <div>The page is then fetched fresh from the server, which is the same thing a hard refresh does.</div>
+          </div>
         </div>
       </sc-if>
     </div>
@@ -1039,15 +1046,44 @@ class Component extends DCLogic {
   // one paste away; the note says so before the button is pressed rather than after.
   static CACHE_KEYS = ["gts.zone.session.v1", "gts.zone.optimize.v1", "gts.zone.market.v1", "gts.zone.pace.v1"];
   static KEPT_KEYS = ["gts.zone.saves.v1", "gts.zone.optimize.saves.v1", "gts.zone.prefs.v1", "gts.zoneBuffs",
-    "mwi.zone.workers", "mwi.zone.partyScriptSeen"];
+    "mwi.zone.workers", "mwi.zone.partyScriptSeen", "mwi.zone.lang"];
   static storedBytes(keys) {
     let n = 0;
     try { for (const k of keys) n += (localStorage.getItem(k) || "").length; } catch {}
     return n;
   }
+  /**
+   * Keys this page wrote under a name it no longer uses.
+   *
+   * This is the case ZONE-85 exists for and did not actually cover: a visitor carrying a retired key was told the
+   * button would clear their cache, and the button had never heard of that key. Anything under our own two
+   * prefixes is ours to remove; anything else on the address belongs to another page and is only counted.
+   */
+  static staleKeys() {
+    const known = new Set([...Component.CACHE_KEYS, ...Component.KEPT_KEYS]);
+    const out = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        if (k && !known.has(k) && /^(gts\.zone|mwi\.zone)/.test(k)) out.push(k);
+      }
+    } catch {}
+    return out;
+  }
+  /** Everything on this address, keys included -- the number a browser's own storage panel would show. */
+  static storedTotal() {
+    let n = 0;
+    try {
+      for (let i = 0; i < localStorage.length; i++) {
+        const k = localStorage.key(i);
+        n += (k || "").length + (localStorage.getItem(k) || "").length;
+      }
+    } catch {}
+    return n;
+  }
   static sizeText(bytes) { return bytes >= 1024 * 1024 ? `${(bytes / 1048576).toFixed(1)} MB` : `${Math.round(bytes / 1024)} KB`; }
   clearZoneCache() {
-    try { for (const k of Component.CACHE_KEYS) localStorage.removeItem(k); } catch {}
+    try { for (const k of [...Component.CACHE_KEYS, ...Component.staleKeys()]) localStorage.removeItem(k); } catch {}
     // A plain reload is allowed to serve the document the browser already holds, which is the whole reason people
     // are told to hard refresh. A one-shot query cannot be answered from that cache, so the document comes back
     // from the server; ZONE-72's stamps carry everything under it. The page drops the query once it is up, so it
@@ -1075,7 +1111,7 @@ class Component extends DCLogic {
   }
   static t = s => s;
   componentDidMount() {
-    import("./i18n.js?v=04167ece5ab5").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=0461699b54e2").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -3387,10 +3423,18 @@ class Component extends DCLogic {
       // Workers: how many simulations run at once in this browser (1 to every core). Fewer leaves the machine room
       // for other things; runs and optimizer searches just take longer. Kept in this browser, not in the session.
       hasWorkers: !!this.client?.setZoneWorkers,
-      cacheSize: (() => { const b = Component.storedBytes(Component.CACHE_KEYS); return b ? Component.sizeText(b) : "nothing cached"; })(),
-      cacheNote: (() => {
+      // Three figures that add up to the fourth, so the total beside the button is accounted for rather than
+      // just quoted. "Other" is everything on this address neither list names -- zero on the public site, real
+      // when this card is mounted inside the guild planner, which shares the address.
+      ...(() => {
+        const cache = Component.storedBytes(Component.CACHE_KEYS) + Component.storedBytes(Component.staleKeys());
         const kept = Component.storedBytes(Component.KEPT_KEYS);
-        return `Drops the working session, the optimizer's 12-hour cache, market prices and the learned pace, then fetches the page fresh — the same thing a hard refresh does. Your party is re-imported from your export afterwards. Saved runs and saved results are kept${kept ? ` (${Component.sizeText(kept)})` : ""}, along with pricing, buffs and these settings.`;
+        const total = Component.storedTotal();
+        // Key names and the browser's own overhead put the total a little above the two parts; only call the
+        // remainder "other" once it is more than a rounding difference.
+        const other = Math.max(0, total - cache - kept);
+        return { cacheSize: Component.sizeText(cache), keptSize: Component.sizeText(kept),
+          otherSize: Component.sizeText(other), totalSize: Component.sizeText(total), hasOther: other >= 2048 };
       })(),
       clearCache: () => this.clearZoneCache(),
       workersMax: String(this.client?.maxWorkers || 1),
