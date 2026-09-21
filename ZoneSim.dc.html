@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=300bc9ab2b6d"></script>
+<script src="./support.js?v=21cb2d9555db"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=300bc9ab2b6d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=21cb2d9555db">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=300bc9ab2b6d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=300bc9ab2b6d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=21cb2d9555db">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=21cb2d9555db"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1073,7 +1073,9 @@ class Component extends DCLogic {
     return { titled: all, setup: all || v === "setup", results: all || v === "results",
       compare: all || v === "compare", saved: all || v === "saved" };
   }
+  static t = s => s;
   componentDidMount() {
+    import("./i18n.js?v=21cb2d9555db").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2854,7 +2856,7 @@ class Component extends DCLogic {
         ? `No item catalog served (${s.zoneCatalogError}) — pickers list what the party already owns.`
         : "Item catalog not served yet — pickers list what the party already owns.",
       hasCatalogNote: !cat,
-      levels: LEVELS.map(([k, label]) => ({ key: k, label, value: String(p.record?.levels?.[k] ?? ""),
+      levels: LEVELS.map(([k, label]) => ({ key: k, label: Component.t(label), value: String(p.record?.levels?.[k] ?? ""),
         icon: iconOf("skill", k, (cat?.skills || []).find(x => x.key === k || String(x.skillHrid || "").endsWith("/" + k)), label),
         dirty: (Number(p.record?.levels?.[k]) || 0) !== (Number(b?.record?.levels?.[k]) || 0),
         set: e => this.zoneSetLevel(i, k, e.target.value) })),
@@ -2926,7 +2928,7 @@ class Component extends DCLogic {
       triggerModeOpts: [{ value: "default", label: "Game defaults" }, { value: "ready", label: "As soon as it is off cooldown" }, { value: "custom", label: "Custom conditions" }],
       consumables: [{ kind: "food", label: "Food", items: consumableItems("food") },
         { kind: "drinks", label: "Drinks", items: consumableItems("drinks") }],
-      rooms: roomDefs.map(r => ({ hrid: r.hrid, name: r.name, value: String(p.record?.rooms?.[r.hrid] ?? 0),
+      rooms: roomDefs.map(r => ({ hrid: r.hrid, name: Component.t(r.name), value: String(p.record?.rooms?.[r.hrid] ?? 0),
         icon: iconOf("room", r.hrid, r, r.name),
         dirty: (p.record?.rooms?.[r.hrid] ?? 0) !== (b?.record?.rooms?.[r.hrid] ?? 0),
         set: e => this.zoneSetRoom(i, r.hrid, e.target.value) })),
@@ -3079,7 +3081,7 @@ class Component extends DCLogic {
     const addOne = (hrid, t, list) => { const l = list || cands.slice();
       if (l.length >= MAX_CANDIDATES || l.some(c => c.zone === hrid && c.difficultyTier === t)) return l;
       l.push({ zone: hrid, difficultyTier: t }); return l; };
-    const zOpt = d => ({ value: d.hrid, label: d.name, iconId: d.iconId || null,
+    const zOpt = d => ({ value: d.hrid, label: Component.t(d.name), iconId: d.iconId || null,
       glyph: d.isDungeon ? "ph-castle-turret" : d.maxPartySize === 1 ? "ph-skull" : "ph-planet",
       note: fits(d) ? "" : `party of ${d.maxPartySize} max` });
     const R = this.zoneShownResult(s);
@@ -3112,7 +3114,7 @@ class Component extends DCLogic {
         const kind = c.isDungeon ? "dungeon" : byHrid(c.zone)?.maxPartySize > 1 ? "planet" : "single monster";
         // One line per row: the sub-figures that used to stack under a cell live in that cell's tooltip.
         return { i, ok, openBg: i === Math.min(s.zoneOpen, list.length - 1) ? "color-mix(in srgb, var(--color-accent) 10%, transparent)" : "transparent",
-          zone: `${c.name} · T${c.difficultyTier}`,
+          zone: `${Component.t(c.name)} · T${c.difficultyTier}`,
           zoneTip: `${kind}${c.isDungeon ? ` · ${c.maxWaves || byHrid(c.zone)?.maxWaves || "?"} waves` : ""}`,
           error: ok ? "" : c.error || "refused",
           rate, rateText: ok ? (c.isDungeon ? this.zoneRunTime(c.averageRunSeconds) : `${nf(rate, 2)} enc`) : "—",
@@ -3161,7 +3163,7 @@ class Component extends DCLogic {
       header = `${(R.party || []).length} players · ${nf(R.hours, R.hours < 1 ? 2 : 0)} h · seed ${R.seed}${Number(R.serverLagMs) > 0 ? ` · server lag ${nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0)} ms` : ""}${Number(R.waveTransitionDelayMs) > 0 ? ` · wave gap ${nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0)} ms` : ""} · loot ${sideShort("loot", R.pricing?.loot)} · consumables ${sideShort("consumables", R.pricing?.consumables)} · keys ${sideShort("keys", R.pricing?.keys)}${R.pricing?.keys === "craft" && R.pricing?.keyMaterials ? ` from materials ${sideShort("keyMaterials", R.pricing.keyMaterials)}` : ""}${R.pricing?.mode === "iron" ? " · iron" : ""} · ${timing}`;
       const secOpen = s.zoneSecOpen || {}, secDefs = [["rates", "Rates"], ["xp", "XP / h"],
         ["damage", "Damage by source"], ["consumables", "Consumables"], ["lootIn", "Loot in"], ["lootOut", "Loot out"]];
-      if (c && c.ok !== false) detail = { title: `${c.name} · T${c.difficultyTier}`,
+      if (c && c.ok !== false) detail = { title: `${Component.t(c.name)} · T${c.difficultyTier}`,
         // Each section collapses to its own header inside every card; one click applies to every player column
         // at once, so the columns stay row-aligned.
         sec: Object.fromEntries(secDefs.map(([k, label]) => { const on = secOpen[k] !== false;
@@ -3314,11 +3316,11 @@ class Component extends DCLogic {
           remove: () => set({ zoneParty: party.filter((_, k) => k !== i), zoneResult: null }) }; }),
       // The task picker reads its art off the solo zone rows, which carry the monster's own icon.
       monsterOpts: zones.filter(z => !z.isDungeon && z.maxPartySize === 1)
-        .map(z => ({ value: `/monsters/${z.hrid.split("/").pop()}`, label: z.name,
+        .map(z => ({ value: `/monsters/${z.hrid.split("/").pop()}`, label: Component.t(z.name),
           iconId: z.iconId || z.hrid.split("/").pop(), glyph: "ph-skull" })),
       taskGroups: [{ label: "", items: [{ value: "", label: "None", glyph: "ph-prohibit" }] },
         { label: "Task monster", items: zones.filter(z => !z.isDungeon && z.maxPartySize === 1)
-          .map(z => ({ value: `/monsters/${z.hrid.split("/").pop()}`, label: z.name,
+          .map(z => ({ value: `/monsters/${z.hrid.split("/").pop()}`, label: Component.t(z.name),
             iconId: z.iconId || z.hrid.split("/").pop(), glyph: "ph-skull" })) }],
       editor: this.zoneEditorVals(s, set, { nf, nice }),
       cmp: this.zoneCompareVals(s, set, { nf, nice, coin }),
@@ -3360,7 +3362,7 @@ class Component extends DCLogic {
         ? `${def.name} allows a party of ${def.maxPartySize}; this party is ${seated.length}. It can still be queued — the server refuses that row on its own and runs the rest.`
         : "",
       cands: cands.map((c, i) => { const d = byHrid(c.zone);
-        return { label: `${d ? d.name : c.zone} · T${c.difficultyTier}`,
+        return { label: `${d ? Component.t(d.name) : c.zone} · T${c.difficultyTier}`,
           icon: this.zoneIcon("zone", c.zone, d, d ? d.name : c.zone),
           note: d ? (d.isDungeon ? `${d.maxWaves} waves` : d.maxPartySize > 1 ? "planet" : "single monster") : "unknown zone",
           fine: !d || fits(d),
