@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2d245b50f1a2"></script>
+<script src="./support.js?v=6c6d3c65e1fd"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=2d245b50f1a2">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=6c6d3c65e1fd">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=2d245b50f1a2">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=2d245b50f1a2"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=6c6d3c65e1fd">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=6c6d3c65e1fd"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1189,7 +1189,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=2d245b50f1a2").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=6c6d3c65e1fd").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -3770,7 +3770,10 @@ class Component extends DCLogic {
         .filter(([k]) => k !== "keyMaterials" || pr.keys === "craft" || pr.mode === "iron")
         .map(([k, label, opts]) => ({ key: k, label, value: pr[k],
           set: e => setPr(k, e.target.value), options: opts.map(o => ({ value: o,
-            label: o.startsWith("/") ? nice(o) : side(k, o) ? `${o} (${side(k, o)})` : o })) })),
+            // Through t(): the values (mirror, craft, standard, none) were shown raw, so a Chinese player read
+            // "mirror" beside translated neighbours (Odysseas, 2026-09-21). An hrid is named by the game's own
+            // noun when the locale has it, else by its title-cased tail.
+            label: o.startsWith("/") ? (Component.t(o) !== o ? Component.t(o) : Component.t(nice(o))) : side(k, o) ? `${Component.t(o)} (${side(k, o)})` : Component.t(o) })) })),
       artisanTea: !!pr.artisanTea, toggleTea: () => setPr("artisanTea", !pr.artisanTea),
       // Per player, not per party: with keys: "craft" each player makes their own keys, so the tea cut follows
       // that player's own Guzzling Pouch. Not sent unless overridden — the server reads each pouch from the loadout.
