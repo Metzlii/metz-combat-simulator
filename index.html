@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="c6998b526bf5"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="1f9074f770c5"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=c6998b526bf5"></script>
+<script src="./support.js?v=1f9074f770c5"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=c6998b526bf5">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=1f9074f770c5">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=c6998b526bf5">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=c6998b526bf5"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=1f9074f770c5">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=1f9074f770c5"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -185,7 +185,7 @@
                 <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.budget }}" onChange="{{ up.setBudget }}">
                 <span class="text-muted" style="font-size:12.5px">min</span>
               </div>
-              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until three finalists stand. Anything left over keeps measuring those three.</div>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until only the finalists stand — five unless you set another number. Anything left over keeps measuring them.</div>
               </sc-if>
             </div>
 
@@ -218,6 +218,8 @@
                 </select>
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
+                <span class="text-muted" style="font-size:12.5px" title="How many upgrades the search keeps once it stops halving; the rest of the budget measures them">Finalists</span>
+                <input class="input" type="number" min="1" max="10" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.finalists }}" onChange="{{ up.setFinalists }}">
               </div>
               <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.booksNote }}</div>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.pouch }}" onChange="{{ up.togglePouch }}"><span>Include the pouch<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Little combat effect, and every party already has one.</span></span></label>
@@ -445,7 +447,7 @@
             <sc-if value="{{ up.idle }}" hint-placeholder-val="{{ true }}">
               <div class="card" style="max-width:66ch;gap:7px">
                 <div class="card-kicker">How the budget is spent</div>
-                <div style="font-size:13px;text-wrap:pretty">The finder screens every upgrade on a handful of seeds, then keeps halving: the better half is measured again on twice as many fresh seeds each round, until three finalists remain.</div>
+                <div style="font-size:13px;text-wrap:pretty">The finder screens every upgrade on a handful of seeds, then keeps halving: the better half is measured again on twice as many fresh seeds each round, until only the finalists remain — five unless you set another number.</div>
                 <div class="card-kicker" style="margin-top:4px">For a sharper answer</div>
                 <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;text-wrap:pretty">
                   <li><b>More time.</b> A 1 h or 2 h limit runs more rounds, so the finalists are measured on many more seeds.</li>
@@ -857,7 +859,7 @@
                 <li><b>Derived-stat sources and run titles in your language.</b> “Philosopher's Earrings +11” and “Critical Aura 90” are translated noun by noun with the number kept, the detail lines with them, and “Baseline — …” in the runs list.</li>
                 <li><b>The party seats itself.</b> MWI Party Export 0.5 marks who is in your party right now, read off the game's party panel, and the site seats those and benches the rest. An export without the mark seats the complete profiles in import order, never one that came back empty. A Bulwark wearer is labelled Defense.</li>
                 <li><b>The upgrade finder prices the hybrid route, and shows its working.</b> For a jump of two or more levels it now also tries buying the item at each listed level in between and enhancing the rest, which is what most players actually do, and takes the cheapest of market, enhancing, the mirror and every hybrid. A mirror's copy is bought outright at its level when one is listed, else built from +0. Every priced row now lists the steps in order — what is sold and for how much, what is bought and at what level, what is enhanced from where to where with its materials and hours, and what is mirrored — so the price can be checked line by line, folded behind “How the price is reached” until asked for.</li>
-                <li><b>The finalists stay on top.</b> The three rows the search measured furthest keep the top of the list; every other priced row follows under “Lower confidence results, ranked”, in the same order. A row on 3 seeds had taken rank 1 from a finalist on 2,047.</li>
+                <li><b>The finalists stay on top, and you choose how many.</b> The upgrade finder keeps five finalists instead of three, and the count is a field under Upgrades to test (1 to 10); those rows keep the top of the list; every other priced row follows under “Lower confidence results, ranked”, in the same order. A row on 3 seeds had taken rank 1 from a finalist on 2,047.</li>
                 <li><b>Upgrades rank by the chosen metric alone.</b> Rows were ordered by how many rounds the search had kept them before anything else, so a row measured to round 3 and found to lose sat above rows measured to round 2 and found to gain. The order is now gain per million coins for the metric picked, and the ± beside each gain is what says how sure a row is.</li>
                 <li><b>The Upgrades ranking lost its skill dropdown.</b> It set which skill's XP the next search would optimise, but changed nothing on screen and the rows showed total XP beside a per-skill order. Upgrades rank by total combat XP; Skill levelling is the per-skill tool.</li>
                 <li><b>The trigger walk reads pass by pass.</b> Each pass sits in its own container that folds, headed by how many values it changed and what it started from, and ends with every trigger's value after that pass — the changed ones marked — named as what the next pass starts from. One flat list of “pass 1 … pass 2 …” rows had left people unsure which values each pass was measured against.</li>
@@ -1023,7 +1025,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=c6998b526bf5");
+      const i18n = await import("./i18n.js?v=1f9074f770c5");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1046,7 +1048,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=c6998b526bf5");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=1f9074f770c5");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1077,7 +1079,7 @@ class Component extends DCLogic {
     metric: "xp", skill: "", player: "", measure: "",
     // The board the operator reaches for first; any served zoneLimits().upgrades value replaces it.
     zone: "/actions/combat/pirate_cove", tier: 2, market: false,
-    budgetMinutes: 15, hours: 168, seeds: 5, steps: 1, abilityLevels: 5,
+    budgetMinutes: 15, hours: 168, seeds: 5, steps: 1, abilityLevels: 5, finalists: 5,
     includePouch: false, includeCharms: false, bookPremium: 0.2,
     // The operator's baseline. zoneLimits().upgrades carries the served version and replaces every field here.
     enhancer: { level: 145, tool: { hrid: "/items/celestial_enhancer", level: 18 }, tea: "ultra", blessed: true, pouchLevel: 14, observatory: 8,
@@ -1320,7 +1322,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=c6998b526bf5");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=1f9074f770c5");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1341,7 +1343,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=c6998b526bf5");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=1f9074f770c5");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1416,7 +1418,7 @@ class Component extends DCLogic {
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
       budgetMinutes: num("budgetMinutes", 15), hours: num("hours", 168), seeds: num("seeds", 5),
-      steps: num("steps", 1), abilityLevels: num("abilityLevels", 5),
+      steps: num("steps", 1), abilityLevels: num("abilityLevels", 5), finalists: num("finalists", 5),
       includePouch: !!this.upVal("includePouch"), includeCharms: !!this.upVal("includeCharms"),
       bookPremium: num("bookPremium", 0.2),
       enhancer: this.upVal("market") ? false : this.upEnhancer(),
@@ -1966,6 +1968,7 @@ class Component extends DCLogic {
     const maxRounds = rows.reduce((a, r) => Math.max(a, Number(r.rounds) || 0), 0);
     const refining = !!s.upHead?.refining || !!s.upDone;
     const atMax = rows.filter(r => (Number(r.rounds) || 0) === maxRounds).length;
+    const finCount = Number(s.upHead?.finalists) || 5;   // the search's own count, so the page marks the right rows
     // Rows further along rank first: a finalist on 189 seeds outranks a screen reading on 3, whatever the ratio.
     // By the chosen metric alone: gain per million coins, then the gain. Depth (rounds survived) used to come
     // first, which put a row measured to round 3 and found to lose (Insanity, −8,476 XP/h) above rows measured
@@ -1983,7 +1986,7 @@ class Component extends DCLogic {
     const unpriced = rows.filter(r => pick(r).per == null).sort((a, b) => (Number(pick(b).d) || 0) - (Number(pick(a).d) || 0));
     const mkRow = (r, i) => {
       const cost = r.cost || {};
-      const fin = refining && maxRounds > 1 && atMax <= 3 && (Number(r.rounds) || 0) === maxRounds;
+      const fin = refining && maxRounds > 1 && atMax <= finCount && (Number(r.rounds) || 0) === maxRounds;
       const step = (cost.steps || []).find(x => x && x.copy);
       const m = pick(r), d = Number(m.d) || 0;
       const pct = r.deltaPct == null ? "" : `${(Number(r.deltaPct) * 100).toFixed(3)} %`;
@@ -2119,6 +2122,7 @@ class Component extends DCLogic {
       steps: String(v("steps")), setSteps: e => set({ steps: Number(e.target.value) || 1 }),
       stepOpts: [{ value: "1", label: "+1 only" }, { value: "2", label: "+1 and +2" }, { value: "3", label: "+1, +2 and +3" }],
       abilityLevels: String(v("abilityLevels")), setAbilityLevels: e => set({ abilityLevels: e.target.value }),
+      finalists: String(v("finalists") ?? 5), setFinalists: e => set({ finalists: Math.max(1, Math.min(10, Math.floor(Number(e.target.value) || 5))) }),
       pouch: !!v("includePouch"), togglePouch: () => set({ includePouch: !v("includePouch") }),
       charms: !!v("includeCharms"), toggleCharms: () => set({ includeCharms: !v("includeCharms") }),
       // One sentence, one node: the percentage is substituted after translation so the clause can be ordered
@@ -2133,7 +2137,7 @@ class Component extends DCLogic {
           ["scope", v("player") ? `${v("player")}${v("measure") ? Component.tf(" \u00b7 {name}'s share", { name: v("measure") }) : ""}` : Component.tf("the whole party ({n})", { n: names.length })],
           ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
           ["budget", Component.tf("{n} min", { n: budget })],
-          ["tries", `${Component.t(["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)])}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
+          ["tries", `${Component.t(["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)])}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
           ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(v("hours")), seeds: nf(v("seeds")) })],
           ["enh", v("market") ? "market only" : Component.tf("level {level} \u00b7 {tool} +{toolLevel}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level })],
           // Skill levelling only: how far ahead the curves look, and how many points each gets.
@@ -2201,11 +2205,11 @@ class Component extends DCLogic {
       pct: `${Math.min(100, (elapsed / (budget * 60000)) * 100).toFixed(1)}%`,
       idle: !rows.length && !s.upRunning && !s.upError,
       hasRows: priced.length > 0,
-      // The finalists (the rows the search measured furthest, at most three) stay on top in their own order; every
+      // The finalists (the rows the search measured furthest, as many as the search was asked to keep) stay on top in their own order; every
       // other priced row follows under a header, ranked the same way. A row on 3 seeds above a finalist on 2,047
       // read as the answer when it was the least certain line on the page (operator, 2026-09-21).
       rows: (() => {
-        const isFin = r => refining && maxRounds > 1 && atMax <= 3 && (Number(r.rounds) || 0) === maxRounds;
+        const isFin = r => refining && maxRounds > 1 && atMax <= finCount && (Number(r.rounds) || 0) === maxRounds;
         const top = priced.filter(isFin), rest = priced.filter(r => !isFin(r));
         if (!top.length || !rest.length) return priced.map(mkRow);
         const divider = { divider: true, isRow: false, label: Component.t("Lower confidence results, ranked"),
