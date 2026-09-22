@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="e1ee0826f40b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="c6998b526bf5"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=e1ee0826f40b"></script>
+<script src="./support.js?v=c6998b526bf5"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e1ee0826f40b">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=c6998b526bf5">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=e1ee0826f40b">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e1ee0826f40b"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=c6998b526bf5">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=c6998b526bf5"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -465,11 +465,6 @@
                     <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.profitStyle }}" onClick="{{ up.pickProfit }}">Profit / h</button>
                     <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.paceStyle }}" onClick="{{ up.pickPace }}">{{ up.paceLabel }}</button>
                   </div>
-                  <sc-if value="{{ up.isXp }}" hint-placeholder-val="{{ true }}">
-                    <select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;flex:none;width:130px" dc-attr-value="{{ up.skill }}" onChange="{{ up.setSkill }}">
-                      <sc-for list="{{ up.skillOpts }}" as="o" hint-placeholder-count="8"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                    </select>
-                  </sc-if>
                   <span class="text-muted" style="font-size:12.5px;text-wrap:pretty;min-width:0">{{ up.rankNote }}</span>
                 </div>
                 <sc-if value="{{ up.refinedNote }}" hint-placeholder-val="{{ false }}">
@@ -480,6 +475,13 @@
                 </div>
                 <div style="display:flex;flex-direction:column;gap:4px">
                   <sc-for list="{{ up.rows }}" as="r" hint-placeholder-count="3">
+                    <sc-if value="{{ r.divider }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;padding:8px 0 2px;margin-top:4px;border-top:1px solid var(--color-divider)">
+                        <h4 style="margin:0;font-size:14px">{{ r.label }}</h4>
+                        <span class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ r.sub }}</span>
+                      </div>
+                    </sc-if>
+                    <sc-if value="{{ r.isRow }}" hint-placeholder-val="{{ true }}">
                     <div style="display:flex;flex-direction:column;gap:5px;padding:8px 10px;border-radius:var(--radius-sm);border:1px solid {{ r.border }};background:{{ r.bg }}">
                       <div style="display:grid;grid-template-columns:32px minmax(0,1fr) 168px 120px;gap:10px;align-items:baseline">
                         <span class="text-muted" style="font-size:13px;font-variant-numeric:tabular-nums">{{ r.rank }}</span>
@@ -509,10 +511,17 @@
                         <div class="text-muted" style="padding-left:42px;font-size:12px;text-wrap:pretty">{{ r.noteLine }}</div>
                       </sc-if>
                       <sc-if value="{{ r.hasPlan }}" hint-placeholder-val="{{ false }}">
-                        <div style="padding-left:42px;display:flex;flex-direction:column;gap:1px;font-size:12.5px">
-                          <sc-for list="{{ r.plan }}" as="a" hint-placeholder-count="3">
-                            <div style="display:flex;gap:6px"><span class="text-muted" style="font-variant-numeric:tabular-nums;flex:none;width:16px">{{ a.n }}</span><span style="text-wrap:pretty;font-variant-numeric:tabular-nums">{{ a.text }}</span></div>
-                          </sc-for>
+                        <div style="padding-left:42px;display:flex;flex-direction:column;gap:2px">
+                          <button class="btn" style="display:flex;gap:6px;align-items:baseline;justify-content:flex-start;width:fit-content;padding:0;border-color:transparent;background:transparent;text-align:left;font-size:12px" style-hover="color:var(--color-accent-300)" onClick="{{ r.planToggle }}">
+                            <span class="text-muted" style="letter-spacing:0.06em;text-transform:uppercase">{{ r.planCaret }} {{ r.planLabel }}</span>
+                          </button>
+                          <sc-if value="{{ r.planOpen }}" hint-placeholder-val="{{ false }}">
+                            <div style="display:flex;flex-direction:column;gap:1px;font-size:12.5px">
+                              <sc-for list="{{ r.plan }}" as="a" hint-placeholder-count="3">
+                                <div style="display:flex;gap:6px"><span class="text-muted" style="font-variant-numeric:tabular-nums;flex:none;width:16px">{{ a.n }}</span><span style="text-wrap:pretty;font-variant-numeric:tabular-nums">{{ a.text }}</span></div>
+                              </sc-for>
+                            </div>
+                          </sc-if>
                         </div>
                       </sc-if>
                       <sc-if value="{{ r.copy }}" hint-placeholder-val="{{ false }}">
@@ -530,6 +539,7 @@
                         </div>
                       </sc-if>
                     </div>
+                    </sc-if>
                   </sc-for>
                 </div>
               </div>
@@ -592,21 +602,39 @@
                 </div>
               </sc-if>
               <sc-if value="{{ up.trig.hasSteps }}" hint-placeholder-val="{{ false }}">
-                <div style="display:flex;flex-direction:column;gap:4px">
+                <div style="display:flex;flex-direction:column;gap:6px">
                   <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">The walk</div>
-                  <sc-for list="{{ up.trig.steps }}" as="st" hint-placeholder-count="4">
-                    <div style="display:grid;grid-template-columns:62px minmax(0,1fr) 150px 170px;gap:10px;align-items:baseline;padding:5px 9px;border-radius:var(--radius-sm);background:var(--color-bg);font-size:12.5px">
-                      <span class="text-muted">{{ st.pass }}</span>
-                      <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ st.full }}"><span style="color:var(--color-accent-300)">{{ st.who }}</span>{{ st.ability }} <span class="text-muted">{{ st.cond }}</span></span>
-                      <span style="font-variant-numeric:tabular-nums;{{ st.style }}">{{ st.move }}</span>
-                      <span class="text-muted" style="font-variant-numeric:tabular-nums;text-align:right">{{ st.gain }}</span>
+                  <sc-for list="{{ up.trig.passes }}" as="ps" hint-placeholder-count="2">
+                    <div style="display:flex;flex-direction:column;gap:4px;padding:7px 9px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
+                      <button class="btn" style="display:flex;gap:8px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left" style-hover="color:var(--color-accent-300)" onClick="{{ ps.toggle }}">
+                        <span style="font-size:13px;font-weight:600">{{ ps.caret }} {{ ps.label }}</span>
+                        <span class="text-muted" style="font-size:12px">{{ ps.summary }}</span>
+                        <span class="text-muted" style="font-size:12px;margin-left:auto;text-align:right">{{ ps.startFrom }}</span>
+                      </button>
+                      <sc-if value="{{ ps.open }}" hint-placeholder-val="{{ true }}">
+                        <sc-for list="{{ ps.steps }}" as="st" hint-placeholder-count="3">
+                          <div style="display:grid;grid-template-columns:minmax(0,1fr) 150px 170px;gap:10px;align-items:baseline;padding:5px 9px;border-radius:var(--radius-sm);background:var(--color-bg);font-size:12.5px">
+                            <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ st.full }}"><span style="color:var(--color-accent-300)">{{ st.who }}</span>{{ st.ability }} <span class="text-muted">{{ st.cond }}</span></span>
+                            <span style="font-variant-numeric:tabular-nums;{{ st.style }}">{{ st.move }}</span>
+                            <span class="text-muted" style="font-variant-numeric:tabular-nums;text-align:right">{{ st.gain }}</span>
+                          </div>
+                        </sc-for>
+                        <sc-if value="{{ ps.hasResult }}" hint-placeholder-val="{{ false }}">
+                          <div style="display:flex;flex-direction:column;gap:2px;margin-top:3px;padding:6px 9px;border-radius:var(--radius-sm);border:1px solid var(--color-accent-800);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
+                            <div class="text-muted" style="font-size:11.5px;letter-spacing:0.06em;text-transform:uppercase">{{ ps.resultLabel }}</div>
+                            <sc-for list="{{ ps.result }}" as="rv" hint-placeholder-count="3">
+                              <div style="display:flex;gap:10px;justify-content:space-between;font-size:12.5px;font-variant-numeric:tabular-nums"><span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ rv.text }}</span><span style="{{ rv.style }}">{{ rv.value }}</span></div>
+                            </sc-for>
+                          </div>
+                        </sc-if>
+                      </sc-if>
                     </div>
                   </sc-for>
                 </div>
               </sc-if>
               <sc-if value="{{ up.trig.hasTargets }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;flex-direction:column;gap:3px;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
-                  <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">In this order</div>
+                  <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Trigger values, from most to least impactful</div>
                   <sc-for list="{{ up.trig.targets }}" as="t" hint-placeholder-count="4">
                     <div style="display:flex;gap:10px;justify-content:space-between;font-size:12.5px" class="text-muted"><span>{{ t.text }}</span><span style="font-variant-numeric:tabular-nums">{{ t.share }}</span></div>
                   </sc-for>
@@ -828,7 +856,11 @@
                 <li><b>The player cards share a wide window.</b> Five cards used to sit at 236 px beside empty space; they grow with the window now, and the page may be 1800 px wide.</li>
                 <li><b>Derived-stat sources and run titles in your language.</b> “Philosopher's Earrings +11” and “Critical Aura 90” are translated noun by noun with the number kept, the detail lines with them, and “Baseline — …” in the runs list.</li>
                 <li><b>The party seats itself.</b> MWI Party Export 0.5 marks who is in your party right now, read off the game's party panel, and the site seats those and benches the rest. An export without the mark seats the complete profiles in import order, never one that came back empty. A Bulwark wearer is labelled Defense.</li>
-                <li><b>The upgrade finder prices the hybrid route, and shows its working.</b> For a jump of two or more levels it now also tries buying the item at each listed level in between and enhancing the rest, which is what most players actually do, and takes the cheapest of market, enhancing, the mirror and every hybrid. A mirror's copy is bought outright at its level when one is listed, else built from +0. Every priced row now lists the steps in order — what is sold and for how much, what is bought and at what level, what is enhanced from where to where with its materials and hours, and what is mirrored — so the price can be checked line by line.</li>
+                <li><b>The upgrade finder prices the hybrid route, and shows its working.</b> For a jump of two or more levels it now also tries buying the item at each listed level in between and enhancing the rest, which is what most players actually do, and takes the cheapest of market, enhancing, the mirror and every hybrid. A mirror's copy is bought outright at its level when one is listed, else built from +0. Every priced row now lists the steps in order — what is sold and for how much, what is bought and at what level, what is enhanced from where to where with its materials and hours, and what is mirrored — so the price can be checked line by line, folded behind “How the price is reached” until asked for.</li>
+                <li><b>The finalists stay on top.</b> The three rows the search measured furthest keep the top of the list; every other priced row follows under “Lower confidence results, ranked”, in the same order. A row on 3 seeds had taken rank 1 from a finalist on 2,047.</li>
+                <li><b>Upgrades rank by the chosen metric alone.</b> Rows were ordered by how many rounds the search had kept them before anything else, so a row measured to round 3 and found to lose sat above rows measured to round 2 and found to gain. The order is now gain per million coins for the metric picked, and the ± beside each gain is what says how sure a row is.</li>
+                <li><b>The Upgrades ranking lost its skill dropdown.</b> It set which skill's XP the next search would optimise, but changed nothing on screen and the rows showed total XP beside a per-skill order. Upgrades rank by total combat XP; Skill levelling is the per-skill tool.</li>
+                <li><b>The trigger walk reads pass by pass.</b> Each pass sits in its own container that folds, headed by how many values it changed and what it started from, and ends with every trigger's value after that pass — the changed ones marked — named as what the next pass starts from. One flat list of “pass 1 … pass 2 …” rows had left people unsure which values each pass was measured against.</li>
                 <li><b>Comparing a planet with a dungeon shows both paces.</b> Average run time is a dungeon's figure and EPH a planet's, so the Compare table now shows both rows with a dash on the side each does not apply to, instead of one “EPH” row mixing clears an hour with encounters an hour. A dungeon that never cleared shows a dash too. The party-totals Deaths / h row now sums the players; it had read 0.00 whatever happened.</li>
                 <li><b>The loadout editor opens on the first seated player</b>, and that card now says <i>editing</i> beside the name. It used to open on whoever was imported first, which with the rail sorted seated-first could be a benched card at the bottom with a highlight that read as a stray hover.</li>
                 <li><b>MWI Party Export 0.3</b> works on a client that is not in English. It looked for the words “Edit Party” to find the party, so on 中文 it found nothing and never appeared — which is exactly the player the translation was for.</li>
@@ -991,7 +1023,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=e1ee0826f40b");
+      const i18n = await import("./i18n.js?v=c6998b526bf5");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1014,7 +1046,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=e1ee0826f40b");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=c6998b526bf5");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1288,7 +1320,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=e1ee0826f40b");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=c6998b526bf5");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1309,7 +1341,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=e1ee0826f40b");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=c6998b526bf5");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1375,9 +1407,11 @@ class Component extends DCLogic {
   upNames() { return (this.state.party || []).map((p, i) => p?.record?.name || Component.tf("Player {n}", { n: i + 1 })); }
   upBody() {
     const num = (k, fb) => { const n = Number(this.upVal(k)); return Number.isFinite(n) ? n : fb; };
-    const metric = this.upVal("metric"), skill = this.upVal("skill"), player = this.upVal("player"), measure = this.upVal("measure");
+    const metric = this.upVal("metric"), player = this.upVal("player"), measure = this.upVal("measure");
+    // Total combat XP only: the per-skill goal that once sat as a dropdown beside the ranking buttons was a
+    // search-time setting that re-ranked nothing on screen, and the rows showed total XP beside a per-skill
+    // order (operator, 2026-09-21: dropped; Skill levelling answers per-skill questions).
     const goal = { metric };
-    if (metric === "xp" && skill) goal.skill = skill;
     if (measure) goal.player = measure;
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
@@ -1644,6 +1678,31 @@ class Component extends DCLogic {
       gain: x.changed ? `${(t => (t ? t.withError : Component.tf("{d} EPH \u00b1 {se}", { d: d(x.delta), se: (Number(x.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, x.delta, x.deltaSE))}${x.deltaXp == null ? "" : (xpEach ? Component.tf(" \u00b7 {xp} XP / h a player", { xp: xpd(x.deltaXp / partyN) }) : Component.tf(" \u00b7 {xp} XP / h", { xp: xpd(x.deltaXp) }))}` : "",
       style: x.changed ? "color:var(--color-accent-300)" : "",
     }));
+    // The walk by pass (operator, 2026-09-21): each pass in its own container, with the values it settled on
+    // at its foot -- every target, the ones this pass changed marked -- named as what the next pass starts
+    // from. The foot appears once the pass has decided every target; a running pass says how far it is.
+    const headNow = s.trigHead || null, targetsAll = headNow?.targets || [];
+    const tKey = t => `${t.player}|${t.abilityHrid}|${t.triggerIndex ?? t.index}`;
+    const passOpen = s.trigPassOpen || {};
+    const passNums = [...new Set((s.trigSteps || []).map(x => x.pass ?? 1))].sort((a, b) => a - b);
+    const totalPasses = Math.max(Number(headNow?.passes) || 0, ...passNums, 0);
+    const valuesNow = new Map(targetsAll.map(t => [tKey(t), t.value]));
+    const passes = passNums.map(p => {
+      const own = (s.trigSteps || []).map((x, i) => ({ x, i })).filter(({ x }) => (x.pass ?? 1) === p);
+      for (const { x } of own) valuesNow.set(tKey(x), x.to);
+      const changedKeys = new Set(own.filter(({ x }) => x.changed).map(({ x }) => tKey(x)));
+      const complete = targetsAll.length > 0 && own.length >= targetsAll.length;
+      const open = passOpen[p] !== false;
+      return { n: p, label: Component.tf("Pass {n}", { n: p }),
+        summary: complete ? Component.tf("{k} of {n} changed", { k: changedKeys.size, n: targetsAll.length }) : Component.tf("in progress \u00b7 {k} of {n} decided", { k: own.length, n: targetsAll.length }),
+        startFrom: p === 1 ? Component.t("starts from the party's own values") : Component.tf("starts from the result of pass {n}", { n: p - 1 }),
+        open, caret: open ? "\u25be" : "\u25b8",
+        toggle: () => this.setState(st => ({ trigPassOpen: { ...(st.trigPassOpen || {}), [p]: (st.trigPassOpen || {})[p] === false } })),
+        steps: own.map(({ i }) => steps[i]), hasResult: complete,
+        resultLabel: p < totalPasses ? Component.tf("After pass {n} \u2014 what pass {m} starts from", { n: p, m: p + 1 }) : Component.tf("After pass {n} \u2014 the values tested together", { n: p }),
+        result: targetsAll.map(t => ({ text: `${whoOf(t.player)}${abName(t)} \u00b7 ${condText(t)}`, value: nf(valuesNow.get(tKey(t))),
+          style: changedKeys.has(tKey(t)) ? "color:var(--color-accent-300);font-weight:600" : "" })) };
+    });
     const done = s.trigDone || null;
     const combined = done?.combined || null;
     // The line exists to say what to go and TYPE INTO THE GAME, so the value to type is the one thing on it
@@ -1670,7 +1729,7 @@ class Component extends DCLogic {
       run: () => this.runMode("triggers"),
       stage: head ? `${Component.t(head.stage || "measuring")}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.runClock()}` : ""}` : Component.t("measuring the party as it stands\u2026"),
       targets, hasTargets: targets.length > 0,
-      steps, hasSteps: steps.length > 0,
+      steps, hasSteps: steps.length > 0, passes,
       combined: combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
@@ -1903,12 +1962,15 @@ class Component extends DCLogic {
     const tier = Math.min(maxT, Math.max(0, Number(v("tier")) || 0));
     const rows = (s.upRows || []).filter(r => r && r.ok !== false);
     const byIndex = new Map((s.upRows || []).map(r => [r.index, r]));
+    const planOpen = s.upPlanOpen || {};
     const maxRounds = rows.reduce((a, r) => Math.max(a, Number(r.rounds) || 0), 0);
     const refining = !!s.upHead?.refining || !!s.upDone;
     const atMax = rows.filter(r => (Number(r.rounds) || 0) === maxRounds).length;
     // Rows further along rank first: a finalist on 189 seeds outranks a screen reading on 3, whatever the ratio.
-    const byRank = (a, b) => (Number(b.rounds) || 0) - (Number(a.rounds) || 0)
-      || ((pick(b).per ?? -Infinity) - (pick(a).per ?? -Infinity))
+    // By the chosen metric alone: gain per million coins, then the gain. Depth (rounds survived) used to come
+    // first, which put a row measured to round 3 and found to lose (Insanity, −8,476 XP/h) above rows measured
+    // to round 2 and found to gain. The ± beside each gain is what says how sure a row is (operator, 2026-09-21).
+    const byRank = (a, b) => ((pick(b).per ?? -Infinity) - (pick(a).per ?? -Infinity))
       || (Number(pick(b).d) || 0) - (Number(pick(a).d) || 0);
     // Every row carries deltaXp and deltaProfit whatever the search refined on, so switching the metric
     // re-ranks the rows in hand instead of only changing what the next search optimises.
@@ -1926,6 +1988,7 @@ class Component extends DCLogic {
       const m = pick(r), d = Number(m.d) || 0;
       const pct = r.deltaPct == null ? "" : `${(Number(r.deltaPct) * 100).toFixed(3)} %`;
       return {
+        isRow: true, divider: false,
         rank: String(i + 1), finalist: fin,
         border: fin ? "var(--color-accent-700)" : "var(--color-divider)",
         bg: fin ? "color-mix(in srgb, var(--color-accent-800) 26%, transparent)" : "var(--color-bg)",
@@ -1951,13 +2014,18 @@ class Component extends DCLogic {
         // chain lengths are not the same price, and the split is the only way to see which is which.
         split: cost.timeCoins != null && Number(cost.timeCoins) > 0
           ? Component.tf("{materials} materials + {time} over {hours} h", { materials: coin(cost.materialCoins), time: coin(cost.timeCoins), hours: (Number(cost.hours) || 0).toFixed(1) }) : "",
-        noteLine: this.costNote(cost),
+        // The one-line note repeats what the step plan spells out (operator, 2026-09-21): shown only when there is no plan.
+        noteLine: (cost.plan || []).length ? "" : this.costNote(cost),
         route: Component.t(Component.UP_ROUTES[cost.route] || cost.route || ""),
         note: this.costNote(cost),
         // How the price is reached, one line per action, in order (operator, 2026-09-21: the route and the total
         // did not say how the copy was obtained or that the held piece was sold).
         hasPlan: Array.isArray(cost.plan) && cost.plan.length > 0,
         plan: (cost.plan || []).map((a, k) => ({ n: `${k + 1}.`, text: this.planLine(a, itemName, coin) })),
+        // Folded by default (operator, 2026-09-21): a +3 row runs to seven lines. Open state per candidate index.
+        planOpen: !!planOpen[r.index], planCaret: planOpen[r.index] ? "\u25be" : "\u25b8",
+        planLabel: Component.tf((cost.plan || []).length === 1 ? "How the price is reached \u00b7 {n} step" : "How the price is reached \u00b7 {n} steps", { n: (cost.plan || []).length }),
+        planToggle: () => this.setState(st => ({ upPlanOpen: { ...(st.upPlanOpen || {}), [r.index]: !(st.upPlanOpen || {})[r.index] } })),
         copy: !(cost.plan || []).length && step?.copy ? Component.tf("make a +{level} {item} and mirror it", { level: step.copy.level, item: itemName(step.copy.hrid) }) : "",
         alt: cost.alternative ? Component.tf("next cheapest: {route} {coins}", { route: Component.t(Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || ""), coins: coin(cost.alternative.coins) }) : "",
         warning: this.costWarning(cost),
@@ -2039,8 +2107,6 @@ class Component extends DCLogic {
       pickPace: () => set({ metric: "eph" }),
       paceLabel: upDungeon ? Component.t("Run time") : Component.t("Encounters / h"),
       paceStyle: metric === "eph" ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)",
-      skill: v("skill") || "", setSkill: e => set({ skill: e.target.value }),
-      skillOpts: [{ value: "", label: Component.t("Every skill") }, ...Component.UP_SKILLS.map(k => ({ value: k, label: Component.t(k[0].toUpperCase() + k.slice(1)) }))],
       zone: v("zone") || "", setZone: e => set({ zone: e.target.value, tier: 0 }),
       zoneOpts: [{ value: "", label: zones.length ? Component.t("Pick a zone") : Component.t("loading the zone list\u2026") }, ...zones.map(z => ({ value: z.hrid, label: Component.t(z.name) }))],
       tier: String(tier), setTier: e => set({ tier: Number(e.target.value) || 0 }),
@@ -2135,7 +2201,17 @@ class Component extends DCLogic {
       pct: `${Math.min(100, (elapsed / (budget * 60000)) * 100).toFixed(1)}%`,
       idle: !rows.length && !s.upRunning && !s.upError,
       hasRows: priced.length > 0,
-      rows: priced.map(mkRow),
+      // The finalists (the rows the search measured furthest, at most three) stay on top in their own order; every
+      // other priced row follows under a header, ranked the same way. A row on 3 seeds above a finalist on 2,047
+      // read as the answer when it was the least certain line on the page (operator, 2026-09-21).
+      rows: (() => {
+        const isFin = r => refining && maxRounds > 1 && atMax <= 3 && (Number(r.rounds) || 0) === maxRounds;
+        const top = priced.filter(isFin), rest = priced.filter(r => !isFin(r));
+        if (!top.length || !rest.length) return priced.map(mkRow);
+        const divider = { divider: true, isRow: false, label: Component.t("Lower confidence results, ranked"),
+          sub: Component.t("measured on fewer seeds than the finalists above \u2014 the \u00b1 says how sure each row is") };
+        return [...top.map(mkRow), divider, ...rest.map((r, i) => mkRow(r, top.length + i))];
+      })(),
       unpriced: unpriced.map(mkRow), hasUnpriced: unpriced.length > 0,
       // "Δ s a run" is not a column heading. Seconds off the run reads as its own thing.
       gainHead: paceAsTime ? Component.t("Faster per run") : `\u0394 ${unit}`,
@@ -2145,7 +2221,7 @@ class Component extends DCLogic {
       refinedNote: head?.refinedOn && head.refinedOn !== metric
         ? Component.tf("the finalists were chosen on {metric}, so this order is measured on the same seeds but not selected for", { metric: head.refinedOn === "profit" ? Component.t("profit") : "XP" }) : "",
       rankNote: s.upRunning ? Component.t("best so far \u2014 rows re-rank as rounds add seeds")
-        : Component.t("by gain per million coins, rows measured furthest first") + (maxRounds > 1 ? Component.tf(" \u00b7 {n} rounds deep", { n: maxRounds }) : ""),
+        : Component.t("by gain per million coins \u2014 the \u00b1 says how sure each row is") + (maxRounds > 1 ? Component.tf(" \u00b7 {n} rounds deep", { n: maxRounds }) : ""),
       done: s.upDone ? Component.tf("{n} upgrades measured in {min} min", { n: nf(s.upDone.evaluated ?? s.upDone.candidates), min: ((Number(s.upDone.ms) || 0) / 60000).toFixed(1) }) + (s.upDone.stoppedBy ? Component.tf(" \u00b7 stopped by {who}", { who: s.upDone.stoppedBy }) : s.upDone.stopped ? Component.t(" \u00b7 stopped early") : "") : "",
     };
   }
