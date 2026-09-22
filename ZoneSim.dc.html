@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=d8b39e8da4ae"></script>
+<script src="./support.js?v=1632330e07ec"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d8b39e8da4ae">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=1632330e07ec">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=d8b39e8da4ae">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d8b39e8da4ae"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=1632330e07ec">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=1632330e07ec"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1209,13 +1209,23 @@ class Component extends DCLogic {
     const text = String(raw ?? ""); const at = text.indexOf(" \u2014 ");
     return at < 0 ? Component.t(text) : Component.t(text.slice(0, at)) + text.slice(at);
   }
+  /**
+   * The stat a character is labelled by: the highest of melee, ranged and magic -- except a Bulwark wearer, whose
+   * job is Defense (operator, 2026-09-21: ohyeah5566 read "Melee 125"). Deliberately not a general weapon rule:
+   * a spear's training stat is attack, but melee is the larger part of its damage, so weapons stay out of it.
+   */
+  static mainStat(p) {
+    const L = p?.record?.levels || {};
+    if ((p?.loadout?.equipment || []).some(e => /bulwark/i.test(String(e?.itemHrid || "")))) return "defense";
+    return ["melee", "ranged", "magic"].reduce((a, k) => (L[k] || 0) > (L[a] || 0) ? k : a, "magic");
+  }
   static tf(template, vars) {
     let out = Component.t(template);
     for (const [k, v] of Object.entries(vars)) out = out.split(`{${k}}`).join(v);
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=d8b39e8da4ae").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=1632330e07ec").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1454,12 +1464,28 @@ class Component extends DCLogic {
   // leave a stale index selected. The cap is the game's own party size.
   static ZONE_MAX_PARTY = 5;
   zonePartyName(p, i) { return p?.record?.name || Component.tf("Player {n}", { n: i + 1 }); }
+  /**
+   * Who is seated before anyone has chosen: the characters the export flags as in the party (the party export
+   * script reads the game's party panel), else the ones with a complete profile -- equipment and abilities both
+   * present -- in import order. Never a character whose profile came back empty (operator, 2026-09-21: Odysseas's
+   * eight-character import seated the first five in file order, two of them not in his party and one with no
+   * equipment at all).
+   */
+  zoneDefaultSeats(s) {
+    const party = s.zoneParty || [];
+    const nameOf = (p, i) => this.zonePartyName(p, i);
+    const flagged = party.map((p, i) => [p, i]).filter(([p]) => p?.record?.inParty === true).map(([p, i]) => nameOf(p, i));
+    if (flagged.length) return flagged;
+    const complete = p => (p?.loadout?.equipment || []).length > 0 && (p?.loadout?.abilities || []).length > 0;
+    const whole = party.map((p, i) => [p, i]).filter(([p]) => complete(p) && p?.record?.inParty !== false).map(([p, i]) => nameOf(p, i));
+    return whole.length ? whole : party.map((p, i) => nameOf(p, i));
+  }
   zoneActiveNames(s) {
     const names = (s.zoneParty || []).map((p, i) => this.zonePartyName(p, i));
     const cap = Component.ZONE_MAX_PARTY;
-    if (!Array.isArray(s.zoneActive)) return names.slice(0, cap);
+    if (!Array.isArray(s.zoneActive)) return this.zoneDefaultSeats(s).slice(0, cap);
     const want = new Set(s.zoneActive), keep = names.filter(n => want.has(n));
-    return (keep.length ? keep : names.slice(0, cap)).slice(0, cap);
+    return (keep.length ? keep : this.zoneDefaultSeats(s)).slice(0, cap);
   }
   zoneActiveParty(s) {
     const act = new Set(this.zoneActiveNames(s));
@@ -3013,7 +3039,7 @@ class Component extends DCLogic {
         ? Component.tf("{n} of {max} seated · {imported} imported", { n: actNames.length, max: Component.ZONE_MAX_PARTY, imported: party.length })
         : `${actNames.length} ${Component.t("seated")}`,
       rail: party.map((q, k) => { const nm = this.zonePartyName(q, k), L = q.record?.levels || {};
-        const st = ["melee", "ranged", "magic"].reduce((a, key) => (L[key] || 0) > (L[a] || 0) ? key : a, "magic");
+        const st = Component.mainStat(q);
         const n = dirtyCount(k), seated = actSet.has(nm);
         // A cape is self-enhanced, so the upgrade finder costs a cape chain on this player's own enhancing —
         // which makes it part of who they are here, not a detail buried in a row.
@@ -3637,7 +3663,7 @@ class Component extends DCLogic {
       party: party.map((p, i) => { const l = p.loadout || {}, nm = p.record?.name || Component.tf("Player {n}", { n: i + 1 });
         const ab = (l.abilities || []).length, fd = (l.food?.["/action_types/combat"] || []).length, dk = (l.drinks?.["/action_types/combat"] || []).length;
         const eq = (l.equipment || []).length, L = p.record?.levels || {};
-        const best = ["melee", "ranged", "magic"].reduce((a, k) => (L[k] || 0) > (L[a] || 0) ? k : a, "magic");
+        const best = Component.mainStat(p);
         return { name: nm, task: tasks[nm] || "",
           sub: `${L[best] ? `${best} ${L[best]} \u00b7 ` : ""}${eq ? Component.tf("{n} items \u00b7 ", { n: eq }) : ""}${Component.tf("{ab} abilities \u00b7 {fd} food \u00b7 {dk} drinks", { ab, fd, dk })}`,
           setTask: e => set({ zoneTasks: { ...tasks, [nm]: e.target.value } }),
