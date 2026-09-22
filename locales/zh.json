@@ -1,4 +1,5 @@
 {
+ "The loadout editor below shows this character": "下方的装备编辑器显示的是该角色",
  "_about": "英文是键名。缺少的条目会自动显示英文，所以这个文件不必翻译完整也能安全使用。欢迎修正任何一行 —— 无需改动代码。",
  "_review": "Translated by Claude for Metzli, 2026-09-21. NOT reviewed by a native speaker yet. Game nouns (ability, zone and item names) are deliberately left in English: the official Chinese client terms were not available, and an invented translation would match neither the English nor the player's own game.",
  "_source": "Skill, house-room and tab names are the game client's own Chinese, read from the operator's screenshots on 2026-09-21 — they match what a player sees in game, which matters more than a better-sounding translation would. Everything else is Claude's and still wants review.",
@@ -3256,6 +3257,7 @@
  "dungeon monsters drop nothing: the only loot is the completion reward for clearing the final wave": "地下城怪物不掉落任何物品：唯一的掉落是通关最后一波的完成奖励",
  "each": "每个",
  "edited": "已修改",
+ "editing": "编辑中",
  "enhancing": "强化",
  "enhancing {level} · {tool} +{toolLevel} · {tea}{blessed} · pouch +{pouch} · observatory {obs} · {capes}": "强化 {level} · {tool} +{toolLevel} · {tea}{blessed} · 袋子 +{pouch} · 天文台 {obs} · {capes}",
  "equipment": "装备",

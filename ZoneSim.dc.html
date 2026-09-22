@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=c29471879551"></script>
+<script src="./support.js?v=f5d70b11a40c"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=c29471879551">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f5d70b11a40c">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=c29471879551">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=c29471879551"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=f5d70b11a40c">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f5d70b11a40c"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -228,7 +228,7 @@
           <div style="display:flex;align-items:center;gap:6px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface);padding:5px 7px;flex:none;{{ r.style }}" style-hover="border-color:var(--color-accent-700)">
             <input type="checkbox" style="cursor:pointer;flex:none;margin:0" checked="{{ r.seated }}" disabled="{{ r.seatLocked }}" title="{{ r.seatTitle }}" onChange="{{ r.toggleSeat }}">
             <button class="btn btn-ghost" style="flex:1;min-width:0;padding:0;border-color:transparent;justify-content:flex-start;text-align:left;display:flex;flex-direction:column;gap:1px;align-items:flex-start" onClick="{{ r.pick }}">
-              <span style="font-size:13.5px;display:flex;gap:5px;align-items:center">{{ r.name }}<sc-if value="{{ r.dirty }}" hint-placeholder-val="{{ false }}"><span style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);display:inline-block" title="Edited since import"></span></sc-if></span>
+              <span style="font-size:13.5px;display:flex;gap:5px;align-items:center">{{ r.name }}<sc-if value="{{ r.dirty }}" hint-placeholder-val="{{ false }}"><span style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);display:inline-block" title="Edited since import"></span></sc-if><sc-if value="{{ r.active }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;color:var(--color-accent-300);text-transform:uppercase;letter-spacing:0.05em;font-weight:500" title="{{ r.editTitle }}">{{ r.editTag }}</span></sc-if></span>
               <span class="text-muted" style="font-size:12px">{{ r.sub }}</span>
               <sc-if value="{{ r.skillSub }}" hint-placeholder-val="{{ false }}">
                 <span class="text-muted" style="font-size:11.5px">{{ r.skillSub }}</span>
@@ -1225,7 +1225,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=c29471879551").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=f5d70b11a40c").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1483,6 +1483,12 @@ class Component extends DCLogic {
     const whole = party.map((p, i) => [p, i]).filter(([p]) => complete(p)).map(([p, i]) => nameOf(p, i));
     return whole.length ? whole : party.map((p, i) => nameOf(p, i));
   }
+  /** Party index of the first seated character -- where the loadout editor's selection starts. */
+  zoneFirstSeat(s) {
+    const party = s.zoneParty || [], first = this.zoneActiveNames(s)[0];
+    const at = party.findIndex((p, i) => this.zonePartyName(p, i) === first);
+    return at < 0 ? 0 : at;
+  }
   zoneActiveNames(s) {
     const names = (s.zoneParty || []).map((p, i) => this.zonePartyName(p, i));
     const cap = Component.ZONE_MAX_PARTY;
@@ -1545,7 +1551,7 @@ class Component extends DCLogic {
       this.setState(s => ({ zoneImporting: false, zoneParty: filled, zoneActive: null, zoneExportOpen: false,
         // ZONE-76: an import can seat a fifth player in one step, which makes every queued planet impossible.
         zoneCands: this.zoneFitCands(s.zoneCands, this.zoneActiveNames({ ...s, zoneParty: filled, zoneActive: null }).length, s.zoneList),
-        zoneBase: JSON.parse(JSON.stringify(filled)), zoneSel: 0, zoneStale: false, zoneDerived: null, zoneDeriveError: null,
+        zoneBase: JSON.parse(JSON.stringify(filled)), zoneSel: this.zoneFirstSeat({ ...s, zoneParty: filled, zoneActive: null }), zoneStale: false, zoneDerived: null, zoneDeriveError: null,
         zoneFormat: r.format || null,
         // The import counts the inventory rows it dropped for not being combat gear. That is the whole bag
         // arriving and being filtered as intended — resources, loot and keys were never going to be equippable —
@@ -2273,7 +2279,7 @@ class Component extends DCLogic {
       patch.zoneParty = players;
       patch.zoneBase = clone(players);   // loaded party IS the baseline, so the editor's marks start clean
       patch.zoneActive = players.map((p, i) => p?.record?.name || Component.tf("Player {n}", { n: i + 1 }));
-      patch.zoneSel = 0;
+      patch.zoneSel = this.zoneFirstSeat({ zoneParty: players, zoneActive: patch.zoneActive });
     }
     if (src.tasks) patch.zoneTasks = { ...src.tasks };
     this.setZonePrefs(patch);
@@ -3054,6 +3060,8 @@ class Component extends DCLogic {
           ? `${Component.t(String(sk.enhancingTool.itemHrid || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()))}${sk.enhancingTool.enhancementLevel ? ` +${sk.enhancingTool.enhancementLevel}` : ""}`
           : "no tool";
         return { name: nm, sub: `${Component.t(nice(st))} ${L[st] || 0}${seated ? "" : ` · ${Component.t("benched")}`}`, active: k === i, dirty: n > 0,
+          // The card the loadout editor below is showing: named, so the accent border is not read as a hover.
+          editTag: k === i ? Component.t("editing") : "", editTitle: Component.t("The loadout editor below shows this character"),
           skillSub: sk?.enhancingLevel ? `${Component.t("enhancing")} ${sk.enhancingLevel} \u00b7 ${tool}${sk.alchemyLevel ? ` \u00b7 ${Component.t("alchemy")} ${sk.alchemyLevel}` : ""}` : "",
           badge: n ? String(n) : "", hasBadge: n > 0,
           seated,
@@ -3065,7 +3073,7 @@ class Component extends DCLogic {
           toggleSeat: () => this.zoneToggleActive(nm),
           style: `${k === i ? "border-color:var(--color-accent);background:color-mix(in srgb, var(--color-accent) 12%, transparent)" : "border-color:var(--color-divider)"}${seated ? "" : ";opacity:0.58"}`,
           pick: () => set({ zoneSel: k, zoneStatOpen: null }),
-          remove: () => set({ zoneParty: party.filter((_, j) => j !== k), zoneBase: base.filter((_, j) => j !== k), zoneSel: 0, zoneResult: s.zoneResult, zoneStale: !!s.zoneResult }) }; })
+          remove: () => { const left = party.filter((_, j) => j !== k); set({ zoneParty: left, zoneBase: base.filter((_, j) => j !== k), zoneSel: this.zoneFirstSeat({ ...s, zoneParty: left }), zoneResult: s.zoneResult, zoneStale: !!s.zoneResult }); } }; })
         // Seated members first, benched after, each group in import order (operator, 2026-09-21): with a whole
         // guild imported, the five who play sit at the top rather than wherever the export put them.
         .map((r, k) => ({ r, k })).sort((a, b) => (b.r.seated - a.r.seated) || (a.k - b.k)).map(({ r }) => r),
