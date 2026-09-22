@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="23c865a07995"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="cdd9d6d2b34c"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=23c865a07995"></script>
+<script src="./support.js?v=cdd9d6d2b34c"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=23c865a07995">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=cdd9d6d2b34c">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=23c865a07995">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=23c865a07995"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=cdd9d6d2b34c">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=cdd9d6d2b34c"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -658,7 +658,7 @@
               <sc-if value="{{ up.trig.hasSteps }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;flex-direction:column;gap:6px">
                   <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">The walk</div>
-                  <sc-for list="{{ up.trig.passes }}" as="ps" hint-placeholder-count="2">
+                  <sc-for list="{{ up.trig.walkPasses }}" as="ps" hint-placeholder-count="2">
                     <div style="display:flex;flex-direction:column;gap:4px;padding:7px 9px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface)">
                       <button class="btn" style="display:flex;gap:8px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left" style-hover="color:var(--color-accent-300)" onClick="{{ ps.toggle }}">
                         <span style="font-size:13px;font-weight:600">{{ ps.caret }} {{ ps.label }}</span>
@@ -1082,7 +1082,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=23c865a07995");
+      const i18n = await import("./i18n.js?v=cdd9d6d2b34c");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1105,7 +1105,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=23c865a07995");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=cdd9d6d2b34c");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1398,7 +1398,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=23c865a07995");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=cdd9d6d2b34c");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1419,7 +1419,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=23c865a07995");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=cdd9d6d2b34c");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1930,7 +1930,7 @@ class Component extends DCLogic {
       run: () => this.runMode("triggers"),
       stage: head ? `${Component.stageText(head.stage || "measuring", head.current)}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.runClock()}` : ""}` : Component.t("measuring the party as it stands\u2026"),
       targets, hasTargets: targets.length > 0,
-      steps, hasSteps: steps.length > 0, passes,
+      steps, hasSteps: steps.length > 0, walkPasses: passes,
       combined: combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
