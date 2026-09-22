@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=6c6d3c65e1fd"></script>
+<script src="./support.js?v=d8b39e8da4ae"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=6c6d3c65e1fd">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d8b39e8da4ae">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=6c6d3c65e1fd">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=6c6d3c65e1fd"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d8b39e8da4ae">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d8b39e8da4ae"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -810,7 +810,9 @@
                collapses the empty tracks, so a solo run stretched one card across the whole page and put its
                label at one edge and its number at the other, unreadable (operator, 2026-09-20). auto-fill keeps
                the tracks, so one card is exactly as wide as it would be in a full party. -->
-          <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(236px,1fr));gap:var(--space-4)">
+          <!-- auto-fit, not auto-fill: five cards share the row on a wide window instead of sitting at 236 px
+               beside empty tracks (operator, 2026-09-21). -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:var(--space-4)">
             <sc-for list="{{ zone.detail.players }}" as="p" hint-placeholder-count="5">
               <div class="card elev-sm" style="gap:6px;padding:var(--space-3);min-width:0">
                 <div>
@@ -1183,13 +1185,37 @@ class Component extends DCLogic {
    * or inflects around the number, can put the value wherever it belongs. For the strings a view model builds
    * there is no other way: they land inside `.sc-interp`, which the after-render pass never touches.
    */
+  /**
+   * A derived-stat source as the server names it -- "Philosopher's Earrings +11", "Attack 162", "Critical Aura
+   * 90", "Zone · Pirate Cove", "Account / Wisdom (community experience)" -- with the noun translated and the
+   * number, sign and qualifier kept. A whole-string match wins when the locale has one.
+   */
+  static derivedLabel(raw) {
+    const text = String(raw ?? ""); if (!text) return text;
+    const whole = Component.t(text); if (whole !== text) return whole;
+    const m = /^(.*?)((?:\s\+?\d+(?:\.\d+)?)?)((?:\s\([^)]*\))?)$/.exec(text); if (!m) return text;
+    const base = m[1].split(" \u00b7 ").map(part => Component.t(part)).join(" \u00b7 ");
+    return base + m[2] + m[3];
+  }
+  /** A source's detail: a fixed phrase, or the buff line "party buff · caster · 12 s every 30 s with Ripple". */
+  static derivedDetail(raw) {
+    const text = String(raw ?? ""); if (!text) return text;
+    const whole = Component.t(text); if (whole !== text) return whole;
+    const m = /^(?:party buff \u00b7 (.+?)|self buff) \u00b7 ([\d.]+) s every ([\d.]+) s( with Ripple)?$/.exec(text); if (!m) return text;
+    return Component.tf("{who} \u00b7 {d} s every {c} s{ripple}", { who: m[1] ? Component.tf("party buff \u00b7 {caster}", { caster: m[1] }) : Component.t("self buff"), d: m[2], c: m[3], ripple: m[4] ? Component.t(" with Ripple") : "" });
+  }
+  /** A run's title, "Baseline — who" or "<change> — who": the headline before the dash is translated. */
+  static runTitle(raw) {
+    const text = String(raw ?? ""); const at = text.indexOf(" \u2014 ");
+    return at < 0 ? Component.t(text) : Component.t(text.slice(0, at)) + text.slice(at);
+  }
   static tf(template, vars) {
     let out = Component.t(template);
     for (const [k, v] of Object.entries(vars)) out = out.split(`{${k}}`).join(v);
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=6c6d3c65e1fd").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=d8b39e8da4ae").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1537,6 +1563,15 @@ class Component extends DCLogic {
     }
   }
   async runZoneSim() {
+    // Prices no older than 59 minutes at run time (operator, 2026-09-21: a run priced on an 8 h old feed). The
+    // feed publishes about hourly; a forced refresh fetches it and the run's own market lookup then reads the
+    // fresh copy (the loader's minute memo holds it). If the feed cannot be reached the run goes ahead on the
+    // copy it has, and the Pricing panel says so.
+    if (this.client?.zoneMarketRefresh) {
+      const m = this.state.zoneMarket;
+      const age = m?.timestamp ? Date.now() - Number(m.timestamp) : Infinity;
+      if (age > 59 * 60e3) await this.refreshZoneMarket();
+    }
     const s = this.state;
     const all = (s.zoneCands || []).slice();
     // Only the party is simulated — benched imports stay in the editor and are not sent.
@@ -2393,7 +2428,7 @@ class Component extends DCLogic {
     // The headline is what the party was (Baseline, or the change from it); the zone board is the sub-line.
     const entries = [
       // A saved session run goes by its saved name, so a rename on the Saved tab shows here too.
-      ...log.map(r => ({ id: r.id, at: r.at, label: saves.find(x => x.fromRun === r.id)?.name || r.title || r.label, where: r.label, rows: (r.candidates || []).length,
+      ...log.map(r => ({ id: r.id, at: r.at, label: saves.find(x => x.fromRun === r.id)?.name || Component.runTitle(r.title || r.label), where: r.label, rows: (r.candidates || []).length,
         hours: this.zoneRunHours(r), saved: savedFrom.has(r.id), session: true,
         baseline: !!r.isBaseline, linked: !!r.basedOn })),
       ...saves.filter(x => !x.fromRun || !log.some(r => r.id === x.fromRun))
@@ -2489,7 +2524,7 @@ class Component extends DCLogic {
       board: this.zoneBoardSig(r.candidates, r.hours), isBaseline: !!r.isBaseline, basedOn: r.basedOn || null,
       hours: r.hours, seed: r.seed, lag: Number(r.serverLagMs) || 0, wave: Number(r.waveTransitionDelayMs) || 0,
       // A saved run keeps the name it was given; a session run is named by its headline.
-      name: kind === "save" ? (r.name || r.title || "Saved run") : (r.title || r.label || "Run"),
+      name: kind === "save" ? (r.name || Component.runTitle(r.title) || Component.t("Saved run")) : (Component.runTitle(r.title || r.label) || Component.t("Run")),
     });
     const sources = [
       ...log.map(r => asSource(r, "run")),
@@ -3179,7 +3214,7 @@ class Component extends DCLogic {
           toggle: () => { if (shown.length) set({ zoneStatOpen: s.zoneStatOpen === key ? null : key }); },
           // A "Base" row of zero says nothing — every character has the same zero — so it is dropped. Any other
           // zero row stays: it is a source that could have contributed and did not.
-          sources: shown.map(x => ({ label: Component.t(x.label), detail: x.detail || "", hasDetail: !!x.detail, value: fmt(x.value),
+          sources: shown.map(x => ({ label: Component.derivedLabel(x.label), detail: Component.derivedDetail(x.detail), hasDetail: !!x.detail, value: fmt(x.value),
             hasIcon: !!x.iconId,
             icon: this.zoneIcon(x.iconSheet === "skills" ? "skill" : x.iconSheet === "misc" ? "room" : "source", x.label, x, x.label) })) }; }),
       hasDerived: !!shownStats.length,
@@ -3410,7 +3445,7 @@ class Component extends DCLogic {
       // While the stream is open there is no wall time yet — the row count stands in for it.
       const timing = s.zoneRunning ? Component.tf("{n} of {total} back", { n: list.length, total: (R.candidates || []).length })
         : sec < 1 ? `${Math.round(sec * 1000)} ms` : `${nf(sec, 1)} s`;
-      header = Component.tf("{players} players · {h} h · seed {seed}", { players: (R.party || []).length, h: nf(R.hours, R.hours < 1 ? 2 : 0), seed: R.seed }) + (Number(R.serverLagMs) > 0 ? Component.tf(" · server lag {n} ms", { n: nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0) }) : "") + (Number(R.waveTransitionDelayMs) > 0 ? Component.tf(" · wave gap {n} ms", { n: nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0) }) : "") + Component.tf(" · loot {loot} · consumables {consumables} · keys {keys}", { loot: sideShort("loot", R.pricing?.loot), consumables: sideShort("consumables", R.pricing?.consumables), keys: sideShort("keys", R.pricing?.keys) }) + (R.pricing?.keys === "craft" && R.pricing?.keyMaterials ? Component.tf(" from materials {v}", { v: sideShort("keyMaterials", R.pricing.keyMaterials) }) : "") + (R.pricing?.mode === "iron" ? Component.t(" · iron") : "") + ` · ${timing}`;
+      header = Component.tf("{players} players · {h} h · seed {seed}", { players: (R.party || []).length, h: nf(R.hours, R.hours < 1 ? 2 : 0), seed: R.seed }) + (Number(R.serverLagMs) > 0 ? Component.tf(" · server lag {n} ms", { n: nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0) }) : "") + (Number(R.waveTransitionDelayMs) > 0 ? Component.tf(" · wave gap {n} ms", { n: nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0) }) : "") + Component.tf(" · loot {loot} · consumables {consumables} · keys {keys}", { loot: sideShort("loot", R.pricing?.loot), consumables: sideShort("consumables", R.pricing?.consumables), keys: sideShort("keys", R.pricing?.keys) }) + (R.pricing?.keys === "craft" && R.pricing?.keyMaterials ? Component.tf(" from materials {v}", { v: sideShort("keyMaterials", R.pricing.keyMaterials) }) : "") + (R.pricing?.mode === "iron" ? Component.t(" · iron") : "") + (Number(R.marketTimestamp) > 0 ? Component.tf(" · prices {age}", { age: (() => { const a = Math.max(0, Date.now() - Number(R.marketTimestamp)); return a < 90e3 ? Component.t("just now") : a < 90 * 60e3 ? Component.tf("{n} min old", { n: Math.round(a / 60e3) }) : Component.tf("{n} h old", { n: Math.round(a / 36e5) }); })() }) : "") + ` · ${timing}`;
       const secOpen = s.zoneSecOpen || {}, secDefs = [["rates", Component.t("Rates")], ["xp", Component.t("XP / h")],
         ["damage", Component.t("Damage by source")], ["consumables", Component.t("Consumables")], ["lootIn", Component.t("Loot in")], ["lootOut", Component.t("Loot out")]];
       if (c && c.ok !== false) detail = { title: `${Component.t(c.name)} · T${c.difficultyTier}${c.hours != null && R?.hours != null && Number(c.hours) !== Number(R.hours) ? ` · ${nf(c.hours)} h` : ""}`,
@@ -3512,10 +3547,11 @@ class Component extends DCLogic {
             return t > 0 ? Component.tf("{day} / day · {hour} / h — counted in loot out, deducted from profit", { day: coin(t * 24), hour: coin(t) }) : ""; })(),
           income: (p.loot?.income?.items || []).map(x => ({ k: nice(x.itemHrid),
             meta: `${nf(x.perHour, 2)} / h @ ${coin(x.coins)}`, total: coin(x.coinsPerHour),
-            tip: `${nice(x.itemHrid)} · ${nf(x.perHour, 2)} / h @ ${coin(x.coins)}${x.via ? ` · ${x.via}` : ""}` })),
+            // The row abbreviates (3K); the tooltip is exact (operator, 2026-09-21): each, per hour, per day.
+            tip: `${nice(x.itemHrid)} · ${nf(x.perHour, 2)} / h @ ${nf(x.coins)} ${Component.t("each")} · ${nf(x.coinsPerHour)} / h · ${nf(x.coinsPerHour * 24)} / ${Component.t("day")}${x.via ? ` · ${x.via}` : ""}` })),
           expenses: (p.loot?.expenses?.items || []).map(x => ({ k: nice(x.itemHrid),
             meta: `${nf(x.perHour, 2)} / h @ ${coin(x.coins)}`, total: coin(x.coinsPerHour),
-            tip: `${nice(x.itemHrid)} · ${nf(x.perHour, 2)} / h @ ${coin(x.coins)}` })),
+            tip: `${nice(x.itemHrid)} · ${nf(x.perHour, 2)} / h @ ${nf(x.coins)} ${Component.t("each")} · ${nf(x.coinsPerHour)} / h · ${nf(x.coinsPerHour * 24)} / ${Component.t("day")}` })),
           keys: p.keys ? Component.tf("{entry} entry keys · {chest} chest keys / h", { entry: nf(p.keys.entryKeysPerHour, 2), chest: nf(p.keys.chestKeysPerHour, 2) }) : "",
           incomeTotal: coin(p.incomePerHour), expensesTotal: coin(p.expensesPerHour),
           profit: coin(p.profitPerHour * 24),
