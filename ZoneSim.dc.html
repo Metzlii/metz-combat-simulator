@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=f5d70b11a40c"></script>
+<script src="./support.js?v=e1ee0826f40b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f5d70b11a40c">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e1ee0826f40b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=f5d70b11a40c">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f5d70b11a40c"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=e1ee0826f40b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e1ee0826f40b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1225,7 +1225,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=f5d70b11a40c").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=e1ee0826f40b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2614,7 +2614,15 @@ class Component extends DCLogic {
     const ps = c => (c?.cand?.players || []);
     const sum = (c, fn) => ps(c).reduce((a, p) => a + (fn(p) || 0), 0);
     const rows = [];
+    const NA = { notApplicable: true };
     const push = (label, a, b, { d = 1, lowerBetter = false, coins = false, per = "", unit = "", fmt = null } = {}) => {
+      // A side with no such figure at all (a planet's run time, a dungeon's EPH, a dungeon that never cleared)
+      // is passed as NA: shown as a dash, and the row carries no delta. A missing field is still 0, as ever.
+      if (a === NA || b === NA) {
+        const show = v => v === NA ? "\u2014" : fmt ? fmt(Number(v) || 0) : (coins ? coin(Number(v) || 0) : nf(Number(v) || 0, d)) + unit;
+        rows.push({ isRow: true, isGroup: false, indent: inGroup ? "18px" : "0", label, a: show(a), b: show(b), delta: "", pct: "", color: "var(--color-neutral-400)" });
+        return;
+      }
       const av = Number(a) || 0, bv = Number(b) || 0, delta = bv - av;
       const good = lowerBetter ? delta < 0 : delta > 0;
       // `fmt` renders a row that is not a plain number -- a clock, for the average run time.
@@ -2647,17 +2655,18 @@ class Component extends DCLogic {
       return Object.keys(p?.consumablesUsedPerHour || {}).reduce((t, k) => t + (items.find(x => x.itemHrid === k)?.coinsPerHour || 0), 0); };
     if (A && B) {
       if (grain === "totals") {
-        // Pace as the results table reads it: a dungeon's average run time (lower is better), or encounters an
-        // hour on a planet. A pair that is one dungeon and one planet has no shared pace figure, so it falls back
-        // to encounters an hour, which both sides do carry.
-        if (A.cand.isDungeon && B.cand.isDungeon)
-          push(Component.t("Average run time"), A.cand.averageRunSeconds, B.cand.averageRunSeconds,
-            { lowerBetter: true, fmt: v => this.zoneRunTime(v) });
-        else if (A.cand.isDungeon || B.cand.isDungeon)
-          push(Component.t("EPH (clears / h)"), A.cand.isDungeon ? A.cand.dungeonsCompletedPerHour : A.cand.encountersPerHour,
-            B.cand.isDungeon ? B.cand.dungeonsCompletedPerHour : B.cand.encountersPerHour, { d: 2 });
-        else push(Component.t("EPH (encounters / h)"), A.cand.encountersPerHour, B.cand.encountersPerHour, { d: 2 });
-        push(Component.t("Deaths / h"), A.cand.deathsPerHour, B.cand.deathsPerHour, { d: 2, lowerBetter: true });
+        // Pace as the results table reads it: a dungeon's average run time (lower is better), a planet's encounters
+        // an hour. Neither figure means anything for the other kind, so a pair of one dungeon and one planet shows
+        // both rows, each blank on the side it does not apply to (operator, 2026-09-21: one "EPH" row mixing
+        // clears and encounters told nobody anything).
+        const runOf = c => (c.isDungeon && c.averageRunSeconds != null ? c.averageRunSeconds : NA), ephOf = c => (c.isDungeon ? NA : c.encountersPerHour);
+        if (A.cand.isDungeon || B.cand.isDungeon)
+          push(Component.t("Average run time"), runOf(A.cand), runOf(B.cand), { lowerBetter: true, fmt: v => this.zoneRunTime(v) });
+        if (!A.cand.isDungeon || !B.cand.isDungeon)
+          push(Component.t("EPH (encounters / h)"), ephOf(A.cand), ephOf(B.cand), { d: 2 });
+        // The party's deaths are the players' summed, as the Results table has them: the candidate itself carries
+        // no deaths figure, and reading one off it showed 0.00 whatever happened.
+        push(Component.t("Deaths / h"), sum(A, p => p.deathsPerHour), sum(B, p => p.deathsPerHour), { d: 2, lowerBetter: true });
         push(Component.t("XP / h, party"), sum(A, p => p.experiencePerHour?.total), sum(B, p => p.experiencePerHour?.total), { d: 4 });
         push(Component.t("Profit / day, party"), sum(A, p => p.profitPerHour) * 24, sum(B, p => p.profitPerHour) * 24, { coins: true });
         // Cowbells are summed per player by the server; the candidate itself carries none.

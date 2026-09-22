@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="f5d70b11a40c"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="e1ee0826f40b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=f5d70b11a40c"></script>
+<script src="./support.js?v=e1ee0826f40b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f5d70b11a40c">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e1ee0826f40b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=f5d70b11a40c">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f5d70b11a40c"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=e1ee0826f40b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e1ee0826f40b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -508,6 +508,13 @@
                       <sc-if value="{{ r.noteLine }}" hint-placeholder-val="{{ false }}">
                         <div class="text-muted" style="padding-left:42px;font-size:12px;text-wrap:pretty">{{ r.noteLine }}</div>
                       </sc-if>
+                      <sc-if value="{{ r.hasPlan }}" hint-placeholder-val="{{ false }}">
+                        <div style="padding-left:42px;display:flex;flex-direction:column;gap:1px;font-size:12.5px">
+                          <sc-for list="{{ r.plan }}" as="a" hint-placeholder-count="3">
+                            <div style="display:flex;gap:6px"><span class="text-muted" style="font-variant-numeric:tabular-nums;flex:none;width:16px">{{ a.n }}</span><span style="text-wrap:pretty;font-variant-numeric:tabular-nums">{{ a.text }}</span></div>
+                          </sc-for>
+                        </div>
+                      </sc-if>
                       <sc-if value="{{ r.copy }}" hint-placeholder-val="{{ false }}">
                         <div style="padding-left:42px;font-size:12.5px;color:var(--color-accent-300);text-wrap:pretty">{{ r.copy }}</div>
                       </sc-if>
@@ -821,6 +828,8 @@
                 <li><b>The player cards share a wide window.</b> Five cards used to sit at 236 px beside empty space; they grow with the window now, and the page may be 1800 px wide.</li>
                 <li><b>Derived-stat sources and run titles in your language.</b> “Philosopher's Earrings +11” and “Critical Aura 90” are translated noun by noun with the number kept, the detail lines with them, and “Baseline — …” in the runs list.</li>
                 <li><b>The party seats itself.</b> MWI Party Export 0.5 marks who is in your party right now, read off the game's party panel, and the site seats those and benches the rest. An export without the mark seats the complete profiles in import order, never one that came back empty. A Bulwark wearer is labelled Defense.</li>
+                <li><b>The upgrade finder prices the hybrid route, and shows its working.</b> For a jump of two or more levels it now also tries buying the item at each listed level in between and enhancing the rest, which is what most players actually do, and takes the cheapest of market, enhancing, the mirror and every hybrid. A mirror's copy is bought outright at its level when one is listed, else built from +0. Every priced row now lists the steps in order — what is sold and for how much, what is bought and at what level, what is enhanced from where to where with its materials and hours, and what is mirrored — so the price can be checked line by line.</li>
+                <li><b>Comparing a planet with a dungeon shows both paces.</b> Average run time is a dungeon's figure and EPH a planet's, so the Compare table now shows both rows with a dash on the side each does not apply to, instead of one “EPH” row mixing clears an hour with encounters an hour. A dungeon that never cleared shows a dash too. The party-totals Deaths / h row now sums the players; it had read 0.00 whatever happened.</li>
                 <li><b>The loadout editor opens on the first seated player</b>, and that card now says <i>editing</i> beside the name. It used to open on whoever was imported first, which with the rail sorted seated-first could be a benched card at the bottom with a highlight that read as a stray hover.</li>
                 <li><b>MWI Party Export 0.3</b> works on a client that is not in English. It looked for the words “Edit Party” to find the party, so on 中文 it found nothing and never appeared — which is exactly the player the translation was for.</li>
               </ul>
@@ -982,7 +991,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=f5d70b11a40c");
+      const i18n = await import("./i18n.js?v=e1ee0826f40b");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1005,7 +1014,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=f5d70b11a40c");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=e1ee0826f40b");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1066,7 +1075,9 @@ class Component extends DCLogic {
   static CATALYSTS = [["none", "No catalyst"], ["catalyst", "Catalyst Of Decomposition"], ["prime", "Prime Catalyst"]];
   static UP_TEAS = [["none", "No enhancing tea"], ["enhancing", "Enhancing Tea"], ["super", "Super Enhancing Tea"], ["ultra", "Ultra Enhancing Tea"]];
   static UP_BUDGETS = [[15, "15 min"], [60, "1 h"], [120, "2 h"]];
-  static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books" };
+  static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books",
+    // The hybrid (operator, 2026-09-21): bought at an intermediate level, then enhanced the rest of the way.
+    "market+enhance": "Buy, then enhance", "market+mirror": "Buy, then mirror", "market+enhance+mirror": "Buy, then enhance + mirror" };
 
   async loadZoneMeta(client) {
     try {
@@ -1168,7 +1179,11 @@ class Component extends DCLogic {
         { count: num(cost.books), price: num(Math.round(cost.perBook)), premium: ((Number(cost.premium) || 0) * 100).toFixed(0) });
     if (Array.isArray(cost.steps) && cost.steps.length) {
       const mirrors = cost.steps.filter(s => s?.route === "mirror").length;
-      const bits = [Component.t(mirrors ? "Enhancelator model, Philosopher's Mirror where cheaper" : "Enhancelator model, enhancing the held item")];
+      const bits = [];
+      // The hybrid's purchase comes first: the level bought and what it cost after the held piece's bid.
+      if (cost.bought && cost.bought.level != null)
+        bits.push(Component.tf("bought at +{level} for {coins} (the ask, less the held piece at the bid)", { level: cost.bought.level, coins: coins(Number(cost.bought.coins) || 0) }));
+      bits.push(Component.t(mirrors ? "Enhancelator model, Philosopher's Mirror where cheaper" : "Enhancelator model, enhancing the held item"));
       if (mirrors) bits.push(Component.tf(mirrors === 1 ? "{n} Philosopher's Mirror" : "{n} Philosopher's Mirrors", { n: mirrors }));
       const p = cost.protection;
       if (p && Number(p.spares) > 0.005) bits.push(Component.tf("protected with {n} spare {item}", { n: Number(p.spares).toFixed(1), item: p.spareHrid ? Component.hridName(p.spareHrid) : "" }));
@@ -1178,6 +1193,27 @@ class Component extends DCLogic {
       return bits.join("; ");
     }
     return cost.note ? Component.t(cost.note) : "";
+  }
+  /** One action of a cost's plan as a sentence in the reader's language: sell, buy, enhance (held piece or copy), mirror. */
+  planLine(a, itemName, coin) {
+    if (!a) return "";
+    const item = itemName(a.hrid), copy = a.purpose === "copy";
+    if (a.act === "sell") return Component.tf("Sell the held {item} +{level} at the bid: {coins} back after tax", { item, level: a.level, coins: coin(a.coins) });
+    if (a.act === "buy") {
+      if (copy && a.spare) return Component.tf("For the mirror copy, a spare {item}, worth {coins} decomposed", { item, coins: coin(a.coins) });
+      return Component.tf(copy ? "For the mirror copy, buy {item} +{level} at the ask: {coins}" : "Buy {item} +{level} at the ask: {coins}", { item, level: a.level, coins: coin(a.coins) });
+    }
+    if (a.act === "enhance") {
+      const vars = { item, from: a.from, to: a.to, materials: coin(a.materialCoins), hours: (Number(a.hours) || 0).toFixed(1), time: coin(a.timeCoins) };
+      const timed = Number(a.timeCoins) > 0;
+      let line = Component.tf(copy
+        ? (timed ? "For the mirror copy, enhance {item} +{from} \u2192 +{to}: {materials} in materials, {hours} h of enhancing at {time}" : "For the mirror copy, enhance {item} +{from} \u2192 +{to}: {materials} in materials, {hours} h of enhancing")
+        : (timed ? "Enhance {item} +{from} \u2192 +{to}: {materials} in materials, {hours} h of enhancing at {time}" : "Enhance {item} +{from} \u2192 +{to}: {materials} in materials, {hours} h of enhancing"), vars);
+      if (Number(a.protects) > 0.005 && a.protectAt != null) line += " \u00b7 " + Component.tf("protected from +{at}, about {n} protects", { at: a.protectAt, n: Number(a.protects).toFixed(1) });
+      return line;
+    }
+    if (a.act === "mirror") return Component.tf("Mirror the {item} +{from} with the +{copy} copy \u2192 +{to}: {coins} for the {mirror}", { item, from: a.from, to: a.to, copy: a.copy?.level, coins: coin(a.coins), mirror: Component.hridName("/items/philosophers_mirror") });
+    return "";
   }
   /** The fill warning, by the same rule the server applies: more books needed than the feed traded recently. */
   costWarning(cost) {
@@ -1252,7 +1288,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=f5d70b11a40c");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=e1ee0826f40b");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1273,7 +1309,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=f5d70b11a40c");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=e1ee0826f40b");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1918,7 +1954,11 @@ class Component extends DCLogic {
         noteLine: this.costNote(cost),
         route: Component.t(Component.UP_ROUTES[cost.route] || cost.route || ""),
         note: this.costNote(cost),
-        copy: step?.copy ? Component.tf("make a +{level} {item} and mirror it", { level: step.copy.level, item: itemName(step.copy.hrid) }) : "",
+        // How the price is reached, one line per action, in order (operator, 2026-09-21: the route and the total
+        // did not say how the copy was obtained or that the held piece was sold).
+        hasPlan: Array.isArray(cost.plan) && cost.plan.length > 0,
+        plan: (cost.plan || []).map((a, k) => ({ n: `${k + 1}.`, text: this.planLine(a, itemName, coin) })),
+        copy: !(cost.plan || []).length && step?.copy ? Component.tf("make a +{level} {item} and mirror it", { level: step.copy.level, item: itemName(step.copy.hrid) }) : "",
         alt: cost.alternative ? Component.tf("next cheapest: {route} {coins}", { route: Component.t(Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || ""), coins: coin(cost.alternative.coins) }) : "",
         warning: this.costWarning(cost),
         // A twin carries the index of the candidate it copies — index 0 is a real one, so the test is != null.
