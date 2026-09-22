@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=2253fb704d4d"></script>
+<script src="./support.js?v=828801a30688"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=2253fb704d4d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=828801a30688">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=2253fb704d4d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=2253fb704d4d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=828801a30688">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=828801a30688"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -34,7 +34,7 @@
   <sc-if value="{{ view.setup }}" hint-placeholder-val="{{ true }}">
   <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-8);align-items:start">
     <!-- import -->
-    <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+    <div data-tour="import" style="display:flex;flex-direction:column;gap:var(--space-3)">
       <div class="field" style="margin:0">
         <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <!-- Once a party is in, the header is a button like Pricing's (operator, 2026-09-21: "the small chevron
@@ -96,7 +96,7 @@
       </sc-if>
       <!-- The queue is BUILT here and READ on the right (operator, 2026-09-21): zone, tier, hours, Add to Queue,
            the count, then the Run button. The export box above collapses once an import is in. -->
-      <div style="display:grid;grid-template-columns:minmax(0,300px) 104px auto;gap:8px;align-items:end;justify-content:start">
+      <div data-tour="queue" style="display:grid;grid-template-columns:minmax(0,300px) 104px auto;gap:8px;align-items:end;justify-content:start">
         <div class="field"><label>Zone</label>
           <dc-import name="IconPick" value="{{ zone.pickZone }}" groups="{{ zone.zoneGroups }}" on-pick="{{ zone.setZone }}"
             placeholder="Pick a zone" height="{{ 31 }}" font-size="{{ 13 }}" fallback-glyph="ph-planet" hint-size="100%,31px"></dc-import>
@@ -126,7 +126,7 @@
       <!-- The Run button sits right under Add to Queue (operator, 2026-09-21: "some people have been getting
            confused about how to start a sim"). It used to live at the foot of the page beside Account buffs, a
            long way from where the queue is built, and its gold alone was not finding it for everyone. -->
-    <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
+    <div data-tour="run" style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
         <!-- ZONE-75: people were not finding how to start a run, so the button wears the brand's gold
              (accent-2, the colour of the mark in the header) instead of sharing the accent every other control
@@ -216,7 +216,7 @@
     <div style="display:grid;grid-template-columns:288px minmax(0,1fr);gap:var(--space-6);align-items:start;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
 
       <div style="display:flex;flex-direction:column;gap:var(--space-3);min-width:0">
-      <div style="display:flex;flex-direction:column;gap:4px">
+      <div data-tour="party" style="display:flex;flex-direction:column;gap:4px">
         <div style="display:flex;gap:8px;align-items:baseline">
           <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Party</div>
           <div class="text-muted" style="font-size:12px;margin-left:auto;flex:none">{{ zone.editor.railNote }}</div>
@@ -243,7 +243,7 @@
         </div>
         <button class="btn btn-ghost" style="padding:2px 6px;font-size:12.5px;margin-top:4px" title="Put every player back to the imported loadout" onClick="{{ zone.editor.revertParty }}">Reset whole party</button>
       </div>
-      <div style="display:flex;flex-direction:column;gap:6px;min-width:0;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+      <div data-tour="derived" style="display:flex;flex-direction:column;gap:6px;min-width:0;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
         <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:baseline;width:100%" onClick="{{ zone.editor.toggleDerived }}">
           <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.derivedCaret }} Derived stats</span>
           <span class="text-muted" style="font-size:12px;margin-left:auto;flex:none">{{ zone.editor.derivedSummary }}</span>
@@ -324,7 +324,7 @@
       </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:var(--space-3);min-width:0">
+      <div data-tour="editor" style="display:flex;flex-direction:column;gap:var(--space-3);min-width:0">
         <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
           <span style="font-size:16px">{{ zone.editor.name }}</span>
           <span class="text-muted" style="font-size:12.5px">{{ zone.editor.editedNote }}</span>
@@ -595,7 +595,7 @@
   </sc-if>
 
   <!-- run options -->
-  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:var(--space-4) var(--space-6);align-items:start;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
+  <div data-tour="pricing" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(272px,1fr));gap:var(--space-4) var(--space-6);align-items:start;padding-top:var(--space-2);border-top:1px solid var(--color-divider)">
     <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
       <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="Set how loot, consumables, keys and capes are priced" onClick="{{ zone.togglePrice }}">Pricing {{ zone.priceCaret }}</button>
       <sc-if value="{{ zone.priceOpen }}" hint-placeholder-val="{{ false }}">
@@ -1225,7 +1225,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=2253fb704d4d").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=828801a30688").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1234,6 +1234,8 @@ class Component extends DCLogic {
     // from outside -- an upgrade or a levelling plan is an errand in the game, but a trigger value is a number
     // this page owns, and retyping twelve of them by hand is how they get mistyped.
     globalThis.addEventListener?.("zone-apply-triggers", this._onApplyTriggers = e => this.applyTunedTriggers(e.detail?.changes || []));
+    // The walkthrough's demo party goes when the guide closes (Zones.dc.html asks through this event).
+    globalThis.addEventListener?.("zone-demo-clear", this._onDemoClear = () => this.clearZoneParty());
   }
   // ——— The session, across a refresh ———
   // A refresh used to cost the imported party, every run of the session and the whole editor state, none of
@@ -1241,6 +1243,13 @@ class Component extends DCLogic {
   // crash, or closing the tab mid-session) costs nothing, short enough that tomorrow's session starts clean
   // rather than on a party whose gear has since changed in the game.
   static ZONE_SESSION_KEY = "gts.zone.session.v1";
+  /** Clear party: the paste, the party, its edits, the results and the baseline all go, and the session with them. */
+  clearZoneParty() {
+    try { localStorage.removeItem(Component.ZONE_SESSION_KEY); } catch {}
+    this._zoneAutoText = null;
+    this.setState({ zoneText: "", zoneNotExport: false, zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
+      zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneRestoredAt: null });
+  }
   // Three days, not twelve hours: the party in a session is pasted work, and the page dropped it when a stored
   // session's stamp aged out between two reloads (2026-09-21, the operator's preview). The stamp is now refreshed
   // on every successful restore, so a session that keeps being opened never ages out at all.
@@ -1290,7 +1299,8 @@ class Component extends DCLogic {
   }
   componentDidUpdate() { this.queueZoneSession(); }
   componentWillUnmount() {
-    if (this._onApplyTriggers) globalThis.removeEventListener?.("zone-apply-triggers", this._onApplyTriggers); clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); clearInterval(this._zoneTicker); this.writeZoneSession(); }
+    if (this._onApplyTriggers) globalThis.removeEventListener?.("zone-apply-triggers", this._onApplyTriggers);
+    if (this._onDemoClear) globalThis.removeEventListener?.("zone-demo-clear", this._onDemoClear); clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); clearInterval(this._zoneTicker); this.writeZoneSession(); }
   // The run settings — hours, seed, server lag, wave delay, the pricing block and whether Advanced is open —
   // describe how this visitor measures, not what they are measuring, so they outlive a refresh. Only these keys
   // are read back: an unknown key in storage from an older build is ignored rather than restored into state.
@@ -3663,10 +3673,7 @@ class Component extends DCLogic {
 
       // The box empties with the party. Leaving the paste behind would strand it: it has already been read, so
       // nothing would read it again, and there is no longer a button to force it.
-      clearParty: () => { try { localStorage.removeItem(Component.ZONE_SESSION_KEY); } catch {}
-        this._zoneAutoText = null;
-        set({ zoneText: "", zoneNotExport: false, zoneParty: [], zoneBase: [], zoneActive: null, zoneWarnings: [], zoneResult: null, zoneFormat: null,
-          zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneRestoredAt: null }); },
+      clearParty: () => this.clearZoneParty(),
       hasParty: party.length > 0, showScriptBadge: !s.zoneScriptSeen, scriptUrl: Component.PARTY_SCRIPT_URL, partyCount: seated.length,
       // The paste box is shown until an import lands, then folds to its header; the caret brings it back.
       exportShown: party.length === 0 || !!s.zoneExportOpen,
