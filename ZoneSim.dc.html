@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=254878481859"></script>
+<script src="./support.js?v=4401194718d0"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=254878481859">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4401194718d0">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=254878481859">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=254878481859"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=4401194718d0">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4401194718d0"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -656,7 +656,9 @@
         <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffDrop }}" onInput="{{ zone.setBuffDrop }}">
         <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community drop quantity bonus this level gives every player">{{ zone.buffDropPct }}</span>
       </div>
-      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.wisdom }}" onChange="{{ zone.toggleWisdom }}">{{ zone.wisdomLabel }}</label>
+      <sc-for list="{{ zone.scrolls }}" as="sc" hint-placeholder-count="7">
+        <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px" title="{{ sc.tip }}"><input type="checkbox" checked="{{ sc.on }}" onChange="{{ sc.toggle }}">{{ sc.label }}</label>
+      </sc-for>
       <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.mooPass }}" onChange="{{ zone.toggleMoo }}">{{ zone.mooLabel }}</label>
       </sc-if>
     </div>
@@ -1095,6 +1097,18 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;client&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;any&quot;},&quot;active&quot;:{&quot;editor&quot;:null,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;zoneOnly&quot;:{&quot;editor&quot;:null,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;setup&quot;,&quot;results&quot;,&quot;compare&quot;,&quot;saved&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;\&quot;all\&quot; | \&quot;setup\&quot; | \&quot;results\&quot; | \&quot;compare\&quot; | \&quot;saved\&quot;&quot;,&quot;section&quot;:&quot;Mount&quot;},&quot;onResults&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;() =&gt; void&quot;},&quot;onParty&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(players: any[]) =&gt; void&quot;}}">
 class Component extends DCLogic {
+  // The combat scrolls the Account buffs panel switches: [accountBuffs key, the scroll's item hrid, English name,
+  // size if the catalog is not loaded]. The server's ACCOUNT_BUFFS is the authority; this is only the order and
+  // the fallback wording.
+  static ZONE_SCROLLS = [
+    ["personalWisdom", "/items/seal_of_wisdom", "Scroll Of Wisdom", 0.2],
+    ["personalDamage", "/items/seal_of_damage", "Scroll Of Damage", 0.08],
+    ["personalAttackSpeed", "/items/seal_of_attack_speed", "Scroll Of Attack Speed", 0.15],
+    ["personalCastSpeed", "/items/seal_of_cast_speed", "Scroll Of Cast Speed", 0.15],
+    ["personalCriticalRate", "/items/seal_of_critical_rate", "Scroll Of Critical Rate", 0.1],
+    ["personalCombatDrop", "/items/seal_of_combat_drop", "Scroll Of Combat Drop", 0.15],
+    ["personalRareFind", "/items/seal_of_rare_find", "Scroll Of Rare Find", 0.6],
+  ];
   // Planets & Dungeons, whole. Two documents mount this: the full application beside its other tabs, and the
   // public zone document (Zones.dc.html) on its own — so a zone feature written here reaches both and is never
   // written twice. Every piece of zone state lives here, and the only way out is the seven zone methods on the
@@ -1118,7 +1132,7 @@ class Component extends DCLogic {
     zoneHours: 1000, zoneSeed: 1, zoneWaveMs: "", zoneAdv: false, zonePriceOpen: false, zoneBuffsOpen: false, zonePricing: {}, zoneConcOverride: false,
     // Both community buffs default to level 20 — 0.2 + 0.005 × 19 = 0.295 each, which is what the live
     // websocket capture shows for drop quantity too. Local storage overrides these once the operator edits them.
-    zoneBuffs: { communityExperience: 0.295, communityDropQuantity: 0.295, personalWisdom: false, mooPass: true, _v: 2 },
+    zoneBuffs: { communityExperience: 0.295, communityDropQuantity: 0.295, personalWisdom: false, personalDamage: false, personalAttackSpeed: false, personalCastSpeed: false, personalCriticalRate: false, personalCombatDrop: false, personalRareFind: false, mooPass: true, _v: 2 },
     zoneRunning: false, zoneProgress: null, zoneResult: null, zoneRunError: null, zoneOpen: 0, zoneSort: { key: "queued", dir: 1 },
     zoneLimits: null,
     // LOAD-1: the editor's own state. zoneBase is the imported party verbatim — the baseline every revert and
@@ -1259,7 +1273,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=254878481859").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=4401194718d0").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1422,7 +1436,7 @@ class Component extends DCLogic {
   zoneAcctDef(key, fallback) {
     const served = (this.state.zoneCatalog?.accountBuffs || []).find(b => b.key === key);
     return { value: served?.value ?? fallback, fromGameData: served ? served.fromGameData !== false : null,
-      name: served?.name || null };
+      name: served?.name || null, itemName: served?.itemName || null };
   }
   zoneBuffFraction(key, level) { const d = this.zoneBuffDef(key);
     const L = Math.max(0, Math.min(d.maxLevel, Math.round(Number(level) || 0)));
@@ -4013,10 +4027,16 @@ class Component extends DCLogic {
       setBuffXp: e => this.setZoneBuffs({ communityExperience: this.zoneBuffFraction("communityExperience", e.target.value) }),
       buffDrop: this.zoneBuffLevel("communityDropQuantity", bf.communityDropQuantity),
       setBuffDrop: e => this.setZoneBuffs({ communityDropQuantity: this.zoneBuffFraction("communityDropQuantity", e.target.value) }),
-      wisdom: !!bf.personalWisdom, toggleWisdom: () => this.setZoneBuffs({ personalWisdom: !bf.personalWisdom }),
+      // The Labyrinth's combat scrolls (2026-09-23), one switch each: the size and the scroll's name come from
+      // the catalog (the game data); the fallbacks only cover a page whose catalog has not arrived yet.
+      scrolls: Component.ZONE_SCROLLS.map(([key, itemHrid, fallbackName, fallbackValue]) => {
+        const d = this.zoneAcctDef(key, fallbackValue);
+        const name = Component.t(itemHrid) !== itemHrid ? Component.t(itemHrid) : (d.itemName || fallbackName);
+        return { key, on: !!bf[key], toggle: () => this.setZoneBuffs({ [key]: !bf[key] }),
+          label: Component.tf("{name} (+{pct}%)", { name, pct: pct(d.value) }),
+          tip: Component.t("A 30-minute Labyrinth scroll, kept up for the whole run") };
+      }),
       mooPass: !!bf.mooPass, toggleMoo: () => this.setZoneBuffs({ mooPass: !bf.mooPass }),
-      wisdomLabel: (() => { const d = this.zoneAcctDef("personalWisdom", 0.2);
-        return Component.tf("Scroll Of Wisdom (+{pct}%)", { pct: pct(d.value) }); })(),
       mooLabel: (() => { const d = this.zoneAcctDef("mooPass", 0.05);
         return Component.tf("Moo Pass (+{pct}% XP)", { pct: pct(d.value) }); })(),
       buffMax: String(this.zoneBuffDef("communityExperience").maxLevel),
