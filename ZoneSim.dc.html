@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=cdd9d6d2b34c"></script>
+<script src="./support.js?v=d10fe2dc4912"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=cdd9d6d2b34c">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d10fe2dc4912">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=cdd9d6d2b34c">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=cdd9d6d2b34c"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d10fe2dc4912">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d10fe2dc4912"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -62,7 +62,7 @@
         <sc-if value="{{ zone.showScriptBadge }}" hint-placeholder-val="{{ true }}">
           <div style="display:flex;gap:8px;align-items:flex-start;margin-top:4px;padding:7px 10px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 22%, transparent);font-size:12.5px;text-wrap:pretty">
             <svg viewBox="0 0 24 24" width="14" height="14" fill="none" aria-hidden="true" style="flex:none;margin-top:2px;color:var(--color-accent-300)"><path d="M12 3v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path><path d="M7.5 10.5 12 15l4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path><path d="M4.5 18.5h15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path></svg>
-            <div>Need an export? Install <a href="{{ zone.scriptUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent);font-weight:600;text-decoration:underline;text-underline-offset:2px">MWI Party Export ↗</a>, a userscript for the game — open each party member's profile once, then paste what it gives you below.</div>
+            <div>Need an export? Install <a href="{{ zone.scriptUrl }}" target="_blank" rel="noopener" style="color:var(--color-accent);font-weight:600;text-decoration:underline;text-underline-offset:2px">Metz Combat Sim Helper ↗</a>, a userscript for the game — open each party member's profile once, then paste what it gives you below.</div>
           </div>
         </sc-if>
         <textarea id="zone-export-paste" class="input" rows="5" placeholder="Paste one character export, or a whole team" style="font-size:13px;line-height:1.45;resize:vertical;margin-top:4px" value="{{ zone.text }}" onInput="{{ zone.setText }}"></textarea>
@@ -329,10 +329,12 @@
           <span style="font-size:16px">{{ zone.editor.name }}</span>
           <span class="text-muted" style="font-size:12.5px">{{ zone.editor.editedNote }}</span>
           <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;margin-left:auto;flex:none" onClick="{{ zone.editor.revertPlayer }}">Reset player</button>
+          <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;flex:none" title="{{ zone.editor.sendTitle }}" onClick="{{ zone.editor.sendToGame }}">Send to game</button>
           <select class="input" style="min-height:27px;padding:1px 5px;font-size:12.5px;width:auto;flex:none" title="Copy another player's gear, abilities and consumables onto this one" value="" onChange="{{ zone.editor.doCopy }}">
             <option value="">Copy loadout from…</option>
             <sc-for list="{{ zone.editor.copyOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
           </select>
+          <sc-if value="{{ zone.editor.hasSendNote }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:12px;flex-basis:100%;text-wrap:pretty">{{ zone.editor.sendNote }}</span></sc-if>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
@@ -1075,7 +1077,7 @@ class Component extends DCLogic {
     zoneActive: null,
     // Pirate Cove T2 is the board a party reaches for first, so every zone picker opens there rather than on
     // an empty select. An import that names its own zone still wins.
-    zoneList: null, zoneListError: null, zonePick: "/actions/combat/pirate_cove", zoneTier: 2, zoneCands: [], zoneTasks: {},
+    zoneList: null, zoneListError: null, zonePick: "/actions/combat/pirate_cove", zoneTier: 2, zoneCands: [], zoneTasks: {}, zoneSendNote: null,
     // Solo encounters (maxPartySize 1) are the long tail of the zone list and never what a party sims,
     // so the dropdown hides them until asked. They stay in the task-monster select regardless.
     zoneShowSingles: false,
@@ -1162,7 +1164,7 @@ class Component extends DCLogic {
   }
   // What the import is called in the status line. The detector's names are for code; these are for people,
   // and "party-export export" is why the suffix is baked in per entry rather than appended.
-  static FORMAT_LABEL = { "party-export": "MWI Party Export", toolasha: "Toolasha export", kernel: "kernel export", optimizer: "optimizer export" };
+  static FORMAT_LABEL = { "party-export": "Metz Combat Sim Helper", toolasha: "Toolasha export", kernel: "kernel export", optimizer: "optimizer export" };
   // The script runs on the game's pages, so this one cannot see it installed. What it CAN see is an import the
   // script made: only it writes a character's `skilling` block. Zones.dc.html hides the header link on the same
   // key, so one import retires both prompts in this browser, and a party pasted from another simulator retires
@@ -1225,7 +1227,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=cdd9d6d2b34c").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=d10fe2dc4912").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2039,6 +2041,48 @@ class Component extends DCLogic {
         list[k] = row; }
       t[hrid] = list;
       p.loadout.abilityTriggers = t; });
+  }
+  /**
+   * One player's loadout to the game, so the changes made here can be set up in a loadout there. The MWI Party
+   * Export script runs on this page as well as in the game: the page writes the loadout into a JSON node and
+   * fires an event, the script stores it for the game and marks the node. Text in the DOM crosses the userscript
+   * sandbox where an event's detail may not, which is why the loadout travels in a node and not on the event.
+   * Without the script (the root carries no build tag, or nothing marks the node) the JSON goes to the clipboard
+   * instead: the script's panel in the game takes it as a paste.
+   */
+  zoneSendToGame(i) {
+    const s = this.state, p = (s.zoneParty || [])[i];
+    if (!p) return;
+    const COMBAT = "/action_types/combat";
+    const name = p.record?.name || "";
+    const pretty = h => String(h || "").split("/").pop().replace(/_refined$/, "").split("_").map(w => (w ? w[0].toUpperCase() + w.slice(1) : "")).join(" ") + (/_refined$/.test(String(h || "")) ? " ★" : "");
+    const slotMap = this.zoneSlotMap(s.zoneCatalog);
+    const conList = kind => ((p.loadout?.[kind] || {})[COMBAT] || []).filter(e => e && e.itemHrid)
+      .map(e => ({ itemHrid: e.itemHrid, name: pretty(e.itemHrid), ...(e.triggers !== undefined ? { triggers: e.triggers } : {}) }));
+    const sent = { name, at: new Date().toISOString(), from: "metz-combat-simulator", loadout: {
+      equipment: (p.loadout?.equipment || []).filter(e => e && e.itemHrid)
+        .map(e => ({ slot: e.itemLocationHrid || (slotMap && slotMap.get(e.itemHrid)) || "", itemHrid: e.itemHrid, enhancementLevel: Number(e.enhancementLevel) || 0, name: pretty(e.itemHrid) })),
+      abilities: (p.loadout?.abilities || []).filter(a => a && a.hrid).map(a => ({ hrid: a.hrid, level: Number(a.level) || 1, name: pretty(a.hrid) })),
+      abilityTriggers: p.loadout?.abilityTriggers || {},
+      food: conList("food"), drinks: conList("drinks") } };
+    let node = document.getElementById("zone-loadout-to-game");
+    if (!node) { node = document.createElement("script"); node.type = "application/json"; node.id = "zone-loadout-to-game"; document.body.appendChild(node); }
+    delete node.dataset.stored;
+    node.textContent = JSON.stringify(sent);
+    const note = text => this.setState({ zoneSendNote: { name, text } });
+    note(Component.t("Sending…"));
+    document.dispatchEvent(new CustomEvent("zone-loadout-to-game"));
+    const started = Date.now();
+    const poll = () => {
+      const stored = node.dataset.stored;
+      if (stored === "ok") { note(Component.t("Sent to the game. On the game's My Party screen, press Set up this loadout in the script's panel.")); return; }
+      if (stored !== "error" && Date.now() - started < 1500) { setTimeout(poll, 100); return; }
+      const json = JSON.stringify(sent, null, 1);
+      const copy = navigator.clipboard && navigator.clipboard.writeText ? navigator.clipboard.writeText(json) : Promise.reject(new Error("no clipboard"));
+      copy.then(() => note(Component.t("Metz Combat Sim Helper was not seen on this page: install it and reload. The loadout was copied instead, and the script's panel in the game has a paste box for it.")),
+        () => note(Component.t("Metz Combat Sim Helper was not seen on this page: install it and reload.")));
+    };
+    setTimeout(poll, 100);
   }
   zoneRevert(scope, i, arg) {
     this.setState(s => { const base = s.zoneBase || [], party = (s.zoneParty || []).slice();
@@ -3106,6 +3150,10 @@ class Component extends DCLogic {
         ? (dirtyCount(i) === 1 ? Component.t("1 section changed from the import — the loadout editor is below.") : Component.tf("{n} sections changed from the import — the loadout editor is below.", { n: dirtyCount(i) }))
         : Component.t("The loadout editor is below."),
       revertPlayer: () => this.zoneRevert("player", i), revertParty: () => this.zoneRevert("party"),
+      sendToGame: () => this.zoneSendToGame(i),
+      sendTitle: Component.t("Sends this character's gear, abilities, food, drinks and trigger lists to the Metz Combat Sim Helper script in the game, which walks you through setting them up in a loadout there."),
+      sendNote: s.zoneSendNote && s.zoneSendNote.name === (p.record?.name || "") ? s.zoneSendNote.text : "",
+      hasSendNote: !!(s.zoneSendNote && s.zoneSendNote.name === (p.record?.name || "")),
       copyOpts: party.map((q, k) => ({ value: String(k), label: q.record?.name || Component.tf("Player {n}", { n: k + 1 }) })).filter((_, k) => k !== i),
       doCopy: e => { const k = Number(e.target.value); if (!Number.isNaN(k)) this.zoneCopyLoadout(i, k); },
       sec: { equipment: sec("equipment", "Equipment", changed.has("equipment")),
