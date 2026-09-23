@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=440aafad2d4d"></script>
+<script src="./support.js?v=acb632775ac2"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=440aafad2d4d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=acb632775ac2">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=440aafad2d4d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=440aafad2d4d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=acb632775ac2">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=acb632775ac2"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -552,7 +552,7 @@
 
         <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
           <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;width:100%" onClick="{{ zone.editor.sec.buffs.toggle }}">
-            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.sec.buffs.caret }} Guild shrine</span>
+            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.sec.buffs.caret }} Guild shrine &amp; achievements</span>
             <sc-if value="{{ zone.editor.sec.buffs.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.sec.buffs.badge }}</span></sc-if>
           </button>
           <sc-if value="{{ zone.editor.sec.buffs.open }}" hint-placeholder-val="{{ false }}">
@@ -573,6 +573,15 @@
                     <input class="input" type="number" min="0" max="{{ bf.max }}" step="1" title="{{ bf.tip }}" style="min-height:27px;padding:1px 5px;font-size:12.5px;width:56px;font-variant-numeric:tabular-nums;flex:none" value="{{ bf.value }}" onInput="{{ bf.set }}">
                   </div>
                 </sc-for>
+              </div>
+              <div style="display:flex;gap:6px 12px;align-items:baseline;flex-wrap:wrap;font-size:12.5px" title="{{ zone.editor.achievements.tip }}">
+                <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Achievements</span>
+                <sc-if value="{{ zone.editor.achievements.has }}" hint-placeholder-val="{{ true }}">
+                  <sc-for list="{{ zone.editor.achievements.tiers }}" as="at" hint-placeholder-count="3">
+                    <span style="display:inline-flex;gap:4px;align-items:baseline;white-space:nowrap" title="{{ at.tip }}"><span style="color:{{ at.color }}">{{ at.mark }}</span><span class="text-muted">{{ at.name }}</span><span class="text-muted" style="font-variant-numeric:tabular-nums;font-size:11.5px">{{ at.count }}</span></span>
+                  </sc-for>
+                </sc-if>
+                <sc-if value="{{ zone.editor.achievements.none }}" hint-placeholder-val="{{ false }}"><span class="text-muted">{{ zone.editor.achievements.note }}</span></sc-if>
               </div>
             </div>
           </sc-if>
@@ -1227,7 +1236,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=440aafad2d4d").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=acb632775ac2").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2897,7 +2906,7 @@ class Component extends DCLogic {
       revert: () => this.zoneRevert(key, i) });
     if (!p) return { has: false, rail: [], slots: [], levels: [], abilities: [], consumables: [], rooms: [], buffs: [],
       derived: [], sec: { equipment: sec("equipment", "Equipment"), levels: sec("levels", "Levels"), abilities: sec("abilities", "Abilities"),
-        consumables: sec("consumables", "Food & drinks"), house: sec("house", "House rooms"), buffs: sec("buffs", "Guild shrine"),
+        consumables: sec("consumables", "Food & drinks"), house: sec("house", "House rooms"), buffs: sec("buffs", "Guild shrine & achievements"),
         task: sec("task", "Task monster") } };
     const abSig = (q, k2) => { const x = (q?.loadout?.abilities || [])[k2];
       return x && x.hrid ? `${x.hrid}@${Number(x.level) || 1}@${trigSig((q?.loadout?.abilityTriggers || {})[x.hrid])}` : ""; };
@@ -3161,7 +3170,7 @@ class Component extends DCLogic {
         abilities: sec("abilities", "Abilities", changed.has("abilities")),
         consumables: sec("consumables", "Food & drinks", changed.has("consumables")),
         house: sec("house", "House rooms", changed.has("house")),
-        buffs: sec("buffs", "Guild shrine", changed.has("buffs")),
+        buffs: sec("buffs", "Guild shrine & achievements", changed.has("buffs")),
         task: sec("task", "Task monster") },
       // A slot belongs to one player: their own item heads the list, then the rest of the catalog for that slot.
       slots: slotDefs.map(sd => { const cur = eqOf(p, sd.hrid), was = eqOf(b, sd.hrid);
@@ -3299,6 +3308,25 @@ class Component extends DCLogic {
           assumedTip: !inf ? "" : inferredFrom[bd.key] ? Component.tf("Not in this export — read from {who}'s", { who: inferredFrom[bd.key] }) : Component.t("Nobody in the party carries shrine levels — 0, not a guess"),
           dirty: (own[bd.key] ?? null) !== (b?.record?.guildCombatBuffLevels?.[bd.key] ?? null),
           set: e => this.zoneSetBuff(i, bd.key, e.target.value) }; }),
+      // The achievement tiers the import summarised (operator, 2026-09-23): which of the three combat tiers apply,
+      // how many of each tier's achievements are unlocked, and the missing names on hover. Display only -- the
+      // buffs themselves were folded into combatBuffs at import and the game decides what is unlocked.
+      achievements: (() => {
+        const tiers = Array.isArray(p.record?.achievementTiers) ? p.record.achievementTiers : null;
+        if (!tiers) return { has: false, none: true, tiers: [], tip: "", note: Component.t("Not in this export — no achievement tier buffs are applied") };
+        // The three tier buffs are percentages in the game's own wording (+2% wisdom, +2% rare find, +2% damage),
+        // whether the data stores them as a ratio or as a flat 0.02, so both print as a percent here.
+        const boost = t => { const v = (Number(t.ratioBoost) || 0) + (Number(t.flatBoost) || 0); return v ? `+${nf(v * 100, 1)}%` : ""; };
+        const rows = tiers.map(t => {
+          const name = (h => { const w = Component.t(h); return w !== h ? w : t.name; })(t.hrid);
+          const what = `${boost(t)} ${nice(t.buffTypeHrid)}`.trim();
+          return { name, mark: t.complete ? "✓" : "✗", color: t.complete ? "var(--color-accent-300)" : "var(--color-text-muted)",
+            count: Component.tf("{n} of {m}", { n: t.unlocked, m: t.total }),
+            tip: t.complete ? Component.tf("{tier}: complete — {what} applies", { tier: name, what })
+              : Component.tf("{tier}: {n} of {m} unlocked — {what} needs all of them. Missing: {list}", { tier: name, n: t.unlocked, m: t.total, what, list: t.missing.join(", ") }) };
+        });
+        return { has: true, none: false, tiers: rows, note: "", tip: Component.t("Read from the export; the game decides what is unlocked") };
+      })(),
       // `format` is the server's rendering hint; sources sum to the total exactly, so they are shown as-is.
       // `percent` carries the kernel's own ratio — 0.1068 is 10.68% — because that is the number the
       // simulation multiplies by, and pre-rounding it would break the promise that sources sum to the total.
