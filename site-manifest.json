@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-23T03:30:07.552Z",
- "commit": "ad078e1",
+ "builtAt": "2026-09-23T04:23:33.800Z",
+ "commit": "7e5074b",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 49,
-  "bytes": 17984908,
-  "gzip": 3123242
+  "bytes": 17987066,
+  "gzip": 3123988
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -50,8 +50,8 @@
    "gzip": 3779
   },
   "index.html": {
-   "bytes": 238226,
-   "gzip": 63921
+   "bytes": 240384,
+   "gzip": 64685
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -59,7 +59,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1480
+   "gzip": 1476
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3647087,
@@ -115,7 +115,7 @@
   },
   "server/lootValue.mjs": {
    "bytes": 7712,
-   "gzip": 3189
+   "gzip": 3187
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -123,7 +123,7 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 3704,
-   "gzip": 1388
+   "gzip": 1386
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9069,
@@ -143,15 +143,15 @@
   },
   "server/zoneOptimize.mjs": {
    "bytes": 17256,
-   "gzip": 6677
+   "gzip": 6676
   },
   "server/zoneSim.mjs": {
    "bytes": 12065,
-   "gzip": 4773
+   "gzip": 4772
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 15029,
-   "gzip": 6058
+   "gzip": 6057
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -183,27 +183,27 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 4864,
-   "gzip": 1949
+   "gzip": 1948
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 743
+   "gzip": 742
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 146
+   "gzip": 145
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 217
+   "gzip": 215
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2028
+   "gzip": 2027
   },
   "ZoneSim.dc.html": {
    "bytes": 339638,
-   "gzip": 88379
+   "gzip": 88378
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
