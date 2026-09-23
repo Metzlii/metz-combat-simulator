@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="acb632775ac2"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="254878481859"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=acb632775ac2"></script>
+<script src="./support.js?v=254878481859"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=acb632775ac2">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=254878481859">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=acb632775ac2">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=acb632775ac2"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=254878481859">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=254878481859"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -315,6 +315,7 @@
                       <input class="input" type="number" min="0" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.rateM }}" onChange="{{ up.setRateM }}">
                     </div>
                     <label style="display:flex;gap:7px;align-items:center;font-size:13px"><input type="checkbox" checked="{{ up.blessed }}" onChange="{{ up.toggleBlessed }}">Blessed Tea</label>
+                    <label style="display:flex;gap:7px;align-items:center;font-size:13px" title="{{ up.championTip }}"><input type="checkbox" checked="{{ up.champion }}" onChange="{{ up.toggleChampion }}">Champion achievement tier</label>
                     <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
                       <span class="text-muted" style="font-size:12.5px">Speed pieces</span>
                       <sc-if value="{{ up.canAddSpeed }}" hint-placeholder-val="{{ true }}">
@@ -876,6 +877,8 @@
             <div>
               <div style="text-wrap:pretty"><b>1.0.6</b></div>
               <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Champion achievements in enhancement costs.</b> The Enhancer panel has a Champion achievement tier tick, on for the professional enhancer: every Champion-tier achievement unlocked is +0.2% enhancing success in the game, added beside the tool's bonus the way Star's MWI Enhancing Prosperity does it (Enhancelator never modelled it). A player's own cape chain reads their tier from their export. On a +0 to +12 chain it is about 2% fewer attempts.</li>
+                <li><b>Damage taken, by what dealt it.</b> A new section on each player's results card, under Damage by source: a row per monster with its share of what landed (a monster's hits and its damage over time together), thorns and retaliation from the player's own hits, then the Insanity sacrifice, what was aimed at the player before evasion and armour, and the healing received. The Compare tab has the same rows as a grain. The kernel now keeps this split, so runs made before this build show the section empty.</li>
                 <li><b>Achievements in the loadout editor.</b> The Guild shrine section is now Guild shrine &amp; achievements, with a line for the three tiers that give combat buffs (Novice +2% wisdom, Veteran +2% rare find, Elite +2% damage): a tick where every achievement in the tier is unlocked and the buff applies, the count otherwise, and the missing achievements on hover.</li>
                 <li><b>The walkthrough card stays on screen.</b> On a narrow window a longer caption could run past the bottom edge; each step now measures the card as drawn and scrolls the page by exactly the overflow, so Next always shows the whole card.</li>
                 <li><b>Send to game.</b> A button in the loadout editor hands one character's gear, abilities, food, drinks and trigger lists to the Metz Combat Sim Helper script (until now named MWI Party Export), which then offers <b>Set up this loadout</b> on the game's My Party screen: a helper walks you through the Loadouts screen step by step, outlining the control to click and filling in each Combat Triggers dialog. It never clicks a slot, a picker item, Create, Equip or Save for you. Without the script on this page the loadout is copied instead, and the script's panel in the game has a paste box for it.</li>
@@ -1085,7 +1088,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=acb632775ac2");
+      const i18n = await import("./i18n.js?v=254878481859");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1108,7 +1111,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=acb632775ac2");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=254878481859");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1142,7 +1145,7 @@ class Component extends DCLogic {
     budgetMinutes: 15, hours: 168, seeds: 5, steps: 1, abilityLevels: 5, finalists: 5,
     includePouch: false, includeCharms: false, bookPremium: 0.2,
     // The operator's baseline. zoneLimits().upgrades carries the served version and replaces every field here.
-    enhancer: { level: 145, tool: { hrid: "/items/celestial_enhancer", level: 18 }, tea: "ultra", blessed: true, pouchLevel: 14, observatory: 8,
+    enhancer: { level: 145, tool: { hrid: "/items/celestial_enhancer", level: 18 }, tea: "ultra", blessed: true, champion: true, pouchLevel: 14, observatory: 8,
       // How a cape is protected while enhancing. A cape protects only with capes of its own kind, and no cape
       // can be bought — so the kernel's "cheapest sibling at its market price" is a price nobody can pay. What
       // the operator has is a number of spares: this many protects spend them, every protect after that is a
@@ -1401,7 +1404,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=acb632775ac2");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=254878481859");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1422,7 +1425,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=acb632775ac2");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=254878481859");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2389,7 +2392,7 @@ class Component extends DCLogic {
           toggle: () => this.setState(st => ({ upSec: { ...st.upSec, [k]: !st.upSec?.[k] } })) }])); })(),
       enhEditable: !v("market"),
       enhSummary: v("market") ? Component.t("priced by the market alone \u2014 no enhancing")
-        : Component.tf("enhancing {level} \u00b7 {tool} +{toolLevel} \u00b7 {tea}{blessed} \u00b7 pouch +{pouch} \u00b7 observatory {obs} \u00b7 {capes}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level, tea, blessed: enh.blessed ? Component.t(" \u00b7 blessed") : "", pouch: enh.pouchLevel, obs: enh.observatory, capes: (Number(enh.capeProtections) || 0) > 0 ? Component.tf("{n} protection capes", { n: nf(Number(enh.capeProtections)) }) : Component.t("capes on mirrors") }) + ((Number(enh.ratePerHour) || 0) > 0 ? ` \u00b7 ${coin(Number(enh.ratePerHour))}/h` : ""),
+        : Component.tf("enhancing {level} \u00b7 {tool} +{toolLevel} \u00b7 {tea}{blessed}{champion} \u00b7 pouch +{pouch} \u00b7 observatory {obs} \u00b7 {capes}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level, tea, blessed: enh.blessed ? Component.t(" \u00b7 blessed") : "", champion: enh.champion ? Component.t(" \u00b7 champion") : "", pouch: enh.pouchLevel, obs: enh.observatory, capes: (Number(enh.capeProtections) || 0) > 0 ? Component.tf("{n} protection capes", { n: nf(Number(enh.capeProtections)) }) : Component.t("capes on mirrors") }) + ((Number(enh.ratePerHour) || 0) > 0 ? ` \u00b7 ${coin(Number(enh.ratePerHour))}/h` : ""),
       market: !!v("market"), toggleMarket: () => set({ market: !v("market") }),
       enhLevel: String(enh.level), setEnhLevel: e => this.setEnh({ level: Number(e.target.value) || 0 }),
       enhTool: enh.tool.hrid, setEnhTool: e => this.setEnhTool({ hrid: e.target.value }),
@@ -2398,6 +2401,10 @@ class Component extends DCLogic {
       tea: enh.tea, setTea: e => this.setEnh({ tea: e.target.value }),
       teaOpts: Component.UP_TEAS.map(([value, label]) => ({ value, label: Component.t(label) })),
       blessed: !!enh.blessed, toggleBlessed: () => this.setEnh({ blessed: !enh.blessed }),
+      // The Champion tier's buff is +0.2% enhancing success. A player's own cape chain reads their tier from the
+      // export instead; this is the professional enhancer's.
+      champion: !!enh.champion, toggleChampion: () => this.setEnh({ champion: !enh.champion }),
+      championTip: Component.t("Every Champion-tier achievement unlocked: +0.2% enhancing success, added beside the tool's bonus. A player's own cape chain reads their tier from their export."),
       // Decomposing is what makes a spare worth anything — a cape cannot be sold, so its coin value is its
       // essences at the wearer's alchemy level.
       dec: enh.decompose || {},
