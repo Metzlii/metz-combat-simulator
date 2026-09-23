@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=4401194718d0"></script>
+<script src="./support.js?v=abcc76279954"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=4401194718d0">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=abcc76279954">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=4401194718d0">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=4401194718d0"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=abcc76279954">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=abcc76279954"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -552,7 +552,7 @@
 
         <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
           <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;width:100%" onClick="{{ zone.editor.sec.buffs.toggle }}">
-            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.sec.buffs.caret }} Guild shrine &amp; achievements</span>
+            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.sec.buffs.caret }} Guild shrines, achievements and Moo Pass</span>
             <sc-if value="{{ zone.editor.sec.buffs.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.sec.buffs.badge }}</span></sc-if>
           </button>
           <sc-if value="{{ zone.editor.sec.buffs.open }}" hint-placeholder-val="{{ false }}">
@@ -583,7 +583,30 @@
                 </sc-if>
                 <sc-if value="{{ zone.editor.achievements.none }}" hint-placeholder-val="{{ false }}"><span class="text-muted">{{ zone.editor.achievements.note }}</span></sc-if>
               </div>
+              <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px;flex-wrap:wrap" title="{{ zone.editor.mooPass.tip }}">
+                <input type="checkbox" checked="{{ zone.editor.mooPass.on }}" onChange="{{ zone.editor.mooPass.toggle }}">{{ zone.editor.mooPass.label }}
+                <span class="text-muted" style="font-size:11.5px">{{ zone.editor.mooPass.note }}</span>
+              </label>
             </div>
+          </sc-if>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
+          <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;width:100%" onClick="{{ zone.editor.sec.scrolls.toggle }}">
+            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.sec.scrolls.caret }} Scrolls</span>
+            <sc-if value="{{ zone.editor.sec.scrolls.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.sec.scrolls.badge }}</span></sc-if>
+            <span class="text-muted" style="font-size:11.5px;margin-left:auto;flex:none">{{ zone.editor.scrollsSummary }}</span>
+          </button>
+          <sc-if value="{{ zone.editor.sec.scrolls.open }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="btn btn-ghost" style="padding:0 8px;font-size:12px;flex:none" title="{{ zone.editor.useAllTip }}" onClick="{{ zone.editor.useAllScrolls }}">Use all</button>
+              <button class="btn btn-ghost" style="padding:0 8px;font-size:12px;flex:none" title="Untick every scroll for this player" onClick="{{ zone.editor.clearScrolls }}">None</button>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:4px 12px">
+              <sc-for list="{{ zone.editor.scrolls }}" as="sc" hint-placeholder-count="7">
+                <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px" title="{{ sc.tip }}"><input type="checkbox" checked="{{ sc.on }}" onChange="{{ sc.toggle }}">{{ sc.label }}</label>
+              </sc-for>
+            </div>
+            <span class="text-muted" style="font-size:12px;text-wrap:pretty">This player's Labyrinth scrolls, kept up for the whole run. Not in any export.</span>
           </sc-if>
         </div>
         <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
@@ -646,7 +669,7 @@
     </div>
 
     <div style="display:flex;flex-direction:column;gap:8px;align-self:start;min-width:0">
-      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="The community buffs and passes every player gets" onClick="{{ zone.toggleBuffs }}">Account buffs {{ zone.buffsCaret }}</button>
+      <button class="btn btn-primary" style="padding:3px 12px;font-size:13.5px;flex:none;align-self:flex-start" title="The community buffs every player gets" onClick="{{ zone.toggleBuffs }}">Community buffs {{ zone.buffsCaret }}</button>
       <sc-if value="{{ zone.buffsOpen }}" hint-placeholder-val="{{ false }}">
       <div style="display:grid;grid-template-columns:minmax(0,max-content) 52px 5.5ch;gap:6px 8px;align-items:center">
         <span class="text-muted" style="font-size:12.5px">{{ zone.buffXpLabel }}</span>
@@ -656,10 +679,6 @@
         <input class="input" type="number" min="0" max="{{ zone.buffMax }}" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;font-variant-numeric:tabular-nums" value="{{ zone.buffDrop }}" onInput="{{ zone.setBuffDrop }}">
         <span style="font-size:12.5px;font-variant-numeric:tabular-nums;text-align:right" title="The community drop quantity bonus this level gives every player">{{ zone.buffDropPct }}</span>
       </div>
-      <sc-for list="{{ zone.scrolls }}" as="sc" hint-placeholder-count="7">
-        <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px" title="{{ sc.tip }}"><input type="checkbox" checked="{{ sc.on }}" onChange="{{ sc.toggle }}">{{ sc.label }}</label>
-      </sc-for>
-      <label style="display:flex;gap:6px;align-items:center;cursor:pointer;font-size:12.5px"><input type="checkbox" checked="{{ zone.mooPass }}" onChange="{{ zone.toggleMoo }}">{{ zone.mooLabel }}</label>
       </sc-if>
     </div>
 
@@ -1273,7 +1292,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=4401194718d0").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=abcc76279954").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2940,7 +2959,8 @@ class Component extends DCLogic {
         .map(e => `${e.itemHrid}~${trigSig(e.triggers !== undefined ? e.triggers : (q?.loadout?.abilityTriggers || {})[e.itemHrid])}`)
         .join(";")).join("#"),
       house: q => numMapSig(q?.record?.rooms),
-      buffs: q => numMapSig(q?.record?.guildCombatBuffLevels) };
+      buffs: q => `${numMapSig(q?.record?.guildCombatBuffLevels)}|moo=${q?.record?.mooPass === true ? 1 : q?.record?.mooPass === false ? 0 : "?"}`,
+      scrolls: q => Object.keys(q?.record?.scrolls || {}).filter(k2 => q.record.scrolls[k2] === true).sort().join(";") };
     const dirtyKeys = k => { const q = party[k], r = base[k]; if (!q || !r) return [];
       return Object.keys(SIG).filter(key => SIG[key](q) !== SIG[key](r)); };
     const dirtyCount = k => dirtyKeys(k).length;
@@ -2954,7 +2974,7 @@ class Component extends DCLogic {
       revert: () => this.zoneRevert(key, i) });
     if (!p) return { has: false, rail: [], slots: [], levels: [], abilities: [], consumables: [], rooms: [], buffs: [],
       derived: [], sec: { equipment: sec("equipment", "Equipment"), levels: sec("levels", "Levels"), abilities: sec("abilities", "Abilities"),
-        consumables: sec("consumables", "Food & drinks"), house: sec("house", "House rooms"), buffs: sec("buffs", "Guild shrine & achievements"),
+        consumables: sec("consumables", "Food & drinks"), house: sec("house", "House rooms"), buffs: sec("buffs", "Guild shrines, achievements and Moo Pass"), scrolls: sec("scrolls", "Scrolls"),
         task: sec("task", "Task monster") } };
     const abSig = (q, k2) => { const x = (q?.loadout?.abilities || [])[k2];
       return x && x.hrid ? `${x.hrid}@${Number(x.level) || 1}@${trigSig((q?.loadout?.abilityTriggers || {})[x.hrid])}` : ""; };
@@ -3218,7 +3238,8 @@ class Component extends DCLogic {
         abilities: sec("abilities", "Abilities", changed.has("abilities")),
         consumables: sec("consumables", "Food & drinks", changed.has("consumables")),
         house: sec("house", "House rooms", changed.has("house")),
-        buffs: sec("buffs", "Guild shrine & achievements", changed.has("buffs")),
+        buffs: sec("buffs", "Guild shrines, achievements and Moo Pass", changed.has("buffs")),
+        scrolls: sec("scrolls", "Scrolls", changed.has("scrolls")),
         task: sec("task", "Task monster") },
       // A slot belongs to one player: their own item heads the list, then the rest of the catalog for that slot.
       slots: slotDefs.map(sd => { const cur = eqOf(p, sd.hrid), was = eqOf(b, sd.hrid);
@@ -3383,6 +3404,37 @@ class Component extends DCLogic {
           tip: Component.t("Champion tier: not in this export — re-export with the sim helper 0.6.4 or newer to include it") });
         return { has: true, none: false, tiers: rows, note: "", tip: Component.t("Read from the export; the game decides what is unlocked") };
       })(),
+      // The Moo Pass, per player (operator, 2026-09-23): the helper's export says who has one; a player it never
+      // said for is taken to have one and marked as an assumption. Ticking it either way is a stated edit.
+      // The same percent formatting the Account buffs panel uses, in this scope.
+      mooPass: (() => { const pct = v => String(Math.round(Number(v) * 1000) / 10); const said = p.record?.mooPass, d = this.zoneAcctDef("mooPass", 0.05);
+        const on = said === true || said === false ? said : (s.zoneBuffs?.mooPass !== false);
+        return { on, toggle: () => this.patchPlayer(i, q => { q.record.mooPass = !on; }),
+          label: Component.tf("Moo Pass (+{pct}% XP)", { pct: pct(d.value) }),
+          assumed: said !== true && said !== false,
+          note: said === true || said === false ? Component.t("from the export") : (on ? Component.t("not in this export — assumed; untick if this player has none") : Component.t("not in this export")),
+          tip: Component.t("Per player. The sim helper's export says who has a Moo Pass; another simulator's export does not, so that player is taken to have one until you say otherwise.") }; })(),
+      // The Labyrinth's combat scrolls, per player, one tick each: the size and the scroll's name come from the
+      // catalog (the game data); the fallbacks only cover a page whose catalog has not arrived yet.
+      scrolls: Component.ZONE_SCROLLS.map(([key, itemHrid, fallbackName, fallbackValue]) => {
+        const pct = v => String(Math.round(Number(v) * 1000) / 10);
+        const d = this.zoneAcctDef(key, fallbackValue), on = !!p.record?.scrolls?.[key];
+        const name = Component.t(itemHrid) !== itemHrid ? Component.t(itemHrid) : (d.itemName || fallbackName);
+        return { key, on, toggle: () => this.patchPlayer(i, q => { q.record.scrolls = { ...(q.record.scrolls || {}), [key]: !on }; }),
+          label: Component.tf("{name} (+{pct}%)", { name, pct: pct(d.value) }),
+          tip: Component.t("A 30-minute Labyrinth scroll, kept up for the whole run") };
+      }),
+      // Operator, 2026-09-23: one click for every scroll that applies to this player's weapon -- Cast Speed for a
+      // mage, Attack Speed for a melee or ranged weapon, both when no weapon is worn -- and one to clear.
+      useAllScrolls: () => this.patchPlayer(i, q => {
+        const skip = isMagicWeapon ? "personalAttackSpeed" : isPhysicalWeapon ? "personalCastSpeed" : null;
+        q.record.scrolls = Object.fromEntries(Component.ZONE_SCROLLS.map(([key]) => [key, key !== skip])); }),
+      useAllTip: isMagicWeapon ? Component.t("Tick every scroll that applies to a mage: all but Attack Speed")
+        : isPhysicalWeapon ? Component.t("Tick every scroll that applies to a melee or ranged weapon: all but Cast Speed")
+        : Component.t("Tick all seven scrolls for this player"),
+      clearScrolls: () => this.patchPlayer(i, q => { q.record.scrolls = {}; }),
+      scrollsSummary: (() => { const n = Component.ZONE_SCROLLS.filter(([key]) => p.record?.scrolls?.[key]).length;
+        return n === 0 ? Component.t("none") : n === 1 ? Component.t("1 scroll") : Component.tf("{n} scrolls", { n }); })(),
       // `format` is the server's rendering hint; sources sum to the total exactly, so they are shown as-is.
       // `percent` carries the kernel's own ratio — 0.1068 is 10.68% — because that is the number the
       // simulation multiplies by, and pre-rounding it would break the promise that sources sum to the total.
@@ -4027,18 +4079,6 @@ class Component extends DCLogic {
       setBuffXp: e => this.setZoneBuffs({ communityExperience: this.zoneBuffFraction("communityExperience", e.target.value) }),
       buffDrop: this.zoneBuffLevel("communityDropQuantity", bf.communityDropQuantity),
       setBuffDrop: e => this.setZoneBuffs({ communityDropQuantity: this.zoneBuffFraction("communityDropQuantity", e.target.value) }),
-      // The Labyrinth's combat scrolls (2026-09-23), one switch each: the size and the scroll's name come from
-      // the catalog (the game data); the fallbacks only cover a page whose catalog has not arrived yet.
-      scrolls: Component.ZONE_SCROLLS.map(([key, itemHrid, fallbackName, fallbackValue]) => {
-        const d = this.zoneAcctDef(key, fallbackValue);
-        const name = Component.t(itemHrid) !== itemHrid ? Component.t(itemHrid) : (d.itemName || fallbackName);
-        return { key, on: !!bf[key], toggle: () => this.setZoneBuffs({ [key]: !bf[key] }),
-          label: Component.tf("{name} (+{pct}%)", { name, pct: pct(d.value) }),
-          tip: Component.t("A 30-minute Labyrinth scroll, kept up for the whole run") };
-      }),
-      mooPass: !!bf.mooPass, toggleMoo: () => this.setZoneBuffs({ mooPass: !bf.mooPass }),
-      mooLabel: (() => { const d = this.zoneAcctDef("mooPass", 0.05);
-        return Component.tf("Moo Pass (+{pct}% XP)", { pct: pct(d.value) }); })(),
       buffMax: String(this.zoneBuffDef("communityExperience").maxLevel),
       buffXpLabel: `${Component.t("Community XP level")} (0–${this.zoneBuffDef("communityExperience").maxLevel})`,
       buffDropLabel: `${Component.t("Community drop level")} (0–${this.zoneBuffDef("communityDropQuantity").maxLevel})`,
