@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=abcc76279954"></script>
+<script src="./support.js?v=538d34fb884b"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=abcc76279954">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=538d34fb884b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=abcc76279954">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=abcc76279954"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=538d34fb884b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=538d34fb884b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -902,6 +902,24 @@
                   </sc-if>
                 </div>
                 <div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--color-divider);padding-top:5px">
+                  <button class="btn" style="display:flex;gap:8px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left" style-hover="color:var(--color-accent-300)" onClick="{{ zone.detail.sec.casts.toggle }}">
+                    <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.detail.sec.casts.caret }} Casts &amp; mana</span>
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums;margin-left:auto;color:var(--color-accent-2-300)" title="{{ p.castsTip }}">{{ p.castsTotal }}</span>
+                  </button>
+                  <sc-if value="{{ zone.detail.sec.casts.open }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:2px">
+                      <sc-for list="{{ p.casts }}" as="ca" hint-placeholder-count="5">
+                        <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;font-size:12.5px;align-items:baseline">
+                          <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ ca.tip }}">{{ ca.k }}</span>
+                          <span class="text-muted" style="font-variant-numeric:tabular-nums;font-size:12px">{{ ca.casts }}</span>
+                          <span style="font-variant-numeric:tabular-nums">{{ ca.mana }}</span>
+                        </div>
+                      </sc-for>
+                      <sc-if value="{{ p.castsNone }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:12px">{{ p.castsNote }}</span></sc-if>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--color-divider);padding-top:5px">
                   <button class="btn" style="display:flex;gap:8px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left" style-hover="color:var(--color-accent-300)" onClick="{{ zone.detail.sec.taken.toggle }}">
                     <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.detail.sec.taken.caret }} Damage taken</span>
                     <span style="font-size:13px;font-variant-numeric:tabular-nums;margin-left:auto;color:var(--color-accent-2-300)" title="{{ p.takenTip }}">{{ p.takenTotal }}</span>
@@ -919,6 +937,23 @@
                         <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;font-size:12px;align-items:baseline" class="text-muted">
                           <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ tn.tip }}">{{ tn.k }}</span>
                           <span style="font-variant-numeric:tabular-nums">{{ tn.v }}</span>
+                        </div>
+                      </sc-for>
+                    </div>
+                  </sc-if>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:2px;border-top:1px solid var(--color-divider);padding-top:5px">
+                  <button class="btn" style="display:flex;gap:8px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left" style-hover="color:var(--color-accent-300)" onClick="{{ zone.detail.sec.restored.toggle }}">
+                    <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.detail.sec.restored.caret }} HP &amp; mana restored</span>
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums;margin-left:auto;color:var(--color-accent-2-300)" title="{{ p.restoredTip }}">{{ p.restoredTotal }}</span>
+                  </button>
+                  <sc-if value="{{ zone.detail.sec.restored.open }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:2px">
+                      <sc-for list="{{ p.restored }}" as="rs" hint-placeholder-count="6">
+                        <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:8px;font-size:12.5px;align-items:baseline" class="{{ rs.cls }}">
+                          <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ rs.tip }}">{{ rs.k }}</span>
+                          <span class="text-muted" style="font-variant-numeric:tabular-nums;font-size:12px">{{ rs.share }}</span>
+                          <span style="font-variant-numeric:tabular-nums">{{ rs.v }}</span>
                         </div>
                       </sc-for>
                     </div>
@@ -1292,7 +1327,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=abcc76279954").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=538d34fb884b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -3539,6 +3574,13 @@ class Component extends DCLogic {
       if (k === "/damage_over_time") return Component.t("Damage over time");
       if (k === "/thorns") return Component.t("Thorns");
       if (k === "/retaliation") return Component.t("Retaliation");
+      if (k === "/hp_regen") return Component.t("HP regen");
+      if (k === "/mp_regen") return Component.t("Mana regen");
+      if (k === "/mana_leech") return Component.t("Mana leech");
+      if (k === "/life_steal") return Component.t("Life steal");
+      if (k === "/hp_drain") return Component.t("HP drain");
+      if (k === "/ripple") return Component.t("Ripple");
+      if (k === "/consumable") return Component.t("Consumable");
       // By HRID first (the locales carry the game's name under the hrid), then the title-cased English as a key.
       const known = Component.t(k);
       if (known !== k) return known;
@@ -3689,11 +3731,13 @@ class Component extends DCLogic {
         : sec < 1 ? `${Math.round(sec * 1000)} ms` : `${nf(sec, 1)} s`;
       header = Component.tf("{players} players · {h} h · seed {seed}", { players: (R.party || []).length, h: nf(R.hours, R.hours < 1 ? 2 : 0), seed: R.seed }) + (Number(R.serverLagMs) > 0 ? Component.tf(" · server lag {n} ms", { n: nf(R.serverLagMs, Number(R.serverLagMs) % 1 ? 1 : 0) }) : "") + (Number(R.waveTransitionDelayMs) > 0 ? Component.tf(" · wave gap {n} ms", { n: nf(R.waveTransitionDelayMs, Number(R.waveTransitionDelayMs) % 1 ? 1 : 0) }) : "") + Component.tf(" · loot {loot} · consumables {consumables} · keys {keys}", { loot: sideShort("loot", R.pricing?.loot), consumables: sideShort("consumables", R.pricing?.consumables), keys: sideShort("keys", R.pricing?.keys) }) + (R.pricing?.keys === "craft" && R.pricing?.keyMaterials ? Component.tf(" from materials {v}", { v: sideShort("keyMaterials", R.pricing.keyMaterials) }) : "") + (R.pricing?.mode === "iron" ? Component.t(" · iron") : "") + (Number(R.marketTimestamp) > 0 ? Component.tf(" · prices {age}", { age: (() => { const a = Math.max(0, Date.now() - Number(R.marketTimestamp)); return a < 90e3 ? Component.t("just now") : a < 90 * 60e3 ? Component.tf("{n} min old", { n: Math.round(a / 60e3) }) : Component.tf("{n} h old", { n: Math.round(a / 36e5) }); })() }) : "") + ` · ${timing}`;
       const secOpen = s.zoneSecOpen || {}, secDefs = [["rates", Component.t("Rates")], ["xp", Component.t("XP / h")],
-        ["damage", Component.t("Damage by source")], ["taken", Component.t("Damage taken")], ["consumables", Component.t("Consumables")], ["lootIn", Component.t("Loot in")], ["lootOut", Component.t("Loot out")]];
+        ["damage", Component.t("Damage by source")], ["casts", Component.t("Casts & mana")], ["taken", Component.t("Damage taken")], ["restored", Component.t("HP & mana restored")],
+        ["consumables", Component.t("Consumables")], ["lootIn", Component.t("Loot in")], ["lootOut", Component.t("Loot out")]];
       if (c && c.ok !== false) detail = { title: `${Component.t(c.name)} · T${c.difficultyTier}${c.hours != null && R?.hours != null && Number(c.hours) !== Number(R.hours) ? ` · ${nf(c.hours)} h` : ""}`,
         // Each section collapses to its own header inside every card; one click applies to every player column
         // at once, so the columns stay row-aligned.
-        sec: Object.fromEntries(secDefs.map(([k, label]) => { const on = secOpen[k] !== false;
+        // Only Rates opens by itself (operator, 2026-09-23): eight sections open on five cards is a wall.
+        sec: Object.fromEntries(secDefs.map(([k, label]) => { const on = k === "rates" ? secOpen[k] !== false : secOpen[k] === true;
           return [k, { label, open: on, caret: on ? "▾" : "▸",
             // Functional update: two headers clicked in the same frame must not overwrite each other.
             toggle: () => this.setState(st => ({ zoneSecOpen: { ...st.zoneSecOpen, [k]: !(st.zoneSecOpen?.[k] !== false) } })) }]; })),
@@ -3774,6 +3818,33 @@ class Component extends DCLogic {
             k: nice(k), v: big(v),
             casts: p.abilityCastsPerHour?.[k] != null ? `${nf(p.abilityCastsPerHour[k], 1)}/h` : "",
             tip: `${nice(k)}${p.abilityCastsPerHour?.[k] != null ? Component.tf(" · {n} casts / h", { n: nf(p.abilityCastsPerHour[k], 1) }) : ""}${Component.tf(" · {n} damage / h", { n: nf(v) })}` })),
+          // Casts & mana (0Flux, 2026-09-23): each ability's casts an hour and the mana those casts spent -- casts
+          // times the ability's mana cost from the catalog, since the game charges a flat cost per cast. A trigger
+          // that stops a cast shows as fewer casts here, which is what the request was about.
+          casts: (() => { const costOf = h => ((s.zoneCatalog?.abilities || []).find(a => a.abilityHrid === h) || {}).manaCost;
+            return Object.entries(p.abilityCastsPerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]).map(([h, v]) => { const cost = costOf(h);
+              return { k: nice(h), casts: Component.tf("{n} casts / h", { n: nf(v, 1) }), mana: cost != null ? Component.tf("{n} mana / h", { n: nf(v * cost) }) : "",
+                tip: `${nice(h)}${Component.tf(" · {n} casts / h", { n: nf(v, 1) })}${cost != null ? Component.tf(" · {n} mana a cast", { n: nf(cost) }) : ""}` }; }); })(),
+          castsNone: !Object.values(p.abilityCastsPerHour || {}).some(v => v > 0), castsNote: Component.t("No ability casts in this run"),
+          castsTotal: (() => { const costOf = h => ((s.zoneCatalog?.abilities || []).find(a => a.abilityHrid === h) || {}).manaCost || 0;
+            return Component.tf("{n} mana / h", { n: nf(Object.entries(p.abilityCastsPerHour || {}).reduce((a, [h, v]) => a + v * costOf(h), 0)) }); })(),
+          castsTip: Component.t("Mana spent on ability casts an hour: each ability's casts times its mana cost"),
+          // HP & mana restored (0Flux, 2026-09-23): the healing split ZONE-P6 kept in the Rates hover, as rows,
+          // and the kernel's mana split beside it. A run saved before the kernel reported mana shows HP only.
+          restored: (() => { const rows = [];
+            const hp = Object.entries(p.healingBySourcePerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+            const hpTotal = hp.reduce((a, [, v]) => a + v, 0);
+            rows.push({ k: Component.t("HP restored"), share: "", v: `${rate(hpTotal / 3600)} / s`, cls: "text-muted", tip: Component.tf("{n} HP restored an hour, every source", { n: nf(hpTotal) }) });
+            for (const [k, v] of hp) rows.push({ k: nice(k), share: hpTotal > 0 ? `${nf(100 * v / hpTotal, 0)}%` : "", v: `${rate(v / 3600)} / s`, cls: "", tip: `${nice(k)}${Component.tf(" · {n} HP / h", { n: nf(v) })}` });
+            if (p.manaRestoredPerHour != null) {
+              const mp = Object.entries(p.manaBySourcePerHour || {}).filter(([, v]) => v > 0).sort((a, b) => b[1] - a[1]);
+              const mpTotal = mp.reduce((a, [, v]) => a + v, 0);
+              rows.push({ k: Component.t("Mana restored"), share: "", v: `${rate(mpTotal / 3600)} / s`, cls: "text-muted", tip: Component.tf("{n} mana restored an hour, every source", { n: nf(mpTotal) }) });
+              for (const [k, v] of mp) rows.push({ k: nice(k), share: mpTotal > 0 ? `${nf(100 * v / mpTotal, 0)}%` : "", v: `${rate(v / 3600)} / s`, cls: "", tip: `${nice(k)}${Component.tf(" · {n} mana / h", { n: nf(v) })}` });
+            }
+            return rows; })(),
+          restoredTotal: `${rate((p.healingReceivedPerHour ?? p.healingPerHour ?? 0) / 3600)} HP / s${p.manaRestoredPerHour != null ? ` · ${rate(p.manaRestoredPerHour / 3600)} MP / s` : ""}`,
+          restoredTip: Component.t("HP and mana restored to this player a second, from every source"),
           // Damage taken by what dealt it (2026-09-23): a row per monster (its hits and its damage-over-time),
           // thorns and retaliation from the player's own hits, each with its share of what landed; then the two
           // figures the Rates row keeps in its hover -- the Insanity sacrifice (the meter counts it as taken) and

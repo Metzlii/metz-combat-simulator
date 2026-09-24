@@ -16,9 +16,26 @@
     if (!RD) throw new Error("dc-runtime: window.ReactDOM is not available yet");
     return RD;
   }
-  var h = ((...args) => getReact().createElement(
-    ...args
-  ));
+  // A controlled number field that shows what was typed while it has focus (2026-09-23, a player's report:
+  // "to change a skill from 50 to 30 I have to put in 530, then delete the 5"). The page's handlers clamp on
+  // every keystroke and React writes the clamped state straight back into the box, so an emptied field became
+  // "1" and the next digit landed after it. Here the box keeps the typed text until it loses focus; the state
+  // still updates on every keystroke exactly as before, and the clamped value shows once the field is left.
+  function NumberField(props) {
+    const React = getReact();
+    const [draft, setDraft] = React.useState(null);
+    const handler = props.onInput || props.onChange;
+    const onChange = (e) => { setDraft(e.target.value); if (handler) handler(e); };
+    const onFocus = (e) => { setDraft(e.target.value); if (props.onFocus) props.onFocus(e); };
+    const onBlur = (e) => { setDraft(null); if (props.onBlur) props.onBlur(e); };
+    const { onInput: _onInput, ...rest } = props;
+    return React.createElement("input", { ...rest, value: draft !== null ? draft : props.value, onChange, onFocus, onBlur });
+  }
+  var h = ((tag, props, ...children) => {
+    if (tag === "input" && props && props.type === "number" && props.value !== void 0 && (props.onInput || props.onChange))
+      return getReact().createElement(NumberField, props, ...children);
+    return getReact().createElement(tag, props, ...children);
+  });
 
   // src/parse.ts
   function parseDcDocument(doc) {
