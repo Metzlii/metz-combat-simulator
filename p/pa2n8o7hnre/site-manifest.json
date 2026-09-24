@@ -1,0 +1,217 @@
+{
+ "builtAt": "2026-09-24T03:03:43.960Z",
+ "commit": "8ef2792",
+ "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
+ "firstLoad": {
+  "files": [
+   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
+   "init_client_data.json"
+  ],
+  "bytes": 6401104,
+  "gzip": 625885,
+  "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
+ },
+ "site": {
+  "files": 49,
+  "bytes": 18122134,
+  "gzip": 3160478
+ },
+ "files": {
+  "assets/actions_sprite.svg": {
+   "bytes": 314040,
+   "gzip": 52449
+  },
+  "assets/combat_monsters_sprite.svg": {
+   "bytes": 1137576,
+   "gzip": 250060
+  },
+  "assets/items_sprite.svg": {
+   "bytes": 3936186,
+   "gzip": 702768
+  },
+  "assets/misc_sprite.svg": {
+   "bytes": 313491,
+   "gzip": 54579
+  },
+  "assets/skills_sprite.svg": {
+   "bytes": 27086,
+   "gzip": 6979
+  },
+  "demo-party.json": {
+   "bytes": 37142,
+   "gzip": 3220
+  },
+  "i18n.js": {
+   "bytes": 9079,
+   "gzip": 3968
+  },
+  "IconPick.dc.html": {
+   "bytes": 11238,
+   "gzip": 3780
+  },
+  "index.html": {
+   "bytes": 262244,
+   "gzip": 69615
+  },
+  "init_client_data.json": {
+   "bytes": 2751077,
+   "gzip": 204283
+  },
+  "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
+   "bytes": 3666,
+   "gzip": 1478
+  },
+  "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
+   "bytes": 3650027,
+   "gzip": 421602
+  },
+  "locales/en.json": {
+   "bytes": 71263,
+   "gzip": 15837
+  },
+  "locales/es.json": {
+   "bytes": 203641,
+   "gzip": 53213
+  },
+  "locales/fr.json": {
+   "bytes": 203015,
+   "gzip": 53090
+  },
+  "locales/ja.json": {
+   "bytes": 214208,
+   "gzip": 62687
+  },
+  "locales/ko.json": {
+   "bytes": 202870,
+   "gzip": 60247
+  },
+  "locales/pt.json": {
+   "bytes": 203573,
+   "gzip": 52944
+  },
+  "locales/ru.json": {
+   "bytes": 265799,
+   "gzip": 67146
+  },
+  "locales/zh-Hant.json": {
+   "bytes": 186346,
+   "gzip": 59978
+  },
+  "locales/zh.json": {
+   "bytes": 226470,
+   "gzip": 78924
+  },
+  "server/abilities.mjs": {
+   "bytes": 6802,
+   "gzip": 2547
+  },
+  "server/chestValue.mjs": {
+   "bytes": 6694,
+   "gzip": 2766
+  },
+  "server/enhanceCost.mjs": {
+   "bytes": 10259,
+   "gzip": 4210
+  },
+  "server/lootValue.mjs": {
+   "bytes": 7712,
+   "gzip": 3191
+  },
+  "server/marketCore.mjs": {
+   "bytes": 1826,
+   "gzip": 955
+  },
+  "server/zoneApi.mjs": {
+   "bytes": 3749,
+   "gzip": 1412
+  },
+  "server/zoneCatalog.mjs": {
+   "bytes": 9204,
+   "gzip": 3289
+  },
+  "server/zoneCsv.mjs": {
+   "bytes": 2980,
+   "gzip": 1384
+  },
+  "server/zoneDerive.mjs": {
+   "bytes": 8977,
+   "gzip": 3324
+  },
+  "server/zoneImport.mjs": {
+   "bytes": 12214,
+   "gzip": 4380
+  },
+  "server/zoneOptimize.mjs": {
+   "bytes": 17256,
+   "gzip": 6678
+  },
+  "server/zoneSim.mjs": {
+   "bytes": 13768,
+   "gzip": 5102
+  },
+  "server/zoneUpgrades.mjs": {
+   "bytes": 18360,
+   "gzip": 7190
+  },
+  "spira-theme.css": {
+   "bytes": 3113,
+   "gzip": 1430
+  },
+  "support.js": {
+   "bytes": 72425,
+   "gzip": 20384
+  },
+  "vendor/babel-standalone-7.29.0-babel.min.js": {
+   "bytes": 3137752,
+   "gzip": 655353
+  },
+  "vendor/react-18.3.1-umd-react.production.min.js": {
+   "bytes": 10751,
+   "gzip": 4269
+  },
+  "vendor/react-dom-18.3.1-umd-react-dom.production.min.js": {
+   "bytes": 131835,
+   "gzip": 43022
+  },
+  "zone-web/icons.json": {
+   "bytes": 22539,
+   "gzip": 6176
+  },
+  "zone-web/parity.html": {
+   "bytes": 5910,
+   "gzip": 2595
+  },
+  "zone-web/zoneClient.js": {
+   "bytes": 4864,
+   "gzip": 1950
+  },
+  "zone-web/zoneProbe.js": {
+   "bytes": 1320,
+   "gzip": 742
+  },
+  "zone-web/zoneProbeWorker.js": {
+   "bytes": 162,
+   "gzip": 147
+  },
+  "zone-web/zoneWorker.js": {
+   "bytes": 273,
+   "gzip": 218
+  },
+  "zoneApi.js": {
+   "bytes": 4996,
+   "gzip": 2028
+  },
+  "ZoneSim.dc.html": {
+   "bytes": 363027,
+   "gzip": 93031
+  },
+  "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
+   "bytes": 13029,
+   "gzip": 3644
+  },
+  "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js": {
+   "bytes": 300,
+   "gzip": 214
+  }
+ }
+}

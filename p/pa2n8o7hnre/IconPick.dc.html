@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js?v=e11b893d9209"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e11b893d9209">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
+  <link rel="stylesheet" href="spira-theme.css?v=e11b893d9209">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e11b893d9209"></script>
+</helmet>
+
+<div style="position:relative;min-width:0;width:100%" onKeyDown="{{ onKey }}">
+  <button class="input" type="button" title="{{ title }}" disabled="{{ isDisabled }}" onClick="{{ toggle }}" ref="{{ btnRef }}"
+    style="display:flex;gap:6px;align-items:center;text-align:left;width:100%;min-width:0;cursor:pointer;min-height:{{ h }}px;padding:2px 6px;font-size:{{ fs }}px;{{ btnStyle }}">
+    <span style="width:{{ iconSize }}px;height:{{ iconSize }}px;display:grid;place-items:center;flex:none;color:var(--color-accent-300)">
+      <sc-if value="{{ cur.has }}" hint-placeholder-val="{{ false }}">{{ cur.mark }}</sc-if>
+      <sc-if value="{{ cur.glyph }}" hint-placeholder-val="{{ true }}"><i class="{{ cur.glyph }}" style="font-size:{{ glyphSize }}px;line-height:1" aria-hidden="true"></i></sc-if>
+    </span>
+    <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{{ labelStyle }}">{{ curLabel }}</span>
+    <span class="text-muted" style="flex:none;font-size:10px">▾</span>
+  </button>
+
+  <sc-if value="{{ isOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:absolute;z-index:60;{{ panelStyle }};left:0;min-width:100%;width:max-content;max-width:min(420px, 78vw);background:var(--color-surface);border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);box-shadow:var(--shadow-lg);padding:4px;display:flex;flex-direction:column;gap:3px">
+      <sc-if value="{{ searchable }}" hint-placeholder-val="{{ false }}">
+        <input class="input" placeholder="Filter…" style="min-height:26px;padding:2px 6px;font-size:12.5px" value="{{ q }}" onInput="{{ setQ }}" ref="{{ inputRef }}">
+      </sc-if>
+      <div style="max-height:296px;overflow-y:auto;display:flex;flex-direction:column;gap:1px;padding-right:2px">
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="6">
+          <sc-if value="{{ r.isHeader }}" hint-placeholder-val="{{ false }}">
+            <div class="text-muted" style="font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;padding:5px 6px 2px">{{ r.label }}</div>
+          </sc-if>
+          <sc-if value="{{ r.isOption }}" hint-placeholder-val="{{ true }}">
+            <button class="btn btn-ghost" type="button" title="{{ r.title }}" onClick="{{ r.pick }}" onMouseEnter="{{ r.hover }}"
+              style="display:flex;gap:7px;align-items:center;width:100%;justify-content:flex-start;text-align:left;padding:3px 6px;border-color:transparent;border-radius:var(--radius-sm);font-size:12.5px;white-space:nowrap;{{ r.style }}">
+              <span style="width:20px;height:20px;display:grid;place-items:center;flex:none;color:var(--color-accent-300)">
+                <sc-if value="{{ r.icon.has }}" hint-placeholder-val="{{ false }}">{{ r.icon.mark }}</sc-if>
+                <sc-if value="{{ r.icon.glyph }}" hint-placeholder-val="{{ true }}"><i class="{{ r.icon.glyph }}" style="font-size:15px;line-height:1" aria-hidden="true"></i></sc-if>
+              </span>
+              <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis">{{ r.label }}</span>
+              <sc-if value="{{ r.hasNote }}" hint-placeholder-val="{{ false }}">
+                <span class="text-muted" style="flex:none;font-size:11px">{{ r.note }}</span>
+              </sc-if>
+            </button>
+          </sc-if>
+        </sc-for>
+        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+          <div class="text-muted" style="font-size:12px;padding:6px">Nothing matches.</div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:320,&quot;height&quot;:200},&quot;value&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;placeholder&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Empty&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;groups&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{label:string; items:{value:string; label:string; iconId?:string; note?:string; glyph?:string}[]}[]&quot;},&quot;options&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;{value:string; label:string; iconId?:string; note?:string; glyph?:string}[]&quot;},&quot;onPick&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(value: string) =&gt; void&quot;},&quot;fallbackGlyph&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;ph-cube&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;height&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:29,&quot;min&quot;:22,&quot;max&quot;:40,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;fontSize&quot;:{&quot;editor&quot;:&quot;float&quot;,&quot;default&quot;:12.5,&quot;min&quot;:10,&quot;max&quot;:16,&quot;unit&quot;:&quot;px&quot;,&quot;tsType&quot;:&quot;number&quot;},&quot;disabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;title&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;style&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;&quot;,&quot;tsType&quot;:&quot;string&quot;}}">
+// A picker that can show the game's own art next to every choice — a native <select> cannot: an <option> may
+// hold text only. The parent hands plain data (value, label, `iconId`, an optional note and glyph); this
+// component renders `<use href="#iconId">` against the sprite symbols the page injected into the document, and
+// falls back to a Phosphor glyph when the sheet has no symbol for that row.
+class Component extends DCLogic {
+  state = { open: false, q: "", hi: -1 };
+
+  componentDidMount() {
+    this._away = e => { if (this.state.open && this._root && !this._root.contains(e.target)) this.setState({ open: false, q: "" }); };
+    document.addEventListener("mousedown", this._away, true);
+  }
+  componentWillUnmount() { document.removeEventListener("mousedown", this._away, true); }
+
+  groups() {
+    const g = this.props.groups;
+    if (Array.isArray(g) && g.length) return g;
+    return [{ label: "", items: this.props.options || [] }];
+  }
+  // One flat list of choices, filtered by the query, so highlight movement and rendering agree.
+  flat() {
+    const q = this.state.q.trim().toLowerCase();
+    const out = [];
+    for (const grp of this.groups()) {
+      const items = (grp.items || []).filter(x => !q || String(x.label || "").toLowerCase().includes(q));
+      if (!items.length) continue;
+      out.push({ header: grp.label || "" , items });
+    }
+    return out;
+  }
+  choices() { return this.flat().flatMap(g => g.items); }
+
+  iconFor(x) {
+    const id = x && x.iconId;
+    const href = id && typeof document !== "undefined" && document.getElementById(id) ? `#${id}` : "";
+    const glyph = (x && x.glyph) || this.props.fallbackGlyph || "";
+    return { has: !!href, glyph: href ? "" : (glyph ? (/^ph /.test(glyph) ? glyph : `ph ${glyph}`) : ""),
+      mark: href ? React.createElement("svg", { width: 20, height: 20, "aria-hidden": "true" },
+        React.createElement("use", { href })) : null };
+  }
+
+  pick(v) {
+    this.setState({ open: false, q: "", hi: -1 });
+    const fn = this.props.onPick;
+    if (typeof fn === "function") fn(v);
+  }
+
+  renderVals() {
+    const P = this.props, open = !!this.state.open;
+    const all = this.choices();
+    const cur = all.find(x => String(x.value) === String(P.value ?? "")) || null;
+    const groups = this.flat();
+    const hi = this.state.hi;
+    let n = -1;
+    const rows = [];
+    for (const g of groups) {
+      if (g.header) rows.push({ isHeader: true, isOption: false, label: g.header, icon: { has: false, glyph: "", mark: null } });
+      for (const x of g.items) {
+        n += 1;
+        const k = n, sel = String(x.value) === String(P.value ?? "");
+        rows.push({ isHeader: false, isOption: true, label: x.label, title: x.title || x.note || x.label,
+          note: x.note || "", hasNote: !!x.note, icon: this.iconFor(x),
+          style: k === hi ? "background:color-mix(in srgb, var(--color-accent) 16%, transparent)"
+            : sel ? "background:color-mix(in srgb, var(--color-accent) 9%, transparent);color:var(--color-accent-300)" : "",
+          pick: () => this.pick(x.value), hover: () => { if (this.state.hi !== k) this.setState({ hi: k }); } });
+      }
+    }
+    const h = Number(P.height) || 29, fs = Number(P.fontSize) || 12.5;
+    return {
+      isOpen: open, isDisabled: !!P.disabled, isEmpty: open && rows.length === 0,
+      // A long list gets a filter box; a slot with four items does not need one.
+      searchable: open && all.length > 9,
+      q: this.state.q, setQ: e => this.setState({ q: e.target.value, hi: -1 }),
+      rows, h, fs, iconSize: Math.max(16, Math.min(22, h - 9)), glyphSize: Math.max(12, Math.min(16, h - 14)),
+      title: P.title || "", curLabel: cur ? cur.label : (P.placeholder || "Empty"),
+      labelStyle: cur ? "" : "color:var(--color-neutral-400)",
+      btnStyle: `${open ? "border-color:var(--color-accent-600);" : ""}${P.disabled ? "opacity:0.55;cursor:default;" : ""}${P.style || ""}`,
+      cur: this.iconFor(cur),
+      btnRef: el => { if (el) this._root = el.parentElement; },
+      inputRef: el => { if (el && !this._focused) { this._focused = true; el.focus(); } },
+      // A picker near the bottom of the page opens upward, so the list is never below the fold.
+      panelStyle: this.state.up ? "bottom:calc(100% + 3px)" : "top:calc(100% + 3px)",
+      toggle: e => { if (P.disabled) return; this._focused = false;
+        const r = e?.currentTarget?.getBoundingClientRect?.();
+        const up = !!r && r.bottom + 340 > window.innerHeight && r.top > 340;
+        this.setState(s => ({ open: !s.open, q: "", hi: -1, up })); },
+      onKey: e => {
+        if (!open) { if (e.key === "Enter" || e.key === " " || e.key === "ArrowDown") { e.preventDefault(); this._focused = false; this.setState({ open: true, hi: -1 }); } return; }
+        if (e.key === "Escape") { e.preventDefault(); this.setState({ open: false, q: "", hi: -1 }); return; }
+        if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault();
+          const d = e.key === "ArrowDown" ? 1 : -1, len = all.length;
+          if (!len) return;
+          this.setState(s => ({ hi: (((s.hi < 0 ? (d > 0 ? -1 : 0) : s.hi) + d) + len) % len })); return; }
+        if (e.key === "Enter") { e.preventDefault(); const x = all[this.state.hi]; if (x) this.pick(x.value); }
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
