@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-09-24T03:03:43.960Z",
- "commit": "8ef2792",
+ "builtAt": "2026-09-24T03:07:44.184Z",
+ "commit": "2bf453d",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 49,
-  "bytes": 18122134,
-  "gzip": 3160478
+  "bytes": 18122279,
+  "gzip": 3160524
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -59,7 +59,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1478
+   "gzip": 1477
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3650027,
@@ -115,7 +115,7 @@
   },
   "server/lootValue.mjs": {
    "bytes": 7712,
-   "gzip": 3191
+   "gzip": 3190
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -123,11 +123,11 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 3749,
-   "gzip": 1412
+   "gzip": 1411
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9204,
-   "gzip": 3289
+   "gzip": 3290
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -143,15 +143,15 @@
   },
   "server/zoneOptimize.mjs": {
    "bytes": 17256,
-   "gzip": 6678
+   "gzip": 6677
   },
   "server/zoneSim.mjs": {
    "bytes": 13768,
-   "gzip": 5102
+   "gzip": 5101
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 18360,
-   "gzip": 7190
+   "gzip": 7191
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -187,23 +187,23 @@
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 742
+   "gzip": 743
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 147
+   "gzip": 146
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 218
+   "gzip": 217
   },
   "zoneApi.js": {
    "bytes": 4996,
-   "gzip": 2028
+   "gzip": 2029
   },
   "ZoneSim.dc.html": {
-   "bytes": 363027,
-   "gzip": 93031
+   "bytes": 363172,
+   "gzip": 93080
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,

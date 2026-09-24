@@ -1,1 +1,1 @@
-import{burnN as e}from"./zoneProbe.js?v=e11b893d9209";onmessage=n=>{const o=Number(n.data);e(o);const r=performance.now();e(o),postMessage(performance.now()-r)};
+import{burnN as e}from"./zoneProbe.js?v=6ebb2c793ce5";onmessage=n=>{const o=Number(n.data);e(o);const r=performance.now();e(o),postMessage(performance.now()-r)};
