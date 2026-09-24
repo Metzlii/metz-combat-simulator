@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="6ebb2c793ce5"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="538d34fb884b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=6ebb2c793ce5"></script>
+<script src="./support.js?v=538d34fb884b"></script>
 </head>
 <body>
 <x-dc>
+<!-- Every <select> on THIS page is written as <sc-raw-select> (2026-09-23): the browser parses this document before the
+     runtime reads it, and Firefox's (and Safari's) HTML parser drops anything inside a <select> that is not an option,
+     which deleted the <sc-for> loops and left every dropdown empty there. Chrome's newer parser keeps them, which is why
+     it never showed here. The runtime renders sc-raw-select as a real select (RAW_UNWRAP), exactly as it does for the
+     fetched components, whose text it wraps itself before parsing. -->
+
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=6ebb2c793ce5">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=538d34fb884b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=6ebb2c793ce5">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=6ebb2c793ce5"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=538d34fb884b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=538d34fb884b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -87,11 +93,11 @@
     <div style="position:absolute;left:var(--space-4);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:14px;font-size:12.5px;white-space:nowrap">
       <sc-if value="{{ hasLangs }}" hint-placeholder-val="{{ false }}">
         <label class="text-muted" data-tour="lang" style="display:flex;align-items:center;gap:6px;margin:0;font-size:12px">Language
-          <select class="input" aria-label="Language" style="padding:1px 4px;font-size:12px;width:auto;min-height:0" dc-attr-value="{{ lang }}" onChange="{{ setLang }}">
+          <sc-raw-select class="input" aria-label="Language" style="padding:1px 4px;font-size:12px;width:auto;min-height:0" value="{{ lang }}" onChange="{{ setLang }}">
             <sc-for list="{{ langOpts }}" as="l" hint-placeholder-count="2">
               <option dc-attr-value="{{ l.value }}">{{ l.label }}</option>
             </sc-for>
-          </select>
+          </sc-raw-select>
         </label>
       </sc-if>
       <sc-if value="{{ restored }}" hint-placeholder-val="{{ false }}">
@@ -194,15 +200,15 @@
                 <span class="text-muted" style="font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto">{{ up.sec.scope.summary }}</span>
               </button>
               <sc-if value="{{ up.sec.scope.open }}" hint-placeholder-val="{{ false }}">
-              <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px" dc-attr-value="{{ up.scope }}" onChange="{{ up.setScope }}">
+              <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px" value="{{ up.scope }}" onChange="{{ up.setScope }}">
                 <sc-for list="{{ up.scopeOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-              </select>
+              </sc-raw-select>
               <sc-if value="{{ up.onePlayer }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;gap:7px;align-items:center">
                   <span class="text-muted" style="font-size:12.5px;flex:none">measured by</span>
-                  <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.measure }}" onChange="{{ up.setMeasure }}">
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.measure }}" onChange="{{ up.setMeasure }}">
                     <sc-for list="{{ up.measureOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                  </select>
+                  </sc-raw-select>
                 </div>
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ up.measureNote }}</div>
               </sc-if>
@@ -217,12 +223,12 @@
               </button>
               <sc-if value="{{ up.sec.where.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;gap:6px">
-                <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:1;min-width:0" dc-attr-value="{{ up.zone }}" onChange="{{ up.setZone }}">
+                <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:1;min-width:0" value="{{ up.zone }}" onChange="{{ up.setZone }}">
                   <sc-for list="{{ up.zoneOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                </select>
-                <select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:none;width:72px" dc-attr-value="{{ up.tier }}" onChange="{{ up.setTier }}">
+                </sc-raw-select>
+                <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:none;width:72px" value="{{ up.tier }}" onChange="{{ up.setTier }}">
                   <sc-for list="{{ up.tierOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                </select>
+                </sc-raw-select>
               </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">One zone and one tier — an upgrade is ranked where you intend to farm, not averaged over a queue.</div>
               </sc-if>
@@ -269,9 +275,9 @@
               <sc-if value="{{ up.sec.tries.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                 <span class="text-muted" style="font-size:12.5px">Item levels</span>
-                <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.steps }}" onChange="{{ up.setSteps }}">
+                <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.steps }}" onChange="{{ up.setSteps }}">
                   <sc-for list="{{ up.stepOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                </select>
+                </sc-raw-select>
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
                 <span class="text-muted" style="font-size:12.5px" title="How many upgrades the search keeps once it stops halving; the rest of the budget measures them">Finalists</span>
@@ -299,15 +305,15 @@
                       <input class="input" type="number" min="1" max="200" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.enhLevel }}" onChange="{{ up.setEnhLevel }}">
                       <span class="text-muted" style="font-size:12.5px">Tool</span>
                       <div style="display:flex;gap:5px;min-width:0">
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;flex:1;min-width:0" dc-attr-value="{{ up.enhTool }}" onChange="{{ up.setEnhTool }}">
+                        <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;flex:1;min-width:0" value="{{ up.enhTool }}" onChange="{{ up.setEnhTool }}">
                           <sc-for list="{{ up.toolOpts }}" as="o" hint-placeholder-count="8"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                        </select>
+                        </sc-raw-select>
                         <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:60px;flex:none" dc-attr-value="{{ up.enhToolLevel }}" onChange="{{ up.setEnhToolLevel }}">
                       </div>
                       <span class="text-muted" style="font-size:12.5px">Tea</span>
-                      <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.tea }}" onChange="{{ up.setTea }}">
+                      <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.tea }}" onChange="{{ up.setTea }}">
                         <sc-for list="{{ up.teaOpts }}" as="o" hint-placeholder-count="4"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                      </select>
+                      </sc-raw-select>
                       <span class="text-muted" style="font-size:12.5px">Guzzling Pouch</span>
                       <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.pouchLevel }}" onChange="{{ up.setPouchLevel }}">
                       <span class="text-muted" style="font-size:12.5px">Observatory</span>
@@ -325,9 +331,9 @@
                     </div>
                       <sc-for list="{{ up.speedGear }}" as="g" hint-placeholder-count="5">
                         <div style="display:grid;grid-template-columns:minmax(0,1fr) 58px auto;gap:6px;align-items:center">
-                          <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" dc-attr-value="{{ g.value }}" onChange="{{ g.setItem }}">
+                          <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" value="{{ g.value }}" onChange="{{ g.setItem }}">
                             <sc-for list="{{ up.speedOpts }}" as="o" hint-placeholder-count="7"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                          </select>
+                          </sc-raw-select>
                           <input class="input" type="number" min="0" max="20" step="1" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" dc-attr-value="{{ g.level }}" onChange="{{ g.setLevel }}">
                           <button class="btn btn-ghost" style="padding:0 6px;font-size:12px;flex:none" title="Drop this piece" onClick="{{ g.remove }}">✕</button>
                         </div>
@@ -338,13 +344,13 @@
                       <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Cape protections</div>
                       <div style="display:grid;grid-template-columns:106px minmax(0,1fr);gap:7px 9px;align-items:center;font-size:13px">
                         <span class="text-muted" style="font-size:12.5px">Alchemy tea</span>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.alchemyTea }}" onChange="{{ up.setAlchemyTea }}">
+                        <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.alchemyTea }}" onChange="{{ up.setAlchemyTea }}">
                           <sc-for list="{{ up.alchemyTeaOpts }}" as="o" hint-placeholder-count="4"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                        </select>
+                        </sc-raw-select>
                         <span class="text-muted" style="font-size:12.5px">Catalyst</span>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" dc-attr-value="{{ up.catalyst }}" onChange="{{ up.setCatalyst }}">
+                        <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.catalyst }}" onChange="{{ up.setCatalyst }}">
                           <sc-for list="{{ up.catalystOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                        </select>
+                        </sc-raw-select>
                       </div>
                       <label style="display:flex;gap:7px;align-items:center;font-size:13px"><input type="checkbox" checked="{{ up.decCatalytic }}" onChange="{{ up.toggleCatalytic }}">Catalytic Tea</label>
                       <div class="text-muted" style="font-size:12px;text-wrap:pretty">A spare is worth its 2,000 essences sold instantly at the bid, times the Decompose rate at the wearer's alchemy level. The catalyst is spent only on a success.</div>
@@ -399,9 +405,9 @@
                       </sc-for>
                     </div>
                   </sc-if>
-                  <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;max-width:320px" value="" onChange="{{ up.food.addExclude }}">
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;max-width:320px" value="" onChange="{{ up.food.addExclude }}">
                     <sc-for list="{{ up.food.excludeOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                  </select>
+                  </sc-raw-select>
                   <span class="text-muted" style="font-size:12px;text-wrap:pretty">A standing list this browser keeps: an item here is never offered, whatever the zone.</span>
                 </div>
                 </sc-if>
@@ -434,9 +440,9 @@
                       <div style="display:grid;grid-template-columns:18px 86px minmax(0,1fr) 58px;gap:6px;align-items:center;font-size:12.5px;{{ k.rowStyle }}">
                         <input type="checkbox" style="margin:0" checked="{{ k.on }}" onChange="{{ k.toggle }}" title="{{ k.title }}">
                         <span class="text-muted" style="display:flex;gap:5px;align-items:baseline" title="{{ k.title }}">{{ k.label }}<span style="font-size:10.5px;color:var(--color-accent-300)">{{ k.owned }}</span></span>
-                        <select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" dc-attr-value="{{ k.charm }}" onChange="{{ k.setCharm }}">
+                        <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" value="{{ k.charm }}" onChange="{{ k.setCharm }}">
                           <sc-for list="{{ up.skills.perOpts }}" as="o" hint-placeholder-count="5"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                        </select>
+                        </sc-raw-select>
                         <input class="input" type="number" min="0" max="20" step="1" placeholder="lv" style="min-height:29px;padding:2px 5px;font-size:12.5px;width:58px" disabled="{{ k.levelDisabled }}" dc-attr-value="{{ k.level }}" onChange="{{ k.setLevel }}">
                       </div>
                     </sc-for>
@@ -1188,7 +1194,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=6ebb2c793ce5");
+      const i18n = await import("./i18n.js?v=538d34fb884b");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1211,7 +1217,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=6ebb2c793ce5");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=538d34fb884b");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1506,7 +1512,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=6ebb2c793ce5");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=538d34fb884b");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1527,7 +1533,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=6ebb2c793ce5");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=538d34fb884b");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
