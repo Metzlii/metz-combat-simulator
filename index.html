@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="f3a737da22ae"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="7a9bafca9abd"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=f3a737da22ae"></script>
+<script src="./support.js?v=7a9bafca9abd"></script>
 </head>
 <body>
 <x-dc>
@@ -14,12 +14,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f3a737da22ae">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7a9bafca9abd">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=f3a737da22ae">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f3a737da22ae"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=7a9bafca9abd">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7a9bafca9abd"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -274,18 +274,42 @@
               </button>
               <sc-if value="{{ up.sec.tries.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
-                <span class="text-muted" style="font-size:12.5px">Item levels</span>
-                <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px" value="{{ up.steps }}" onChange="{{ up.setSteps }}">
-                  <sc-for list="{{ up.stepOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                </sc-raw-select>
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
                 <span class="text-muted" style="font-size:12.5px" title="How many upgrades the search keeps once it stops halving; the rest of the budget measures them">Finalists</span>
                 <input class="input" type="number" min="1" max="10" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.finalists }}" onChange="{{ up.setFinalists }}">
               </div>
               <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.booksNote }}</div>
-              <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.pouch }}" onChange="{{ up.togglePouch }}"><span>Include the pouch<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Little combat effect, and every party already has one.</span></span></label>
-              <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.charms }}" onChange="{{ up.toggleCharms }}"><span>Include charms<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">A charm raises its owner's XP without changing the fight, so cheap charm steps top every XP list.</span></span></label>
+              <!-- 2026-09-25 (a player's requests, the operator's amendments): a coin budget, the gear slots to test, house rooms with a level cap, refining, and what the request would simulate. -->
+              <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px;padding-top:4px;border-top:1px solid var(--color-divider)">
+                <span class="text-muted" style="font-size:12.5px">Coin budget</span>
+                <input class="input" type="text" placeholder="e.g. 500m or 1.2b" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:150px" dc-attr-value="{{ up.coinBudget }}" onChange="{{ up.setCoinBudget }}">
+              </div>
+              <div class="text-muted" style="font-size:12px;text-wrap:pretty">Every item level whose price fits the budget is tested; with no budget, every level the market or the enhancer can price. Below +10 the market ask is the price whenever the item is listed. Shorthand works: 500k, 20m, 1.2b.</div>
+              <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
+                <span class="text-muted" style="font-size:12.5px">Skip levels</span>
+                <input class="input" type="text" placeholder="e.g. 9, 11" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:150px" dc-attr-value="{{ up.skipLevels }}" onChange="{{ up.setSkipLevels }}">
+              </div>
+              <div class="text-muted" style="font-size:12px;text-wrap:pretty">Item levels you would never buy, comma-separated: no enhancement or refine is tested at these levels.</div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;gap:9px;align-items:baseline"><span class="text-muted" style="font-size:12.5px">Gear slots</span><button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;border:0" onClick="{{ up.slotsAll }}">all</button><button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;border:0" onClick="{{ up.slotsNone }}">none</button></div>
+                <div style="display:flex;gap:5px 10px;flex-wrap:wrap">
+                  <sc-for list="{{ up.slotOpts }}" as="sl" hint-placeholder-count="12"><label style="display:flex;gap:5px;align-items:center;font-size:12.5px"><input type="checkbox" checked="{{ sl.on }}" onChange="{{ sl.toggle }}">{{ sl.name }}</label></sc-for>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;gap:9px;align-items:baseline"><span class="text-muted" style="font-size:12.5px">House rooms</span><button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;border:0" onClick="{{ up.roomsAll }}">all</button><button class="btn btn-ghost" style="padding:0 4px;font-size:11.5px;border:0" onClick="{{ up.roomsNone }}">none</button></div>
+                <div style="display:flex;gap:5px 10px;flex-wrap:wrap">
+                  <sc-for list="{{ up.roomOpts }}" as="rm" hint-placeholder-count="8"><label style="display:flex;gap:5px;align-items:center;font-size:12.5px"><input type="checkbox" checked="{{ rm.on }}" onChange="{{ rm.toggle }}">{{ rm.name }}</label></sc-for>
+                </div>
+                <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
+                  <span class="text-muted" style="font-size:12.5px">Levels per room</span>
+                  <input class="input" type="number" min="1" max="8" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.roomLevels }}" onChange="{{ up.setRoomLevels }}">
+                </div>
+                <div class="text-muted" style="font-size:12px;text-wrap:pretty">A chosen room is tested from its level up to the cap, whatever the budget: a Dining Room at 4 with a cap of 3 is tested at 5, 6 and 7. The first entry picks the Dojo and each player's own main-stat room: Mystical Study for a mage, Gym for melee, Archery Range for ranged.</div>
+              </div>
+              <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.refine }}" onChange="{{ up.toggleRefine }}"><span>Refine un-refined gear<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Refining keeps the enhancement level. Each worn unrefined piece at +10 or above, a cape at +3 or above, is tested as its refined version at the held level and, with a budget, at every level above that fits, the shards included.</span></span></label>
+              <div style="font-size:12.5px;text-wrap:pretty;color:var(--color-accent-300)">{{ up.countLine }}</div>
               </sc-if>
             </div>
 
@@ -987,6 +1011,17 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-25</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.12</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>A coin budget replaces the item-levels choice.</b> Enter what you would spend and every item level whose price fits is tested, so a +5 piece is tried at +7, +10 and +12 when they fit; with no budget, every level the market or the enhancer can price. Ability books take the highest step the budget allows, and Ability levels stays a step count since every book level would be far too many. Below +10 the market ask is the price whenever the item is listed, since nobody commissions a piece that cheap. Under the options a line says how many upgrades the request would simulate, by kind, before you run it (a player's request).</li>
+                <li><b>Gear slots to test, and levels to skip.</b> Untick the slots you were not considering and the finder skips them; the Pouch and the Charm start unticked, in place of the two Include ticks. Skip levels takes the levels you would never buy, +9 and +11 for most gear, and no enhancement or refine is tested there.</li>
+                <li><b>House rooms as upgrades.</b> Tick the rooms you are weighing and a cap of levels: a Dining Room at 4 with a cap of 3 is tested at 5, 6 and 7, each priced from the game's own upgrade table at market ask, and ranked on the same table as gear. It opens on the Dojo and each player's main-stat room, Mystical Study, Gym or Archery Range by their weapon, two levels each.</li>
+                <li><b>Refine un-refined gear.</b> On by default: each worn unrefined piece at +10 or above, a cape at +3 or above, is tested as its refined version at the held level, refining keeps the level, and with a budget at every level above that fits, the shards included. Below those levels nobody spends shards, so nothing is offered.</li>
+                <li>Each of these follows the Whose upgrades choice: the whole party or one player.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-24</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.11</b></div>
@@ -1250,7 +1285,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=f3a737da22ae");
+      const i18n = await import("./i18n.js?v=7a9bafca9abd");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1273,7 +1308,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=f3a737da22ae");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=7a9bafca9abd");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1337,7 +1372,9 @@ class Component extends DCLogic {
   static UP_BUDGETS = [[15, "15 min"], [60, "1 h"], [120, "2 h"]];
   static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books",
     // The hybrid (operator, 2026-09-21): bought at an intermediate level, then enhanced the rest of the way.
-    "market+enhance": "Buy, then enhance", "market+mirror": "Buy, then mirror", "market+enhance+mirror": "Buy, then enhance + mirror" };
+    "market+enhance": "Buy, then enhance", "market+mirror": "Buy, then mirror", "market+enhance+mirror": "Buy, then enhance + mirror",
+    // 2026-09-25: a house-room level and a refine; "refine+<route>" is composed on the row.
+    room: "House room", refine: "Refine" };
 
   async loadZoneMeta(client) {
     try {
@@ -1441,6 +1478,16 @@ class Component extends DCLogic {
     }).join(" \u00b7 ");
   }
   /** A game noun by hrid, else the hrid's own words -- for parts of a server sentence that name an item. */
+  /** Coins from what a player types: 1500000, 1,500,000, 1.5m, 500k, 1.2b (case-insensitive). null when blank or unreadable. */
+  static parseCoins(text) {
+    const raw = String(text ?? "").trim().toLowerCase().replace(/[,\s_]/g, "");
+    if (!raw) return null;
+    const m = /^(\d+(?:\.\d+)?)([kmb])?$/.exec(raw);
+    if (!m) return null;
+    const mult = { k: 1e3, m: 1e6, b: 1e9 }[m[2]] || 1;
+    const coins = Math.floor(Number(m[1]) * mult);
+    return Number.isFinite(coins) && coins > 0 ? coins : null;
+  }
   static hridName(h) {
     const v = Component.t(String(h || ""));
     return v !== h ? v : String(h || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
@@ -1454,6 +1501,11 @@ class Component extends DCLogic {
     if (!cost) return "";
     const num = v => Number(v || 0).toLocaleString("en-US");
     const coins = v => v >= 1e9 ? `${(v / 1e9).toFixed(2)} B` : v >= 1e6 ? `${(v / 1e6).toFixed(1)} M` : num(Math.round(v));
+    // A refine's shards come first; the rest of the note is the route that follows (2026-09-25).
+    if (cost.refine && cost.refine.priced) { const rest = this.costNote({ ...cost, refine: null, note: String(cost.note || "").replace(/^.*?; then /, "") });
+      return Component.tf("refined for {coins}", { coins: coins(Number(cost.refine.coins) || 0) }) + (rest ? `; ${rest}` : ""); }
+    if (cost.route === "room" && Array.isArray(cost.materials) && cost.materials.length)
+      return Component.tf("the game's upgrade table: {list}", { list: cost.materials.map(m => `${num(m.count)} ${Component.hridName(m.itemHrid)}`).join(", ") });
     if (cost.route === "books" && cost.books != null && cost.perBook != null)
       return Component.tf("{count} books at {price} (lowest ask, instant buy, +{premium}%)",
         { count: num(cost.books), price: num(Math.round(cost.perBook)), premium: ((Number(cost.premium) || 0) * 100).toFixed(0) });
@@ -1568,7 +1620,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=f3a737da22ae");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=7a9bafca9abd");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1589,7 +1641,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=f3a737da22ae");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=7a9bafca9abd");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1600,7 +1652,13 @@ class Component extends DCLogic {
       });
     } catch (err) { this.setState({ optSaveError: `Could not read that CSV: ${err?.message || err}` }); }
   }
-  componentDidUpdate() { this.queueOptimize(); }
+  componentDidUpdate() {
+    this.queueOptimize();
+    // The count under the Upgrades options follows the party, the mode and the client as well as the options
+    // (2026-09-25). The runtime calls this hook without the previous state, so the last-seen party is kept here.
+    const mark = `${this.state.upMode}|${this.state.client ? 1 : 0}`;
+    if (this._countParty !== this.state.party || this._countMark !== mark) { this._countParty = this.state.party; this._countMark = mark; this.scheduleUpCount(); }
+  }
   componentWillUnmount() { clearTimeout(this._optT); clearInterval(this._upTick); }
   noteParty(players, buffs, measure) {
     this.setState({ party: Array.isArray(players) ? players : [], buffs: buffs || null, measure: measure || {} });
@@ -1779,7 +1837,22 @@ class Component extends DCLogic {
     const own = (this.state.party || []).find(p => p?.record?.owned || p?.owned);
     return own?.record?.name || "";
   }
-  setUp(patch) { this.setState(s => ({ upForm: { ...s.upForm, ...patch } })); }
+  setUp(patch) { this.setState(s => ({ upForm: { ...s.upForm, ...patch } }), () => this.scheduleUpCount()); }
+  // What the Upgrades request would simulate, by kind (2026-09-25): asked of the client whenever the request changes,
+  // half a second after the last change, so the player can see a budget or a room list blow up before pressing Run.
+  scheduleUpCount() {
+    clearTimeout(this._upCountTimer);
+    this._upCountTimer = setTimeout(async () => {
+      const c = this.state.client;
+      if (!c?.zoneUpgradeCount || !(this.state.party || []).length || !this.upVal("zone") || this.state.upMode !== "upgrades") return;
+      const body = this.upBody();
+      const sig = JSON.stringify({ ...body, players: (body.players || []).map(p => [p?.record?.name, (p?.loadout?.equipment || []).map(e => `${e.itemHrid}+${e.enhancementLevel}`), p?.record?.rooms, (p?.loadout?.abilities || []).map(a => `${a.hrid || a.abilityHrid}:${a.level}`)]) });
+      if (sig === this._upCountSig) return;
+      this._upCountSig = sig;
+      try { const count = await c.zoneUpgradeCount(body); if (this._upCountSig === sig) this.setState({ upCount: count }); }
+      catch (e) { if (this._upCountSig === sig) this.setState({ upCount: { error: `${e?.message || e}`.replace(/^\d{3}\s*/, "") } }); }
+    }, 500);
+  }
   upEnhancer() {
     const d = { ...Component.UP_DEFAULTS.enhancer, ...(this.state.limits?.upgrades?.enhancer || {}) };
     const e = { ...d, ...this.state.upEnh };
@@ -1813,8 +1886,13 @@ class Component extends DCLogic {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
       budgetMinutes: num("budgetMinutes", 15), hours: num("hours", 168), seeds: num("seeds", 5),
       steps: num("steps", 1), abilityLevels: num("abilityLevels", 5), finalists: num("finalists", 5),
-      includePouch: !!this.upVal("includePouch"), includeCharms: !!this.upVal("includeCharms"),
       bookPremium: num("bookPremium", 0.2),
+      // 2026-09-25: the coin budget (blank: none), the gear slots (null: all), the rooms with their cap, refining.
+      budget: Component.parseCoins(this.upVal("budget")),
+      slots: Array.isArray(this.upVal("slots")) ? this.upVal("slots") : (this.state.limits?.upgrades?.slotChoices || []).map(y => y.hrid),
+      rooms: Array.isArray(this.upVal("rooms")) ? this.upVal("rooms") : [],
+      roomLevels: num("roomLevels", 1), refine: !!this.upVal("refine"),
+      skipLevels: String(this.upVal("skipLevels") || "").split(/[^0-9]+/).filter(Boolean).map(Number),
       enhancer: this.upVal("market") ? false : this.upEnhancer(),
       // The route prepares its runs the way zoneRun does, so the community buffs, the Moo Pass and the shrine
       // reach the search: without them it would measure a different party from the one Setup runs.
@@ -2493,8 +2571,10 @@ class Component extends DCLogic {
         border: fin ? "var(--color-accent-700)" : "var(--color-divider)",
         bg: fin ? "color-mix(in srgb, var(--color-accent-800) 26%, transparent)" : "var(--color-bg)",
         player: names.length > 1 ? (r.player || "") : "",
-        glyph: r.kind === "ability" ? "ph-book-open-text" : "ph-arrow-fat-line-up",
-        title: `${(r.itemHrid || r.abilityHrid) ? itemName(r.itemHrid || r.abilityHrid) : (r.name || "")} ${r.from} \u2192 ${r.to}`,
+        glyph: r.kind === "ability" ? "ph-book-open-text" : r.kind === "room" ? "ph-house" : r.kind === "refine" ? "ph-star" : "ph-arrow-fat-line-up",
+        title: r.kind === "room" ? `${(h => { const t = Component.t(h); return t !== h ? t : (r.name || ""); })(r.roomHrid)} ${r.from} \u2192 ${r.to}`
+          : r.kind === "refine" ? Component.tf("Refine {item} +{from} \u2192 {refined} +{to}", { item: itemName(r.fromHrid), from: r.from, refined: itemName(r.itemHrid), to: r.to })
+          : `${(r.itemHrid || r.abilityHrid) ? itemName(r.itemHrid || r.abilityHrid) : (r.name || "")} ${r.from} \u2192 ${r.to}`,
         gain: paceAsTime ? (this.runTimeOf(upBase, d)?.short || "") : `${d >= 0 ? "+" : "\u2212"}${gainNum(d)} ${unit}`,
         se: m.se == null ? "" : paceAsTime ? `\u00b1 ${(this.runTimeOf(upBase, d, m.se)?.se ?? 0).toFixed(1)} s` : `\u00b1 ${gainNum(m.se)}`,
         pctLine: pct ? Component.tf("{pct} of baseline", { pct }) : "",
@@ -2516,7 +2596,7 @@ class Component extends DCLogic {
           ? Component.tf("{materials} materials + {time} over {hours} h", { materials: coin(cost.materialCoins), time: coin(cost.timeCoins), hours: (Number(cost.hours) || 0).toFixed(1) }) : "",
         // The one-line note repeats what the step plan spells out (operator, 2026-09-21): shown only when there is no plan.
         noteLine: (cost.plan || []).length ? "" : this.costNote(cost),
-        route: Component.t(Component.UP_ROUTES[cost.route] || cost.route || ""),
+        route: (key => key.startsWith("refine+") ? Component.tf("Refine, then {route}", { route: Component.t(Component.UP_ROUTES[key.slice(7)] || key.slice(7)) }) : Component.t(Component.UP_ROUTES[key] || key))(String(cost.route || "")),
         note: this.costNote(cost),
         // How the price is reached, one line per action, in order (operator, 2026-09-21: the route and the total
         // did not say how the copy was obtained or that the held piece was sold).
@@ -2623,10 +2703,33 @@ class Component extends DCLogic {
       finalists: String(v("finalists") ?? 5), setFinalists: e => set({ finalists: Math.max(1, Math.min(10, Math.floor(Number(e.target.value) || 5))) }),
       pouch: !!v("includePouch"), togglePouch: () => set({ includePouch: !v("includePouch") }),
       charms: !!v("includeCharms"), toggleCharms: () => set({ includeCharms: !v("includeCharms") }),
+      // 2026-09-25: the coin budget, the gear slots, the rooms and their cap, refining, and what would run.
+      // `budget`/`setBudget` above are the time limit in minutes; the coins have their own names.
+      // The field keeps what was typed (500m, 1.2b); parseCoins reads it wherever the budget is used.
+      coinBudget: v("budget") == null ? "" : String(v("budget")),
+      skipLevels: String(v("skipLevels") ?? ""), setSkipLevels: e => set({ skipLevels: e.target.value }),
+      setCoinBudget: e => set({ budget: e.target.value }),
+      // The list is always explicit (the served default omits the pouch and the charm), so the server's include flags never apply here.
+      slotOpts: (s.limits?.upgrades?.slotChoices || []).map(x => { const all = (s.limits?.upgrades?.slotChoices || []).map(y => y.hrid), chosen = Array.isArray(v("slots")) ? v("slots") : all, on = chosen.includes(x.hrid);
+        return { hrid: x.hrid, name: Component.hridName(x.hrid) === x.hrid ? x.name : Component.t(x.name), on,
+          toggle: () => set({ slots: on ? chosen.filter(h => h !== x.hrid) : [...chosen, x.hrid] }) }; }),
+      slotsAll: () => set({ slots: (s.limits?.upgrades?.slotChoices || []).map(y => y.hrid) }), slotsNone: () => set({ slots: [] }),
+      // "auto" leads the room list: the Dojo and each player's main-stat room by weapon style (the default).
+      roomOpts: [{ hrid: "auto", name: Component.t("Dojo + each player's main-stat room") }, ...(s.limits?.upgrades?.roomChoices || [])].map(x => { const chosen = Array.isArray(v("rooms")) ? v("rooms") : [], on = chosen.includes(x.hrid);
+        return { hrid: x.hrid, name: x.hrid === "auto" ? x.name : (h => { const t = Component.t(h); return t !== h ? t : x.name; })(x.hrid), on,
+          toggle: () => set({ rooms: on ? chosen.filter(h => h !== x.hrid) : [...chosen, x.hrid] }) }; }),
+      roomsAll: () => set({ rooms: ["auto", ...(s.limits?.upgrades?.roomChoices || []).map(y => y.hrid)] }), roomsNone: () => set({ rooms: [] }),
+      roomLevels: String(v("roomLevels") ?? 1), setRoomLevels: e => set({ roomLevels: Math.max(1, Math.min(8, Math.floor(Number(e.target.value) || 1))) }),
+      refine: !!v("refine"), toggleRefine: () => set({ refine: !v("refine") }),
+      countLine: (c => { if (!c) return ""; if (c.error) return Component.t(c.error);
+        const parts = [["enhance", "{n} enhancements"], ["ability", "{n} abilities"], ["room", "{n} rooms"], ["refine", "{n} refinements"]]
+          .filter(([k]) => c.byKind?.[k]).map(([k, key]) => Component.tf(key, { n: nf(c.byKind[k]) }));
+        const line = Component.tf("{n} upgrades would be simulated", { n: nf(c.total) }) + (parts.length ? `: ${parts.join(", ")}` : "");
+        return c.capped ? `${line} \u00b7 ${Component.tf("over the cap of {cap}: only the first {cap} run", { cap: nf(c.cap) })}` : line; })(s.upCount),
       // One sentence, one node: the percentage is substituted after translation so the clause can be ordered
       // however the language needs. It used to be "Ability books are priced up to" + value + "over the lowest
       // ask", which only reads as a sentence in a language shaped like English.
-      booksNote: Component.tf("Ability books are priced up to {premium} over the lowest ask (an instant buy).",
+      booksNote: Component.tf("Ability books are priced up to {premium} over the lowest ask (an instant buy), depending on market trade volume and skill book availability.",
         { premium: `${Math.round((Number(v("bookPremium")) || 0) * 100)} %` }),
       // Every part of the form is a section that opens, and all of them start closed: the answer each one holds
       // is on its own header, so the column reads as a summary of the search until something needs changing.
@@ -2635,7 +2738,7 @@ class Component extends DCLogic {
           ["scope", v("player") ? `${v("player")}${v("measure") ? Component.tf(" \u00b7 {name}'s share", { name: v("measure") }) : ""}` : Component.tf("the whole party ({n})", { n: names.length })],
           ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
           ["budget", Component.tf("{n} min", { n: budget })],
-          ["tries", `${Component.t(["", "+1", "+1 and +2", "+1 to +3"][Math.min(3, Number(v("steps")) || 1)])}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
+          ["tries", `${Component.parseCoins(v("budget")) > 0 ? Component.tf("budget {coins}", { coins: nf(Component.parseCoins(v("budget"))) }) : Component.t("no budget")}${(v("rooms") || []).length ? Component.tf(" \u00b7 {n} rooms", { n: (v("rooms") || []).length }) : ""}${v("refine") ? Component.t(" \u00b7 refining") : ""}${String(v("skipLevels") || "").trim() ? Component.tf(" \u00b7 skip +{levels}", { levels: String(v("skipLevels")).split(/[^0-9]+/).filter(Boolean).join(", +") }) : ""}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
           ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(v("hours")), seeds: nf(v("seeds")) })],
           ["enh", v("market") ? Component.t("market only") : Component.tf("level {level} \u00b7 {tool} +{toolLevel}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level })],
           // Skill levelling only: how far ahead the curves look, and how many points each gets.

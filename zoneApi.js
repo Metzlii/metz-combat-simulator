@@ -13,7 +13,7 @@ const WORKERS_KEY = "mwi.zone.workers";
 const savedWorkers = () => { try { const v = Number(localStorage.getItem(WORKERS_KEY)); return v >= 1 ? Math.floor(v) : null; } catch { return null; } };
 
 export async function connectZoneOnly() {
-  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=f3a737da22ae");
+  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=7a9bafca9abd");
   let cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
   const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
@@ -44,6 +44,8 @@ export async function connectZoneOnly() {
     // uses — a search runs for minutes to hours, and the ranking fills in as rows land.
     zoneUpgrades: body => zone.zoneUpgrades(body),
     zoneUpgradesStream: (body, handlers) => zone.zoneUpgradesStream(body, handlers),
+    // 2026-09-25: what an Upgrades request would simulate, by kind, before it runs (the count line under the options).
+    zoneUpgradeCount: body => zone.zoneUpgradeCount(body),
     // ZONE-53 (2) and (3): the other two optimizers. Same streamed shape as the upgrade finder.
     zoneTriggers: body => zone.zoneTriggers(body),
     zoneTriggersStream: (body, handlers) => zone.zoneTriggersStream(body, handlers),
@@ -60,7 +62,7 @@ export async function connectZoneOnly() {
   // follow, with the header's lane count updated through the same event the Workers setting uses.
   (async () => {
     try {
-      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=f3a737da22ae");
+      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=7a9bafca9abd");
       const measured = Math.max(1, await probeLanes());
       if (measured <= cores) return;
       cores = measured;
