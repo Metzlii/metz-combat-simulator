@@ -18,6 +18,7 @@
  "1 scroll": "1 张卷轴",
  "A 30-minute Labyrinth scroll, kept up for the whole run": "迷宫的30分钟卷轴，整个模拟期间持续生效",
  "A chosen room is tested from its level up to the cap, whatever the budget: a Dining Room at 4 with a cap of 3 is tested at 5, 6 and 7.": "选中的房间不受预算限制，从当前等级测试到上限：4 级餐厅、上限 3 时，会测试 5、6 和 7 级。",
+ "A chosen room is tested from its level up to the cap, whatever the budget: a Dining Room at 4 with a cap of 3 is tested at 5, 6 and 7. The first entry picks the Dojo and each player's own main-stat room: Mystical Study for a mage, Gym for melee, Archery Range for ranged, and the Armory as well for a bulwark player.": "选中的房间不受预算限制，从当前等级测试到上限：4 级餐厅、上限 3 时，会测试 5、6 和 7 级。第一项会选择道场和每位玩家自己的主属性房间：法师是神秘书房，近战是健身房，远程是射箭场，持壁垒的玩家还会加上军械库。",
  "A chosen room is tested from its level up to the cap, whatever the budget: a Dining Room at 4 with a cap of 3 is tested at 5, 6 and 7. The first entry picks the Dojo and each player's own main-stat room: Mystical Study for a mage, Gym for melee, Archery Range for ranged.": "选中的房间不受预算限制，从当前等级测试到上限：4 级餐厅、上限 3 时，会测试 5、6 和 7 级。第一项会选择道场和每位玩家自己的主属性房间：法师是神秘书房，近战是健身房，远程是射箭场。",
  "A demo party is loaded for the walkthrough; it clears when you close the guide.": "已为引导加载了一支演示队伍，关闭引导时会清除。",
  "A short walkthrough of the site": "网站的简短引导",
