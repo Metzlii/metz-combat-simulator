@@ -135,7 +135,11 @@ export function translate(root = document.body) {
   for (let n = walk.nextNode(); n; n = walk.nextNode()) nodes.push(n);
   for (const n of nodes) {
     const raw = n.nodeValue, key = raw.trim();
-    const hit = dict[key];
+    // A context key (2026-09-25): one English string that needs two translations -- the optimizer's Food & drinks
+    // tab (zh 食物优化) beside the Food & drinks toggle and editor section -- carries data-t="<key>" on its parent.
+    // A locale without that key falls back to the plain English one.
+    const ctx = n.parentElement?.getAttribute?.("data-t");
+    const hit = (ctx && dict[ctx]) || dict[key];
     if (!hit || hit === key) continue;
     // The surrounding whitespace is layout, not text: "Seed " keeps its space.
     if (!original.has(n)) original.set(n, raw);
