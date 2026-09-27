@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="7339ec32af19"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="d23d3c9aab46"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=7339ec32af19"></script>
+<script src="./support.js?v=d23d3c9aab46"></script>
 </head>
 <body>
 <x-dc>
@@ -14,12 +14,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7339ec32af19">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d23d3c9aab46">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=7339ec32af19">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7339ec32af19"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d23d3c9aab46">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d23d3c9aab46"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -268,7 +268,8 @@
                 <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.budget }}" onChange="{{ up.setBudget }}">
                 <span class="text-muted" style="font-size:12.5px">min</span>
               </div>
-              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until only the finalists stand — five unless you set another number. Anything left over keeps measuring them.</div>
+              <sc-if value="{{ up.notTrig }}" hint-placeholder-val="{{ true }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until only the finalists stand — five unless you set another number. Anything left over keeps measuring them.</div></sc-if>
+              <sc-if value="{{ up.trigLimitNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;text-wrap:pretty">{{ up.trigLimitNote }}</div></sc-if>
               </sc-if>
             </div>
 
@@ -428,6 +429,14 @@
                   <button class="seg-opt" style="font-size:12.5px;{{ up.trig.scopeFood.style }}" onClick="{{ up.trig.scopeFood.go }}">Food</button>
                 </div>
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Abilities: the enemy-HP conditions on the slotted abilities. Food: the HP and MP thresholds on the slotted food, from the game's default where a player set none. A drink has nothing to tune.</div>
+                <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">
+                  <span class="text-muted" style="font-size:12.5px">Rank by</span>
+                  <div class="seg" style="align-self:flex-start">
+                    <button class="seg-opt" style="font-size:12.5px;{{ up.trig.rankXp.style }}" onClick="{{ up.trig.rankXp.go }}">XP / h</button>
+                    <button class="seg-opt" style="font-size:12.5px;{{ up.trig.rankProfit.style }}" onClick="{{ up.trig.rankProfit.go }}">Profit / day</button>
+                  </div>
+                </div>
+                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.</div>
                 </sc-if>
               </div>
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
@@ -440,7 +449,7 @@
                   <span class="text-muted" style="font-size:12.5px">Walks of the list</span>
                   <input class="input" type="number" min="1" max="4" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.trig.passes }}" onChange="{{ up.trig.setPasses }}">
                 </div>
-                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Triggers interact, so the list is walked more than once: a second walk is worth more than a tighter first one. The time limit is split evenly across the slots, with a share held back for the final check.</div>
+                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Triggers interact, so the list is walked more than once: a second walk is worth more than a tighter first one. Each walk costs about the same, so two walks take about twice as long as one.</div>
                 </sc-if>
               </div>
             </sc-if>
@@ -758,8 +767,8 @@
               <sc-if value="{{ up.trig.idle }}" hint-placeholder-val="{{ true }}">
                 <div class="card" style="max-width:66ch;gap:7px">
                   <div class="card-kicker">How the walk goes</div>
-                  <div style="font-size:13px;text-wrap:pretty">A baseline run measures each ability's share of party damage, and the walk takes them biggest first. Each threshold is swept from no gate up to six times party DPS, coarse then fine around the winner, with every earlier winner left in place — then the whole list is walked again.</div>
-                  <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">A value replaces the one it came from only if it beat it on the same seeds. The answer is every winner together against the party as it came in, on fresh seeds.</div>
+                  <div style="font-size:13px;text-wrap:pretty">An importance screen first tries each trigger's whole window on its own against the party as it stands, and the walk takes the triggers that move the result most first. Each threshold is swept from no gate up to six times party DPS, coarse then fine around the winner, with every earlier winner left in place — then the whole list is walked again in the same order.</div>
+                  <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">A value replaces the one it came from only when fresh seeds confirm its gain is more than twice its own error, sized to see 0.06% of the party's result. The answer is every winner together against the party as it came in, on fresh seeds.</div>
                 </div>
               </sc-if>
               <sc-if value="{{ up.trig.hasCombined }}" hint-placeholder-val="{{ false }}">
@@ -1035,6 +1044,18 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-26</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.13</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Trigger values keeps only what it can confirm.</b> Keeping the best of a dozen noisy values made the whole list worse on every walk we measured, so a new value now has to be confirmed on fresh seeds with its gain more than twice its own error, sized to see 0.06% of the party's result (3,000 XP / h on a party making 5 million). Runs are 672 hours, and the walk takes as long as that needs: there is no time limit by default, and the time limit header says about how long before you start.</li>
+                <li><b>Trigger values ranks on XP / h.</b> One trigger rarely moves encounters per hour by more than the noise, so each value is now judged on XP / h by default, or on Profit / day if you pick it under What to tune. The pace change still shows beside each gain.</li>
+                <li><b>An importance screen sets the walk's order.</b> Every trigger's whole window is first tried on its own against the party as it stands, and the walk takes the triggers that move the result most first, so a buff or debuff whose timing matters no longer waits at the end because it deals no damage. Each later pass walks the same order from the values the one before it found.</li>
+                <li><b>Refining from below +10.</b> An unrefined +7 piece is now offered refined at +10 and up; before, only a piece already at +10 was.</li>
+                <li><b>Refined pieces priced by the market.</b> Buying the refined piece outright, the held one sold, is now one of the prices, so Price by the market only offers refined gear that is listed.</li>
+                <li><b>Translations.</b> Chinese corrections from Odysseus, the walkthrough's Back button in every language, and the Food &amp; drinks optimizer translated throughout.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-25</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.12</b></div>
@@ -1314,7 +1335,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=7339ec32af19");
+      const i18n = await import("./i18n.js?v=d23d3c9aab46");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1337,7 +1358,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=7339ec32af19");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=d23d3c9aab46");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1660,7 +1681,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=7339ec32af19");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=d23d3c9aab46");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1681,7 +1702,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=7339ec32af19");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=d23d3c9aab46");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1946,7 +1967,43 @@ class Component extends DCLogic {
   // ——— ZONE-53 (2) and (3): the other two optimizers ———
   // Both answer in the upgrade finder's shape — a streamed head, rows carrying an index, a done summary — so one
   // runner drives all three and each mode only says what to send and what to keep.
-  static TRIG_DEFAULTS = { passes: 2, scope: "abilities" };
+  // Trigger values keeps its own hours, seeds and time limit (operator, 2026-09-26): 672 h runs, 5 seeds, and no limit
+  // by default -- the walk's rounds are sized by seeds, and a limit is only a cap.
+  static TRIG_DEFAULTS = { passes: 2, scope: "abilities", metric: "xp", hours: 672, seeds: 5, budgetMinutes: "" };
+  static TRIG_LIMITS = [[0, "No limit"], [60, "1 h"], [120, "2 h"], [240, "4 h"]];
+  /** About how long a trigger walk takes on this device, before it starts: the server's job plan, priced at the
+   * pace this browser learned (the native figure x 1.2 before it has one), over its lanes. Null without triggers. */
+  trigEstimateMs() {
+    const s = this.state, who = this.upVal("player");
+    const players = (s.party || []).filter(p => !who || p?.record?.name === who);
+    const food = this.modeVal("triggers", "scope") === "food";
+    const ENEMY = ["/combat_trigger_conditions/current_hp", "/combat_trigger_conditions/missing_hp", "/combat_trigger_conditions/lowest_hp_percentage"];
+    let T = 0;
+    for (const p of players) {
+      if (food) { T += (p?.loadout?.food?.["/action_types/combat"] || []).filter(e => e?.itemHrid).length; continue; }
+      const slotted = new Set((p?.loadout?.abilities || []).map(a => a?.hrid || a?.abilityHrid));
+      for (const [h, list] of Object.entries(p?.loadout?.abilityTriggers || {})) if (slotted.has(h) && Array.isArray(list))
+        T += list.filter(t => ENEMY.includes(t?.conditionHrid) && /all_enemies|targeted_enemy/.test(t?.dependencyHrid || "")).length;
+    }
+    if (!T) return null;
+    const seeds = Number(this.modeVal("triggers", "seeds")) || 5, hours = Number(this.modeVal("triggers", "hours")) || 672, passes = Number(this.modeVal("triggers", "passes")) || 2;
+    const jobs = seeds + (!food && T > 1 ? (12 * T + 1) * 2 : 0) + passes * T * (13 * seeds + 6 * seeds + 4 * 2 * seeds + 16) + 8 * seeds;
+    let spch = 0.05; try { const l = JSON.parse(localStorage.getItem("gts.zone.pace.v1") || "null"); if (Number(l?.secondsPerCandidateHour) > 0) spch = Number(l.secondsPerCandidateHour); } catch {}
+    const lanes = Number(s.client?.zoneLanes) || Number(s.client?.workers) || 1;
+    return jobs * hours * spch / lanes * 1000;
+  }
+  static durText(ms) {
+    const m = Math.max(1, Math.round((Number(ms) || 0) / 60000));
+    return m >= 60 ? Component.tf("{h} h {m} min", { h: Math.floor(m / 60), m: String(m % 60).padStart(2, "0") }) : Component.tf("{n} min", { n: m });
+  }
+  /** The running walk's clock: elapsed, and what is left from the planned runs against the ones done. */
+  trigClock(head) {
+    const el = Date.now() - (this._upT0 || Date.now()), done = Number(head?.jobsDone) || 0, plan = Number(head?.plannedJobs) || 0;
+    const cap = Number(this.modeVal("triggers", "budgetMinutes")) || 0;
+    const left = done > 0 && plan > done ? el * (plan - done) / done : null;
+    const text = left != null ? Component.tf("{elapsed} elapsed · about {left} left", { elapsed: Component.durText(el), left: Component.durText(left) }) : Component.tf("{elapsed} elapsed", { elapsed: Component.durText(el) });
+    return cap > 0 ? `${text} · ${Component.tf("capped at {n} min", { n: cap })}` : text;
+  }
   static SKILL_DEFAULTS = { horizonDays: 90, points: 10, charm: "current", charmLevel: 0 };
   modeState(mode) {
     return mode === "triggers"
@@ -2028,7 +2085,12 @@ class Component extends DCLogic {
       ...(this.state.measure || {}),
     };
     if (this.upVal("player")) body.player = this.upVal("player");
-    if (mode === "triggers") { body.passes = num(this.modeVal("triggers", "passes"), 2); body.scope = this.modeVal("triggers", "scope") === "food" ? "food" : "abilities"; }
+    if (mode === "triggers") { body.passes = num(this.modeVal("triggers", "passes"), 2); body.scope = this.modeVal("triggers", "scope") === "food" ? "food" : "abilities";
+      // What each value is judged on (operator, 2026-09-26): XP / h by default, Profit / day on request.
+      body.goal = { metric: this.modeVal("triggers", "metric") === "profit" ? "profit" : "xp" };
+      // Its own hours and seeds, and a limit only when one is set (none by default).
+      body.hours = num(this.modeVal("triggers", "hours"), 672); body.seeds = num(this.modeVal("triggers", "seeds"), 5);
+      const cap = Number(this.modeVal("triggers", "budgetMinutes")); body.budgetMinutes = cap > 0 ? cap : null; }
     else {
       body.horizonDays = num(this.modeVal("skills", "horizonDays"), 90);
       body.points = num(this.modeVal("skills", "points"), 10);
@@ -2264,14 +2326,25 @@ class Component extends DCLogic {
       if ((dep === x.dependencyHrid || cond === x.conditionHrid) && x.condition) return x.condition;
       return `${dep === x.dependencyHrid ? Component.hridName(dep) : dep} ${cond === x.conditionHrid ? Component.hridName(cond) : cond} ${/greater/.test(x.comparatorHrid || "") ? "\u2265" : "\u2264"}`;
     };
+    // What the walk ranked on (operator, 2026-09-26): XP / h by default, Profit / day on request; EPH for an answer
+    // from before. Read from the answer when there is one, so a restored answer describes itself.
+    const gm = s.trigDone?.goal?.metric || s.trigHead?.goal?.metric || (this.modeVal("triggers", "metric") === "profit" ? "profit" : "xp");
+    const coinAbs = v => { const a = Math.abs(Number(v) || 0); return a >= 1e9 ? `${(a / 1e9).toFixed(2)} B` : a >= 1e6 ? `${(a / 1e6).toFixed(1)} M` : a >= 1e3 ? `${(a / 1e3).toFixed(1)} k` : nf(a); };
+    const goalText = (delta, se) => gm === "profit"
+      ? Component.tf("{d} coins / day \u00b1 {se}", { d: `${Number(delta) >= 0 ? "+" : "\u2212"}${coinAbs(Number(delta) * 24)}`, se: coinAbs((Number(se) || 0) * 24) })
+      : xpEach ? Component.tf("{d} XP / h a player \u00b1 {se}", { d: xpd(Number(delta) / partyN), se: nf((Number(se) || 0) / partyN) })
+      : Component.tf("{d} XP / h \u00b1 {se}", { d: xpd(delta), se: nf(Number(se) || 0) });
+    const paceText = (dEph, se) => (t => (t ? t.withError : Component.tf("{d} EPH \u00b1 {se}", { d: d(dEph), se: (Number(se) || 0).toFixed(2) })))(this.runTimeOf(base, Number(dEph) || 0, se));
+    const goalGain = x => `${goalText(x.delta, x.deltaSE)}${x.deltaEph == null ? "" : ` \u00b7 ${paceText(x.deltaEph, x.deltaEphSE)}`}`;
+    const goalCombined = c => `${goalText(c.delta, c.deltaSE)}${measured && scope ? ` ${scope}` : ""}${c.deltaEph == null ? "" : ` \u00b7 ${paceText(c.deltaEph, c.deltaEphSE)}`}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(c.seeds) })}`;
     const steps = (s.trigSteps || []).map((x, i) => ({
       key: `${i}`, who: whoOf(x.player), ability: abName(x),
       full: `${whoOf(x.player)}${abName(x)} ${condText(x)}`.trim(),
       pass: Component.tf("pass {n}", { n: x.pass ?? 1 }), cond: condText(x),
-      move: x.changed ? `${nf(x.from)} \u2192 ${nf(x.to)}` : Component.tf("kept {v}", { v: nf(x.from) }),
+      move: x.changed ? `${nf(x.from)} \u2192 ${nf(x.to)}` : x.rejected ? Component.tf("kept {v} \u00b7 {to} did not clear its noise", { v: nf(x.from), to: nf(x.rejected.to) }) : Component.tf("kept {v}", { v: nf(x.from) }),
       changed: !!x.changed,
       // EPH decides each step; its XP change on the same seeds is shown beside it.
-      gain: x.changed ? `${(t => (t ? t.withError : Component.tf("{d} EPH \u00b1 {se}", { d: d(x.delta), se: (Number(x.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, x.delta, x.deltaSE))}${x.deltaXp == null ? "" : (xpEach ? Component.tf(" \u00b7 {xp} XP / h a player", { xp: xpd(x.deltaXp / partyN) }) : Component.tf(" \u00b7 {xp} XP / h", { xp: xpd(x.deltaXp) }))}` : "",
+      gain: gm !== "eph" ? (x.changed ? goalGain(x) : x.rejected ? goalText(x.rejected.delta, x.rejected.deltaSE) : "") : x.changed ? `${(t => (t ? t.withError : Component.tf("{d} EPH \u00b1 {se}", { d: d(x.delta), se: (Number(x.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, x.delta, x.deltaSE))}${x.deltaXp == null ? "" : (xpEach ? Component.tf(" \u00b7 {xp} XP / h a player", { xp: xpd(x.deltaXp / partyN) }) : Component.tf(" \u00b7 {xp} XP / h", { xp: xpd(x.deltaXp) }))}` : "",
       style: x.changed ? "color:var(--color-accent-300)" : "",
     }));
     // The walk by pass (operator, 2026-09-21): each pass in its own container, with the values it settled on
@@ -2316,26 +2389,34 @@ class Component extends DCLogic {
     const head = s.trigHead || null;
     const targets = (head?.targets || []).map(t => ({
       text: `${whoOf(t.player)}${abName(t)} \u00b7 ${t.condition} ${nf(t.value)}`,
+      // The importance screen's spread (2026-09-26): how far EPH moved across the trigger's window, the walk's order.
       share: t.kind === "food" ? (t.usesPerHour ? Component.tf("{n} uses / h", { n: nf(t.usesPerHour) }) : "")
+        : t.spread != null ? (gm === "profit" ? Component.tf("moves {d} coins / day", { d: coinAbs(Number(t.spread) * 24) })
+          : gm === "xp" ? (xpEach ? Component.tf("moves {d} XP / h a player", { d: nf(Number(t.spread) / partyN) }) : Component.tf("moves {d} XP / h", { d: nf(Number(t.spread)) }))
+          : Component.tf("moves {d} EPH", { d: (Number(t.spread) || 0).toFixed(2) }))
         : t.damagePerHour ? Component.tf("{n} dmg/h", { n: nf(t.damagePerHour) }) : "" }));
     // What to tune (operator, 2026-09-24): the abilities' enemy-HP triggers, or the food's HP/MP thresholds.
     const tuneScope = this.modeVal("triggers", "scope") === "food" ? "food" : "abilities";
     const scopeBtn = k => ({ style: tuneScope === k ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
       go: () => this.setMode("triggers", { scope: k }) });
     const whatOpen = !!(s.upSec || {}).trigWhat;
+    const rankMetric = this.modeVal("triggers", "metric") === "profit" ? "profit" : "xp";
+    const rankBtn = k => ({ style: rankMetric === k ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
+      go: () => this.setMode("triggers", { metric: k }) });
     return {
-      scopeAbilities: scopeBtn("abilities"), scopeFood: scopeBtn("food"),
-      whatOpen, whatCaret: whatOpen ? "\u25be" : "\u25b8", whatSummary: tuneScope === "food" ? Component.t("Food") : Component.t("Abilities"),
+      scopeAbilities: scopeBtn("abilities"), scopeFood: scopeBtn("food"), rankXp: rankBtn("xp"), rankProfit: rankBtn("profit"),
+      whatOpen, whatCaret: whatOpen ? "\u25be" : "\u25b8",
+      whatSummary: `${tuneScope === "food" ? Component.t("Food") : Component.t("Abilities")} \u00b7 ${rankMetric === "profit" ? Component.t("Profit / day") : Component.t("XP / h")}`,
       toggleWhat: () => this.setState(st => ({ upSec: { ...st.upSec, trigWhat: !st.upSec?.trigWhat } })),
       passes: String(this.modeVal("triggers", "passes")),
       setPasses: e => this.setMode("triggers", { passes: Math.max(1, Math.floor(Number(e.target.value) || 1)) }),
       running: !!s.trigRunning, idle: !s.trigRunning && !(s.trigSteps || []).length && !s.trigDone && !s.trigError,
-      error: s.trigError || "", noClears: this.noClearsNote(s, head, "triggers"),
+      error: s.trigError || "", noClears: gm === "eph" ? this.noClearsNote(s, head, "triggers") : "",
       run: () => this.runMode("triggers"),
-      stage: head ? `${Component.stageText(head.stage || "measuring", head.current)}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.runClock()}` : ""}` : Component.t("measuring the party as it stands\u2026"),
+      stage: head ? `${Component.stageText(head.stage || "measuring", head.current)}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.trigClock(head)}` : ""}` : Component.t("measuring the party as it stands\u2026"),
       targets, hasTargets: targets.length > 0,
       steps, hasSteps: steps.length > 0, walkPasses: passes,
-      combined: combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
+      combined: combined && gm !== "eph" ? goalCombined(combined) : combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
       // Send the tuned values to the party on Setup. Only ever from a FINISHED answer: a half-walked list is
@@ -2669,6 +2750,9 @@ class Component extends DCLogic {
     const set = patch => this.setUp(patch);
     const ready = !!(s.party || []).length && !!v("zone");
     const mode = s.upMode || "upgrades";
+    // Trigger values keeps its own time limit, hours and seeds (2026-09-26); the panels read and write the mode's.
+    const onTrig = mode === "triggers", tv = k => this.modeVal("triggers", k), tset = p => this.setMode("triggers", p);
+    const trigCap = Number(tv("budgetMinutes")) || 0, trigEst = onTrig ? this.trigEstimateMs() : null;
     const modeBtn = k => ({ style: mode === k
       ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)"
       : "border:0;background:transparent;color:var(--color-neutral-300)",
@@ -2734,11 +2818,18 @@ class Component extends DCLogic {
       zoneOpts: [{ value: "", label: zones.length ? Component.t("Pick a zone") : Component.t("loading the zone list\u2026") }, ...zones.map(z => ({ value: z.hrid, label: Component.t(z.name) }))],
       tier: String(tier), setTier: e => set({ tier: Number(e.target.value) || 0 }),
       tierOpts: Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
-      budgets: Component.UP_BUDGETS.map(([m, label]) => ({ label,
-        cls: Number(v("budgetMinutes")) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => set({ budgetMinutes: m }) })),
-      budget: String(v("budgetMinutes")), setBudget: e => set({ budgetMinutes: String(Math.max(5, Math.floor(Number(e.target.value) || 15))) }),   // 5 minutes is the floor for a typed limit
-      hours: String(v("hours")), setHours: e => set({ hours: e.target.value }),
-      seeds: String(v("seeds")), setSeeds: e => set({ seeds: e.target.value }),
+      budgets: onTrig ? Component.TRIG_LIMITS.map(([m, label]) => ({ label: Component.t(label),
+          cls: trigCap === m ? "btn btn-secondary" : "btn btn-ghost", go: () => tset({ budgetMinutes: m ? String(m) : "" }) }))
+        : Component.UP_BUDGETS.map(([m, label]) => ({ label,
+          cls: Number(v("budgetMinutes")) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => set({ budgetMinutes: m }) })),
+      budget: onTrig ? (trigCap ? String(trigCap) : "") : String(v("budgetMinutes")),
+      setBudget: onTrig ? e => tset({ budgetMinutes: String(e.target.value).trim() === "" ? "" : String(Math.max(5, Math.floor(Number(e.target.value) || 5))) })
+        : e => set({ budgetMinutes: String(Math.max(5, Math.floor(Number(e.target.value) || 15))) }),   // 5 minutes is the floor for a typed limit
+      hours: onTrig ? String(tv("hours")) : String(v("hours")), setHours: e => (onTrig ? tset({ hours: e.target.value }) : set({ hours: e.target.value })),
+      seeds: onTrig ? String(tv("seeds")) : String(v("seeds")), setSeeds: e => (onTrig ? tset({ seeds: e.target.value }) : set({ seeds: e.target.value })),
+      notTrig: !onTrig,
+      trigLimitNote: onTrig ? (trigEst != null ? Component.tf("Trigger values runs until every trigger is confirmed, about {t} for this party on this device; a limit here only stops it early.", { t: Component.durText(trigEst) })
+        : Component.t("Trigger values runs until every trigger is confirmed; a limit here only stops it early.")) : "",
       steps: String(v("steps")), setSteps: e => set({ steps: Number(e.target.value) || 1 }),
       stepOpts: [{ value: "1", label: Component.t("+1 only") }, { value: "2", label: Component.t("+1 and +2") }, { value: "3", label: Component.t("+1, +2 and +3") }],
       abilityLevels: String(v("abilityLevels")), setAbilityLevels: e => set({ abilityLevels: e.target.value }),
@@ -2786,9 +2877,9 @@ class Component extends DCLogic {
         const defs = [
           ["scope", v("player") ? `${v("player")}${v("measure") ? Component.tf(" \u00b7 {name}'s share", { name: v("measure") }) : ""}` : Component.tf("the whole party ({n})", { n: names.length })],
           ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
-          ["budget", Component.tf("{n} min", { n: budget })],
+          ["budget", onTrig ? `${trigCap ? Component.tf("{n} min", { n: trigCap }) : Component.t("no limit")}${trigEst != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(trigEst) })}` : ""}` : Component.tf("{n} min", { n: budget })],
           ["tries", `${Component.parseCoins(v("budget")) > 0 ? Component.tf("budget {coins}", { coins: nf(Component.parseCoins(v("budget"))) }) : Component.t("no budget")}${(v("rooms") || []).length ? Component.tf(" \u00b7 {n} rooms", { n: (v("rooms") || []).length }) : ""}${v("refine") ? Component.t(" \u00b7 refining") : ""}${String(v("skipLevels") || "").trim() ? Component.tf(" \u00b7 skip +{levels}", { levels: String(v("skipLevels")).split(/[^0-9]+/).filter(Boolean).join(", +") }) : ""}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
-          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(v("hours")), seeds: nf(v("seeds")) })],
+          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(onTrig ? tv("hours") : v("hours")), seeds: nf(onTrig ? tv("seeds") : v("seeds")) })],
           ["enh", v("market") ? Component.t("market only") : Component.tf("level {level} \u00b7 {tool} +{toolLevel}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level })],
           // Skill levelling only: how far ahead the curves look, and how many points each gets.
           ["horizon", Component.tf("{days} days \u00b7 {samples} samples", { days: Number(this.modeVal("skills", "horizonDays")) || 90, samples: Number(this.modeVal("skills", "points")) || 10 })],
