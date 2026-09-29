@@ -3218,6 +3218,7 @@
  "Werewolf Claw": "늑대인간 발톱",
  "Werewolf Slasher": "늑대인간 참수도",
  "What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.": "각 값을 평가하는 기준입니다. 트리거 하나로 시간당 조우 수가 노이즈 이상 움직이는 경우는 드물어 기본값은 XP / 시간입니다. 이익 / 일은 전리품에서 음식과 음료 비용을 뺀 값입니다. 속도 변화도 각 개선 옆에 계속 표시됩니다.",
+ "What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.": "탐색이 업그레이드를 남기는 기준입니다. 매 라운드 선두 후보를 더 많은 시드로 다시 측정합니다. 이익 / 시간은 전리품에서 음식과 음료 비용을 뺀 값이며, 업그레이드 가격은 어느 경우든 개선 폭 옆에 표시됩니다. 결과는 나중에 다른 기준으로 다시 정렬할 수 있습니다.",
  "What to test": "테스트 대상",
  "What to tune": "조정 대상",
  "What would be simulated": "시뮬레이션될 항목",

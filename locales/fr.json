@@ -3092,6 +3092,7 @@
  "Werewolf Claw": "Griffe de Loup-garou",
  "Werewolf Slasher": "Trancheur de Loup-garou",
  "What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.": "Ce sur quoi chaque valeur est jugée. Un seul déclencheur fait rarement bouger les rencontres par heure au-delà du bruit, donc XP / h est le choix par défaut ; Profit / jour compte le butin moins le coût de la nourriture et des boissons. Le changement de rythme reste affiché à côté de chaque gain.",
+ "What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.": "Ce sur quoi la recherche garde les améliorations : chaque tour remesure les meneurs sur ce critère avec plus de graines. Profit / h est le butin moins le coût de la nourriture et des boissons ; le prix d'une amélioration s'affiche à côté de son gain dans tous les cas. Les résultats peuvent ensuite être triés selon les autres critères.",
  "What to test": "Quoi tester",
  "What to tune": "Quoi régler",
  "What would be simulated": "Ce qui serait simulé",

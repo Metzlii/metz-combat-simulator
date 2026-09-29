@@ -3217,6 +3217,7 @@
  "Werewolf Claw": "Коготь оборотня",
  "Werewolf Slasher": "Секач оборотня",
  "What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.": "По чему оценивается каждое значение. Один триггер редко меняет число встреч в час сильнее шума, поэтому по умолчанию — опыт / ч; Прибыль / день — добыча за вычетом стоимости еды и напитков. Изменение темпа по-прежнему показано рядом с каждым приростом.",
+ "What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.": "По чему поиск отбирает улучшения: каждый раунд заново измеряет лидеров по этому критерию на большем числе сидов. Прибыль / ч — добыча за вычетом стоимости еды и напитков; цена улучшения в любом случае показана рядом с приростом. Результаты потом можно пересортировать по другим критериям.",
  "What to test": "Что тестировать",
  "What to tune": "Что настраивать",
  "What would be simulated": "Что будет смоделировано",

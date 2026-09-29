@@ -3218,6 +3218,7 @@
  "Werewolf Claw": "人狼の爪",
  "Werewolf Slasher": "人狼の大刀",
  "What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.": "各値の評価基準です。1 つのトリガーで 1 時間あたりの遭遇数がノイズ以上に動くことはまれなので、既定は XP / 時です。利益 / 日 は戦利品から食べ物と飲み物の費用を引いたものです。ペースの変化も各改善の横に表示されます。",
+ "What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.": "探索がアップグレードを残す基準です。各ラウンドで上位候補をより多くのシードで再測定します。利益 / 時 は戦利品から食べ物と飲み物の費用を引いたものです。アップグレードの価格はどちらの場合も改善量の横に表示されます。結果は後から他の基準で並べ替えられます。",
  "What to test": "テストする対象",
  "What to tune": "調整する対象",
  "What would be simulated": "シミュレートされる内容",

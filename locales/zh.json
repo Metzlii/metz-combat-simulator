@@ -188,6 +188,7 @@
  "Walkthrough": "引导",
  "Welcome": "欢迎",
  "What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.": "每个取值的评判依据。单个触发条件对每小时遭遇数的影响很少超过随机误差，因此默认按每小时经验排序；每天利润为战利品收入减去食物和饮料成本。每项提升旁仍会显示节奏变化。",
+ "What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.": "搜索保留升级的依据：每一轮都会用更多随机种子重新测量在此项上领先的升级。每小时利润为战利品收入减去食物和饮料成本；无论选哪一项，升级价格都会显示在提升旁边。结果之后可以按其他项重新排序。",
  "What to test": "测试项目",
  "What to tune": "调整什么",
  "What would be simulated": "将模拟的内容",

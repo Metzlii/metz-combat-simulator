@@ -3221,6 +3221,7 @@
  "Werewolf Claw": "狼人之爪",
  "Werewolf Slasher": "狼人關刀",
  "What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.": "每個取值的評判依據。單一觸發條件對每小時遭遇數的影響很少超過隨機誤差，因此預設按每小時經驗排序；每天利潤為戰利品收入減去食物和飲料成本。每項提升旁仍會顯示節奏變化。",
+ "What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.": "搜尋保留升級的依據：每一輪都會用更多隨機種子重新測量在此項上領先的升級。利潤 / 小時為戰利品收入減去食物和飲料成本；無論選哪一項，升級價格都會顯示在提升旁邊。結果之後可以按其他項重新排序。",
  "What to test": "測試項目",
  "What to tune": "調整什麼",
  "What would be simulated": "將模擬的內容",

@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="d23d3c9aab46"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="5036599baa46"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=d23d3c9aab46"></script>
+<script src="./support.js?v=5036599baa46"></script>
 </head>
 <body>
 <x-dc>
@@ -14,12 +14,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d23d3c9aab46">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=5036599baa46">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=d23d3c9aab46">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d23d3c9aab46"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=5036599baa46">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=5036599baa46"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -255,6 +255,23 @@
               </sc-if>
             </div>
 
+            <!-- What the search refines on, chosen before the run (operator, 2026-09-29); the same state as the re-sort bar above the results. -->
+            <sc-if value="{{ up.onUpgrades }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+              <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.sec.rank.toggle }}">
+                <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.sec.rank.caret }} Rank by</span>
+                <span class="text-muted" style="font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto">{{ up.sec.rank.summary }}</span>
+              </button>
+              <sc-if value="{{ up.sec.rank.open }}" hint-placeholder-val="{{ false }}">
+              <div class="seg" style="align-self:flex-start">
+                <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.xpStyle }}" onClick="{{ up.pickXp }}">XP / h</button>
+                <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.profitStyle }}" onClick="{{ up.pickProfit }}">Profit / h</button>
+                <button class="seg-opt" style="font-size:12.5px;border:0;{{ up.paceStyle }}" onClick="{{ up.pickPace }}">{{ up.paceLabel }}</button>
+              </div>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">What the search keeps upgrades on: each round measures the leaders on this again on more seeds. Profit / h is the loot less what food and drinks cost; an upgrade's price shows beside its gain either way. The results can be re-sorted by the others afterwards.</div>
+              </sc-if>
+            </div>
+            </sc-if>
             <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
               <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.sec.budget.toggle }}">
                 <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.sec.budget.caret }} Simulation time limit</span>
@@ -1044,6 +1061,13 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-29</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.14</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Upgrades can rank on profit from the start.</b> A Rank by section in the form picks XP / h, Profit / h or the pace before the search runs. The choice used to exist only above finished results, so a first search always refined on XP.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-26</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.13</b></div>
@@ -1335,7 +1359,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=d23d3c9aab46");
+      const i18n = await import("./i18n.js?v=5036599baa46");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1358,7 +1382,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=d23d3c9aab46");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=5036599baa46");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1681,7 +1705,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=d23d3c9aab46");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=5036599baa46");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1702,7 +1726,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=d23d3c9aab46");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=5036599baa46");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2877,6 +2901,8 @@ class Component extends DCLogic {
         const defs = [
           ["scope", v("player") ? `${v("player")}${v("measure") ? Component.tf(" \u00b7 {name}'s share", { name: v("measure") }) : ""}` : Component.tf("the whole party ({n})", { n: names.length })],
           ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
+          // Upgrades only: what the search refines on (2026-09-29).
+          ["rank", metric === "profit" ? Component.t("Profit / h") : metric === "eph" ? (upDungeon ? Component.t("Run time") : Component.t("Encounters / h")) : Component.t("XP / h")],
           ["budget", onTrig ? `${trigCap ? Component.tf("{n} min", { n: trigCap }) : Component.t("no limit")}${trigEst != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(trigEst) })}` : ""}` : Component.tf("{n} min", { n: budget })],
           ["tries", `${Component.parseCoins(v("budget")) > 0 ? Component.tf("budget {coins}", { coins: nf(Component.parseCoins(v("budget"))) }) : Component.t("no budget")}${(v("rooms") || []).length ? Component.tf(" \u00b7 {n} rooms", { n: (v("rooms") || []).length }) : ""}${v("refine") ? Component.t(" \u00b7 refining") : ""}${String(v("skipLevels") || "").trim() ? Component.tf(" \u00b7 skip +{levels}", { levels: String(v("skipLevels")).split(/[^0-9]+/).filter(Boolean).join(", +") }) : ""}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
           ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(onTrig ? tv("hours") : v("hours")), seeds: nf(onTrig ? tv("seeds") : v("seeds")) })],
