@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="b80d0f63e1d4"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="7ec2104c9c6f"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=b80d0f63e1d4"></script>
+<!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
+     their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
+<meta name="darkreader-lock">
+<script src="./support.js?v=7ec2104c9c6f"></script>
 </head>
 <body>
 <x-dc>
@@ -14,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b80d0f63e1d4">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7ec2104c9c6f">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=b80d0f63e1d4">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b80d0f63e1d4"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=7ec2104c9c6f">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7ec2104c9c6f"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -359,7 +362,8 @@
                   <span class="text-muted" style="font-size:12.5px">Guild tokens owned</span>
                   <input class="input" type="number" min="0" step="100" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:110px" dc-attr-value="{{ up.guildTokens }}" onChange="{{ up.setGuildTokens }}">
                 </div>
-                <div class="text-muted" style="font-size:12px;text-wrap:pretty">Each chosen shrine is tested for every player from their own level up to the cap, priced as that player's own purchase: the credits at the cheapest item to buy and convert into each colour, and the guild tokens the levels take, which can't be bought. Tokens you own beyond that are spent on the credit colours they save the most coins on, and each row says how.</div>
+                <div class="text-muted" style="font-size:12px;text-wrap:pretty">Each chosen shrine is tested for every player from their own level up to the cap, priced as that player's own purchase: the credits at the cheapest item to buy and turn in for each colour, with how many of it, and the guild tokens the levels take, which can't be bought. The tokens you own pay those first.</div>
+                <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.spendTokens }}" onChange="{{ up.toggleSpendTokens }}"><span>Spend spare tokens on credits<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Off: every credit is priced in coins, and each row says which credits your spare tokens would save the most on. On: the spare tokens buy those credits, and the price drops by what they save.</span></span></label>
               </div>
               <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.refine }}" onChange="{{ up.toggleRefine }}"><span>Refine un-refined gear<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Refining keeps the enhancement level. Each worn unrefined piece is tested as its refined version at +10 or above, a cape at +3 or above: at the held level when it is already there, and at every level above that fits the budget, the shards included.</span></span></label>
               <div style="display:flex;gap:9px;align-items:baseline;flex-wrap:wrap">
@@ -1075,6 +1079,15 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-30</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.16</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Shrine credits say how many items to turn in.</b> Each credit colour now names the count of its cheapest item, not only the item.</li>
+                <li><b>Spare guild tokens are a suggestion unless you choose to spend them.</b> A new option, Spend spare tokens on credits, is off by default: each shrine row prices every credit in coins and says which credits your spare tokens would save the most on, and how much. Turned on, the tokens buy those credits and the price drops.</li>
+                <li><b>Toggles keep their colours with Dark Reader.</b> The extension repainted some toggle buttons, such as Rank by in Upgrades, in the browser's plain grey. The page is already dark, so it now asks Dark Reader to leave it alone.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-09-29</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.15</b></div>
@@ -1381,7 +1394,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=b80d0f63e1d4");
+      const i18n = await import("./i18n.js?v=7ec2104c9c6f");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1404,7 +1417,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=b80d0f63e1d4");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=7ec2104c9c6f");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1617,10 +1630,13 @@ class Component extends DCLogic {
     if (cost.route === "shrine") {
       const bits = [Component.tf("{n} guild tokens (paid in tokens)", { n: num(cost.tokens) })];
       if (cost.tokensShort) bits.push(Component.tf("{n} more than you own", { n: num(cost.tokensShort) }));
-      const credits = (cost.credits || []).filter(c => c.bought > 0).map(c => Component.tf("{count} {credit} via {item}", { count: num(c.bought), credit: Component.hridName(c.itemHrid), item: c.via ? Component.hridName(c.via) : "?" }));
+      // Each colour with the items it takes to turn in (2026-09-30); spare tokens are spent only when the form says so,
+      // otherwise the plan is a suggestion with what it would save.
+      const credits = (cost.credits || []).filter(c => c.bought > 0).map(c => Component.tf("{count} {credit} from {items} {item}", { count: num(c.bought), credit: Component.hridName(c.itemHrid), items: num(c.items), item: c.via ? Component.hridName(c.via) : "?" }));
       if (credits.length) bits.push(Component.tf("credits: {list}", { list: credits.join(", ") }));
       const plan = (cost.tokenPlan || []).map(t => Component.tf("{tokens} tokens for {credits} {credit}", { tokens: num(t.tokens), credits: num(t.credits), credit: Component.hridName(t.itemHrid) }));
-      if (plan.length) bits.push(Component.tf("spare tokens: {list}", { list: plan.join(", ") }));
+      if (plan.length) bits.push(cost.tokensSpent ? Component.tf("spare tokens: {list}", { list: plan.join(", ") })
+        : Component.tf("spare tokens would save {coins} as: {list}", { coins: coins(Number(cost.tokensSaving) || 0), list: plan.join(", ") }));
       return bits.join("; ");
     }
     if (cost.route === "room" && Array.isArray(cost.materials) && cost.materials.length)
@@ -1739,7 +1755,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=b80d0f63e1d4");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=7ec2104c9c6f");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1760,7 +1776,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=b80d0f63e1d4");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=7ec2104c9c6f");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2013,7 +2029,7 @@ class Component extends DCLogic {
       roomLevels: num("roomLevels", 1), refine: !!this.upVal("refine"),
       // 2026-09-29: the combat shrines to test, their level cap, the guild tokens owned.
       shrines: Array.isArray(this.upVal("shrines")) ? this.upVal("shrines") : [],
-      shrineLevels: num("shrineLevels", 1), guildTokens: Math.max(0, Math.floor(num("guildTokens", 0))),
+      shrineLevels: num("shrineLevels", 1), guildTokens: Math.max(0, Math.floor(num("guildTokens", 0))), spendTokens: !!this.upVal("spendTokens"),
       skipLevels: String(this.upVal("skipLevels") || "").split(/[^0-9]+/).filter(Boolean).map(Number),
       enhancer: this.upVal("market") ? false : this.upEnhancer(),
       // The route prepares its runs the way zoneRun does, so the community buffs, the Moo Pass and the shrine
@@ -2920,6 +2936,7 @@ class Component extends DCLogic {
       shrinesAll: () => set({ shrines: (s.limits?.upgrades?.shrineChoices || []).map(y => y.key) }), shrinesNone: () => set({ shrines: [] }),
       shrineLevels: String(v("shrineLevels") ?? 1), setShrineLevels: e => set({ shrineLevels: Math.max(1, Math.min(5, Math.floor(Number(e.target.value) || 1))) }),
       guildTokens: String(v("guildTokens") ?? 0), setGuildTokens: e => set({ guildTokens: Math.max(0, Math.floor(Number(e.target.value) || 0)) }),
+      spendTokens: !!v("spendTokens"), toggleSpendTokens: () => set({ spendTokens: !v("spendTokens") }),
       roomLevels: String(v("roomLevels") ?? 1), setRoomLevels: e => set({ roomLevels: Math.max(1, Math.min(8, Math.floor(Number(e.target.value) || 1))) }),
       refine: !!v("refine"), toggleRefine: () => set({ refine: !v("refine") }),
       countHasRows: !!(s.upCount?.rows || []).length,
