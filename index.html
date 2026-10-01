@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="fe7422219440"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="b84902719a8d"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=fe7422219440"></script>
+<script src="./support.js?v=b84902719a8d"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=fe7422219440">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b84902719a8d">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=fe7422219440">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=fe7422219440"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=b84902719a8d">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b84902719a8d"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -522,9 +522,11 @@
                       </sc-for>
                     </div>
                   </sc-if>
-                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:12.5px;max-width:320px" value="" onChange="{{ up.food.addExclude }}">
-                    <sc-for list="{{ up.food.excludeOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
-                  </sc-raw-select>
+                  <!-- Filterable (operator, 2026-10-01): type part of a name and the list narrows; picking one adds it. -->
+                  <input class="input" type="search" list="food-never-test" style="min-height:29px;padding:2px 6px;font-size:12.5px;max-width:320px" placeholder="{{ up.food.excludePlaceholder }}" dc-attr-value="{{ up.food.excludeQuery }}" onInput="{{ up.food.typeExclude }}" onChange="{{ up.food.typeExclude }}">
+                  <datalist id="food-never-test">
+                    <sc-for list="{{ up.food.excludeOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.label }}"></option></sc-for>
+                  </datalist>
                   <span class="text-muted" style="font-size:12px;text-wrap:pretty">A standing list this browser keeps: an item here is never offered, whatever the zone.</span>
                 </div>
                 </sc-if>
@@ -986,6 +988,7 @@
                             <sc-if value="{{ fr.finalist }}" hint-placeholder-val="{{ false }}"><span class="tag tag-accent" style="font-size:10.5px">finalist</span></sc-if>
                             <span class="text-muted" style="font-size:11.5px">{{ fr.seeds }}</span>
                             <span class="text-muted" style="font-size:11.5px">{{ fr.deaths }}</span>
+                            <sc-if value="{{ fr.mana }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:11.5px;font-variant-numeric:tabular-nums" title="{{ fr.manaTip }}">{{ fr.mana }}</span></sc-if>
                           </div>
                           <div style="text-align:right;font-variant-numeric:tabular-nums;min-width:0">
                             <span style="font-size:13.5px;color:var(--color-accent-300)">{{ fr.gain }}</span>
@@ -1079,6 +1082,15 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-01</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.18</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Mana on every Food &amp; drinks result.</b> Each tested change now shows the refused casts per hour and the average mana pool of the player it changes (a whole-party drink: its players together), beside the same figures without the change on the same seeds. A food swap that costs XP usually says why here.</li>
+                <li><b>Never test filters as you type.</b> The list narrows to the names that match; picking one adds it.</li>
+                <li><b>All HP food or all MP food in one pick.</b> Never test offers both groups at the top of its list; a group shows as one chip that brings them all back.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-01</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.17</b></div>
@@ -1401,7 +1413,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=fe7422219440");
+      const i18n = await import("./i18n.js?v=b84902719a8d");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1424,7 +1436,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=fe7422219440");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=b84902719a8d");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1762,7 +1774,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=fe7422219440");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=b84902719a8d");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1783,7 +1795,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=fe7422219440");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=b84902719a8d");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2331,13 +2343,20 @@ class Component extends DCLogic {
     // The other figure every row carries: the coin side of an XP search, the XP side of a profit one.
     const other = r => metric === "profit" ? (r.deltaXp == null ? "" : Component.tf("{n} XP/h", { n: `${r.deltaXp < 0 ? "\u2212" : "+"}${nf(Math.abs(r.deltaXp))}` }))
       : (r.deltaProfit == null ? "" : Component.tf("{n} coins/h", { n: `${r.deltaProfit < 0 ? "\u2212" : "+"}${coin(Math.abs(r.deltaProfit))}` }));
+    const refusedNum = v => (Number(v) < 10 ? (Number(v) || 0).toFixed(1) : nf(v)), poolPct = v => ((Number(v) || 0) * 100).toFixed(0);
+    const manaLine = r => { const m = r.mana; if (!m) return "";
+      return [m.refusedPerHour == null ? "" : Component.tf("{n} refused / h (was {was})", { n: refusedNum(m.refusedPerHour), was: m.baseRefusedPerHour == null ? "\u2014" : refusedNum(m.baseRefusedPerHour) }),
+        m.meanPool == null ? "" : Component.tf("average mana pool {pct}% (was {was}%)", { pct: poolPct(m.meanPool), was: m.baseMeanPool == null ? "\u2014" : poolPct(m.baseMeanPool) })].filter(Boolean).join(" \u00b7 "); };
     const mk = (r, i) => { const m = pick(r), d = Number(m.d) || 0, fin = isFin(r);
       return { rank: String(i + 1), finalist: fin, title: what(r), player: r.party ? who(r) : names.length > 1 ? (r.player || "") : "",
         kindTag: r.consumableKind === "drinks" ? Component.t("drink") : Component.t("food"),
         border: fin ? "var(--color-accent-700)" : "var(--color-divider)", bg: fin ? "color-mix(in srgb, var(--color-accent-800) 26%, transparent)" : "var(--color-bg)",
         gain: `${d < 0 ? "\u2212" : "+"}${gainNum(d)} ${unit}`, se: m.se == null ? "" : `\u00b1 ${gainNum(m.se)}`,
         other: other(r), seeds: Component.tf("{n} seeds", { n: nf(r.seeds || 0) }),
-        deaths: r.deathsPerHour == null ? "" : Component.tf("{n} deaths / h", { n: (Number(r.deathsPerHour) || 0).toFixed(2) }) }; };
+        deaths: r.deathsPerHour == null ? "" : Component.tf("{n} deaths / h", { n: (Number(r.deathsPerHour) || 0).toFixed(2) }),
+        // Refused casts and the average mana pool of the players the change reaches, with and without it on the same
+        // seeds (operator, 2026-10-01). A whole-party row sums the refused casts and averages the pool.
+        mana: manaLine(r), manaTip: r.mana?.players?.length ? r.mana.players.join(", ") : "" }; };
     const top = sorted.filter(isFin), rest = sorted.filter(r => !isFin(r));
     const list = top.length && rest.length ? [...top.map(mk), { divider: true, label: Component.t("Lower confidence results, ranked"), sub: Component.t("measured on fewer seeds than the finalists above \u2014 the \u00b1 says how sure each row is") }, ...rest.map((r, i) => mk(r, top.length + i))]
       : sorted.map(mk);
@@ -2347,7 +2366,13 @@ class Component extends DCLogic {
     const party = this.modeVal("food", "party") === true;
     const partyBtn = on => ({ style: party === on ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
       go: () => this.setMode("food", { party: on }) });
-    const choices = (s.limits?.upgrades?.consumables || []).filter(c => !exclude.includes(c.itemHrid));
+    const allChoices = s.limits?.upgrades?.consumables || [], choices = allChoices.filter(c => !exclude.includes(c.itemHrid));
+    // Whole groups (operator, 2026-10-01): every HP food or every MP food in one pick. A group fully excluded shows as
+    // one chip that brings them all back; the list offers a group while any of it is still tested.
+    const groups = [["hp", Component.t("All HP food")], ["mp", Component.t("All MP food")]]
+      .map(([key, label]) => ({ key, label, hrids: allChoices.filter(c => c.kind === "food" && c.restore === key).map(c => c.itemHrid) })).filter(g => g.hrids.length);
+    const fullGroups = groups.filter(g => g.hrids.every(h => exclude.includes(h))), inFullGroup = h => fullGroups.some(g => g.hrids.includes(h));
+    const choiceLabel = c => `${itemName(c.itemHrid)} (${c.kind === "drinks" ? Component.t("drink") : Component.t("food")})`;
     const kindBtn = k => ({ style: kinds === k ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
       go: () => this.setMode("food", { kinds: k }) });
     const optSummary = [kinds === "food" ? Component.t("food only") : kinds === "drinks" ? Component.t("drinks only") : Component.t("food and drinks"),
@@ -2358,10 +2383,15 @@ class Component extends DCLogic {
       kindBoth: kindBtn("both"), kindFood: kindBtn("food"), kindDrinks: kindBtn("drinks"),
       party, partyEach: partyBtn(false), partyAll: partyBtn(true),
       smart, toggleSmart: () => this.setMode("food", { smart: !smart }),
-      excluded: exclude.map(h => ({ hrid: h, name: itemName(h), remove: () => this.setMode("food", { exclude: exclude.filter(x => x !== h) }) })),
+      excluded: [...fullGroups.map(g => ({ hrid: g.key, name: g.label, remove: () => this.setMode("food", { exclude: exclude.filter(x => !g.hrids.includes(x)) }) })),
+        ...exclude.filter(h => !inFullGroup(h)).map(h => ({ hrid: h, name: itemName(h), remove: () => this.setMode("food", { exclude: exclude.filter(x => x !== h) }) }))],
       hasExcluded: exclude.length > 0,
-      excludeOpts: [{ value: "", label: Component.t("Never test\u2026") }, ...choices.map(c => ({ value: c.itemHrid, label: `${itemName(c.itemHrid)} (${c.kind === "drinks" ? Component.t("drink") : Component.t("food")})` }))],
-      addExclude: e => { const h = e.target.value; if (h) this.setMode("food", { exclude: [...exclude, h] }); },
+      excludeOpts: [...groups.filter(g => !fullGroups.includes(g)).map(g => ({ value: g.key, label: g.label })), ...choices.map(c => ({ value: c.itemHrid, label: choiceLabel(c) }))],
+      excludePlaceholder: Component.t("Type a food or drink to never test it"), excludeQuery: s.foodNeverQ || "",
+      // The browser's list narrows as the name is typed; a value that is exactly one of the labels is the pick.
+      typeExclude: e => { const typed = e.target.value || "", group = groups.find(g => g.label === typed), hit = choices.find(c => choiceLabel(c) === typed);
+        const add = group ? group.hrids : hit ? [hit.itemHrid] : null;
+        if (add) { this.setState({ foodNeverQ: "" }); this.setMode("food", { exclude: [...new Set([...exclude, ...add])] }); } else this.setState({ foodNeverQ: typed }); },
       whatOpen: secOpen, whatCaret: secOpen ? "\u25be" : "\u25b8", whatSummary: optSummary,
       toggleWhat: () => this.setState(st => ({ upSec: { ...st.upSec, foodWhat: !st.upSec?.foodWhat } })),
       error: s.foodError || "", rows: list.map(r => ({ isRow: !r.divider, ...r })), hasRows: rows.length > 0,
