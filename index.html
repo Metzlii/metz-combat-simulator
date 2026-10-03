@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="b84902719a8d"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="f725057e84e4"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=b84902719a8d"></script>
+<script src="./support.js?v=f725057e84e4"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b84902719a8d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f725057e84e4">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=b84902719a8d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b84902719a8d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=f725057e84e4">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f725057e84e4"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -288,7 +288,7 @@
                 <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.budget }}" onChange="{{ up.setBudget }}">
                 <span class="text-muted" style="font-size:12.5px">min</span>
               </div>
-              <sc-if value="{{ up.notTrig }}" hint-placeholder-val="{{ true }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole budget: it screens every upgrade, then halves the field and doubles the seeds each round until only the finalists stand — five unless you set another number. Anything left over keeps measuring them.</div></sc-if>
+              <sc-if value="{{ up.notTrig }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole limit: it measures every point on every curve, then measures them all again on twice the seeds each round until the time is up. No point is dropped, so each curve's error bars shrink together.</div></sc-if>
               <sc-if value="{{ up.trigLimitNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;text-wrap:pretty">{{ up.trigLimitNote }}</div></sc-if>
               </sc-if>
             </div>
@@ -305,7 +305,10 @@
                 <span class="text-muted" style="font-size:12.5px">Seeds in the screen</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.seeds }}" onChange="{{ up.setSeeds }}">
               </div>
-              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round doubles the seeds, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div>
+              <sc-if value="{{ up.upSearch }}" hint-placeholder-val="{{ true }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round has 1.5 times the seeds of the one before, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div></sc-if>
+              <sc-if value="{{ up.onTriggers }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round doubles the seeds, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div></sc-if>
+              <!-- Skill levelling refines every point evenly (keepAll): a curve needs all its points measured alike, so nothing "survives" a round (2026-10-02). -->
+              <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Every round measures every point again on twice the seeds, so the first pass is deliberately thin. A level's gain is often a fraction of a percent — one simulation cannot see it.</div></sc-if>
               </sc-if>
             </div>
             <sc-if value="{{ up.onUpgrades }}" hint-placeholder-val="{{ true }}">
@@ -318,7 +321,7 @@
               <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
-                <span class="text-muted" style="font-size:12.5px" title="How many upgrades the search keeps once it stops halving; the rest of the budget measures them">Finalists</span>
+                <span class="text-muted" style="font-size:12.5px" title="How many upgrades the search keeps once it stops cutting; the round that picks them is the last">Finalists</span>
                 <input class="input" type="number" min="1" max="10" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.finalists }}" onChange="{{ up.setFinalists }}">
               </div>
               <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ up.booksNote }}</div>
@@ -545,7 +548,7 @@
                   <span class="text-muted" style="font-size:12.5px">Samples per skill</span>
                   <input class="input" type="number" min="1" max="16" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.skills.points }}" onChange="{{ up.skills.setPoints }}">
                 </div>
-                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Levels are placed by time, not by number: a skill that levels in a day gets its samples spread over the projection, one that takes a month gets a single sample past its end. The charm decides how fast, so it moves every curve along the days axis.</div>
+                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each skill is tested at the levels it would reach at evenly spaced points over the days ahead. A skill that gains a level a day gets its samples spread across the whole period; one that needs a month for a single level gets just one sample, at its next level. The charm sets how fast each skill levels, so a better charm reaches each level sooner.</div>
                 </sc-if>
               </div>
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
@@ -666,13 +669,13 @@
 
             <sc-if value="{{ up.idle }}" hint-placeholder-val="{{ true }}">
               <div class="card" style="max-width:66ch;gap:7px">
-                <div class="card-kicker">How the budget is spent</div>
-                <div style="font-size:13px;text-wrap:pretty">The finder screens every upgrade on a handful of seeds, then keeps halving: the better half is measured again on twice as many fresh seeds each round, until only the finalists remain — five unless you set another number.</div>
+                <div class="card-kicker">How the search runs</div>
+                <div style="font-size:13px;text-wrap:pretty">The finder screens every upgrade on a handful of seeds, then keeps cutting: each round drops the bottom third and measures the rest again on 1.5 times as many fresh seeds, until only the finalists remain — five unless you set another number.</div>
                 <div class="card-kicker" style="margin-top:4px">For a sharper answer</div>
                 <ul style="margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px;font-size:12.5px;text-wrap:pretty">
-                  <li><b>More time.</b> A 1 h or 2 h limit runs more rounds, so the finalists are measured on many more seeds.</li>
-                  <li><b>Fewer candidates.</b> Search one player instead of the whole party, and try +1 item levels only: the same time is spread over fewer upgrades.</li>
-                  <li><b>Longer runs.</b> More hours per seed makes each measurement steadier, at the cost of fewer of them in the time limit.</li>
+                  <li><b>More seeds.</b> Every round has 1.5 times the seeds of the one before, so more seeds to start with means more on the finalists, and a search that takes as much longer.</li>
+                  <li><b>Fewer candidates.</b> Search one player instead of the whole party, and try +1 item levels only: fewer upgrades to screen means a shorter search.</li>
+                  <li><b>Longer runs.</b> More hours per seed makes each measurement steadier, and the search longer by the same share.</li>
                   <li><b>The right fight.</b> Pick the zone and tier you actually farm, with your real shrine, account buffs and pricing: the ranking is only as good as what it measures.</li>
                 </ul>
               </div>
@@ -1082,6 +1085,15 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-02</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.19</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>The upgrade finder runs on its settings, not a clock.</b> It screens every upgrade, then each round drops the bottom third and measures the rest on 1.5 times the seeds (it used to keep half on twice the seeds) until the finalists stand, and stops once they are measured, so the same settings always do the same work. The time row says about how long that is on your device before you press Run, then how much is left while it runs. A time limit is now only a cap, and there is none by default. Food &amp; drinks runs the same search and works the same way.</li>
+                <li><b>New defaults: 1000 h runs on 3 seeds.</b> They were 168 h on 5 seeds within 15 minutes. Skill levelling keeps its own settings and a time limit, now 1000 h on 3 seeds within 1 hour (was 168 h on 5 seeds within 15 minutes), and its Projection duration note is in plainer words.</li>
+                <li><b>Skill levelling's help says what it does.</b> It never cut points: every point on every curve is measured again each round on twice the seeds until the time limit, so each curve's error bars shrink together. The panel text had described the upgrade finder's halving.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-01</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.18</b></div>
@@ -1413,7 +1425,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=b84902719a8d");
+      const i18n = await import("./i18n.js?v=f725057e84e4");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1436,7 +1448,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=b84902719a8d");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=f725057e84e4");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1468,7 +1480,8 @@ class Component extends DCLogic {
     metric: "xp", skill: "", player: "", measure: "",
     // The board the operator reaches for first; any served zoneLimits().upgrades value replaces it.
     zone: "/actions/combat/pirate_cove", tier: 2, market: false,
-    budgetMinutes: 15, hours: 168, seeds: 5, steps: 1, abilityLevels: 5, finalists: 5,
+    // 2026-10-02 (operator): 1000 h runs on 3 seeds, and no time limit -- the settings size the search.
+    budgetMinutes: "", hours: 1000, seeds: 3, steps: 1, abilityLevels: 5, finalists: 5,
     includePouch: false, includeCharms: false, bookPremium: 0.2,
     // The operator's baseline. zoneLimits().upgrades carries the served version and replaces every field here.
     enhancer: { level: 145, tool: { hrid: "/items/celestial_enhancer", level: 18 }, tea: "ultra", blessed: true, champion: true, pouchLevel: 14, observatory: 8,
@@ -1497,6 +1510,7 @@ class Component extends DCLogic {
   static ALCHEMY_TEAS = [["none", "No alchemy tea"], ["alchemy", "Alchemy Tea"], ["super", "Super Alchemy Tea"], ["ultra", "Ultra Alchemy Tea"]];
   static CATALYSTS = [["none", "No catalyst"], ["catalyst", "Catalyst Of Decomposition"], ["prime", "Prime Catalyst"]];
   static UP_TEAS = [["none", "No enhancing tea"], ["enhancing", "Enhancing Tea"], ["super", "Super Enhancing Tea"], ["ultra", "Ultra Enhancing Tea"]];
+  // Skill levelling's time limits; the upgrade finder and the food test take TRIG_LIMITS (a cap, none by default).
   static UP_BUDGETS = [[15, "15 min"], [60, "1 h"], [120, "2 h"]];
   static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books",
     // The hybrid (operator, 2026-09-21): bought at an intermediate level, then enhanced the rest of the way.
@@ -1774,7 +1788,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=b84902719a8d");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=f725057e84e4");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1795,7 +1809,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=b84902719a8d");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=f725057e84e4");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -1810,7 +1824,7 @@ class Component extends DCLogic {
     this.queueOptimize();
     // The count under the Upgrades options follows the party, the mode and the client as well as the options
     // (2026-09-25). The runtime calls this hook without the previous state, so the last-seen party is kept here.
-    const mark = `${this.state.upMode}|${this.state.client ? 1 : 0}`;
+    const mark = `${this.state.upMode}|${this.state.client ? 1 : 0}|${this.state.upMode === "food" ? JSON.stringify(this.state.foodForm || {}) : ""}`;
     if (this._countParty !== this.state.party || this._countMark !== mark) { this._countParty = this.state.party; this._countMark = mark; this.scheduleUpCount(); }
   }
   componentWillUnmount() { clearTimeout(this._optT); clearInterval(this._upTick); if (this._countEsc) globalThis.removeEventListener?.("keydown", this._countEsc); }
@@ -1998,15 +2012,37 @@ class Component extends DCLogic {
     clearTimeout(this._upCountTimer);
     this._upCountTimer = setTimeout(async () => {
       const c = this.state.client;
-      if (!c?.zoneUpgradeCount || !(this.state.party || []).length || !this.upVal("zone") || this.state.upMode !== "upgrades") return;
-      const body = this.upBody();
+      // The food test is the same search, so it is counted too (2026-10-02): its plan is what its estimate is made of.
+      const mode = this.state.upMode;
+      if (!c?.zoneUpgradeCount || !(this.state.party || []).length || !this.upVal("zone") || (mode !== "upgrades" && mode !== "food")) return;
+      const body = this.upBodyFor(mode), key = mode === "food" ? "foodCount" : "upCount";
       const sig = JSON.stringify({ ...body, players: (body.players || []).map(p => [p?.record?.name, (p?.loadout?.equipment || []).map(e => `${e.itemHrid}+${e.enhancementLevel}`), p?.record?.rooms, (p?.loadout?.abilities || []).map(a => `${a.hrid || a.abilityHrid}:${a.level}`)]) });
       if (sig === this._upCountSig) return;
       this._upCountSig = sig;
-      try { const count = await c.zoneUpgradeCount(body); if (this._upCountSig === sig) this.setState({ upCount: count }); }
-      catch (e) { if (this._upCountSig === sig) this.setState({ upCount: { error: `${e?.message || e}`.replace(/^\d{3}\s*/, "") } }); }
+      try { const count = await c.zoneUpgradeCount(body); if (this._upCountSig === sig) this.setState({ [key]: count }); }
+      catch (e) { if (this._upCountSig === sig) this.setState({ [key]: { error: `${e?.message || e}`.replace(/^\d{3}\s*/, "") } }); }
     }, 500);
   }
+  /** The upgrade finder's time cap in minutes, 0 for none (blank, 0, or the served null). */
+  upCap() { const m = Number(this.upVal("budgetMinutes")); return Number.isFinite(m) && m > 0 ? m : 0; }
+  /** The request for the upgrade finder or the food test: the food test is the same search over consumables. */
+  upBodyFor(mode) {
+    const body = this.upBody();
+    if (mode === "food") { body.mode = "food"; body.foodKinds = this.modeVal("food", "kinds"); body.foodSmart = this.modeVal("food", "smart") !== false; body.foodParty = this.modeVal("food", "party") === true;
+      body.foodExclude = (this.modeVal("food", "exclude") || []).slice(); }
+    return body;
+  }
+  /** About how long the upgrade or food search takes on this device, before it starts: the server's plan for this
+   * request (its runs and hours), priced at the pace this browser learned, over its lanes. Null until it is counted. */
+  upEstimateMs(mode) {
+    const plan = (mode === "food" ? this.state.foodCount : this.state.upCount)?.plan;
+    if (!plan || !(Number(plan.jobs) > 0)) return null;
+    let spch = 0.05; try { const l = JSON.parse(localStorage.getItem("gts.zone.pace.v1") || "null"); if (Number(l?.secondsPerCandidateHour) > 0) spch = Number(l.secondsPerCandidateHour); } catch {}
+    const lanes = Number(this.state.client?.zoneLanes) || Number(this.state.client?.workers) || 1;
+    return Number(plan.jobs) * (Number(plan.hours) || 0) * spch / lanes * 1000;
+  }
+  /** How far along a running upgrade or food search is: runs done of the planned ones, 0..1 (null before the plan). */
+  static planShare(head) { const done = Number(head?.jobsDone) || 0, plan = Number(head?.plannedJobs) || 0; return plan > 0 ? Math.min(1, done / plan) : null; }
   upEnhancer() {
     const d = { ...Component.UP_DEFAULTS.enhancer, ...(this.state.limits?.upgrades?.enhancer || {}) };
     const e = { ...d, ...this.state.upEnh };
@@ -2038,7 +2074,8 @@ class Component extends DCLogic {
     if (measure) goal.player = measure;
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
-      budgetMinutes: num("budgetMinutes", 15), hours: num("hours", 168), seeds: num("seeds", 5),
+      // A cap only (2026-10-02): blank or 0 sends none, and the rounds are sized by the seeds and the candidates.
+      budgetMinutes: this.upCap() || null, hours: num("hours", 1000), seeds: num("seeds", 3),
       steps: num("steps", 1), abilityLevels: num("abilityLevels", 5), finalists: num("finalists", 5),
       bookPremium: num("bookPremium", 0.2),
       // 2026-09-25: the coin budget (blank: none), the gear slots (null: all), the rooms with their cap, refining.
@@ -2093,14 +2130,15 @@ class Component extends DCLogic {
     return m >= 60 ? Component.tf("{h} h {m} min", { h: Math.floor(m / 60), m: String(m % 60).padStart(2, "0") }) : Component.tf("{n} min", { n: m });
   }
   /** The running walk's clock: elapsed, and what is left from the planned runs against the ones done. */
-  trigClock(head) {
+  trigClock(head, cap = Number(this.modeVal("triggers", "budgetMinutes")) || 0) {
     const el = Date.now() - (this._upT0 || Date.now()), done = Number(head?.jobsDone) || 0, plan = Number(head?.plannedJobs) || 0;
-    const cap = Number(this.modeVal("triggers", "budgetMinutes")) || 0;
     const left = done > 0 && plan > done ? el * (plan - done) / done : null;
     const text = left != null ? Component.tf("{elapsed} elapsed · about {left} left", { elapsed: Component.durText(el), left: Component.durText(left) }) : Component.tf("{elapsed} elapsed", { elapsed: Component.durText(el) });
     return cap > 0 ? `${text} · ${Component.tf("capped at {n} min", { n: cap })}` : text;
   }
-  static SKILL_DEFAULTS = { horizonDays: 90, points: 10, charm: "current", charmLevel: 0 };
+  // Skill levelling keeps its own hours, seeds and time limit: its search still spends a time slot (2026-10-02). 1000 h
+  // runs on 3 seeds within an hour (operator, same day). The served limits.skills replace these.
+  static SKILL_DEFAULTS = { horizonDays: 90, points: 10, charm: "current", charmLevel: 0, hours: 1000, seeds: 3, budgetMinutes: 60 };
   modeState(mode) {
     return mode === "triggers"
       ? { running: "trigRunning", rows: "trigRows", head: "trigHead", done: "trigDone", error: "trigError", extra: "trigSteps" }
@@ -2175,8 +2213,8 @@ class Component extends DCLogic {
     const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num(this.upVal("tier"), 0),
-      hours: num(this.upVal("hours"), 168), seeds: num(this.upVal("seeds"), 5),
-      budgetMinutes: Math.max(5, num(this.upVal("budgetMinutes"), 15)),
+      hours: num(this.modeVal("skills", "hours"), 1000), seeds: num(this.modeVal("skills", "seeds"), 3),
+      budgetMinutes: Math.max(5, num(this.modeVal("skills", "budgetMinutes"), 60)),
       accountBuffs: this.state.buffs || null,
       ...(this.state.measure || {}),
     };
@@ -2218,7 +2256,7 @@ class Component extends DCLogic {
   runClock() {
     // Read exactly as `upBody` reads it, with no clamp of its own: a clock that floors a value the request
     // did not floor would count down to a limit the search was never given.
-    const n = Number(this.upVal("budgetMinutes")), budget = Number.isFinite(n) ? n : 15;
+    const n = Math.max(5, Number(this.modeVal("skills", "budgetMinutes"))), budget = Number.isFinite(n) ? n : 60;
     const left = budget * 60000 - (Date.now() - (this._upT0 || Date.now()));
     if (!Number.isFinite(left)) return "";
     if (left <= 0) return Component.tf("past {budget} min \u00b7 finishing this round", { budget });
@@ -2290,9 +2328,7 @@ class Component extends DCLogic {
     const K = mode === "food" ? { running: "foodRunning", error: "foodError", rows: "foodRows", head: "foodHead", done: "foodDone" }
       : { running: "upRunning", error: "upError", rows: "upRows", head: "upHead", done: "upDone" };
     if (!c || !(this.state.party || []).length || !this.upVal("zone") || this.state[K.running]) return;
-    const body = this.upBody();
-    if (mode === "food") { body.mode = "food"; body.foodKinds = this.modeVal("food", "kinds"); body.foodSmart = this.modeVal("food", "smart") !== false; body.foodParty = this.modeVal("food", "party") === true;
-      body.foodExclude = (this.modeVal("food", "exclude") || []).slice(); }
+    const body = this.upBodyFor(mode);
     this._upT0 = Date.now();
     clearInterval(this._upTick);
     this._upTick = setInterval(() => this.forceUpdate(), 1000);   // the bar moves between rounds, not only at one
@@ -2315,7 +2351,9 @@ class Component extends DCLogic {
         const rows = (s[K.rows] || []).slice(), row = { ...r.upgrade, index: r.index, stage: r.stage };
         const at = rows.findIndex(x => x.index === r.index);
         if (at < 0) rows.push(row); else rows[at] = row;
-        return { [K.rows]: rows };
+        // Each row says how many runs are done, so the clock moves within a round, not only between them.
+        const h = s[K.head], done = Number(r.jobsDone);
+        return { [K.rows]: rows, ...(h && Number.isFinite(done) && done > (Number(h.jobsDone) || 0) ? { [K.head]: { ...h, jobsDone: done } } : {}) };
       }),
     });
     this._upStream = stream;
@@ -2360,7 +2398,7 @@ class Component extends DCLogic {
     const top = sorted.filter(isFin), rest = sorted.filter(r => !isFin(r));
     const list = top.length && rest.length ? [...top.map(mk), { divider: true, label: Component.t("Lower confidence results, ranked"), sub: Component.t("measured on fewer seeds than the finalists above \u2014 the \u00b1 says how sure each row is") }, ...rest.map((r, i) => mk(r, top.length + i))]
       : sorted.map(mk);
-    const head = s.foodHead, elapsed = s.foodRunning && this._upT0 ? Date.now() - this._upT0 : 0, budget = Math.max(5, Number(this.upVal("budgetMinutes")) || 15);
+    const head = s.foodHead, share = Component.planShare(head);
     // What to test (operator, 2026-09-23): both kinds, food only or drinks only; the weapon-style rule; the exclusions.
     const kinds = this.modeVal("food", "kinds") || "both", smart = this.modeVal("food", "smart") !== false, exclude = this.modeVal("food", "exclude") || [];
     const party = this.modeVal("food", "party") === true;
@@ -2396,8 +2434,8 @@ class Component extends DCLogic {
       toggleWhat: () => this.setState(st => ({ upSec: { ...st.upSec, foodWhat: !st.upSec?.foodWhat } })),
       error: s.foodError || "", rows: list.map(r => ({ isRow: !r.divider, ...r })), hasRows: rows.length > 0,
       idle: !rows.length && !s.foodRunning && !s.foodError,
-      stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}` : Component.t("screening every food and drink\u2026"),
-      pct: `${Math.min(100, (elapsed / (budget * 60000)) * 100).toFixed(1)}%`,
+      stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.foodRunning ? ` \u00b7 ${this.trigClock(head, this.upCap())}` : ""}` : Component.t("screening every food and drink\u2026"),
+      pct: `${((share ?? 0) * 100).toFixed(1)}%`,
       gainHead: `\u0394 ${unit}`,
       rankNote: s.foodRunning ? Component.t("best so far \u2014 rows re-rank as rounds add seeds") : Component.t("by gain \u2014 the \u00b1 says how sure each row is"),
       done: s.foodDone ? Component.tf("{n} changes measured in {min} min", { n: nf(s.foodDone.evaluated ?? s.foodDone.candidates), min: ((Number(s.foodDone.ms) || 0) / 60000).toFixed(1) }) : "",
@@ -2855,8 +2893,8 @@ class Component extends DCLogic {
       };
     };
     const head = s.upHead || null;
-    const budget = Math.max(5, Number(v("budgetMinutes")) || 15);
-    const elapsed = s.upRunning ? Math.max(Number(head?.elapsedMs) || 0, Date.now() - (this._upT0 || Date.now())) : Number(head?.elapsedMs) || 0;
+    // The upgrade finder and the food test: a cap only, and an estimate from the request's plan (2026-10-02).
+    const upCap = this.upCap(), upEst = this.upEstimateMs(s.upMode === "food" ? "food" : "upgrades"), upShare = Component.planShare(head);
     const enh = this.upEnhancer();
     const tea = Component.t((Component.UP_TEAS.find(t => t[0] === enh.tea) || ["none", "no tea"])[1]);
     // The eight enhancer hrids come from zoneLimits().upgrades.enhancerTools, checked against the game data on
@@ -2868,6 +2906,9 @@ class Component extends DCLogic {
     // Trigger values keeps its own time limit, hours and seeds (2026-09-26); the panels read and write the mode's.
     const onTrig = mode === "triggers", tv = k => this.modeVal("triggers", k), tset = p => this.setMode("triggers", p);
     const trigCap = Number(tv("budgetMinutes")) || 0, trigEst = onTrig ? this.trigEstimateMs() : null;
+    // Skill levelling keeps its own hours, seeds and time limit (2026-10-02); the panels read and write the mode's.
+    const onSkill = mode === "skills", sv = k => this.modeVal("skills", k), sset = p => this.setMode("skills", p);
+    const skillBudget = Math.max(5, Number(sv("budgetMinutes")) || 60);
     const modeBtn = k => ({ style: mode === k
       ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)"
       : "border:0;background:transparent;color:var(--color-neutral-300)",
@@ -2933,18 +2974,23 @@ class Component extends DCLogic {
       zoneOpts: [{ value: "", label: zones.length ? Component.t("Pick a zone") : Component.t("loading the zone list\u2026") }, ...zones.map(z => ({ value: z.hrid, label: Component.t(z.name) }))],
       tier: String(tier), setTier: e => set({ tier: Number(e.target.value) || 0 }),
       tierOpts: Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
-      budgets: onTrig ? Component.TRIG_LIMITS.map(([m, label]) => ({ label: Component.t(label),
-          cls: trigCap === m ? "btn btn-secondary" : "btn btn-ghost", go: () => tset({ budgetMinutes: m ? String(m) : "" }) }))
-        : Component.UP_BUDGETS.map(([m, label]) => ({ label,
-          cls: Number(v("budgetMinutes")) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => set({ budgetMinutes: m }) })),
-      budget: onTrig ? (trigCap ? String(trigCap) : "") : String(v("budgetMinutes")),
-      setBudget: onTrig ? e => tset({ budgetMinutes: String(e.target.value).trim() === "" ? "" : String(Math.max(5, Math.floor(Number(e.target.value) || 5))) })
-        : e => set({ budgetMinutes: String(Math.max(5, Math.floor(Number(e.target.value) || 15))) }),   // 5 minutes is the floor for a typed limit
-      hours: onTrig ? String(tv("hours")) : String(v("hours")), setHours: e => (onTrig ? tset({ hours: e.target.value }) : set({ hours: e.target.value })),
-      seeds: onTrig ? String(tv("seeds")) : String(v("seeds")), setSeeds: e => (onTrig ? tset({ seeds: e.target.value }) : set({ seeds: e.target.value })),
-      notTrig: !onTrig,
+      budgets: onSkill ? Component.UP_BUDGETS.map(([m, label]) => ({ label,
+          cls: Number(sv("budgetMinutes")) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => sset({ budgetMinutes: m }) }))
+        : Component.TRIG_LIMITS.map(([m, label]) => ({ label: Component.t(label),
+          cls: (onTrig ? trigCap : upCap) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => (onTrig ? tset : set)({ budgetMinutes: m ? String(m) : "" }) })),
+      budget: onSkill ? String(sv("budgetMinutes")) : onTrig ? (trigCap ? String(trigCap) : "") : (upCap ? String(upCap) : ""),
+      // 5 minutes is the floor for a typed limit; blank is no limit, except in skill levelling, which spends one.
+      setBudget: onSkill ? e => sset({ budgetMinutes: String(Math.max(5, Math.floor(Number(e.target.value) || 60))) })
+        : e => (onTrig ? tset : set)({ budgetMinutes: String(e.target.value).trim() === "" ? "" : String(Math.max(5, Math.floor(Number(e.target.value) || 5))) }),
+      hours: String(onTrig ? tv("hours") : onSkill ? sv("hours") : v("hours")), setHours: e => (onTrig ? tset : onSkill ? sset : set)({ hours: e.target.value }),
+      seeds: String(onTrig ? tv("seeds") : onSkill ? sv("seeds") : v("seeds")), setSeeds: e => (onTrig ? tset : onSkill ? sset : set)({ seeds: e.target.value }),
+      notTrig: onSkill,
+      // The upgrade finder and the food test cut a third on 1.5x seeds (2026-10-02); the other two still double.
+      upSearch: mode === "upgrades" || mode === "food",
       trigLimitNote: onTrig ? (trigEst != null ? Component.tf("Trigger values runs until every trigger is confirmed, about {t} for this party on this device; a limit here only stops it early.", { t: Component.durText(trigEst) })
-        : Component.t("Trigger values runs until every trigger is confirmed; a limit here only stops it early.")) : "",
+        : Component.t("Trigger values runs until every trigger is confirmed; a limit here only stops it early."))
+        : onSkill ? "" : upEst != null ? Component.tf("The search runs until its finalists are measured, about {t} for these settings on this device; a limit here only stops it early.", { t: Component.durText(upEst) })
+        : Component.t("The search runs until its finalists are measured; a limit here only stops it early."),
       steps: String(v("steps")), setSteps: e => set({ steps: Number(e.target.value) || 1 }),
       stepOpts: [{ value: "1", label: Component.t("+1 only") }, { value: "2", label: Component.t("+1 and +2") }, { value: "3", label: Component.t("+1, +2 and +3") }],
       abilityLevels: String(v("abilityLevels")), setAbilityLevels: e => set({ abilityLevels: e.target.value }),
@@ -3001,9 +3047,10 @@ class Component extends DCLogic {
           ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
           // Upgrades only: what the search refines on (2026-09-29).
           ["rank", metric === "profit" ? Component.t("Profit / h") : metric === "eph" ? (upDungeon ? Component.t("Run time") : Component.t("Encounters / h")) : Component.t("XP / h")],
-          ["budget", onTrig ? `${trigCap ? Component.tf("{n} min", { n: trigCap }) : Component.t("no limit")}${trigEst != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(trigEst) })}` : ""}` : Component.tf("{n} min", { n: budget })],
+          ["budget", onSkill ? Component.tf("{n} min", { n: skillBudget }) : (() => { const cap = onTrig ? trigCap : upCap, est = onTrig ? trigEst : upEst;
+            return `${cap ? Component.tf("{n} min", { n: cap }) : Component.t("no limit")}${est != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(est) })}` : ""}`; })()],
           ["tries", `${Component.parseCoins(v("budget")) > 0 ? Component.tf("budget {coins}", { coins: nf(Component.parseCoins(v("budget"))) }) : Component.t("no budget")}${(v("rooms") || []).length ? Component.tf(" \u00b7 {n} rooms", { n: (v("rooms") || []).length }) : ""}${(v("shrines") || []).length ? Component.tf(" \u00b7 {n} shrines", { n: (v("shrines") || []).length }) : ""}${v("refine") ? Component.t(" \u00b7 refining") : ""}${String(v("skipLevels") || "").trim() ? Component.tf(" \u00b7 skip +{levels}", { levels: String(v("skipLevels")).split(/[^0-9]+/).filter(Boolean).join(", +") }) : ""}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
-          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(onTrig ? tv("hours") : v("hours")), seeds: nf(onTrig ? tv("seeds") : v("seeds")) })],
+          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(onTrig ? tv("hours") : onSkill ? sv("hours") : v("hours")), seeds: nf(onTrig ? tv("seeds") : onSkill ? sv("seeds") : v("seeds")) })],
           ["enh", v("market") ? Component.t("market only") : Component.tf("level {level} \u00b7 {tool} +{toolLevel}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level })],
           // Skill levelling only: how far ahead the curves look, and how many points each gets.
           ["horizon", Component.tf("{days} days \u00b7 {samples} samples", { days: Number(this.modeVal("skills", "horizonDays")) || 90, samples: Number(this.modeVal("skills", "points")) || 10 })],
@@ -3066,12 +3113,14 @@ class Component extends DCLogic {
       // which is why this is its own flag rather than a term in the shared one.
       skillsRunDisabled: !ready || !has || this.skillsOn().length === 0,
       runNote: !has ? "" : !(s.party || []).length ? "" : !v("zone") ? Component.t("pick a zone first")
-        : (names.length === 1 ? Component.tf("{n} player", { n: names.length }) : Component.tf("{n} players", { n: names.length })) + ` \u00b7 ${zone ? `${Component.t(zone.name)} T${tier}` : ""}` + Component.tf(" \u00b7 up to {n} min", { n: budget }),
+        : (names.length === 1 ? Component.tf("{n} player", { n: names.length }) : Component.tf("{n} players", { n: names.length })) + ` \u00b7 ${zone ? `${Component.t(zone.name)} T${tier}` : ""}`
+        + (onSkill ? Component.tf(" \u00b7 up to {n} min", { n: skillBudget }) : (() => { const est = onTrig ? trigEst : upEst, cap = onTrig ? trigCap : upCap;
+          return est != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(cap ? Math.min(est, cap * 60000) : est) })}` : cap ? Component.tf(" \u00b7 up to {n} min", { n: cap }) : ""; })()),
       run: () => this.findUpgrades(), stop: () => this.stopUpgrades(),
       error: s.upError || "",
-      stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.upRunning ? ` \u00b7 ${this.runClock()}` : ""}`
+      stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.upRunning ? ` \u00b7 ${this.trigClock(head, upCap)}` : ""}`
         : Component.t("screening every upgrade\u2026"),
-      pct: `${Math.min(100, (elapsed / (budget * 60000)) * 100).toFixed(1)}%`,
+      pct: `${((upShare ?? 0) * 100).toFixed(1)}%`,
       idle: !rows.length && !s.upRunning && !s.upError,
       hasRows: priced.length > 0,
       // The finalists (the rows the search measured furthest, as many as the search was asked to keep) stay on top in their own order; every
