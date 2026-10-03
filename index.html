@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="f725057e84e4"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="5dd4c959db09"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=f725057e84e4"></script>
+<script src="./support.js?v=5dd4c959db09"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f725057e84e4">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=5dd4c959db09">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=f725057e84e4">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f725057e84e4"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=5dd4c959db09">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=5dd4c959db09"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -572,6 +572,26 @@
                   </div>
                 </sc-if>
               </div>
+              <!-- 2026-10-03 (operator: 32M XP from 163, the sim costed the whole level): where the player stands in each level. -->
+              <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+                <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.skills.toggleXp }}">
+                  <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.skills.xpCaret }} XP left to next level</span>
+                  <span class="text-muted" style="font-size:12px;margin-left:auto">{{ up.skills.xpSummary }}</span>
+                </button>
+                <sc-if value="{{ up.skills.xpOpen }}" hint-placeholder-val="{{ false }}">
+                  <div style="display:flex;flex-direction:column;gap:5px">
+                    <sc-if value="{{ up.skills.xpShow }}" hint-placeholder-val="{{ true }}">
+                      <sc-for list="{{ up.skills.xpRows }}" as="x" hint-placeholder-count="3">
+                        <div style="display:grid;grid-template-columns:104px minmax(0,1fr);gap:6px;align-items:center;font-size:12.5px">
+                          <span class="text-muted">{{ x.label }}</span>
+                          <input class="input" type="text" inputmode="decimal" style="min-height:29px;padding:2px 6px;font-size:12.5px;min-width:0" placeholder="{{ x.placeholder }}" dc-attr-value="{{ x.value }}" onChange="{{ x.set }}">
+                        </div>
+                      </sc-for>
+                    </sc-if>
+                    <div class="text-muted" style="font-size:12px;text-wrap:pretty">Each curve counts from where the player is in the level now. Hover a skill in the game to see its XP To Level Up and type it here (32m works). Left blank, the helper's export says it for your own character; without either, the curve starts at the beginning of the level.</div>
+                  </div>
+                </sc-if>
+              </div>
             </sc-if>
 
             <!-- The run button, with what it will run on the line under it -- the same place in every tool. -->
@@ -1085,6 +1105,13 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-03</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.20</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Skill levelling starts where you are in the level.</b> A curve used to count every skill from the start of its current level, so a skill 91% of the way to its next level was costed the whole level: two weeks to a level that was a day away. A new section, XP left to next level, takes the number the game shows on each skill's tooltip (32m works), and the Metz Combat Sim Helper 0.6.5 exports it for your own character, kept current as you fight. Each curve's legend says where it starts, e.g. "from 91% of 162".</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-02</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.19</b></div>
@@ -1425,7 +1452,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=f725057e84e4");
+      const i18n = await import("./i18n.js?v=5dd4c959db09");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1448,7 +1475,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=f725057e84e4");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=5dd4c959db09");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1788,7 +1815,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=f725057e84e4");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=5dd4c959db09");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1809,7 +1836,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=f725057e84e4");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=5dd4c959db09");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2237,6 +2264,10 @@ class Component extends DCLogic {
       // ZONE-62: a skill whose charm is switched off is not measured, so it is in neither `skills` nor `charms`.
       const on = this.skillsOn();
       body.skills = on;
+      // XP left to the next level, for the searched player only (2026-10-03); blank skills are left to the export.
+      const who = this.upVal("player"), left = ((this.modeVal("skills", "xpLeft") || {})[who]) || {}, xpToNext = {};
+      if (who) for (const k of on) { const v = Component.parseCoins(left[k]); if (v != null && Number.isFinite(v) && v >= 0 && String(left[k] ?? "").trim() !== "") xpToNext[k] = v; }
+      if (Object.keys(xpToNext).length) body.xpToNext = xpToNext;
       const charms = {};
       for (const k of on) { const c = per[k], o = owned[k] || Component.CHARM_FALLBACK;
         if (c && (c.charm || c.charmLevel != null)) charms[k] = { charm: c.charm || o.charm, charmLevel: num(c.charmLevel, o.charmLevel) };
@@ -2643,7 +2674,7 @@ class Component extends DCLogic {
     const partyOrder = (s.party || []).map(pl => pl?.record?.name || "");
     const lines = curves.map(c => ({
       dash: dashes[Math.max(0, partyOrder.indexOf(c.player)) % dashes.length],
-      name: `${Component.t(String(c.skill || "").replace(/^./, ch => ch.toUpperCase()))}${(s.party || []).length > 1 ? ` \u00b7 ${c.player}` : ""}${c.charm?.charm ? ` (${Component.t(String(c.charm.charm).replace(/^./, ch => ch.toUpperCase()))}${c.charm.charmLevel ? ` +${c.charm.charmLevel}` : ""})` : ""}`,
+      name: `${Component.t(String(c.skill || "").replace(/^./, ch => ch.toUpperCase()))}${(s.party || []).length > 1 ? ` \u00b7 ${c.player}` : ""}${c.charm?.charm ? ` (${Component.t(String(c.charm.charm).replace(/^./, ch => ch.toUpperCase()))}${c.charm.charmLevel ? ` +${c.charm.charmLevel}` : ""})` : ""}${Number(c.levelProgress) > 0 ? ` · ${Component.tf("from {pct}% of {level}", { pct: Math.floor(Number(c.levelProgress) * 100), level: c.from })}` : ""}`,
       color: HUE[c.skill] || "var(--color-neutral-100)",
       points: (c.points || []).map(p => `${x(p.days).toFixed(1)},${y(valOf(c, p)).toFixed(1)}`).join(" "),
       dots: (c.points || []).map(p => ({ cx: x(p.days).toFixed(1), cy: y(valOf(c, p)).toFixed(1),
@@ -2703,6 +2734,22 @@ class Component extends DCLogic {
         ...((s.limits?.skills?.charmTiers) || []).filter(t => t !== "current").map(t => ({ value: t, label: Component.t(`${t[0].toUpperCase()}${t.slice(1)} charm`) }))],
       charmLevel: String(this.modeVal("skills", "charmLevel")),
       setCharmLevel: e => this.setMode("skills", { charmLevel: Math.max(0, Math.floor(Number(e.target.value) || 0)) }),
+      // XP left to each skill's next level (2026-10-03): typed per searched player, kept per name so another
+      // character never inherits it. Blank falls back to the export's total (the helper's own-character
+      // `skillExperience`), then to the start of the level.
+      ...(() => { const who = this.upVal("player"), all = this.modeVal("skills", "xpLeft") || {}, mine = all[who] || {}, on = this.skillsOn();
+        const rec = (s.party || []).find(p => (p?.record?.name || "") === who)?.record || null, known = k => Number.isFinite(Number(rec?.experience?.[k]));
+        const typed = on.filter(k => String(mine[k] ?? "").trim() !== "").length, fromExport = on.filter(k => String(mine[k] ?? "").trim() === "" && known(k)).length;
+        return {
+          xpShow: !!who, xpOpen: !!s.skillXpOpen, xpCaret: s.skillXpOpen ? "\u25be" : "\u25b8",
+          toggleXp: () => this.setState(st => ({ skillXpOpen: !st.skillXpOpen })),
+          xpSummary: !who ? Component.t("one player at a time")
+            : [typed ? Component.tf("{n} typed", { n: typed }) : "", fromExport ? Component.tf("{n} from the export", { n: fromExport }) : "",
+              !typed && !fromExport ? Component.t("start of each level") : ""].filter(Boolean).join(" \u00b7 "),
+          xpRows: on.map(k => ({ key: k, label: Component.t(k[0].toUpperCase() + k.slice(1)), value: String(mine[k] ?? ""),
+            placeholder: known(k) ? Component.t("from the export") : Component.t("start of level"),
+            set: e => this.setMode("skills", { xpLeft: { ...all, [who]: { ...mine, [k]: String(e.target.value || "").trim() } } }) })),
+        }; })(),
       perOpen: !!s.skillPerOpen,
       togglePer: () => this.setState(st => ({ skillPerOpen: !st.skillPerOpen })),
       perCaret: s.skillPerOpen ? "\u25be" : "\u25b8",
