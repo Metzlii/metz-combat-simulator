@@ -1,20 +1,20 @@
 {
- "builtAt": "2026-10-03T13:17:23.333Z",
- "commit": "d43277e",
+ "builtAt": "2026-10-05T15:37:19.677Z",
+ "commit": "3284737",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
    "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
    "init_client_data.json"
   ],
-  "bytes": 6401104,
-  "gzip": 625885,
+  "bytes": 6401278,
+  "gzip": 625975,
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
   "files": 50,
-  "bytes": 18384764,
-  "gzip": 3235121
+  "bytes": 18385656,
+  "gzip": 3235384
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -47,11 +47,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3780
+   "gzip": 3781
   },
   "index.html": {
-   "bytes": 332146,
-   "gzip": 86663
+   "bytes": 332864,
+   "gzip": 86832
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -59,11 +59,11 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1481
+   "gzip": 1479
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
-   "bytes": 3650027,
-   "gzip": 421602
+   "bytes": 3650201,
+   "gzip": 421692
   },
   "locales/en.json": {
    "bytes": 87587,
@@ -119,7 +119,7 @@
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
-   "gzip": 3188
+   "gzip": 3189
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -131,7 +131,7 @@
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
-   "gzip": 3423
+   "gzip": 3426
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -155,7 +155,7 @@
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 39229,
-   "gzip": 14013
+   "gzip": 14012
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -203,11 +203,11 @@
   },
   "zoneApi.js": {
    "bytes": 5175,
-   "gzip": 2097
+   "gzip": 2098
   },
   "ZoneSim.dc.html": {
    "bytes": 363865,
-   "gzip": 93385
+   "gzip": 93386
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
