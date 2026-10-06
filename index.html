@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="350bb9865503"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="f02c7a1ae196"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=350bb9865503"></script>
+<script src="./support.js?v=f02c7a1ae196"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=350bb9865503">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=f02c7a1ae196">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=350bb9865503">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=350bb9865503"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=f02c7a1ae196">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=f02c7a1ae196"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -288,7 +288,6 @@
                 <input class="input" type="number" min="5" step="1" style="min-height:27px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.budget }}" onChange="{{ up.setBudget }}">
                 <span class="text-muted" style="font-size:12.5px">min</span>
               </div>
-              <sc-if value="{{ up.notTrig }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The search spends the whole limit: it measures every point on every curve, then measures them all again on twice the seeds each round until the time is up. No point is dropped, so each curve's error bars shrink together.</div></sc-if>
               <sc-if value="{{ up.trigLimitNote }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;text-wrap:pretty">{{ up.trigLimitNote }}</div></sc-if>
               </sc-if>
             </div>
@@ -306,7 +305,7 @@
                 <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.seeds }}" onChange="{{ up.setSeeds }}">
               </div>
               <sc-if value="{{ up.upSearch }}" hint-placeholder-val="{{ true }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round has 1.5 times the seeds of the one before, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div></sc-if>
-              <sc-if value="{{ up.onTriggers }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round doubles the seeds, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div></sc-if>
+              <sc-if value="{{ up.trigView }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Each surviving round doubles the seeds, so the screen is deliberately thin. A single upgrade is worth 0.05–0.4% of party XP — one simulation cannot see it.</div></sc-if>
               <!-- Skill levelling refines every point evenly (keepAll): a curve needs all its points measured alike, so nothing "survives" a round (2026-10-02). -->
               <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Every round measures every point again on twice the seeds, so the first pass is deliberately thin. A level's gain is often a fraction of a percent — one simulation cannot see it.</div></sc-if>
               </sc-if>
@@ -477,6 +476,9 @@
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">What each value is judged on. One trigger rarely moves encounters per hour by more than the noise, so XP / h is the default; Profit / day counts the loot less what the food and drinks cost. The pace change still shows beside each gain.</div>
                 </sc-if>
               </div>
+            </sc-if>
+            <!-- The walks belong to the trigger walk wherever it is driven from: its own tab, or the Survival goal (2026-10-05). -->
+            <sc-if value="{{ up.trigView }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
                 <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ up.sec.passes.toggle }}">
                   <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.sec.passes.caret }} Passes</span>
@@ -493,12 +495,27 @@
             </sc-if>
 
             <sc-if value="{{ up.onFood }}" hint-placeholder-val="{{ false }}">
+              <!-- The goal (operator, 2026-10-05): most players want cheaper mana food; a team wants its healing food timed; drinks are a swap question. -->
+              <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
+                <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;color:var(--color-accent-300)">Goal</span>
+                <div class="seg" style="align-self:flex-start">
+                  <button class="seg-opt" style="font-size:12.5px;{{ up.food.goalMana.style }}" onClick="{{ up.food.goalMana.go }}">Cheapest mana</button>
+                  <button class="seg-opt" style="font-size:12.5px;{{ up.food.goalSurvival.style }}" onClick="{{ up.food.goalSurvival.go }}">Survival</button>
+                  <button class="seg-opt" style="font-size:12.5px;{{ up.food.goalSwap.style }}" onClick="{{ up.food.goalSwap.go }}">Best swap</button>
+                </div>
+                <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ up.food.goalNote }}</div>
+              </div>
+              <sc-if value="{{ up.food.showWhat }}" hint-placeholder-val="{{ true }}">
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
                 <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left" onClick="{{ up.food.toggleWhat }}">
                   <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.food.whatCaret }} What to test</span>
                   <span class="text-muted" style="font-size:12px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;margin-left:auto">{{ up.food.whatSummary }}</span>
                 </button>
                 <sc-if value="{{ up.food.whatOpen }}" hint-placeholder-val="{{ false }}">
+                <sc-if value="{{ up.food.isMana }}" hint-placeholder-val="{{ false }}">
+                <label style="display:flex;gap:7px;align-items:flex-start;font-size:13px"><input type="checkbox" style="margin-top:3px" checked="{{ up.food.allowLost }}" onChange="{{ up.food.toggleAllowLost }}"><span>Allow lost casts when XP is not lower<span class="text-muted" style="display:block;font-size:12px;text-wrap:pretty">Off, a setup that has any cast refused is never the answer. On, a cheaper setup that loses a few casts counts when its XP is not measurably lower.</span></span></label>
+                </sc-if>
+                <sc-if value="{{ up.food.isSwap }}" hint-placeholder-val="{{ true }}">
                 <div class="seg" style="align-self:flex-start">
                   <button class="seg-opt" style="font-size:12.5px;{{ up.food.kindBoth.style }}" onClick="{{ up.food.kindBoth.go }}">Food &amp; drinks</button>
                   <button class="seg-opt" style="font-size:12.5px;{{ up.food.kindFood.style }}" onClick="{{ up.food.kindFood.go }}">Food only</button>
@@ -516,6 +533,7 @@
                 <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">The whole party: every player who can use a drink gets it at once, and a drink already carried is taken off everyone; a change counts only if the party as a whole gains. Wisdom Coffee on one player raises their XP at everyone else's cost.</div>
                 </sc-if>
                 <label style="display:flex;gap:7px;align-items:center;font-size:13px" title="A mage gains nothing from Attack, Melee, Ranged or Swiftness Coffee; melee and ranged gain nothing from Magic or Channeling Coffee. Off, every drink is tested."><input type="checkbox" checked="{{ up.food.smart }}" onChange="{{ up.food.toggleSmart }}">Skip drinks the weapon cannot use</label>
+                </sc-if>
                 <div style="display:flex;flex-direction:column;gap:5px">
                   <span class="text-muted" style="font-size:12.5px">Never test</span>
                   <sc-if value="{{ up.food.hasExcluded }}" hint-placeholder-val="{{ false }}">
@@ -534,6 +552,7 @@
                 </div>
                 </sc-if>
               </div>
+              </sc-if>
             </sc-if>
             <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}">
               <div style="display:flex;flex-direction:column;gap:7px;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
@@ -605,11 +624,11 @@
                   <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.run }}">Find upgrades</button>
                 </sc-if>
               </sc-if>
-              <sc-if value="{{ up.onTriggers }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ up.trigView }}" hint-placeholder-val="{{ false }}">
                 <sc-if value="{{ up.trig.running }}" hint-placeholder-val="{{ false }}">
                   <button class="btn btn-secondary" style="padding:4px 16px;font-size:14px" onClick="{{ up.stop }}">Stop</button>
                 </sc-if>
-                <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.trig.run }}">Tune triggers</button>
+                <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.trigRun }}">{{ up.trigRunLabel }}</button>
               </sc-if>
               <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}">
                 <sc-if value="{{ up.skills.running }}" hint-placeholder-val="{{ false }}">
@@ -620,12 +639,12 @@
                     <span class="text-muted" style="font-size:12.5px">Every skill is unticked under Charm per skill — there is nothing to measure.</span>
                   </sc-if>
               </sc-if>
-              <sc-if value="{{ up.onFood }}" hint-placeholder-val="{{ false }}">
+              <sc-if value="{{ up.foodView }}" hint-placeholder-val="{{ false }}">
                 <sc-if value="{{ up.food.running }}" hint-placeholder-val="{{ false }}">
                   <button class="btn btn-secondary" style="padding:4px 16px;font-size:14px" onClick="{{ up.stop }}">Stop</button>
                 </sc-if>
                 <sc-if value="{{ up.food.idleButton }}" hint-placeholder-val="{{ true }}">
-                  <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.food.run }}">Find food &amp; drinks</button>
+                  <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ up.runDisabled }}" onClick="{{ up.food.run }}">{{ up.food.runLabel }}</button>
                 </sc-if>
               </sc-if>
               <sc-if value="{{ up.canClear }}" hint-placeholder-val="{{ false }}">
@@ -811,7 +830,7 @@
             <sc-if value="{{ up.done }}" hint-placeholder-val="{{ false }}">
               <div class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums;text-wrap:pretty">{{ up.done }}</div>
             </sc-if>            </sc-if>
-            <sc-if value="{{ up.onTriggers }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ up.trigView }}" hint-placeholder-val="{{ false }}">
               <sc-if value="{{ up.trig.running }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;gap:9px;align-items:center;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
                   <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
@@ -970,7 +989,7 @@
                 </div>
               </sc-if>
             </sc-if>
-            <sc-if value="{{ up.onFood }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ up.foodView }}" hint-placeholder-val="{{ false }}">
               <sc-if value="{{ up.food.running }}" hint-placeholder-val="{{ false }}">
                 <div style="display:flex;flex-direction:column;gap:6px;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
                   <div style="display:flex;gap:9px;align-items:center">
@@ -1009,6 +1028,7 @@
                             <span class="tag tag-outline" style="font-size:10.5px">{{ fr.kindTag }}</span>
                             <span class="text-muted" style="font-size:12px">{{ fr.player }}</span>
                             <sc-if value="{{ fr.finalist }}" hint-placeholder-val="{{ false }}"><span class="tag tag-accent" style="font-size:10.5px">finalist</span></sc-if>
+                            <sc-if value="{{ fr.badge }}" hint-placeholder-val="{{ false }}"><span class="tag tag-accent" style="font-size:10.5px">{{ fr.badge }}</span></sc-if>
                             <span class="text-muted" style="font-size:11.5px">{{ fr.seeds }}</span>
                             <span class="text-muted" style="font-size:11.5px">{{ fr.deaths }}</span>
                             <sc-if value="{{ fr.mana }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:11.5px;font-variant-numeric:tabular-nums" title="{{ fr.manaTip }}">{{ fr.mana }}</span></sc-if>
@@ -1105,6 +1125,15 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-05</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.23</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Food &amp; drinks now works to a goal.</b> <b>Cheapest mana</b> (the default) finds the cheapest gummy and yogurt setup that has no casts refused for lack of mana. A first pass on the food carried today measures how much mana an hour food has to deliver; from every gummy, yogurt and pair that fits beside the healing food, the cheapest few that can deliver it are simulated, each food on its default trigger and at a quarter, half and three quarters of the mana pool, and in a pair each food gets its own threshold. Cost counts food and drinks only, not keys. A tick box allows setups that lose a few casts when XP is not lower. <b>Survival</b> walks the healing food's triggers for the fastest clears. <b>Best swap</b> is the ranking the tab had before.</li>
+                <li><b>Skill levelling stops on its own.</b> There is no time limit by default: it adds seeds until every point on the curve is precise enough, and shows the widest error against the target while it runs. Charm per skill starts unticked for the main stats your weapon does not train (melee and ranged for a mage).</li>
+                <li><b>Optimizer defaults that give a useful answer.</b> Upgrades: the whole party, 1,500 hours, 3 seeds, a 3b budget. Trigger values: 2,000 hours, 3 seeds, 4 walks. Food &amp; drinks: 2,000 hours, 3 seeds.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-05</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.22</b></div>
@@ -1466,7 +1495,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=350bb9865503");
+      const i18n = await import("./i18n.js?v=f02c7a1ae196");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1489,7 +1518,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=350bb9865503");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=f02c7a1ae196");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1521,8 +1550,8 @@ class Component extends DCLogic {
     metric: "xp", skill: "", player: "", measure: "",
     // The board the operator reaches for first; any served zoneLimits().upgrades value replaces it.
     zone: "/actions/combat/pirate_cove", tier: 2, market: false,
-    // 2026-10-02 (operator): 1000 h runs on 3 seeds, and no time limit -- the settings size the search.
-    budgetMinutes: "", hours: 1000, seeds: 3, steps: 1, abilityLevels: 5, finalists: 5,
+    // 2026-10-02 (operator): 3 seeds and no time limit -- the settings size the search. 1500 h since 2026-10-05.
+    budgetMinutes: "", hours: 1500, seeds: 3, steps: 1, abilityLevels: 5, finalists: 5,
     includePouch: false, includeCharms: false, bookPremium: 0.2,
     // The operator's baseline. zoneLimits().upgrades carries the served version and replaces every field here.
     enhancer: { level: 145, tool: { hrid: "/items/celestial_enhancer", level: 18 }, tea: "ultra", blessed: true, champion: true, pouchLevel: 14, observatory: 8,
@@ -1551,8 +1580,6 @@ class Component extends DCLogic {
   static ALCHEMY_TEAS = [["none", "No alchemy tea"], ["alchemy", "Alchemy Tea"], ["super", "Super Alchemy Tea"], ["ultra", "Ultra Alchemy Tea"]];
   static CATALYSTS = [["none", "No catalyst"], ["catalyst", "Catalyst Of Decomposition"], ["prime", "Prime Catalyst"]];
   static UP_TEAS = [["none", "No enhancing tea"], ["enhancing", "Enhancing Tea"], ["super", "Super Enhancing Tea"], ["ultra", "Ultra Enhancing Tea"]];
-  // Skill levelling's time limits; the upgrade finder and the food test take TRIG_LIMITS (a cap, none by default).
-  static UP_BUDGETS = [[15, "15 min"], [60, "1 h"], [120, "2 h"]];
   static UP_ROUTES = { market: "Market", enhance: "Enhance", mirror: "Mirror", "enhance+mirror": "Enhance + mirror", books: "Books",
     // The hybrid (operator, 2026-09-21): bought at an intermediate level, then enhanced the rest of the way.
     "market+enhance": "Buy, then enhance", "market+mirror": "Buy, then mirror", "market+enhance+mirror": "Buy, then enhance + mirror",
@@ -1829,7 +1856,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=350bb9865503");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=f02c7a1ae196");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1850,7 +1877,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=350bb9865503");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=f02c7a1ae196");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2039,7 +2066,8 @@ class Component extends DCLogic {
     // The searches open on whoever ran the export. Only the operator's own character carries an inventory, so
     // `record.owned` is the marker — and they are the one person here who can act on the answer. Picking any
     // scope, including the whole party, replaces this.
-    if (k === "player") return this.importerName();
+    // Upgrades opens on the whole party (operator, 2026-10-05): an upgrade anywhere in the party speeds everyone's clears.
+    if (k === "player") return (this.state.upMode || "upgrades") === "upgrades" ? "" : this.importerName();
     return this.upDefaults()[k];
   }
   importerName() {
@@ -2069,7 +2097,11 @@ class Component extends DCLogic {
   /** The request for the upgrade finder or the food test: the food test is the same search over consumables. */
   upBodyFor(mode) {
     const body = this.upBody();
-    if (mode === "food") { body.mode = "food"; body.foodKinds = this.modeVal("food", "kinds"); body.foodSmart = this.modeVal("food", "smart") !== false; body.foodParty = this.modeVal("food", "party") === true;
+    // The food test keeps its own hours and seeds (2026-10-05: 2000 h on 3 seeds).
+    if (mode === "food") { const fn = (k, fb) => { const x = Number(this.modeVal("food", k)); return Number.isFinite(x) && x > 0 ? x : fb; };
+      body.hours = fn("hours", 2000); body.seeds = fn("seeds", 3);
+      if (this.foodGoal() === "mana") { body.foodGoal = "mana"; body.allowLostCasts = this.modeVal("food", "allowLostCasts") === true; }
+      body.mode = "food"; body.foodKinds = this.modeVal("food", "kinds"); body.foodSmart = this.modeVal("food", "smart") !== false; body.foodParty = this.modeVal("food", "party") === true;
       body.foodExclude = (this.modeVal("food", "exclude") || []).slice(); }
     return body;
   }
@@ -2116,7 +2148,7 @@ class Component extends DCLogic {
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
       // A cap only (2026-10-02): blank or 0 sends none, and the rounds are sized by the seeds and the candidates.
-      budgetMinutes: this.upCap() || null, hours: num("hours", 1000), seeds: num("seeds", 3),
+      budgetMinutes: this.upCap() || null, hours: num("hours", 1500), seeds: num("seeds", 3),
       steps: num("steps", 1), abilityLevels: num("abilityLevels", 5), finalists: num("finalists", 5),
       bookPremium: num("bookPremium", 0.2),
       // 2026-09-25: the coin budget (blank: none), the gear slots (null: all), the rooms with their cap, refining.
@@ -2143,24 +2175,27 @@ class Component extends DCLogic {
   // runner drives all three and each mode only says what to send and what to keep.
   // Trigger values keeps its own hours, seeds and time limit (operator, 2026-09-26): 672 h runs, 5 seeds, and no limit
   // by default -- the walk's rounds are sized by seeds, and a limit is only a cap.
-  static TRIG_DEFAULTS = { passes: 2, scope: "abilities", metric: "xp", hours: 672, seeds: 5, budgetMinutes: "" };
+  // 2000 h runs on 3 seeds, four walks (operator, 2026-10-05; was 672 h, 5 seeds, two walks).
+  static TRIG_DEFAULTS = { passes: 4, scope: "abilities", metric: "xp", hours: 2000, seeds: 3, budgetMinutes: "" };
   static TRIG_LIMITS = [[0, "No limit"], [60, "1 h"], [120, "2 h"], [240, "4 h"]];
   /** About how long a trigger walk takes on this device, before it starts: the server's job plan, priced at the
    * pace this browser learned (the native figure x 1.2 before it has one), over its lanes. Null without triggers. */
-  trigEstimateMs() {
+  trigEstimateMs(hpFoodOnly = false) {
     const s = this.state, who = this.upVal("player");
     const players = (s.party || []).filter(p => !who || p?.record?.name === who);
-    const food = this.modeVal("triggers", "scope") === "food";
+    const food = hpFoodOnly || this.modeVal("triggers", "scope") === "food";
+    // Survival walks the healing food only; which foods heal comes with the limits.
+    const heals = new Set((s.limits?.upgrades?.consumables || []).filter(c => c.kind === "food" && c.restore === "hp").map(c => c.itemHrid));
     const ENEMY = ["/combat_trigger_conditions/current_hp", "/combat_trigger_conditions/missing_hp", "/combat_trigger_conditions/lowest_hp_percentage"];
     let T = 0;
     for (const p of players) {
-      if (food) { T += (p?.loadout?.food?.["/action_types/combat"] || []).filter(e => e?.itemHrid).length; continue; }
+      if (food) { T += (p?.loadout?.food?.["/action_types/combat"] || []).filter(e => e?.itemHrid && (!hpFoodOnly || heals.has(e.itemHrid))).length; continue; }
       const slotted = new Set((p?.loadout?.abilities || []).map(a => a?.hrid || a?.abilityHrid));
       for (const [h, list] of Object.entries(p?.loadout?.abilityTriggers || {})) if (slotted.has(h) && Array.isArray(list))
         T += list.filter(t => ENEMY.includes(t?.conditionHrid) && /all_enemies|targeted_enemy/.test(t?.dependencyHrid || "")).length;
     }
     if (!T) return null;
-    const seeds = Number(this.modeVal("triggers", "seeds")) || 5, hours = Number(this.modeVal("triggers", "hours")) || 672, passes = Number(this.modeVal("triggers", "passes")) || 2;
+    const seeds = Number(this.modeVal("triggers", "seeds")) || 3, hours = Number(this.modeVal("triggers", "hours")) || 2000, passes = Number(this.modeVal("triggers", "passes")) || 4;
     const jobs = seeds + (!food && T > 1 ? (12 * T + 1) * 2 : 0) + passes * T * (13 * seeds + 6 * seeds + 4 * 2 * seeds + 16) + 8 * seeds;
     let spch = 0.05; try { const l = JSON.parse(localStorage.getItem("gts.zone.pace.v1") || "null"); if (Number(l?.secondsPerCandidateHour) > 0) spch = Number(l.secondsPerCandidateHour); } catch {}
     const lanes = Number(s.client?.zoneLanes) || Number(s.client?.workers) || 1;
@@ -2179,7 +2214,24 @@ class Component extends DCLogic {
   }
   // Skill levelling keeps its own hours, seeds and time limit: its search still spends a time slot (2026-10-02). 1000 h
   // runs on 3 seeds within an hour (operator, same day). The served limits.skills replace these.
-  static SKILL_DEFAULTS = { horizonDays: 90, points: 10, charm: "current", charmLevel: 0, hours: 1000, seeds: 3, budgetMinutes: 60 };
+  static SKILL_DEFAULTS = { horizonDays: 90, points: 10, charm: "current", charmLevel: 0, hours: 1000, seeds: 3, budgetMinutes: "", precision: 0.0003 };
+  // The three main-stat skills: a weapon trains one of them and never the other two.
+  static MAIN_STATS = ["melee", "ranged", "magic"];
+  /** Skill levelling's time cap in minutes, 0 for none (blank, 0 or the served null). */
+  skillCap() { const m = Number(this.modeVal("skills", "budgetMinutes")); return Number.isFinite(m) && m > 0 ? m : 0; }
+  /** The skills ticked before anyone has touched them (2026-10-05): every skill but the main stats the searched
+   * players' weapons do not train -- melee and ranged for a mage. Weapon styles come with the limits. */
+  defaultSkills() {
+    const styles = this.state.limits?.skills?.weaponStyles, who = this.upVal("player");
+    if (!styles) return [...Component.UP_SKILLS];
+    const used = new Set();
+    for (const p of (this.state.party || []).filter(q => !who || q?.record?.name === who)) {
+      const eq = p?.loadout?.equipment || [];
+      const worn = eq.find(e => e && /\/item_locations\/(two_hand|main_hand)$/.test(e.itemLocationHrid || "")) || eq.find(e => e && styles[e.itemHrid]);
+      if (worn && styles[worn.itemHrid]) used.add(styles[worn.itemHrid]);
+    }
+    return used.size ? Component.UP_SKILLS.filter(k => !Component.MAIN_STATS.includes(k) || used.has(k)) : [...Component.UP_SKILLS];
+  }
   modeState(mode) {
     return mode === "triggers"
       ? { running: "trigRunning", rows: "trigRows", head: "trigHead", done: "trigDone", error: "trigError", extra: "trigSteps" }
@@ -2188,7 +2240,13 @@ class Component extends DCLogic {
   // The food optimizer's settings outlive the page: an exclusion list is a standing rule ("never Lucky Coffee in a
   // dungeon"), not a one-search choice.
   static FOOD_FORM_KEY = "gts.zone.foodForm.v1";
-  static FOOD_DEFAULTS = { kinds: "both", smart: true, exclude: [], party: false };
+  // `goal` (2026-10-05): "mana" -- the cheapest mana food that loses no casts, what most players come for; "survival"
+  // -- when each player eats their healing food, walked like the ability triggers and judged on run time; "swap" --
+  // every single add, swap or removal ranked by XP or profit, the only one that covers drinks.
+  static FOOD_DEFAULTS = { kinds: "both", smart: true, exclude: [], party: false, hours: 2000, seeds: 3, goal: "mana", allowLostCasts: false };
+  foodGoal() { const g = this.modeVal("food", "goal"); return g === "survival" || g === "swap" ? g : "mana"; }
+  /** True on the Food & drinks tab with the Survival goal: the tab then drives the trigger walk, on healing food only. */
+  foodSurvival() { return this.state.upMode === "food" && this.foodGoal() === "survival"; }
   loadFoodForm() { try { const f = JSON.parse(localStorage.getItem(Component.FOOD_FORM_KEY) || "null"); if (f && typeof f === "object") this.setState({ foodForm: f }); } catch {} }
   modeVal(mode, k) {
     const form = (mode === "triggers" ? this.state.trigForm : mode === "food" ? this.state.foodForm : this.state.skillForm) || {};
@@ -2208,8 +2266,9 @@ class Component extends DCLogic {
   // melee costed, and at a high level intelligence is worth about what magic is, so measuring them spends the
   // budget on answers nobody asked for (operator, 2026-09-20). All seven are on until one is turned off.
   skillsOn() {
-    const v = this.modeVal("skills", "skills");
-    return Array.isArray(v) ? v.filter(k => Component.UP_SKILLS.includes(k)) : [...Component.UP_SKILLS];
+    // Only a list the player has set counts; the served default names every skill and would hide the style rule.
+    const v = (this.state.skillForm || {}).skills;
+    return Array.isArray(v) ? v.filter(k => Component.UP_SKILLS.includes(k)) : this.defaultSkills();
   }
   toggleSkill(k) {
     const on = new Set(this.skillsOn());
@@ -2255,16 +2314,17 @@ class Component extends DCLogic {
     const body = {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num(this.upVal("tier"), 0),
       hours: num(this.modeVal("skills", "hours"), 1000), seeds: num(this.modeVal("skills", "seeds"), 3),
-      budgetMinutes: Math.max(5, num(this.modeVal("skills", "budgetMinutes"), 60)),
+      // A cap only (2026-10-05): skill levelling ends when every point is measured to its precision.
+      budgetMinutes: this.skillCap() || null,
       accountBuffs: this.state.buffs || null,
       ...(this.state.measure || {}),
     };
     if (this.upVal("player")) body.player = this.upVal("player");
-    if (mode === "triggers") { body.passes = num(this.modeVal("triggers", "passes"), 2); body.scope = this.modeVal("triggers", "scope") === "food" ? "food" : "abilities";
+    if (mode === "triggers") { body.passes = num(this.modeVal("triggers", "passes"), 4); body.scope = this.modeVal("triggers", "scope") === "food" ? "food" : "abilities";
       // What each value is judged on (operator, 2026-09-26): XP / h by default, Profit / day on request.
       body.goal = { metric: this.modeVal("triggers", "metric") === "profit" ? "profit" : "xp" };
       // Its own hours and seeds, and a limit only when one is set (none by default).
-      body.hours = num(this.modeVal("triggers", "hours"), 672); body.seeds = num(this.modeVal("triggers", "seeds"), 5);
+      body.hours = num(this.modeVal("triggers", "hours"), 2000); body.seeds = num(this.modeVal("triggers", "seeds"), 3);
       const cap = Number(this.modeVal("triggers", "budgetMinutes")); body.budgetMinutes = cap > 0 ? cap : null; }
     else {
       body.horizonDays = num(this.modeVal("skills", "horizonDays"), 90);
@@ -2299,14 +2359,16 @@ class Component extends DCLogic {
    * then says it has passed it, rather than showing a negative or pretending the search is over.
    */
   runClock() {
-    // Read exactly as `upBody` reads it, with no clamp of its own: a clock that floors a value the request
-    // did not floor would count down to a limit the search was never given.
-    const n = Math.max(5, Number(this.modeVal("skills", "budgetMinutes"))), budget = Number.isFinite(n) ? n : 60;
-    const left = budget * 60000 - (Date.now() - (this._upT0 || Date.now()));
-    if (!Number.isFinite(left)) return "";
-    if (left <= 0) return Component.tf("past {budget} min \u00b7 finishing this round", { budget });
-    const t = Math.round(left / 1000);
-    return Component.tf("{time} left of {budget} min", { time: `${Math.floor(t / 60)}:${String(t % 60).padStart(2, "0")}`, budget });
+    // Skill levelling since 2026-10-05: no countdown, because nothing is being counted down to. It says how long it
+    // has run and how far the widest error still is from the target, both as a share of the party's rate.
+    const head = this.state.skillHead || {}, el = Date.now() - (this._upT0 || Date.now()), cap = this.skillCap();
+    const precision = Number(head.precision) || Number(this.modeVal("skills", "precision")) || 0.0003;
+    const base = Number(head.targetSE) > 0 ? Number(head.targetSE) / precision : 0, worst = Number(head.worstSE);
+    const pct = x => (x * 100).toFixed(x * 100 < 0.1 ? 3 : 2);
+    const text = base > 0 && Number.isFinite(worst) && worst > 0
+      ? Component.tf("{elapsed} elapsed \u00b7 widest error \u00b1{now}%, target \u00b1{target}%", { elapsed: Component.durText(el), now: pct(worst / base), target: (precision * 100).toFixed(2) })
+      : Component.tf("{elapsed} elapsed", { elapsed: Component.durText(el) });
+    return cap > 0 ? `${text} \u00b7 ${Component.tf("capped at {n} min", { n: cap })}` : text;
   }
   /**
    * A gain measured in clears an hour, said as what it does to the average run time.
@@ -2337,12 +2399,13 @@ class Component extends DCLogic {
     return { secs, se, text, short, withError: `${text}${se == null ? "" : ` \u00b1 ${se.toFixed(1)} s`}`,
       from: mmss(3600 / C), to: mmss(3600 / (C + d)) };
   }
-  async runMode(mode) {
+  async runMode(mode, extra = null) {
     const c = this.state.client, K = this.modeState(mode);
     const one = mode === "triggers" ? c?.zoneTriggers : c?.zoneSkills;
     const streamed = mode === "triggers" ? c?.zoneTriggersStream : c?.zoneSkillsStream;
     if (!c || !(this.state.party || []).length || !this.upVal("zone") || this.state[K.running] || !(one || streamed)) return;
-    const body = this.modeBody(mode);
+    // `extra`: what the caller pins on the request -- the Survival goal's healing-food walk judged on run time.
+    const body = { ...this.modeBody(mode), ...(extra || {}) };
     this._upT0 = Date.now();
     clearInterval(this._upTick);
     this._upTick = setInterval(() => this.forceUpdate(), 1000);
@@ -2444,6 +2507,36 @@ class Component extends DCLogic {
     const list = top.length && rest.length ? [...top.map(mk), { divider: true, label: Component.t("Lower confidence results, ranked"), sub: Component.t("measured on fewer seeds than the finalists above \u2014 the \u00b1 says how sure each row is") }, ...rest.map((r, i) => mk(r, top.length + i))]
       : sorted.map(mk);
     const head = s.foodHead, share = Component.planShare(head);
+    // The goal (2026-10-05). What is on screen describes itself: an answer in hand says which goal produced it.
+    const goal = this.foodGoal(), shownGoal = rows.length || s.foodRunning ? (head?.foodGoal || s.foodDone?.foodGoal || "swap") : goal;
+    const goalBtn = k => ({ style: goal === k ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "border:0;background:transparent;color:var(--color-neutral-300)",
+      go: () => this.setMode("food", { goal: k }) });
+    const allowLost = this.modeVal("food", "allowLostCasts") === true;
+    // Cheapest mana rows: the setup in words, coins saved a day, and whether it keeps the casts.
+    const coinDay = v => coin(Math.abs(Number(v) || 0) * 24);
+    // Each food with its own threshold when it has one; a food on its default trigger is just named.
+    const setupName = r => ((r.foods || []).length ? r.foods.map(h => itemName(h) + (r.thresholds?.[h] != null ? ` (${Component.tf("missing MP \u2265 {n}", { n: nf(r.thresholds[h]) })})` : "")).join(" + ") : Component.t("no mana food"));
+    // What the baseline found: the mana the food has to deliver, and how many setups that left to simulate.
+    const needNote = (() => { const need = head?.manaNeed || {}, seen = head?.setupsConsidered || {}, kept = head?.setupsSimulated || {};
+      return Object.keys(need).map(who => Component.tf("{who}: food must deliver {n} mana / h \u00b7 {kept} of {all} setups simulated", { who, n: nf(Math.round(need[who])), kept: nf(kept[who] ?? 0), all: nf(seen[who] ?? 0) })).join(" \u00b7 "); })();
+    const manaRows = () => {
+      const ok = rows.filter(r => r.feasible).sort((a, b) => (Number(b.delta) || 0) - (Number(a.delta) || 0));
+      const lose = rows.filter(r => !r.feasible).sort((a, b) => (Number(a.refusedPerHour) || 0) - (Number(b.refusedPerHour) || 0));
+      // One answer a player: their cheapest setup that keeps the casts, or -- when none does -- the one that loses fewest.
+      const best = new Map(); for (const r of ok) if (!best.has(r.player)) best.set(r.player, r);
+      const nearest = new Map(); for (const r of lose) if (!best.has(r.player) && !nearest.has(r.player)) nearest.set(r.player, r);
+      const row = (r, i) => { const d = Number(r.delta) || 0, top = best.get(r.player) === r, near = nearest.get(r.player) === r;
+        return { rank: String(i + 1), finalist: false, title: setupName(r), player: names.length > 1 ? (r.player || "") : "", kindTag: Component.t("food"),
+          badge: top ? Component.t("cheapest, no casts lost") : near ? Component.t("fewest casts lost") : "",
+          border: top || near ? "var(--color-accent-700)" : "var(--color-divider)", bg: top || near ? "color-mix(in srgb, var(--color-accent-800) 26%, transparent)" : "var(--color-bg)",
+          gain: d >= 0 ? Component.tf("saves {coins} / day", { coins: coinDay(d) }) : Component.tf("costs {coins} / day more", { coins: coinDay(d) }),
+          se: r.deltaSE == null ? "" : `\u00b1 ${coinDay(r.deltaSE)}`,
+          other: r.deltaXp == null ? "" : Component.tf("{n} XP/h", { n: `${r.deltaXp < 0 ? "\u2212" : "+"}${nf(Math.abs(r.deltaXp))}` }) + (r.deltaXpSE == null ? "" : ` \u00b1 ${nf(r.deltaXpSE)}`),
+          seeds: Component.tf("{n} seeds", { n: nf(r.seeds || 0) }), deaths: "",
+          mana: manaLine(r), manaTip: r.fromFoods?.length ? Component.tf("replaces {item}", { item: r.fromFoods.map(itemName).join(" + ") }) : "" }; };
+      return ok.length && lose.length ? [...ok.map(row), { divider: true, label: Component.t("Loses casts"), sub: Component.t("cheaper on food, but casts are refused for lack of mana") }, ...lose.map((r, i) => row(r, ok.length + i))]
+        : [...ok, ...lose].map(row);
+    };
     // What to test (operator, 2026-09-23): both kinds, food only or drinks only; the weapon-style rule; the exclusions.
     const kinds = this.modeVal("food", "kinds") || "both", smart = this.modeVal("food", "smart") !== false, exclude = this.modeVal("food", "exclude") || [];
     const party = this.modeVal("food", "party") === true;
@@ -2462,7 +2555,15 @@ class Component extends DCLogic {
       smart ? Component.t("by weapon style") : Component.t("every drink"), party && kinds !== "food" ? Component.t("whole party") : "",
       exclude.length ? Component.tf("{n} excluded", { n: exclude.length }) : ""].filter(Boolean).join(" \u00b7 ");
     const secOpen = !!(s.upSec || {}).foodWhat;
+    const isMana = shownGoal === "mana", shownList = isMana ? manaRows() : list;
     return { running: !!s.foodRunning, idleButton: !s.foodRunning, run: () => this.findUpgrades("food"),
+      goalMana: goalBtn("mana"), goalSurvival: goalBtn("survival"), goalSwap: goalBtn("swap"),
+      isMana: goal === "mana", isSwap: goal === "swap", isSurvival: goal === "survival", showWhat: goal !== "survival",
+      goalNote: goal === "mana" ? Component.t("The cheapest mana food that loses you no casts. Every gummy and yogurt, alone and together, on its default trigger and eaten later; ranked by what the food costs a day.")
+        : goal === "survival" ? Component.t("When each player eats their healing food. The HP thresholds are walked one at a time, like ability triggers, and judged on run time, with deaths shown beside it.")
+        : Component.t("Every single add, swap or removal of a food or drink, ranked by XP or profit. The one to use for drinks."),
+      runLabel: goal === "mana" ? Component.t("Find the cheapest mana food") : Component.t("Find food & drinks"),
+      allowLost, toggleAllowLost: () => this.setMode("food", { allowLostCasts: !allowLost }),
       kindBoth: kindBtn("both"), kindFood: kindBtn("food"), kindDrinks: kindBtn("drinks"),
       party, partyEach: partyBtn(false), partyAll: partyBtn(true),
       smart, toggleSmart: () => this.setMode("food", { smart: !smart }),
@@ -2475,16 +2576,19 @@ class Component extends DCLogic {
       typeExclude: e => { const typed = e.target.value || "", group = groups.find(g => g.label === typed), hit = choices.find(c => choiceLabel(c) === typed);
         const add = group ? group.hrids : hit ? [hit.itemHrid] : null;
         if (add) { this.setState({ foodNeverQ: "" }); this.setMode("food", { exclude: [...new Set([...exclude, ...add])] }); } else this.setState({ foodNeverQ: typed }); },
-      whatOpen: secOpen, whatCaret: secOpen ? "\u25be" : "\u25b8", whatSummary: optSummary,
+      whatOpen: secOpen, whatCaret: secOpen ? "\u25be" : "\u25b8",
+      whatSummary: goal === "mana" ? [allowLost ? Component.t("lost casts allowed when XP holds") : Component.t("no casts lost"), exclude.length ? Component.tf("{n} excluded", { n: exclude.length }) : ""].filter(Boolean).join(" \u00b7 ") : optSummary,
       toggleWhat: () => this.setState(st => ({ upSec: { ...st.upSec, foodWhat: !st.upSec?.foodWhat } })),
-      error: s.foodError || "", rows: list.map(r => ({ isRow: !r.divider, ...r })), hasRows: rows.length > 0,
+      error: s.foodError || "", rows: shownList.map(r => ({ isRow: !r.divider, ...r })), hasRows: rows.length > 0,
       idle: !rows.length && !s.foodRunning && !s.foodError,
       stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.foodRunning ? ` \u00b7 ${this.trigClock(head, this.upCap())}` : ""}` : Component.t("screening every food and drink\u2026"),
       pct: `${((share ?? 0) * 100).toFixed(1)}%`,
-      gainHead: `\u0394 ${unit}`,
-      rankNote: s.foodRunning ? Component.t("best so far \u2014 rows re-rank as rounds add seeds") : Component.t("by gain \u2014 the \u00b1 says how sure each row is"),
+      gainHead: isMana ? Component.t("Food cost") : `\u0394 ${unit}`,
+      rankNote: isMana ? `${s.foodRunning ? Component.t("cheapest so far \u2014 rows re-rank as rounds add seeds") : Component.t("cheapest first, among the setups that lose no casts \u2014 food and drinks only, keys left out")}${needNote ? ` \u00b7 ${needNote}` : ""}`
+        : s.foodRunning ? Component.t("best so far \u2014 rows re-rank as rounds add seeds") : Component.t("by gain \u2014 the \u00b1 says how sure each row is"),
       done: s.foodDone ? Component.tf("{n} changes measured in {min} min", { n: nf(s.foodDone.evaluated ?? s.foodDone.candidates), min: ((Number(s.foodDone.ms) || 0) / 60000).toFixed(1) }) : "",
-      note: Component.t("Tests adding, swapping or removing one food or drink per player, priced by the hour: profit already nets what it costs, XP ignores it. Pick one player for the full list; a whole party is capped at 400 changes.") };
+      note: goal === "mana" ? Component.t("A first pass on the food carried today measures how much mana an hour it has to deliver. From every gummy, yogurt and pair that fits beside the healing food, the cheapest few that can deliver it are then simulated, each food on its default trigger and at a quarter, half and three quarters of the mana pool. A setup that has casts refused for lack of mana is never the answer.")
+        : Component.t("Tests adding, swapping or removing one food or drink per player, priced by the hour: profit already nets what it costs, XP ignores it. Pick one player for the full list; a whole party is capped at 400 changes.") };
   }
   stopUpgrades() { this._upStream?.abort(); }
 
@@ -2613,7 +2717,9 @@ class Component extends DCLogic {
       stage: head ? `${Component.stageText(head.stage || "measuring", head.current)}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.trigClock(head)}` : ""}` : Component.t("measuring the party as it stands\u2026"),
       targets, hasTargets: targets.length > 0,
       steps, hasSteps: steps.length > 0, walkPasses: passes,
-      combined: combined && gm !== "eph" ? goalCombined(combined) : combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
+      combined: combined && gm !== "eph" ? goalCombined(combined) : combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${(head?.foodRestore || done?.foodRestore) === "hp" && combined.deathsPerHour != null && base?.deathsPerHour != null
+        // Survival (2026-10-05): the deaths are what the healing food is for, so they sit beside the run time.
+        ? ` \u00b7 ${Component.tf("{n} deaths / h (was {was})", { n: (Number(combined.deathsPerHour) || 0).toFixed(2), was: (Number(base.deathsPerHour) || 0).toFixed(2) })}` : ""}${Component.tf(" \u00b7 {n} fresh seeds", { n: nf(combined.seeds) })}` : "",
       hasCombined: !!combined,
       changes, hasChanges: changes.length > 0,
       // Send the tuned values to the party on Setup. Only ever from a FINISHED answer: a half-walked list is
@@ -2965,11 +3071,18 @@ class Component extends DCLogic {
     const ready = !!(s.party || []).length && !!v("zone");
     const mode = s.upMode || "upgrades";
     // Trigger values keeps its own time limit, hours and seeds (2026-09-26); the panels read and write the mode's.
-    const onTrig = mode === "triggers", tv = k => this.modeVal("triggers", k), tset = p => this.setMode("triggers", p);
-    const trigCap = Number(tv("budgetMinutes")) || 0, trigEst = onTrig ? this.trigEstimateMs() : null;
+    // Survival (2026-10-05) is the trigger walk on healing food, driven from the Food & drinks tab: it reads the
+    // trigger tool's hours, seeds, walks and limit, and its answer is the trigger tool's answer.
+    const survival = this.foodSurvival(), resMode = survival ? "triggers" : mode;
+    const onTrig = mode === "triggers" || survival, tv = k => this.modeVal("triggers", k), tset = p => this.setMode("triggers", p);
+    const trigCap = Number(tv("budgetMinutes")) || 0, trigEst = onTrig ? this.trigEstimateMs(survival) : null;
     // Skill levelling keeps its own hours, seeds and time limit (2026-10-02); the panels read and write the mode's.
     const onSkill = mode === "skills", sv = k => this.modeVal("skills", k), sset = p => this.setMode("skills", p);
-    const skillBudget = Math.max(5, Number(sv("budgetMinutes")) || 60);
+    const skillCap = this.skillCap();
+    // The food test keeps its own hours and seeds (2026-10-05); the panels read and write the mode's.
+    const onFood = mode === "food", fv = k => this.modeVal("food", k), fset = p => this.setMode("food", p);
+    const modeCap = onTrig ? trigCap : onSkill ? skillCap : upCap, modeSet = onTrig ? tset : onSkill ? sset : set;
+    const hsVal = k => (onTrig ? tv(k) : onSkill ? sv(k) : onFood ? fv(k) : v(k)), hsSet = onTrig ? tset : onSkill ? sset : onFood ? fset : set;
     const modeBtn = k => ({ style: mode === k
       ? "border:0;background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)"
       : "border:0;background:transparent;color:var(--color-neutral-300)",
@@ -2980,13 +3093,18 @@ class Component extends DCLogic {
       restoredNote: s.optRestoredAt ? (() => { const mins = Math.max(1, Math.round((Date.now() - s.optRestoredAt) / 60000));
         return Component.tf("This answer was measured {ago} ago and restored with the page. Run again if the party has changed since.", { ago: mins < 60 ? Component.tf("{n} min", { n: mins }) : Component.tf("{n} h", { n: (mins / 60).toFixed(1) }) }); })() : "",
       mode, onUpgrades: mode === "upgrades", onTriggers: mode === "triggers", onSkills: mode === "skills", onFood: mode === "food",
+      // The trigger walk's settings, button and answer show on its own tab and under the Survival goal; the food
+      // search's button and answer under the other two goals.
+      trigView: onTrig, foodView: mode === "food" && !survival,
+      trigRunLabel: survival ? Component.t("Tune healing food") : Component.t("Tune triggers"),
+      trigRun: () => (survival ? this.runMode("triggers", { scope: "food", foodRestore: "hp", goal: { metric: "eph" } }) : this.runMode("triggers")),
       // Clear results: only for the tool on screen, only when it holds an answer (or an error), never mid-search.
-      canClear: !(s.upRunning || s.trigRunning || s.skillRunning || s.foodRunning) && (mode === "food" ? !!((s.foodRows || []).length || s.foodHead || s.foodError) : mode === "upgrades"
+      canClear: !(s.upRunning || s.trigRunning || s.skillRunning || s.foodRunning) && (resMode === "food" ? !!((s.foodRows || []).length || s.foodHead || s.foodError) : resMode === "upgrades"
         ? !!((s.upRows || []).length || s.upHead || s.upError)
-        : mode === "triggers" ? !!((s.trigRows || []).length || (s.trigSteps || []).length || s.trigHead || s.trigError)
+        : resMode === "triggers" ? !!((s.trigRows || []).length || (s.trigSteps || []).length || s.trigHead || s.trigError)
         : !!((s.skillRows || []).length || s.skillHead || s.skillError)),
-      clearResults: () => this.clearOptimize(mode),
-      saveResults: () => this.saveOptimize(mode),
+      clearResults: () => this.clearOptimize(resMode),
+      saveResults: () => this.saveOptimize(resMode),
       // CSV is the skills answer only: it is a ranked table plus curves, which is what a rectangular file can
       // hold. The trigger tool's answer is a list of DECISIONS and a combined run, which a spreadsheet would
       // flatten into nonsense, so it is not offered there rather than offered badly.
@@ -3035,22 +3153,20 @@ class Component extends DCLogic {
       zoneOpts: [{ value: "", label: zones.length ? Component.t("Pick a zone") : Component.t("loading the zone list\u2026") }, ...zones.map(z => ({ value: z.hrid, label: Component.t(z.name) }))],
       tier: String(tier), setTier: e => set({ tier: Number(e.target.value) || 0 }),
       tierOpts: Array.from({ length: maxT + 1 }, (_, t) => ({ value: String(t), label: `T${t}` })),
-      budgets: onSkill ? Component.UP_BUDGETS.map(([m, label]) => ({ label,
-          cls: Number(sv("budgetMinutes")) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => sset({ budgetMinutes: m }) }))
-        : Component.TRIG_LIMITS.map(([m, label]) => ({ label: Component.t(label),
-          cls: (onTrig ? trigCap : upCap) === m ? "btn btn-secondary" : "btn btn-ghost", go: () => (onTrig ? tset : set)({ budgetMinutes: m ? String(m) : "" }) })),
-      budget: onSkill ? String(sv("budgetMinutes")) : onTrig ? (trigCap ? String(trigCap) : "") : (upCap ? String(upCap) : ""),
-      // 5 minutes is the floor for a typed limit; blank is no limit, except in skill levelling, which spends one.
-      setBudget: onSkill ? e => sset({ budgetMinutes: String(Math.max(5, Math.floor(Number(e.target.value) || 60))) })
-        : e => (onTrig ? tset : set)({ budgetMinutes: String(e.target.value).trim() === "" ? "" : String(Math.max(5, Math.floor(Number(e.target.value) || 5))) }),
-      hours: String(onTrig ? tv("hours") : onSkill ? sv("hours") : v("hours")), setHours: e => (onTrig ? tset : onSkill ? sset : set)({ hours: e.target.value }),
-      seeds: String(onTrig ? tv("seeds") : onSkill ? sv("seeds") : v("seeds")), setSeeds: e => (onTrig ? tset : onSkill ? sset : set)({ seeds: e.target.value }),
-      notTrig: onSkill,
+      // Every tool's limit is a cap now, none by default (skill levelling since 2026-10-05).
+      budgets: Component.TRIG_LIMITS.map(([m, label]) => ({ label: Component.t(label),
+          cls: modeCap === m ? "btn btn-secondary" : "btn btn-ghost", go: () => modeSet({ budgetMinutes: m ? String(m) : "" }) })),
+      budget: modeCap ? String(modeCap) : "",
+      // 5 minutes is the floor for a typed limit; blank is no limit.
+      setBudget: e => modeSet({ budgetMinutes: String(e.target.value).trim() === "" ? "" : String(Math.max(5, Math.floor(Number(e.target.value) || 5))) }),
+      hours: String(hsVal("hours")), setHours: e => hsSet({ hours: e.target.value }),
+      seeds: String(hsVal("seeds")), setSeeds: e => hsSet({ seeds: e.target.value }),
       // The upgrade finder and the food test cut a third on 1.5x seeds (2026-10-02); the other two still double.
       upSearch: mode === "upgrades" || mode === "food",
       trigLimitNote: onTrig ? (trigEst != null ? Component.tf("Trigger values runs until every trigger is confirmed, about {t} for this party on this device; a limit here only stops it early.", { t: Component.durText(trigEst) })
         : Component.t("Trigger values runs until every trigger is confirmed; a limit here only stops it early."))
-        : onSkill ? "" : upEst != null ? Component.tf("The search runs until its finalists are measured, about {t} for these settings on this device; a limit here only stops it early.", { t: Component.durText(upEst) })
+        : onSkill ? Component.tf("Skill levelling runs until every point on every curve is measured to within \u00b1{pct}% of the party's rate; a limit here only stops it early.", { pct: ((Number(sv("precision")) || 0.0003) * 100).toFixed(2) })
+        : upEst != null ? Component.tf("The search runs until its finalists are measured, about {t} for these settings on this device; a limit here only stops it early.", { t: Component.durText(upEst) })
         : Component.t("The search runs until its finalists are measured; a limit here only stops it early."),
       steps: String(v("steps")), setSteps: e => set({ steps: Number(e.target.value) || 1 }),
       stepOpts: [{ value: "1", label: Component.t("+1 only") }, { value: "2", label: Component.t("+1 and +2") }, { value: "3", label: Component.t("+1, +2 and +3") }],
@@ -3108,10 +3224,10 @@ class Component extends DCLogic {
           ["where", zone ? `${Component.t(zone.name)} \u00b7 T${tier}` : "no zone picked"],
           // Upgrades only: what the search refines on (2026-09-29).
           ["rank", metric === "profit" ? Component.t("Profit / h") : metric === "eph" ? (upDungeon ? Component.t("Run time") : Component.t("Encounters / h")) : Component.t("XP / h")],
-          ["budget", onSkill ? Component.tf("{n} min", { n: skillBudget }) : (() => { const cap = onTrig ? trigCap : upCap, est = onTrig ? trigEst : upEst;
+          ["budget", (() => { const cap = modeCap, est = onTrig ? trigEst : onSkill ? null : upEst;
             return `${cap ? Component.tf("{n} min", { n: cap }) : Component.t("no limit")}${est != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(est) })}` : ""}`; })()],
           ["tries", `${Component.parseCoins(v("budget")) > 0 ? Component.tf("budget {coins}", { coins: nf(Component.parseCoins(v("budget"))) }) : Component.t("no budget")}${(v("rooms") || []).length ? Component.tf(" \u00b7 {n} rooms", { n: (v("rooms") || []).length }) : ""}${(v("shrines") || []).length ? Component.tf(" \u00b7 {n} shrines", { n: (v("shrines") || []).length }) : ""}${v("refine") ? Component.t(" \u00b7 refining") : ""}${String(v("skipLevels") || "").trim() ? Component.tf(" \u00b7 skip +{levels}", { levels: String(v("skipLevels")).split(/[^0-9]+/).filter(Boolean).join(", +") }) : ""}${Component.tf(" \u00b7 abilities +{n}", { n: v("abilityLevels") })}${Component.tf(" \u00b7 {n} finalists", { n: v("finalists") ?? 5 })}${v("includeCharms") ? Component.t(" \u00b7 charms") : ""}${v("includePouch") ? Component.t(" \u00b7 pouch") : ""}`],
-          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(onTrig ? tv("hours") : onSkill ? sv("hours") : v("hours")), seeds: nf(onTrig ? tv("seeds") : onSkill ? sv("seeds") : v("seeds")) })],
+          ["measure", Component.tf("{h} h \u00b7 {seeds} seeds", { h: nf(hsVal("hours")), seeds: nf(hsVal("seeds")) })],
           ["enh", v("market") ? Component.t("market only") : Component.tf("level {level} \u00b7 {tool} +{toolLevel}", { level: enh.level, tool: itemName(enh.tool.hrid), toolLevel: enh.tool.level })],
           // Skill levelling only: how far ahead the curves look, and how many points each gets.
           ["horizon", Component.tf("{days} days \u00b7 {samples} samples", { days: Number(this.modeVal("skills", "horizonDays")) || 90, samples: Number(this.modeVal("skills", "points")) || 10 })],
@@ -3175,7 +3291,7 @@ class Component extends DCLogic {
       skillsRunDisabled: !ready || !has || this.skillsOn().length === 0,
       runNote: !has ? "" : !(s.party || []).length ? "" : !v("zone") ? Component.t("pick a zone first")
         : (names.length === 1 ? Component.tf("{n} player", { n: names.length }) : Component.tf("{n} players", { n: names.length })) + ` \u00b7 ${zone ? `${Component.t(zone.name)} T${tier}` : ""}`
-        + (onSkill ? Component.tf(" \u00b7 up to {n} min", { n: skillBudget }) : (() => { const est = onTrig ? trigEst : upEst, cap = onTrig ? trigCap : upCap;
+        + (onSkill ? (skillCap ? Component.tf(" \u00b7 up to {n} min", { n: skillCap }) : "") : (() => { const est = onTrig ? trigEst : upEst, cap = onTrig ? trigCap : upCap;
           return est != null ? ` \u00b7 ${Component.tf("about {t}", { t: Component.durText(cap ? Math.min(est, cap * 60000) : est) })}` : cap ? Component.tf(" \u00b7 up to {n} min", { n: cap }) : ""; })()),
       run: () => this.findUpgrades(), stop: () => this.stopUpgrades(),
       error: s.upError || "",
