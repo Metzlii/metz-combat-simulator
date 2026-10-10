@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="81954be01887"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="b8df501ecacc"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=81954be01887"></script>
+<script src="./support.js?v=b8df501ecacc"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=81954be01887">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=b8df501ecacc">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=81954be01887">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=81954be01887"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=b8df501ecacc">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=b8df501ecacc"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -319,7 +319,7 @@
               <sc-if value="{{ up.sec.tries.open }}" hint-placeholder-val="{{ false }}">
               <div style="display:grid;grid-template-columns:118px minmax(0,1fr);gap:6px 9px;align-items:center;font-size:13px">
                 <span class="text-muted" style="font-size:12.5px">Ability levels</span>
-                <input class="input" type="number" min="1" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
+                <input class="input" type="number" min="0" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.abilityLevels }}" onChange="{{ up.setAbilityLevels }}">
                 <span class="text-muted" style="font-size:12.5px" title="How many upgrades the search keeps once it stops cutting; the round that picks them is the last">Finalists</span>
                 <input class="input" type="number" min="1" max="10" step="1" style="min-height:29px;padding:2px 6px;font-size:12.5px;width:74px" dc-attr-value="{{ up.finalists }}" onChange="{{ up.setFinalists }}">
               </div>
@@ -1128,6 +1128,14 @@
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-09</span>
             <div>
+              <div style="text-wrap:pretty"><b>1.0.29</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Upgrade finder: charms are calculated, not simulated.</b> A charm's level or a higher grade only changes the rate its owner's XP in that skill is multiplied by, so each charm row is worked out from the baseline's own runs. Checked against simulations of the same change: the fight is identical and the XP agrees to fourteen digits. Charm rows no longer count against the cap of 400.</li>
+                <li>Ability levels 0 tests no abilities (it was read as 1), and with every gear slot off no gear is tested, the Guzzling Pouch included, so house rooms, shrines and abilities can be tested on their own.</li>
+              </ul>
+            </div>
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-10-09</span>
+            <div>
               <div style="text-wrap:pretty"><b>1.0.28</b></div>
               <ul class="about-list" style="margin-top:4px;font-size:13.5px">
                 <li>Upgrade finder: 0 in Skip levels is honoured. A higher charm grade, the Philosopher's jewellery and the Guzzling Pouch are offered from +0 up, and a 0 in the list was dropped before any of them looked, so their +0 was still simulated.</li>
@@ -1531,7 +1539,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=81954be01887");
+      const i18n = await import("./i18n.js?v=b8df501ecacc");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1554,7 +1562,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=81954be01887");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=b8df501ecacc");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -1892,7 +1900,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=81954be01887");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=b8df501ecacc");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -1913,7 +1921,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=81954be01887");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=b8df501ecacc");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -2185,7 +2193,7 @@ class Component extends DCLogic {
       players: this.state.party, zone: this.upVal("zone"), difficultyTier: num("tier", 0), goal,
       // A cap only (2026-10-02): blank or 0 sends none, and the rounds are sized by the seeds and the candidates.
       budgetMinutes: this.upCap() || null, hours: num("hours", 1500), seeds: num("seeds", 3),
-      steps: num("steps", 1), abilityLevels: num("abilityLevels", 5), finalists: num("finalists", 5),
+      steps: num("steps", 1), abilityLevels: String(this.upVal("abilityLevels") ?? "").trim() === "" ? 5 : num("abilityLevels", 5), finalists: num("finalists", 5),
       bookPremium: num("bookPremium", 0.2),
       // 2026-09-25: the coin budget (blank: none), the gear slots (null: all), the rooms with their cap, refining.
       budget: Component.parseCoins(this.upVal("budget")),
@@ -3111,7 +3119,7 @@ class Component extends DCLogic {
         alt: cost.alternative ? Component.tf("next cheapest: {route} {coins}", { route: Component.t(Component.UP_ROUTES[cost.alternative.route] || cost.alternative.route || ""), coins: coin(cost.alternative.coins) }) : "",
         warning: this.costWarning(cost),
         // A twin carries the index of the candidate it copies — index 0 is a real one, so the test is != null.
-        sameAs: r.sameAs == null ? "" : (() => { const o = byIndex.get(r.sameAs);
+        sameAs: r.sameAs == null ? (r.exact ? Component.t("calculated from the baseline runs, not simulated") : "") : (() => { const o = byIndex.get(r.sameAs);
           return Component.tf("same stats as {what}", { what: o ? `${(o.itemHrid || o.abilityHrid) ? itemName(o.itemHrid || o.abilityHrid) : (o.name || "")} +${o.to}` : Component.tf("candidate {n}", { n: r.sameAs }) }); })(),
         meas: Component.tf("{seeds} seeds \u00b7 round {round}", { seeds: nf(r.seeds), round: r.rounds ?? "\u2014" }),
         risk: r.deathsPerHour == null ? "" : Component.tf("{deaths} deaths/h \u00b7 {failed} failed/h", { deaths: Number(r.deathsPerHour).toFixed(2), failed: Number(r.failedPerHour || 0).toFixed(2) }),
@@ -3267,8 +3275,12 @@ class Component extends DCLogic {
       countMore: (c => c && c.total > (c.listed || 0) ? Component.tf("and {n} more, not listed here", { n: nf(c.total - (c.listed || 0)) }) : "")(s.upCount),
       countLine: (c => { if (!c) return ""; if (c.error) return Component.t(c.error);
         const parts = [["enhance", "{n} enhancements"], ["ability", "{n} abilities"], ["room", "{n} rooms"], ["shrine", "{n} shrine levels"], ["refine", "{n} refinements"], ["grade", "{n} higher charm grades"], ["philo", "{n} Philosopher's jewellery"], ["pouch", "{n} Guzzling Pouch levels"]]
-          .filter(([k]) => c.byKind?.[k]).map(([k, key]) => Component.tf(key, { n: nf(c.byKind[k]) }));
-        const line = Component.tf("{n} upgrades would be simulated", { n: nf(c.total) }) + (parts.length ? `: ${parts.join(", ")}` : "");
+          .map(([k, key]) => [key, (c.byKind?.[k] || 0) - (c.exactByKind?.[k] || 0)]).filter(([, count]) => count > 0).map(([key, count]) => Component.tf(key, { n: nf(count) }));
+        // Charm changes are arithmetic on the baseline's runs (2026-10-09): counted apart, they cost no simulation.
+        const exact = c.exact || 0;
+        const charms = exact ? Component.tf("{n} charm upgrades are calculated from the baseline, with no simulation", { n: nf(exact) }) : "";
+        const line = exact && c.total === exact ? charms
+          : Component.tf("{n} upgrades would be simulated", { n: nf(c.total - exact) }) + (parts.length ? `: ${parts.join(", ")}` : "") + (charms ? ` \u00b7 ${charms}` : "");
         return c.capped ? `${line} \u00b7 ${Component.tf("over the cap of {cap}: only the first {cap} run", { cap: nf(c.cap) })}` : line; })(s.upCount),
       // One sentence, one node: the percentage is substituted after translation so the clause can be ordered
       // however the language needs. It used to be "Ability books are priced up to" + value + "over the lowest
