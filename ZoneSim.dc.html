@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=ada9707bf68d"></script>
+<script src="./support.js?v=0240ab05134e"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ada9707bf68d">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0240ab05134e">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=ada9707bf68d">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ada9707bf68d"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=0240ab05134e">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0240ab05134e"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1327,7 +1327,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=ada9707bf68d").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=0240ab05134e").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1553,7 +1553,10 @@ class Component extends DCLogic {
       if (c === "}" || c === "]") { depth--; if (!depth && start >= 0) { parts.push(t.slice(start, i + 1)); start = -1; } }
     }
     const objs = [];
-    for (const p of parts) { try { objs.push(JSON.parse(p)); } catch {} }
+    // A part may itself be a list: the sim helper's export is an array of characters, so two of them pasted one
+    // after the other split into two arrays, and an array of arrays is not a party (operator, 2026-10-12:
+    // "player1: not a recognisable character export"). Each list's characters join the one party.
+    for (const p of parts) { try { const v = JSON.parse(p); if (Array.isArray(v)) objs.push(...v); else objs.push(v); } catch {} }
     return objs.length ? { payload: objs, count: objs.length, split: true } : { payload: t, count: 0 };
   }
   // Shrine inference happens at import, so what the field shows is what the run sends: this export's own
