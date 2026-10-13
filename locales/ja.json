@@ -1482,6 +1482,8 @@
  "Action Level": "行動レベル",
  "Action Speed": "行動速度",
  "Actions / min": "アクション / 分",
+ "Add an empty player. Pick another player under Copy loadout from and the whole character is copied into it.": "空のプレイヤーを追加します。「装備のコピー元」で他のプレイヤーを選ぶと、キャラクター全体がコピーされます。",
+ "Add player": "プレイヤーを追加",
  "Add to Queue": "キューに追加",
  "Add {item}": "{item} を追加",
  "Advanced": "詳細設定",

@@ -1481,6 +1481,8 @@
  "Action Level": "Уровень действия",
  "Action Speed": "Скорость действий",
  "Actions / min": "Действий / мин",
+ "Add an empty player. Pick another player under Copy loadout from and the whole character is copied into it.": "Добавляет пустого игрока. Выберите другого игрока в списке «Копировать снаряжение из», и персонаж будет скопирован целиком.",
+ "Add player": "Добавить игрока",
  "Add to Queue": "В очередь",
  "Add {item}": "Добавить {item}",
  "Advanced": "Дополнительно",

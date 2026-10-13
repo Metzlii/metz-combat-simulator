@@ -30,6 +30,8 @@
  "A value replaces the one it came from only when fresh seeds confirm its gain is more than twice its own error, sized to see 0.06% of the party's result. The answer is every winner together against the party as it came in, on fresh seeds.": "只有在新的随机种子上确认其提升超过自身误差的两倍时，才会替换原值；精度足以分辨队伍结果的 0.06%。最终结果是所有最佳值一起，在新的种子上与原始队伍对比。",
  "Abilities: the enemy-HP conditions on the slotted abilities. Food: the HP and MP thresholds on the slotted food, from the game's default where a player set none. A drink has nothing to tune.": "技能：已装备技能的敌方生命条件。食物：已装备食物的生命和魔力阈值，玩家未设置时从游戏默认值开始。饮料没有可调整的内容。",
  "Ability books are priced up to {premium} over the lowest ask (an instant buy), depending on market trade volume and skill book availability.": "技能书按最低卖价（即时购买）最多加价 {premium} 计价，取决于市场成交量和技能书的供应。",
+ "Add an empty player. Pick another player under Copy loadout from and the whole character is copied into it.": "添加一个空玩家。在“从以下角色复制配装”中选择另一名玩家，即可将整个角色复制到其中。",
+ "Add player": "添加玩家",
  "Add {item}": "添加 {item}",
  "Advanced charm": "高级护符",
  "After pass {n} — the values tested together": "第 {n} 轮之后 — 一并测试的数值",

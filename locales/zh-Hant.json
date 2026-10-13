@@ -1482,6 +1482,8 @@
  "Action Level": "行動所需等級",
  "Action Speed": "行動速度",
  "Actions / min": "動作 / 分鐘",
+ "Add an empty player. Pick another player under Copy loadout from and the whole character is copied into it.": "新增一個空玩家。在「從以下角色複製配裝」中選擇另一名玩家，即可將整個角色複製到其中。",
+ "Add player": "新增玩家",
  "Add to Queue": "加入佇列",
  "Add {item}": "新增 {item}",
  "Advanced": "進階設定",
