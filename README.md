@@ -19,6 +19,32 @@ Nothing is sent to a server: the combat kernel is compiled to WebAssembly and ev
 This repository holds the **built site only**: what GitHub Pages serves. The source is kept in a private repository,
 and each release replaces this one's contents with a new build. Issues and suggestions are welcome here.
 
+## Local mode (this fork)
+
+Run the simulations in Node on your PC instead of in browser Web Workers. It needs [Node.js](https://nodejs.org/)
+18 or newer and nothing else.
+
+```
+node local/server.mjs            # or double-click local/start.cmd on Windows
+```
+
+This opens the same page at <http://localhost:8787/>. The page is only the UI: every simulation runs in Node worker
+threads on all of your cores, without the browser's core-count limits or background-tab throttling. Options:
+`--port N`, `--workers N` (defaults to every core) and `--no-open`. The market price cache is kept in
+`local/.cache/`. Opened any other way (for example from GitHub Pages), the page runs in the browser as before.
+
+### Measuring performance
+
+- **Live dashboard:** <http://localhost:8787/local/dashboard.html> shows throughput (simulated hours and
+  simulations per second), how many cores are busy in the kernel, per-thread utilization, kernel ms per simulated
+  hour (p50/p95), queue, CPU and memory for the last ten minutes, plus the latest simulations. "Run load test"
+  puts a fixed workload through the pool, and the Workers field resizes the pool live.
+- **Scaling benchmark:** `node local/bench.mjs` runs the same workload at 1, 2, 4… workers and prints throughput,
+  speedup and efficiency per worker count (`--workers 1,8,16`, `--hours 24`, `--repeat 3`).
+- **Prometheus / Grafana:** the server exposes <http://localhost:8787/metrics>. With Docker Desktop running,
+  `docker compose -f local/grafana/docker-compose.yml up -d` starts Prometheus and Grafana with a ready-made
+  dashboard at <http://localhost:3000>, keeping 30 days of history.
+
 ## Found something wrong?
 
 Mail Metzli in-game, or open an issue. Numbers that look off are worth reporting with your export and the zone you

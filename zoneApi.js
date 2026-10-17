@@ -13,18 +13,28 @@ const WORKERS_KEY = "mwi.zone.workers";
 const savedWorkers = () => { try { const v = Number(localStorage.getItem(WORKERS_KEY)); return v >= 1 ? Math.floor(v) : null; } catch { return null; } };
 
 export async function connectZoneOnly() {
-  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=2bd2c62c3d06");
-  let cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
-  const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
+  // Local mode (node local/server.mjs): the kernel runs in Node worker threads on every core, and this page is
+  // only the UI. The local server answers /local-api/ping; on the public site nothing does and we fall through.
+  const { localServerInfo, createLocalZoneClient } = await import("./local/remoteClient.js?v=2bd2c62c3d06");
+  const local = await localServerInfo();
+  let cores = local ? local.maxWorkers : Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
+  const zone = local
+    ? createLocalZoneClient(local)
+    : await (await import("./zone-web/zoneClient.js?v=2bd2c62c3d06")).createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
+  const defaultWorkers = () => local ? cores : Math.max(1, cores - 1);
+  if (local) {
+    const saved = savedWorkers();
+    if (saved && saved !== zone.workers) zone.setWorkers(saved);
+  }
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
   let lanes = null;
   try { lanes = Number((await zone.zoneLimits())?.concurrency) || null; } catch (e) { console.warn("zone limits unavailable", e); }
   const client = {
-    source: "browser", workers: lanes || 1, zoneLanes: lanes, base: null, data: {},
+    source: local ? "local" : "browser", workers: lanes || 1, zoneLanes: lanes, base: null, data: {},
     // Setup > Advanced > Workers. `defaultWorkers` is what an unset field means; the header's lane count follows.
-    maxWorkers: zone.maxWorkers, defaultWorkers: Math.max(1, cores - 1), savedWorkers: savedWorkers(),
+    maxWorkers: zone.maxWorkers, defaultWorkers: defaultWorkers(), savedWorkers: savedWorkers(),
     setZoneWorkers(n) {
-      const w = zone.setWorkers(n == null || n === "" ? Math.max(1, cores - 1) : n);   // empty: back to the default
+      const w = zone.setWorkers(n == null || n === "" ? defaultWorkers() : n);   // empty: back to the default
       try { if (n == null || n === "") localStorage.removeItem(WORKERS_KEY); else localStorage.setItem(WORKERS_KEY, String(w)); } catch { /* not kept */ }
       client.workers = client.zoneLanes = w; client.savedWorkers = savedWorkers();
       globalThis.dispatchEvent?.(new CustomEvent("zone-lanes", { detail: w }));
@@ -60,7 +70,7 @@ export async function connectZoneOnly() {
   // the browser's own report, so it can only ever RAISE the budget. It runs in the background -- the page is
   // usable immediately on the reported figure -- and when it finishes the ceiling, the default and the pool
   // follow, with the header's lane count updated through the same event the Workers setting uses.
-  (async () => {
+  if (!local) (async () => {
     try {
       const { probeLanes } = await import("./zone-web/zoneProbe.js?v=2bd2c62c3d06");
       const measured = Math.max(1, await probeLanes());

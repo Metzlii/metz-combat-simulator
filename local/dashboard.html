@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simulator Performance</title>
+<style>
+  :root {
+    --bg: #f6f7f9; --panel: #ffffff; --line: #e3e6eb; --grid: #eef0f3; --text: #1b1f27; --muted: #667085;
+    --accent: #6d5bd0; --s1: #3b7ddd; --s2: #e08a1e; --s3: #1f9d63; --s4: #a35bd0; --bad: #d64545;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1117; --panel: #171a22; --line: #262b36; --grid: #1f232c; --text: #e6e8ee; --muted: #8a92a6;
+      --accent: #9184d9; --s1: #5b9bff; --s2: #f5a524; --s3: #3fcf8e; --s4: #c18cff; --bad: #ff6b6b;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1117; --panel: #171a22; --line: #262b36; --grid: #1f232c; --text: #e6e8ee; --muted: #8a92a6;
+    --accent: #9184d9; --s1: #5b9bff; --s2: #f5a524; --s3: #3fcf8e; --s4: #c18cff; --bad: #ff6b6b;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  main { max-width: 1280px; margin: 0 auto; padding: 20px 16px 40px; }
+  header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 16px; }
+  h1 { font-size: 20px; margin: 0; font-weight: 650; }
+  h2 { font-size: 13px; margin: 0 0 8px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+  .status { color: var(--muted); font-size: 13px; }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--s3); margin-right: 6px; vertical-align: 1px; }
+  .dot.off { background: var(--bad); }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+  .controls { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin-bottom: 16px; }
+  .controls label { color: var(--muted); font-size: 13px; display: flex; gap: 6px; align-items: center; }
+  input, select, button { font: inherit; color: var(--text); background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 5px 8px; }
+  input[type=number] { width: 64px; }
+  button { cursor: pointer; background: var(--accent); color: #fff; border-color: transparent; padding: 6px 12px; font-weight: 550; }
+  button.ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  button:disabled { opacity: .55; cursor: progress; }
+  #benchOut { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+  .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .tile .k { color: var(--muted); font-size: 12px; }
+  .tile .v { font-size: 26px; font-weight: 650; font-variant-numeric: tabular-nums; line-height: 1.2; margin-top: 2px; }
+  .tile .s { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+  .charts { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 12px; margin-bottom: 16px; }
+  .chart { position: relative; }
+  .chart canvas { width: 100%; height: 170px; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12px; color: var(--muted); margin: -2px 0 6px; font-variant-numeric: tabular-nums; }
+  .legend i { display: inline-block; width: 10px; height: 3px; border-radius: 2px; margin-right: 5px; vertical-align: 3px; }
+  .legend b { color: var(--text); font-weight: 600; margin-left: 4px; }
+  .tip { position: absolute; pointer-events: none; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 8px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.18); display: none; white-space: nowrap; font-variant-numeric: tabular-nums; z-index: 2; }
+  .workers { display: grid; grid-template-columns: repeat(auto-fill, minmax(34px, 1fr)); gap: 6px; }
+  .w { height: 54px; border-radius: 5px; background: var(--grid); position: relative; overflow: hidden; }
+  .w span { position: absolute; left: 0; right: 0; bottom: 0; background: var(--s1); transition: height .4s; }
+  .w em { position: absolute; top: 3px; left: 0; right: 0; text-align: center; font-size: 10px; font-style: normal; color: var(--muted); z-index: 1; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+  @media (max-width: 820px) { .two { grid-template-columns: 1fr; } .charts { grid-template-columns: 1fr; } }
+  .tablewrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+  th, td { text-align: right; padding: 4px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { color: var(--muted); font-weight: 550; }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; margin: 0; font-variant-numeric: tabular-nums; }
+  dt { color: var(--muted); } dd { margin: 0; text-align: right; }
+  .hint { color: var(--muted); font-size: 12px; margin-top: 10px; }
+  a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <h1>Simulator performance</h1>
+    <span class="status" id="status"><span class="dot off"></span>connecting…</span>
+    <span class="status" style="margin-left:auto"><a href="/">← simulator</a> · <a href="/metrics" target="_blank">/metrics</a></span>
+  </header>
+
+  <div class="panel controls">
+    <label>Workers <input type="number" id="workers" min="1" step="1"> <button class="ghost" id="applyWorkers">Apply</button></label>
+    <label>Load test
+      <select id="benchHours"><option value="1">1 h</option><option value="6">6 h</option><option value="24" selected>24 h</option><option value="168">168 h</option></select>
+      × <input type="number" id="benchRepeat" value="1" min="1" max="20" title="How many times to run every planet">
+      <button id="bench">Run load test</button>
+    </label>
+    <span id="benchOut">Runs every planet (tier 0, demo character solo) through the pool.</span>
+  </div>
+
+  <section class="tiles">
+    <div class="panel tile"><div class="k">Simulated hours / second</div><div class="v" id="tSimH">–</div><div class="s" id="tSimHs">&nbsp;</div></div>
+    <div class="panel tile"><div class="k">Simulations / second</div><div class="v" id="tJobs">–</div><div class="s" id="tJobss">&nbsp;</div></div>
+    <div class="panel tile"><div class="k">Cores in use (kernel)</div><div class="v" id="tEff">–</div><div class="s" id="tEffs">&nbsp;</div></div>
+    <div class="panel tile"><div class="k">Worker utilization</div><div class="v" id="tUtil">–</div><div class="s" id="tUtils">&nbsp;</div></div>
+    <div class="panel tile"><div class="k">Kernel ms / simulated hour</div><div class="v" id="tPer">–</div><div class="s" id="tPers">&nbsp;</div></div>
+    <div class="panel tile"><div class="k">Machine CPU</div><div class="v" id="tCpu">–</div><div class="s" id="tCpus">&nbsp;</div></div>
+  </section>
+
+  <section class="charts" id="charts"></section>
+
+  <section class="two">
+    <div class="panel">
+      <h2>Worker threads · utilization (last second)</h2>
+      <div class="workers" id="workerBars"></div>
+      <div class="hint">Each bar is one worker thread. Idle bars while jobs are queued would mean the pool is starving; idle bars with an empty queue just mean the request is finishing its last jobs.</div>
+    </div>
+    <div class="panel">
+      <h2>Since start</h2>
+      <dl id="totals"></dl>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Recent simulations</h2>
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Zone</th><th>Tier</th><th>Party</th><th>Sim hours</th><th>Kernel ms</th><th>Queued ms</th><th>ms / sim-h</th><th>Kills</th><th>Thread</th><th>Finished</th></tr></thead>
+        <tbody id="recent"><tr><td colspan="10" style="text-align:center;color:var(--muted)">No simulations yet. Run something in the simulator, or press “Run load test”.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</main>
+
+<script>
+const $ = id => document.getElementById(id);
+const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const fmt = (v, d = 0) => v == null || !Number.isFinite(v) ? "–" : v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+const pct = v => v == null ? "–" : `${fmt(100 * v, 0)}%`;
+const zoneName = hrid => (hrid || "?").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+const WINDOW = 600;
+
+let history = [], lastT = 0, info = null, cores = 1;
+
+// ---- charts -------------------------------------------------------------------------------------------------
+const CHARTS = [
+  { id: "thr", title: "Throughput", series: [{ key: "simHoursPerSec", label: "sim hours / s", color: "--s1", d: 0 }, { key: "jobsPerSec", label: "sims / s", color: "--s2", d: 1, axis: "right" }] },
+  { id: "par", title: "Parallelism", series: [{ key: "effectiveCores", label: "cores in kernel", color: "--s1", d: 1 }, { key: "busy", label: "busy workers", color: "--s3", d: 0 }, { key: "threads", label: "workers", color: "--muted", d: 0, dash: true }] },
+  { id: "cpu", title: "CPU", unit: "%", max: 100, series: [{ key: "systemCpu", label: "whole machine", color: "--s2", scale: 100, d: 0 }, { key: "processCpu", label: "simulator process", color: "--s1", scale: 100, d: 0 }] },
+  { id: "lat", title: "Kernel ms per simulated hour (last 10 s of jobs)", series: [{ key: "p50MsPerSimHour", label: "p50", color: "--s1", d: 2 }, { key: "p95MsPerSimHour", label: "p95", color: "--s4", d: 2 }] },
+  { id: "q", title: "Queue", series: [{ key: "queued", label: "jobs waiting for a worker", color: "--s2", d: 0 }] },
+  { id: "mem", title: "Memory (MB)", series: [{ key: "rssMB", label: "resident", color: "--s3", d: 0 }, { key: "heapMB", label: "JS heap (main)", color: "--s4", d: 0 }] },
+];
+
+function buildCharts() {
+  const host = $("charts");
+  for (const c of CHARTS) {
+    const el = document.createElement("div");
+    el.className = "panel chart";
+    el.innerHTML = `<h2>${c.title}</h2><div class="legend">${c.series.map((s, i) => `<span><i style="background:var(${s.color})"></i>${s.label}<b data-i="${i}">–</b></span>`).join("")}</div><canvas></canvas><div class="tip"></div>`;
+    host.appendChild(el);
+    c.el = el; c.canvas = el.querySelector("canvas"); c.tip = el.querySelector(".tip");
+    c.canvas.addEventListener("mousemove", e => hover(c, e));
+    c.canvas.addEventListener("mouseleave", () => { c.hoverX = null; c.tip.style.display = "none"; draw(c); });
+  }
+}
+
+const val = (h, s) => { const v = h[s.key]; return v == null ? null : v * (s.scale || 1); };
+const niceMax = v => { if (!(v > 0)) return 1; const p = 10 ** Math.floor(Math.log10(v)); return [1, 2, 2.5, 5, 10].map(m => m * p).find(m => m >= v * 1.08) || 10 * p; };
+
+function draw(c) {
+  const cv = c.canvas, dpr = devicePixelRatio || 1, W = cv.clientWidth, H = cv.clientHeight;
+  if (cv.width !== W * dpr || cv.height !== H * dpr) { cv.width = W * dpr; cv.height = H * dpr; }
+  const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+  const hasRight = c.series.some(s => s.axis === "right");
+  const L = 44, R = hasRight ? 40 : 10, T = 6, B = 20, pw = W - L - R, ph = H - T - B;
+  const data = history.slice(-WINDOW);
+  const now = data.length ? data[data.length - 1].t : Date.now(), t0 = now - WINDOW * 1000;
+  const x = t => L + ((t - t0) / (WINDOW * 1000)) * pw;
+  const maxOf = side => c.max || niceMax(Math.max(0, ...data.flatMap(h => c.series.filter(s => (s.axis || "left") === side).map(s => val(h, s) ?? 0))));
+  const maxL = maxOf("left"), maxR = hasRight ? maxOf("right") : 1;
+  g.font = "11px system-ui, sans-serif"; g.fillStyle = css("--muted"); g.strokeStyle = css("--grid"); g.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = T + ph - (ph * i) / 4;
+    g.beginPath(); g.moveTo(L, y + .5); g.lineTo(L + pw, y + .5); g.stroke();
+    g.textAlign = "right"; g.fillText(fmt(maxL * i / 4, maxL < 4 ? 1 : 0), L - 6, y + 4);
+    if (hasRight) { g.textAlign = "left"; g.fillText(fmt(maxR * i / 4, maxR < 4 ? 1 : 0), L + pw + 6, y + 4); }
+  }
+  g.textAlign = "center";
+  for (let m = 0; m <= 10; m += 2) g.fillText(m ? `-${m}m` : "now", L + pw - (m / 10) * pw, H - 5);
+  for (const s of c.series) {
+    const max = s.axis === "right" ? maxR : maxL;
+    g.strokeStyle = css(s.color); g.lineWidth = 1.75; g.setLineDash(s.dash ? [4, 4] : []);
+    g.beginPath(); let pen = false;
+    for (const h of data) {
+      const v = val(h, s);
+      if (v == null) { pen = false; continue; }
+      const px = x(h.t), py = T + ph - Math.min(1, v / max) * ph;
+      pen ? g.lineTo(px, py) : g.moveTo(px, py); pen = true;
+    }
+    g.stroke(); g.setLineDash([]);
+  }
+  if (c.hoverX != null && data.length) {
+    g.strokeStyle = css("--muted"); g.lineWidth = 1; g.beginPath(); g.moveTo(c.hoverX + .5, T); g.lineTo(c.hoverX + .5, T + ph); g.stroke();
+  }
+  const latest = data[data.length - 1];
+  c.el.querySelectorAll(".legend b").forEach(b => { const s = c.series[b.dataset.i]; b.textContent = latest ? fmt(val(latest, s), s.d) + (c.unit || "") : "–"; });
+}
+
+function hover(c, e) {
+  const r = c.canvas.getBoundingClientRect(), mx = e.clientX - r.left, W = r.width;
+  const hasRight = c.series.some(s => s.axis === "right"), L = 44, pw = W - L - (hasRight ? 40 : 10);
+  const data = history.slice(-WINDOW); if (!data.length) return;
+  const now = data[data.length - 1].t, t = now - WINDOW * 1000 + ((mx - L) / pw) * WINDOW * 1000;
+  let best = data[0]; for (const h of data) if (Math.abs(h.t - t) < Math.abs(best.t - t)) best = h;
+  c.hoverX = L + ((best.t - (now - WINDOW * 1000)) / (WINDOW * 1000)) * pw;
+  c.tip.innerHTML = `<div style="color:var(--muted)">${new Date(best.t).toLocaleTimeString()}</div>` +
+    c.series.map(s => `<div><i style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(${s.color});margin-right:6px"></i>${s.label}: <b>${fmt(val(best, s), s.d)}${c.unit || ""}</b></div>`).join("");
+  c.tip.style.display = "block";
+  const tipW = c.tip.offsetWidth;
+  c.tip.style.left = `${Math.min(W - tipW, Math.max(0, c.hoverX + 14 + (c.hoverX + tipW + 20 > W ? -tipW - 28 : 0)))}px`;
+  c.tip.style.top = `${34 + 4}px`;
+  draw(c);
+}
+
+// ---- panels -------------------------------------------------------------------------------------------------
+function renderTiles(cur, totals, workers) {
+  const c = cur || {};
+  $("tSimH").textContent = fmt(c.simHoursPerSec, 0);
+  $("tSimHs").textContent = `${fmt(c.killsPerSec, 0)} kills/s simulated`;
+  $("tJobs").textContent = fmt(c.jobsPerSec, 1);
+  $("tJobss").textContent = `${fmt(totals.jobs)} total · ${fmt(totals.failed)} failed`;
+  $("tEff").textContent = `${fmt(c.effectiveCores, 1)} / ${workers}`;
+  $("tEffs").textContent = `${cores} logical cores on this machine`;
+  $("tUtil").textContent = pct(c.utilization);
+  $("tUtils").textContent = `${fmt(c.busy)} busy · ${fmt(c.queued)} queued`;
+  $("tPer").textContent = fmt(c.p50MsPerSimHour, 2);
+  $("tPers").textContent = `p95 ${fmt(c.p95MsPerSimHour, 2)} · lower is faster`;
+  $("tCpu").textContent = pct(c.systemCpu);
+  $("tCpus").textContent = `simulator ${pct(c.processCpu)} · ${fmt(c.rssMB, 0)} MB`;
+}
+
+function renderWorkers(list) {
+  const host = $("workerBars");
+  if (host.children.length !== list.length) host.innerHTML = list.map(() => `<div class="w"><em></em><span></span></div>`).join("");
+  list.forEach((w, i) => {
+    const el = host.children[i];
+    el.title = `thread ${w.id}: ${pct(w.utilization)}`;
+    el.querySelector("em").textContent = pct(w.utilization);
+    el.querySelector("span").style.height = `${Math.round(100 * w.utilization)}%`;
+  });
+}
+
+function renderTotals(s) {
+  const t = s.totals, up = s.uptimeSec;
+  const rows = [
+    ["Uptime", up < 3600 ? `${fmt(up / 60, 1)} min` : `${fmt(up / 3600, 1)} h`],
+    ["Simulations", fmt(t.jobs)],
+    ["Simulated in-game time", t.simulatedHours < 48 ? `${fmt(t.simulatedHours, 1)} h` : `${fmt(t.simulatedHours / 24, 1)} days`],
+    ["Kills simulated", fmt(t.kills)],
+    ["Encounters simulated", fmt(t.encounters)],
+    ["Kernel time (all threads)", `${fmt(t.kernelMs / 1000, 1)} s`],
+    ["Average kernel ms / sim-hour", t.simulatedHours ? fmt(t.kernelMs / t.simulatedHours, 2) : "–"],
+    ["Average queue wait / sim", t.jobs ? `${fmt(t.queuedMs / t.jobs, 0)} ms` : "–"],
+  ];
+  $("totals").innerHTML = rows.map(([k, v]) => `<dt>${k}</dt><dd>${v}</dd>`).join("");
+}
+
+function renderRecent(list) {
+  if (!list.length) return;
+  $("recent").innerHTML = list.map(j => `<tr>
+    <td>${j.ok ? "" : "⚠ "}${zoneName(j.zone)}</td><td>${j.tier ?? "–"}</td><td>${j.players ?? "–"}</td><td>${fmt(j.hours, j.hours < 1 ? 2 : 0)}</td>
+    <td>${fmt(j.runMs)}</td><td>${fmt(j.queuedMs)}</td><td>${fmt(j.msPerSimHour, 2)}</td><td>${fmt(j.kills)}</td><td>${j.workerId}</td>
+    <td>${new Date(j.at).toLocaleTimeString()}</td></tr>`).join("");
+}
+
+// ---- polling ------------------------------------------------------------------------------------------------
+async function poll() {
+  try {
+    const s = await (await fetch(`/local-api/metrics?since=${lastT}`, { cache: "no-store" })).json();
+    cores = s.cores;
+    if (s.history.length) { history.push(...s.history); lastT = history[history.length - 1].t; if (history.length > WINDOW) history = history.slice(-WINDOW); }
+    const workers = s.current?.threads || info?.workers || 0;
+    $("status").innerHTML = `<span class="dot"></span>live · ${cores} logical cores · ${workers} workers`;
+    renderTiles(s.current, s.totals, workers);
+    renderWorkers(s.current?.workers || []);
+    renderTotals(s);
+    renderRecent(s.recent);
+    CHARTS.forEach(draw);
+  } catch {
+    $("status").innerHTML = `<span class="dot off"></span>server not reachable: is <code>node local/server.mjs</code> running?`;
+  }
+}
+
+async function api(name, body) {
+  const r = await fetch(`/local-api/${name}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body ?? {}) });
+  const out = await r.json(); if (out.error) throw new Error(out.error); return out.value;
+}
+
+$("applyWorkers").onclick = async () => {
+  const v = await api("setWorkers", { workers: Number($("workers").value) });
+  $("workers").value = v.workers;
+};
+$("bench").onclick = async () => {
+  const b = $("bench"); b.disabled = true; $("benchOut").textContent = "running…";
+  try {
+    const r = await api("bench", { hours: Number($("benchHours").value), repeat: Number($("benchRepeat").value) });
+    $("benchOut").innerHTML = `<b>${fmt(r.sims)}</b> sims in <b>${fmt(r.wallMs / 1000, 2)} s</b> on ${r.workers} workers · <b>${fmt(r.simHoursPerSec, 0)}</b> sim-h/s · ${fmt(r.simsPerSec, 1)} sims/s · ${fmt(r.msPerSimHour, 2)} kernel ms/sim-h`;
+  } catch (e) { $("benchOut").textContent = `failed: ${e.message}`; }
+  b.disabled = false;
+};
+
+(async () => {
+  buildCharts();
+  try { info = await (await fetch("/local-api/ping")).json(); $("workers").value = info.workers; $("workers").max = info.maxWorkers; } catch {}
+  await poll();
+  setInterval(poll, 1000);
+  addEventListener("resize", () => CHARTS.forEach(draw));
+  matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => CHARTS.forEach(draw));
+})();
+</script>
+</body>
+</html>
