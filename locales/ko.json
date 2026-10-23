@@ -3438,6 +3438,7 @@
  "no level can show a gain in clears": "어떤 레벨도 클리어 수 이득을 보일 수 없음",
  "no limit": "제한 없음",
  "no mana food": "마나 음식 없음",
+ "no market ask for {list}, so setups with it were skipped": "{list}의 시장 판매 주문이 없어 해당 음식이 포함된 구성은 건너뜀",
  "no price": "가격 없음",
  "no tea": "차 없음",
  "no tool": "도구 없음",

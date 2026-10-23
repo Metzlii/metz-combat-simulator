@@ -3441,6 +3441,7 @@
  "no level can show a gain in clears": "任何等級都無法在通關數上顯示收益",
  "no limit": "不限時",
  "no mana food": "不帶回藍食物",
+ "no market ask for {list}, so setups with it were skipped": "{list} 在市場上沒有賣單，含它的配置已跳過",
  "no price": "無價格",
  "no tea": "無茶",
  "no tool": "無工具",

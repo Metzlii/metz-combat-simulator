@@ -3436,6 +3436,7 @@
  "no level can show a gain in clears": "ни один уровень не покажет прирост прохождений",
  "no limit": "без ограничения",
  "no mana food": "без еды на ману",
+ "no market ask for {list}, so setups with it were skipped": "на рынке нет предложений для {list}, поэтому наборы с этой едой были пропущены",
  "no price": "нет цены",
  "no tea": "без чая",
  "no tool": "без инструмента",

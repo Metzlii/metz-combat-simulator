@@ -3438,6 +3438,7 @@
  "no level can show a gain in clears": "どのレベルもクリア数の利得を示せません",
  "no limit": "制限なし",
  "no mana food": "マナ回復の食べ物なし",
+ "no market ask for {list}, so setups with it were skipped": "{list} に市場の売り注文がないため、それを含む構成はスキップしました",
  "no price": "価格なし",
  "no tea": "お茶なし",
  "no tool": "ツールなし",

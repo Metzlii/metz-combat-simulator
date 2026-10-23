@@ -3303,6 +3303,7 @@
  "no level can show a gain in clears": "aucun niveau ne peut montrer un gain en passages",
  "no limit": "sans limite",
  "no mana food": "aucune nourriture de mana",
+ "no market ask for {list}, so setups with it were skipped": "aucune offre de vente sur le marché pour {list}, donc les configurations l'incluant ont été ignorées",
  "no price": "sans prix",
  "no tea": "pas de thé",
  "no tool": "sans outil",
