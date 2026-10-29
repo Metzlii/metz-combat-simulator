@@ -13,7 +13,7 @@ const WORKERS_KEY = "mwi.zone.workers";
 const savedWorkers = () => { try { const v = Number(localStorage.getItem(WORKERS_KEY)); return v >= 1 ? Math.floor(v) : null; } catch { return null; } };
 
 export async function connectZoneOnly() {
-  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=9c501cc7f533");
+  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=9cdc8b4e68c8");
   let cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
   const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
@@ -51,6 +51,10 @@ export async function connectZoneOnly() {
     zoneTriggersStream: (body, handlers) => zone.zoneTriggersStream(body, handlers),
     zoneSkills: body => zone.zoneSkills(body),
     zoneSkillsStream: (body, handlers) => zone.zoneSkillsStream(body, handlers),
+    // ZONE-173: the loadout sweep (every saved loadout against every planet and tier), streamed like the others.
+    zoneLoadouts: body => zone.zoneLoadouts(body),
+    zoneLoadoutsStream: (body, handlers) => zone.zoneLoadoutsStream(body, handlers),
+    zoneLoadoutCount: body => zone.zoneLoadoutCount(body),
     close: () => zone.close(),
   };
 
@@ -62,7 +66,7 @@ export async function connectZoneOnly() {
   // follow, with the header's lane count updated through the same event the Workers setting uses.
   (async () => {
     try {
-      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=9c501cc7f533");
+      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=9cdc8b4e68c8");
       const measured = Math.max(1, await probeLanes());
       if (measured <= cores) return;
       cores = measured;
