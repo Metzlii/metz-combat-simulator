@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=bcdd9123ece4"></script>
+<script src="./support.js?v=894e6da5399d"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=bcdd9123ece4">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=894e6da5399d">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=bcdd9123ece4">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=bcdd9123ece4"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=894e6da5399d">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=894e6da5399d"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -227,7 +227,8 @@
              the rail used to grow with it. -->
         <div style="display:flex;flex-direction:column;gap:4px;max-height:660px;overflow-y:auto;overscroll-behavior:contain;padding-right:2px">
         <sc-for list="{{ zone.editor.rail }}" as="r" hint-placeholder-count="5">
-          <div style="display:flex;align-items:center;gap:6px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface);padding:5px 7px;flex:none;{{ r.style }}" style-hover="border-color:var(--color-accent-700)">
+          <div style="display:flex;flex-direction:column;gap:3px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);background:var(--color-surface);padding:5px 7px;flex:none;{{ r.style }}" style-hover="border-color:var(--color-accent-700)">
+          <div style="display:flex;align-items:center;gap:6px">
             <input type="checkbox" style="cursor:pointer;flex:none;margin:0" checked="{{ r.seated }}" disabled="{{ r.seatLocked }}" title="{{ r.seatTitle }}" onChange="{{ r.toggleSeat }}">
             <button class="btn btn-ghost" style="flex:1;min-width:0;padding:0;border-color:transparent;justify-content:flex-start;text-align:left;display:flex;flex-direction:column;gap:1px;align-items:flex-start" onClick="{{ r.pick }}">
               <span style="font-size:13.5px;display:flex;gap:5px;align-items:center">{{ r.name }}<sc-if value="{{ r.dirty }}" hint-placeholder-val="{{ false }}"><span style="width:5px;height:5px;border-radius:50%;background:var(--color-accent);display:inline-block" title="Edited since import"></span></sc-if><sc-if value="{{ r.active }}" hint-placeholder-val="{{ false }}"><span style="font-size:10.5px;color:var(--color-accent-300);text-transform:uppercase;letter-spacing:0.05em;font-weight:500" title="{{ r.editTitle }}">{{ r.editTag }}</span></sc-if></span>
@@ -240,6 +241,19 @@
               <span style="font-size:11.5px;color:var(--color-accent-300);font-variant-numeric:tabular-nums" title="Sections changed">{{ r.badge }}</span>
             </sc-if>
             <button class="btn btn-ghost" style="padding:0 4px;font-size:12.5px;flex:none" title="Remove from the party" onClick="{{ r.remove }}">✕</button>
+          </div>
+          <!-- ZONE-173 (2026-11-02): the saved-loadout picker on every card that has any, not only in the editor header --
+               the editor opens on the first seat, and the exporter's own character (the only profile that carries
+               saved loadouts) is not always that seat. Picking here also makes this the edited player. -->
+          <sc-if value="{{ r.hasLoadouts }}" hint-placeholder-val="{{ false }}">
+            <label style="display:flex;gap:6px;align-items:center;padding-left:22px;min-width:0" title="{{ r.loadoutTitle }}">
+              <span class="text-muted" style="font-size:12px;flex:none">{{ r.loadoutLabel }}</span>
+              <select class="input" style="min-height:25px;padding:1px 5px;font-size:12px;width:auto;min-width:0;flex:1" value="{{ r.loadoutPick }}" onChange="{{ r.pickLoadout }}">
+                <option value="">{{ r.loadoutAsExported }}</option>
+                <sc-for list="{{ r.loadoutOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+              </select>
+            </label>
+          </sc-if>
           </div>
         </sc-for>
         </div>
@@ -337,6 +351,9 @@
                 <sc-for list="{{ zone.editor.loadoutOpts }}" as="o" hint-placeholder-count="3"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
               </select>
             </label>
+          </sc-if>
+          <sc-if value="{{ zone.editor.noLoadoutsNote }}" hint-placeholder-val="{{ false }}">
+            <span class="text-muted" style="font-size:12px;flex:none;margin-left:4px;cursor:help;border-bottom:1px dotted var(--color-neutral-400)" title="{{ zone.editor.noLoadoutsTitle }}">{{ zone.editor.noLoadoutsNote }}</span>
           </sc-if>
           <span class="text-muted" style="font-size:12.5px">{{ zone.editor.editedNote }}</span>
           <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;margin-left:auto;flex:none" onClick="{{ zone.editor.revertPlayer }}">Reset player</button>
@@ -1338,7 +1355,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=bcdd9123ece4").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=894e6da5399d").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2237,7 +2254,7 @@ class Component extends DCLogic {
   // player returns to. After that it is a player like any other.
   // ZONE-173: one of the player's saved loadouts onto their editable loadout ("" = the export's worn set, from the
   // import baseline). The record, levels, rooms and buffs stay; only the loadout half changes, as Copy loadout from does.
-  zonePickLoadout(i, value) {
+  zonePickLoadout(i, value, { select = false } = {}) {
     this.setState(s => { const party = (s.zoneParty || []).slice(), p = party[i]; if (!p) return null;
       const name = p.record?.name || "", list = Array.isArray(p.record?.loadouts) ? p.record.loadouts : [];
       const k = value === "" ? -1 : Number(value);
@@ -2246,7 +2263,9 @@ class Component extends DCLogic {
       // A saved loadout's equipment rows carry no slot (the kernel's shape); the catalog names each item's slot, as it
       // does for the party at import -- without it the editor's slots read empty (operator, 2026-10-29).
       party[i] = this.zoneFillSlots([{ ...p, loadout: JSON.parse(JSON.stringify(source)) }], s.zoneCatalog)[0];
-      return { zoneParty: party, zoneLoadoutPick: { ...(s.zoneLoadoutPick || {}), [name]: k >= 0 ? String(k) : "" }, zoneStale: !!s.zoneResult, zoneDerived: null }; });
+      return { zoneParty: party, zoneLoadoutPick: { ...(s.zoneLoadoutPick || {}), [name]: k >= 0 ? String(k) : "" }, zoneStale: !!s.zoneResult, zoneDerived: null,
+        // From a rail card, the editor follows the pick so what it swapped in is on view.
+        ...(select ? { zoneSel: i, zoneStatOpen: null } : {}) }; });
   }
   zoneCopyLoadout(to, from) {
     this.setState(s => { const party = (s.zoneParty || []).slice(), src = party[from], dst = party[to];
@@ -3303,7 +3322,15 @@ class Component extends DCLogic {
           // through t(). Derived at render time, which is why no scanner of this file ever saw it as English.
           ? `${Component.t(String(sk.enhancingTool.itemHrid || "").split("/").pop().replace(/_/g, " ").replace(/\b\w/g, c => c.toUpperCase()))}${sk.enhancingTool.enhancementLevel ? ` +${sk.enhancingTool.enhancementLevel}` : ""}`
           : "no tool";
+        const savedLds = Array.isArray(q.record?.loadouts) ? q.record.loadouts : [];
         return { name: nm, sub: `${Component.t(nice(st))} ${L[st] || 0}${seated ? "" : ` · ${Component.t("benched")}`}`, active: k === i, dirty: n > 0,
+          // ZONE-173: this card's saved-loadout picker (see the template); the pick is shared with the editor header's.
+          hasLoadouts: savedLds.length > 0,
+          loadoutOpts: savedLds.map((l, j) => ({ value: String(j), label: l.name || Component.tf("Loadout {n}", { n: j + 1 }) })),
+          loadoutPick: String((s.zoneLoadoutPick || {})[q.record?.name || ""] ?? ""),
+          loadoutAsExported: Component.t("As exported"), loadoutLabel: Component.t("Loadout:"),
+          loadoutTitle: Component.t("One of this character's saved game loadouts: its gear, abilities, food, drinks and triggers replace what is set up here"),
+          pickLoadout: e => this.zonePickLoadout(k, e.target.value, { select: true }),
           // The card the loadout editor below is showing: named, so the accent border is not read as a hover.
           editTag: k === i ? Component.t("editing") : "", editTitle: Component.t("The loadout editor below shows this character"),
           skillSub: sk?.enhancingLevel ? `${Component.t("enhancing")} ${sk.enhancingLevel} \u00b7 ${tool}${sk.alchemyLevel ? ` \u00b7 ${Component.t("alchemy")} ${sk.alchemyLevel}` : ""}` : "",
@@ -3331,6 +3358,11 @@ class Component extends DCLogic {
       loadoutAsExported: Component.t("As exported"), loadoutLabel: Component.t("Loadout:"),
       loadoutTitle: Component.t("One of this character's saved game loadouts: its gear, abilities, food, drinks and triggers replace what is set up here"),
       pickLoadout: e => this.zonePickLoadout(i, e.target.value),
+      // Only the exporter's own character carries an owned inventory, so a player with one and no saved loadouts is
+      // the person at the keyboard, whose helper sent none: said beside the name, where the picker would be
+      // (a solo player reported the picker missing, 2026-11-02; their export had no loadouts key at all).
+      noLoadoutsNote: !!p.record?.owned && !(Array.isArray(p.record?.loadouts) && p.record.loadouts.length) ? Component.t("no saved loadouts in this export") : "",
+      noLoadoutsTitle: Component.t("The Metz Combat Sim Helper 0.7.0 or later exports every combat loadout saved in the game along with your own character, and a Loadout: picker appears here to swap between them. This export carried none: update the helper, then export yourself again. Teammates' profiles never carry loadouts."),
       task: (s.zoneTasks || {})[p.record?.name] || "",
       taskLabel: (() => { const t = (s.zoneTasks || {})[p.record?.name] || ""; return t ? (h => { const v = Component.t(h); return v !== h ? v : title(h); })(t) : Component.t("none"); })(),
       setTask: v => set({ zoneTasks: { ...(s.zoneTasks || {}), [p.record?.name]: typeof v === "string" ? v : v.target.value }, zoneStale: !!s.zoneResult }),
