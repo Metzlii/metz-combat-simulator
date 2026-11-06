@@ -21,13 +21,20 @@
   // every keystroke and React writes the clamped state straight back into the box, so an emptied field became
   // "1" and the next digit landed after it. Here the box keeps the typed text until it loses focus; the state
   // still updates on every keystroke exactly as before, and the clamped value shows once the field is left.
+  // The draft is dropped when the value changes from OUTSIDE while nothing has been typed since the field took
+  // focus (2026-11-06, Scaridium on Firefox: the shrine levels kept showing the first player's after switching to
+  // another). The field keeps its instance across a switch of the edited player (rows are keyed by position), and
+  // Firefox on a Mac does not move focus to a clicked button, so the blur that would have cleared the draft never
+  // came. A change the user's own keystrokes caused still keeps the draft: that is what the draft is for.
   function NumberField(props) {
     const React = getReact();
     const [draft, setDraft] = React.useState(null);
+    const typed = React.useRef(false);
     const handler = props.onInput || props.onChange;
-    const onChange = (e) => { setDraft(e.target.value); if (handler) handler(e); };
-    const onFocus = (e) => { setDraft(e.target.value); if (props.onFocus) props.onFocus(e); };
-    const onBlur = (e) => { setDraft(null); if (props.onBlur) props.onBlur(e); };
+    const onChange = (e) => { typed.current = true; setDraft(e.target.value); if (handler) handler(e); };
+    const onFocus = (e) => { typed.current = false; setDraft(e.target.value); if (props.onFocus) props.onFocus(e); };
+    const onBlur = (e) => { typed.current = false; setDraft(null); if (props.onBlur) props.onBlur(e); };
+    React.useEffect(() => { if (draft !== null && !typed.current) setDraft(null); }, [props.value]);
     const { onInput: _onInput, ...rest } = props;
     return React.createElement("input", { ...rest, value: draft !== null ? draft : props.value, onChange, onFocus, onBlur });
   }

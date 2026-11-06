@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=71f756ebebde"></script>
+<script src="./support.js?v=318e6a5259af"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=71f756ebebde">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=318e6a5259af">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=71f756ebebde">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=71f756ebebde"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=318e6a5259af">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=318e6a5259af"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1355,7 +1355,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=71f756ebebde").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=318e6a5259af").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2229,7 +2229,12 @@ class Component extends DCLogic {
     };
     setTimeout(poll, 100);
   }
+  // A number field holds the text it showed while it has focus (support.js NumberField), and Firefox on a Mac does
+  // not move focus to a clicked button -- so a field still focused across a switch of the edited player, a reset or a
+  // loadout pick kept showing the old player's number (Scaridium, 2026-11-06). The focus is dropped first.
+  zoneDropFocus() { try { const el = globalThis.document?.activeElement; if (el && typeof el.blur === "function" && el !== document.body) el.blur(); } catch {} }
   zoneRevert(scope, i, arg) {
+    this.zoneDropFocus();
     this.setState(s => { const base = s.zoneBase || [], party = (s.zoneParty || []).slice();
       const clone = o => JSON.parse(JSON.stringify(o));
       if (scope === "party") return { zoneParty: clone(base), zoneStale: !!s.zoneResult, zoneDerived: null };
@@ -2255,6 +2260,7 @@ class Component extends DCLogic {
   // ZONE-173: one of the player's saved loadouts onto their editable loadout ("" = the export's worn set, from the
   // import baseline). The record, levels, rooms and buffs stay; only the loadout half changes, as Copy loadout from does.
   zonePickLoadout(i, value, { select = false } = {}) {
+    this.zoneDropFocus();
     this.setState(s => { const party = (s.zoneParty || []).slice(), p = party[i]; if (!p) return null;
       const name = p.record?.name || "", list = Array.isArray(p.record?.loadouts) ? p.record.loadouts : [];
       const k = value === "" ? -1 : Number(value);
@@ -2268,6 +2274,7 @@ class Component extends DCLogic {
         ...(select ? { zoneSel: i, zoneStatOpen: null } : {}) }; });
   }
   zoneCopyLoadout(to, from) {
+    this.zoneDropFocus();
     this.setState(s => { const party = (s.zoneParty || []).slice(), src = party[from], dst = party[to];
       if (!src || !dst) return null;
       if (dst.record?._blank) {
@@ -3343,7 +3350,7 @@ class Component extends DCLogic {
             : (actNames.length >= Component.ZONE_MAX_PARTY ? Component.tf("A party seats {n} — bench someone first", { n: Component.ZONE_MAX_PARTY }) : Component.t("Benched — check to put in the party")),
           toggleSeat: () => this.zoneToggleActive(nm),
           style: `${k === i ? "border-color:var(--color-accent);background:color-mix(in srgb, var(--color-accent) 12%, transparent)" : "border-color:var(--color-divider)"}${seated ? "" : ";opacity:0.58"}`,
-          pick: () => set({ zoneSel: k, zoneStatOpen: null }),
+          pick: () => { this.zoneDropFocus(); set({ zoneSel: k, zoneStatOpen: null }); },
           remove: () => { const left = party.filter((_, j) => j !== k); set({ zoneParty: left, zoneBase: base.filter((_, j) => j !== k), zoneSel: this.zoneFirstSeat({ ...s, zoneParty: left }), zoneResult: s.zoneResult, zoneStale: !!s.zoneResult }); } }; })
         // Seated members first, benched after, each group in import order (operator, 2026-09-21): with a whole
         // guild imported, the five who play sit at the top rather than wherever the export put them.
