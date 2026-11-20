@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=318e6a5259af"></script>
+<script src="./support.js?v=244dfb64f8e3"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=318e6a5259af">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=244dfb64f8e3">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=318e6a5259af">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=318e6a5259af"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=244dfb64f8e3">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=244dfb64f8e3"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -866,6 +866,42 @@
           <div style="display:flex;gap:12px;align-items:baseline;flex-wrap:wrap">
             <h4 style="margin:0;font-size:15px">{{ zone.detail.title }}</h4>
           </div>
+          <!-- ZONE-176: the dungeon's own figures in the open, above the player cards (operator, 2026-11-19: average
+               run time, the wipe rate and the fail rate were buried in the Avg run tooltip and people were not finding
+               them). One card for the party, tiles that wrap, open by itself. -->
+          <sc-if value="{{ zone.detail.hasDungeon }}" hint-placeholder-val="{{ false }}">
+            <div class="card elev-sm" style="gap:6px;padding:var(--space-3);min-width:0">
+              <button class="btn" style="display:flex;gap:8px;align-items:baseline;justify-content:flex-start;width:100%;padding:0;border-color:transparent;background:transparent;text-align:left" style-hover="color:var(--color-accent-300)" onClick="{{ zone.detail.dungeon.toggle }}">
+                <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.detail.dungeon.caret }} Dungeon</span>
+                <span class="text-muted" style="font-size:12.5px;margin-left:auto;font-variant-numeric:tabular-nums;text-align:right">{{ zone.detail.dungeon.head }}</span>
+              </button>
+              <sc-if value="{{ zone.detail.dungeon.open }}" hint-placeholder-val="{{ false }}">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(138px,1fr));gap:8px 14px;border-top:1px solid var(--color-divider);padding-top:6px">
+                  <sc-for list="{{ zone.detail.dungeon.stats }}" as="x" hint-placeholder-count="9">
+                    <div style="display:flex;flex-direction:column;gap:1px;min-width:0" title="{{ x.tip }}">
+                      <span class="text-muted" style="font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">{{ x.k }}</span>
+                      <span style="font-size:15px;font-variant-numeric:tabular-nums;color:{{ x.color }}">{{ x.v }}<span class="text-muted" style="font-size:12px"> {{ x.sub }}</span></span>
+                    </div>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ zone.detail.dungeon.hasWaves }}" hint-placeholder-val="{{ false }}">
+                  <!-- The waves fold away by themselves: 65 chips under the figures is a wall (preview, 2026-11-19). -->
+                  <div style="display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--color-divider);padding-top:4px">
+                    <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;align-self:flex-start" title="{{ zone.detail.dungeon.wavesTip }}" onClick="{{ zone.detail.dungeon.wavesToggle }}">
+                      <span class="text-muted" style="font-size:11.5px;letter-spacing:0.04em;text-transform:uppercase">{{ zone.detail.dungeon.wavesCaret }} Time per wave ({{ zone.detail.dungeon.wavesN }})</span>
+                    </button>
+                    <sc-if value="{{ zone.detail.dungeon.wavesOpen }}" hint-placeholder-val="{{ false }}">
+                      <div style="display:flex;gap:4px 14px;flex-wrap:wrap;align-items:baseline;font-size:12px">
+                        <sc-for list="{{ zone.detail.dungeon.waves }}" as="w" hint-placeholder-count="10">
+                          <span style="font-variant-numeric:tabular-nums;white-space:nowrap" title="{{ w.tip }}"><span class="text-muted">{{ w.wave }} ·</span> {{ w.text }}</span>
+                        </sc-for>
+                      </div>
+                    </sc-if>
+                  </div>
+                </sc-if>
+              </sc-if>
+            </div>
+          </sc-if>
           <!-- ZONE-73: auto-FILL, not auto-fit. Both wrap the same way as the window narrows, but auto-fit
                collapses the empty tracks, so a solo run stretched one card across the whole page and put its
                label at one edge and its number at the other, unreadable (operator, 2026-09-20). auto-fill keeps
@@ -1355,7 +1391,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=318e6a5259af").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=244dfb64f8e3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2649,6 +2685,51 @@ class Component extends DCLogic {
   // ZONE-57: a dungeon's clear speed reads as the time one run takes, the way it is timed in game -- 14:03, not
   // 4.27 clears an hour. Seconds matter here: two builds a hundredth of a clear apart are eleven seconds apart per
   // run, which the rate hides and the clock shows. Runs past the hour carry an hours field.
+  // ZONE-176: the dungeon's own figures for the Results page (operator, 2026-11-19: average run time, the wipe rate
+  // and the fail rate were buried in the Avg run tooltip and people were not finding them). Per-clear and per-attempt
+  // pace, clears an hour, fail rate, wipes an hour, deaths per attempt, the clear-time spread from the kernel's
+  // per-run clock (which restarts after a wipe, so the session less the clock's sum is what the wipes cost), and the
+  // mean fight time of every wave. Open by itself: that is the point of it.
+  zoneDungeonDetail(c, s) {
+    const none = { hasDungeon: false, dungeon: { open: false, caret: "", head: "", stats: [], waves: [], hasWaves: false, wavesTip: "", wavesN: 0, wavesOpen: false, wavesCaret: "", toggle: () => {}, wavesToggle: () => {} } };
+    if (!c || c.ok === false || !c.isDungeon) return none;
+    const nf = (v, d = 0) => Number(v || 0).toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d });
+    const t = sec => this.zoneRunTime(sec);
+    const clears = c.dungeonsCompleted || 0, fails = c.dungeonsFailed || 0, attempts = clears + fails;
+    const hours = Number(c.simulatedHours) || 0, attemptsPerHour = hours > 0 ? attempts / hours : 0;
+    const clearsPerHour = c.dungeonsCompletedPerHour || 0, failsPerHour = c.dungeonsFailedPerHour || 0;
+    const ps = c.players || [];
+    const deathsPerHour = ps.reduce((a, p) => a + (p.deathsPerHour || 0), 0);
+    const failPct = attempts > 0 ? 100 * fails / attempts : 0;
+    const pctText = v => `${nf(v, v > 0 && v < 10 ? 2 : 1)}%`;
+    const good = "var(--color-accent-300)", bad = "var(--color-accent-2-300)", plain = "inherit";
+    const rs = c.runSeconds && c.runSeconds.n > 0 ? c.runSeconds : null;
+    const lostPct = rs && hours > 0 ? Math.max(0, 100 * (1 - rs.sum / (hours * 3600))) : null;
+    const stats = [
+      { k: Component.t("Average run"), v: t(c.averageRunSeconds), sub: Component.t("per clear"), color: good, tip: Component.t("average time for one full run, counting the time lost to failed attempts") },
+      { k: Component.t("Per attempt"), v: t(c.averageAttemptSeconds), sub: "", color: plain, tip: Component.t("the session divided by every attempt, clears and wipes alike") },
+      { k: Component.t("Clears / h"), v: nf(clearsPerHour, 2), sub: Component.tf("{n} / day", { n: nf(clearsPerHour * 24, 1) }), color: plain, tip: Component.tf("{n} clears in {h} simulated hours", { n: nf(clears), h: nf(hours, hours < 10 ? 1 : 0) }) },
+      { k: Component.t("Fail rate"), v: pctText(failPct), sub: "", color: fails > 0 ? bad : good, tip: Component.tf("{n} of {m} attempts wiped", { n: nf(fails), m: nf(attempts) }) },
+      { k: Component.t("Wipes / h"), v: nf(failsPerHour, 2), sub: failsPerHour > 0 ? Component.tf("{n} / day", { n: nf(failsPerHour * 24, 1) }) : "", color: fails > 0 ? bad : good, tip: Component.t("failed attempts an hour; a wipe restarts the run at wave 1 after 3 s") },
+      { k: Component.t("Deaths per run"), v: attemptsPerHour > 0 ? nf(deathsPerHour / attemptsPerHour, 2) : "—", sub: "", color: plain,
+        tip: Component.t("the party's deaths over every attempt") + (attemptsPerHour > 0 && ps.length ? "\n" + ps.map(p => `${p.hrid} ${nf((p.deathsPerHour || 0) / attemptsPerHour, 2)}`).join("\n") : "") },
+      ...(rs ? [
+        { k: Component.t("Fastest clear"), v: t(rs.min), sub: "", color: plain, tip: Component.t("the quickest completed run: first wave to final kill, a fresh clock after a wipe") },
+        { k: Component.t("Median clear"), v: t(rs.median), sub: "", color: plain, tip: Component.t("half the completed runs were quicker than this, half slower") },
+        { k: Component.t("Slowest clear"), v: t(rs.max), sub: "", color: plain, tip: Component.t("the slowest completed run") },
+        { k: Component.t("Time lost to wipes"), v: pctText(lostPct), sub: Component.t("of the session"), color: fails > 0 ? bad : good, tip: Component.t("the session's time outside completed runs: the attempts that wiped and the restart after each") },
+      ] : []),
+    ];
+    const waves = (c.waveSeconds || []).map(w => ({ wave: String(w.wave), text: w.meanSeconds < 60 ? `${nf(w.meanSeconds, 1)} s` : t(w.meanSeconds),
+      tip: Component.tf("wave {n}: {t} s over {k} fights", { n: w.wave, t: nf(w.meanSeconds, 1), k: nf(w.n) }) }));
+    const open = s.zoneDungeonOpen !== false;
+    return { hasDungeon: true, dungeon: { open, caret: open ? "▾" : "▸",
+      head: Component.tf("{t} per clear · {pct} fail", { t: t(c.averageRunSeconds), pct: pctText(failPct) }),
+      stats, waves, hasWaves: waves.length > 0, wavesN: waves.length, wavesTip: Component.t("mean fight time of each wave, spawn to last kill, over every attempt that reached it"),
+      wavesOpen: !!s.zoneWavesOpen, wavesCaret: s.zoneWavesOpen ? "▾" : "▸",
+      wavesToggle: () => this.setState(st => ({ zoneWavesOpen: !st.zoneWavesOpen })),
+      toggle: () => this.setState(st => ({ zoneDungeonOpen: !(st.zoneDungeonOpen !== false) })) } };
+  }
   zoneRunTime(seconds) {
     const v = Number(seconds);
     if (!Number.isFinite(v) || v <= 0) return "—";
@@ -3852,7 +3933,7 @@ class Component extends DCLogic {
       const secOpen = s.zoneSecOpen || {}, secDefs = [["rates", Component.t("Rates")], ["xp", Component.t("XP / h")],
         ["damage", Component.t("Damage by source")], ["casts", Component.t("Casts & mana")], ["taken", Component.t("Damage taken")], ["restored", Component.t("HP & mana restored")],
         ["consumables", Component.t("Consumables")], ["lootIn", Component.t("Loot in")], ["lootOut", Component.t("Loot out")]];
-      if (c && c.ok !== false) detail = { title: `${Component.t(c.name)} · T${c.difficultyTier}${c.hours != null && R?.hours != null && Number(c.hours) !== Number(R.hours) ? ` · ${nf(c.hours)} h` : ""}`,
+      if (c && c.ok !== false) detail = { ...this.zoneDungeonDetail(c, s), title: `${Component.t(c.name)} · T${c.difficultyTier}${c.hours != null && R?.hours != null && Number(c.hours) !== Number(R.hours) ? ` · ${nf(c.hours)} h` : ""}`,
         // Each section collapses to its own header inside every card; one click applies to every player column
         // at once, so the columns stay row-aligned.
         // Only Rates opens by itself (operator, 2026-09-23): eight sections open on five cards is a wall.
