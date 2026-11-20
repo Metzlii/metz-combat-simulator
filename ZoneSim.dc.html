@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=244dfb64f8e3"></script>
+<script src="./support.js?v=dc65aa3f386f"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=244dfb64f8e3">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=dc65aa3f386f">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=244dfb64f8e3">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=244dfb64f8e3"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=dc65aa3f386f">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=dc65aa3f386f"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1391,7 +1391,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=244dfb64f8e3").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=dc65aa3f386f").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1729,16 +1729,18 @@ class Component extends DCLogic {
     this._zoneSplit = split ? (count === 1 ? Component.tf("read {n} export from the paste", { n: count }) : Component.tf("read {n} exports from the paste", { n: count })) : "";
     try { const r = await this.client.zoneImport(payload);
       const filled = this.zoneSortParty(this.zoneFillSlots(this.zoneFillShrine(r.players || []), this.state.zoneCatalog));
+      const picked = this.zoneGroupLoadouts(filled, this.state.zoneCatalog);
       if (!this.state.zoneScriptSeen && Component.fromPartyScript(filled)) {
         this.setState({ zoneScriptSeen: true });
         try { localStorage.setItem(Component.PARTY_SCRIPT_KEY, "1"); } catch {}
       }
       // A fresh import folds the paste box whether or not it was opened by hand (operator, 2026-09-21: it stayed
       // open after the script's Import button); the caret brings it back.
-      this.setState(s => ({ zoneImporting: false, zoneParty: filled, zoneActive: null, zoneExportOpen: false, zoneLoadoutPick: {},
+      this.setState(s => ({ zoneImporting: false, zoneParty: picked.party, zoneActive: null, zoneExportOpen: false, zoneLoadoutPick: picked.picks,
         // ZONE-76: an import can seat a fifth player in one step, which makes every queued planet impossible.
         zoneCands: this.zoneFitCands(s.zoneCands, this.zoneActiveNames({ ...s, zoneParty: filled, zoneActive: null }).length, s.zoneList),
-        zoneBase: JSON.parse(JSON.stringify(filled)), zoneSel: this.zoneFirstSeat({ ...s, zoneParty: filled, zoneActive: null }), zoneStale: false, zoneDerived: null, zoneDeriveError: null,
+        // The baseline is the party as imported WITH each marked group loadout in place (ZONE-177), so a fresh import shows no edits.
+        zoneBase: JSON.parse(JSON.stringify(picked.party)), zoneSel: this.zoneFirstSeat({ ...s, zoneParty: filled, zoneActive: null }), zoneStale: false, zoneDerived: null, zoneDeriveError: null,
         zoneFormat: r.format || null,
         // The import counts the inventory rows it dropped for not being combat gear. That is the whole bag
         // arriving and being filtered as intended — resources, loot and keys were never going to be equippable —
@@ -2295,6 +2297,23 @@ class Component extends DCLogic {
   // player returns to. After that it is a player like any other.
   // ZONE-173: one of the player's saved loadouts onto their editable loadout ("" = the export's worn set, from the
   // import baseline). The record, levels, rooms and buffs stay; only the loadout half changes, as Copy loadout from does.
+  // ZONE-177 (2026-11-20): the helper marks the loadout the game shows under a party member's View Loadout -- what they
+  // fight with in the party, whatever they wear right now -- as `groupCombat`. That loadout IS the player's import
+  // (operator: "the group loadout should be the default on the site"): it becomes the player's loadout AND the
+  // baseline the edit marks and Reset player measure against, so nothing reads "edited" on a fresh import. The
+  // profile's worn set is not lost: it joins the picker as "Worn at export".
+  zoneGroupLoadouts(party, catalog) {
+    const picks = {};
+    const out = party.map(p => {
+      const list = Array.isArray(p?.record?.loadouts) ? p.record.loadouts : [], k = list.findIndex(l => l && l.groupCombat === true);
+      if (k < 0 || !list[k].loadout) return p;
+      picks[p.record?.name || ""] = String(k);
+      const worn = { id: "worn-at-export", name: Component.t("Worn at export"), loadout: JSON.parse(JSON.stringify(p.loadout || {})), wornAtExport: true };
+      const record = { ...p.record, loadouts: list.some(l => l && l.wornAtExport) ? list : [...list, worn] };
+      return this.zoneFillSlots([{ ...p, record, loadout: JSON.parse(JSON.stringify(list[k].loadout)) }], catalog)[0];
+    });
+    return { party: out, picks };
+  }
   zonePickLoadout(i, value, { select = false } = {}) {
     this.zoneDropFocus();
     this.setState(s => { const party = (s.zoneParty || []).slice(), p = party[i]; if (!p) return null;
@@ -3414,7 +3433,8 @@ class Component extends DCLogic {
         return { name: nm, sub: `${Component.t(nice(st))} ${L[st] || 0}${seated ? "" : ` · ${Component.t("benched")}`}`, active: k === i, dirty: n > 0,
           // ZONE-173: this card's saved-loadout picker (see the template); the pick is shared with the editor header's.
           hasLoadouts: savedLds.length > 0,
-          loadoutOpts: savedLds.map((l, j) => ({ value: String(j), label: l.name || Component.tf("Loadout {n}", { n: j + 1 }) })),
+          loadoutOpts: savedLds.map((l, j) => { const name = l.name || Component.tf("Loadout {n}", { n: j + 1 });
+            return { value: String(j), label: l.groupCombat ? Component.tf("{name} · group combat", { name }) : name }; }),
           loadoutPick: String((s.zoneLoadoutPick || {})[q.record?.name || ""] ?? ""),
           loadoutAsExported: Component.t("As exported"), loadoutLabel: Component.t("Loadout:"),
           loadoutTitle: Component.t("One of this character's saved game loadouts: its gear, abilities, food, drinks and triggers replace what is set up here"),
@@ -3441,7 +3461,8 @@ class Component extends DCLogic {
       // Picking one puts its gear, abilities, food, drinks and trigger lists on this player; "As exported" is the
       // worn set the export came with. The pick is remembered by name until the next import.
       hasLoadouts: Array.isArray(p.record?.loadouts) && p.record.loadouts.length > 0,
-      loadoutOpts: (p.record?.loadouts || []).map((l, k) => ({ value: String(k), label: l.name || Component.tf("Loadout {n}", { n: k + 1 }) })),
+      loadoutOpts: (p.record?.loadouts || []).map((l, k) => { const name = l.name || Component.tf("Loadout {n}", { n: k + 1 });
+        return { value: String(k), label: l.groupCombat ? Component.tf("{name} · group combat", { name }) : name }; }),
       loadoutPick: String((s.zoneLoadoutPick || {})[p.record?.name || ""] ?? ""),
       loadoutAsExported: Component.t("As exported"), loadoutLabel: Component.t("Loadout:"),
       loadoutTitle: Component.t("One of this character's saved game loadouts: its gear, abilities, food, drinks and triggers replace what is set up here"),
