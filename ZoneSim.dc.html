@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=e6fa9d413ebe"></script>
+<script src="./support.js?v=43a3d49a19d1"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e6fa9d413ebe">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=43a3d49a19d1">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=e6fa9d413ebe">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e6fa9d413ebe"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=43a3d49a19d1">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=43a3d49a19d1"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -261,6 +261,7 @@
       <div data-tour="derived" style="display:flex;flex-direction:column;gap:6px;min-width:0;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">
         <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:baseline;width:100%" onClick="{{ zone.editor.toggleDerived }}">
           <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.derivedCaret }} Derived stats</span>
+          <sc-if value="{{ zone.editor.derivedEdited }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.derivedBadge }}</span></sc-if>
           <span class="text-muted" style="font-size:12px;margin-left:auto;flex:none">{{ zone.editor.derivedSummary }}</span>
         </button>
         <sc-if value="{{ zone.editor.derivedOpen }}" hint-placeholder-val="{{ false }}">
@@ -273,14 +274,39 @@
         <sc-if value="{{ zone.editor.hasContextNote }}" hint-placeholder-val="{{ false }}">
           <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.editor.contextNote }}</div>
         </sc-if>
+        <!-- ZONE-178: what-if offsets. The note says what they are; the button appears once one is set; the last line
+             heads the third column. -->
+        <sc-if value="{{ zone.editor.hasDerived }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:8px;align-items:baseline;flex-wrap:wrap">
+            <span class="text-muted" style="font-size:12.5px;text-wrap:pretty;min-width:0;flex:1">{{ zone.editor.offsetsNote }}</span>
+            <sc-if value="{{ zone.editor.hasOffsets }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-ghost" style="padding:1px 6px;font-size:12px;flex:none" title="{{ zone.editor.clearOffsetsTip }}" onClick="{{ zone.editor.clearOffsets }}">{{ zone.editor.clearOffsetsLabel }}</button>
+            </sc-if>
+          </div>
+          <div class="text-muted" style="display:flex;gap:8px;font-size:11px;letter-spacing:0.05em;text-transform:uppercase">
+            <span style="margin-left:auto">{{ zone.editor.valueHead }}</span>
+            <span style="width:84px;flex:none" title="{{ zone.editor.offsetHeadTip }}">{{ zone.editor.offsetHead }}</span>
+          </div>
+        </sc-if>
         <sc-for list="{{ zone.editor.derived }}" as="d" hint-placeholder-count="8">
-          <div style="display:flex;flex-direction:column;border-top:1px solid var(--color-divider);padding:4px 0">
-            <button class="btn btn-ghost" style="padding:0;border-color:transparent;display:flex;gap:8px;align-items:baseline;width:100%;justify-content:flex-start" onClick="{{ d.toggle }}">
-              <span class="text-muted" style="font-size:12.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ d.caret }} {{ d.label }}</span>
-              <span style="font-size:13.5px;margin-left:auto;font-variant-numeric:tabular-nums;color:var(--color-accent-300);flex:none">{{ d.total }}</span>
-            </button>
+          <div style="display:flex;flex-direction:column;border-top:1px solid var(--color-divider);padding:2px 0">
+            <!-- Three columns: the stat, its value, and the what-if offset (ZONE-178; operator, 2026-11-20: "the offset
+                 input would exist as a 3rd column within derived stats. And default to empty/0 if not changed"). The
+                 field sits beside the button, never inside it: a click in it must not fold the row. -->
+            <div style="display:flex;gap:8px;align-items:center">
+              <button class="btn btn-ghost" style="padding:0;border-color:transparent;display:flex;gap:8px;align-items:baseline;flex:1;min-width:0;justify-content:flex-start" onClick="{{ d.toggle }}">
+                <span class="text-muted" style="font-size:12.5px;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ d.caret }} {{ d.label }}</span>
+                <span style="font-size:13.5px;margin-left:auto;font-variant-numeric:tabular-nums;color:var(--color-accent-300);flex:none">{{ d.total }}</span>
+              </button>
+              <span style="display:flex;gap:3px;align-items:center;flex:none;width:84px">
+                <sc-if value="{{ d.offsetable }}" hint-placeholder-val="{{ true }}">
+                  <input class="input" type="number" step="{{ d.offsetStep }}" placeholder="0" aria-label="{{ d.offsetAria }}" title="{{ d.offsetTip }}" style="min-height:23px;padding:0 4px;font-size:12px;width:64px;min-width:0;font-variant-numeric:tabular-nums;text-align:right;{{ d.offsetStyle }}" value="{{ d.offsetText }}" onChange="{{ d.setOffset }}">
+                  <span class="text-muted" style="font-size:11.5px;min-width:10px">{{ d.offsetUnit }}</span>
+                </sc-if>
+              </span>
+            </div>
             <sc-if value="{{ d.open }}" hint-placeholder-val="{{ false }}">
-              <div style="display:flex;flex-direction:column;gap:2px;padding:4px 0 2px 12px">
+              <div style="display:flex;flex-direction:column;gap:2px;padding:4px 92px 2px 12px">
                 <sc-for list="{{ d.sources }}" as="src" hint-placeholder-count="3">
                   <div style="display:flex;gap:6px;align-items:center;font-size:12.5px">
                     <sc-if value="{{ src.hasIcon }}" hint-placeholder-val="{{ false }}">
@@ -289,7 +315,7 @@
                         <sc-if value="{{ src.icon.glyph }}" hint-placeholder-val="{{ true }}"><i class="{{ src.icon.glyph }}" style="font-size:11px;line-height:1" aria-hidden="true"></i></sc-if>
                       </span>
                     </sc-if>
-                    <span class="text-muted" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ src.detail }}">{{ src.label }}</span>
+                    <span class="text-muted" style="min-width:0;overflow-wrap:anywhere" title="{{ src.detail }}">{{ src.label }}</span>
                     <span style="margin-left:auto;font-variant-numeric:tabular-nums;flex:none">{{ src.value }}</span>
                   </div>
                 </sc-for>
@@ -1216,6 +1242,24 @@ class Component extends DCLogic {
   // The combat scrolls the Account buffs panel switches: [accountBuffs key, the scroll's item hrid, English name,
   // size if the catalog is not loaded]. The server's ACCOUNT_BUFFS is the authority; this is only the order and
   // the fallback wording.
+  // ZONE-178: the derived stats that take a what-if offset, by the server's key: its label and how it reads
+  // (`server/zoneDerive.mjs` STATS; a percent offset is stored as a fraction, 0.01 for one point).
+  static ZONE_OFFSET_STATS = { maxHitpoints: ["Max hitpoints", "integer"], maxManapoints: ["Max manapoints", "integer"],
+    hpRegen: ["HP regen / 10 s", "percent"], mpRegen: ["Mana regen / 10 s", "percent"], accuracyRating: ["Accuracy rating", "rating"],
+    maxDamage: ["Max damage", "rating"], criticalRate: ["Critical rate", "percent"], criticalDamage: ["Critical damage", "percent"],
+    amplify: ["Amplify", "percent"], healingAmplify: ["Healing amplify", "percent"], attackSpeed: ["Attack speed", "percent"],
+    castSpeed: ["Cast speed", "percent"], abilityHaste: ["Ability haste", "rating"], armor: ["Armour", "rating"],
+    evasionStab: ["Evasion vs stab", "rating"], evasionSlash: ["Evasion vs slash", "rating"], evasionSmash: ["Evasion vs smash", "rating"],
+    evasionRanged: ["Evasion vs ranged", "rating"], evasionMagic: ["Evasion vs magic", "rating"],
+    resistanceWater: ["Water resistance", "rating"], resistanceNature: ["Nature resistance", "rating"], resistanceFire: ["Fire resistance", "rating"],
+    foodHaste: ["Food haste", "percent"], drinkConcentration: ["Drink concentration", "percent"],
+    combatExperience: ["Combat experience", "percent"], combatDropRate: ["Combat drop rate", "percent"] };
+  /** An offset as it reads: "+1%" for 0.01 on a percent stat, "+0.5" on a rating, with a real minus sign. */
+  static zoneOffsetText(key, value) {
+    const pct = (Component.ZONE_OFFSET_STATS[key] || [])[1] === "percent", n = (Number(value) || 0) * (pct ? 100 : 1);
+    const shown = (Math.round(Math.abs(n) * 1e6) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 4 });
+    return `${n < 0 ? "\u2212" : "+"}${shown}${pct ? "%" : ""}`;
+  }
   static ZONE_SCROLLS = [
     ["personalWisdom", "/items/seal_of_wisdom", "Scroll Of Wisdom", 0.2],
     ["personalDamage", "/items/seal_of_damage", "Scroll Of Damage", 0.08],
@@ -1257,6 +1301,8 @@ class Component extends DCLogic {
     // Default view (operator, 2026-09-16): every panel starts collapsed — the operator opens what they need.
     zoneEditSec: { equipment: false, abilities: false, consumables: false, levels: false, house: false, buffs: false, task: false },
     zoneStatOpen: null, zoneStale: false, zoneDerivedOpen: false,
+    // ZONE-178: what is typed in an offset field, by "<player>|<stat>", so "0." survives until the next digit.
+    zoneOffsetText: {},
     zoneMarket: null, zoneMarketBusy: false, zoneMarketMsg: "", zoneMarketAt: 0,
     zoneSaves: [], zoneSaveName: "", zoneRunLog: [], zoneShow: null, zoneBaseline: null, zoneSetupFrom: null,
     zoneManaOpen: false, zoneNotExport: false,
@@ -1389,7 +1435,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=e6fa9d413ebe").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=43a3d49a19d1").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2678,6 +2724,11 @@ class Component extends DCLogic {
       for (const k of new Set([...Object.keys(lWas), ...Object.keys(lNow)])) {
         const a = Number(lWas[k]) || 0, c = Number(lNow[k]) || 0;
         if (a !== c) changes.push(`${who}${k} ${a} → ${c}`); }
+      // ZONE-178: a what-if stat offset is a difference from the import like any other, and names the run.
+      const oWas = b?.record?.statOffsets || {}, oNow = p?.record?.statOffsets || {};
+      for (const k of new Set([...Object.keys(oWas), ...Object.keys(oNow)])) {
+        const a = Number(oWas[k]) || 0, c = Number(oNow[k]) || 0;
+        if (a !== c) changes.push(`${who}${Component.t((Component.ZONE_OFFSET_STATS[k] || [k])[0])} ${Component.zoneOffsetText(k, c)}`); }
     }
     if (!changes.length) return { title: "Baseline", count: 0 };
     return { title: changes.length === 1 ? changes[0] : Component.tf("{first} · +{n} more", { first: changes[0], n: changes.length - 1 }), count: changes.length };
@@ -3211,7 +3262,10 @@ class Component extends DCLogic {
         .join(";")).join("#"),
       house: q => numMapSig(q?.record?.rooms),
       buffs: q => `${numMapSig(q?.record?.guildCombatBuffLevels)}|moo=${q?.record?.mooPass === true ? 1 : q?.record?.mooPass === false ? 0 : "?"}`,
-      scrolls: q => Object.keys(q?.record?.scrolls || {}).filter(k2 => q.record.scrolls[k2] === true).sort().join(";") };
+      scrolls: q => Object.keys(q?.record?.scrolls || {}).filter(k2 => q.record.scrolls[k2] === true).sort().join(";"),
+      // ZONE-178: the what-if stat offsets.
+      offsets: q => Object.keys(q?.record?.statOffsets || {}).filter(k2 => Number(q.record.statOffsets[k2])).sort()
+        .map(k2 => `${k2}=${Number(q.record.statOffsets[k2])}`).join(";") };
     const dirtyKeys = k => { const q = party[k], r = base[k]; if (!q || !r) return [];
       return Object.keys(SIG).filter(key => SIG[key](q) !== SIG[key](r)); };
     const dirtyCount = k => dirtyKeys(k).length;
@@ -3715,7 +3769,20 @@ class Component extends DCLogic {
       // simulation multiplies by, and pre-rounding it would break the promise that sources sum to the total.
       derivedOpen: derivedOpen, derivedCaret: derivedOpen ? "▾" : "▸",
       toggleDerived: () => set({ zoneDerivedOpen: !derivedOpen }),
-      derivedSummary: D ? `${shownStats.length} ${Component.t("stats")}` : "",
+      // ZONE-178: what-if offsets. They live on the player's record, so they stay through a loadout pick and go
+      // with Reset player; they count as an edit, and name the runs made with them.
+      ...(() => { const offs = p.record?.statOffsets || {}, set2 = Object.keys(offs).filter(k2 => Number(offs[k2]));
+        return { hasOffsets: set2.length > 0, derivedEdited: changed.has("offsets"), derivedBadge: Component.t("edited"),
+          offsetsNote: set2.length === 0 ? Component.t("Type in the Offset column to test what more of a stat would do.")
+            : (set2.length === 1 ? Component.t("1 offset is added in every run. It is a what-if, not something this character has.")
+              : Component.tf("{n} offsets are added in every run. They are a what-if, not something this character has.", { n: set2.length })),
+          clearOffsetsLabel: Component.t("Clear offsets"), clearOffsetsTip: Component.t("Remove every stat offset from this player"),
+          valueHead: Component.t("Value"), offsetHead: Component.t("Offset"),
+          offsetHeadTip: Component.t("Added to this stat's finished value in every run, to test what more (or less) of it would do. Not something the character has."),
+          clearOffsets: () => { this.setState({ zoneOffsetText: {} }); this.patchPlayer(i, q => { delete q.record.statOffsets; }); },
+          offsetCount: set2.length }; })(),
+      derivedSummary: D ? `${shownStats.length} ${Component.t("stats")}${(() => { const n = Object.keys(p.record?.statOffsets || {}).filter(k2 => Number(p.record.statOffsets[k2])).length;
+        return n === 0 ? "" : ` \u00b7 ${n === 1 ? Component.t("1 offset") : Component.tf("{n} offsets", { n })}`; })()}` : "",
       contextNote: styleNote, hasContextNote: !!styleNote,
       // Alphabetical by label (operator, 2026-09-16): 21 stats in the server's own order is a list you scan
       // top to bottom every time; by name it is a list you can look something up in.
@@ -3724,9 +3791,27 @@ class Component extends DCLogic {
         // A stat whose only source was a zero Base has nothing left to expand, so it loses its caret and reads
         // as the flat row it is.
         const shown = (st.sources || []).filter(x => !(/^base$/i.test(String(x.label || "").trim()) && !Number(x.value)));
+        // ZONE-178: the row's what-if offset. Typed in the stat's own unit (percentage points on a percent stat),
+        // kept as the kernel's number (a fraction there). The field shows what was typed while it still means the
+        // stored number, so a half-typed "0." is not rewritten under the cursor.
+        const offsetable = st.offsetable === true && !!Component.ZONE_OFFSET_STATS[key];
+        const pct = st.format === "percent", scale = pct ? 100 : 1;
+        const off = Number((p.record?.statOffsets || {})[key]) || 0, offShown = Math.round(off * scale * 1e6) / 1e6;
+        const textKey = `${p.record?.name || ""}|${key}`, typed = (s.zoneOffsetText || {})[textKey];
+        const offsetText = typed !== undefined && (Number(typed) || 0) === offShown ? typed : off ? String(offShown) : "";
         return { label: Component.t(st.label), total: fmt(st.total), expandable: shown.length > 0,
           open: s.zoneStatOpen === key && shown.length > 0, caret: shown.length === 0 ? "·" : s.zoneStatOpen === key ? "▾" : "▸",
           toggle: () => { if (shown.length) set({ zoneStatOpen: s.zoneStatOpen === key ? null : key }); },
+          // The third column: empty until an offset is typed; a set one is tinted so it is seen at a glance.
+          offsetable, offsetUnit: pct ? "%" : "", offsetStep: pct ? "0.5" : st.format === "integer" ? "10" : "1", offsetText,
+          offsetStyle: off !== 0 ? "border-color:#e0a030;color:#e0a030" : "",
+          offsetAria: Component.tf("Offset on {stat}", { stat: Component.t(st.label) }),
+          offsetTip: Component.t("Added to this stat's finished value in every run, to test what more (or less) of it would do. Not something the character has."),
+          setOffset: e => { const rawText = e.target.value, n = Number(rawText), value = Number.isFinite(n) ? n / scale : 0;
+            this.setState(st0 => ({ zoneOffsetText: { ...(st0.zoneOffsetText || {}), [textKey]: rawText } }));
+            this.patchPlayer(i, q => { const next = { ...(q.record.statOffsets || {}) };
+              if (value) next[key] = value; else delete next[key];
+              if (Object.keys(next).length) q.record.statOffsets = next; else delete q.record.statOffsets; }); },
           // A "Base" row of zero says nothing — every character has the same zero — so it is dropped. Any other
           // zero row stays: it is a source that could have contributed and did not.
           sources: shown.map(x => ({ label: Component.derivedLabel(x.label), detail: Component.derivedDetail(x.detail), hasDetail: !!x.detail, value: fmt(x.value),
