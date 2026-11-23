@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=61677bcd780e"></script>
+<script src="./support.js?v=7d1b9e75f6bb"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=61677bcd780e">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7d1b9e75f6bb">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=61677bcd780e">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=61677bcd780e"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=7d1b9e75f6bb">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7d1b9e75f6bb"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1266,6 +1266,33 @@ class Component extends DCLogic {
     foodHaste: ["Food haste", "percent"], drinkConcentration: ["Drink concentration", "percent"],
     combatExperience: ["Combat experience", "percent"], combatDropRate: ["Combat drop rate", "percent"] };
   /** An offset as it reads: "+1%" for 0.01 on a percent stat, "+0.5" on a rating, with a real minus sign. */
+  // A loadout's three sections as canonical signatures: gear, abilities with their trigger lists, food and drinks
+  // with theirs. One rule for the editor's edit marks and for "is the group loadout the profile's own?" (ZONE-180).
+  // Never raw JSON: editing a slot re-orders the equipment array, and a cleared condition list means the same as
+  // no list. Cast order is list order, so abilities are NOT sorted; everything else is order-free.
+  static zoneTrigSig(t) {
+    return t === undefined ? "d" : t === null || (Array.isArray(t) && !t.length) ? "r"
+      : !Array.isArray(t) ? "d"
+      : "c" + t.map(r2 => [r2.dependencyHrid || "", r2.conditionHrid || "", r2.comparatorHrid || "",
+          r2.value === undefined || r2.value === null ? "" : Number(r2.value)].join("|")).join(",");
+  }
+  static zoneLoadoutSig(loadout) {
+    const COMBAT = "/action_types/combat", trigSig = Component.zoneTrigSig, triggers = loadout?.abilityTriggers || {};
+    return {
+      equipment: (loadout?.equipment || []).filter(x => x && x.itemHrid)
+        .map(x => `${x.itemLocationHrid || "?"}|${x.itemHrid}|${Number(x.enhancementLevel) || 0}`).sort().join(";"),
+      abilities: (loadout?.abilities || []).filter(a => a && a.hrid)
+        .map(a => `${a.hrid}@${Number(a.level) || 1}@${trigSig(triggers[a.hrid])}`).join(";"),
+      consumables: ["food", "drinks"].map(kind => ((loadout?.[kind] || {})[COMBAT] || [])
+        .filter(e => e && e.itemHrid)
+        .map(e => `${e.itemHrid}~${trigSig(e.triggers !== undefined ? e.triggers : triggers[e.itemHrid])}`)
+        .join(";")).join("#") };
+  }
+  /** True when two loadouts have the same gear, abilities, food, drinks and trigger lists. */
+  static zoneSameLoadout(a, b) {
+    const x = Component.zoneLoadoutSig(a), y = Component.zoneLoadoutSig(b);
+    return x.equipment === y.equipment && x.abilities === y.abilities && x.consumables === y.consumables;
+  }
   static zoneOffsetText(key, value) {
     const pct = (Component.ZONE_OFFSET_STATS[key] || [])[1] === "percent", n = (Number(value) || 0) * (pct ? 100 : 1);
     const shown = (Math.round(Math.abs(n) * 1e6) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 4 });
@@ -1446,7 +1473,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=61677bcd780e").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=7d1b9e75f6bb").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2479,8 +2506,13 @@ class Component extends DCLogic {
       // The helper's own entry (a teammate's, or yours when no saved loadout matched) is named for what it is; a
       // saved loadout of yours that carries the mark keeps its game name.
       const named = list.map(l => l && l.groupCombat === true && l.id === "group-combat" ? { ...l, name: Component.t("Group Loadout") } : l);
-      const record = { ...p.record, loadouts: named.some(l => l && l.wornAtExport) ? named : [...named, worn] };
-      return this.zoneFillSlots([{ ...p, record, loadout: JSON.parse(JSON.stringify(list[k].loadout)) }], catalog)[0];
+      // ZONE-180 (operator, 2026-11-22): a profile opened while the party was in combat IS the group loadout (helper
+      // 0.7.5 sends it as both), so "Profile Loadout" would be the same loadout a second time. It joins the picker
+      // only when it differs: same gear, abilities, food, drinks and trigger lists means one option.
+      const group = this.zoneFillSlots([{ ...p, loadout: JSON.parse(JSON.stringify(list[k].loadout)) }], catalog)[0];
+      const twice = Component.zoneSameLoadout(group.loadout, p.loadout);
+      const record = { ...p.record, loadouts: twice || named.some(l => l && l.wornAtExport) ? named : [...named, worn] };
+      return { ...group, record };
     });
     return { party: out, picks };
   }
@@ -3363,24 +3395,16 @@ class Component extends DCLogic {
     // the equipment array, a zeroed room or shrine level is deleted rather than stored, and a cleared condition
     // list means the same as no list — all of which read as a permanent edit under a literal compare. Put a
     // value back to what was imported and the mark clears.
-    const trigSig = t => t === undefined ? "d" : t === null || (Array.isArray(t) && !t.length) ? "r"
-      : !Array.isArray(t) ? "d"
-      : "c" + t.map(r2 => [r2.dependencyHrid || "", r2.conditionHrid || "", r2.comparatorHrid || "",
-          r2.value === undefined || r2.value === null ? "" : Number(r2.value)].join("|")).join(",");
+    const trigSig = Component.zoneTrigSig;
     const numMapSig = m => Object.keys(m || {}).filter(k2 => Number(m[k2]) > 0).sort()
       .map(k2 => `${k2}=${Number(m[k2])}`).join(";");
     const SIG = {
-      // Cast order is list order, so abilities are NOT sorted; everything else is order-free.
-      equipment: q => (q?.loadout?.equipment || []).filter(x => x && x.itemHrid)
-        .map(x => `${x.itemLocationHrid || "?"}|${x.itemHrid}|${Number(x.enhancementLevel) || 0}`).sort().join(";"),
+      // The loadout's three sections share one rule with the import (Component.zoneLoadoutSig).
+      equipment: q => Component.zoneLoadoutSig(q?.loadout).equipment,
       levels: q => { const L = q?.record?.levels || {};
         return LEVELS.map(([k2]) => `${k2}=${Number(L[k2]) || 0}`).join(";"); },
-      abilities: q => (q?.loadout?.abilities || []).filter(a => a && a.hrid)
-        .map(a => `${a.hrid}@${Number(a.level) || 1}@${trigSig((q?.loadout?.abilityTriggers || {})[a.hrid])}`).join(";"),
-      consumables: q => ["food", "drinks"].map(kind => ((q?.loadout?.[kind] || {})[COMBAT] || [])
-        .filter(e => e && e.itemHrid)
-        .map(e => `${e.itemHrid}~${trigSig(e.triggers !== undefined ? e.triggers : (q?.loadout?.abilityTriggers || {})[e.itemHrid])}`)
-        .join(";")).join("#"),
+      abilities: q => Component.zoneLoadoutSig(q?.loadout).abilities,
+      consumables: q => Component.zoneLoadoutSig(q?.loadout).consumables,
       house: q => numMapSig(q?.record?.rooms),
       buffs: q => `${numMapSig(q?.record?.guildCombatBuffLevels)}|moo=${q?.record?.mooPass === true ? 1 : q?.record?.mooPass === false ? 0 : "?"}`,
       scrolls: q => Object.keys(q?.record?.scrolls || {}).filter(k2 => q.record.scrolls[k2] === true).sort().join(";"),
