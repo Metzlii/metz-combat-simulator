@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=7d1b9e75f6bb"></script>
+<script src="./support.js?v=1963fdfcde26"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7d1b9e75f6bb">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=1963fdfcde26">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=7d1b9e75f6bb">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7d1b9e75f6bb"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=1963fdfcde26">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=1963fdfcde26"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1473,7 +1473,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=7d1b9e75f6bb").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=1963fdfcde26").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2509,8 +2509,11 @@ class Component extends DCLogic {
       // ZONE-180 (operator, 2026-11-22): a profile opened while the party was in combat IS the group loadout (helper
       // 0.7.5 sends it as both), so "Profile Loadout" would be the same loadout a second time. It joins the picker
       // only when it differs: same gear, abilities, food, drinks and trigger lists means one option.
+      // Nor when it is one of the player's own saved loadouts (operator, 2026-11-22, "importer profile issue"): your
+      // profile is whichever saved loadout you are wearing, and that loadout is already in the list by name.
       const group = this.zoneFillSlots([{ ...p, loadout: JSON.parse(JSON.stringify(list[k].loadout)) }], catalog)[0];
-      const twice = Component.zoneSameLoadout(group.loadout, p.loadout);
+      const twice = list.some(l => l && l.loadout && Component.zoneSameLoadout(
+        this.zoneFillSlots([{ loadout: JSON.parse(JSON.stringify(l.loadout)) }], catalog)[0].loadout, p.loadout));
       const record = { ...p.record, loadouts: twice || named.some(l => l && l.wornAtExport) ? named : [...named, worn] };
       return { ...group, record };
     });

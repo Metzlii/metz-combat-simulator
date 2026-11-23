@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-11-23T01:26:15.992Z",
- "commit": "082bd89",
+ "builtAt": "2026-11-23T01:44:51.537Z",
+ "commit": "ce333ff",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 51,
-  "bytes": 18652443,
-  "gzip": 3312269
+  "bytes": 18653489,
+  "gzip": 3312471
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -47,11 +47,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3780
+   "gzip": 3779
   },
   "index.html": {
-   "bytes": 411023,
-   "gzip": 103745
+   "bytes": 411719,
+   "gzip": 103858
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -59,7 +59,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1478
+   "gzip": 1480
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3670380,
@@ -115,11 +115,11 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 11039,
-   "gzip": 4501
+   "gzip": 4500
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
-   "gzip": 3188
+   "gzip": 3189
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -127,11 +127,11 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 5689,
-   "gzip": 2065
+   "gzip": 2063
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
-   "gzip": 3423
+   "gzip": 3422
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -143,7 +143,7 @@
   },
   "server/zoneImport.mjs": {
    "bytes": 13826,
-   "gzip": 4950
+   "gzip": 4949
   },
   "server/zoneOptimize.mjs": {
    "bytes": 40095,
@@ -187,15 +187,15 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 6214,
-   "gzip": 2415
+   "gzip": 2414
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
-   "gzip": 547
+   "gzip": 546
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 743
+   "gzip": 742
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
@@ -207,11 +207,11 @@
   },
   "zoneApi.js": {
    "bytes": 5484,
-   "gzip": 2172
+   "gzip": 2170
   },
   "ZoneSim.dc.html": {
-   "bytes": 407990,
-   "gzip": 105437
+   "bytes": 408340,
+   "gzip": 105534
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
