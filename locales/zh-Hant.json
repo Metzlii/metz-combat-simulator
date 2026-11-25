@@ -3959,5 +3959,6 @@
  "Focus Orbs for the types, then Attunement Orbs for the grades,": "先用專注寶珠定類型，再用調諧寶珠提等級，",
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "社群流程圖：先提等級（重鑄、鎖定最高等級、重塑、調諧），再置換，最後用專注定類型",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "社群流程圖，用突變寶珠代替調諧寶珠",
- "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "先用重鑄寶珠出一條特殊詞條，再用突變寶珠出兩條特殊詞條和一條想要的詞條，最後用調諧寶珠提等級，"
+ "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "先用重鑄寶珠出一條特殊詞條，再用突變寶珠出兩條特殊詞條和一條想要的詞條，最後用調諧寶珠提等級，",
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "符石的價值佔此權重下最佳符石的比例：最佳即你最有價值的四個詞條全部為 G6。符石的價值是四條詞條提升之和，單位與權重所測相同。這條腰帶上其他符石已有的特殊詞條在這裡不計價值：你會去提升那一條。"
 }

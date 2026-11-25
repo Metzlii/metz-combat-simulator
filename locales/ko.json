@@ -3956,5 +3956,6 @@
  "Focus Orbs for the types, then Attunement Orbs for the grades,": "종류는 집중의 오브, 등급은 조율의 오브로,",
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "커뮤니티 순서도: 등급 먼저(재련, 최고 등급 잠금, 재구성, 조율), 교환, 그다음 집중으로 종류",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "커뮤니티 순서도, 조율의 오브 대신 변이의 오브",
- "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "재련의 오브로 특수 수식어 하나, 변이의 오브로 특수 수식어 둘과 원하는 수식어 하나, 그다음 등급은 조율의 오브로,"
+ "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "재련의 오브로 특수 수식어 하나, 변이의 오브로 특수 수식어 둘과 원하는 수식어 하나, 그다음 등급은 조율의 오브로,",
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "이 가중치에서 가능한 최고의 호석 대비 비율로 본 호석의 가치입니다. 최고란 가장 가치 있는 수식어 4개가 모두 G6인 것입니다. 호석의 가치는 네 라인 증가량의 합이며, 가중치가 측정한 단위로 나타냅니다. 이 벨트의 다른 호석에 이미 있는 특수 수식어는 여기서 계산하지 않습니다(그쪽을 올릴 것이므로)."
 }

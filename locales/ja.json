@@ -3956,5 +3956,6 @@
  "Focus Orbs for the types, then Attunement Orbs for the grades,": "種類は集中のオーブ、グレードは調律のオーブで、",
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "コミュニティのフローチャート：まずグレード（再鍛造、最高グレードをロック、再構成、調律）、交換、最後に集中で種類",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "コミュニティのフローチャート（調律のオーブの代わりに変異のオーブ）",
- "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "再鍛造のオーブで特殊修飾子を1つ、変異のオーブで特殊修飾子2つと欲しい修飾子1つ、最後にグレードは調律のオーブで、"
+ "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "再鍛造のオーブで特殊修飾子を1つ、変異のオーブで特殊修飾子2つと欲しい修飾子1つ、最後にグレードは調律のオーブで、",
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "このウェイトでの最良の護石に対する割合で見た護石の価値です。最良とは、最も価値の高い4つの修飾子がすべて G6 のものです。護石の価値は4つのラインの上昇量の合計で、ウェイトが測った単位で表します。このベルトの別の護石にすでにある特殊修飾子はここでは数えません（そちらを上げるはずなので）。"
 }
