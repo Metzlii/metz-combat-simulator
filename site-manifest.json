@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-11-25T18:22:55.717Z",
- "commit": "59b85b8",
+ "builtAt": "2026-11-25T18:27:09.342Z",
+ "commit": "15e2cd2",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 54,
-  "bytes": 19193398,
-  "gzip": 3457528
+  "bytes": 19193413,
+  "gzip": 3457526
  },
  "files": {
   "IconPick.dc.html": {
@@ -210,8 +210,8 @@
    "gzip": 2588
   },
   "zone-web/zoneClient.js": {
-   "bytes": 6786,
-   "gzip": 2556
+   "bytes": 6801,
+   "gzip": 2554
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
