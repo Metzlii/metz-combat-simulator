@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-11-25T18:27:09.342Z",
- "commit": "15e2cd2",
+ "builtAt": "2026-11-25T18:30:24.692Z",
+ "commit": "4ad58ae",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 54,
-  "bytes": 19193413,
-  "gzip": 3457526
+  "bytes": 19193887,
+  "gzip": 3457690
  },
  "files": {
   "IconPick.dc.html": {
@@ -23,7 +23,7 @@
   },
   "ZoneSim.dc.html": {
    "bytes": 420106,
-   "gzip": 107990
+   "gzip": 107989
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js": {
    "bytes": 300,
@@ -62,8 +62,8 @@
    "gzip": 4141
   },
   "index.html": {
-   "bytes": 495203,
-   "gzip": 124058
+   "bytes": 495677,
+   "gzip": 124213
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -71,7 +71,7 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1478
+   "gzip": 1481
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3804797,
@@ -127,11 +127,11 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 11039,
-   "gzip": 4501
+   "gzip": 4502
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
-   "gzip": 3188
+   "gzip": 3189
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -139,11 +139,11 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 6551,
-   "gzip": 2226
+   "gzip": 2225
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
-   "gzip": 3422
+   "gzip": 3423
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -151,7 +151,7 @@
   },
   "server/zoneDerive.mjs": {
    "bytes": 11204,
-   "gzip": 4251
+   "gzip": 4252
   },
   "server/zoneImport.mjs": {
    "bytes": 16330,
@@ -159,7 +159,7 @@
   },
   "server/zoneOptimize.mjs": {
    "bytes": 43446,
-   "gzip": 15313
+   "gzip": 15314
   },
   "server/zoneSim.mjs": {
    "bytes": 15144,
@@ -171,15 +171,15 @@
   },
   "server/zoneTalismanRolls.mjs": {
    "bytes": 20675,
-   "gzip": 7344
+   "gzip": 7343
   },
   "server/zoneTalismans.mjs": {
    "bytes": 8252,
-   "gzip": 3570
+   "gzip": 3571
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 49287,
-   "gzip": 17565
+   "gzip": 17566
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -211,7 +211,7 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 6801,
-   "gzip": 2554
+   "gzip": 2555
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
@@ -231,7 +231,7 @@
   },
   "zoneApi.js": {
    "bytes": 6297,
-   "gzip": 2439
+   "gzip": 2440
   }
  }
 }
