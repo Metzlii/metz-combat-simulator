@@ -3829,7 +3829,7 @@
  "The set, line by line": "組合逐條明細",
  "The six special modifiers (Smite, Consistency, Shatter, Echo, Fortify, Overkill) follow rules measured in combat on the test server. The game can still change them before release.": "六條特殊詞條（制裁、穩定、破甲、回響、堅守、過量傷害）遵循在測試服實戰中測得的規則。遊戲在發布前仍可能改動它們。",
  "The test server adds a belt slot that holds up to three talismans, each with up to four modifiers of grade 1 to 6. The combat kernel on this site fights with them, by rules measured on the test server.": "測試服新增了腰帶欄位，最多可裝三枚符石，每枚最多帶四條 1 至 6 級的詞條。本站的戰鬥核心會按在測試服測得的規則帶著它們戰鬥。",
- "Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.": "找出在某個區域中，對某位玩家的某條腰帶而言最有價值的符石詞條。先把每條戰鬥詞條作為腰帶上唯一的詞條分別測量；再逐條搭建最佳組合，每一步都在已選詞條的基礎上保留提升最大的那條。所有詞條都按同一等級計算，因此結果說明的是該追求什麼，而不是洗出來要花多少。",
+ "Which talisman modifiers are worth the most to one player, on one belt, in one zone. Every combat modifier is measured as the only line on the belt, at one grade, and its other grades follow from that value; the modifiers then simply rank by it. This says what to aim for, not what a roll costs.": "找出在某個區域中，對某位玩家的某條腰帶而言最有價值的符石詞條。每條戰鬥詞條都作為腰帶上唯一的詞條，在同一等級下測量，其他等級由該值推得；詞條再按此值排序。結果說明的是該追求什麼，而不是洗出來要花多少。",
  "Zone and tier": "區域與難度",
  "clears / h": "通關 / 小時",
  "coins / h": "金幣 / 小時",
@@ -3844,7 +3844,7 @@
  "Copy the weights": "複製權重",
  "Copied": "已複製",
  "The browser did not allow copying to the clipboard.": "瀏覽器不允許複製到剪貼簿。",
- "A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.": "100 分代表最高等級下最好的單條詞條（{name}）；其他每格都是相對它的占比。詞條數值與提升成正比，因此較低等級由實測等級推算。所有等級都低於 1 分的詞條不予顯示。",
+ "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "等級列：100 分代表最高等級下最好的單條詞條（{name}）；其他每格都是相對它的占比。詞條數值與提升成正比，因此較低等級由實測等級推算。",
  "Modifiers to measure": "要測量的詞條",
  "Special": "特殊",
  "{n} of {m} measured": "已測量 {n} / {m}",
@@ -3855,7 +3855,7 @@
  "Drops": "掉落",
  "Turn off": "關閉",
  "Turn on": "開啟",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.": "取消勾選該角色用不到的詞條，可逐條取消，也可用開關整組取消。關閉的詞條既不測量也不會放進組合，能縮短搜尋時間。選擇會保存在此瀏覽器中。",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "取消勾選這個角色用不到的詞條，可以逐條取消，也可以用開關取消整組。關閉的詞條不會被測量，從而縮短執行時間。魔法、近戰、遠程和物理按該玩家的武器預設；你在其中的改動會為該玩家單獨保存。選擇保存在此瀏覽器中。",
  "Your belt and talismans": "你的腰帶與符石",
  "No one in the imported party has a belt or talismans.": "匯入的隊伍中沒有人有腰帶或符石。",
  "no belt": "無腰帶",
@@ -3960,5 +3960,9 @@
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "社群流程圖：先提等級（重鑄、鎖定最高等級、重塑、調諧），再置換，最後用專注定類型",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "社群流程圖，用突變寶珠代替調諧寶珠",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "先用重鑄寶珠出一條特殊詞條，再用突變寶珠出兩條特殊詞條和一條想要的詞條，最後用調諧寶珠提等級，",
- "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "符石的價值佔此權重下最佳符石的比例：最佳即你最有價值的四個詞條全部為 G6。符石的價值是四條詞條提升之和，單位與權重所測相同。這條腰帶上其他符石已有的特殊詞條在這裡不計價值：你會去提升那一條。"
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "符石的價值佔此權重下最佳符石的比例：最佳即你最有價值的四個詞條全部為 G6。符石的價值是四條詞條提升之和，單位與權重所測相同。這條腰帶上其他符石已有的特殊詞條在這裡不計價值：你會去提升那一條。",
+ "Defense + Tank": "防禦 + 坦克",
+ "Seeds": "種子數",
+ "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "每次執行模擬的小時數。越長越穩定，但每次執行也越久。",
+ "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "首輪中每個詞條的執行次數，每個詞條都與空腰帶使用相同的種子。之後每輪對較好的一半加倍。"
 }

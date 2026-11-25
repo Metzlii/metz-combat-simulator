@@ -757,7 +757,7 @@
  "The set, line by line": "The set, line by line",
  "The six special modifiers (Smite, Consistency, Shatter, Echo, Fortify, Overkill) follow rules measured in combat on the test server. The game can still change them before release.": "The six special modifiers (Smite, Consistency, Shatter, Echo, Fortify, Overkill) follow rules measured in combat on the test server. The game can still change them before release.",
  "The test server adds a belt slot that holds up to three talismans, each with up to four modifiers of grade 1 to 6. The combat kernel on this site fights with them, by rules measured on the test server.": "The test server adds a belt slot that holds up to three talismans, each with up to four modifiers of grade 1 to 6. The combat kernel on this site fights with them, by rules measured on the test server.",
- "Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.": "Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.",
+ "Which talisman modifiers are worth the most to one player, on one belt, in one zone. Every combat modifier is measured as the only line on the belt, at one grade, and its other grades follow from that value; the modifiers then simply rank by it. This says what to aim for, not what a roll costs.": "Which talisman modifiers are worth the most to one player, on one belt, in one zone. Every combat modifier is measured as the only line on the belt, at one grade, and its other grades follow from that value; the modifiers then simply rank by it. This says what to aim for, not what a roll costs.",
  "Zone and tier": "Zone and tier",
  "clears / h": "clears / h",
  "coins / h": "coins / h",
@@ -772,7 +772,7 @@
  "Copy the weights": "Copy the weights",
  "Copied": "Copied",
  "The browser did not allow copying to the clipboard.": "The browser did not allow copying to the clipboard.",
- "A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.": "A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.",
+ "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.",
  "Modifiers to measure": "Modifiers to measure",
  "Defense": "Defense",
  "Special": "Special",
@@ -787,7 +787,7 @@
  "Drops": "Drops",
  "Turn off": "Turn off",
  "Turn on": "Turn on",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.": "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.",
  "Your belt and talismans": "Your belt and talismans",
  "No one in the imported party has a belt or talismans.": "No one in the imported party has a belt or talismans.",
  "no belt": "no belt",
@@ -952,5 +952,9 @@
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Community flowchart, with Mutation Orbs in place of Attunement Orbs",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,",
- "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead."
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.",
+ "Defense + Tank": "Defense + Tank",
+ "Seeds": "Seeds",
+ "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Simulated hours in each run. Longer runs are steadier, and every run takes longer.",
+ "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half."
 }

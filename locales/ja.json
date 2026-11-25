@@ -3826,7 +3826,7 @@
  "The set, line by line": "セットのライン別内訳",
  "The six special modifiers (Smite, Consistency, Shatter, Echo, Fortify, Overkill) follow rules measured in combat on the test server. The game can still change them before release.": "6つの特殊修飾子（スマイト、安定、粉砕、エコー、フォーティファイ、オーバーキル）は、テストサーバーでの戦闘で計測したルールに従います。リリース前にゲーム側で変更される可能性があります。",
  "The test server adds a belt slot that holds up to three talismans, each with up to four modifiers of grade 1 to 6. The combat kernel on this site fights with them, by rules measured on the test server.": "テストサーバーでは、最大3つの護石を装着できるベルト枠が追加されます。各護石にはグレード1〜6の修飾子が最大4つ付きます。このサイトの戦闘カーネルは、テストサーバーで計測したルールでそれらを使って戦います。",
- "Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.": "1つのゾーンで、1人のプレイヤーの1本のベルトにとって、どの護石修飾子が最も価値があるかを調べます。まず各戦闘修飾子を、ベルト上の唯一のラインとして測定します。次に1ラインずつ最適なセットを組み上げ、各ステップでは選択済みのラインに加えて最も上昇量の大きいラインを残します。全ラインを1つのグレードで計算するため、これは目指すべき構成を示すもので、ロールのコストを示すものではありません。",
+ "Which talisman modifiers are worth the most to one player, on one belt, in one zone. Every combat modifier is measured as the only line on the belt, at one grade, and its other grades follow from that value; the modifiers then simply rank by it. This says what to aim for, not what a roll costs.": "1つのゾーンで、1人のプレイヤーの1本のベルトにとって、どの護石修飾子が最も価値があるかを調べます。各戦闘修飾子を、ベルト上の唯一のラインとして1つのグレードで測定し、ほかのグレードはその値から求めます。修飾子はその値で順位付けされます。これは目指すべき構成を示すもので、ロールのコストを示すものではありません。",
  "Zone and tier": "ゾーンとティア",
  "clears / h": "クリア / 時",
  "coins / h": "コイン / 時",
@@ -3841,7 +3841,7 @@
  "Copy the weights": "重みをコピー",
  "Copied": "コピーしました",
  "The browser did not allow copying to the clipboard.": "ブラウザがクリップボードへのコピーを許可しませんでした。",
- "A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.": "スコア 100 は最高グレードでの最良の単一ライン（{name}）で、ほかの各セルはそれに対する割合です。ラインは値に比例するため、低いグレードは測定値から算出しています。全グレードでスコアが 1 未満のラインは除外しています。",
+ "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "グレード列：スコア 100 は最高グレードでの最良の単一ライン（{name}）で、ほかの各セルはそれに対する割合です。ラインは値に比例するため、低いグレードは測定値から算出しています。",
  "Modifiers to measure": "測定する修飾子",
  "Special": "特殊",
  "{n} of {m} measured": "{m} 個中 {n} 個を測定済み",
@@ -3852,7 +3852,7 @@
  "Drops": "ドロップ",
  "Turn off": "オフにする",
  "Turn on": "オンにする",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.": "このキャラクターに不要なものは、修飾子ごと、またはスイッチでグループごとチェックを外してください。オフの修飾子は測定もセットへの採用もされず、探索が短くなります。選択はこのブラウザに保存されます。",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "このキャラクターに不要なものを、修飾子ごとに、またはグループごとにスイッチでオフにします。オフの修飾子は測定されないため、実行が短くなります。魔法・近接・遠隔・物理はこのプレイヤーの武器に合わせて始まり、そこで切り替えたものはこのプレイヤー用に保存されます。選択はこのブラウザに保存されます。",
  "Your belt and talismans": "あなたのベルトと護石",
  "No one in the imported party has a belt or talismans.": "インポートしたパーティーには、ベルトや護石を持つ人がいません。",
  "no belt": "ベルトなし",
@@ -3957,5 +3957,9 @@
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "コミュニティのフローチャート：まずグレード（再鍛造、最高グレードをロック、再構成、調律）、交換、最後に集中で種類",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "コミュニティのフローチャート（調律のオーブの代わりに変異のオーブ）",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "再鍛造のオーブで特殊修飾子を1つ、変異のオーブで特殊修飾子2つと欲しい修飾子1つ、最後にグレードは調律のオーブで、",
- "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "このウェイトでの最良の護石に対する割合で見た護石の価値です。最良とは、最も価値の高い4つの修飾子がすべて G6 のものです。護石の価値は4つのラインの上昇量の合計で、ウェイトが測った単位で表します。このベルトの別の護石にすでにある特殊修飾子はここでは数えません（そちらを上げるはずなので）。"
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "このウェイトでの最良の護石に対する割合で見た護石の価値です。最良とは、最も価値の高い4つの修飾子がすべて G6 のものです。護石の価値は4つのラインの上昇量の合計で、ウェイトが測った単位で表します。このベルトの別の護石にすでにある特殊修飾子はここでは数えません（そちらを上げるはずなので）。",
+ "Defense + Tank": "防御 + タンク",
+ "Seeds": "シード",
+ "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "各実行のシミュレーション時間。長いほど安定しますが、各実行に時間がかかります。",
+ "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "最初の測定での修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。以降のラウンドでは上位半分について倍にします。"
 }

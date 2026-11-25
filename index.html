@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="deba819ebbda"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="d822e3871605"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=deba819ebbda"></script>
+<script src="./support.js?v=d822e3871605"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=deba819ebbda">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d822e3871605">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=deba819ebbda">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=deba819ebbda"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d822e3871605">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d822e3871605"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -39,6 +39,10 @@
     .about-list { margin: 0; padding-left: 18px; display: flex; flex-direction: column; gap: 4px; font-size: 13px; text-wrap: pretty; }
     input[type=range] { accent-color: var(--color-accent); }
     input[type=checkbox] { accent-color: var(--color-accent); width: 15px; height: 15px; margin: 0; }
+    /* Talisman modifiers: columns as wide as their widest entry, fewer of them on narrow screens. */
+    .tal-mods { display: grid; grid-template-columns: repeat(6, max-content); gap: 3px 22px; }
+    @media (max-width: 1100px) { .tal-mods { grid-template-columns: repeat(4, max-content); } }
+    @media (max-width: 760px) { .tal-mods { grid-template-columns: repeat(2, max-content); } }
     /* Chart labels and points live in HTML OVER the svg, not inside it: the runtime wraps every {{ }} in a
        <span>, and a span inside an svg <text> renders nothing at all -- which is why the curve end labels were
        never visible. Positions are percentages of the chart box, so they hold at every width, and the labels
@@ -1238,7 +1242,7 @@
         <div style="display:flex;flex-direction:column;gap:var(--space-3)">
           <h3 style="margin:0;font-size:17px">Talisman Stat Weighting</h3>
           <div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px;text-wrap:pretty;max-width:80ch">The test server lists a talisman's Attack Speed line in your stats but does not apply it to your attack interval (reported as a bug). This simulator applies it, so Attack Speed is worth more here than on the test server today.</div>
-          <div style="font-size:13.5px;text-wrap:pretty">Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">Which talisman modifiers are worth the most to one player, on one belt, in one zone. Every combat modifier is measured as the only line on the belt, at one grade, and its other grades follow from that value; the modifiers then simply rank by it. This says what to aim for, not what a roll costs.</div>
           <sc-if value="{{ dev.noParty }}" hint-placeholder-val="{{ false }}">
             <div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px;text-wrap:pretty">Import a party on Setup first. The optimizer uses that party as it stands, with the belt below added to the chosen player.</div>
           </sc-if>
@@ -1279,6 +1283,10 @@
               <button class="seg-opt" style="font-size:12.5px;border:0;{{ dev.xpStyle }}" onClick="{{ dev.pickXp }}">XP / h</button>
               <button class="seg-opt" style="font-size:12.5px;border:0;{{ dev.profitStyle }}" onClick="{{ dev.pickProfit }}">Profit</button>
             </div>
+            <label style="display:flex;gap:6px;align-items:center" title="Simulated hours in each run. Longer runs are steadier, and every run takes longer."><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Hours</span>
+              <input class="input" type="number" min="10" step="10" style="min-height:29px;padding:2px 6px;font-size:13px;width:82px" dc-attr-value="{{ dev.hours }}" onChange="{{ dev.setHours }}"></label>
+            <label style="display:flex;gap:6px;align-items:center" title="Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half."><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Seeds</span>
+              <input class="input" type="number" min="1" max="20" step="1" style="min-height:29px;padding:2px 6px;font-size:13px;width:62px" dc-attr-value="{{ dev.seeds }}" onChange="{{ dev.setSeeds }}"></label>
             <span class="text-muted" style="font-size:12.5px">{{ dev.beltNote }}</span>
           </div>
           <div style="display:flex;flex-direction:column;gap:7px">
@@ -1287,15 +1295,15 @@
               <span class="text-muted" style="font-size:12px;margin-left:auto">{{ dev.poolsSummary }}</span>
             </button>
             <sc-if value="{{ dev.poolsOpen }}" hint-placeholder-val="{{ false }}">
-              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.</div>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.</div>
               <sc-for list="{{ dev.pools }}" as="pl" hint-placeholder-count="4">
                 <div style="display:flex;flex-direction:column;gap:4px">
                   <div style="display:flex;gap:9px;align-items:baseline;padding-top:5px;border-top:1px solid var(--color-divider)">
                     <span style="font-size:13px;font-weight:600">{{ pl.name }}</span>
                     <span class="text-muted" style="font-size:12px">{{ pl.count }}</span>
-                    <button class="btn btn-ghost" style="padding:1px 8px;font-size:12px;margin-left:auto" onClick="{{ pl.toggle }}">{{ pl.toggleLabel }}</button>
+                    <button class="btn btn-ghost" style="padding:1px 8px;font-size:12px" onClick="{{ pl.toggle }}">{{ pl.toggleLabel }}</button>
                   </div>
-                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:3px 12px">
+                  <div class="tal-mods">
                     <sc-for list="{{ pl.mods }}" as="md" hint-placeholder-count="8"><label style="display:flex;gap:5px;align-items:center;font-size:12.5px"><input type="checkbox" checked="{{ md.on }}" onChange="{{ md.toggle }}">{{ md.name }}</label></sc-for>
                   </div>
                 </div>
@@ -1330,31 +1338,20 @@
               </sc-for>
             </div>
           </sc-if>
-          <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}">
-            <div style="display:flex;flex-direction:column;gap:4px">
-              <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
-                <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Every grade of every modifier</div>
-                <button class="btn btn-ghost" style="padding:2px 8px;font-size:12.5px;margin-left:auto" title="Gain per grade for every modifier, as JSON, for use in another tool" onClick="{{ dev.copyWeights }}">{{ dev.copyLabel }}</button>
-              </div>
-              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.gradeNote }}</div>
-              <div style="display:grid;grid-template-columns:minmax(0,1fr) repeat(6,3.2em);gap:3px 8px;font-size:13px;font-variant-numeric:tabular-nums">
-                <span class="text-muted" style="font-size:12px">Modifier</span>
-                <sc-for list="{{ dev.gradeHead }}" as="g" hint-placeholder-count="6"><span class="text-muted" style="font-size:12px;text-align:right">{{ g.label }}</span></sc-for>
-                <sc-for list="{{ dev.gradeRows }}" as="r" hint-placeholder-count="8">
-                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{{ r.style }}">{{ r.name }}</span>
-                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6"><span style="{{ c.style }}">{{ c.text }}</span></sc-for>
-                </sc-for>
-              </div>
-            </div>
-          </sc-if>
           <sc-if value="{{ dev.hasRows }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex;flex-direction:column;gap:4px">
-              <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Each line alone</div>
+              <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+                <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Each line alone</div>
+                <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:2px 8px;font-size:12.5px" title="Gain per grade for every modifier, as JSON, for use in another tool" onClick="{{ dev.copyWeights }}">{{ dev.copyLabel }}</button></sc-if>
+              </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.rowsNote }}</div>
-              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:3px 16px;font-size:13px;font-variant-numeric:tabular-nums">
+              <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.gradeNote }}</div></sc-if>
+              <div style="display:grid;grid-template-columns:max-content auto auto auto repeat(6,2.6em);justify-content:start;gap:3px 18px;font-size:13px;font-variant-numeric:tabular-nums">
                 <span class="text-muted" style="font-size:12px">Modifier</span><span class="text-muted" style="font-size:12px;text-align:right">Line value</span><span class="text-muted" style="font-size:12px;text-align:right">Gain</span><span class="text-muted" style="font-size:12px;text-align:right">Share</span>
+                <sc-for list="{{ dev.gradeHead }}" as="g" hint-placeholder-count="6"><span class="text-muted" style="font-size:12px;text-align:right">{{ g.label }}</span></sc-for>
                 <sc-for list="{{ dev.rows }}" as="r" hint-placeholder-count="8">
                   <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{{ r.style }}">{{ r.name }}</span><span style="text-align:right" class="text-muted">{{ r.value }}</span><span style="text-align:right;{{ r.style }}">{{ r.gain }}</span><span style="text-align:right" class="text-muted">{{ r.share }}</span>
+                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6"><span style="{{ c.style }}">{{ c.text }}</span></sc-for>
                 </sc-for>
               </div>
             </div>
@@ -1518,6 +1515,7 @@
               <div style="text-wrap:pretty"><b>1.0.52</b></div>
               <ul class="about-list" style="margin-top:4px;font-size:13.5px">
                 <li><b>Talisman Crafting: a three-special plan.</b> The lock-and-Exchange route puts the best modifier at G6, then Reforging Orbs until another special turns up, Mutation Orbs for two specials and a fourth line you want (or three specials), and Attunement Orbs for the grades. It is offered when at least two more specials are worth something on your weights.</li>
+                <li><b>Talisman Stat Weighting measures each line alone and stops there.</b> Building a whole belt's set line by line mostly re-found the same ranking (Magic Experience three times over) and took most of the run. Magic, Melee, Ranged and Physical start from the player's weapon, each group's switch sits beside its name, Defense is now Defense + Tank, and the two tables are one: each line with its score at every grade beside it. Hours and Seeds are set on the page, 1,000 hours and 3 seeds by default (it was a fixed 100 hours and 2 seeds, too few for the lower lines).</li>
                 <li>A special already on another talisman of the belt now counts for nothing on the one being crafted (you would raise that one instead), where it used to count for what it added over that copy's grade. The Target field explains its percentage on hover.</li>
               </ul>
             </div>
@@ -2151,15 +2149,43 @@ class Component extends DCLogic {
   devVal(k) { const v = this.state.devForm[k]; if (v !== undefined) return v;
     const d = this.state.devChoices?.defaults || {};
     const own = k === "belt" || k === "level" ? (this.state.party || []).find(p => p?.record?.name === this.devVal("player"))?.loadout?.belt : null;
-    return k === "belt" ? (own?.itemHrid || d.belt?.itemHrid || "/items/large_talisman_belt") : k === "level" ? (own ? own.enhancementLevel : (d.belt?.enhancementLevel ?? 10)) : k === "grade" ? (d.grade || 6) : k === "metric" ? "eph"
+    return k === "belt" ? (own?.itemHrid || d.belt?.itemHrid || "/items/large_talisman_belt") : k === "level" ? (own ? own.enhancementLevel : (d.belt?.enhancementLevel ?? 10)) : k === "grade" ? (d.grade || 6) : k === "hours" ? (d.hours || 1000) : k === "seeds" ? (d.seeds || 3) : k === "metric" ? "eph"
       : k === "player" ? (this.importerName() || (this.state.party || [])[0]?.record?.name || "") : undefined; }
   setDev(patch) { this.setState(s => ({ devForm: { ...s.devForm, ...patch } })); }
   // The modifiers switched off for the search, kept in this browser: a tank's list and a mage's list differ, and
   // nobody wants to untick thirty lines twice.
   static DEV_OFF_KEY = "mwi.zone.talismanOff";
-  devOff() { if (!this._devOff) { try { this._devOff = JSON.parse(localStorage.getItem(Component.DEV_OFF_KEY) || "{}") || {}; } catch { this._devOff = {}; } } return this._devOff; }
-  setDevOff(hrids, off) { const next = { ...this.devOff() }; for (const h of hrids) { if (off) next[h] = true; else delete next[h]; }
-    this._devOff = next; try { localStorage.setItem(Component.DEV_OFF_KEY, JSON.stringify(next)); } catch {} this.forceUpdate(); }
+  // The modifiers switched off. The style groups (Magic, Melee, Ranged, Physical) follow the player's weapon until a
+  // switch in them is flipped, and a flip is kept for that player alone (operator, 2026-11-25); the rest is one list.
+  static DEV_STYLE_KEY = "mwi.zone.talismanStyleOff";
+  static DEV_STYLE_POOLS = ["magic", "melee", "ranged", "physical"];
+  devStored() { if (!this._devOff) { try { this._devOff = JSON.parse(localStorage.getItem(Component.DEV_OFF_KEY) || "{}") || {}; } catch { this._devOff = {}; } } return this._devOff; }
+  devStyleStored() { if (!this._devStyle) { try { this._devStyle = JSON.parse(localStorage.getItem(Component.DEV_STYLE_KEY) || "{}") || {}; } catch { this._devStyle = {}; } } return this._devStyle; }
+  devPlayerStyle() {
+    const styles = this.state.limits?.skills?.weaponStyles, who = this.devVal("player");
+    if (!styles || !who) return null;
+    const eq = (this.state.party || []).find(q => q?.record?.name === who)?.loadout?.equipment || [];
+    const worn = eq.find(e => e && /\/item_locations\/(two_hand|main_hand)$/.test(e.itemLocationHrid || "")) || eq.find(e => e && styles[e.itemHrid]);
+    return (worn && styles[worn.itemHrid]) || null;
+  }
+  devOff() {
+    const out = { ...this.devStored() }, mods = this.state.devChoices?.modifiers || [], style = this.devPlayerStyle();
+    const mine = this.devStyleStored()[this.devVal("player") || ""] || {};
+    const unused = { magic: ["melee", "ranged", "physical"], melee: ["magic", "ranged"], ranged: ["magic", "melee"] }[style] || [];
+    for (const m of mods) if (Component.DEV_STYLE_POOLS.includes(m.purpose)) {
+      delete out[m.hrid];
+      const off = m.hrid in mine ? mine[m.hrid] : unused.includes(m.purpose);
+      if (off) out[m.hrid] = true;
+    }
+    return out;
+  }
+  setDevOff(hrids, off) {
+    const style = new Set((this.state.devChoices?.modifiers || []).filter(m => Component.DEV_STYLE_POOLS.includes(m.purpose)).map(m => m.hrid));
+    const next = { ...this.devStored() }, who = this.devVal("player") || "", all = { ...this.devStyleStored() }, mine = { ...(all[who] || {}) };
+    for (const h of hrids) { if (style.has(h)) mine[h] = !!off; else if (off) next[h] = true; else delete next[h]; }
+    all[who] = mine; this._devOff = next; this._devStyle = all;
+    try { localStorage.setItem(Component.DEV_OFF_KEY, JSON.stringify(next)); localStorage.setItem(Component.DEV_STYLE_KEY, JSON.stringify(all)); } catch {}
+    this.forceUpdate(); }
   async devEnsureChoices() {
     const c = this.state.client;
     if (this.state.devChoices || this._devAsked || !c?.zoneTalismanChoices) return;
@@ -2170,7 +2196,8 @@ class Component extends DCLogic {
     const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
     return { players: this.state.party, zone: this.upVal("zone"), difficultyTier: num(this.upVal("tier"), 0), player: this.devVal("player"), development: true,
       belt: { itemHrid: this.devVal("belt"), enhancementLevel: Math.max(0, Math.min(20, Math.floor(num(this.devVal("level"), 0)))) }, grade: num(this.devVal("grade"), 6),
-      goal: { metric: this.devVal("metric") }, exclude: Object.keys(this.devOff()), accountBuffs: this.state.buffs || null, ...(this.state.measure || {}) };
+      goal: { metric: this.devVal("metric") }, exclude: Object.keys(this.devOff()), accountBuffs: this.state.buffs || null, ...(this.state.measure || {}),
+      hours: num(this.devVal("hours"), 1000), seeds: num(this.devVal("seeds"), 3) };
   }
   async devRun() {
     const c = this.state.client;
@@ -2317,7 +2344,7 @@ class Component extends DCLogic {
     const belt = ch.belts.find(b => b.hrid === this.devVal("belt")), level = Math.max(0, Math.min(20, Math.floor(Number(this.devVal("level")) || 0)));
     // The pools, each with its modifiers and a switch for the whole pool.
     const off = this.devOff(), mods = ch.modifiers || [];
-    const POOLS = { magic: "Magic", melee: "Melee", ranged: "Ranged", physical: "Physical (melee and ranged)", "all styles": "Every style", defense: "Defense", "health and mana": "Health and mana",
+    const POOLS = { magic: "Magic", melee: "Melee", ranged: "Ranged", physical: "Physical (melee and ranged)", "all styles": "Every style", defense: "Defense + Tank", "health and mana": "Health and mana",
       experience: "Experience", drops: "Drops", special: "Special" };
     const pools = (ch.purposes || Object.keys(POOLS)).map(g => { const list = mods.filter(m => m.purpose === g), on = list.filter(m => !off[m.hrid]).length;
       return { name: Component.t(POOLS[g] || g), count: Component.tf("{n} of {m}", { n: on, m: list.length }), allOn: on === list.length,
@@ -2329,6 +2356,10 @@ class Component extends DCLogic {
     const allRanked = (done?.ranked || []).filter(r => Array.isArray(r.byGrade));
     const topGain = Math.max(0, ...allRanked.map(r => Math.max(...r.byGrade)));
     const score = v => (topGain > 0 ? Math.round(100 * v / topGain) : 0);
+    // One table (operator, 2026-11-25): each measured line with its score at every grade beside it.
+    const gradeBy = new Map(allRanked.map(r => [r.hrid, r]));
+    const gradeCells = h => { const r = gradeBy.get(h); return Array.from({ length: ch.info?.maxGrade || 6 }, (_, i) => { const v = r?.byGrade?.[i];
+      if (v == null) return { text: "", style: "" }; const sc = score(v); return { text: sc >= 1 ? String(sc) : "\u2013", style: `text-align:right;opacity:${(0.45 + 0.55 * Math.min(1, sc / 100)).toFixed(2)}` }; }); };
     const gradeRows = allRanked.filter(r => score(Math.max(...r.byGrade)) >= 1).map(r => ({ name: Component.t(r.name), style: r.group === "special" ? "color:var(--color-accent-2-400)" : "",
       cells: r.byGrade.map(v => { const sc = score(v); return { text: sc >= 1 ? String(sc) : "\u2013", style: `text-align:right;opacity:${(0.45 + 0.55 * Math.min(1, sc / 100)).toFixed(2)}` }; }) }));
     // What the run was judged on rides with its head, so a result keeps its own units after the form changes.
@@ -2352,6 +2383,8 @@ class Component extends DCLogic {
       beltOpts: ch.belts.map(b => ({ value: b.hrid, label: `${Component.t(b.name)} (${b.slots})` })),
       level: String(level), setLevel: e => this.setDev({ level: e.target.value }),
       grade: String(this.devVal("grade")), setGrade: e => this.setDev({ grade: Number(e.target.value) || 6 }),
+      hours: String(this.devVal("hours")), setHours: e => this.setDev({ hours: Math.max(10, Number(e.target.value) || 1000) }),
+      seeds: String(this.devVal("seeds")), setSeeds: e => this.setDev({ seeds: Math.max(1, Math.min(20, Math.floor(Number(e.target.value) || 3))) }),
       gradeOpts: Array.from({ length: ch.info.maxGrade }, (_, i) => ({ value: String(i + 1), label: Component.tf("Grade {n}", { n: i + 1 }) })),
       paceLabel: dungeon ? Component.t("Run time") : Component.t("Encounters / h"),
       paceStyle: seg("eph"), xpStyle: seg("xp"), profitStyle: seg("profit"),
@@ -2374,12 +2407,12 @@ class Component extends DCLogic {
           talismans: (p.loadout.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: t.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(" \u00b7 ") })) }; }),
       noImported: !(s.party || []).some(p => p?.loadout?.belt || (p?.loadout?.talismans || []).length),
       hasGrades: gradeRows.length > 0, gradeRows,
-      gradeHead: allRanked.length ? allRanked[0].byGrade.map((_, i) => ({ label: `G${i + 1}` })) : [],
-      gradeNote: Component.tf("A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.", { name: allRanked[0] ? Component.t(allRanked[0].name) : "" }),
+      gradeHead: Array.from({ length: ch.info?.maxGrade || 6 }, (_, i) => ({ label: `G${i + 1}` })),
+      gradeNote: Component.tf("Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.", { name: allRanked[0] ? Component.t(allRanked[0].name) : "" }),
       copyWeights: () => this.devCopyWeights(), copyLabel: s.devCopied ? Component.t("Copied") : Component.t("Copy the weights"),
       hasRows: rows.length > 0,
       rowsNote: Component.tf("One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.", { unit }),
-      rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), gain: r.seeds ? `${fmt(r.delta)} \u00b1 ${Number(r.deltaSE || 0).toFixed(2)}` : "\u2026", share: r.seeds ? share(r.delta) : "",
+      rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), cells: gradeCells(r.hrid), gain: r.seeds ? `${fmt(r.delta)} \u00b1 ${Number(r.deltaSE || 0).toFixed(2)}` : "\u2026", share: r.seeds ? share(r.delta) : "",
         style: r.group === "special" ? "color:var(--color-accent-2-400)" : "" })),
     };
   }
@@ -2392,7 +2425,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=deba819ebbda");
+      const i18n = await import("./i18n.js?v=d822e3871605");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2415,7 +2448,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=deba819ebbda");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=d822e3871605");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -2754,7 +2787,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=deba819ebbda");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=d822e3871605");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -2775,7 +2808,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=deba819ebbda");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=d822e3871605");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({

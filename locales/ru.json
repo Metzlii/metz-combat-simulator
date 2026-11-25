@@ -3824,7 +3824,7 @@
  "The set, line by line": "Набор по строкам",
  "The six special modifiers (Smite, Consistency, Shatter, Echo, Fortify, Overkill) follow rules measured in combat on the test server. The game can still change them before release.": "Шесть особых модификаторов (Кара, Стабильность, Сокрушение, Эхо, Укрепление, Избыточный урон) следуют правилам, измеренным в бою на тестовом сервере. Игра ещё может изменить их до выпуска.",
  "The test server adds a belt slot that holds up to three talismans, each with up to four modifiers of grade 1 to 6. The combat kernel on this site fights with them, by rules measured on the test server.": "На тестовом сервере появился слот пояса, вмещающий до трёх талисманов, у каждого до четырёх модификаторов уровня от 1 до 6. Боевое ядро этого сайта сражается с ними по правилам, измеренным на тестовом сервере.",
- "Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.": "Какие модификаторы талисманов ценнее всего для одного игрока, на одном поясе, в одной зоне. Сначала каждый боевой модификатор измеряется как единственная строка на поясе. Затем лучший набор собирается по одной строке, и на каждом шаге остаётся строка, дающая наибольший прирост поверх уже выбранных. Все строки берутся на одном уровне, так что это показывает, к чему стремиться, а не сколько стоит ролл.",
+ "Which talisman modifiers are worth the most to one player, on one belt, in one zone. Every combat modifier is measured as the only line on the belt, at one grade, and its other grades follow from that value; the modifiers then simply rank by it. This says what to aim for, not what a roll costs.": "Какие модификаторы талисманов ценнее всего для одного игрока, на одном поясе, в одной зоне. Каждый боевой модификатор измеряется как единственная строка на поясе, на одном уровне, а его другие уровни выводятся из этого значения; затем модификаторы просто ранжируются по нему. Это показывает, к чему стремиться, а не сколько стоит ролл.",
  "Zone and tier": "Зона и сложность",
  "clears / h": "прохождений / ч",
  "coins / h": "монет / ч",
@@ -3839,7 +3839,7 @@
  "Copy the weights": "Скопировать веса",
  "Copied": "Скопировано",
  "The browser did not allow copying to the clipboard.": "Браузер не разрешил копирование в буфер обмена.",
- "A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.": "100 очков — лучшая одиночная строка на высшем уровне ({name}); каждая другая ячейка — доля от неё. Строка масштабируется со своим значением, поэтому её низшие уровни выводятся из измеренного. Строки, набирающие меньше 1 на всех уровнях, не показаны.",
+ "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "Столбцы уровней: 100 очков — лучшая одиночная строка на высшем уровне ({name}); каждая другая ячейка — доля от неё. Строка масштабируется со своим значением, поэтому её низшие уровни выводятся из измеренного.",
  "Modifiers to measure": "Модификаторы для измерения",
  "Special": "Особые",
  "{n} of {m} measured": "измерено {n} из {m}",
@@ -3850,7 +3850,7 @@
  "Drops": "Добыча",
  "Turn off": "Выключить",
  "Turn on": "Включить",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.": "Снимите галочки с того, что этому персонажу не нужно, — по одному модификатору или целую группу её переключателем. Выключенный модификатор никогда не измеряется и не попадает в набор, что сокращает поиск. Выбор сохраняется в этом браузере.",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Снимите отметку с того, что этому персонажу не нужно, по одному модификатору или целую группу её переключателем. Выключенный модификатор не измеряется, что сокращает расчёт. Магия, Ближний бой, Дальний бой и Физика задаются по оружию этого игрока; ваши изменения в них сохраняются для этого игрока. Выбор хранится в этом браузере.",
  "Your belt and talismans": "Ваш пояс и талисманы",
  "No one in the imported party has a belt or talismans.": "Ни у кого в импортированной группе нет пояса или талисманов.",
  "no belt": "без пояса",
@@ -3955,5 +3955,9 @@
  "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Схема сообщества: сначала уровни (перековка, закрепить лучший уровень, переплавка, гармония), обмен, затем фокус для типов",
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Схема сообщества, со Сферами мутации вместо Сфер гармонии",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "Сферы перековки для особого модификатора, Сферы мутации для двух особых и одного нужного, затем Сферы гармонии для уровней,",
- "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "Ценность талисмана как доля лучшего возможного при этой оценке: ваши четыре самых ценных модификатора, все на G6. Ценность талисмана — сумма приростов его четырёх строк в единицах, которые измеряла оценка. Особый модификатор, который уже есть на другом талисмане этого пояса, здесь не учитывается: вы улучшили бы тот."
+ "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "Ценность талисмана как доля лучшего возможного при этой оценке: ваши четыре самых ценных модификатора, все на G6. Ценность талисмана — сумма приростов его четырёх строк в единицах, которые измеряла оценка. Особый модификатор, который уже есть на другом талисмане этого пояса, здесь не учитывается: вы улучшили бы тот.",
+ "Defense + Tank": "Защита + танк",
+ "Seeds": "Сиды",
+ "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Симулируемые часы в каждом прогоне. Длинные прогоны стабильнее, но каждый идёт дольше.",
+ "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "Прогонов на модификатор в первом проходе, каждый модификатор на тех же сидах, что и пустой пояс. Каждый следующий раунд удваивает их для лучшей половины."
 }
