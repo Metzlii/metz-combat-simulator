@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="df2ba88411fe"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="446d3e660f7b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=df2ba88411fe"></script>
+<script src="./support.js?v=446d3e660f7b"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=df2ba88411fe">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=446d3e660f7b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=df2ba88411fe">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=df2ba88411fe"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=446d3e660f7b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=446d3e660f7b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1340,8 +1340,17 @@
           </sc-if>
           <sc-if value="{{ dev.hasRows }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex;flex-direction:column;gap:4px">
-              <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+              <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
                 <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Each line alone</div>
+                <sc-if value="{{ dev.hasDone }}" hint-placeholder-val="{{ false }}">
+                  <span class="text-muted" style="font-size:12px;margin-left:8px">Show in</span>
+                  <div class="seg">
+                    <button class="seg-opt" style="font-size:12px;border:0;{{ dev.viewPaceStyle }}" onClick="{{ dev.viewPace }}">{{ dev.paceLabel }}</button>
+                    <button class="seg-opt" style="font-size:12px;border:0;{{ dev.viewXpStyle }}" onClick="{{ dev.viewXp }}">XP / h</button>
+                    <button class="seg-opt" style="font-size:12px;border:0;{{ dev.viewProfitStyle }}" onClick="{{ dev.viewProfit }}">Profit</button>
+                  </div>
+                  <label style="display:flex;gap:6px;align-items:center;font-size:12.5px" title="Without the Experience lines the table, the scores and the copied weights leave them out."><input type="checkbox" checked="{{ dev.viewShowXp }}" onChange="{{ dev.toggleViewXp }}">Experience modifiers</label>
+                </sc-if>
                 <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:2px 8px;font-size:12.5px" title="Gain per grade for every modifier, as JSON, for use in another tool" onClick="{{ dev.copyWeights }}">{{ dev.copyLabel }}</button></sc-if>
               </div>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.rowsNote }}</div>
@@ -1515,7 +1524,7 @@
               <div style="text-wrap:pretty"><b>1.0.52</b></div>
               <ul class="about-list" style="margin-top:4px;font-size:13.5px">
                 <li><b>Talisman Crafting: a three-special plan.</b> The lock-and-Exchange route puts the best modifier at G6, then Reforging Orbs until another special turns up, Mutation Orbs for two specials and a fourth line you want (or three specials), and Attunement Orbs for the grades. It is offered when at least two more specials are worth something on your weights.</li>
-                <li><b>Talisman Stat Weighting measures each line alone and stops there.</b> Building a whole belt's set line by line mostly re-found the same ranking (Magic Experience three times over) and took most of the run. Magic, Melee, Ranged and Physical start from the player's weapon, each group's switch sits beside its name, Defense is now Defense + Tank, and the two tables are one: each line with its score at every grade beside it. Hours and Seeds are set on the page, 1,000 hours and 8 seeds by default, in one pass with every line on the same runs (it was a fixed 100 hours and 2 seeds, then halving rounds that piled runs on the top few and left the rest noisy).</li>
+                <li><b>Talisman Stat Weighting measures each line alone and stops there.</b> Building a whole belt's set line by line mostly re-found the same ranking (Magic Experience three times over) and took most of the run. Magic, Melee, Ranged and Physical start from the player's weapon, each group's switch sits beside its name, Defense is now Defense + Tank, and the two tables are one: each line with its score at every grade beside it, scored against the best line that is not Experience. A finished run can be shown in run time, XP / h or profit, with or without the Experience lines; Copy the weights copies what is shown. Hours and Seeds are set on the page, 1,000 hours and 8 seeds by default, in one pass with every line on the same runs (it was a fixed 100 hours and 2 seeds, then halving rounds that piled runs on the top few and left the rest noisy).</li>
                 <li>A special already on another talisman of the belt now counts for nothing on the one being crafted (you would raise that one instead), where it used to count for what it added over that copy's grade. The Target field explains its percentage on hover.</li>
               </ul>
             </div>
@@ -2205,7 +2214,7 @@ class Component extends DCLogic {
     this._devT0 = Date.now();
     clearInterval(this._devTick);
     this._devTick = setInterval(() => this.forceUpdate(), 1000);
-    this.setState({ devRunning: true, devError: "", devRows: [], devSteps: [], devHead: null, devDone: null });
+    this.setState({ devRunning: true, devError: "", devRows: [], devSteps: [], devHead: null, devDone: null, devView: null });
     const finish = patch => { clearInterval(this._devTick); this._devTick = null; this.setState({ devRunning: false, ...patch }); };
     try {
       const stream = c.zoneTalismansStream(this.devBody(), {
@@ -2324,11 +2333,16 @@ class Component extends DCLogic {
     };
   }
   /** The whole table as JSON for another tool (a userscript that scores a talisman in the game): gain per grade, by modifier. */
+  // How a finished run is read: its unit and whether the Experience lines show; a new run starts from its own metric.
+  devView(ranMetric) { const v = this.state.devView || {}; return { unit: ["eph", "xp", "profit"].includes(v.unit) ? v.unit : ranMetric || "eph", xp: v.xp !== false }; }
   async devCopyWeights() {
     const d = this.state.devDone; if (!d?.ranked) return;
+    // What the table shows is what is copied: its unit, and no Experience lines when they are hidden.
+    const view = this.devView(d.goal?.metric), mods = this.state.devChoices?.modifiers || [];
+    const pick = r => (r.byGradeBy?.[view.unit] || r.byGrade), keep = r => view.xp || mods.find(m => m.hrid === r.hrid)?.purpose !== "experience";
     const out = { schema: "metz-talisman-weights/1", gameVersion: d.gameVersion || this.state.devChoices?.gameVersion || null, player: d.player, zone: d.zone, difficultyTier: d.difficultyTier,
-      belt: d.belt, metric: d.goal?.metric, baseline: d.baseline, measuredGrade: d.grade,
-      weights: Object.fromEntries(d.ranked.filter(r => Array.isArray(r.byGrade)).map(r => [r.hrid, r.byGrade.map(v => Number(v.toFixed(4)))])) };
+      belt: d.belt, metric: view.unit, ...(view.xp ? {} : { excluded: "experience" }), baseline: d.baseline, measuredGrade: d.grade,
+      weights: Object.fromEntries(d.ranked.filter(r => Array.isArray(pick(r)) && keep(r)).map(r => [r.hrid, pick(r).map(v => Number(v.toFixed(4)))])) };
     try { await navigator.clipboard.writeText(JSON.stringify(out, null, 1)); this.setState({ devCopied: true }); setTimeout(() => this.setState({ devCopied: false }), 2000); }
     catch (e) { this.setState({ devError: Component.t("The browser did not allow copying to the clipboard.") }); }
   }
@@ -2340,6 +2354,7 @@ class Component extends DCLogic {
     const names = (s.party || []).map(p => p?.record?.name).filter(Boolean);
     const metric = this.devVal("metric"), head = s.devHead || {}, done = s.devDone;
     const zone = (s.zones || []).find(z => z.hrid === this.upVal("zone")), dungeon = !!zone?.isDungeon;
+    const seg2 = on => (on ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)");
     const seg = k => metric === k ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)";
     const belt = ch.belts.find(b => b.hrid === this.devVal("belt")), level = Math.max(0, Math.min(20, Math.floor(Number(this.devVal("level")) || 0)));
     // The pools, each with its modifiers and a switch for the whole pool.
@@ -2351,26 +2366,37 @@ class Component extends DCLogic {
         toggle: () => this.setDevOff(list.map(m => m.hrid), on > 0), toggleLabel: on > 0 ? Component.t("Turn off") : Component.t("Turn on"),
         mods: list.map(m => ({ name: Component.t(m.name), on: !off[m.hrid], toggle: e => this.setDevOff([m.hrid], !e.target.checked) })) }; });
     const onCount = mods.filter(m => !off[m.hrid]).length;
-    // Every grade of every modifier, as a score out of 100 against the best line at the top grade: scores compare
-    // across the whole table, so a grade-4 line that scores 50 is worth as much as any other line that scores 50.
-    const allRanked = (done?.ranked || []).filter(r => Array.isArray(r.byGrade));
-    const topGain = Math.max(0, ...allRanked.map(r => Math.max(...r.byGrade)));
+    // What the run was judged on rides with its head, so a result keeps its own units after the form changes.
+    const ranMetric = head.goal?.metric || metric, base = head.baseline || done?.baseline || null;
+    // A finished run reads in any unit it measured, with or without the Experience lines (operator, 2026-11-25).
+    const view = this.devView(ranMetric);
+    const U = { eph: ["deltaEph", "deltaEphSE"], xp: ["deltaXp", "deltaXpSE"], profit: ["deltaProfit", "deltaProfitSE"] };
+    const isXp = r => mods.find(m => m.hrid === r.hrid)?.purpose === "experience";
+    const shown = r => !done || view.xp || !isXp(r);
+    const gainOf = r => (done ? Number(r[U[view.unit][0]]) || 0 : Number(r.delta) || 0);
+    const seOf = r => (done ? Number(r[U[view.unit][1]]) || 0 : Number(r.deltaSE) || 0);
+    const gradesOf = r => (done ? r.byGradeBy?.[view.unit] : null) || r.byGrade || null;
+    // Every grade of every modifier as a score, 100 being the best line at the top grade that is not an Experience
+    // line: an XP line can be worth many combat lines, and against it every combat line sat between 2 and 13. An
+    // Experience line may score over 100.
+    const allRanked = (done?.ranked || []).filter(r => Array.isArray(gradesOf(r)) && shown(r));
+    const scorePool = allRanked.filter(r => !isXp(r)).length ? allRanked.filter(r => !isXp(r)) : allRanked;
+    const topRow = scorePool.reduce((b, r) => (!b || Math.max(...gradesOf(r)) > Math.max(...gradesOf(b)) ? r : b), null);
+    const topGain = topRow ? Math.max(0, ...gradesOf(topRow)) : 0;
     const score = v => (topGain > 0 ? Math.round(100 * v / topGain) : 0);
     // One table (operator, 2026-11-25): each measured line with its score at every grade beside it.
     const gradeBy = new Map(allRanked.map(r => [r.hrid, r]));
-    const gradeCells = h => { const r = gradeBy.get(h); return Array.from({ length: ch.info?.maxGrade || 6 }, (_, i) => { const v = r?.byGrade?.[i];
+    const gradeCells = h => { const r = gradeBy.get(h); return Array.from({ length: ch.info?.maxGrade || 6 }, (_, i) => { const v = r ? gradesOf(r)?.[i] : null;
       if (v == null) return { text: "", style: "" }; const sc = score(v); return { text: sc >= 1 ? String(sc) : "\u2013", style: `text-align:right;opacity:${(0.45 + 0.55 * Math.min(1, sc / 100)).toFixed(2)}` }; }); };
-    const gradeRows = allRanked.filter(r => score(Math.max(...r.byGrade)) >= 1).map(r => ({ name: Component.t(r.name), style: r.group === "special" ? "color:var(--color-accent-2-400)" : "",
-      cells: r.byGrade.map(v => { const sc = score(v); return { text: sc >= 1 ? String(sc) : "\u2013", style: `text-align:right;opacity:${(0.45 + 0.55 * Math.min(1, sc / 100)).toFixed(2)}` }; }) }));
-    // What the run was judged on rides with its head, so a result keeps its own units after the form changes.
-    const ranMetric = head.goal?.metric || metric, base = head.baseline || done?.baseline || null;
-    const baseGoal = !base ? 0 : ranMetric === "eph" ? Number(base.eph) || 0 : ranMetric === "xp" ? Number(base.xpPerHour) || 0 : 0;
-    const unit = ranMetric === "eph" ? (base?.dungeon ? Component.t("clears / h") : Component.t("encounters / h")) : ranMetric === "xp" ? Component.t("XP / h") : Component.t("coins / h");
+    const gradeRows = allRanked;
+    const vm = done ? view.unit : ranMetric;
+    const baseGoal = !base ? 0 : vm === "eph" ? Number(base.eph) || 0 : vm === "xp" ? Number(base.xpPerHour) || 0 : Number(base.profitPerHour) || 0;
+    const unit = vm === "eph" ? (base?.dungeon ? Component.t("clears / h") : Component.t("encounters / h")) : vm === "xp" ? Component.t("XP / h") : Component.t("coins / h");
     const fmt = v => { const a = Math.abs(v); return `${v < 0 ? "\u2212" : "+"}${a >= 1000 ? Math.round(a).toLocaleString("en-US") : a.toFixed(a >= 100 ? 0 : a >= 10 ? 1 : 2)}`; };
     const share = v => (baseGoal > 0 ? `${v < 0 ? "\u2212" : "+"}${Math.abs(100 * v / baseGoal).toFixed(1)}%` : "");
     const val = m => (m.isPercent ? `${(100 * m.value).toFixed(Math.abs(m.value) < 0.1 ? 2 : 1)}%` : `${Number(m.value.toFixed(2))}`);
     const power = belt ? belt.power + belt.powerPerLevel * ((s.devChoices?.enhancement || [])[level] ?? NaN) : NaN;
-    const rows = (done?.ranked || (s.devRows || []).filter(r => r.phase === "alone")).slice().sort((a, b) => (Number(b.delta) || 0) - (Number(a.delta) || 0));
+    const rows = (done?.ranked || (s.devRows || []).filter(r => r.phase === "alone")).filter(shown).slice().sort((a, b) => gainOf(b) - gainOf(a));
     const steps = done?.steps || s.devSteps || [];
     const comb = done?.combined || null;
     const el = this._devT0 ? Date.now() - this._devT0 : 0;
@@ -2408,11 +2434,15 @@ class Component extends DCLogic {
       noImported: !(s.party || []).some(p => p?.loadout?.belt || (p?.loadout?.talismans || []).length),
       hasGrades: gradeRows.length > 0, gradeRows,
       gradeHead: Array.from({ length: ch.info?.maxGrade || 6 }, (_, i) => ({ label: `G${i + 1}` })),
-      gradeNote: Component.tf("Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.", { name: allRanked[0] ? Component.t(allRanked[0].name) : "" }),
+      gradeNote: Component.tf("Grade columns: 100 is the best line at the top grade that is not an Experience line ({name}); every other cell is its share of that, so an Experience line can score over 100. A line scales with its value, so its lower grades are worked out from the measured one.", { name: topRow ? Component.t(topRow.name) : "" }),
+      hasDone: !!done,
+      viewPaceStyle: seg2(view.unit === "eph"), viewXpStyle: seg2(view.unit === "xp"), viewProfitStyle: seg2(view.unit === "profit"),
+      viewPace: () => this.setState({ devView: { ...view, unit: "eph" } }), viewXp: () => this.setState({ devView: { ...view, unit: "xp" } }), viewProfit: () => this.setState({ devView: { ...view, unit: "profit" } }),
+      viewShowXp: view.xp, toggleViewXp: e => this.setState({ devView: { ...view, xp: !!e.target.checked } }),
       copyWeights: () => this.devCopyWeights(), copyLabel: s.devCopied ? Component.t("Copied") : Component.t("Copy the weights"),
       hasRows: rows.length > 0,
       rowsNote: Component.tf("One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.", { unit }),
-      rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), cells: gradeCells(r.hrid), gain: r.seeds ? `${fmt(r.delta)} \u00b1 ${Number(r.deltaSE || 0).toFixed(2)}` : "\u2026", share: r.seeds ? share(r.delta) : "",
+      rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), cells: gradeCells(r.hrid), gain: r.seeds ? `${fmt(gainOf(r))} \u00b1 ${seOf(r) >= 1000 ? Math.round(seOf(r)).toLocaleString("en-US") : seOf(r).toFixed(seOf(r) >= 100 ? 0 : 2)}` : "\u2026", share: r.seeds ? share(gainOf(r)) : "",
         style: r.group === "special" ? "color:var(--color-accent-2-400)" : "" })),
     };
   }
@@ -2425,7 +2455,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=df2ba88411fe");
+      const i18n = await import("./i18n.js?v=446d3e660f7b");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2448,7 +2478,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=df2ba88411fe");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=446d3e660f7b");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -2787,7 +2817,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=df2ba88411fe");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=446d3e660f7b");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -2808,7 +2838,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=df2ba88411fe");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=446d3e660f7b");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({

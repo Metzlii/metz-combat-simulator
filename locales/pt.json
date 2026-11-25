@@ -3765,7 +3765,7 @@
  "Copy the weights": "Copiar os pesos",
  "Copied": "Copiado",
  "The browser did not allow copying to the clipboard.": "O navegador não permitiu copiar para a área de transferência.",
- "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "Colunas de grau: uma pontuação de 100 é a melhor linha individual no grau máximo ({name}); cada outra célula é a parcela dela em relação a essa. Uma linha escala com seu valor, então os graus inferiores são calculados a partir do medido.",
+ "Grade columns: 100 is the best line at the top grade that is not an Experience line ({name}); every other cell is its share of that, so an Experience line can score over 100. A line scales with its value, so its lower grades are worked out from the measured one.": "Colunas de grau: 100 é a melhor linha no grau máximo que não é de Experiência ({name}); cada outra célula é sua parte disso, então uma linha de Experiência pode passar de 100. Uma linha escala com seu valor, então seus graus inferiores são calculados a partir do medido.",
  "Modifiers to measure": "Modificadores a medir",
  "Special": "Especial",
  "{n} of {m} measured": "{n} de {m} medidos",
@@ -3885,5 +3885,8 @@
  "Defense + Tank": "Defesa + tanque",
  "Seeds": "Sementes",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Horas simuladas em cada execução. Execuções mais longas são mais estáveis, e cada uma demora mais.",
- "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Execuções por modificador, cada modificador nas mesmas sementes que o cinto vazio. O erro diminui com a raiz quadrada: 8 sementes de 1.000 horas deixam uma linha típica dentro de cerca de 5%."
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Execuções por modificador, cada modificador nas mesmas sementes que o cinto vazio. O erro diminui com a raiz quadrada: 8 sementes de 1.000 horas deixam uma linha típica dentro de cerca de 5%.",
+ "Show in": "Mostrar em",
+ "Experience modifiers": "Modificadores de experiência",
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "Sem as linhas de Experiência, a tabela, as pontuações e os pesos copiados as deixam de fora."
 }

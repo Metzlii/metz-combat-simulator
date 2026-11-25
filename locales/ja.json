@@ -3841,7 +3841,7 @@
  "Copy the weights": "重みをコピー",
  "Copied": "コピーしました",
  "The browser did not allow copying to the clipboard.": "ブラウザがクリップボードへのコピーを許可しませんでした。",
- "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "グレード列：スコア 100 は最高グレードでの最良の単一ライン（{name}）で、ほかの各セルはそれに対する割合です。ラインは値に比例するため、低いグレードは測定値から算出しています。",
+ "Grade columns: 100 is the best line at the top grade that is not an Experience line ({name}); every other cell is its share of that, so an Experience line can score over 100. A line scales with its value, so its lower grades are worked out from the measured one.": "グレード列：100 は経験値以外のラインで最高グレードの最良のもの（{name}）で、ほかの各セルはそれに対する割合です。そのため経験値のラインは 100 を超えることがあります。ラインは値に比例するため、低いグレードは測定値から算出しています。",
  "Modifiers to measure": "測定する修飾子",
  "Special": "特殊",
  "{n} of {m} measured": "{m} 個中 {n} 個を測定済み",
@@ -3961,5 +3961,8 @@
  "Defense + Tank": "防御 + タンク",
  "Seeds": "シード",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "各実行のシミュレーション時間。長いほど安定しますが、各実行に時間がかかります。",
- "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。誤差は平方根に比例して小さくなり、1,000 時間 × 8 シードで一般的なラインは約 5% 以内になります。"
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。誤差は平方根に比例して小さくなり、1,000 時間 × 8 シードで一般的なラインは約 5% 以内になります。",
+ "Show in": "表示単位",
+ "Experience modifiers": "経験値の修飾子",
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "経験値のラインを外すと、表・スコア・コピーするウェイトからも除かれます。"
 }

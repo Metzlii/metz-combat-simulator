@@ -3768,7 +3768,7 @@
  "Copy the weights": "Copiar los pesos",
  "Copied": "Copiado",
  "The browser did not allow copying to the clipboard.": "El navegador no permitió copiar al portapapeles.",
- "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "Columnas de grado: una puntuación de 100 es la mejor línea individual en el grado máximo ({name}); cada otra celda es su proporción respecto a esa. Una línea escala con su valor, así que sus grados inferiores se calculan a partir del medido.",
+ "Grade columns: 100 is the best line at the top grade that is not an Experience line ({name}); every other cell is its share of that, so an Experience line can score over 100. A line scales with its value, so its lower grades are worked out from the measured one.": "Columnas de grado: 100 es la mejor línea en el grado máximo que no es de Experiencia ({name}); cada otra celda es su parte de eso, así que una línea de Experiencia puede pasar de 100. Una línea escala con su valor, así que sus grados inferiores se calculan a partir del medido.",
  "Modifiers to measure": "Modificadores a medir",
  "Special": "Especial",
  "{n} of {m} measured": "{n} de {m} medidos",
@@ -3888,5 +3888,8 @@
  "Defense + Tank": "Defensa + tanque",
  "Seeds": "Semillas",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Horas simuladas en cada ejecución. Las ejecuciones más largas son más estables, y cada una tarda más.",
- "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Ejecuciones por modificador, cada modificador con las mismas semillas que el cinturón vacío. El error se reduce con la raíz cuadrada: 8 semillas de 1.000 horas dejan una línea típica dentro de un 5% aproximadamente."
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Ejecuciones por modificador, cada modificador con las mismas semillas que el cinturón vacío. El error se reduce con la raíz cuadrada: 8 semillas de 1.000 horas dejan una línea típica dentro de un 5% aproximadamente.",
+ "Show in": "Mostrar en",
+ "Experience modifiers": "Modificadores de experiencia",
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "Sin las líneas de Experiencia, la tabla, las puntuaciones y los pesos copiados las omiten."
 }

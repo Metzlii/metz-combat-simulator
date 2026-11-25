@@ -3844,7 +3844,7 @@
  "Copy the weights": "複製權重",
  "Copied": "已複製",
  "The browser did not allow copying to the clipboard.": "瀏覽器不允許複製到剪貼簿。",
- "Grade columns: 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one.": "等級列：100 分代表最高等級下最好的單條詞條（{name}）；其他每格都是相對它的占比。詞條數值與提升成正比，因此較低等級由實測等級推算。",
+ "Grade columns: 100 is the best line at the top grade that is not an Experience line ({name}); every other cell is its share of that, so an Experience line can score over 100. A line scales with its value, so its lower grades are worked out from the measured one.": "等級列：100 分代表最高等級下非經驗類詞條中最好的一條（{name}）；其他每格都是相對它的占比，因此經驗類詞條可能超過 100。詞條數值與提升成正比，因此較低等級由實測等級推算。",
  "Modifiers to measure": "要測量的詞條",
  "Special": "特殊",
  "{n} of {m} measured": "已測量 {n} / {m}",
@@ -3964,5 +3964,8 @@
  "Defense + Tank": "防禦 + 坦克",
  "Seeds": "種子數",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "每次執行模擬的小時數。越長越穩定，但每次執行也越久。",
- "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "每個詞條的執行次數，每個詞條都與空腰帶使用相同的種子。誤差按平方根縮小：8 個種子、每次 1,000 小時，可讓一般詞條的誤差在約 5% 以內。"
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "每個詞條的執行次數，每個詞條都與空腰帶使用相同的種子。誤差按平方根縮小：8 個種子、每次 1,000 小時，可讓一般詞條的誤差在約 5% 以內。",
+ "Show in": "顯示單位",
+ "Experience modifiers": "經驗詞條",
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "不顯示經驗類詞條時，表格、分數和複製的權重都會將其排除。"
 }
