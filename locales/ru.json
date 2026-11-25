@@ -3879,8 +3879,6 @@
  "Orb": "Сфера",
  "Plan": "План",
  "Prices": "Цены",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "Сфера перековки, пока каждая незакреплённая строка не станет G4 или лучше, затем Сфера фокуса для типов; закрепление при 60%",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "Сфера перековки, пока каждая незакреплённая строка не станет G5 или лучше, затем Сфера фокуса для типов; закрепление при 60%",
  "Reforging Orb until it is good enough": "Сфера перековки, пока не станет достаточно хорошим",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "Сфера перековки; закрепить первую строку, стоящую 60% лучшей строки, затем перековывать остальные",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "Сфера перековки; закрепить первую строку, стоящую 85% лучшей строки, затем перековывать остальные",
@@ -3949,5 +3947,11 @@
  "belt full": "пояс заполнен",
  "no line adds anything more": "ни одна строка больше ничего не добавляет",
  "nothing left to add": "больше нечего добавить",
- "time limit": "лимит времени"
+ "time limit": "лимит времени",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "Сфера перековки для уровней, затем Сфера фокуса для типов; закрепление при 60%",
+ "Reforging Orb for the grades, then Focus Orb for the types": "Сфера перековки для уровней, затем Сфера фокуса для типов",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "Сферы перековки для уровней, затем Сферы фокуса для типов,",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "Сферы фокуса для типов, затем Сферы гармонии для уровней,",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Схема сообщества: сначала уровни (перековка, закрепить лучший уровень, переплавка, гармония), обмен, затем фокус для типов",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Схема сообщества, со Сферами мутации вместо Сфер гармонии"
 }

@@ -3808,8 +3808,6 @@
  "Orb": "Orbe",
  "Plan": "Plan",
  "Prices": "Precios",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "Orbe de Reforja hasta que cada línea desbloqueada sea G4 o mejor, luego Orbe de Enfoque para los tipos; bloquear al 60%",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "Orbe de Reforja hasta que cada línea desbloqueada sea G5 o mejor, luego Orbe de Enfoque para los tipos; bloquear al 60%",
  "Reforging Orb until it is good enough": "Orbe de Reforja hasta que sea suficientemente bueno",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "Orbe de Reforja; bloquear la primera línea que valga el 60% de la mejor línea y seguir reforjando el resto",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "Orbe de Reforja; bloquear la primera línea que valga el 85% de la mejor línea y seguir reforjando el resto",
@@ -3878,5 +3876,11 @@
  "belt full": "cinturón lleno",
  "no line adds anything more": "ninguna línea añade nada más",
  "nothing left to add": "no queda nada que añadir",
- "time limit": "límite de tiempo"
+ "time limit": "límite de tiempo",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "Orbe de Reforja para los grados, luego Orbe de Enfoque para los tipos; bloquear al 60%",
+ "Reforging Orb for the grades, then Focus Orb for the types": "Orbe de Reforja para los grados, luego Orbe de Enfoque para los tipos",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "Orbes de Reforja para los grados, luego Orbes de Enfoque para los tipos,",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "Orbes de Enfoque para los tipos, luego Orbes de Sintonía para los grados,",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Diagrama de la comunidad: primero los grados (Reforja, bloquear el mejor grado, Remodelación, Sintonía), Intercambio, luego Enfoque para los tipos",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Diagrama de la comunidad, con Orbes de Mutación en lugar de Orbes de Sintonía"
 }

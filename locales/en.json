@@ -830,8 +830,6 @@
  "Plan": "Plan",
  "Prices": "Prices",
  "Reforging Orb": "Reforging Orb",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%",
  "Reforging Orb until it is good enough": "Reforging Orb until it is good enough",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest",
@@ -946,5 +944,11 @@
  "Smite": "Smite",
  "Small Talisman Belt": "Small Talisman Belt",
  "Medium Talisman Belt": "Medium Talisman Belt",
- "Large Talisman Belt": "Large Talisman Belt"
+ "Large Talisman Belt": "Large Talisman Belt",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%",
+ "Reforging Orb for the grades, then Focus Orb for the types": "Reforging Orb for the grades, then Focus Orb for the types",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "Reforging Orbs for the grades, then Focus Orbs for the types,",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "Focus Orbs for the types, then Attunement Orbs for the grades,",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Community flowchart, with Mutation Orbs in place of Attunement Orbs"
 }

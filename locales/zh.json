@@ -4024,8 +4024,6 @@
  "Orb": "宝珠",
  "Plan": "方案",
  "Prices": "价格",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "用重铸宝珠直到所有未锁定词条都达到 G4 或以上，再用专注宝珠定类型；60% 时锁定",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "用重铸宝珠直到所有未锁定词条都达到 G5 或以上，再用专注宝珠定类型；60% 时锁定",
  "Reforging Orb until it is good enough": "用重铸宝珠直到足够好",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "重铸宝珠；锁定第一条价值达到最佳词条 60% 的词条，然后继续重铸其余词条",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "重铸宝珠；锁定第一条价值达到最佳词条 85% 的词条，然后继续重铸其余词条",
@@ -4094,5 +4092,11 @@
  "belt full": "腰带已满",
  "no line adds anything more": "没有词条能再带来提升",
  "nothing left to add": "没有可添加的了",
- "time limit": "时间上限"
+ "time limit": "时间上限",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "先用重铸宝珠提等级，再用专注宝珠定类型；60% 时锁定",
+ "Reforging Orb for the grades, then Focus Orb for the types": "先用重铸宝珠提等级，再用专注宝珠定类型",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "先用重铸宝珠提等级，再用专注宝珠定类型，",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "先用专注宝珠定类型，再用调谐宝珠提等级，",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "社区流程图：先提等级（重铸、锁定最高等级、重塑、调谐），再置换，最后用专注定类型",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "社区流程图，用突变宝珠代替调谐宝珠"
 }

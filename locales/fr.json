@@ -3742,8 +3742,6 @@
  "Orb": "Orbe",
  "Plan": "Plan",
  "Prices": "Prix",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "Orbe de Reforge jusqu'à ce que chaque ligne non verrouillée soit G4 ou mieux, puis Orbe de Concentration pour les types ; verrouiller à 60 %",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "Orbe de Reforge jusqu'à ce que chaque ligne non verrouillée soit G5 ou mieux, puis Orbe de Concentration pour les types ; verrouiller à 60 %",
  "Reforging Orb until it is good enough": "Orbe de Reforge jusqu'à ce qu'il soit assez bon",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "Orbe de Reforge ; verrouiller la première ligne valant 60 % de la meilleure ligne, puis continuer à reforger le reste",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "Orbe de Reforge ; verrouiller la première ligne valant 85 % de la meilleure ligne, puis continuer à reforger le reste",
@@ -3812,5 +3810,11 @@
  "belt full": "ceinture pleine",
  "no line adds anything more": "aucune ligne n'apporte plus rien",
  "nothing left to add": "plus rien à ajouter",
- "time limit": "limite de temps"
+ "time limit": "limite de temps",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "Orbe de Reforge pour les grades, puis Orbe de Concentration pour les types ; verrouiller à 60 %",
+ "Reforging Orb for the grades, then Focus Orb for the types": "Orbe de Reforge pour les grades, puis Orbe de Concentration pour les types",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "Orbes de Reforge pour les grades, puis Orbes de Concentration pour les types,",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "Orbes de Concentration pour les types, puis Orbes d'Harmonisation pour les grades,",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Organigramme de la communauté : d'abord les grades (Reforge, verrouiller le meilleur grade, Remodelage, Harmonisation), Échange, puis Concentration pour les types",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Organigramme de la communauté, avec des Orbes de Mutation à la place des Orbes d'Harmonisation"
 }

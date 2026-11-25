@@ -3881,8 +3881,6 @@
  "Orb": "오브",
  "Plan": "플랜",
  "Prices": "가격",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "잠기지 않은 모든 라인이 G4 이상이 될 때까지 재련의 오브, 그다음 종류는 집중의 오브; 60%에서 잠금",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "잠기지 않은 모든 라인이 G5 이상이 될 때까지 재련의 오브, 그다음 종류는 집중의 오브; 60%에서 잠금",
  "Reforging Orb until it is good enough": "충분히 좋아질 때까지 재련의 오브",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "재련의 오브; 최고 라인의 60% 가치인 첫 라인을 잠그고 나머지는 계속 재련",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "재련의 오브; 최고 라인의 85% 가치인 첫 라인을 잠그고 나머지는 계속 재련",
@@ -3951,5 +3949,11 @@
  "belt full": "벨트 가득 참",
  "no line adds anything more": "더 증가시키는 라인 없음",
  "nothing left to add": "더 추가할 것 없음",
- "time limit": "시간 제한"
+ "time limit": "시간 제한",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "등급은 재련의 오브, 그다음 종류는 집중의 오브; 60%에서 잠금",
+ "Reforging Orb for the grades, then Focus Orb for the types": "등급은 재련의 오브, 그다음 종류는 집중의 오브",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "등급은 재련의 오브, 종류는 집중의 오브로,",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "종류는 집중의 오브, 등급은 조율의 오브로,",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "커뮤니티 순서도: 등급 먼저(재련, 최고 등급 잠금, 재구성, 조율), 교환, 그다음 집중으로 종류",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "커뮤니티 순서도, 조율의 오브 대신 변이의 오브"
 }

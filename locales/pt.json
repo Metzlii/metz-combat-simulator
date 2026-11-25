@@ -3805,8 +3805,6 @@
  "Orb": "Orbe",
  "Plan": "Plano",
  "Prices": "Preços",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "Orbe de Reforja até cada linha desbloqueada ser G4 ou melhor, depois Orbe de Foco para os tipos; bloquear em 60%",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "Orbe de Reforja até cada linha desbloqueada ser G5 ou melhor, depois Orbe de Foco para os tipos; bloquear em 60%",
  "Reforging Orb until it is good enough": "Orbe de Reforja até ficar bom o suficiente",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "Orbe de Reforja; bloquear a primeira linha que valha 60% da melhor linha e continuar reforjando o resto",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "Orbe de Reforja; bloquear a primeira linha que valha 85% da melhor linha e continuar reforjando o resto",
@@ -3875,5 +3873,11 @@
  "belt full": "cinto cheio",
  "no line adds anything more": "nenhuma linha acrescenta mais nada",
  "nothing left to add": "nada mais a adicionar",
- "time limit": "limite de tempo"
+ "time limit": "limite de tempo",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "Orbe de Reforja para os graus, depois Orbe de Foco para os tipos; bloquear em 60%",
+ "Reforging Orb for the grades, then Focus Orb for the types": "Orbe de Reforja para os graus, depois Orbe de Foco para os tipos",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "Orbes de Reforja para os graus, depois Orbes de Foco para os tipos,",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "Orbes de Foco para os tipos, depois Orbes de Sintonia para os graus,",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "Fluxograma da comunidade: graus primeiro (Reforja, bloquear o melhor grau, Remodelação, Sintonia), Troca, depois Foco para os tipos",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Fluxograma da comunidade, com Orbes de Mutação no lugar de Orbes de Sintonia"
 }

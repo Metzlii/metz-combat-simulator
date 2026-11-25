@@ -3881,8 +3881,6 @@
  "Orb": "オーブ",
  "Plan": "プラン",
  "Prices": "価格",
- "Reforging Orb until every unlocked line is G4 or better, then Focus Orb for the types; lock at 60%": "ロックしていない全ラインが G4 以上になるまで再鍛造のオーブ、その後種類を集中のオーブで；60% でロック",
- "Reforging Orb until every unlocked line is G5 or better, then Focus Orb for the types; lock at 60%": "ロックしていない全ラインが G5 以上になるまで再鍛造のオーブ、その後種類を集中のオーブで；60% でロック",
  "Reforging Orb until it is good enough": "十分な性能になるまで再鍛造のオーブ",
  "Reforging Orb; lock the first line worth 60% of the best line, then keep reforging the rest": "再鍛造のオーブ；最良ラインの60%の価値がある最初のラインをロックし、残りを再鍛造し続ける",
  "Reforging Orb; lock the first line worth 85% of the best line, then keep reforging the rest": "再鍛造のオーブ；最良ラインの85%の価値がある最初のラインをロックし、残りを再鍛造し続ける",
@@ -3951,5 +3949,11 @@
  "belt full": "ベルトが満杯",
  "no line adds anything more": "これ以上上昇するラインなし",
  "nothing left to add": "追加できるものなし",
- "time limit": "時間切れ"
+ "time limit": "時間切れ",
+ "Reforging Orb for the grades, then Focus Orb for the types; lock at 60%": "グレードは再鍛造のオーブ、種類は集中のオーブで；60% でロック",
+ "Reforging Orb for the grades, then Focus Orb for the types": "グレードは再鍛造のオーブ、種類は集中のオーブで",
+ "Reforging Orbs for the grades, then Focus Orbs for the types,": "グレードは再鍛造のオーブ、種類は集中のオーブで、",
+ "Focus Orbs for the types, then Attunement Orbs for the grades,": "種類は集中のオーブ、グレードは調律のオーブで、",
+ "Community flowchart: grades first (Reforging, lock the best grade, Reshaping, Attunement), Exchange, then Focus for the types": "コミュニティのフローチャート：まずグレード（再鍛造、最高グレードをロック、再構成、調律）、交換、最後に集中で種類",
+ "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "コミュニティのフローチャート（調律のオーブの代わりに変異のオーブ）"
 }
