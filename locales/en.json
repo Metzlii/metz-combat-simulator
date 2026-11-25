@@ -745,7 +745,7 @@
  "Judge by": "Judge by",
  "Line value": "Line value",
  "Modifier": "Modifier",
- "One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.": "One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.",
+ "One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.": "One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.",
  "Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.": "Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.",
  "Player": "Player",
  "Profit": "Profit",
@@ -956,5 +956,5 @@
  "Defense + Tank": "Defense + Tank",
  "Seeds": "Seeds",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Simulated hours in each run. Longer runs are steadier, and every run takes longer.",
- "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half."
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%."
 }

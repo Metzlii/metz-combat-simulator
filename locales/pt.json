@@ -3740,7 +3740,7 @@
  "Judge by": "Avaliar por",
  "Line value": "Valor da linha",
  "Modifier": "Modificador",
- "One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.": "Uma linha de cada modificador em um cinto de resto vazio, em {unit}. Linhas que ganham pouco são medidas em menos execuções.",
+ "One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.": "Uma linha de cada modificador em um cinto de resto vazio, em {unit}, todas as linhas nas mesmas execuções.",
  "Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.": "Os modificadores comuns (velocidade de ataque, armadura, precisão e os demais) são lidos dos dados de jogo do servidor de testes e somam-se ao atributo de equipamento de mesmo nome.",
  "Player": "Jogador",
  "Share": "Parcela",
@@ -3885,5 +3885,5 @@
  "Defense + Tank": "Defesa + tanque",
  "Seeds": "Sementes",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Horas simuladas em cada execução. Execuções mais longas são mais estáveis, e cada uma demora mais.",
- "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "Execuções por modificador na primeira passada, cada modificador nas mesmas sementes que o cinto vazio. Cada rodada seguinte as dobra para a melhor metade."
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Execuções por modificador, cada modificador nas mesmas sementes que o cinto vazio. O erro diminui com a raiz quadrada: 8 sementes de 1.000 horas deixam uma linha típica dentro de cerca de 5%."
 }

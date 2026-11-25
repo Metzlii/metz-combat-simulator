@@ -3816,7 +3816,7 @@
  "Judge by": "評価基準",
  "Line value": "ラインの価値",
  "Modifier": "修飾子",
- "One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.": "ほかに何も付けていないベルトに各修飾子を1ラインずつ付けた場合の値（{unit}）。上昇量の小さいラインは少ない実行回数で測定します。",
+ "One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.": "ほかは空のベルトに各修飾子のラインを1つ付けた場合（{unit}）。全ラインを同じ実行で測定します。",
  "Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.": "通常の修飾子（攻撃速度、防御力、命中など）はテストサーバーのゲームデータから読み取り、同名の装備ステータスに加算されます。",
  "Player": "プレイヤー",
  "Share": "割合",
@@ -3961,5 +3961,5 @@
  "Defense + Tank": "防御 + タンク",
  "Seeds": "シード",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "各実行のシミュレーション時間。長いほど安定しますが、各実行に時間がかかります。",
- "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "最初の測定での修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。以降のラウンドでは上位半分について倍にします。"
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。誤差は平方根に比例して小さくなり、1,000 時間 × 8 シードで一般的なラインは約 5% 以内になります。"
 }

@@ -3814,7 +3814,7 @@
  "Judge by": "Критерий",
  "Line value": "Ценность строки",
  "Modifier": "Модификатор",
- "One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.": "По одной строке каждого модификатора на в остальном пустом поясе, в {unit}. Строки с малым приростом измеряются на меньшем числе прогонов.",
+ "One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.": "Одна строка каждого модификатора на в остальном пустом поясе, в {unit}, все строки на одних и тех же прогонах.",
  "Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.": "Обычные модификаторы (скорость атаки, броня, точность и остальные) берутся из игровых данных тестового сервера и прибавляются к одноимённой характеристике снаряжения.",
  "Player": "Игрок",
  "Share": "Доля",
@@ -3959,5 +3959,5 @@
  "Defense + Tank": "Защита + танк",
  "Seeds": "Сиды",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Симулируемые часы в каждом прогоне. Длинные прогоны стабильнее, но каждый идёт дольше.",
- "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "Прогонов на модификатор в первом проходе, каждый модификатор на тех же сидах, что и пустой пояс. Каждый следующий раунд удваивает их для лучшей половины."
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Прогонов на модификатор, каждый модификатор на тех же сидах, что и пустой пояс. Погрешность падает как квадратный корень: 8 сидов по 1 000 часов дают типичной строке точность около 5%."
 }

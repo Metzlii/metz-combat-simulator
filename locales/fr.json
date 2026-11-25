@@ -3676,7 +3676,7 @@
  "Judge by": "Juger par",
  "Line value": "Valeur de la ligne",
  "Modifier": "Modificateur",
- "One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.": "Une ligne de chaque modificateur sur une ceinture autrement vide, en {unit}. Les lignes qui gagnent peu sont mesurées sur moins d'exécutions.",
+ "One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.": "Une ligne de chaque modificateur sur une ceinture sinon vide, en {unit}, toutes les lignes sur les mêmes calculs.",
  "Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.": "Les modificateurs ordinaires (vitesse d'attaque, armure, précision et les autres) sont lus dans les données de jeu du serveur de test et s'ajoutent à la statistique d'équipement du même nom.",
  "Player": "Joueur",
  "Profit": "Profit",
@@ -3822,5 +3822,5 @@
  "Defense + Tank": "Défense + tank",
  "Seeds": "Graines",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Heures simulées par calcul. Des calculs plus longs sont plus stables, et chacun prend plus de temps.",
- "Runs per modifier in the first pass, every modifier on the same seeds as the empty belt. Each later round doubles it for the better half.": "Calculs par modificateur au premier passage, chaque modificateur sur les mêmes graines que la ceinture vide. Chaque tour suivant les double pour la meilleure moitié."
+ "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Calculs par modificateur, chaque modificateur sur les mêmes graines que la ceinture vide. L'erreur diminue avec la racine carrée : 8 graines de 1 000 heures placent une ligne typique à environ 5 % près."
 }
