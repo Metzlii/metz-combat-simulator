@@ -997,5 +997,7 @@
  "Roll the other lines until it is good enough": "Roll the other lines until it is good enough",
  "Roll until it is good enough": "Roll until it is good enough",
  "Attunement for the grades": "Attunement for the grades",
- "Spent when reached {m}, 9 in 10 within {p}": "Spent when reached {m}, 9 in 10 within {p}"
+ "Spent when reached {m}, 9 in 10 within {p}": "Spent when reached {m}, 9 in 10 within {p}",
+ "Solo: {members}": "Solo: {members}",
+ "Party of {n}: {members}": "Party of {n}: {members}"
 }

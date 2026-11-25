@@ -4002,5 +4002,7 @@
  "Roll the other lines until it is good enough": "十分になるまでほかのラインを振る",
  "Roll until it is good enough": "十分になるまで振る",
  "Attunement for the grades": "グレードは調律",
- "Spent when reached {m}, 9 in 10 within {p}": "到達時の消費 {m}、10回中9回は {p} 以内"
+ "Spent when reached {m}, 9 in 10 within {p}": "到達時の消費 {m}、10回中9回は {p} 以内",
+ "Solo: {members}": "ソロ：{members}",
+ "Party of {n}: {members}": "{n} 人パーティー：{members}"
 }

@@ -4002,5 +4002,7 @@
  "Roll the other lines until it is good enough": "충분할 때까지 다른 라인 굴리기",
  "Roll until it is good enough": "충분할 때까지 굴리기",
  "Attunement for the grades": "등급은 조율",
- "Spent when reached {m}, 9 in 10 within {p}": "도달 시 소비 {m}, 10번 중 9번은 {p} 이내"
+ "Spent when reached {m}, 9 in 10 within {p}": "도달 시 소비 {m}, 10번 중 9번은 {p} 이내",
+ "Solo: {members}": "솔로: {members}",
+ "Party of {n}: {members}": "{n}인 파티: {members}"
 }

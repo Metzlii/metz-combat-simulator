@@ -4000,5 +4000,7 @@
  "Roll the other lines until it is good enough": "Роллить остальные строки, пока не будет достаточно",
  "Roll until it is good enough": "Роллить, пока не будет достаточно",
  "Attunement for the grades": "Гармония для уровней",
- "Spent when reached {m}, 9 in 10 within {p}": "Потрачено при достижении {m}, 9 из 10 в пределах {p}"
+ "Spent when reached {m}, 9 in 10 within {p}": "Потрачено при достижении {m}, 9 из 10 в пределах {p}",
+ "Solo: {members}": "Соло: {members}",
+ "Party of {n}: {members}": "Группа из {n}: {members}"
 }

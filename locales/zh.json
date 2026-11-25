@@ -4145,5 +4145,7 @@
  "Roll the other lines until it is good enough": "洗其余词条直到足够好",
  "Roll until it is good enough": "洗到足够好为止",
  "Attunement for the grades": "用调谐提等级",
- "Spent when reached {m}, 9 in 10 within {p}": "达到时花费 {m}，十次中九次在 {p} 以内"
+ "Spent when reached {m}, 9 in 10 within {p}": "达到时花费 {m}，十次中九次在 {p} 以内",
+ "Solo: {members}": "单人：{members}",
+ "Party of {n}: {members}": "{n} 人队伍：{members}"
 }

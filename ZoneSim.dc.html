@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=856915facd83"></script>
+<script src="./support.js?v=bb9aa00df55c"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=856915facd83">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=bb9aa00df55c">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=856915facd83">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=856915facd83"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=bb9aa00df55c">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=bb9aa00df55c"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1533,7 +1533,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=856915facd83").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=bb9aa00df55c").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -4175,6 +4175,9 @@ class Component extends DCLogic {
       if (k === "/damage_over_time") return Component.t("Damage over time");
       if (k === "/thorns") return Component.t("Thorns");
       if (k === "/retaliation") return Component.t("Retaliation");
+      // Talisman specials as their own lines (2026-11-25): what an Echo repeat dealt, and Overkill's carried damage.
+      if (k === "/echo") return Component.t("Echo");
+      if (k === "/overkill") return Component.t("Overkill");
       if (k === "/hp_regen") return Component.t("HP regen");
       if (k === "/mp_regen") return Component.t("Mana regen");
       if (k === "/mana_leech") return Component.t("Mana leech");

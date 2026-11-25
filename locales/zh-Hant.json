@@ -4005,5 +4005,7 @@
  "Roll the other lines until it is good enough": "洗其餘詞條直到足夠好",
  "Roll until it is good enough": "洗到足夠好為止",
  "Attunement for the grades": "用調諧提等級",
- "Spent when reached {m}, 9 in 10 within {p}": "達到時花費 {m}，十次中九次在 {p} 以內"
+ "Spent when reached {m}, 9 in 10 within {p}": "達到時花費 {m}，十次中九次在 {p} 以內",
+ "Solo: {members}": "單人：{members}",
+ "Party of {n}: {members}": "{n} 人隊伍：{members}"
 }

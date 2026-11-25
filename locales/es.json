@@ -3929,5 +3929,7 @@
  "Roll the other lines until it is good enough": "Tirar las otras líneas hasta que sea suficiente",
  "Roll until it is good enough": "Tirar hasta que sea suficiente",
  "Attunement for the grades": "Sintonía para los grados",
- "Spent when reached {m}, 9 in 10 within {p}": "Gastado al llegar {m}, 9 de cada 10 dentro de {p}"
+ "Spent when reached {m}, 9 in 10 within {p}": "Gastado al llegar {m}, 9 de cada 10 dentro de {p}",
+ "Solo: {members}": "Solo: {members}",
+ "Party of {n}: {members}": "Grupo de {n}: {members}"
 }

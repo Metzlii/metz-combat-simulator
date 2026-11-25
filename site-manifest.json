@@ -1,29 +1,29 @@
 {
- "builtAt": "2026-11-25T18:30:24.692Z",
- "commit": "4ad58ae",
+ "builtAt": "2026-11-25T19:03:53.368Z",
+ "commit": "3fb37ea",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
    "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm",
    "init_client_data.json"
   ],
-  "bytes": 6555874,
-  "gzip": 654583,
+  "bytes": 6556279,
+  "gzip": 654622,
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
   "files": 54,
-  "bytes": 19193887,
-  "gzip": 3457690
+  "bytes": 19197279,
+  "gzip": 3458637
  },
  "files": {
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3780
+   "gzip": 3779
   },
   "ZoneSim.dc.html": {
-   "bytes": 420106,
-   "gzip": 107989
+   "bytes": 420338,
+   "gzip": 108064
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js": {
    "bytes": 300,
@@ -62,8 +62,8 @@
    "gzip": 4141
   },
   "index.html": {
-   "bytes": 495677,
-   "gzip": 124213
+   "bytes": 497543,
+   "gzip": 124780
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -71,47 +71,47 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1481
+   "gzip": 1477
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
-   "bytes": 3804797,
-   "gzip": 450300
+   "bytes": 3805202,
+   "gzip": 450339
   },
   "locales/en.json": {
-   "bytes": 120112,
-   "gzip": 25280
+   "bytes": 120206,
+   "gzip": 25306
   },
   "locales/es.json": {
-   "bytes": 259856,
-   "gzip": 71134
+   "bytes": 259950,
+   "gzip": 71161
   },
   "locales/fr.json": {
-   "bytes": 260448,
-   "gzip": 71503
+   "bytes": 260545,
+   "gzip": 71537
   },
   "locales/ja.json": {
-   "bytes": 275379,
-   "gzip": 82379
+   "bytes": 275487,
+   "gzip": 82423
   },
   "locales/ko.json": {
-   "bytes": 259628,
-   "gzip": 79050
+   "bytes": 259725,
+   "gzip": 79082
   },
   "locales/pt.json": {
-   "bytes": 258514,
-   "gzip": 70804
+   "bytes": 258608,
+   "gzip": 70832
   },
   "locales/ru.json": {
-   "bytes": 340909,
-   "gzip": 88121
+   "bytes": 341016,
+   "gzip": 88164
   },
   "locales/zh-Hant.json": {
-   "bytes": 237259,
-   "gzip": 78912
+   "bytes": 237358,
+   "gzip": 78952
   },
   "locales/zh.json": {
-   "bytes": 277141,
-   "gzip": 97489
+   "bytes": 277240,
+   "gzip": 97523
   },
   "server/abilities.mjs": {
    "bytes": 6802,
@@ -127,11 +127,11 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 11039,
-   "gzip": 4502
+   "gzip": 4499
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
-   "gzip": 3189
+   "gzip": 3185
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -139,11 +139,11 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 6551,
-   "gzip": 2225
+   "gzip": 2223
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
-   "gzip": 3423
+   "gzip": 3421
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -151,19 +151,19 @@
   },
   "server/zoneDerive.mjs": {
    "bytes": 11204,
-   "gzip": 4252
+   "gzip": 4249
   },
   "server/zoneImport.mjs": {
    "bytes": 16330,
-   "gzip": 5809
+   "gzip": 5806
   },
   "server/zoneOptimize.mjs": {
    "bytes": 43446,
-   "gzip": 15314
+   "gzip": 15312
   },
   "server/zoneSim.mjs": {
    "bytes": 15144,
-   "gzip": 5595
+   "gzip": 5593
   },
   "server/zoneTalismanData.mjs": {
    "bytes": 10050,
@@ -171,15 +171,15 @@
   },
   "server/zoneTalismanRolls.mjs": {
    "bytes": 20675,
-   "gzip": 7343
+   "gzip": 7341
   },
   "server/zoneTalismans.mjs": {
    "bytes": 8252,
-   "gzip": 3571
+   "gzip": 3569
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 49287,
-   "gzip": 17566
+   "gzip": 17563
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -211,11 +211,11 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 6801,
-   "gzip": 2555
+   "gzip": 2553
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
-   "gzip": 547
+   "gzip": 545
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
@@ -223,15 +223,15 @@
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 147
+   "gzip": 146
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
-   "gzip": 218
+   "gzip": 216
   },
   "zoneApi.js": {
    "bytes": 6297,
-   "gzip": 2440
+   "gzip": 2438
   }
  }
 }
