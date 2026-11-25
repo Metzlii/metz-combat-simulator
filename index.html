@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="ac48b5124037"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="5be4474e6380"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=ac48b5124037"></script>
+<script src="./support.js?v=5be4474e6380"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ac48b5124037">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=5be4474e6380">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=ac48b5124037">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ac48b5124037"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=5be4474e6380">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=5be4474e6380"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -196,15 +196,22 @@
 
     <sc-if value="{{ onOptimize }}" hint-placeholder-val="{{ false }}">
       <div style="display:flex;flex-direction:column;gap:var(--space-4);line-height:1.5">
+        <sc-if value="{{ up.notTalisman }}" hint-placeholder-val="{{ true }}">
         <h3 style="margin:0;font-size:17px">Upgrade finder</h3>
+        </sc-if>
         <div class="seg" style="align-self:flex-start">
           <button class="seg-opt" data-tour="mode-upgrades" style="font-size:13px;{{ up.modeUpgrades.style }}" onClick="{{ up.modeUpgrades.go }}">Upgrades</button>
           <button class="seg-opt" data-tour="mode-triggers" style="font-size:13px;{{ up.modeTriggers.style }}" onClick="{{ up.modeTriggers.go }}">Trigger values</button>
           <button class="seg-opt" data-tour="mode-skills" style="font-size:13px;{{ up.modeSkills.style }}" onClick="{{ up.modeSkills.go }}">Skill levelling</button>
           <button class="seg-opt" data-tour="mode-food" data-t="Optimizer tab: Food & drinks" style="font-size:13px;{{ up.modeFood.style }}" onClick="{{ up.modeFood.go }}">Food &amp; drinks</button>
           <button class="seg-opt" data-tour="mode-loadouts" style="font-size:13px;{{ up.modeLoadouts.style }}" onClick="{{ up.modeLoadouts.go }}">Loadouts × planets</button>
+          <sc-if value="{{ development }}" hint-placeholder-val="{{ false }}">
+            <button class="seg-opt" style="font-size:13px;{{ up.modeTalWeights.style }}" onClick="{{ up.modeTalWeights.go }}">Talisman Stat Weighting</button>
+            <button class="seg-opt" style="font-size:13px;{{ up.modeTalCraft.style }}" onClick="{{ up.modeTalCraft.go }}">Talisman Crafting</button>
+          </sc-if>
         </div>
 
+        <sc-if value="{{ up.notTalisman }}" hint-placeholder-val="{{ true }}">
         <sc-if value="{{ up.noParty }}" hint-placeholder-val="{{ false }}">
           <div class="card" style="max-width:62ch;gap:8px">
             <div class="card-title" style="font-size:15px;margin:0">No party to search</div>
@@ -1226,6 +1233,208 @@
             </sc-if>
           </div>
         </div>
+        </sc-if>
+        <sc-if value="{{ up.onTalWeights }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+          <h3 style="margin:0;font-size:17px">Talisman Stat Weighting</h3>
+          <div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px;text-wrap:pretty;max-width:80ch">The test server lists a talisman's Attack Speed line in your stats but does not apply it to your attack interval (reported as a bug). This simulator applies it, so Attack Speed is worth more here than on the test server today.</div>
+          <div style="font-size:13.5px;text-wrap:pretty">Which talisman modifiers are worth the most to one player, on one belt, in one zone. First every combat modifier is measured as the only line on the belt. Then the best set is built one line at a time, each step keeping the line that gains the most on top of the lines already chosen. Every line is taken at one grade, so this says what to aim for, not what a roll costs.</div>
+          <sc-if value="{{ dev.noParty }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px;text-wrap:pretty">Import a party on Setup first. The optimizer uses that party as it stands, with the belt below added to the chosen player.</div>
+          </sc-if>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 14px;align-items:end">
+            <label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Player</span>
+              <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;min-width:0" value="{{ dev.player }}" onChange="{{ dev.setPlayer }}">
+                <sc-for list="{{ dev.playerOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+              </sc-raw-select>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Zone and tier</span>
+              <div style="display:flex;gap:6px">
+                <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:1;min-width:0" value="{{ up.zone }}" onChange="{{ up.setZone }}">
+                  <sc-for list="{{ up.zoneOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                </sc-raw-select>
+                <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:none;width:72px" value="{{ up.tier }}" onChange="{{ up.setTier }}">
+                  <sc-for list="{{ up.tierOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                </sc-raw-select>
+              </div>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Belt and enhancement</span>
+              <div style="display:flex;gap:6px">
+                <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;flex:1;min-width:0" value="{{ dev.belt }}" onChange="{{ dev.setBelt }}">
+                  <sc-for list="{{ dev.beltOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                </sc-raw-select>
+                <input class="input" type="number" min="0" max="20" step="1" style="min-height:31px;padding:3px 7px;font-size:13px;flex:none;width:72px" dc-attr-value="{{ dev.level }}" onChange="{{ dev.setLevel }}" aria-label="Belt enhancement level">
+              </div>
+            </label>
+            <label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Grade of every line</span>
+              <sc-raw-select class="input" style="min-height:31px;padding:3px 7px;font-size:13px;min-width:0" value="{{ dev.grade }}" onChange="{{ dev.setGrade }}">
+                <sc-for list="{{ dev.gradeOpts }}" as="o" hint-placeholder-count="6"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+              </sc-raw-select>
+            </label>
+          </div>
+          <div style="display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap">
+            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Judge by</span>
+            <div class="seg">
+              <button class="seg-opt" style="font-size:12.5px;border:0;{{ dev.paceStyle }}" onClick="{{ dev.pickPace }}">{{ dev.paceLabel }}</button>
+              <button class="seg-opt" style="font-size:12.5px;border:0;{{ dev.xpStyle }}" onClick="{{ dev.pickXp }}">XP / h</button>
+              <button class="seg-opt" style="font-size:12.5px;border:0;{{ dev.profitStyle }}" onClick="{{ dev.pickProfit }}">Profit</button>
+            </div>
+            <span class="text-muted" style="font-size:12.5px">{{ dev.beltNote }}</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left;border-radius:var(--radius-sm)" style-hover="background:color-mix(in srgb, var(--color-accent) 10%, transparent)" onClick="{{ dev.togglePools }}">
+              <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ dev.poolsCaret }} Modifiers to measure</span>
+              <span class="text-muted" style="font-size:12px;margin-left:auto">{{ dev.poolsSummary }}</span>
+            </button>
+            <sc-if value="{{ dev.poolsOpen }}" hint-placeholder-val="{{ false }}">
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured and never put in the set, which shortens the search. The choice is kept in this browser.</div>
+              <sc-for list="{{ dev.pools }}" as="pl" hint-placeholder-count="4">
+                <div style="display:flex;flex-direction:column;gap:4px">
+                  <div style="display:flex;gap:9px;align-items:baseline;padding-top:5px;border-top:1px solid var(--color-divider)">
+                    <span style="font-size:13px;font-weight:600">{{ pl.name }}</span>
+                    <span class="text-muted" style="font-size:12px">{{ pl.count }}</span>
+                    <button class="btn btn-ghost" style="padding:1px 8px;font-size:12px;margin-left:auto" onClick="{{ pl.toggle }}">{{ pl.toggleLabel }}</button>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:3px 12px">
+                    <sc-for list="{{ pl.mods }}" as="md" hint-placeholder-count="8"><label style="display:flex;gap:5px;align-items:center;font-size:12.5px"><input type="checkbox" checked="{{ md.on }}" onChange="{{ md.toggle }}">{{ md.name }}</label></sc-for>
+                  </div>
+                </div>
+              </sc-for>
+            </sc-if>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <sc-if value="{{ dev.running }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-secondary" style="padding:4px 16px;font-size:14px" onClick="{{ dev.stop }}">Stop</button>
+            </sc-if>
+            <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ dev.runDisabled }}" onClick="{{ dev.run }}">Find the best talismans</button>
+            <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ dev.stage }}</span>
+          </div>
+          <sc-if value="{{ dev.error }}" hint-placeholder-val="{{ false }}">
+            <div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px;text-wrap:pretty">{{ dev.error }}</div>
+          </sc-if>
+          <sc-if value="{{ dev.hasSet }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:7px;padding:9px 11px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 26%, transparent)">
+              <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ dev.setTitle }}</div>
+              <div style="font-size:15px;color:var(--color-accent-300);font-variant-numeric:tabular-nums">{{ dev.combined }}</div>
+              <sc-for list="{{ dev.talismans }}" as="t" hint-placeholder-count="3">
+                <div style="font-size:13px;font-variant-numeric:tabular-nums;text-wrap:pretty"><span class="text-muted">{{ t.label }}</span> {{ t.lines }}</div>
+              </sc-for>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.setNote }}</div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ dev.hasSteps }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">The set, line by line</div>
+              <sc-for list="{{ dev.steps }}" as="st" hint-placeholder-count="4">
+                <div style="display:flex;gap:10px;font-size:13px;font-variant-numeric:tabular-nums"><span class="text-muted" style="flex:none;width:2.2em;text-align:right">{{ st.n }}</span><span style="flex:1;min-width:0">{{ st.name }}</span><span style="flex:none;color:var(--color-accent-300)">{{ st.gain }}</span></div>
+              </sc-for>
+            </div>
+          </sc-if>
+          <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div style="display:flex;gap:10px;align-items:baseline;flex-wrap:wrap">
+                <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Every grade of every modifier</div>
+                <button class="btn btn-ghost" style="padding:2px 8px;font-size:12.5px;margin-left:auto" title="Gain per grade for every modifier, as JSON, for use in another tool" onClick="{{ dev.copyWeights }}">{{ dev.copyLabel }}</button>
+              </div>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.gradeNote }}</div>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) repeat(6,3.2em);gap:3px 8px;font-size:13px;font-variant-numeric:tabular-nums">
+                <span class="text-muted" style="font-size:12px">Modifier</span>
+                <sc-for list="{{ dev.gradeHead }}" as="g" hint-placeholder-count="6"><span class="text-muted" style="font-size:12px;text-align:right">{{ g.label }}</span></sc-for>
+                <sc-for list="{{ dev.gradeRows }}" as="r" hint-placeholder-count="8">
+                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{{ r.style }}">{{ r.name }}</span>
+                  <sc-for list="{{ r.cells }}" as="c" hint-placeholder-count="6"><span style="{{ c.style }}">{{ c.text }}</span></sc-for>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <sc-if value="{{ dev.hasRows }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:4px">
+              <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Each line alone</div>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.rowsNote }}</div>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto;gap:3px 16px;font-size:13px;font-variant-numeric:tabular-nums">
+                <span class="text-muted" style="font-size:12px">Modifier</span><span class="text-muted" style="font-size:12px;text-align:right">Line value</span><span class="text-muted" style="font-size:12px;text-align:right">Gain</span><span class="text-muted" style="font-size:12px;text-align:right">Share</span>
+                <sc-for list="{{ dev.rows }}" as="r" hint-placeholder-count="8">
+                  <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;{{ r.style }}">{{ r.name }}</span><span style="text-align:right" class="text-muted">{{ r.value }}</span><span style="text-align:right;{{ r.style }}">{{ r.gain }}</span><span style="text-align:right" class="text-muted">{{ r.share }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+        </div>
+        </sc-if>
+        <sc-if value="{{ up.onTalCraft }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:var(--space-3)">
+            <h3 style="margin:0;font-size:17px">Talisman Crafting</h3>
+            <div style="font-size:13.5px;text-wrap:pretty">With a stat weighting, the odds of crafting a talisman up to a target share of the best one possible, for each way of spending orbs, within a budget. Prices are the market's lowest ask; type your own where an item has none yet. Every orb's roll can be discarded, so each plan keeps a roll only when it helps, and stops as soon as the talisman is good enough.</div>
+            <sc-if value="{{ roll.ready }}" hint-placeholder-val="{{ false }}">
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px 14px;align-items:end">
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0;grid-column:1 / -1"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Stat weighting</span>
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.weighting }}" onChange="{{ roll.setWeighting }}">
+                    <sc-for list="{{ roll.weightOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </sc-raw-select></label>
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0;grid-column:span 2"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Start from</span>
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.talisman }}" onChange="{{ roll.setTalisman }}">
+                    <sc-for list="{{ roll.talismanOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </sc-raw-select>
+                </label>
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Target (% of the best)</span>
+                  <input class="input" style="min-height:29px;padding:2px 6px;font-size:13px;" type="number" min="1" max="100" step="1" dc-attr-value="{{ roll.target }}" onChange="{{ roll.setTarget }}"></label>
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0;grid-column:span 2"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Exchange Orb</span>
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.exchange }}" onChange="{{ roll.setExchange }}">
+                    <sc-for list="{{ roll.exchangeOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </sc-raw-select></label>
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0;grid-column:span 2"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Cost</span>
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.priceMode }}" onChange="{{ roll.setPriceMode }}">
+                    <sc-for list="{{ roll.priceModeOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </sc-raw-select></label>
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ roll.budgetLabel }}</span>
+                  <input class="input" style="min-height:29px;padding:2px 6px;font-size:13px;" dc-attr-value="{{ roll.budget }}" onChange="{{ roll.setBudget }}"></label>
+              </div>
+              <sc-if value="{{ roll.coinMode }}" hint-placeholder-val="{{ false }}">
+              <details style="font-size:13px"><summary class="text-muted" style="cursor:pointer;font-size:12.5px">Prices</summary>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:5px 14px;padding-top:6px">
+                  <sc-for list="{{ roll.prices }}" as="pr" hint-placeholder-count="10">
+                    <label style="display:flex;gap:6px;align-items:center;min-width:0"><span style="flex:1;min-width:0;font-size:12.5px">{{ pr.label }}</span>
+                      <input class="input" style="min-height:29px;padding:2px 6px;font-size:13px;width:84px;flex:none" placeholder="{{ pr.placeholder }}" dc-attr-value="{{ pr.value }}" onChange="{{ pr.set }}">
+                      <span class="text-muted" style="font-size:11px;width:92px;flex:none">{{ pr.note }}</span></label>
+                  </sc-for>
+                </div>
+              </details>
+              </sc-if>
+              <div style="display:flex;gap:10px;align-items:center">
+                <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ roll.runDisabled }}" onClick="{{ roll.run }}">Work out the odds</button>
+                <sc-if value="{{ roll.running }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:13px">rolling…</span></sc-if>
+              </div>
+              <sc-if value="{{ roll.error }}" hint-placeholder-val="{{ false }}"><div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px">{{ roll.error }}</div></sc-if>
+              <sc-if value="{{ roll.hasOut }}" hint-placeholder-val="{{ false }}">
+                <div style="font-size:13px;text-wrap:pretty">{{ roll.summary }}</div>
+                <sc-if value="{{ roll.build }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ roll.build }}</div></sc-if>
+                <label style="display:flex;gap:8px;align-items:center;align-self:flex-start"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Show power as</span>
+                  <sc-raw-select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;width:auto" value="{{ roll.showAs }}" onChange="{{ roll.setShowAs }}">
+                    <sc-for list="{{ roll.showAsOpts }}" as="o" hint-placeholder-count="4"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </sc-raw-select></label>
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto auto;gap:4px 14px;font-size:13px;font-variant-numeric:tabular-nums;align-items:baseline">
+                  <span class="text-muted" style="font-size:12px">Plan</span><span class="text-muted" style="font-size:12px;text-align:right">Chance</span><span class="text-muted" style="font-size:12px;text-align:right">{{ roll.spendHead }}</span><span class="text-muted" style="font-size:12px;text-align:right" title="Median and 90th percentile of what it cost when it got there">Spent when reached</span><span class="text-muted" style="font-size:12px;text-align:right" title="Orbs and cores used on average, when it got there">Used</span><span class="text-muted" style="font-size:12px;text-align:right" title="{{ roll.powerTip }}">Average power</span>
+                  <sc-for list="{{ roll.plans }}" as="pl" hint-placeholder-count="6">
+                    <span style="min-width:0;text-wrap:pretty;{{ pl.style }}">{{ pl.name }}</span><span style="text-align:right;color:var(--color-accent-300);{{ pl.style }}">{{ pl.chance }}</span><span style="text-align:right;{{ pl.style }}">{{ pl.mean }}</span><span style="text-align:right;{{ pl.style }}">{{ pl.reached }}</span><span style="text-align:right;font-size:12px;{{ pl.style }}">{{ pl.mix }}</span><span style="text-align:right;{{ pl.style }}">{{ pl.power }}</span>
+                  </sc-for>
+                </div>
+                <sc-if value="{{ roll.hasOnce }}" hint-placeholder-val="{{ false }}">
+                  <div class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;padding-top:6px">Is this one good enough? Each orb once, kept only if better</div>
+                  <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto;gap:4px 14px;font-size:13px;font-variant-numeric:tabular-nums">
+                    <span class="text-muted" style="font-size:12px">Orb</span><span class="text-muted" style="font-size:12px;text-align:right">Better</span><span class="text-muted" style="font-size:12px;text-align:right" title="How much better, as a share of the best talisman, when it is">Gain when better</span><span class="text-muted" style="font-size:12px;text-align:right">Average after</span><span class="text-muted" style="font-size:12px;text-align:right" title="The orb's price over its chance to come out better">Cost to beat it</span>
+                    <sc-for list="{{ roll.once }}" as="o" hint-placeholder-count="6">
+                      <span>{{ o.orb }}</span><span style="text-align:right;color:var(--color-accent-300)">{{ o.better }}</span><span style="text-align:right">{{ o.gain }}</span><span style="text-align:right">{{ o.after }}</span><span style="text-align:right">{{ o.cost }}</span>
+                    </sc-for>
+                  </div>
+                </sc-if>
+                <div class="text-muted" style="font-size:12px;text-wrap:pretty">{{ roll.note }}</div>
+              </sc-if>
+            </sc-if>
+            <sc-if value="{{ roll.notReady }}" hint-placeholder-val="{{ true }}">
+              <div class="text-muted" style="font-size:12.5px">Run Talisman Stat Weighting first: the odds are worked out on its gains.</div>
+            </sc-if>
+          </div>
+        </sc-if>
       </div>
     </sc-if>
 
@@ -1304,6 +1513,17 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-25</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.50</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Development tools, for the test server's belt and talismans.</b> Off unless you tick the option at the bottom of this tab; with it off, nothing in any run changes.</li>
+                <li>An export from the test server brings the belt and talismans each character wears, and those of every saved loadout. The loadout editor gets a Belt and talismans section, the derived stats show what each talisman adds, and runs fight with them.</li>
+                <li><b>Optimize › Talisman Stat Weighting</b>: what every modifier is worth to one player on a belt in a zone, at every grade, in pace, XP / h or profit; switch off the modifiers you have no use for, by purpose; copy the weights for other tools.</li>
+                <li><b>Optimize › Talisman Crafting</b>: the odds of crafting a talisman up to a target, plan by plan, within a budget of orbs (or coins once the items have a market). Every orb's rule from the game data, the grade odds the developer stated, rolls kept only when they help, and the lock-and-Exchange route.</li>
+                <li>The six special modifiers fight by rules measured in combat on the test server. The game can change any of it before release.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-23</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.49</b></div>
@@ -1803,6 +2023,48 @@
             </div>
           </div>
         </details>
+
+        <!-- Development tools (operator, 2026-11-25): opt-in, at the bottom of About. Nothing unreleased is shown
+             or simulated until this is ticked; ticking it only adds the Development tab. -->
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);border-top:1px solid var(--color-divider);padding-top:var(--space-4)">
+          <h4 style="margin:0;font-size:15px">Development tools</h4>
+          <label style="display:flex;gap:8px;align-items:flex-start;font-size:13.5px;text-wrap:pretty;cursor:pointer">
+            <input type="checkbox" checked="{{ development }}" onChange="{{ toggleDevelopment }}" style="margin-top:4px">
+            <span>Show the Development tab. It holds tools for game features that are on the test server and not released yet. They are built on guesses about how those features work and will change. Everything else on this site stays on the released game's rules whether this is ticked or not.</span>
+          </label>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ onDevelopment }}" hint-placeholder-val="{{ false }}">
+      <div style="display:flex;flex-direction:column;gap:var(--space-5);max-width:74ch;line-height:1.55">
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <h3 style="margin:0;font-size:17px">Development</h3>
+          <div style="font-size:13.5px;text-wrap:pretty">Tools for game features that are on the test server and not released. Nothing here is final: the game can change before release, and so will these. Untick the option at the bottom of About to hide this tab again.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2)">
+          <h4 style="margin:0;font-size:15px">Belt and talismans</h4>
+          <div style="font-size:13.5px;text-wrap:pretty">The test server adds a belt slot that holds up to three talismans, each with up to four modifiers of grade 1 to 6. The combat kernel on this site fights with them, by rules measured on the test server.</div>
+          <ul class="about-list">
+            <li>Ordinary modifiers (attack speed, armor, accuracy and the rest) are read from the test server's game data and add to the gear stat of the same name.</li>
+            <li>A belt's Talisman Power raises every modifier: value × (1 + power). Confirmed in game for the six special modifiers.</li>
+            <li>The six special modifiers (Smite, Consistency, Shatter, Echo, Fortify, Overkill) follow rules measured in combat on the test server. The game can still change them before release.</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:var(--space-2);padding-top:var(--space-4);border-top:1px solid var(--color-divider)">
+          <h4 style="margin:0;font-size:15px">Your belt and talismans</h4>
+          <div style="font-size:13.5px;text-wrap:pretty">An export from the test server (the Combat Sim Helper's test-server build) brings the belt and the talismans each character wears, and those of every saved loadout. While this tab is switched on, runs on Setup fight with them, the derived stats include them, and the loadout editor on Setup has a Belt and talismans section to change them. Switched off, they are left out and every run is the released game.</div>
+          <sc-for list="{{ dev.imported }}" as="ip" hint-placeholder-count="1">
+            <div style="display:flex;flex-direction:column;gap:2px;font-size:13px;font-variant-numeric:tabular-nums">
+              <div><b>{{ ip.name }}</b> <span class="text-muted">{{ ip.belt }}</span></div>
+              <sc-for list="{{ ip.talismans }}" as="t" hint-placeholder-count="3"><div style="text-wrap:pretty"><span class="text-muted">{{ t.label }}</span> {{ t.lines }}</div></sc-for>
+            </div>
+          </sc-for>
+          <sc-if value="{{ dev.noImported }}" hint-placeholder-val="{{ true }}">
+            <div class="text-muted" style="font-size:12.5px">No one in the imported party has a belt or talismans.</div>
+          </sc-if>
+        </div>
+        <div style="font-size:13.5px;text-wrap:pretty;padding-top:var(--space-3);border-top:1px solid var(--color-divider)">The talisman tools are on the Optimize tab while this option is on: <b>Talisman Stat Weighting</b> (which modifiers are worth the most, at every grade) and <b>Talisman Crafting</b> (the orbs, their odds and their cost to reach a talisman you are happy with).</div>
       </div>
     </sc-if>
   </main>
@@ -1815,11 +2077,13 @@ class Component extends DCLogic {
   // are views of that one component (it stays mounted across every tab, so the party, the edits and the last
   // run survive a trip through Optimize or About); Optimize and About are this document's own. No server:
   // zoneApi.js answers every zone call in the page, so the built site is plain static files.
-  state = { client: null, booting: true, error: "", tab: "setup", fresh: false, partyScriptSeen: Component.partyScriptSeenBefore(), tour: null,
+  state = { client: null, booting: true, error: "", tab: "setup", fresh: false, development: Component.developmentOn(), partyScriptSeen: Component.partyScriptSeenBefore(), tour: null,
     // The Optimize tab's own state. `party` is reported up by ZoneSim (on-party) — the imported, edited,
     // seated party, which is what the finder searches; `zones` and `limits` are this document's own requests.
     party: [], zones: null, limits: null,
     upForm: {}, upEnh: {}, upSec: {}, upMode: "upgrades", optRestoredAt: null,
+    devRoll: (() => { try { return JSON.parse(localStorage.getItem("mwi.zone.talismanRoll") || "{}") || {}; } catch { return {}; } })(), devRollRunning: false, devRollDone: null, devRollError: "",
+    devForm: {}, devChoices: null, devRunning: false, devRows: [], devSteps: [], devHead: null, devDone: null, devError: "",
     trigForm: {}, trigRunning: false, trigRows: [], trigSteps: [], trigHead: null, trigDone: null, trigError: "",
     skillForm: {}, skillMetric: "xp", skillPerOpen: false, skillRunning: false, skillRows: [], skillHead: null, skillDone: null, skillError: "",
     foodForm: {}, foodRunning: false, foodRows: [], foodHead: null, foodDone: null, foodError: "",
@@ -1853,8 +2117,255 @@ class Component extends DCLogic {
     { id: "compare", label: "Compare", glyph: "ph-arrows-left-right" },
     { id: "optimize", label: "Optimize", glyph: "ph-target" },
     { id: "saved", label: "Saved", glyph: "ph-bookmarks-simple" },
+    // Shown only to a visitor who ticked "Show the Development tab" at the bottom of About.
+    { id: "development", label: "Development", glyph: "ph-flask", development: true },
     { id: "about", label: "About", glyph: "ph-info" },
   ];
+  // The Development opt-in, per browser. Off by default; nothing unreleased is shown or simulated without it.
+  static DEVELOPMENT_KEY = "mwi.zone.development";
+  static developmentOn() { try { return localStorage.getItem(Component.DEVELOPMENT_KEY) === "1"; } catch { return false; } }
+  setDevelopment(on) {
+    try { if (on) localStorage.setItem(Component.DEVELOPMENT_KEY, "1"); else localStorage.removeItem(Component.DEVELOPMENT_KEY); } catch {}
+    // Turning it off while the tab is showing would leave the visitor on a tab that no longer exists.
+    this.setState({ development: !!on, tab: !on && this.state.tab === "development" ? "about" : this.state.tab,
+      ...(!on && (this.state.upMode === "talWeights" || this.state.upMode === "talCraft") ? { upMode: "upgrades" } : {}) });
+  }
+  // ---- Development: the talisman optimizer (DEV-1; unreleased game content, shown only with the opt-in) ----------
+  devVal(k) { const v = this.state.devForm[k]; if (v !== undefined) return v;
+    const d = this.state.devChoices?.defaults || {};
+    const own = k === "belt" || k === "level" ? (this.state.party || []).find(p => p?.record?.name === this.devVal("player"))?.loadout?.belt : null;
+    return k === "belt" ? (own?.itemHrid || d.belt?.itemHrid || "/items/large_talisman_belt") : k === "level" ? (own ? own.enhancementLevel : (d.belt?.enhancementLevel ?? 10)) : k === "grade" ? (d.grade || 6) : k === "metric" ? "eph"
+      : k === "player" ? (this.importerName() || (this.state.party || [])[0]?.record?.name || "") : undefined; }
+  setDev(patch) { this.setState(s => ({ devForm: { ...s.devForm, ...patch } })); }
+  // The modifiers switched off for the search, kept in this browser: a tank's list and a mage's list differ, and
+  // nobody wants to untick thirty lines twice.
+  static DEV_OFF_KEY = "mwi.zone.talismanOff";
+  devOff() { if (!this._devOff) { try { this._devOff = JSON.parse(localStorage.getItem(Component.DEV_OFF_KEY) || "{}") || {}; } catch { this._devOff = {}; } } return this._devOff; }
+  setDevOff(hrids, off) { const next = { ...this.devOff() }; for (const h of hrids) { if (off) next[h] = true; else delete next[h]; }
+    this._devOff = next; try { localStorage.setItem(Component.DEV_OFF_KEY, JSON.stringify(next)); } catch {} this.forceUpdate(); }
+  async devEnsureChoices() {
+    const c = this.state.client;
+    if (this.state.devChoices || this._devAsked || !c?.zoneTalismanChoices) return;
+    this._devAsked = true;
+    try { this.setState({ devChoices: await c.zoneTalismanChoices() }); } catch (e) { this._devAsked = false; console.warn("talisman choices unavailable", e); }
+  }
+  devBody() {
+    const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
+    return { players: this.state.party, zone: this.upVal("zone"), difficultyTier: num(this.upVal("tier"), 0), player: this.devVal("player"), development: true,
+      belt: { itemHrid: this.devVal("belt"), enhancementLevel: Math.max(0, Math.min(20, Math.floor(num(this.devVal("level"), 0)))) }, grade: num(this.devVal("grade"), 6),
+      goal: { metric: this.devVal("metric") }, exclude: Object.keys(this.devOff()), accountBuffs: this.state.buffs || null, ...(this.state.measure || {}) };
+  }
+  async devRun() {
+    const c = this.state.client;
+    if (!c?.zoneTalismansStream || !(this.state.party || []).length || !this.upVal("zone") || this.state.devRunning) return;
+    this._devT0 = Date.now();
+    clearInterval(this._devTick);
+    this._devTick = setInterval(() => this.forceUpdate(), 1000);
+    this.setState({ devRunning: true, devError: "", devRows: [], devSteps: [], devHead: null, devDone: null });
+    const finish = patch => { clearInterval(this._devTick); this._devTick = null; this.setState({ devRunning: false, ...patch }); };
+    try {
+      const stream = c.zoneTalismansStream(this.devBody(), {
+        onHead: h => this.setState({ devHead: h }),
+        onRow: m => this.setState(s => { const rows = (s.devRows || []).slice(), row = { ...(m.row || m), index: m.index }, at = rows.findIndex(x => x.index === m.index);
+          if (at < 0) rows.push(row); else rows[at] = row; return { devRows: rows }; }),
+        onStep: st => this.setState(s => ({ devSteps: [...(s.devSteps || []), st] })),
+      });
+      this._devStream = stream;
+      const done = await stream.done;
+      finish({ devDone: done });
+      if (done?.ranked?.length && !done.stopped) this.saveWeighting(done);
+    } catch (e) { finish({ devError: `${e?.message || e}`.replace(/^\d{3}\s*\{.*?"error"\s*:\s*"([^"]*)".*\}$/, "$1").replace(/^\d{3}\s*/, "") }); }
+  }
+  devStop() { try { this._devStream?.abort(); } catch {} }
+  // Finished stat weightings, kept in this browser (the last six): Talisman Crafting picks one.
+  static TAL_WEIGHTS_KEY = "mwi.zone.talismanWeights";
+  weightings() { if (!this._weightings) { try { this._weightings = JSON.parse(localStorage.getItem(Component.TAL_WEIGHTS_KEY) || "[]") || []; } catch { this._weightings = []; } } return this._weightings; }
+  saveWeighting(d) {
+    const zone = (this.state.zones || []).find(z => z.hrid === d.zone);
+    const unit = d.goal?.metric === "xp" ? "XP / h" : d.goal?.metric === "profit" ? "coins / h" : d.baseline?.dungeon ? "clears / h" : "encounters / h";
+    const w = { id: String(Date.now()), at: Date.now(), player: d.player, zoneName: zone?.name || d.zone, tier: d.difficultyTier, belt: d.belt, grade: d.grade, unit,
+      paceUnit: d.baseline?.dungeon ? "clears / h" : "encounters / h", metric: d.goal?.metric || "eph",
+      ranked: d.ranked.filter(r => Array.isArray(r.byGrade)).map(r => ({ hrid: r.hrid, name: r.name, group: r.group, byGrade: r.byGrade, ...(r.byGradeBy ? { byGradeBy: r.byGradeBy } : {}) })) };
+    this._weightings = [w, ...this.weightings()].slice(0, 6);
+    try { localStorage.setItem(Component.TAL_WEIGHTS_KEY, JSON.stringify(this._weightings)); } catch {}
+    this.setDevRoll({ weighting: w.id });
+  }
+  talOn() { const s = this.state; return !!s.development && s.tab === "optimize" && (s.upMode === "talWeights" || s.upMode === "talCraft"); }
+  // ---- Rolling for it: the crafting odds, from the optimizer's own weights --------------------------------------
+  setDevRoll(patch) { this.setState(s => { const next = { ...s.devRoll, ...patch, prices: { ...(s.devRoll.prices || {}), ...(patch.prices || {}) } };
+    try { localStorage.setItem("mwi.zone.talismanRoll", JSON.stringify(next)); } catch {} return { devRoll: next }; }); }
+  static coinsOf(text) { const m = /^\s*([\d.,]+)\s*([kmb]?)\s*$/i.exec(String(text ?? "")); if (!m) return null; const v = Number(m[1].replace(/,/g, ""));
+    return Number.isFinite(v) ? v * ({ k: 1e3, m: 1e6, b: 1e9 }[m[2].toLowerCase()] || 1) : null; }
+  static coinsText(v) { const a = Math.abs(Number(v) || 0); return a >= 1e9 ? `${(v / 1e9).toFixed(2)}B` : a >= 1e6 ? `${(v / 1e6).toFixed(1)}M` : a >= 1e3 ? `${(v / 1e3).toFixed(0)}k` : String(Math.round(v || 0)); }
+  async devRollRun() {
+    const s = this.state, c = s.client, r = s.devRoll || {};
+    const list = this.weightings(), done = list.find(w => w.id === r.weighting) || list[0];
+    if (!c?.zoneTalismanRolls || !done?.ranked?.length || s.devRollRunning) return;
+    const weights = Object.fromEntries(done.ranked.map(x => [x.hrid, x.byGrade]));
+    // The same lines in the other units the weighting measured, so the power can be shown as XP / h or profit.
+    const views = done.ranked.some(x => x.byGradeBy) ? Object.fromEntries(["eph", "xp", "profit"].map(unitKey => [unitKey, Object.fromEntries(done.ranked.map(x => [x.hrid, x.byGradeBy?.[unitKey] || []]))])) : undefined;
+    const own = ((s.party || []).find(p => p?.record?.name === done.player)?.loadout?.talismans) || [];
+    const k = r.talisman == null || r.talisman === "" ? "new" : String(r.talisman), pickT = k === "new" ? null : own[Number(k)] || null;
+    const prices = Object.fromEntries(Object.entries(r.prices || {}).map(([h, v]) => [h, Component.coinsOf(v)]).filter(([, v]) => v != null));
+    const coinMode = r.priceMode === "market";
+    const body = { development: true, weights, ...(views ? { views } : {}), talisman: pickT, context: own.filter(t => t !== pickT), prices,
+      exchange: r.exchange === "shuffle" ? "shuffle" : "derangement", priceMode: coinMode ? "market" : "count",
+      budget: coinMode ? (Component.coinsOf(r.budget ?? "50M") ?? 50e6) : Math.max(1, Math.floor(Number(r.budgetItems ?? 300) || 300)), target: Math.max(1, Math.min(100, Number(r.target ?? 40) || 40)) / 100 };
+    this.setState({ devRollRunning: true, devRollError: "" });
+    try { this.setState({ devRollRunning: false, devRollDone: { ...(await c.zoneTalismanRolls(body)), from: k, player: done.player, unit: done.unit } }); }
+    catch (e) { this.setState({ devRollRunning: false, devRollError: `${e?.message || e}`.replace(/^\d{3}\s*\{.*?"error"\s*:\s*"([^"]*)".*\}$/, "$1").replace(/^\d{3}\s*/, "") }); }
+  }
+  devRollVals() {
+    const s = this.state, r = s.devRoll || {}, out = s.devRollDone;
+    const list = this.weightings(), done = list.find(w => w.id === r.weighting) || list[0] || null;
+    const own = ((s.party || []).find(p => p?.record?.name === done?.player)?.loadout?.talismans) || [];
+    const mods = s.devChoices?.modifiers || [], nameOf = h => Component.t(mods.find(m => m.hrid === h)?.name || String(h).split("/").pop().replace(/_/g, " "));
+    const pct = v => (v == null ? "\u2013" : `${(100 * v).toFixed(v < 0.1 && v > 0 ? 1 : 0)}%`), coins = v => (v == null ? "\u2013" : Component.coinsText(v));
+    const ITEMS = [["/items/reforging_orb", "Reforging Orb"], ["/items/reshaping_orb", "Reshaping Orb"], ["/items/mutation_orb", "Mutation Orb"], ["/items/focus_orb", "Focus Orb"],
+      ["/items/attunement_orb", "Attunement Orb"], ["/items/exchange_orb", "Exchange Orb"], ["/items/binding_orb", "Binding Orb"], ["/items/basic_talisman_core", "Basic Talisman Core"],
+      ["/items/advanced_talisman_core", "Advanced Talisman Core"], ["/items/expert_talisman_core", "Expert Talisman Core"]];
+    const used = out?.prices ? Object.values(out.prices) : [];
+    const coinMode = r.priceMode === "market", outCoins = out?.priceMode === "market";
+    const spendText = v => (v == null ? "\u2013" : outCoins ? coins(v) : `${Math.round(v)}`);
+    // What the power is shown in: the unit it was ranked by, or the same lines in pace, XP / h or profit a day.
+    const hasViews = !!(done?.ranked || []).some(x => x.byGradeBy) && !!(out?.bestBy && Object.keys(out.bestBy).length);
+    const view = hasViews && ["eph", "xp", "profit"].includes(r.showAs) ? r.showAs : "goal";
+    const unitOf = v => (v === "xp" ? Component.t("XP / h") : v === "profit" ? Component.t("coins / day") : v === "eph" ? Component.t(done?.paceUnit || "encounters / h") : Component.t(out?.unit || ""));
+    const big = v => { const a = Math.abs(v); return a >= 1e6 ? `${(v / 1e6).toFixed(2)}M` : a >= 1e4 ? `${(v / 1e3).toFixed(1)}k` : Number(v.toPrecision(3)).toLocaleString(); };
+    const power = p => { if (p.finalValue?.mean == null) return "";
+      const v = view === "goal" ? p.finalValue.mean : p.finalValue.by?.[view], best = view === "goal" ? out.best?.value : out.bestBy?.[view];
+      if (v == null) return ""; const shown = view === "profit" ? v * 24 : v;
+      return `+${big(shown)} ${unitOf(view)} (${pct(best ? v / best : null)})`; };
+    return {
+      ready: !!(done?.ranked?.length), notReady: !(done?.ranked?.length), forName: done?.player || "",
+      weighting: done?.id || "", setWeighting: e => this.setDevRoll({ weighting: e.target.value }),
+      weightOpts: list.map(w => ({ value: w.id, label: `${w.player} \u00b7 ${Component.t(w.zoneName || "")} T${w.tier} \u00b7 ${Component.t(w.belt?.name || "")} +${w.belt?.enhancementLevel ?? 0} \u00b7 ${Component.t(w.unit)} \u00b7 ${new Date(w.at).toLocaleString()}` })),
+      talisman: r.talisman == null ? "new" : String(r.talisman), setTalisman: e => this.setDevRoll({ talisman: e.target.value }),
+      talismanOpts: [{ value: "new", label: Component.t("A new talisman (from a Basic Talisman Core)") },
+        ...own.map((t, k) => ({ value: String(k), label: `${Component.tf("Talisman {n}:", { n: k + 1 })} ${t.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(", ")}` }))],
+      target: String(r.target ?? 40), setTarget: e => this.setDevRoll({ target: e.target.value }),
+      coinMode, priceMode: coinMode ? "market" : "count", setPriceMode: e => this.setDevRoll({ priceMode: e.target.value }),
+      priceModeOpts: [{ value: "count", label: Component.t("every orb and core counts as one (prices ignored)") }, { value: "market", label: Component.t("coins (market prices, or your own)") }],
+      budget: coinMode ? String(r.budget ?? "50M") : String(r.budgetItems ?? 300),
+      setBudget: e => this.setDevRoll(coinMode ? { budget: e.target.value } : { budgetItems: e.target.value }),
+      budgetLabel: coinMode ? Component.t("Budget (coins: 50M, 1.5B)") : Component.t("Budget (orbs and cores)"),
+      spendHead: outCoins ? Component.t("Average spend") : Component.t("Average items"),
+      exchange: r.exchange === "shuffle" ? "shuffle" : "derangement", setExchange: e => this.setDevRoll({ exchange: e.target.value }),
+      exchangeOpts: [{ value: "derangement", label: Component.t("every line moves (as its description reads)") }, { value: "shuffle", label: Component.t("any shuffle (a line may keep its grade)") }],
+      prices: ITEMS.map(([h, label]) => { const u = used.find(x => x.hrid === h);
+        return { label: Component.t(label), value: String((r.prices || {})[h] ?? ""), set: e => this.setDevRoll({ prices: { [h]: e.target.value } }),
+          placeholder: u?.coins != null && u.source !== "your price" ? Component.coinsText(u.coins) : Component.t("market"),
+          note: u ? (u.source === "your price" ? "" : u.coins != null ? Component.t("market") : Component.tf("no price (vendor {v})", { v: Component.coinsText(u.vendor) })) : "" }; }),
+      run: () => this.devRollRun(), running: !!s.devRollRunning, runDisabled: !!s.devRollRunning || !done?.ranked?.length || !s.client?.zoneTalismanRolls,
+      error: s.devRollError || "", hasOut: !!out,
+      summary: out ? Component.tf("Target {t} of the best talisman ({best}), within {b}. Where you start: {c}.", { t: pct(out.target), b: outCoins ? coins(out.budget) : Component.tf("{n} orbs and cores", { n: out.budget }),
+        best: out.best.lines.map(l => `${nameOf(l.hrid)} G${l.grade}`).join(", "), c: out.current.lines.length ? pct(out.current.share) : Component.t("nothing yet") }) : "",
+      build: out?.build?.length ? Component.tf("A new talisman is built up to its lines first: {steps}, {cost}. Each plan's own count includes it.", { steps: out.build.map(b => `${b.count} ${Component.t(b.item)}`).join(" + "), cost: outCoins ? coins(out.buildCost) : Component.tf("{n} items", { n: out.buildCost }) }) : "",
+      showAs: view, setShowAs: e => this.setDevRoll({ showAs: e.target.value }),
+      showAsOpts: [{ value: "goal", label: Component.tf("as ranked ({unit})", { unit: Component.t(out?.unit || done?.unit || "") }) },
+        ...(hasViews ? [{ value: "eph", label: Component.t(done.paceUnit || "encounters / h") }, { value: "xp", label: Component.t("XP / h") }, { value: "profit", label: Component.t("profit / day") }] : [])],
+      powerTip: out ? Component.tf("What the talisman adds where the plan leaves it, in {unit}, averaged over every try (reached or not), and that as a share of the best talisman.", { unit: unitOf(view) }) : "",
+      plans: (out?.plans || []).map(p => ({ name: p.template ? Component.tf(p.template, { mod: Component.t(p.vars?.mod || ""), orb: Component.t(p.vars?.orb || "") }) : Component.t(p.name),
+        chance: p.unavailable ? Component.t("needs a price") : p.unreachable ? Component.tf("cannot reach (tops out at {p})", { p: pct(p.ceiling) }) : pct(p.chance),
+        mean: p.unavailable || p.unreachable ? "" : spendText(p.meanSpend),
+        reached: p.unavailable || p.unreachable || !p.chance ? (p.unavailable ? p.missing.map(x => Component.t(x)).join(", ") : "") : `${spendText(p.spendWhenReached.median)} \u00b7 ${spendText(p.spendWhenReached.p90)}`,
+        // What the plan used, on average, when it got there: every orb and core by name.
+        mix: Object.entries(p.orbMix || {}).filter(([, v]) => v >= 0.05).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${/ Orb$/.test(k) ? Component.t(k.replace(/ Orb$/, "")) : Component.t(k)} ${v >= 10 ? Math.round(v) : v.toFixed(1)}`).join(" \u00b7 "),
+        orbs: p.orbsWhenReached?.median != null ? String(p.orbsWhenReached.median) : "",
+        power: power(p), style: p.unavailable || p.unreachable ? "opacity:0.55" : "" })),
+      hasOnce: !!(out?.oneOrb?.length),
+      once: (out?.oneOrb || []).map(o => ({ orb: Component.t(o.orb), better: o.usable ? pct(o.chanceBetter) : Component.t("cannot be used"), gain: o.usable && o.chanceBetter > 0 ? `+${pct(o.gainWhenBetter)}` : "",
+        after: o.usable ? pct(o.meanShareAfter) : "", cost: o.usable && o.costToBeat != null ? coins(o.costToBeat) : "\u2013" })),
+      note: out ? Component.tf("{n} tries of each plan, stopping as soon as the talisman reaches the target or the next orb would pass the budget. The odds are the game's own: each grade half as likely as the one below, specials a tenth as likely (the developer, in the game's Discord). A Binding Orb is spent for each lock and replaces the old one (confirmed in game). Assumed: the Exchange Orb as chosen above (every attempt is played out, so a G6 that lands on the wrong line and moves back is in the cost); a talisman never rolls the same modifier twice. A talisman's worth is its lines' gains added together.", { n: out.trials }) : "",
+    };
+  }
+  /** The whole table as JSON for another tool (a userscript that scores a talisman in the game): gain per grade, by modifier. */
+  async devCopyWeights() {
+    const d = this.state.devDone; if (!d?.ranked) return;
+    const out = { schema: "metz-talisman-weights/1", gameVersion: d.gameVersion || this.state.devChoices?.gameVersion || null, player: d.player, zone: d.zone, difficultyTier: d.difficultyTier,
+      belt: d.belt, metric: d.goal?.metric, baseline: d.baseline, measuredGrade: d.grade,
+      weights: Object.fromEntries(d.ranked.filter(r => Array.isArray(r.byGrade)).map(r => [r.hrid, r.byGrade.map(v => Number(v.toFixed(4)))])) };
+    try { await navigator.clipboard.writeText(JSON.stringify(out, null, 1)); this.setState({ devCopied: true }); setTimeout(() => this.setState({ devCopied: false }), 2000); }
+    catch (e) { this.setState({ devError: Component.t("The browser did not allow copying to the clipboard.") }); }
+  }
+  devVals() {
+    const s = this.state, on = s.development && (s.tab === "development" || this.talOn());
+    if (!on) return { noParty: false, playerOpts: [], beltOpts: [], gradeOpts: [], talismans: [], steps: [], rows: [], pools: [], gradeRows: [], gradeHead: [], imported: [] };
+    this.devEnsureChoices();
+    const ch = s.devChoices || { belts: [], info: { maxGrade: 6, maxModifierCount: 4 } };
+    const names = (s.party || []).map(p => p?.record?.name).filter(Boolean);
+    const metric = this.devVal("metric"), head = s.devHead || {}, done = s.devDone;
+    const zone = (s.zones || []).find(z => z.hrid === this.upVal("zone")), dungeon = !!zone?.isDungeon;
+    const seg = k => metric === k ? "background:color-mix(in srgb, var(--color-accent-700) 34%, transparent);color:var(--color-text)" : "background:transparent;color:var(--color-neutral-300)";
+    const belt = ch.belts.find(b => b.hrid === this.devVal("belt")), level = Math.max(0, Math.min(20, Math.floor(Number(this.devVal("level")) || 0)));
+    // The pools, each with its modifiers and a switch for the whole pool.
+    const off = this.devOff(), mods = ch.modifiers || [];
+    const POOLS = { magic: "Magic", melee: "Melee", ranged: "Ranged", physical: "Physical (melee and ranged)", "all styles": "Every style", defense: "Defense", "health and mana": "Health and mana",
+      experience: "Experience", drops: "Drops", special: "Special" };
+    const pools = (ch.purposes || Object.keys(POOLS)).map(g => { const list = mods.filter(m => m.purpose === g), on = list.filter(m => !off[m.hrid]).length;
+      return { name: Component.t(POOLS[g] || g), count: Component.tf("{n} of {m}", { n: on, m: list.length }), allOn: on === list.length,
+        toggle: () => this.setDevOff(list.map(m => m.hrid), on > 0), toggleLabel: on > 0 ? Component.t("Turn off") : Component.t("Turn on"),
+        mods: list.map(m => ({ name: Component.t(m.name), on: !off[m.hrid], toggle: e => this.setDevOff([m.hrid], !e.target.checked) })) }; });
+    const onCount = mods.filter(m => !off[m.hrid]).length;
+    // Every grade of every modifier, as a score out of 100 against the best line at the top grade: scores compare
+    // across the whole table, so a grade-4 line that scores 50 is worth as much as any other line that scores 50.
+    const allRanked = (done?.ranked || []).filter(r => Array.isArray(r.byGrade));
+    const topGain = Math.max(0, ...allRanked.map(r => Math.max(...r.byGrade)));
+    const score = v => (topGain > 0 ? Math.round(100 * v / topGain) : 0);
+    const gradeRows = allRanked.filter(r => score(Math.max(...r.byGrade)) >= 1).map(r => ({ name: Component.t(r.name), style: r.group === "special" ? "color:var(--color-accent-2-400)" : "",
+      cells: r.byGrade.map(v => { const sc = score(v); return { text: sc >= 1 ? String(sc) : "\u2013", style: `text-align:right;opacity:${(0.45 + 0.55 * Math.min(1, sc / 100)).toFixed(2)}` }; }) }));
+    // What the run was judged on rides with its head, so a result keeps its own units after the form changes.
+    const ranMetric = head.goal?.metric || metric, base = head.baseline || done?.baseline || null;
+    const baseGoal = !base ? 0 : ranMetric === "eph" ? Number(base.eph) || 0 : ranMetric === "xp" ? Number(base.xpPerHour) || 0 : 0;
+    const unit = ranMetric === "eph" ? (base?.dungeon ? Component.t("clears / h") : Component.t("encounters / h")) : ranMetric === "xp" ? Component.t("XP / h") : Component.t("coins / h");
+    const fmt = v => { const a = Math.abs(v); return `${v < 0 ? "\u2212" : "+"}${a >= 1000 ? Math.round(a).toLocaleString("en-US") : a.toFixed(a >= 100 ? 0 : a >= 10 ? 1 : 2)}`; };
+    const share = v => (baseGoal > 0 ? `${v < 0 ? "\u2212" : "+"}${Math.abs(100 * v / baseGoal).toFixed(1)}%` : "");
+    const val = m => (m.isPercent ? `${(100 * m.value).toFixed(Math.abs(m.value) < 0.1 ? 2 : 1)}%` : `${Number(m.value.toFixed(2))}`);
+    const power = belt ? belt.power + belt.powerPerLevel * ((s.devChoices?.enhancement || [])[level] ?? NaN) : NaN;
+    const rows = (done?.ranked || (s.devRows || []).filter(r => r.phase === "alone")).slice().sort((a, b) => (Number(b.delta) || 0) - (Number(a.delta) || 0));
+    const steps = done?.steps || s.devSteps || [];
+    const comb = done?.combined || null;
+    const el = this._devT0 ? Date.now() - this._devT0 : 0;
+    const stage = s.devRunning ? `${head.stage ? String(head.stage).trim() : Component.t("starting\u2026")} \u00b7 ${Component.tf("{n} runs", { n: Number(head.jobsDone) || 0 })} \u00b7 ${Component.tf("{elapsed} elapsed", { elapsed: Component.durText(el) })}`
+      : done ? (done.stopped ? Component.t("stopped") : Component.tf("done in {t} \u00b7 {n} runs", { t: Component.durText(Number(done.ms) || 0), n: Number(done.jobs) || 0 })) : "";
+    return {
+      noParty: !names.length,
+      player: this.devVal("player"), setPlayer: e => this.setDev({ player: e.target.value }), playerOpts: names.map(n => ({ value: n, label: n })),
+      belt: this.devVal("belt"), setBelt: e => this.setDev({ belt: e.target.value }),
+      beltOpts: ch.belts.map(b => ({ value: b.hrid, label: `${Component.t(b.name)} (${b.slots})` })),
+      level: String(level), setLevel: e => this.setDev({ level: e.target.value }),
+      grade: String(this.devVal("grade")), setGrade: e => this.setDev({ grade: Number(e.target.value) || 6 }),
+      gradeOpts: Array.from({ length: ch.info.maxGrade }, (_, i) => ({ value: String(i + 1), label: Component.tf("Grade {n}", { n: i + 1 }) })),
+      paceLabel: dungeon ? Component.t("Run time") : Component.t("Encounters / h"),
+      paceStyle: seg("eph"), xpStyle: seg("xp"), profitStyle: seg("profit"),
+      pickPace: () => this.setDev({ metric: "eph" }), pickXp: () => this.setDev({ metric: "xp" }), pickProfit: () => this.setDev({ metric: "profit" }),
+      beltNote: belt ? Component.tf("{slots} talismans, up to {lines} lines", { slots: belt.slots, lines: belt.slots * ch.info.maxModifierCount }) + (Number.isFinite(power) ? ` \u00b7 ${Component.tf("Talisman Power {p}%", { p: (100 * power).toFixed(1) })}` : "") : "",
+      running: !!s.devRunning, runDisabled: !!s.devRunning || onCount === 0 || !names.length || !this.upVal("zone") || !s.client?.zoneTalismansStream,
+      run: () => this.devRun(), stop: () => this.devStop(), stage, error: s.devError || "",
+      hasSet: !!(done && (done.talismans || []).length),
+      setTitle: done ? Component.tf("The set for {name}", { name: done.player || "" }) : "",
+      combined: comb ? `${fmt(comb.delta)} ${unit}${share(comb.delta) ? ` (${share(comb.delta)})` : ""} \u00b1 ${Number(comb.deltaSE || 0).toFixed(2)}` : "",
+      talismans: (done?.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: t.modifiers.map(m => `${Component.t(m.name)} ${val(m)}`).join(" \u00b7 ") })),
+      setNote: done ? Component.tf("Against the same belt with nothing in it, every line at grade {g}. The search ended: {why}.", { g: done.grade, why: Component.t(done.stoppedBy || "stopped") }) : "",
+      hasSteps: steps.length > 0,
+      steps: steps.map(st => ({ n: `${st.step}.`, name: `${Component.t(st.name)}${st.copy > 1 ? ` \u00d7${st.copy}` : ""}`, gain: `${fmt(st.delta)}${share(st.delta) ? ` (${share(st.delta)})` : ""}` })),
+      pools, poolsOpen: !!s.devPoolsOpen, poolsCaret: s.devPoolsOpen ? "\u25be" : "\u25b8", togglePools: () => this.setState(x => ({ devPoolsOpen: !x.devPoolsOpen })),
+      poolsSummary: Component.tf("{n} of {m} measured", { n: onCount, m: mods.length }), noneOn: mods.length > 0 && onCount === 0,
+      imported: (s.party || []).filter(p => p?.loadout?.belt || (p?.loadout?.talismans || []).length).map(p => {
+        const b = ch.belts.find(x => x.hrid === p.loadout.belt?.itemHrid), nameOf = h => Component.t(mods.find(m => m.hrid === h)?.name || String(h).split("/").pop().replace(/_/g, " "));
+        return { name: p.record?.name || "", belt: b ? `${Component.t(b.name)} +${p.loadout.belt.enhancementLevel}` : Component.t("no belt"),
+          talismans: (p.loadout.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: t.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(" \u00b7 ") })) }; }),
+      noImported: !(s.party || []).some(p => p?.loadout?.belt || (p?.loadout?.talismans || []).length),
+      hasGrades: gradeRows.length > 0, gradeRows,
+      gradeHead: allRanked.length ? allRanked[0].byGrade.map((_, i) => ({ label: `G${i + 1}` })) : [],
+      gradeNote: Component.tf("A score of 100 is the best single line at the top grade ({name}); every other cell is its share of that. A line scales with its value, so its lower grades are worked out from the measured one. Lines that score under 1 at every grade are left out.", { name: allRanked[0] ? Component.t(allRanked[0].name) : "" }),
+      copyWeights: () => this.devCopyWeights(), copyLabel: s.devCopied ? Component.t("Copied") : Component.t("Copy the weights"),
+      hasRows: rows.length > 0,
+      rowsNote: Component.tf("One line of each modifier on an otherwise empty belt, in {unit}. Lines that gain little are measured on fewer runs.", { unit }),
+      rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), gain: r.seeds ? `${fmt(r.delta)} \u00b1 ${Number(r.deltaSE || 0).toFixed(2)}` : "\u2026", share: r.seeds ? share(r.delta) : "",
+        style: r.group === "special" ? "color:var(--color-accent-2-400)" : "" })),
+    };
+  }
   static SIM_TABS = ["setup", "results", "compare", "saved"];
 
   async componentDidMount() {
@@ -1864,7 +2375,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=ac48b5124037");
+      const i18n = await import("./i18n.js?v=5be4474e6380");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -1887,7 +2398,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=ac48b5124037");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=5be4474e6380");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -2226,7 +2737,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=ac48b5124037");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=5be4474e6380");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -2247,7 +2758,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=ac48b5124037");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=5be4474e6380");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -3642,6 +4153,8 @@ class Component extends DCLogic {
       optSavesOpen: !!s.optSavesOpen, optSavesCaret: s.optSavesOpen ? "\u25be" : "\u25b8",
       optSavesCount: `${(s.optSaves || []).filter(x => x.mode === mode).length}`,
       toggleOptSaves: () => this.setState({ optSavesOpen: !s.optSavesOpen }),
+      modeTalWeights: modeBtn("talWeights"), modeTalCraft: modeBtn("talCraft"),
+      notTalisman: !(s.development && (mode === "talWeights" || mode === "talCraft")), onTalWeights: !!s.development && mode === "talWeights", onTalCraft: !!s.development && mode === "talCraft",
       modeUpgrades: modeBtn("upgrades"), modeTriggers: modeBtn("triggers"), modeSkills: modeBtn("skills"), modeFood: modeBtn("food"), modeLoadouts: modeBtn("loadouts"),
       // ZONE-173: the sweep picks its own zones and runs on the whole party, so the zone picker and the scope are not shown for it.
       onLoadouts: onLd, hasZonePick: !onLd, hasScope: !onLd, ld: this.ldVals(s, { nf }),
@@ -3873,7 +4386,7 @@ class Component extends DCLogic {
     return {
       client: s.client, booting: s.booting, bootError: s.error,
       retry: () => location.reload(),
-      tabs: Component.TABS.map(t => ({
+      tabs: Component.TABS.filter(t => !t.development || s.development).map(t => ({
         label: Component.t(t.label), glyph: t.glyph, dot: t.id === "results" && s.fresh, tour: `tab-${t.id}`,
         go: () => this.pick(t.id),
         style: s.tab === t.id
@@ -3904,7 +4417,11 @@ class Component extends DCLogic {
       noteResults: () => this.noteResults(),
       noteParty: p => this.noteParty(p),
       onOptimize: s.tab === "optimize", onAbout: s.tab === "about",
+      onDevelopment: s.development && s.tab === "development",
+      development: !!s.development, toggleDevelopment: e => this.setDevelopment(!!e.target.checked),
       up: this.upgradeVals(),
+      dev: this.devVals(),
+      roll: this.talOn() ? this.devRollVals() : { prices: [], plans: [], once: [], talismanOpts: [], weightOpts: [] },
       // Where the work happens, rather than which server answered — there is none.
       serverStatus: s.booting ? Component.t("loading the simulator…") : s.error ? Component.t("the simulator did not load")
         : (lanes === 1 ? Component.tf("runs in your browser · {n} lane · wasm kernel", { n: lanes }) : Component.tf("runs in your browser · {n} lanes · wasm kernel", { n: lanes })),

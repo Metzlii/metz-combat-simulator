@@ -12,8 +12,13 @@
 const WORKERS_KEY = "mwi.zone.workers";
 const savedWorkers = () => { try { const v = Number(localStorage.getItem(WORKERS_KEY)); return v >= 1 ? Math.floor(v) : null; } catch { return null; } };
 
+// DEV-1: the visitor's Development opt-in (About tab), read at each request. With it, a run carries
+// `development: true` and the imported belt and talismans fight; without it they are dropped before the kernel.
+const devOn = () => { try { return localStorage.getItem("mwi.zone.development") === "1"; } catch { return false; } };
+const withDev = body => (devOn() && body && typeof body === "object" ? { ...body, development: true } : body);
+
 export async function connectZoneOnly() {
-  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=ac48b5124037");
+  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=5be4474e6380");
   let cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
   const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
@@ -34,12 +39,12 @@ export async function connectZoneOnly() {
     zones: () => zone.zones(),
     zoneImport: payload => zone.zoneImport(payload),
     zoneCatalog: () => zone.zoneCatalog(),
-    zoneDerive: body => zone.zoneDerive(body),
-    zoneRun: body => zone.zoneRun(body),
+    zoneDerive: body => zone.zoneDerive(withDev(body)),
+    zoneRun: body => zone.zoneRun(withDev(body)),
     zoneLimits: () => zone.zoneLimits(),
     zoneMarket: () => zone.zoneMarket(),
     zoneMarketRefresh: () => zone.zoneMarketRefresh(),
-    zoneRunStream: (body, handlers) => zone.zoneRunStream(body, handlers),
+    zoneRunStream: (body, handlers) => zone.zoneRunStream(withDev(body), handlers),
     // ZONE-53 (1): the upgrade finder, passed through exactly as the rest are. Streamed is the form the page
     // uses — a search runs for minutes to hours, and the ranking fills in as rows land.
     zoneUpgrades: body => zone.zoneUpgrades(body),
@@ -55,6 +60,11 @@ export async function connectZoneOnly() {
     zoneLoadouts: body => zone.zoneLoadouts(body),
     zoneLoadoutsStream: (body, handlers) => zone.zoneLoadoutsStream(body, handlers),
     zoneLoadoutCount: body => zone.zoneLoadoutCount(body),
+    // DEV-1: the Development tab's talisman optimizer (unreleased game content).
+    zoneTalismanChoices: () => zone.zoneTalismanChoices(),
+    zoneTalismanRolls: body => zone.zoneTalismanRolls(body),
+    zoneTalismans: body => zone.zoneTalismans(body),
+    zoneTalismansStream: (body, handlers) => zone.zoneTalismansStream(body, handlers),
     close: () => zone.close(),
   };
 
@@ -66,7 +76,7 @@ export async function connectZoneOnly() {
   // follow, with the header's lane count updated through the same event the Workers setting uses.
   (async () => {
     try {
-      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=ac48b5124037");
+      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=5be4474e6380");
       const measured = Math.max(1, await probeLanes());
       if (measured <= cores) return;
       cores = measured;

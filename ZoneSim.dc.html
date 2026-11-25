@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=ac48b5124037"></script>
+<script src="./support.js?v=5be4474e6380"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ac48b5124037">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=5be4474e6380">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=ac48b5124037">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ac48b5124037"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=5be4474e6380">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=5be4474e6380"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -434,6 +434,60 @@
             </div>
           </sc-if>
         </div>
+
+        <!-- DEV-1: the test server's belt and talismans, shown only with the Development option (About tab). -->
+        <sc-if value="{{ zone.editor.tal.on }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
+          <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;width:100%" onClick="{{ zone.editor.sec.talismans.toggle }}">
+            <span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">{{ zone.editor.sec.talismans.caret }} Belt and talismans</span>
+            <span style="font-size:11px;padding:0 5px;border:1px solid var(--color-accent-700);border-radius:var(--radius-sm);color:var(--color-accent-300)">Development</span>
+            <sc-if value="{{ zone.editor.sec.talismans.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="font-size:11.5px;color:var(--color-accent-300)">{{ zone.editor.sec.talismans.badge }}</span></sc-if>
+          </button>
+          <sc-if value="{{ zone.editor.sec.talismans.open }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:7px">
+              <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+                <span class="text-muted" style="font-size:12.5px">Belt</span>
+                <select class="input" style="min-height:26px;padding:1px 5px;font-size:12.5px;width:auto" value="{{ zone.editor.tal.belt }}" onChange="{{ zone.editor.tal.setBelt }}">
+                  <sc-for list="{{ zone.editor.tal.beltOpts }}" as="o" hint-placeholder-count="4"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                </select>
+                <sc-if value="{{ zone.editor.tal.hasBelt }}" hint-placeholder-val="{{ false }}">
+                  <span class="text-muted" style="font-size:12.5px">+</span>
+                  <input class="input" type="number" min="0" max="20" step="1" style="min-height:26px;padding:1px 5px;font-size:12.5px;width:56px" value="{{ zone.editor.tal.level }}" onChange="{{ zone.editor.tal.setLevel }}" aria-label="Belt enhancement level">
+                </sc-if>
+                <button class="btn btn-ghost" style="padding:1px 7px;font-size:12px;margin-left:auto" onClick="{{ zone.editor.sec.talismans.revert }}">Reset</button>
+              </div>
+              <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ zone.editor.tal.beltNote }}</div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:6px">
+                <sc-for list="{{ zone.editor.tal.slots }}" as="ts" hint-placeholder-count="3">
+                  <div style="display:flex;flex-direction:column;gap:4px;border:1px solid var(--color-divider);border-radius:var(--radius-sm);padding:5px 6px;background:var(--color-surface);min-width:0">
+                    <div style="display:flex;gap:6px;align-items:baseline">
+                      <span class="text-muted" style="font-size:11.5px;letter-spacing:0.05em;text-transform:uppercase">{{ ts.label }}</span>
+                      <sc-if value="{{ ts.hasLines }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:0 6px;font-size:11.5px;margin-left:auto" onClick="{{ ts.clear }}">Remove</button></sc-if>
+                    </div>
+                    <sc-for list="{{ ts.lines }}" as="ln" hint-placeholder-count="2">
+                      <div style="display:flex;gap:4px;align-items:center;min-width:0">
+                        <select class="input" style="min-height:26px;padding:1px 5px;font-size:12.5px;flex:1;min-width:0" value="{{ ln.hrid }}" onChange="{{ ln.setMod }}">
+                          <sc-for list="{{ ln.opts }}" as="o" hint-placeholder-count="6"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                        </select>
+                        <select class="input" style="min-height:26px;padding:1px 5px;font-size:12.5px;width:54px;flex:none" value="{{ ln.grade }}" onChange="{{ ln.setGrade }}">
+                          <sc-for list="{{ ln.gradeOpts }}" as="o" hint-placeholder-count="6"><option value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                        </select>
+                        <span class="text-muted" style="font-size:12px;width:52px;text-align:right;flex:none;font-variant-numeric:tabular-nums">{{ ln.value }}</span>
+                        <button class="btn btn-ghost" style="padding:0 4px;font-size:12px;flex:none" title="Remove this line" onClick="{{ ln.remove }}">✕</button>
+                      </div>
+                      <sc-if value="{{ ln.dup }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:11.5px">A special counts once: this copy adds nothing.</span></sc-if>
+                    </sc-for>
+                    <sc-if value="{{ ts.canAdd }}" hint-placeholder-val="{{ true }}">
+                      <button class="btn btn-ghost" style="padding:1px 6px;font-size:12px;align-self:flex-start" onClick="{{ ts.add }}">+ Add a line</button>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </div>
+              <div class="text-muted" style="font-size:12px;text-wrap:pretty">✦ marks the six special modifiers. Turn the Development option off (About tab) and these are left out of every run.</div>
+            </div>
+          </sc-if>
+        </div>
+        </sc-if>
 
         <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid var(--color-divider);padding-top:6px">
           <button class="btn btn-ghost" style="padding:1px 0;border-color:transparent;justify-content:flex-start;display:flex;gap:7px;align-items:center;width:100%" onClick="{{ zone.editor.sec.abilities.toggle }}">
@@ -1286,13 +1340,19 @@ class Component extends DCLogic {
       consumables: ["food", "drinks"].map(kind => ((loadout?.[kind] || {})[COMBAT] || [])
         .filter(e => e && e.itemHrid)
         .map(e => `${e.itemHrid}~${trigSig(e.triggers !== undefined ? e.triggers : triggers[e.itemHrid])}`)
-        .join(";")).join("#") };
+        .join(";")).join("#"),
+      // DEV-1: the test server's belt and talismans.
+      talismans: `${loadout?.belt?.itemHrid || ""}+${Number(loadout?.belt?.enhancementLevel) || 0}|` + (loadout?.talismans || [])
+        .map(t => (t.modifiers || []).map(m => `${m.hrid}:${m.grade}`).join(",")).join(";") };
   }
-  /** True when two loadouts have the same gear, abilities, food, drinks and trigger lists. */
+  /** True when two loadouts have the same gear, abilities, food, drinks, trigger lists, belt and talismans. */
   static zoneSameLoadout(a, b) {
     const x = Component.zoneLoadoutSig(a), y = Component.zoneLoadoutSig(b);
-    return x.equipment === y.equipment && x.abilities === y.abilities && x.consumables === y.consumables;
+    return x.equipment === y.equipment && x.abilities === y.abilities && x.consumables === y.consumables && x.talismans === y.talismans;
   }
+  // DEV-1: the Development opt-in (the About tab's option, kept in this browser). The belt and talismans are edited
+  // and fought with only while it is on.
+  static zoneDevOn() { try { return localStorage.getItem("mwi.zone.development") === "1"; } catch { return false; } }
   static zoneOffsetText(key, value) {
     const pct = (Component.ZONE_OFFSET_STATS[key] || [])[1] === "percent", n = (Number(value) || 0) * (pct ? 100 : 1);
     const shown = (Math.round(Math.abs(n) * 1e6) / 1e6).toLocaleString("en-US", { maximumFractionDigits: 4 });
@@ -1337,7 +1397,7 @@ class Component extends DCLogic {
     // every "edited" mark is measured against.
     zoneBase: [], zoneSel: 0, zoneCatalog: null, zoneCatalogError: null, zoneDerived: null, zoneDeriveError: null,
     // Default view (operator, 2026-09-16): every panel starts collapsed — the operator opens what they need.
-    zoneEditSec: { equipment: false, abilities: false, consumables: false, levels: false, house: false, buffs: false, task: false },
+    zoneEditSec: { equipment: false, talismans: false, abilities: false, consumables: false, levels: false, house: false, buffs: false, task: false },
     zoneStatOpen: null, zoneStale: false, zoneDerivedOpen: false,
     // ZONE-178: what is typed in an offset field, by "<player>|<stat>", so "0." survives until the next digit.
     zoneOffsetText: {},
@@ -1473,7 +1533,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=ac48b5124037").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=5be4474e6380").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2463,6 +2523,21 @@ class Component extends DCLogic {
   // not move focus to a clicked button -- so a field still focused across a switch of the edited player, a reset or a
   // loadout pick kept showing the old player's number (Scaridium, 2026-11-06). The focus is dropped first.
   zoneDropFocus() { try { const el = globalThis.document?.activeElement; if (el && typeof el.blur === "function" && el !== document.body) el.blur(); } catch {} }
+  // DEV-1: the belt and talismans. `fn` gets the loadout to change; the talismans are kept in slot order.
+  zoneEditTalismans(i, fn) {
+    this.patchPlayer(i, next => { const l = next.loadout;
+      l.talismans = (l.talismans || []).map(t => ({ ...t, modifiers: (t.modifiers || []).map(m => ({ ...m })) }));
+      fn(l);
+      l.talismans = l.talismans.filter(t => (t.modifiers || []).length).map((t, k) => ({ ...t, slotIndex: k + 1 }));
+      const slots = (this.state.zoneTalChoices?.belts || []).find(b => b.hrid === l.belt?.itemHrid)?.slots || 0;
+      l.talismans = l.talismans.slice(0, slots);
+      if (!l.belt) delete l.belt; if (!l.talismans.length) delete l.talismans; });
+  }
+  async zoneLoadTalChoices() {
+    if (this.state.zoneTalChoices || this._talAsked || !this.client?.zoneTalismanChoices) return;
+    this._talAsked = true;
+    try { this.setState({ zoneTalChoices: await this.client.zoneTalismanChoices() }); } catch (e) { this._talAsked = false; console.warn("talisman choices unavailable", e); }
+  }
   zoneRevert(scope, i, arg) {
     this.zoneDropFocus();
     this.setState(s => { const base = s.zoneBase || [], party = (s.zoneParty || []).slice();
@@ -2478,6 +2553,8 @@ class Component extends DCLogic {
         else if (scope === "abilities") { p.loadout.abilities = clone(b.loadout?.abilities || []); p.loadout.abilityTriggers = clone(b.loadout?.abilityTriggers || {}); }
         else if (scope === "food") p.loadout.food = clone(b.loadout?.food || {});
         else if (scope === "drinks") p.loadout.drinks = clone(b.loadout?.drinks || {});
+        else if (scope === "talismans") { delete p.loadout.belt; delete p.loadout.talismans;
+          if (b.loadout?.belt) p.loadout.belt = clone(b.loadout.belt); if (b.loadout?.talismans) p.loadout.talismans = clone(b.loadout.talismans); }
         else if (scope === "rooms") p.record.rooms = clone(b.record?.rooms || {});
         else if (scope === "buffs") { p.record.guildCombatBuffLevels = clone(b.record?.guildCombatBuffLevels || {}); p.record.combatBuffs = clone(b.record?.combatBuffs || []); }
         party[i] = p; }
@@ -2717,7 +2794,7 @@ class Component extends DCLogic {
     return { players: this.zoneActiveParty(s), accountBuffs: s.zoneBuffs || null,
       ...(open ? { zone: open.zone || null, difficultyTier: open.difficultyTier ?? null } : {}) };
   }
-  zoneDeriveSig(s) { return JSON.stringify(this.zoneDeriveBody(s)); }
+  zoneDeriveSig(s) { return JSON.stringify({ ...this.zoneDeriveBody(s), development: Component.zoneDevOn() }); }
   async loadZoneDerived() {
     const s = this.state;
     if (!(s.zoneParty || []).length || !this.client?.zoneDerive) return;   // not before the client is up
@@ -3408,6 +3485,7 @@ class Component extends DCLogic {
         return LEVELS.map(([k2]) => `${k2}=${Number(L[k2]) || 0}`).join(";"); },
       abilities: q => Component.zoneLoadoutSig(q?.loadout).abilities,
       consumables: q => Component.zoneLoadoutSig(q?.loadout).consumables,
+      talismans: q => Component.zoneLoadoutSig(q?.loadout).talismans,
       house: q => numMapSig(q?.record?.rooms),
       buffs: q => `${numMapSig(q?.record?.guildCombatBuffLevels)}|moo=${q?.record?.mooPass === true ? 1 : q?.record?.mooPass === false ? 0 : "?"}`,
       scrolls: q => Object.keys(q?.record?.scrolls || {}).filter(k2 => q.record.scrolls[k2] === true).sort().join(";"),
@@ -3426,7 +3504,7 @@ class Component extends DCLogic {
       toggle: () => set({ zoneEditSec: { ...secOpen, [key]: !secOpen[key] } }),
       revert: () => this.zoneRevert(key, i) });
     if (!p) return { has: false, rail: [], slots: [], levels: [], abilities: [], consumables: [], rooms: [], buffs: [],
-      derived: [], sec: { equipment: sec("equipment", "Equipment"), levels: sec("levels", "Levels"), abilities: sec("abilities", "Abilities"),
+      derived: [], tal: { on: false, slots: [], beltOpts: [] }, sec: { equipment: sec("equipment", "Equipment"), talismans: sec("talismans", "Belt and talismans"), levels: sec("levels", "Levels"), abilities: sec("abilities", "Abilities"),
         consumables: sec("consumables", "Food & drinks"), house: sec("house", "House rooms"), buffs: sec("buffs", "Guild shrines, achievements and Moo Pass"), scrolls: sec("scrolls", "Scrolls"),
         task: sec("task", "Task monster") } };
     const abSig = (q, k2) => { const x = (q?.loadout?.abilities || [])[k2];
@@ -3710,7 +3788,48 @@ class Component extends DCLogic {
       hasSendNote: !!(s.zoneSendNote && s.zoneSendNote.name === (p.record?.name || "")),
       copyOpts: party.map((q, k) => ({ value: String(k), label: q.record?.name || Component.tf("Player {n}", { n: k + 1 }) })).filter((_, k) => k !== i),
       doCopy: e => { const k = Number(e.target.value); if (!Number.isNaN(k)) this.zoneCopyLoadout(i, k); },
+      tal: (() => {
+        const on = Component.zoneDevOn();
+        if (!on) return { on: false, slots: [], beltOpts: [] };
+        this.zoneLoadTalChoices();
+        const ch = s.zoneTalChoices || { belts: [], modifiers: [], info: { maxGrade: 6, maxModifierCount: 4 } };
+        const l = p.loadout || {}, belt = ch.belts.find(x => x.hrid === l.belt?.itemHrid) || null, lv = Number(l.belt?.enhancementLevel) || 0;
+        const table = ch.enhancement || [], power = belt ? belt.power + belt.powerPerLevel * (Number(table[lv]) || 0) : 0;
+        const edit = fn => this.zoneEditTalismans(i, fn);
+        const modName = h => Component.t(ch.modifiers.find(m => m.hrid === h)?.name || String(h).split("/").pop().replace(/_/g, " "));
+        const valueText = (h, g) => { const m = ch.modifiers.find(x => x.hrid === h); if (!m) return ""; const v = (Number(m.gradeValues?.[g - 1]) || 0) * (1 + power);
+          return m.isPercent ? `+${(100 * v).toFixed(Math.abs(v) < 0.1 ? 2 : 1)}%` : `+${Number(v.toFixed(2))}`; };
+        const specials = new Set(ch.modifiers.filter(m => m.group === "special").map(m => m.hrid));
+        const byName = ch.modifiers.slice().sort((a, b) => modName(a.hrid).localeCompare(modName(b.hrid)));
+        const talismans = l.talismans || [];
+        return { on: true, ready: !!s.zoneTalChoices,
+          belt: l.belt?.itemHrid || "", level: String(lv),
+          beltOpts: [{ value: "", label: Component.t("No belt") }, ...ch.belts.map(x => ({ value: x.hrid, label: `${Component.t(x.name)} (${x.slots})` }))],
+          setBelt: e => edit(x => { const h = e.target.value; x.belt = h ? { itemHrid: h, enhancementLevel: Number(x.belt?.enhancementLevel) || 0 } : null; }),
+          setLevel: e => edit(x => { if (x.belt) x.belt = { ...x.belt, enhancementLevel: Math.max(0, Math.min(20, Math.floor(Number(e.target.value) || 0))) }; }),
+          hasBelt: !!belt,
+          beltNote: belt ? Component.tf("Talisman Power {p}%: every line below is its grade value × {m}.", { p: (100 * power).toFixed(1), m: (1 + power).toFixed(3) }) : Component.t("Pick a belt to hold talismans."),
+          slots: belt ? Array.from({ length: belt.slots }, (_, k) => {
+            const t = talismans[k], mods = t?.modifiers || [], exists = !!t || k === talismans.length;
+            return { exists, label: Component.tf("Talisman {n}", { n: k + 1 }),
+              lines: mods.map((m, j) => ({
+                hrid: m.hrid, grade: String(m.grade), value: valueText(m.hrid, m.grade),
+                // A special on two talismans counts once, at its best grade (test server, 2026-11-25): the weaker copy,
+                // or the later of two equal ones, adds nothing.
+                dup: specials.has(m.hrid) && talismans.some((tt, kk) => kk !== k && tt.modifiers.some(x => x.hrid === m.hrid && (x.grade > m.grade || (x.grade === m.grade && kk < k)))),
+                opts: byName.filter(x => x.hrid === m.hrid || !mods.some(y => y.hrid === x.hrid)).map(x => ({ value: x.hrid, label: modName(x.hrid) + (x.group === "special" ? " \u2726" : "") })),
+                gradeOpts: Array.from({ length: ch.info.maxGrade }, (_, g) => ({ value: String(g + 1), label: `G${g + 1}` })),
+                setMod: e => edit(x => { x.talismans[k].modifiers[j].hrid = e.target.value; }),
+                setGrade: e => edit(x => { x.talismans[k].modifiers[j].grade = Number(e.target.value) || 1; }),
+                remove: () => edit(x => { x.talismans[k].modifiers.splice(j, 1); }) })),
+              canAdd: mods.length < ch.info.maxModifierCount,
+              add: () => edit(x => { const free = byName.find(z => !(x.talismans[k]?.modifiers || []).some(y => y.hrid === z.hrid));
+                if (!free) return; if (!x.talismans[k]) x.talismans[k] = { slotIndex: k + 1, modifiers: [] }; x.talismans[k].modifiers.push({ hrid: free.hrid, grade: ch.info.maxGrade }); }),
+              hasLines: mods.length > 0,
+              clear: () => edit(x => { x.talismans.splice(k, 1); }) }; }).filter(x => x.exists) : [] };
+      })(),
       sec: { equipment: sec("equipment", "Equipment", changed.has("equipment")),
+        talismans: sec("talismans", "Belt and talismans", changed.has("talismans")),
         levels: sec("levels", "Levels", changed.has("levels")),
         abilities: sec("abilities", "Abilities", changed.has("abilities")),
         consumables: sec("consumables", "Food & drinks", changed.has("consumables")),
