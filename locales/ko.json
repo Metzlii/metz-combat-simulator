@@ -3964,5 +3964,8 @@
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "수식어당 실행 횟수이며, 각 수식어는 빈 벨트와 같은 시드로 실행합니다. 오차는 제곱근에 비례해 줄어들며, 1,000시간 × 8시드면 일반적인 라인은 약 5% 이내입니다.",
  "Show in": "표시 단위",
  "Experience modifiers": "경험치 수식어",
- "Without the Experience lines the table, the scores and the copied weights leave them out.": "경험치 라인을 빼면 표, 점수, 복사하는 가중치에서도 빠집니다."
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "경험치 라인을 빼면 표, 점수, 복사하는 가중치에서도 빠집니다.",
+ "Keep this answer in this browser; a saved answer is never pruned": "이 결과를 이 브라우저에 보관합니다. 저장한 결과는 자동으로 지워지지 않습니다",
+ "Plan · used": "계획 · 사용",
+ "needs a price: {items}": "가격 필요: {items}"
 }

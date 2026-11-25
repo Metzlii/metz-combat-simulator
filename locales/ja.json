@@ -3964,5 +3964,8 @@
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。誤差は平方根に比例して小さくなり、1,000 時間 × 8 シードで一般的なラインは約 5% 以内になります。",
  "Show in": "表示単位",
  "Experience modifiers": "経験値の修飾子",
- "Without the Experience lines the table, the scores and the copied weights leave them out.": "経験値のラインを外すと、表・スコア・コピーするウェイトからも除かれます。"
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "経験値のラインを外すと、表・スコア・コピーするウェイトからも除かれます。",
+ "Keep this answer in this browser; a saved answer is never pruned": "この結果をこのブラウザに保存します。保存した結果は自動で削除されません",
+ "Plan · used": "プラン · 使用",
+ "needs a price: {items}": "価格が必要：{items}"
 }

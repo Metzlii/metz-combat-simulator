@@ -3825,5 +3825,8 @@
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Calculs par modificateur, chaque modificateur sur les mêmes graines que la ceinture vide. L'erreur diminue avec la racine carrée : 8 graines de 1 000 heures placent une ligne typique à environ 5 % près.",
  "Show in": "Afficher en",
  "Experience modifiers": "Modificateurs d'expérience",
- "Without the Experience lines the table, the scores and the copied weights leave them out.": "Sans les lignes d'Expérience, le tableau, les scores et les poids copiés les laissent de côté."
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "Sans les lignes d'Expérience, le tableau, les scores et les poids copiés les laissent de côté.",
+ "Keep this answer in this browser; a saved answer is never pruned": "Garder cette réponse dans ce navigateur ; une réponse enregistrée n'est jamais supprimée",
+ "Plan · used": "Plan · utilisé",
+ "needs a price: {items}": "il manque un prix : {items}"
 }

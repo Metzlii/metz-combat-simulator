@@ -4107,5 +4107,8 @@
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "每个词条的运行次数，每个词条都与空腰带使用相同的种子。误差按平方根缩小：8 个种子、每次 1,000 小时，可让一般词条的误差在约 5% 以内。",
  "Show in": "显示单位",
  "Experience modifiers": "经验词条",
- "Without the Experience lines the table, the scores and the copied weights leave them out.": "不显示经验类词条时，表格、分数和复制的权重都会将其排除。"
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "不显示经验类词条时，表格、分数和复制的权重都会将其排除。",
+ "Keep this answer in this browser; a saved answer is never pruned": "在此浏览器中保留此结果；保存的结果不会被自动清理",
+ "Plan · used": "方案 · 使用",
+ "needs a price: {items}": "需要价格：{items}"
 }

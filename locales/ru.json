@@ -3962,5 +3962,8 @@
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Прогонов на модификатор, каждый модификатор на тех же сидах, что и пустой пояс. Погрешность падает как квадратный корень: 8 сидов по 1 000 часов дают типичной строке точность около 5%.",
  "Show in": "Показать в",
  "Experience modifiers": "Модификаторы опыта",
- "Without the Experience lines the table, the scores and the copied weights leave them out.": "Без строк опыта таблица, оценки и скопированные веса их не учитывают."
+ "Without the Experience lines the table, the scores and the copied weights leave them out.": "Без строк опыта таблица, оценки и скопированные веса их не учитывают.",
+ "Keep this answer in this browser; a saved answer is never pruned": "Сохранить этот ответ в браузере; сохранённый ответ никогда не удаляется",
+ "Plan · used": "План · использовано",
+ "needs a price: {items}": "нужна цена: {items}"
 }

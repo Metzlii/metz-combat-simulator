@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="446d3e660f7b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="051f2950eb20"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=446d3e660f7b"></script>
+<script src="./support.js?v=051f2950eb20"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=446d3e660f7b">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=051f2950eb20">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=446d3e660f7b">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=446d3e660f7b"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=051f2950eb20">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=051f2950eb20"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1316,7 +1316,28 @@
             </sc-if>
             <button class="btn btn-primary" style="padding:4px 16px;font-size:14px" disabled="{{ dev.runDisabled }}" onClick="{{ dev.run }}">Find the best talismans</button>
             <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ dev.stage }}</span>
+            <sc-if value="{{ dev.canSave }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-secondary" style="padding:3px 12px;font-size:13px" title="Keep this answer in this browser; a saved answer is never pruned" onClick="{{ dev.saveResults }}">Save results</button>
+              <button class="btn btn-ghost" style="padding:3px 12px;font-size:13px" title="Remove this tool's last answer from the page" onClick="{{ dev.clearResults }}">Clear results</button>
+            </sc-if>
           </div>
+          <sc-if value="{{ up.hasOptSaves }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:4px;width:100%">
+              <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left" onClick="{{ up.toggleOptSaves }}">
+                <span style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;flex:none;color:var(--color-accent-300)">{{ up.optSavesCaret }} Saved results</span>
+                <span class="text-muted" style="font-size:12px">{{ up.optSavesCount }}</span>
+              </button>
+              <sc-if value="{{ up.optSavesOpen }}" hint-placeholder-val="{{ false }}">
+                <sc-for list="{{ up.optSaves }}" as="sv" hint-placeholder-count="2">
+                  <div style="display:flex;gap:10px;align-items:center;padding:2px 0;font-size:12.5px">
+                    <span style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="{{ sv.name }}">{{ sv.name }}</span><span class="text-muted" style="flex:none">{{ sv.when }}</span>
+                    <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px" title="Put this answer back on the page" onClick="{{ sv.open }}">Open</button>
+                    <button class="btn btn-ghost" style="padding:0 5px;font-size:12px" title="Delete this saved result" onClick="{{ sv.remove }}">✕</button>
+                  </div>
+                </sc-for>
+              </sc-if>
+            </div>
+          </sc-if>
           <sc-if value="{{ dev.error }}" hint-placeholder-val="{{ false }}">
             <div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px;text-wrap:pretty">{{ dev.error }}</div>
           </sc-if>
@@ -1418,10 +1439,23 @@
                   <sc-raw-select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;width:auto" value="{{ roll.showAs }}" onChange="{{ roll.setShowAs }}">
                     <sc-for list="{{ roll.showAsOpts }}" as="o" hint-placeholder-count="4"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                   </sc-raw-select></label>
-                <div style="display:grid;grid-template-columns:minmax(0,1fr) auto auto auto auto auto;gap:4px 14px;font-size:13px;font-variant-numeric:tabular-nums;align-items:baseline">
-                  <span class="text-muted" style="font-size:12px">Plan</span><span class="text-muted" style="font-size:12px;text-align:right">Chance</span><span class="text-muted" style="font-size:12px;text-align:right">{{ roll.spendHead }}</span><span class="text-muted" style="font-size:12px;text-align:right" title="Median and 90th percentile of what it cost when it got there">Spent when reached</span><span class="text-muted" style="font-size:12px;text-align:right" title="Orbs and cores used on average, when it got there">Used</span><span class="text-muted" style="font-size:12px;text-align:right" title="{{ roll.powerTip }}">Average power</span>
+                <!-- One card per plan, as on Upgrades (operator, 2026-11-25): rank, the plan, its chance and power on the
+                     right, and beneath it what it takes and the orbs it used. -->
+                <div style="display:grid;grid-template-columns:32px minmax(0,1fr) 120px 170px;gap:10px;padding:0 11px;font-size:12px" class="text-muted">
+                  <span></span><span>Plan</span><span style="text-align:right">Chance</span><span style="text-align:right" title="{{ roll.powerTip }}">Average power</span>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:6px">
                   <sc-for list="{{ roll.plans }}" as="pl" hint-placeholder-count="6">
-                    <span style="min-width:0;text-wrap:pretty;{{ pl.style }}">{{ pl.name }}</span><span style="text-align:right;color:var(--color-accent-300);{{ pl.style }}">{{ pl.chance }}</span><span style="text-align:right;{{ pl.style }}">{{ pl.mean }}</span><span style="text-align:right;{{ pl.style }}">{{ pl.reached }}</span><span style="text-align:right;font-size:12px;{{ pl.style }}">{{ pl.mix }}</span><span style="text-align:right;{{ pl.style }}">{{ pl.power }}</span>
+                    <div style="display:flex;flex-direction:column;gap:4px;padding:8px 10px;border-radius:var(--radius-sm);border:1px solid {{ pl.border }};background:{{ pl.bg }};{{ pl.style }}">
+                      <div style="display:grid;grid-template-columns:32px minmax(0,1fr) 120px 170px;gap:10px;align-items:baseline;font-variant-numeric:tabular-nums">
+                        <span class="text-muted" style="font-size:13px">{{ pl.rank }}</span>
+                        <span style="font-size:13.5px;text-wrap:pretty;min-width:0">{{ pl.name }}</span>
+                        <span style="font-size:14px;text-align:right;color:var(--color-accent-300)">{{ pl.chance }}</span>
+                        <span style="font-size:13px;text-align:right">{{ pl.power }}</span>
+                      </div>
+                      <div class="text-muted" style="padding-left:42px;font-size:12px;font-variant-numeric:tabular-nums;text-wrap:pretty">{{ pl.detail }}</div>
+                      <div class="text-muted" style="padding-left:42px;font-size:12px;text-wrap:pretty" title="Orbs and cores used on average, when it got there">{{ pl.mix }}</div>
+                    </div>
                   </sc-for>
                 </div>
                 <sc-if value="{{ roll.hasOnce }}" hint-placeholder-val="{{ false }}">
@@ -1524,7 +1558,8 @@
               <div style="text-wrap:pretty"><b>1.0.52</b></div>
               <ul class="about-list" style="margin-top:4px;font-size:13.5px">
                 <li><b>Talisman Crafting: a three-special plan.</b> The lock-and-Exchange route puts the best modifier at G6, then Reforging Orbs until another special turns up, Mutation Orbs for two specials and a fourth line you want (or three specials), and Attunement Orbs for the grades. It is offered when at least two more specials are worth something on your weights.</li>
-                <li><b>Talisman Stat Weighting measures each line alone and stops there.</b> Building a whole belt's set line by line mostly re-found the same ranking (Magic Experience three times over) and took most of the run. Magic, Melee, Ranged and Physical start from the player's weapon, each group's switch sits beside its name, Defense is now Defense + Tank, and the two tables are one: each line with its score at every grade beside it, scored against the best line that is not Experience. A finished run can be shown in run time, XP / h or profit, with or without the Experience lines; Copy the weights copies what is shown. Hours and Seeds are set on the page, 1,000 hours and 8 seeds by default, in one pass with every line on the same runs (it was a fixed 100 hours and 2 seeds, then halving rounds that piled runs on the top few and left the rest noisy).</li>
+                <li><b>Talisman Stat Weighting measures each line alone and stops there.</b> Building a whole belt's set line by line mostly re-found the same ranking (Magic Experience three times over) and took most of the run. Magic, Melee, Ranged and Physical start from the player's weapon, each group's switch sits beside its name, Defense is now Defense + Tank, and the two tables are one: each line with its score at every grade beside it, scored against the best line that is not Experience. A finished run can be shown in run time, XP / h or profit, with or without the Experience lines; Copy the weights copies what is shown. Hours and Seeds are set on the page, 1,000 hours and 8 seeds by default, in one pass with every line on the same runs (it was a fixed 100 hours and 2 seeds, then halving rounds that piled runs on the top few and left the rest noisy). Finished weightings are kept with the other optimizer answers (Save results keeps one for good), and opening one offers it to Talisman Crafting again.</li>
+                <li>Talisman Crafting lists its plans as cards, like Upgrades: the plan, its chance and the power it ends with, then what it takes and the orbs it used beneath, so a long plan name no longer squeezes into a narrow column.</li>
                 <li>A special already on another talisman of the belt now counts for nothing on the one being crafted (you would raise that one instead), where it used to count for what it added over that copy's grade. The Target field explains its percentage on hover.</li>
               </ul>
             </div>
@@ -2227,6 +2262,8 @@ class Component extends DCLogic {
       const done = await stream.done;
       finish({ devDone: done });
       if (done?.ranked?.length && !done.stopped) this.saveWeighting(done);
+      // Kept like every optimizer answer: the last few automatically, a pressed Save for good.
+      setTimeout(() => this.autoSaveOptimize("talWeights"), 0);
     } catch (e) { finish({ devError: `${e?.message || e}`.replace(/^\d{3}\s*\{.*?"error"\s*:\s*"([^"]*)".*\}$/, "$1").replace(/^\d{3}\s*/, "") }); }
   }
   devStop() { try { this._devStream?.abort(); } catch {} }
@@ -2239,6 +2276,10 @@ class Component extends DCLogic {
     const w = { id: String(Date.now()), at: Date.now(), player: d.player, zoneName: zone?.name || d.zone, tier: d.difficultyTier, belt: d.belt, grade: d.grade, unit,
       paceUnit: d.baseline?.dungeon ? "clears / h" : "encounters / h", metric: d.goal?.metric || "eph",
       ranked: d.ranked.filter(r => Array.isArray(r.byGrade)).map(r => ({ hrid: r.hrid, name: r.name, group: r.group, byGrade: r.byGrade, ...(r.byGradeBy ? { byGradeBy: r.byGradeBy } : {}) })) };
+    w.ms = d.ms ?? null;
+    const same = x => x.ms != null && x.ms === w.ms && x.player === w.player && x.zoneName === w.zoneName;
+    const had = this.weightings().find(same);
+    if (had) { this.setDevRoll({ weighting: had.id }); return; }
     this._weightings = [w, ...this.weightings()].slice(0, 6);
     try { localStorage.setItem(Component.TAL_WEIGHTS_KEY, JSON.stringify(this._weightings)); } catch {}
     this.setDevRoll({ weighting: w.id });
@@ -2318,14 +2359,19 @@ class Component extends DCLogic {
       showAsOpts: [{ value: "goal", label: Component.tf("as ranked ({unit})", { unit: Component.t(out?.unit || done?.unit || "") }) },
         ...(hasViews ? [{ value: "eph", label: Component.t(done.paceUnit || "encounters / h") }, { value: "xp", label: Component.t("XP / h") }, { value: "profit", label: Component.t("profit / day") }] : [])],
       powerTip: out ? Component.tf("What the talisman adds where the plan leaves it, in {unit}, averaged over every try (reached or not), and that as a share of the best talisman.", { unit: unitOf(view) }) : "",
-      plans: (out?.plans || []).map(p => ({ name: p.template ? Component.tf(p.template, { mod: Component.t(p.vars?.mod || ""), orb: Component.t(p.vars?.orb || "") }) : Component.t(p.name),
+      plans: (out?.plans || []).map((p, i) => ({ rank: `${i + 1}.`, name: p.template ? Component.tf(p.template, { mod: Component.t(p.vars?.mod || ""), orb: Component.t(p.vars?.orb || "") }) : Component.t(p.name),
         chance: p.unavailable ? Component.t("needs a price") : p.unreachable ? Component.tf("cannot reach (tops out at {p})", { p: pct(p.ceiling) }) : pct(p.chance),
         mean: p.unavailable || p.unreachable ? "" : spendText(p.meanSpend),
         reached: p.unavailable || p.unreachable || !p.chance ? (p.unavailable ? p.missing.map(x => Component.t(x)).join(", ") : "") : `${spendText(p.spendWhenReached.median)} \u00b7 ${spendText(p.spendWhenReached.p90)}`,
         // What the plan used, on average, when it got there: every orb and core by name.
         mix: Object.entries(p.orbMix || {}).filter(([, v]) => v >= 0.05).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${/ Orb$/.test(k) ? Component.t(k.replace(/ Orb$/, "")) : Component.t(k)} ${v >= 10 ? Math.round(v) : v.toFixed(1)}`).join(" \u00b7 "),
         orbs: p.orbsWhenReached?.median != null ? String(p.orbsWhenReached.median) : "",
-        power: power(p), style: p.unavailable || p.unreachable ? "opacity:0.55" : "" })),
+        power: power(p), style: p.unavailable || p.unreachable ? "opacity:0.55" : "",
+        // The line under the plan, as on an Upgrades card: what it takes, then what it used.
+        detail: p.unavailable ? Component.tf("needs a price: {items}", { items: p.missing.map(x => Component.t(x)).join(", ") }) : p.unreachable ? ""
+          : [`${outCoins ? Component.t("Average spend") : Component.t("Average items")} ${spendText(p.meanSpend)}`, p.chance ? `${Component.t("Spent when reached")} ${spendText(p.spendWhenReached.median)} \u00b7 ${spendText(p.spendWhenReached.p90)}` : ""].filter(Boolean).join("  \u2014  "),
+        border: i === 0 && !p.unavailable && !p.unreachable ? "color-mix(in srgb, var(--color-accent-500) 55%, transparent)" : "var(--color-divider)",
+        bg: i === 0 && !p.unavailable && !p.unreachable ? "color-mix(in srgb, var(--color-accent-700) 14%, transparent)" : "transparent" })),
       hasOnce: !!(out?.oneOrb?.length),
       once: (out?.oneOrb || []).map(o => ({ orb: Component.t(o.orb), better: o.usable ? pct(o.chanceBetter) : Component.t("cannot be used"), gain: o.usable && o.chanceBetter > 0 ? `+${pct(o.gainWhenBetter)}` : "",
         after: o.usable ? pct(o.meanShareAfter) : "", cost: o.usable && o.costToBeat != null ? coins(o.costToBeat) : "\u2013" })),
@@ -2436,6 +2482,7 @@ class Component extends DCLogic {
       gradeHead: Array.from({ length: ch.info?.maxGrade || 6 }, (_, i) => ({ label: `G${i + 1}` })),
       gradeNote: Component.tf("Grade columns: 100 is the best line at the top grade that is not an Experience line ({name}); every other cell is its share of that, so an Experience line can score over 100. A line scales with its value, so its lower grades are worked out from the measured one.", { name: topRow ? Component.t(topRow.name) : "" }),
       hasDone: !!done,
+      canSave: !!done && !s.devRunning, saveResults: () => this.saveOptimize("talWeights"), clearResults: () => this.clearOptimize("talWeights"),
       viewPaceStyle: seg2(view.unit === "eph"), viewXpStyle: seg2(view.unit === "xp"), viewProfitStyle: seg2(view.unit === "profit"),
       viewPace: () => this.setState({ devView: { ...view, unit: "eph" } }), viewXp: () => this.setState({ devView: { ...view, unit: "xp" } }), viewProfit: () => this.setState({ devView: { ...view, unit: "profit" } }),
       viewShowXp: view.xp, toggleViewXp: e => this.setState({ devView: { ...view, xp: !!e.target.checked } }),
@@ -2455,7 +2502,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=446d3e660f7b");
+      const i18n = await import("./i18n.js?v=051f2950eb20");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2478,7 +2525,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=446d3e660f7b");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=051f2950eb20");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -2613,6 +2660,7 @@ class Component extends DCLogic {
     skills: { skillRows: [], skillHead: null, skillDone: null, skillError: "" },
     food: { foodRows: [], foodHead: null, foodDone: null, foodError: "" },
     loadouts: { ldRows: [], ldHead: null, ldDone: null, ldError: "" },
+    talWeights: { devRows: [], devSteps: [], devHead: null, devDone: null, devError: "" },
   };
   clearOptimize(mode) { this.setState({ ...Component.OPT_CLEAR[mode], optRestoredAt: null }); }
   // Saved results (operator, 2026-09-19): an optimizer answer kept past the 12-hour cache, named, per tool, in this
@@ -2621,7 +2669,7 @@ class Component extends DCLogic {
   // How many AUTOMATIC answers to keep per tool. Small on purpose: these accumulate without anyone asking, and
   // a list nobody curates is one nobody reads. A pressed Save is exempt and never pruned.
   static AUTO_SAVE_KEEP = 5;
-  static OPT_MODE_LABEL = { upgrades: "Upgrades", triggers: "Trigger values", skills: "Skill levelling", food: "Food & drinks", loadouts: "Loadouts × planets" };
+  static OPT_MODE_LABEL = { upgrades: "Upgrades", triggers: "Trigger values", skills: "Skill levelling", food: "Food & drinks", loadouts: "Loadouts × planets", talWeights: "Talisman Stat Weighting" };
   loadOptSaves() {
     try { const list = JSON.parse(localStorage.getItem(Component.OPT_SAVES_KEY) || "[]"); if (Array.isArray(list)) this.setState({ optSaves: list }); } catch {}
   }
@@ -2753,7 +2801,7 @@ class Component extends DCLogic {
   }
   /** A saved answer's name, rebuilt from its stored parts so it reads in the current language, not the one it was saved in. */
   optSaveLabel(x) {
-    const d = x?.data || {}, head = d.upHead || d.trigHead || d.skillHead || d.ldHead || null;
+    const d = x?.data || {}, head = d.upHead || d.trigHead || d.skillHead || d.ldHead || d.devHead || null;
     if (!head) return x?.name || "";
     const zone = (this.state.zones || []).find(z => z.hrid === head.zone);
     const where = zone ? `${Component.t(zone.name)} T${head.difficultyTier ?? 0}` : "";
@@ -2764,8 +2812,8 @@ class Component extends DCLogic {
   optSaveRecord(mode, auto) {
     const s = this.state, fields = Object.keys(Component.OPT_CLEAR[mode]).filter(k => !/Error$/.test(k));
     const data = Component.trimOpt(Object.fromEntries(fields.map(k => [k, s[k]])));
-    const head = mode === "upgrades" ? s.upHead : mode === "triggers" ? s.trigHead : mode === "food" ? s.foodHead : mode === "loadouts" ? s.ldHead : s.skillHead;
-    const done = mode === "upgrades" ? s.upDone : mode === "triggers" ? s.trigDone : mode === "food" ? s.foodDone : mode === "loadouts" ? s.ldDone : s.skillDone;
+    const head = mode === "upgrades" ? s.upHead : mode === "triggers" ? s.trigHead : mode === "food" ? s.foodHead : mode === "loadouts" ? s.ldHead : mode === "talWeights" ? s.devHead : s.skillHead;
+    const done = mode === "upgrades" ? s.upDone : mode === "triggers" ? s.trigDone : mode === "food" ? s.foodDone : mode === "loadouts" ? s.ldDone : mode === "talWeights" ? s.devDone : s.skillDone;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     const where = zone ? `${zone.name} T${head?.difficultyTier ?? 0}` : "";
     const who = head?.player || "whole party";
@@ -2793,9 +2841,9 @@ class Component extends DCLogic {
    */
   autoSaveOptimize(mode) {
     const s = this.state;
-    const done = mode === "upgrades" ? s.upDone : mode === "triggers" ? s.trigDone : mode === "food" ? s.foodDone : mode === "loadouts" ? s.ldDone : s.skillDone;
+    const done = mode === "upgrades" ? s.upDone : mode === "triggers" ? s.trigDone : mode === "food" ? s.foodDone : mode === "loadouts" ? s.ldDone : mode === "talWeights" ? s.devDone : s.skillDone;
     if (!done) return;
-    const rows = mode === "upgrades" ? (s.upRows || []) : mode === "triggers" ? (s.trigSteps || []) : mode === "food" ? (s.foodRows || []) : (s.skillRows || []);
+    const rows = mode === "upgrades" ? (s.upRows || []) : mode === "triggers" ? (s.trigSteps || []) : mode === "food" ? (s.foodRows || []) : mode === "talWeights" ? (s.devRows || []) : (s.skillRows || []);
     const hasAnswer = rows.length || (done.ranked || []).length || (done.changes || []).length || (done.curves || []).length;
     if (!hasAnswer) return;
     const rec = this.optSaveRecord(mode, true);
@@ -2807,7 +2855,9 @@ class Component extends DCLogic {
   }
   openOptSave(id) {
     const sv = (this.state.optSaves || []).find(x => x.id === id);
-    if (sv) this.setState({ ...Component.OPT_CLEAR[sv.mode], ...sv.data, upMode: sv.mode, optRestoredAt: null });
+    if (sv) this.setState({ ...Component.OPT_CLEAR[sv.mode], ...sv.data, upMode: sv.mode, optRestoredAt: null, ...(sv.mode === "talWeights" ? { devView: null } : {}) });
+    // A stat weighting opened again is offered to Talisman Crafting too.
+    if (sv?.mode === "talWeights" && sv.data?.devDone?.ranked?.length) this.saveWeighting(sv.data.devDone);
   }
   deleteOptSave(id) { this.writeOptSaves((this.state.optSaves || []).filter(x => x.id !== id)); }
   // ZONE-84: an answer as a file. It leaves this browser, which is the point -- a spreadsheet, a teammate, or
@@ -2817,7 +2867,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=446d3e660f7b");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=051f2950eb20");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -2838,7 +2888,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=446d3e660f7b");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=051f2950eb20");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
