@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-11-26T08:22:24.888Z",
- "commit": "20f2cb3",
+ "builtAt": "2026-11-26T08:35:37.446Z",
+ "commit": "0337f49",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -12,9 +12,9 @@
   "note": "the simulation kernel and the game data, the part of the first load the loading card describes; gzip level 9, which is close to what a static host sends"
  },
  "site": {
-  "files": 55,
-  "bytes": 19301072,
-  "gzip": 3481111
+  "files": 56,
+  "bytes": 19305808,
+  "gzip": 3482564
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -47,11 +47,11 @@
   },
   "IconPick.dc.html": {
    "bytes": 11238,
-   "gzip": 3781
+   "gzip": 3779
   },
   "index.html": {
-   "bytes": 516116,
-   "gzip": 129466
+   "bytes": 518110,
+   "gzip": 129802
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -59,47 +59,47 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1479
+   "gzip": 1480
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3808031,
    "gzip": 450336
   },
   "locales/en.json": {
-   "bytes": 124899,
-   "gzip": 26046
+   "bytes": 124991,
+   "gzip": 26062
   },
   "locales/es.json": {
-   "bytes": 267832,
-   "gzip": 72830
+   "bytes": 267934,
+   "gzip": 72861
   },
   "locales/fr.json": {
-   "bytes": 268420,
-   "gzip": 73152
+   "bytes": 268519,
+   "gzip": 73186
   },
   "locales/ja.json": {
-   "bytes": 283954,
-   "gzip": 84157
+   "bytes": 284046,
+   "gzip": 84186
   },
   "locales/ko.json": {
-   "bytes": 267872,
-   "gzip": 80809
+   "bytes": 267969,
+   "gzip": 80840
   },
   "locales/pt.json": {
-   "bytes": 266387,
-   "gzip": 72547
+   "bytes": 266481,
+   "gzip": 72579
   },
   "locales/ru.json": {
-   "bytes": 350105,
-   "gzip": 89946
+   "bytes": 350206,
+   "gzip": 89974
   },
   "locales/zh-Hant.json": {
-   "bytes": 245000,
-   "gzip": 80667
+   "bytes": 245095,
+   "gzip": 80700
   },
   "locales/zh.json": {
-   "bytes": 285010,
-   "gzip": 99147
+   "bytes": 285105,
+   "gzip": 99190
   },
   "server/abilities.mjs": {
    "bytes": 6802,
@@ -115,11 +115,11 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 11039,
-   "gzip": 4503
+   "gzip": 4502
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
-   "gzip": 3192
+   "gzip": 3188
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
@@ -131,7 +131,7 @@
   },
   "server/zoneApi.mjs": {
    "bytes": 6551,
-   "gzip": 2226
+   "gzip": 2225
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
@@ -143,35 +143,35 @@
   },
   "server/zoneDerive.mjs": {
    "bytes": 11204,
-   "gzip": 4254
+   "gzip": 4252
   },
   "server/zoneImport.mjs": {
    "bytes": 16358,
-   "gzip": 5820
+   "gzip": 5818
   },
   "server/zoneOptimize.mjs": {
    "bytes": 43446,
-   "gzip": 15314
+   "gzip": 15313
   },
   "server/zoneSim.mjs": {
    "bytes": 15144,
-   "gzip": 5596
+   "gzip": 5595
   },
   "server/zoneTalismanData.mjs": {
    "bytes": 10050,
    "gzip": 1659
   },
   "server/zoneTalismanRolls.mjs": {
-   "bytes": 11641,
-   "gzip": 4780
+   "bytes": 11905,
+   "gzip": 4900
   },
   "server/zoneTalismans.mjs": {
    "bytes": 8266,
-   "gzip": 3582
+   "gzip": 3581
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 49287,
-   "gzip": 17567
+   "gzip": 17566
   },
   "spira-theme.css": {
    "bytes": 3113,
@@ -202,12 +202,12 @@
    "gzip": 2595
   },
   "zone-web/zoneClient.js": {
-   "bytes": 7074,
-   "gzip": 2655
+   "bytes": 8305,
+   "gzip": 3118
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
-   "gzip": 548
+   "gzip": 547
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
@@ -216,6 +216,10 @@
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
    "gzip": 147
+  },
+  "zone-web/zoneRollsWorker.js": {
+   "bytes": 380,
+   "gzip": 274
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
@@ -227,7 +231,7 @@
   },
   "ZoneSim.dc.html": {
    "bytes": 428605,
-   "gzip": 110113
+   "gzip": 110112
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
