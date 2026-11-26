@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="7cd1da8cef87"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="dc30a75d7bc0"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=7cd1da8cef87"></script>
+<script src="./support.js?v=dc30a75d7bc0"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=7cd1da8cef87">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=dc30a75d7bc0">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=7cd1da8cef87">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=7cd1da8cef87"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=dc30a75d7bc0">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=dc30a75d7bc0"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1405,6 +1405,11 @@
                     <sc-for list="{{ roll.talismanOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                   </sc-raw-select>
                 </label>
+                <label style="display:flex;flex-direction:column;gap:4px;min-width:0" title="{{ roll.specialsTip }}"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Specials</span>
+                  <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.specials }}" onChange="{{ roll.setSpecials }}">
+                    <sc-for list="{{ roll.specialsOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                  </sc-raw-select>
+                </label>
                 <sc-if value="{{ roll.planForOpts.length }}" hint-placeholder-val="{{ false }}">
                   <label style="display:flex;flex-direction:column;gap:4px;min-width:0" title="{{ roll.planForTip }}"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Plan for</span>
                     <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.planFor }}" onChange="{{ roll.setPlanFor }}">
@@ -1453,6 +1458,9 @@
               <sc-if value="{{ roll.error }}" hint-placeholder-val="{{ false }}"><div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px">{{ roll.error }}</div></sc-if>
               <sc-if value="{{ roll.hasOut }}" hint-placeholder-val="{{ false }}">
                 <div style="font-size:13px;text-wrap:pretty">{{ roll.summary }}</div>
+                <sc-if value="{{ roll.keepText }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:13.5px;text-wrap:pretty;padding:8px 10px;border:1px solid var(--color-accent-800);border-radius:6px"><b>{{ roll.keepVerdict }}</b> <span class="text-muted">{{ roll.keepText }}</span></div>
+                </sc-if>
                 <sc-if value="{{ roll.compareText }}" hint-placeholder-val="{{ false }}">
                   <div style="font-size:13.5px;text-wrap:pretty;padding:8px 10px;border:1px solid var(--color-accent-800);border-radius:6px"><b>{{ roll.compareVerdict }}</b> <span class="text-muted">{{ roll.compareText }}</span></div>
                 </sc-if>
@@ -1597,6 +1605,14 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.66</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Specials: spread or keep.</b> Talisman Crafting has a Specials choice. Spread across the belt (as before): the talisman aims for one special and counts no more, since the rest belong on the belt's other talismans. Keep the ones it has: the specials the starting talisman already has stay in its target, for when keeping a second special is cheaper than finding it again for another talisman. With Keep, the odds also work out spread from the same start and what finding each extra special (at the grade kept, or better) on another talisman would take, and the verdict weighs keeping, less that saving, against spreading. Send to game carries the choice.</li>
+                <li>Fixed: with a belt's slots known, a second special on the talisman was counted in full, so a plan could reach its target by raising a special meant for another talisman.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.65</b></div>
@@ -2518,11 +2534,14 @@ class Component extends DCLogic {
       exchange: r.exchange === "shuffle" ? "shuffle" : "derangement", priceMode: coinMode ? "market" : "count",
       // The weighting's belt: the best talisman shares the specials out across its slots (one each, where that is worth more).
       slots: Number(done.belt?.slots) || null,
+      // Keep the ones it has (operator, 2026-11-26): the starting talisman's specials stay in its target.
+      keepSpecials: r.specials === "keep",
       budget: coinMode ? (Component.coinsOf(r.budget ?? "50M") ?? 50e6) : Math.max(1, Math.floor(Number(r.budgetItems ?? 300) || 300)), target: Math.max(1, Math.min(100, Number(r.target ?? 40) || 40)) / 100 };
     this.setState({ devRollRunning: true, devRollError: "", devRollProgress: { done: 0, total: 0 } });
     // Every core works a share of the plans; the bar moves as each share comes back (2026-11-26).
     const both = (k === "game" || k === "game-roll") && r.fromGame?.newRoll && r.fromGame?.talisman;
-    const onProgress = (d, t, half = 0) => this.setState({ devRollProgress: { done: d + half * t, total: both ? 2 * t : t } });
+    const keepMode = r.specials === "keep", runs = 1 + (both ? 1 : 0) + (keepMode ? 1 : 0);
+    const onProgress = (d, t, half = 0) => this.setState({ devRollProgress: { done: d + half * t, total: runs * t } });
     try {
       // A roll waiting in the game (operator, 2026-11-26: "it should just do both and tell you whether to keep it"): the
       // current lines and the new roll, each with its best plan, and which to keep.
@@ -2534,7 +2553,15 @@ class Component extends DCLogic {
         const byKey = out => Object.fromEntries((out.plans || []).filter(x => !x.unavailable && !x.unreachable).map(x => [x.key, { chance: x.chance, meanSpend: x.meanSpend }]));
         compare = { current: Component.bestOf(cur), roll: Component.bestOf(roll), plans: { current: byKey(cur), roll: byKey(roll) } };
       }
-      this.setState({ devRollRunning: false, devRollDone: { ...main, from: k, player: done.player, unit: planFor ? Component.unitOfKey(planFor, done) : done.unit, planFor, compare } });
+      // Keep against spread (operator, 2026-11-26): the same start with the specials spread, and keep's cost less what
+      // finding the kept extra specials on another talisman would take.
+      let keepVsSpread = null;
+      if (keepMode) {
+        const spread = await c.zoneTalismanRolls({ ...body, keepSpecials: false }, { onProgress: (d, t) => onProgress(d, t, runs - 1) });
+        const saving = (main.keepSavings || []).reduce((a, x) => a + (x.meanSpend || 0), 0);
+        keepVsSpread = { keep: Component.bestOf(main), spread: Component.bestOf(spread), saving, savings: main.keepSavings || [] };
+      }
+      this.setState({ devRollRunning: false, devRollDone: { ...main, from: k, player: done.player, unit: planFor ? Component.unitOfKey(planFor, done) : done.unit, planFor, compare, keepVsSpread, keepSpecials: keepMode } });
     }
     catch (e) { this.setState({ devRollRunning: false, devRollError: `${e?.message || e}`.replace(/^\d{3}\s*\{.*?"error"\s*:\s*"([^"]*)".*\}$/, "$1").replace(/^\d{3}\s*/, "") }); }
   }
@@ -2569,6 +2596,9 @@ class Component extends DCLogic {
         ...(r.fromGame?.newRoll ? [{ value: "game-roll", label: `${Component.t("From the game, the new roll:")} ${r.fromGame.newRoll.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(", ")}` }] : []),
         ...own.map((t, k) => ({ value: String(k), label: `${Component.tf("Talisman {n}:", { n: k + 1 })} ${t.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(", ")}` }))],
       target: String(r.target ?? 40), setTarget: e => this.setDevRoll({ target: e.target.value }),
+      specials: r.specials === "keep" ? "keep" : "", setSpecials: e => this.setDevRoll({ specials: e.target.value }),
+      specialsOpts: [{ value: "", label: Component.t("spread across the belt (one per talisman)") }, { value: "keep", label: Component.t("keep the ones it has") }],
+      specialsTip: Component.t("A special counts once on the belt. Spread: the best talisman has one, the others go on the belt's other talismans. Keep: the specials the starting talisman already has stay in its target, which saves finding them again for another talisman."),
       planFor: ["eph", "xp", "profit"].includes(r.planFor) ? r.planFor : "", setPlanFor: e => this.setDevRoll({ planFor: e.target.value }),
       planForOpts: (done?.ranked || []).some(x => x.byGradeBy) ? [{ value: "", label: Component.tf("as ranked ({unit})", { unit: Component.t(done.unit || "") }) },
         ...["eph", "xp", "profit"].filter(k => done.ranked.some(x => Array.isArray(x.byGradeBy?.[k]))).map(k => ({ value: k, label: Component.t(Component.unitOfKey(k, done)) }))] : [],
@@ -2597,6 +2627,15 @@ class Component extends DCLogic {
         return { compareVerdict: pick === "either" ? Component.t("Either: the best plan rerolls these lines anyway.") : pick === "roll" ? Component.t("Use New Roll.") : Component.t("Keep Current."),
           compareText: Component.tf("From the current lines the best plan reaches the target {a} of the time for {as} on average; from the new roll, {b} for {bs}.",
             { a: pct(c.current.chance), as: sp(c.current.meanSpend), b: pct(c.roll.chance), bs: sp(c.roll.meanSpend) }) };
+      })(),
+      ...(() => {
+        // Keep the specials or spread them: keep's best plan less the saving, against spread's best plan.
+        const v = out?.keepVsSpread; if (!v?.keep || !v?.spread || !v.savings.length) return { keepVerdict: "", keepText: "" };
+        const sp = x => (outCoins ? coins(x) : `${Math.round(x)}`), net = Math.max(0, v.keep.meanSpend - v.saving);
+        const pick = Component.keepOrTake(v.spread, { chance: v.keep.chance, meanSpend: net });
+        return { keepVerdict: pick === "either" ? Component.t("Keep or spread: about the same.") : pick === "roll" ? Component.t("Keep the specials.") : Component.t("Spread the specials."),
+          keepText: Component.tf("Keeping: the best plan reaches its target {a} of the time for {as}, less {s} it saves on finding {mods} for another talisman: {net}. Spreading: {b} for {bs}.",
+            { a: pct(v.keep.chance), as: sp(v.keep.meanSpend), s: sp(v.saving), mods: v.savings.map(x => `${Component.t(x.name)} G${x.grade}+`).join(", "), net: sp(net), b: pct(v.spread.chance), bs: sp(v.spread.meanSpend) }) };
       })(),
       summary: out ? Component.tf("Target {t} of the best talisman ({best}), within {b}. Where you start: {c}.", { t: pct(out.target), b: outCoins ? coins(out.budget) : Component.tf("{n} orbs and cores", { n: out.budget }),
         best: out.best.lines.map(l => `${nameOf(l.hrid)} G${l.grade}`).join(", "), c: out.current.lines.length ? pct(out.current.share) : Component.t("nothing yet") }) : "",
@@ -2667,6 +2706,7 @@ class Component extends DCLogic {
       plan: plan && out ? { key: plan.key, title: this.rollPlanTitle(plan), target: out.target, exchange: out.exchange, priceMode: out.priceMode,
         prices: Object.fromEntries(Object.entries(out.prices || {}).map(([k, v]) => [k, v?.coins ?? null])), chance: plan.chance ?? null,
         steps: this.rollPlanSteps(plan, out).map(a => a.text),
+        keepSpecials: !!out.keepSpecials,
         // The modifiers this plan's Focus Orbs favour, so the game names exactly those.
         focus: plan.focus ? plan.focus.hrids : null,
         // Each step's words, in the page's language, so the game says what the plan is doing at the step it is on.
@@ -2844,7 +2884,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=7cd1da8cef87");
+      const i18n = await import("./i18n.js?v=dc30a75d7bc0");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2867,7 +2907,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=7cd1da8cef87");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=dc30a75d7bc0");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -3228,7 +3268,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=7cd1da8cef87");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=dc30a75d7bc0");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -3249,7 +3289,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=7cd1da8cef87");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=dc30a75d7bc0");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
