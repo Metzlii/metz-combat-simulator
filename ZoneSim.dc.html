@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=a99293acc925"></script>
+<script src="./support.js?v=ee8caf2877dd"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=a99293acc925">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ee8caf2877dd">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=a99293acc925">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=a99293acc925"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=ee8caf2877dd">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ee8caf2877dd"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -390,6 +390,20 @@
           <sc-if value="{{ zone.editor.noLoadoutsNote }}" hint-placeholder-val="{{ false }}">
             <span class="text-muted" style="font-size:12px;flex:none;margin-left:4px;cursor:help;border-bottom:1px dotted var(--color-neutral-400)" title="{{ zone.editor.noLoadoutsTitle }}">{{ zone.editor.noLoadoutsNote }}</span>
           </sc-if>
+          <sc-if value="{{ zone.editor.ldSaving }}" hint-placeholder-val="{{ false }}">
+            <span style="display:inline-flex;gap:6px;align-items:center;flex:none">
+              <input class="input" id="zone-ld-save-name" style="min-height:27px;padding:1px 7px;font-size:12.5px;width:170px" placeholder="{{ zone.editor.ldNamePlaceholder }}" title="{{ zone.editor.ldNameTitle }}" value="{{ zone.editor.ldName }}" onInput="{{ zone.editor.ldNameInput }}">
+              <button class="btn btn-primary" style="padding:1px 9px;font-size:12.5px;flex:none" title="{{ zone.editor.ldSaveTitle }}" onClick="{{ zone.editor.ldSave }}">{{ zone.editor.ldSaveLabel }}</button>
+              <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;flex:none" onClick="{{ zone.editor.ldCancel }}">Cancel</button>
+            </span>
+          </sc-if>
+          <sc-if value="{{ zone.editor.ldIdle }}" hint-placeholder-val="{{ true }}">
+            <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;flex:none" title="Save what is set up here as a loadout of this character: it joins the Loadout picker, is kept in this browser and comes back with the next import" onClick="{{ zone.editor.ldStart }}">Save loadout</button>
+            <sc-if value="{{ zone.editor.ldCanDelete }}" hint-placeholder-val="{{ false }}">
+              <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;flex:none" title="{{ zone.editor.ldDeleteTitle }}" onClick="{{ zone.editor.ldDelete }}">Delete loadout</button>
+            </sc-if>
+          </sc-if>
+          <sc-if value="{{ zone.editor.hasLdError }}" hint-placeholder-val="{{ false }}"><span style="font-size:12px;color:var(--color-danger-300, #f08a8a)">{{ zone.editor.ldError }}</span></sc-if>
           <span class="text-muted" style="font-size:12.5px">{{ zone.editor.editedNote }}</span>
           <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;margin-left:auto;flex:none" onClick="{{ zone.editor.revertPlayer }}">Reset player</button>
           <button class="btn btn-ghost" style="padding:1px 7px;font-size:12.5px;flex:none" title="{{ zone.editor.sendTitle }}" onClick="{{ zone.editor.sendToGame }}">Send to game</button>
@@ -1421,7 +1435,7 @@ class Component extends DCLogic {
   // The party goes with the session, because the session is where the old oversized copies live and the party is
   // one paste away; the note says so before the button is pressed rather than after.
   static CACHE_KEYS = ["gts.zone.session.v1", "gts.zone.optimize.v1", "gts.zone.market.v1", "gts.zone.pace.v1"];
-  static KEPT_KEYS = ["gts.zone.saves.v1", "gts.zone.optimize.saves.v1", "gts.zone.prefs.v1", "gts.zoneBuffs",
+  static KEPT_KEYS = ["gts.zone.saves.v1", "gts.zone.optimize.saves.v1", "gts.zone.prefs.v1", "gts.zoneBuffs", "gts.zone.loadouts.v1",
     "mwi.zone.workers", "mwi.zone.partyScriptSeen", "mwi.zone.lang"];
   static storedBytes(keys) {
     let n = 0;
@@ -1533,7 +1547,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=a99293acc925").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=ee8caf2877dd").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1958,6 +1972,7 @@ class Component extends DCLogic {
     try { const r = await this.client.zoneImport(payload);
       const filled = this.zoneSortParty(this.zoneFillSlots(this.zoneFillShrine(r.players || []), this.state.zoneCatalog));
       const picked = this.zoneGroupLoadouts(filled, this.state.zoneCatalog);
+      picked.party = this.zoneWithSiteLoadouts(picked.party);
       if (!this.state.zoneScriptSeen && Component.fromPartyScript(filled)) {
         this.setState({ zoneScriptSeen: true });
         try { localStorage.setItem(Component.PARTY_SCRIPT_KEY, "1"); } catch {}
@@ -2603,7 +2618,7 @@ class Component extends DCLogic {
   zoneLoadoutOpts(record) {
     const list = Array.isArray(record?.loadouts) ? record.loadouts : [];
     const opts = list.map((l, k) => { const name = l?.name || Component.tf("Loadout {n}", { n: k + 1 });
-      return { value: String(k), label: l?.wornAtExport ? Component.t("Profile Loadout") : !l?.groupCombat ? name
+      return { value: String(k), label: l?.wornAtExport ? Component.t("Profile Loadout") : l?.site ? Component.tf("{name} · saved here", { name }) : !l?.groupCombat ? name
         : l.id === "group-combat" ? Component.t("Group Loadout") : Component.tf("{name} · Group Loadout", { name }) }; });
     return list.some(l => l && l.groupCombat === true) ? opts : [{ value: "", label: Component.t("As exported") }, ...opts];
   }
@@ -2627,6 +2642,62 @@ class Component extends DCLogic {
       return { zoneParty: party, zoneLoadoutPick: { ...(s.zoneLoadoutPick || {}), [name]: k >= 0 ? String(k) : "" }, zoneStale: !!s.zoneResult, zoneDerived: null,
         // From a rail card, the editor follows the pick so what it swapped in is on view.
         ...(select ? { zoneSel: i, zoneStatOpen: null } : {}) }; });
+  }
+  // Loadouts made on this page (operator, 2026-11-25: "create and save loadouts on the Setup page so I can test
+  // different sets"). Save loadout keeps what the editor shows for this character under a name: it joins the
+  // character's Loadout picker after the game's own loadouts, marked `site`, and the Loadouts x planets sweep sees it
+  // like any other. They are kept in this browser by character name (gts.zone.loadouts.v1) and come back with every
+  // fresh import of that character, so a re-export from the game does not lose them. Saving under a name already
+  // saved here replaces that loadout; the game's own loadouts are never changed.
+  static SITE_LOADOUTS_KEY = "gts.zone.loadouts.v1";
+  zoneSiteLoadoutStore() {
+    try { const v = JSON.parse(localStorage.getItem(Component.SITE_LOADOUTS_KEY) || "{}"); return v && typeof v === "object" && !Array.isArray(v) ? v : {}; } catch { return {}; }
+  }
+  zoneSiteLoadoutPut(name, list) {
+    const all = this.zoneSiteLoadoutStore();
+    if (list.length) all[name] = list; else delete all[name];
+    try { localStorage.setItem(Component.SITE_LOADOUTS_KEY, JSON.stringify(all)); return true; } catch { return false; }
+  }
+  /** The party with each character's site loadouts after the game's own (any earlier site entries replaced). */
+  zoneWithSiteLoadouts(party) {
+    const all = this.zoneSiteLoadoutStore();
+    return party.map(p => { const name = p?.record?.name || "", mine = Array.isArray(all[name]) ? all[name].filter(l => l && l.loadout) : [];
+      const own = (Array.isArray(p?.record?.loadouts) ? p.record.loadouts : []).filter(l => !(l && l.site));
+      if (!mine.length && own.length === (p?.record?.loadouts || []).length) return p;
+      return { ...p, record: { ...p.record, loadouts: [...own, ...mine.map(l => ({ id: l.id, name: l.name, site: true, loadout: JSON.parse(JSON.stringify(l.loadout)) }))] } }; });
+  }
+  zoneSaveSiteLoadout(i) {
+    const typed = String(this.state.zoneLdName || "").trim().slice(0, 60);
+    this.zoneDropFocus();
+    this.setState(s => { const party = (s.zoneParty || []).slice(), p = party[i]; if (!p) return null;
+      const name = p.record?.name || "", list = Array.isArray(p.record?.loadouts) ? p.record.loadouts.slice() : [];
+      const siteCount = list.filter(l => l && l.site).length;
+      const title = typed || Component.tf("Loadout {n}", { n: siteCount + 1 });
+      const at = list.findIndex(l => l && l.site && String(l.name || "").toLowerCase() === title.toLowerCase());
+      const entry = { id: at >= 0 ? list[at].id : "site-" + Date.now().toString(36), name: title, site: true, loadout: JSON.parse(JSON.stringify(p.loadout || {})) };
+      const k = at >= 0 ? at : list.length;
+      list[k] = entry;
+      if (!this.zoneSiteLoadoutPut(name, list.filter(l => l && l.site)))
+        return { zoneLdError: Component.t("This browser would not store the loadout (storage full or blocked)") };
+      // The baseline carries the same list, so Reset player keeps the picker as it is.
+      party[i] = { ...p, record: { ...p.record, loadouts: list } };
+      const base = (s.zoneBase || []).slice(); if (base[i]) base[i] = { ...base[i], record: { ...base[i].record, loadouts: JSON.parse(JSON.stringify(list)) } };
+      return { zoneParty: party, zoneBase: base, zoneLdSaving: null, zoneLdName: "", zoneLdError: "",
+        zoneLoadoutPick: { ...(s.zoneLoadoutPick || {}), [name]: String(k) } }; });
+  }
+  zoneDeleteSiteLoadout(i) {
+    this.zoneDropFocus();
+    this.setState(s => { const party = (s.zoneParty || []).slice(), p = party[i]; if (!p) return null;
+      const name = p.record?.name || "", list = Array.isArray(p.record?.loadouts) ? p.record.loadouts : [];
+      const k = Number(this.zoneLoadoutPickOf(s, p.record)); if (!(k >= 0) || !list[k]?.site) return null;
+      const left = list.filter((_, j) => j !== k);
+      this.zoneSiteLoadoutPut(name, left.filter(l => l && l.site));
+      party[i] = { ...p, record: { ...p.record, loadouts: left } };
+      const base = (s.zoneBase || []).slice(); if (base[i]) base[i] = { ...base[i], record: { ...base[i].record, loadouts: JSON.parse(JSON.stringify(left)) } };
+      // What it put on the player stays on the player; the picker goes back to its default (the editor's
+      // "changed from the import" note still says what differs).
+      const picks = { ...(s.zoneLoadoutPick || {}) }; delete picks[name];
+      return { zoneParty: party, zoneBase: base, zoneLoadoutPick: picks }; });
   }
   zoneCopyLoadout(to, from) {
     this.zoneDropFocus();
@@ -3766,6 +3837,24 @@ class Component extends DCLogic {
       loadoutLabel: Component.t("Loadout:"),
       loadoutTitle: Component.t("One of this character's saved game loadouts: its gear, abilities, food, drinks and triggers replace what is set up here"),
       pickLoadout: e => this.zonePickLoadout(i, e.target.value),
+      // Save loadout / Delete loadout (site loadouts, see zoneSaveSiteLoadout).
+      ...(() => { const list = Array.isArray(p.record?.loadouts) ? p.record.loadouts : [], pk = this.zoneLoadoutPickOf(s, p.record);
+        const cur = pk !== "" ? list[Number(pk)] : null, saving = s.zoneLdSaving === (p.record?.name || "");
+        const typed = String(s.zoneLdName || "").trim().toLowerCase();
+        const replaces = !!typed && list.some(l => l && l.site && String(l.name || "").toLowerCase() === typed);
+        return { ldSaving: saving, ldIdle: !saving, ldName: s.zoneLdName || "",
+          ldNamePlaceholder: Component.tf("Loadout {n}", { n: list.filter(l => l && l.site).length + 1 }),
+          ldNameTitle: Component.t("A name for this loadout. A name already saved here replaces that loadout."),
+          ldSaveLabel: replaces ? Component.t("Replace") : Component.t("Save"),
+          ldSaveTitle: replaces ? Component.t("Replace the loadout saved here under this name with what is set up now") : Component.t("Save what is set up now as a new loadout"),
+          ldNameInput: e => this.setState({ zoneLdName: e.target.value }),
+          ldStart: () => this.setState({ zoneLdSaving: p.record?.name || "", zoneLdError: "", zoneLdName: cur?.site ? cur.name || "" : "" }),
+          ldSave: () => this.zoneSaveSiteLoadout(i),
+          ldCancel: () => this.setState({ zoneLdSaving: null, zoneLdName: "", zoneLdError: "" }),
+          ldCanDelete: !!cur?.site,
+          ldDeleteTitle: cur?.site ? Component.tf("Forget the loadout “{name}” saved here (what it put on this player stays)", { name: cur.name || "" }) : "",
+          ldDelete: () => this.zoneDeleteSiteLoadout(i),
+          ldError: s.zoneLdError || "", hasLdError: !!s.zoneLdError }; })(),
       // Only the exporter's own character carries an owned inventory, so a player with one and no saved loadouts is
       // the person at the keyboard, whose helper sent none: said beside the name, where the picker would be
       // (a solo player reported the picker missing, 2026-11-02; their export had no loadouts key at all).

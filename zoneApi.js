@@ -18,7 +18,7 @@ const devOn = () => { try { return localStorage.getItem("mwi.zone.development") 
 const withDev = body => (devOn() && body && typeof body === "object" ? { ...body, development: true } : body);
 
 export async function connectZoneOnly() {
-  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=a99293acc925");
+  const { createBrowserZoneClient } = await import("./zone-web/zoneClient.js?v=ee8caf2877dd");
   let cores = Math.max(1, globalThis.navigator?.hardwareConcurrency || 2);
   const zone = await createBrowserZoneClient({ workers: Math.min(cores, savedWorkers() || Math.max(1, cores - 1)), maxWorkers: cores });
   // The visitor's own lane count (every core but one) stands in for the server's worker pool.
@@ -76,7 +76,7 @@ export async function connectZoneOnly() {
   // follow, with the header's lane count updated through the same event the Workers setting uses.
   (async () => {
     try {
-      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=a99293acc925");
+      const { probeLanes } = await import("./zone-web/zoneProbe.js?v=ee8caf2877dd");
       const measured = Math.max(1, await probeLanes());
       if (measured <= cores) return;
       cores = measured;
