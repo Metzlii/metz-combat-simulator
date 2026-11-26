@@ -116,6 +116,7 @@
  "For the mirror copy, enhance {item} +{from} → +{to}: {materials} in materials, {hours} h of enhancing": "镜子所需的副本：将 {item} 从 +{from} 强化到 +{to}：材料 {materials}，强化 {hours} 小时",
  "For the mirror copy, enhance {item} +{from} → +{to}: {materials} in materials, {hours} h of enhancing at {time}": "镜子所需的副本：将 {item} 从 +{from} 强化到 +{to}：材料 {materials}，强化 {hours} 小时计 {time}",
  "Forget the loadout “{name}” saved here (what it put on this player stays)": "删除本站保存的配装“{name}”（已装到该玩家身上的内容保留）",
+ "From the game, the new roll:": "来自游戏（新词条）：",
  "From the game:": "来自游戏：",
  "Gear slots": "装备栏位",
  "Goal": "目标",
