@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="0d256b90791f"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="6d24a96ddc79"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=0d256b90791f"></script>
+<script src="./support.js?v=6d24a96ddc79"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=0d256b90791f">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=6d24a96ddc79">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=0d256b90791f">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=0d256b90791f"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=6d24a96ddc79">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=6d24a96ddc79"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1405,6 +1405,13 @@
                     <sc-for list="{{ roll.talismanOpts }}" as="o" hint-placeholder-count="2"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
                   </sc-raw-select>
                 </label>
+                <sc-if value="{{ roll.planForOpts.length }}" hint-placeholder-val="{{ false }}">
+                  <label style="display:flex;flex-direction:column;gap:4px;min-width:0" title="{{ roll.planForTip }}"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Plan for</span>
+                    <sc-raw-select class="input" style="min-height:29px;padding:2px 6px;font-size:13px;min-width:0" value="{{ roll.planFor }}" onChange="{{ roll.setPlanFor }}">
+                      <sc-for list="{{ roll.planForOpts }}" as="o" hint-placeholder-count="3"><option dc-attr-value="{{ o.value }}">{{ o.label }}</option></sc-for>
+                    </sc-raw-select>
+                  </label>
+                </sc-if>
                 <label title="The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead." style="display:flex;flex-direction:column;gap:4px;min-width:0"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase;cursor:help;text-decoration:underline dotted">Target (% of the best)</span>
                   <input class="input" style="min-height:29px;padding:2px 6px;font-size:13px;" type="number" min="1" max="100" step="1" dc-attr-value="{{ roll.target }}" onChange="{{ roll.setTarget }}"></label>
                 <label style="display:flex;flex-direction:column;gap:4px;min-width:0;grid-column:span 2"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Exchange Orb</span>
@@ -1586,6 +1593,13 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.61</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Talisman Crafting: Plan for.</b> Make the plan for another unit the weighting measured, clears an hour, XP an hour or profit, not only the one it was ranked by: an Experience-ranked weighting can plan for pace when a roll lands two good specials. Send to game sends the plan with those weights, so the game judges each roll the same way.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.60</b></div>
@@ -2426,6 +2440,8 @@ class Component extends DCLogic {
     gradesReforge: "Reforging for the grades: a roll is kept when its grades are better, whatever its types", types: "Roll the types until every line is one you want",
     focusTypes: "Focus for the types; the grades stay", keepLock: "Lock the best line it has",
     keepRoll: "Roll the other lines; a roll is kept only when the talisman is worth more", finishOne: "Roll the other lines until it is good enough", plainOrb: "Roll until it is good enough", grades: "Attunement for the grades" };
+  /** The unit a weighting measured, by key: eph is its pace (clears or encounters an hour). */
+  static unitOfKey(k, w) { return k === "eph" ? (w?.paceUnit || "encounters / h") : k === "xp" ? "XP / h" : k === "profit" ? "coins / h" : (w?.unit || ""); }
   /** Names joined with "or" in the reader's language: "Smite or Echo". */
   static orNames(names) { return (names || []).map(x => Component.t(x)).reduce((a, b) => (a ? Component.tf("{a} or {b}", { a, b }) : b), ""); }
   rollPlanSteps(p) {
@@ -2438,7 +2454,10 @@ class Component extends DCLogic {
     const s = this.state, c = s.client, r = s.devRoll || {};
     const list = this.weightings(), done = list.find(w => w.id === r.weighting) || list[0];
     if (!c?.zoneTalismanRolls || !done?.ranked?.length || s.devRollRunning) return;
-    const weights = Object.fromEntries(done.ranked.map(x => [x.hrid, x.byGrade]));
+    // Plan for (operator, 2026-11-26: from Echo G6 + Overkill the XP weights only look for the two Experience lines): the
+    // weights in another unit the weighting measured, the whole plan and Send to game in that unit.
+    const planFor = ["eph", "xp", "profit"].includes(r.planFor) && done.ranked.some(x => Array.isArray(x.byGradeBy?.[r.planFor])) ? r.planFor : "";
+    const weights = Object.fromEntries(done.ranked.map(x => [x.hrid, planFor ? (x.byGradeBy?.[planFor] || [0, 0, 0, 0, 0, 0]) : x.byGrade]));
     // The same lines in the other units the weighting measured, so the power can be shown as XP / h or profit.
     const views = done.ranked.some(x => x.byGradeBy) ? Object.fromEntries(["eph", "xp", "profit"].map(unitKey => [unitKey, Object.fromEntries(done.ranked.map(x => [x.hrid, x.byGradeBy?.[unitKey] || []]))])) : undefined;
     const ownLoadout = (s.party || []).find(p => p?.record?.name === done.player)?.loadout || null;
@@ -2459,7 +2478,7 @@ class Component extends DCLogic {
     this.setState({ devRollRunning: true, devRollError: "", devRollProgress: { done: 0, total: 0 } });
     // Every core works a share of the plans; the bar moves as each share comes back (2026-11-26).
     const onProgress = (d, t) => this.setState({ devRollProgress: { done: d, total: t } });
-    try { this.setState({ devRollRunning: false, devRollDone: { ...(await c.zoneTalismanRolls(body, { onProgress })), from: k, player: done.player, unit: done.unit } }); }
+    try { this.setState({ devRollRunning: false, devRollDone: { ...(await c.zoneTalismanRolls(body, { onProgress })), from: k, player: done.player, unit: planFor ? Component.unitOfKey(planFor, done) : done.unit, planFor } }); }
     catch (e) { this.setState({ devRollRunning: false, devRollError: `${e?.message || e}`.replace(/^\d{3}\s*\{.*?"error"\s*:\s*"([^"]*)".*\}$/, "$1").replace(/^\d{3}\s*/, "") }); }
   }
   devRollVals() {
@@ -2492,6 +2511,10 @@ class Component extends DCLogic {
         ...(r.fromGame?.talisman ? [{ value: "game", label: `${Component.t("From the game:")} ${r.fromGame.talisman.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(", ")}` }] : []),
         ...own.map((t, k) => ({ value: String(k), label: `${Component.tf("Talisman {n}:", { n: k + 1 })} ${t.modifiers.map(m => `${nameOf(m.hrid)} G${m.grade}`).join(", ")}` }))],
       target: String(r.target ?? 40), setTarget: e => this.setDevRoll({ target: e.target.value }),
+      planFor: ["eph", "xp", "profit"].includes(r.planFor) ? r.planFor : "", setPlanFor: e => this.setDevRoll({ planFor: e.target.value }),
+      planForOpts: (done?.ranked || []).some(x => x.byGradeBy) ? [{ value: "", label: Component.tf("as ranked ({unit})", { unit: Component.t(done.unit || "") }) },
+        ...["eph", "xp", "profit"].filter(k => done.ranked.some(x => Array.isArray(x.byGradeBy?.[k]))).map(k => ({ value: k, label: Component.t(Component.unitOfKey(k, done)) }))] : [],
+      planForTip: Component.t("Which unit the plan is made for: the weighting's lines measured in that unit. Send to game sends the plan with these weights."),
       coinMode, priceMode: coinMode ? "market" : "count", setPriceMode: e => this.setDevRoll({ priceMode: e.target.value }),
       priceModeOpts: [{ value: "count", label: Component.t("every orb and core counts as one (prices ignored)") }, { value: "market", label: Component.t("coins (market prices, or your own)") }],
       budget: coinMode ? String(r.budget ?? "50M") : String(r.budgetItems ?? 300),
@@ -2559,14 +2582,16 @@ class Component extends DCLogic {
   // as it stands. Sent the way a loadout is: #zone-talisman-to-game and an event; the script marks the node stored.
   devAdvicePackage(w, plan = null, out = null) {
     const ch = this.state.devChoices || {};
+    // A plan made for another unit (Plan for) is sent with that unit's weights, so the game judges rolls as the plan did.
+    const pf = out?.planFor && (w.ranked || []).some(r => Array.isArray(r.byGradeBy?.[out.planFor])) ? out.planFor : "";
     const mods = (ch.modifiers || []).map(m => ({ hrid: m.hrid, name: m.name, group: m.group, weight: m.weight }));
     return { schema: "metz-talisman-advice/1", from: "metz-combat-simulator", at: new Date().toISOString(), gameVersion: ch.gameVersion || null,
-      player: w.player, zone: w.zoneName || w.zone || "", tier: w.tier ?? null, belt: w.belt || null, unit: w.unit || "",
+      player: w.player, zone: w.zoneName || w.zone || "", tier: w.tier ?? null, belt: w.belt || null, unit: pf ? Component.unitOfKey(pf, w) : (w.unit || ""),
       info: { maxGrade: ch.info?.maxGrade || 6, maxModifierCount: ch.info?.maxModifierCount || 4 }, modifiers: mods,
-      weights: Object.fromEntries((w.ranked || []).filter(r => Array.isArray(r.byGrade)).map(r => [r.hrid, r.byGrade])),
+      weights: Object.fromEntries((w.ranked || []).filter(r => Array.isArray(pf ? r.byGradeBy?.[pf] : r.byGrade)).map(r => [r.hrid, pf ? r.byGradeBy[pf] : r.byGrade])),
       // Every unit the run measured, so the game shows XP / h and the pace (run time for a dungeon) whatever the weights
       // were ranked by (operator, 2026-11-26). Old saved weightings have no byGradeBy and send the ranked unit only.
-      metric: w.metric || null, paceUnit: w.paceUnit || null, baseline: w.baseline || null,
+      metric: pf || w.metric || null, paceUnit: w.paceUnit || null, baseline: w.baseline || null,
       weightsBy: (w.ranked || []).some(r => r.byGradeBy) ? Object.fromEntries(["eph", "xp", "profit"].map(k => [k, Object.fromEntries((w.ranked || []).filter(r => Array.isArray(r.byGradeBy?.[k])).map(r => [r.hrid, r.byGradeBy[k]]))])) : null,
       plan: plan && out ? { key: plan.key, title: this.rollPlanTitle(plan), target: out.target, exchange: out.exchange, priceMode: out.priceMode,
         prices: Object.fromEntries(Object.entries(out.prices || {}).map(([k, v]) => [k, v?.coins ?? null])), chance: plan.chance ?? null,
@@ -2744,7 +2769,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=0d256b90791f");
+      const i18n = await import("./i18n.js?v=6d24a96ddc79");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2767,7 +2792,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=0d256b90791f");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=6d24a96ddc79");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -3128,7 +3153,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=0d256b90791f");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=6d24a96ddc79");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -3149,7 +3174,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=0d256b90791f");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=6d24a96ddc79");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
