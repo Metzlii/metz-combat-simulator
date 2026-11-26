@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="cea58390045e"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="e07b6f76bd57"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=cea58390045e"></script>
+<script src="./support.js?v=e07b6f76bd57"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=cea58390045e">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=e07b6f76bd57">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=cea58390045e">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=cea58390045e"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=e07b6f76bd57">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=e07b6f76bd57"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1453,6 +1453,9 @@
               <sc-if value="{{ roll.error }}" hint-placeholder-val="{{ false }}"><div style="padding:7px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);font-size:13px">{{ roll.error }}</div></sc-if>
               <sc-if value="{{ roll.hasOut }}" hint-placeholder-val="{{ false }}">
                 <div style="font-size:13px;text-wrap:pretty">{{ roll.summary }}</div>
+                <sc-if value="{{ roll.compareText }}" hint-placeholder-val="{{ false }}">
+                  <div style="font-size:13.5px;text-wrap:pretty;padding:8px 10px;border:1px solid var(--color-accent-800);border-radius:6px"><b>{{ roll.compareVerdict }}</b> <span class="text-muted">{{ roll.compareText }}</span></div>
+                </sc-if>
                 <sc-if value="{{ roll.build }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ roll.build }}</div></sc-if>
                 <label style="display:flex;gap:8px;align-items:center;align-self:flex-start"><span class="text-muted" style="font-size:12px;letter-spacing:0.06em;text-transform:uppercase">Show power as</span>
                   <sc-raw-select class="input" style="min-height:27px;padding:1px 6px;font-size:12.5px;width:auto" value="{{ roll.showAs }}" onChange="{{ roll.setShowAs }}">
@@ -1593,6 +1596,13 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.64</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Keep Current or Use New Roll, in one run.</b> When the talisman sent from the game has a roll waiting, Work out the odds runs both, the talisman as it is and the new roll, and says which to keep: the one whose best plan reaches the target more often, or within two points, for fewer orbs.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.63</b></div>
@@ -2454,6 +2464,8 @@ class Component extends DCLogic {
     gradesReforge: "Reforging for the grades: a roll is kept when its grades are better, whatever its types", types: "Roll the types until every line is one you want",
     focusTypes: "Focus for the types; the grades stay", keepLock: "Lock the best line it has",
     keepRoll: "Roll the other lines; a roll is kept only when the talisman is worth more", finishOne: "Roll the other lines until it is good enough", plainOrb: "Roll until it is good enough", grades: "Attunement for the grades" };
+  /** A run's best plan, for the keep-or-take comparison: its title, chance and average spend. */
+  static bestOf(out) { const p = (out?.plans || []).find(x => !x.unavailable && !x.unreachable); return p ? { key: p.key, chance: p.chance, meanSpend: p.meanSpend, share: out.current?.share ?? null } : null; }
   /** The unit a weighting measured, by key: eph is its pace (clears or encounters an hour). */
   static unitOfKey(k, w) { return k === "eph" ? (w?.paceUnit || "encounters / h") : k === "xp" ? "XP / h" : k === "profit" ? "coins / h" : (w?.unit || ""); }
   /** Names joined with "or" in the reader's language: "Smite or Echo". */
@@ -2493,8 +2505,20 @@ class Component extends DCLogic {
       budget: coinMode ? (Component.coinsOf(r.budget ?? "50M") ?? 50e6) : Math.max(1, Math.floor(Number(r.budgetItems ?? 300) || 300)), target: Math.max(1, Math.min(100, Number(r.target ?? 40) || 40)) / 100 };
     this.setState({ devRollRunning: true, devRollError: "", devRollProgress: { done: 0, total: 0 } });
     // Every core works a share of the plans; the bar moves as each share comes back (2026-11-26).
-    const onProgress = (d, t) => this.setState({ devRollProgress: { done: d, total: t } });
-    try { this.setState({ devRollRunning: false, devRollDone: { ...(await c.zoneTalismanRolls(body, { onProgress })), from: k, player: done.player, unit: planFor ? Component.unitOfKey(planFor, done) : done.unit, planFor } }); }
+    const both = (k === "game" || k === "game-roll") && r.fromGame?.newRoll && r.fromGame?.talisman;
+    const onProgress = (d, t, half = 0) => this.setState({ devRollProgress: { done: d + half * t, total: both ? 2 * t : t } });
+    try {
+      // A roll waiting in the game (operator, 2026-11-26: "it should just do both and tell you whether to keep it"): the
+      // current lines and the new roll, each with its best plan, and which to keep.
+      let main = await c.zoneTalismanRolls(body, { onProgress: (d, t) => onProgress(d, t, 0) }), compare = null;
+      if (both) {
+        const otherT = k === "game" ? r.fromGame.newRoll : r.fromGame.talisman, sig2 = t => (t?.modifiers || []).map(m => `${m.hrid}:${m.grade}`).sort().join("|");
+        const other = await c.zoneTalismanRolls({ ...body, talisman: otherT, context: onBelt.filter(t => !(sig2(t) === sig2(r.fromGame.talisman) || sig2(t) === sig2(r.fromGame.newRoll))) }, { onProgress: (d, t) => onProgress(d, t, 1) });
+        const cur = k === "game" ? main : other, roll = k === "game" ? other : main;
+        compare = { current: Component.bestOf(cur), roll: Component.bestOf(roll) };
+      }
+      this.setState({ devRollRunning: false, devRollDone: { ...main, from: k, player: done.player, unit: planFor ? Component.unitOfKey(planFor, done) : done.unit, planFor, compare } });
+    }
     catch (e) { this.setState({ devRollRunning: false, devRollError: `${e?.message || e}`.replace(/^\d{3}\s*\{.*?"error"\s*:\s*"([^"]*)".*\}$/, "$1").replace(/^\d{3}\s*/, "") }); }
   }
   devRollVals() {
@@ -2548,6 +2572,15 @@ class Component extends DCLogic {
       progressPct: `${Math.round(100 * (s.devRollProgress?.total ? s.devRollProgress.done / s.devRollProgress.total : 0))}%`,
       progressText: s.devRollProgress?.total ? Component.tf("Working out the odds: {p}", { p: `${Math.round(100 * s.devRollProgress.done / s.devRollProgress.total)}%` }) : Component.t("Starting…"), runDisabled: !!s.devRollRunning || !done?.ranked?.length || !s.client?.zoneTalismanRolls,
       error: s.devRollError || "", hasOut: !!out,
+      ...(() => {
+        // Keep the current lines or take the new roll: the likelier best plan wins; within 2 points, the cheaper one.
+        const c = out?.compare; if (!c?.current || !c?.roll) return { compareVerdict: "", compareText: "" };
+        const d = c.roll.chance - c.current.chance, take = Math.abs(d) > 0.02 ? d > 0 : c.roll.meanSpend < c.current.meanSpend;
+        const sp = v => (outCoins ? coins(v) : `${Math.round(v)}`);
+        return { compareVerdict: take ? Component.t("Use New Roll.") : Component.t("Keep Current."),
+          compareText: Component.tf("From the current lines the best plan reaches the target {a} of the time for {as} on average; from the new roll, {b} for {bs}.",
+            { a: pct(c.current.chance), as: sp(c.current.meanSpend), b: pct(c.roll.chance), bs: sp(c.roll.meanSpend) }) };
+      })(),
       summary: out ? Component.tf("Target {t} of the best talisman ({best}), within {b}. Where you start: {c}.", { t: pct(out.target), b: outCoins ? coins(out.budget) : Component.tf("{n} orbs and cores", { n: out.budget }),
         best: out.best.lines.map(l => `${nameOf(l.hrid)} G${l.grade}`).join(", "), c: out.current.lines.length ? pct(out.current.share) : Component.t("nothing yet") }) : "",
       build: out?.build?.length ? Component.tf("A new talisman is built up to its lines first: {steps}, {cost}. Each plan's own count includes it.", { steps: out.build.map(b => `${b.count} ${Component.t(b.item)}`).join(" + "), cost: outCoins ? coins(out.buildCost) : Component.tf("{n} items", { n: out.buildCost }) }) : "",
@@ -2790,7 +2823,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=cea58390045e");
+      const i18n = await import("./i18n.js?v=e07b6f76bd57");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2813,7 +2846,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=cea58390045e");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=e07b6f76bd57");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -3174,7 +3207,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=cea58390045e");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=e07b6f76bd57");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -3195,7 +3228,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=cea58390045e");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=e07b6f76bd57");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
