@@ -3613,6 +3613,7 @@
  "zero": "0",
  "{ab} abilities · {fd} food · {dk} drinks": "어빌리티 {ab} · 음식 {fd} · 음료 {dk}",
  "{a} h vs {b} h — a different length of the same stream, so every rate shifts a little": "{a}시간 대 {b}시간 — 같은 난수열의 길이가 달라 모든 비율이 조금씩 달라집니다",
+ "{a} or {b}": "{a} 또는 {b}",
  "{a} → {b} / day": "{a} → {b} / 일",
  "{a} → {b} dmg / s": "{a} → {b} 피해/초",
  "{a} → {b} taken / s": "{a} → {b} 피해 / 초",

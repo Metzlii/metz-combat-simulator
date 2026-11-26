@@ -3611,6 +3611,7 @@
  "zero": "ноль",
  "{ab} abilities · {fd} food · {dk} drinks": "{ab} способностей · {fd} еды · {dk} напитков",
  "{a} h vs {b} h — a different length of the same stream, so every rate shifts a little": "{a} ч против {b} ч — разная длина одного потока, поэтому все скорости немного сдвигаются",
+ "{a} or {b}": "{a} или {b}",
  "{a} → {b} / day": "{a} → {b} / день",
  "{a} → {b} dmg / s": "{a} → {b} урона / с",
  "{a} → {b} taken / s": "{a} → {b} получено / с",

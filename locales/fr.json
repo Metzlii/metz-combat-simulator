@@ -3475,6 +3475,7 @@
  "zero": "zéro",
  "{ab} abilities · {fd} food · {dk} drinks": "{ab} capacités · {fd} nourriture · {dk} boissons",
  "{a} h vs {b} h — a different length of the same stream, so every rate shifts a little": "{a} h contre {b} h — une longueur différente du même flux, donc chaque rythme bouge un peu",
+ "{a} or {b}": "{a} ou {b}",
  "{a} → {b} / day": "{a} → {b} / jour",
  "{a} → {b} dmg / s": "{a} → {b} dégâts / s",
  "{a} → {b} taken / s": "{a} → {b} subis / s",

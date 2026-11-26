@@ -3753,6 +3753,7 @@
  "zero": "无价值",
  "{ab} abilities · {fd} food · {dk} drinks": "{ab} 技能 · {fd} 食物 · {dk} 饮品",
  "{a} h vs {b} h — a different length of the same stream, so every rate shifts a little": "{a} 小时 对 {b} 小时 —— 同一随机序列的不同长度，因此所有速率都会略有偏移",
+ "{a} or {b}": "{a}或{b}",
  "{a} → {b} / day": "{a} → {b} / 天",
  "{a} → {b} dmg / s": "{a} → {b} 伤害/秒",
  "{a} → {b} taken / s": "{a} → {b} 承受 / 秒",

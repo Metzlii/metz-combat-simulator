@@ -3540,6 +3540,7 @@
  "whole party": "grupo inteiro",
  "{ab} abilities · {fd} food · {dk} drinks": "{ab} habilidades · {fd} comida · {dk} bebidas",
  "{a} h vs {b} h — a different length of the same stream, so every rate shifts a little": "{a} h vs {b} h — um comprimento diferente da mesma sequência, então toda taxa muda um pouco",
+ "{a} or {b}": "{a} ou {b}",
  "{a} → {b} / day": "{a} → {b} / dia",
  "{a} → {b} dmg / s": "{a} → {b} de dano / s",
  "{a} → {b} taken / s": "{a} → {b} recebido / s",

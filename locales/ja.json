@@ -3613,6 +3613,7 @@
  "zero": "ゼロ",
  "{ab} abilities · {fd} food · {dk} drinks": "アビリティ {ab} · 食べ物 {fd} · 飲み物 {dk}",
  "{a} h vs {b} h — a different length of the same stream, so every rate shifts a little": "{a} 時間 対 {b} 時間 — 同じ乱数列の長さが異なるため、すべてのレートが少しずれます",
+ "{a} or {b}": "{a} または {b}",
  "{a} → {b} / day": "{a} → {b} / 日",
  "{a} → {b} dmg / s": "{a} → {b} ダメージ/秒",
  "{a} → {b} taken / s": "{a} → {b} 被ダメ / 秒",
