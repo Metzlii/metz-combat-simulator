@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-11-26T07:21:25.465Z",
- "commit": "0ec9531",
+ "builtAt": "2026-11-26T08:17:34.369Z",
+ "commit": "e868cc7",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 55,
-  "bytes": 19291706,
-  "gzip": 3478145
+  "bytes": 19299499,
+  "gzip": 3480643
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -50,8 +50,8 @@
    "gzip": 3780
   },
   "index.html": {
-   "bytes": 511672,
-   "gzip": 128271
+   "bytes": 514944,
+   "gzip": 129169
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -59,47 +59,47 @@
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm.js": {
    "bytes": 3666,
-   "gzip": 1478
+   "gzip": 1480
   },
   "kernel-zone/wasm/pkg/mwi_zone_wasm_bg.wasm": {
    "bytes": 3808031,
    "gzip": 450336
   },
   "locales/en.json": {
-   "bytes": 124539,
-   "gzip": 25966
+   "bytes": 124869,
+   "gzip": 26040
   },
   "locales/es.json": {
-   "bytes": 267467,
-   "gzip": 72707
+   "bytes": 267803,
+   "gzip": 72818
   },
   "locales/fr.json": {
-   "bytes": 268040,
-   "gzip": 73012
+   "bytes": 268390,
+   "gzip": 73143
   },
   "locales/ja.json": {
-   "bytes": 283555,
-   "gzip": 83959
+   "bytes": 283917,
+   "gzip": 84144
   },
   "locales/ko.json": {
-   "bytes": 267479,
-   "gzip": 80666
+   "bytes": 267838,
+   "gzip": 80798
   },
   "locales/pt.json": {
-   "bytes": 266020,
-   "gzip": 72416
+   "bytes": 266357,
+   "gzip": 72538
   },
   "locales/ru.json": {
-   "bytes": 349593,
-   "gzip": 89765
+   "bytes": 350071,
+   "gzip": 89933
   },
   "locales/zh-Hant.json": {
-   "bytes": 244645,
-   "gzip": 80518
+   "bytes": 244971,
+   "gzip": 80653
   },
   "locales/zh.json": {
-   "bytes": 284655,
-   "gzip": 99001
+   "bytes": 284981,
+   "gzip": 99133
   },
   "server/abilities.mjs": {
    "bytes": 6802,
@@ -115,7 +115,7 @@
   },
   "server/enhanceCost.mjs": {
    "bytes": 11039,
-   "gzip": 4501
+   "gzip": 4502
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
@@ -126,8 +126,8 @@
    "gzip": 955
   },
   "server/talismanPlanner.mjs": {
-   "bytes": 9933,
-   "gzip": 3231
+   "bytes": 11250,
+   "gzip": 3645
   },
   "server/zoneApi.mjs": {
    "bytes": 6551,
@@ -135,7 +135,7 @@
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
-   "gzip": 3425
+   "gzip": 3422
   },
   "server/zoneCsv.mjs": {
    "bytes": 2980,
@@ -143,11 +143,11 @@
   },
   "server/zoneDerive.mjs": {
    "bytes": 11204,
-   "gzip": 4251
+   "gzip": 4252
   },
   "server/zoneImport.mjs": {
    "bytes": 16358,
-   "gzip": 5818
+   "gzip": 5817
   },
   "server/zoneOptimize.mjs": {
    "bytes": 43446,
@@ -203,7 +203,7 @@
   },
   "zone-web/zoneClient.js": {
    "bytes": 7074,
-   "gzip": 2655
+   "gzip": 2654
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
@@ -211,7 +211,7 @@
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 743
+   "gzip": 742
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
@@ -223,11 +223,11 @@
   },
   "zoneApi.js": {
    "bytes": 6389,
-   "gzip": 2454
+   "gzip": 2453
   },
   "ZoneSim.dc.html": {
    "bytes": 428605,
-   "gzip": 110111
+   "gzip": 110110
   },
   "_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css": {
    "bytes": 13029,
