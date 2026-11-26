@@ -3852,7 +3852,6 @@
  "Drops": "드롭",
  "Turn off": "끄기",
  "Turn on": "켜기",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "이 캐릭터에게 쓸모없는 것을 수식어 하나씩 또는 그룹 전체를 스위치로 해제하세요. 꺼진 수식어는 측정하지 않으므로 실행이 짧아집니다. 마법, 근접, 원거리, 물리는 이 플레이어의 무기에 맞춰 시작하며, 여기서 바꾼 것은 이 플레이어용으로 저장됩니다. 선택은 이 브라우저에 저장됩니다.",
  "Your belt and talismans": "내 벨트와 호석",
  "No one in the imported party has a belt or talismans.": "가져온 파티에 벨트나 호석을 가진 사람이 없습니다.",
  "no belt": "벨트 없음",
@@ -3958,7 +3957,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "커뮤니티 순서도, 조율의 오브 대신 변이의 오브",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "재련의 오브로 특수 수식어 하나, 변이의 오브로 특수 수식어 둘과 원하는 수식어 하나, 그다음 등급은 조율의 오브로,",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "이 가중치에서 가능한 최고의 호석 대비 비율로 본 호석의 가치입니다. 최고란 가장 가치 있는 수식어 4개가 모두 G6인 것입니다. 호석의 가치는 네 라인 증가량의 합이며, 가중치가 측정한 단위로 나타냅니다. 이 벨트의 다른 호석에 이미 있는 특수 수식어는 여기서 계산하지 않습니다(그쪽을 올릴 것이므로).",
- "Defense + Tank": "방어 + 탱커",
  "Seeds": "시드",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "각 실행의 시뮬레이션 시간. 길수록 안정적이지만 실행마다 오래 걸립니다.",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "수식어당 실행 횟수이며, 각 수식어는 빈 벨트와 같은 시드로 실행합니다. 오차는 제곱근에 비례해 줄어들며, 1,000시간 × 8시드면 일반적인 라인은 약 5% 이내입니다.",
@@ -4004,5 +4002,8 @@
  "Attunement for the grades": "등급은 조율",
  "Spent when reached {m}, 9 in 10 within {p}": "도달 시 소비 {m}, 10번 중 9번은 {p} 이내",
  "Solo: {members}": "솔로: {members}",
- "Party of {n}: {members}": "{n}인 파티: {members}"
+ "Party of {n}: {members}": "{n}인 파티: {members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "저장한 결과를 열기 전에 검색이 끝나길 기다리거나 중지하세요",
+ "Bulwark": "대방패",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "이 캐릭터에게 쓸모없는 것을 수식어 하나씩 또는 그룹 전체를 스위치로 해제하세요. 꺼진 수식어는 측정하지 않으므로 실행이 짧아집니다. 마법, 근접, 원거리, 물리, 대방패는 이 플레이어의 무기에 맞춰 시작하며, 여기서 바꾼 것은 이 플레이어용으로 저장됩니다. 선택은 이 브라우저에 저장됩니다."
 }

@@ -3779,7 +3779,6 @@
  "Drops": "Botín",
  "Turn off": "Desactivar",
  "Turn on": "Activar",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Desmarca lo que este personaje no usa, un modificador a la vez o un grupo entero con su interruptor. Un modificador desactivado nunca se mide, lo que acorta la ejecución. Magia, Cuerpo a cuerpo, A distancia y Físico parten del arma de este jugador; lo que cambies en ellos se guarda para este jugador. La elección se guarda en este navegador.",
  "Your belt and talismans": "Tu cinturón y talismanes",
  "No one in the imported party has a belt or talismans.": "Nadie en el grupo importado tiene cinturón ni talismanes.",
  "no belt": "sin cinturón",
@@ -3885,7 +3884,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Diagrama de la comunidad, con Orbes de Mutación en lugar de Orbes de Sintonía",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "Orbes de Reforja para un especial, Orbes de Mutación para dos especiales y un modificador deseado, luego Orbes de Sintonía para los grados,",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "El valor del talismán como parte del mejor posible con esta ponderación: tus cuatro modificadores más valiosos, todos en G6. El valor de un talismán es la suma de las ganancias de sus cuatro líneas, en la unidad que midió la ponderación. Un especial que ya está en otro talismán de este cinturón no cuenta aquí: mejorarías ese otro.",
- "Defense + Tank": "Defensa + tanque",
  "Seeds": "Semillas",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Horas simuladas en cada ejecución. Las ejecuciones más largas son más estables, y cada una tarda más.",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Ejecuciones por modificador, cada modificador con las mismas semillas que el cinturón vacío. El error se reduce con la raíz cuadrada: 8 semillas de 1.000 horas dejan una línea típica dentro de un 5% aproximadamente.",
@@ -3931,5 +3929,8 @@
  "Attunement for the grades": "Sintonía para los grados",
  "Spent when reached {m}, 9 in 10 within {p}": "Gastado al llegar {m}, 9 de cada 10 dentro de {p}",
  "Solo: {members}": "Solo: {members}",
- "Party of {n}: {members}": "Grupo de {n}: {members}"
+ "Party of {n}: {members}": "Grupo de {n}: {members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "Espera a que termine la búsqueda, o detenla, antes de abrir un resultado guardado",
+ "Bulwark": "Baluarte",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Desmarca lo que este personaje no usa, un modificador a la vez o un grupo entero con su interruptor. Un modificador desactivado nunca se mide, lo que acorta la ejecución. Magia, Cuerpo a cuerpo, A distancia, Físico y Baluarte parten del arma de este jugador; lo que cambies en ellos se guarda para este jugador. La elección se guarda en este navegador."
 }

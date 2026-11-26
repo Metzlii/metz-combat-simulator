@@ -787,7 +787,6 @@
  "Drops": "Drops",
  "Turn off": "Turn off",
  "Turn on": "Turn on",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.",
  "Your belt and talismans": "Your belt and talismans",
  "No one in the imported party has a belt or talismans.": "No one in the imported party has a belt or talismans.",
  "no belt": "no belt",
@@ -953,7 +952,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Community flowchart, with Mutation Orbs in place of Attunement Orbs",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.",
- "Defense + Tank": "Defense + Tank",
  "Seeds": "Seeds",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Simulated hours in each run. Longer runs are steadier, and every run takes longer.",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.",
@@ -999,5 +997,8 @@
  "Attunement for the grades": "Attunement for the grades",
  "Spent when reached {m}, 9 in 10 within {p}": "Spent when reached {m}, 9 in 10 within {p}",
  "Solo: {members}": "Solo: {members}",
- "Party of {n}: {members}": "Party of {n}: {members}"
+ "Party of {n}: {members}": "Party of {n}: {members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "Wait for the search to finish, or stop it, before opening a saved result",
+ "Bulwark": "Bulwark",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser."
 }

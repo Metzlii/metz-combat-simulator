@@ -3852,7 +3852,6 @@
  "Drops": "ドロップ",
  "Turn off": "オフにする",
  "Turn on": "オンにする",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "このキャラクターに不要なものを、修飾子ごとに、またはグループごとにスイッチでオフにします。オフの修飾子は測定されないため、実行が短くなります。魔法・近接・遠隔・物理はこのプレイヤーの武器に合わせて始まり、そこで切り替えたものはこのプレイヤー用に保存されます。選択はこのブラウザに保存されます。",
  "Your belt and talismans": "あなたのベルトと護石",
  "No one in the imported party has a belt or talismans.": "インポートしたパーティーには、ベルトや護石を持つ人がいません。",
  "no belt": "ベルトなし",
@@ -3958,7 +3957,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "コミュニティのフローチャート（調律のオーブの代わりに変異のオーブ）",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "再鍛造のオーブで特殊修飾子を1つ、変異のオーブで特殊修飾子2つと欲しい修飾子1つ、最後にグレードは調律のオーブで、",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "このウェイトでの最良の護石に対する割合で見た護石の価値です。最良とは、最も価値の高い4つの修飾子がすべて G6 のものです。護石の価値は4つのラインの上昇量の合計で、ウェイトが測った単位で表します。このベルトの別の護石にすでにある特殊修飾子はここでは数えません（そちらを上げるはずなので）。",
- "Defense + Tank": "防御 + タンク",
  "Seeds": "シード",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "各実行のシミュレーション時間。長いほど安定しますが、各実行に時間がかかります。",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "修飾子ごとの実行回数。各修飾子は空のベルトと同じシードで実行します。誤差は平方根に比例して小さくなり、1,000 時間 × 8 シードで一般的なラインは約 5% 以内になります。",
@@ -4004,5 +4002,8 @@
  "Attunement for the grades": "グレードは調律",
  "Spent when reached {m}, 9 in 10 within {p}": "到達時の消費 {m}、10回中9回は {p} 以内",
  "Solo: {members}": "ソロ：{members}",
- "Party of {n}: {members}": "{n} 人パーティー：{members}"
+ "Party of {n}: {members}": "{n} 人パーティー：{members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "保存した結果を開く前に、検索の完了を待つか停止してください",
+ "Bulwark": "大盾",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "このキャラクターに不要なものを、修飾子ごとに、またはグループごとにスイッチでオフにします。オフの修飾子は測定されないため、実行が短くなります。魔法・近接・遠隔・物理・大盾はこのプレイヤーの武器に合わせて始まり、そこで切り替えたものはこのプレイヤー用に保存されます。選択はこのブラウザに保存されます。"
 }

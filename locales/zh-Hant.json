@@ -3855,7 +3855,6 @@
  "Drops": "掉落",
  "Turn off": "關閉",
  "Turn on": "開啟",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "取消勾選這個角色用不到的詞條，可以逐條取消，也可以用開關取消整組。關閉的詞條不會被測量，從而縮短執行時間。魔法、近戰、遠程和物理按該玩家的武器預設；你在其中的改動會為該玩家單獨保存。選擇保存在此瀏覽器中。",
  "Your belt and talismans": "你的腰帶與符石",
  "No one in the imported party has a belt or talismans.": "匯入的隊伍中沒有人有腰帶或符石。",
  "no belt": "無腰帶",
@@ -3961,7 +3960,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "社群流程圖，用突變寶珠代替調諧寶珠",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "先用重鑄寶珠出一條特殊詞條，再用突變寶珠出兩條特殊詞條和一條想要的詞條，最後用調諧寶珠提等級，",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "符石的價值佔此權重下最佳符石的比例：最佳即你最有價值的四個詞條全部為 G6。符石的價值是四條詞條提升之和，單位與權重所測相同。這條腰帶上其他符石已有的特殊詞條在這裡不計價值：你會去提升那一條。",
- "Defense + Tank": "防禦 + 坦克",
  "Seeds": "種子數",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "每次執行模擬的小時數。越長越穩定，但每次執行也越久。",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "每個詞條的執行次數，每個詞條都與空腰帶使用相同的種子。誤差按平方根縮小：8 個種子、每次 1,000 小時，可讓一般詞條的誤差在約 5% 以內。",
@@ -4007,5 +4005,8 @@
  "Attunement for the grades": "用調諧提等級",
  "Spent when reached {m}, 9 in 10 within {p}": "達到時花費 {m}，十次中九次在 {p} 以內",
  "Solo: {members}": "單人：{members}",
- "Party of {n}: {members}": "{n} 人隊伍：{members}"
+ "Party of {n}: {members}": "{n} 人隊伍：{members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "開啟已儲存的結果前，請等待搜尋完成或先停止它",
+ "Bulwark": "重盾",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "取消勾選這個角色用不到的詞條，可以逐條取消，也可以用開關取消整組。關閉的詞條不會被測量，從而縮短執行時間。魔法、近戰、遠程、物理和重盾按該玩家的武器預設；你在其中的改動會為該玩家單獨保存。選擇保存在此瀏覽器中。"
 }

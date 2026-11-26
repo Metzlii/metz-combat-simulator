@@ -3850,7 +3850,6 @@
  "Drops": "Добыча",
  "Turn off": "Выключить",
  "Turn on": "Включить",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Снимите отметку с того, что этому персонажу не нужно, по одному модификатору или целую группу её переключателем. Выключенный модификатор не измеряется, что сокращает расчёт. Магия, Ближний бой, Дальний бой и Физика задаются по оружию этого игрока; ваши изменения в них сохраняются для этого игрока. Выбор хранится в этом браузере.",
  "Your belt and talismans": "Ваш пояс и талисманы",
  "No one in the imported party has a belt or talismans.": "Ни у кого в импортированной группе нет пояса или талисманов.",
  "no belt": "без пояса",
@@ -3956,7 +3955,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Схема сообщества, со Сферами мутации вместо Сфер гармонии",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "Сферы перековки для особого модификатора, Сферы мутации для двух особых и одного нужного, затем Сферы гармонии для уровней,",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "Ценность талисмана как доля лучшего возможного при этой оценке: ваши четыре самых ценных модификатора, все на G6. Ценность талисмана — сумма приростов его четырёх строк в единицах, которые измеряла оценка. Особый модификатор, который уже есть на другом талисмане этого пояса, здесь не учитывается: вы улучшили бы тот.",
- "Defense + Tank": "Защита + танк",
  "Seeds": "Сиды",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Симулируемые часы в каждом прогоне. Длинные прогоны стабильнее, но каждый идёт дольше.",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Прогонов на модификатор, каждый модификатор на тех же сидах, что и пустой пояс. Погрешность падает как квадратный корень: 8 сидов по 1 000 часов дают типичной строке точность около 5%.",
@@ -4002,5 +4000,8 @@
  "Attunement for the grades": "Гармония для уровней",
  "Spent when reached {m}, 9 in 10 within {p}": "Потрачено при достижении {m}, 9 из 10 в пределах {p}",
  "Solo: {members}": "Соло: {members}",
- "Party of {n}: {members}": "Группа из {n}: {members}"
+ "Party of {n}: {members}": "Группа из {n}: {members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "Дождитесь окончания поиска или остановите его, прежде чем открывать сохранённый результат",
+ "Bulwark": "Бастион",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Снимите отметку с того, что этому персонажу не нужно, по одному модификатору или целую группу её переключателем. Выключенный модификатор не измеряется, что сокращает расчёт. Магия, Ближний бой, Дальний бой, Физика и Бастион задаются по оружию этого игрока; ваши изменения в них сохраняются для этого игрока. Выбор хранится в этом браузере."
 }

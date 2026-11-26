@@ -3713,7 +3713,6 @@
  "Drops": "Butin",
  "Turn off": "Désactiver",
  "Turn on": "Activer",
- "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged and Physical start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Décochez ce dont ce personnage n'a pas l'usage, un modificateur à la fois ou un groupe entier avec son interrupteur. Un modificateur désactivé n'est jamais mesuré, ce qui raccourcit le calcul. Magie, Mêlée, Distance et Physique partent de l'arme de ce joueur ; ce que vous y changez est gardé pour ce joueur. Le choix est conservé dans ce navigateur.",
  "Your belt and talismans": "Votre ceinture et vos talismans",
  "No one in the imported party has a belt or talismans.": "Personne dans le groupe importé n'a de ceinture ni de talismans.",
  "no belt": "pas de ceinture",
@@ -3819,7 +3818,6 @@
  "Community flowchart, with Mutation Orbs in place of Attunement Orbs": "Organigramme de la communauté, avec des Orbes de Mutation à la place des Orbes d'Harmonisation",
  "Reforging Orbs for a special, Mutation Orbs for two specials and a wanted modifier, then Attunement Orbs for the grades,": "Orbes de Reforge pour un spécial, Orbes de Mutation pour deux spéciaux et un modificateur voulu, puis Orbes d'Harmonisation pour les grades,",
  "The talisman's worth as a share of the best one possible on this weighting: your four most valuable modifiers, all at G6. A talisman's worth is its four lines' gains added together, in the unit the weighting measured. A special already on another talisman of this belt counts for nothing here: you would raise that one instead.": "La valeur du talisman en part du meilleur possible avec cette pondération : vos quatre modificateurs les plus précieux, tous en G6. La valeur d'un talisman est la somme des gains de ses quatre lignes, dans l'unité mesurée par la pondération. Un spécial déjà présent sur un autre talisman de cette ceinture ne compte pas ici : vous amélioreriez plutôt celui-là.",
- "Defense + Tank": "Défense + tank",
  "Seeds": "Graines",
  "Simulated hours in each run. Longer runs are steadier, and every run takes longer.": "Heures simulées par calcul. Des calculs plus longs sont plus stables, et chacun prend plus de temps.",
  "Runs per modifier, every modifier on the same seeds as the empty belt. The error shrinks with the square root: 8 seeds of 1,000 hours put a typical line within about 5%.": "Calculs par modificateur, chaque modificateur sur les mêmes graines que la ceinture vide. L'erreur diminue avec la racine carrée : 8 graines de 1 000 heures placent une ligne typique à environ 5 % près.",
@@ -3865,5 +3863,8 @@
  "Attunement for the grades": "Harmonisation pour les grades",
  "Spent when reached {m}, 9 in 10 within {p}": "Dépensé à l'arrivée {m}, 9 sur 10 sous {p}",
  "Solo: {members}": "Solo : {members}",
- "Party of {n}: {members}": "Groupe de {n} : {members}"
+ "Party of {n}: {members}": "Groupe de {n} : {members}",
+ "Wait for the search to finish, or stop it, before opening a saved result": "Attendez la fin de la recherche, ou arrêtez-la, avant d'ouvrir un résultat enregistré",
+ "Bulwark": "Rempart",
+ "Untick what this character has no use for, one modifier at a time or a whole group with its switch. A modifier that is off is never measured, which shortens the run. Magic, Melee, Ranged, Physical and Bulwark start from this player's weapon; a switch you flip in them is kept for this player. The choice is kept in this browser.": "Décochez ce dont ce personnage n'a pas l'usage, un modificateur à la fois ou un groupe entier avec son interrupteur. Un modificateur désactivé n'est jamais mesuré, ce qui raccourcit le calcul. Magie, Mêlée, Distance, Physique et Rempart partent de l'arme de ce joueur ; ce que vous y changez est gardé pour ce joueur. Le choix est conservé dans ce navigateur."
 }
