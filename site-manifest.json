@@ -1,6 +1,6 @@
 {
- "builtAt": "2026-11-26T11:52:08.957Z",
- "commit": "2aead22",
+ "builtAt": "2026-11-26T12:09:45.277Z",
+ "commit": "4cf2d43",
  "page": "9bac88b6af5dc696655418cc7ab07d30c44b63a02873a157dcf3bfb8da3f67c9",
  "firstLoad": {
   "files": [
@@ -13,8 +13,8 @@
  },
  "site": {
   "files": 56,
-  "bytes": 19349650,
-  "gzip": 3496094
+  "bytes": 19350231,
+  "gzip": 3496189
  },
  "files": {
   "assets/actions_sprite.svg": {
@@ -50,8 +50,8 @@
    "gzip": 3780
   },
   "index.html": {
-   "bytes": 536077,
-   "gzip": 133934
+   "bytes": 536635,
+   "gzip": 134029
   },
   "init_client_data.json": {
    "bytes": 2751077,
@@ -119,19 +119,19 @@
   },
   "server/lootValue.mjs": {
    "bytes": 7731,
-   "gzip": 3189
+   "gzip": 3188
   },
   "server/marketCore.mjs": {
    "bytes": 1826,
    "gzip": 955
   },
   "server/talismanPlanner.mjs": {
-   "bytes": 12693,
-   "gzip": 4136
+   "bytes": 12716,
+   "gzip": 4143
   },
   "server/zoneApi.mjs": {
    "bytes": 6551,
-   "gzip": 2226
+   "gzip": 2225
   },
   "server/zoneCatalog.mjs": {
    "bytes": 9564,
@@ -143,15 +143,15 @@
   },
   "server/zoneDerive.mjs": {
    "bytes": 11204,
-   "gzip": 4252
+   "gzip": 4253
   },
   "server/zoneImport.mjs": {
    "bytes": 16358,
-   "gzip": 5819
+   "gzip": 5818
   },
   "server/zoneOptimize.mjs": {
    "bytes": 43446,
-   "gzip": 15315
+   "gzip": 15313
   },
   "server/zoneSim.mjs": {
    "bytes": 15144,
@@ -163,11 +163,11 @@
   },
   "server/zoneTalismanRolls.mjs": {
    "bytes": 13444,
-   "gzip": 5463
+   "gzip": 5462
   },
   "server/zoneTalismans.mjs": {
    "bytes": 8266,
-   "gzip": 3582
+   "gzip": 3581
   },
   "server/zoneUpgrades.mjs": {
    "bytes": 49287,
@@ -207,19 +207,19 @@
   },
   "zone-web/zoneCountWorker.js": {
    "bytes": 923,
-   "gzip": 547
+   "gzip": 548
   },
   "zone-web/zoneProbe.js": {
    "bytes": 1320,
-   "gzip": 743
+   "gzip": 741
   },
   "zone-web/zoneProbeWorker.js": {
    "bytes": 162,
-   "gzip": 147
+   "gzip": 146
   },
   "zone-web/zoneRollsWorker.js": {
    "bytes": 380,
-   "gzip": 274
+   "gzip": 275
   },
   "zone-web/zoneWorker.js": {
    "bytes": 273,
