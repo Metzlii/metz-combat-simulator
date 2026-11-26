@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="ee8caf2877dd"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="876897a12438"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=ee8caf2877dd"></script>
+<script src="./support.js?v=876897a12438"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=ee8caf2877dd">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=876897a12438">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=ee8caf2877dd">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=ee8caf2877dd"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=876897a12438">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=876897a12438"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1373,7 +1373,9 @@
                   <label style="display:flex;gap:6px;align-items:center;font-size:12.5px" title="Without the Experience lines the table, the scores and the copied weights leave them out."><input type="checkbox" checked="{{ dev.viewShowXp }}" onChange="{{ dev.toggleViewXp }}">Experience modifiers</label>
                 </sc-if>
                 <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:2px 8px;font-size:12.5px" title="Gain per grade for every modifier, as JSON, for use in another tool" onClick="{{ dev.copyWeights }}">{{ dev.copyLabel }}</button></sc-if>
+                <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:2px 8px;font-size:12.5px" title="{{ dev.sendTitle }}" onClick="{{ dev.sendToGame }}">Send to game</button></sc-if>
               </div>
+              <sc-if value="{{ dev.sendNote }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.sendNote }}</div></sc-if>
               <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.rowsNote }}</div>
               <sc-if value="{{ dev.hasGrades }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.gradeNote }}</div></sc-if>
               <div style="display:grid;grid-template-columns:max-content auto auto auto repeat(6,2.6em);justify-content:start;gap:3px 18px;font-size:13px;font-variant-numeric:tabular-nums">
@@ -1457,8 +1459,10 @@
                         <sc-if value="{{ pl.tag }}" hint-placeholder-val="{{ false }}"><span class="tag tag-outline" style="font-size:10.5px">{{ pl.tag }}</span></sc-if>
                         <span>{{ pl.spendLine }}</span>
                         <span>{{ pl.reachedLine }}</span>
+                        <sc-if value="{{ pl.canSend }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:0 7px;font-size:12px;margin-left:auto" title="{{ pl.sendTitle }}" onClick="{{ pl.sendToGame }}">Send to game</button></sc-if>
                         <sc-if value="{{ pl.detail }}" hint-placeholder-val="{{ false }}"><span>{{ pl.detail }}</span></sc-if>
                       </div>
+                      <sc-if value="{{ pl.sendNote }}" hint-placeholder-val="{{ false }}"><div class="text-muted" style="padding-left:42px;font-size:12px;text-wrap:pretty">{{ pl.sendNote }}</div></sc-if>
                       <sc-if value="{{ pl.hasSteps }}" hint-placeholder-val="{{ false }}">
                         <div style="padding-left:42px;display:flex;flex-direction:column;gap:2px">
                           <button class="btn" style="display:flex;gap:6px;align-items:baseline;justify-content:flex-start;width:fit-content;padding:0;border-color:transparent;background:transparent;text-align:left;font-size:12px" onClick="{{ pl.toggleSteps }}">
@@ -1571,6 +1575,13 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-26</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.54</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li><b>Talisman advice in the game (test server).</b> Talisman Stat Weighting and each Talisman Crafting plan have a <b>Send to game</b> button. The Metz Combat Sim Helper (0.8.0) carries what you send into the game: the talisman window shows what each line is worth, the talisman's worth against the best one possible, the plan's next step for the talisman as it stands, and with a new roll waiting, whether to keep it. Metz Dungeon Stats (0.2.16) shows the same, adds the worth to talisman tooltips and a summary of your equipped combat talismans on the Talismans tab, and keeps a record of every roll. The advice runs the simulator's own crafting rules.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-25</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.53</b></div>
@@ -2435,6 +2446,10 @@ class Component extends DCLogic {
         ...(hasViews ? [{ value: "eph", label: Component.t(done.paceUnit || "encounters / h") }, { value: "xp", label: Component.t("XP / h") }, { value: "profit", label: Component.t("profit / day") }] : [])],
       powerTip: out ? Component.tf("What the talisman adds where the plan leaves it, in {unit}, averaged over every try (reached or not), and that as a share of the best talisman.", { unit: unitOf(view) }) : "",
       plans: (out?.plans || []).map((p, i) => ({ rank: `${i + 1}.`, title: this.rollPlanTitle(p), stepsList: this.rollPlanSteps(p, out),
+        canSend: !p.unavailable && !p.unreachable && !!done,
+        sendTitle: Component.t("Send this plan and its weights to the game through the Metz Combat Sim Helper: the crafting window shows the plan's next step for the talisman as it stands"),
+        sendToGame: () => this.devSendToGame(this.devAdvicePackage(done, p, out), `plan:${p.key}`),
+        sendNote: s.devSendNote?.key === `plan:${p.key}` ? s.devSendNote.text : "",
         stepsOpen: !!(s.devRollOpen || {})[p.key], stepsCaret: (s.devRollOpen || {})[p.key] ? "\u25be" : "\u25b8",
         stepsLabel: Component.tf("Steps ({n})", { n: (p.steps || []).length }), hasSteps: !!(p.steps || []).length,
         toggleSteps: () => this.setState(st => ({ devRollOpen: { ...(st.devRollOpen || {}), [p.key]: !(st.devRollOpen || {})[p.key] } })),
@@ -2462,6 +2477,53 @@ class Component extends DCLogic {
   /** The whole table as JSON for another tool (a userscript that scores a talisman in the game): gain per grade, by modifier. */
   // How a finished run is read: its unit and whether the Experience lines show; a new run starts from its own metric.
   devView(ranMetric) { const v = this.state.devView || {}; return { unit: ["eph", "xp", "profit"].includes(v.unit) ? v.unit : ranMetric || "eph", xp: v.xp !== false }; }
+  // Talisman advice to the game (operator, 2026-11-25: "the site to game integration for Talisman stats weights and reroll
+  // steps"). One package, schema metz-talisman-advice/1: the weights (each modifier's gain at each grade, in the unit
+  // the weighting ranked by), the modifier list the crafting rules need, and optionally one crafting plan by its key
+  // with the target, the Exchange reading and the prices it was ranked on. The Metz Combat Sim Helper carries it into
+  // the game, where it and Metz Dungeon Stats run the plan's own rule (server/talismanPlanner.mjs) on the talisman
+  // as it stands. Sent the way a loadout is: #zone-talisman-to-game and an event; the script marks the node stored.
+  devAdvicePackage(w, plan = null, out = null) {
+    const ch = this.state.devChoices || {};
+    const mods = (ch.modifiers || []).map(m => ({ hrid: m.hrid, name: m.name, group: m.group, weight: m.weight }));
+    return { schema: "metz-talisman-advice/1", from: "metz-combat-simulator", at: new Date().toISOString(), gameVersion: ch.gameVersion || null,
+      player: w.player, zone: w.zoneName || w.zone || "", tier: w.tier ?? null, belt: w.belt || null, unit: w.unit || "",
+      info: { maxGrade: ch.info?.maxGrade || 6, maxModifierCount: ch.info?.maxModifierCount || 4 }, modifiers: mods,
+      weights: Object.fromEntries((w.ranked || []).filter(r => Array.isArray(r.byGrade)).map(r => [r.hrid, r.byGrade])),
+      plan: plan && out ? { key: plan.key, title: this.rollPlanTitle(plan), target: out.target, exchange: out.exchange, priceMode: out.priceMode,
+        prices: Object.fromEntries(Object.entries(out.prices || {}).map(([k, v]) => [k, v?.coins ?? null])), chance: plan.chance ?? null,
+        steps: this.rollPlanSteps(plan, out).map(a => a.text),
+        // Each step's words, in the page's language, so the game says what the plan is doing at the step it is on.
+        phases: Object.fromEntries(Object.entries(Component.ROLL_STEP_TEXT).map(([k, v]) => [k, Component.tf(v, { mod: Component.t(plan.vars?.mod || ""), share: plan.share ? `${Math.round(100 * plan.share)}%` : "" })])) } : null };
+  }
+  devSendToGame(pkg, noteKey) {
+    let node = document.getElementById("zone-talisman-to-game");
+    if (!node) { node = document.createElement("script"); node.type = "application/json"; node.id = "zone-talisman-to-game"; document.body.appendChild(node); }
+    delete node.dataset.stored;
+    node.textContent = JSON.stringify(pkg);
+    const note = text => this.setState({ devSendNote: { key: noteKey, text } });
+    note(Component.t("Sending…"));
+    document.dispatchEvent(new CustomEvent("zone-talisman-to-game"));
+    const started = Date.now();
+    const poll = () => {
+      const stored = node.dataset.stored;
+      if (stored === "ok") { note(pkg.plan ? Component.t("Sent to the game. Open the talisman's crafting window: the next step of this plan shows there.")
+        : Component.t("Sent to the game. Talisman tooltips, the talisman window and the Talismans tab now show these weights.")); return; }
+      if (stored !== "error" && Date.now() - started < 1500) { setTimeout(poll, 100); return; }
+      const json = JSON.stringify(pkg);
+      const say = () => note(stored === "error" ? Component.t("The Metz Combat Sim Helper could not store it. The package was copied instead.")
+        : Component.t("Metz Combat Sim Helper was not seen on this page: install it (0.8 or later) and reload. The package was copied instead."));
+      try { navigator.clipboard.writeText(json).then(say, () => note(Component.t("Metz Combat Sim Helper was not seen on this page: install it (0.8 or later) and reload."))); } catch { say(); }
+    };
+    setTimeout(poll, 100);
+  }
+  /** The finished weighting as a saved weighting reads (the same fields saveWeighting keeps). */
+  devWeightingOf(d) {
+    const zone = (this.state.zones || []).find(z => z.hrid === d.zone);
+    return { player: d.player, zoneName: zone?.name || d.zone, tier: d.difficultyTier, belt: d.belt,
+      unit: d.goal?.metric === "xp" ? "XP / h" : d.goal?.metric === "profit" ? "coins / h" : d.baseline?.dungeon ? "clears / h" : "encounters / h",
+      ranked: (d.ranked || []).filter(r => Array.isArray(r.byGrade)).map(r => ({ hrid: r.hrid, byGrade: r.byGrade })) };
+  }
   async devCopyWeights() {
     const d = this.state.devDone; if (!d?.ranked) return;
     // What the table shows is what is copied: its unit, and no Experience lines when they are hidden.
@@ -2568,6 +2630,9 @@ class Component extends DCLogic {
       viewPace: () => this.setState({ devView: { ...view, unit: "eph" } }), viewXp: () => this.setState({ devView: { ...view, unit: "xp" } }), viewProfit: () => this.setState({ devView: { ...view, unit: "profit" } }),
       viewShowXp: view.xp, toggleViewXp: e => this.setState({ devView: { ...view, xp: !!e.target.checked } }),
       copyWeights: () => this.devCopyWeights(), copyLabel: s.devCopied ? Component.t("Copied") : Component.t("Copy the weights"),
+      sendTitle: Component.t("Send these weights to the game through the Metz Combat Sim Helper: the talisman window, tooltips and the Talismans tab show what each line is worth"),
+      sendToGame: () => { const d = s.devDone; if (d?.ranked) this.devSendToGame(this.devAdvicePackage(this.devWeightingOf(d)), "weights"); },
+      sendNote: s.devSendNote?.key === "weights" ? s.devSendNote.text : "",
       hasRows: rows.length > 0,
       rowsNote: Component.tf("One line of each modifier on an otherwise empty belt, in {unit}, every line on the same runs.", { unit }),
       rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), cells: gradeCells(r.hrid), gain: r.seeds ? `${fmt(gainOf(r))} \u00b1 ${seOf(r) >= 1000 ? Math.round(seOf(r)).toLocaleString("en-US") : seOf(r).toFixed(seOf(r) >= 100 ? 0 : 2)}` : "\u2026", share: r.seeds ? share(gainOf(r)) : "",
@@ -2583,7 +2648,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=ee8caf2877dd");
+      const i18n = await import("./i18n.js?v=876897a12438");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -2606,7 +2671,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=ee8caf2877dd");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=876897a12438");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -2967,7 +3032,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=ee8caf2877dd");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=876897a12438");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -2988,7 +3053,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=ee8caf2877dd");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=876897a12438");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
