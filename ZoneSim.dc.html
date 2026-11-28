@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=13bddaa8a6da"></script>
+<script src="./support.js?v=d560064c0810"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=13bddaa8a6da">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d560064c0810">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=13bddaa8a6da">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=13bddaa8a6da"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=d560064c0810">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d560064c0810"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1547,7 +1547,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=13bddaa8a6da").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=d560064c0810").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -1556,6 +1556,8 @@ class Component extends DCLogic {
     // from outside -- an upgrade or a levelling plan is an errand in the game, but a trigger value is a number
     // this page owns, and retyping twelve of them by hand is how they get mistyped.
     globalThis.addEventListener?.("zone-apply-triggers", this._onApplyTriggers = e => this.applyTunedTriggers(e.detail?.changes || []));
+    // The talisman set Talisman Stat Weighting found, put on its player here (2026-11-28, operator).
+    globalThis.addEventListener?.("zone-apply-talismans", this._onApplyTalismans = e => this.applyFoundTalismans(e.detail || {}));
     // The walkthrough's demo party goes when the guide closes (Zones.dc.html asks through this event).
     globalThis.addEventListener?.("zone-demo-clear", this._onDemoClear = () => this.clearZoneParty());
   }
@@ -1622,6 +1624,7 @@ class Component extends DCLogic {
   componentDidUpdate() { this.queueZoneSession(); }
   componentWillUnmount() {
     if (this._onApplyTriggers) globalThis.removeEventListener?.("zone-apply-triggers", this._onApplyTriggers);
+    if (this._onApplyTalismans) globalThis.removeEventListener?.("zone-apply-talismans", this._onApplyTalismans);
     if (this._onDemoClear) globalThis.removeEventListener?.("zone-demo-clear", this._onDemoClear); clearTimeout(this._sessionT); clearTimeout(this._zoneAutoT); clearInterval(this._zoneTicker); this.writeZoneSession(); }
   // The run settings — hours, seed, server lag, wave delay, the pricing block and whether Advanced is open —
   // describe how this visitor measures, not what they are measuring, so they outlive a refresh. Only these keys
@@ -2225,6 +2228,19 @@ class Component extends DCLogic {
       globalThis.dispatchEvent?.(new CustomEvent("zone-triggers-applied", { detail: { applied, missed } }));
       return { zoneParty: party, zoneStale: !!s.zoneResult, zoneDerived: null };
     });
+  }
+  // Talisman Stat Weighting's set on its player (2026-11-28, operator: "make them available to equip in Setup"): the
+  // run's belt at the run's enhancement and its talismans replace the player's belt section; the rest of the loadout
+  // is left alone. The belt section's Reset brings the imported belt back, Save loadout keeps the set as a loadout.
+  // Reported back like the trigger values: only this side knows whether the player is still in the party.
+  applyFoundTalismans({ player, belt, talismans }) {
+    const i = (this.state.zoneParty || []).findIndex(p => (p?.record?.name || "") === player);
+    const ok = i >= 0 && belt?.itemHrid && Array.isArray(talismans) && talismans.length > 0;
+    if (ok) this.zoneEditTalismans(i, l => {
+      l.belt = { itemHrid: belt.itemHrid, enhancementLevel: Math.max(0, Math.min(20, Math.floor(Number(belt.enhancementLevel) || 0))) };
+      l.talismans = talismans.map((t, k) => ({ slotIndex: k + 1, modifiers: (t.modifiers || []).map(m => ({ hrid: m.hrid, grade: Number(m.grade) || 1 })) }));
+    });
+    globalThis.dispatchEvent?.(new CustomEvent("zone-talismans-applied", { detail: { player, applied: ok, count: ok ? talismans.length : 0 } }));
   }
   // ZONE-178: how long an offset field waits after the last keystroke before applying what is in it.
   static ZONE_OFFSET_DELAY_MS = 2000;
