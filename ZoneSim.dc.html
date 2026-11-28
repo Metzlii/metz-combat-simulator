@@ -3,17 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js?v=79b10eb7469b"></script>
+<script src="./support.js?v=86f2e235b9ec"></script>
 </head>
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=79b10eb7469b">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=86f2e235b9ec">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=79b10eb7469b">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=79b10eb7469b"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=86f2e235b9ec">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=86f2e235b9ec"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a:hover { color: var(--color-accent-400); }
@@ -1547,7 +1547,7 @@ class Component extends DCLogic {
     return out;
   }
   componentDidMount() {
-    import("./i18n.js?v=79b10eb7469b").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
+    import("./i18n.js?v=86f2e235b9ec").then(m => { Component.t = m.t; this.forceUpdate(); }).catch(() => {});
     // Account-wide buffs change slowly and are not in any export — remembered between sessions.
     try { const b = JSON.parse(localStorage.getItem("gts.zoneBuffs") || "null"); if (b) this.setState(st => ({ zoneBuffs: this.migrateZoneBuffs(b, st.zoneBuffs) })); } catch {}
     this.loadZonePrefs();
@@ -2141,25 +2141,13 @@ class Component extends DCLogic {
     this._zoneTicker = setInterval(() => { if (!this.state.zoneRunning) { clearInterval(this._zoneTicker); this._zoneTicker = null; return; } this.forceUpdate(); }, 500);
   }
   /**
-   * 0..1 for the bar. Finished rows are exact; the rows in flight move on the clock against the estimate for the
-   * whole run, held under the next row's share so the bar never has to step back when the row lands. With no
-   * estimate (a server that sent none) the bar is the finished share alone.
+   * 0..1 for the bar: sims done out of sims expected, nothing else (operator, 2026-11-28: the old bar moved on a clock
+   * against a stored pace, which the machine and the browser throw off, so it looked random).
    */
   zoneProgressFraction(s) {
     const p = s.zoneProgress; if (!s.zoneRunning) return 0;
     const total = Math.max(1, Number(p?.total) || 1), done = Math.min(total, Number(p?.done) || 0);
-    const est = Number(p?.estimatedSeconds) || 0;
-    const byRows = done / total;
-    if (!(est > 0)) return byRows;
-    const elapsed = (Date.now() - (this._zoneRunStart || Date.now())) / 1000;
-    // The estimate is a mean, so half of all runs outlast it. Up to 80% of it the bar is the clock; past that it
-    // approaches the end without arriving -- 88% at the estimate, 94% at 1.25x, 96% at 1.5x, 98% at 2x -- so a run
-    // that overruns keeps the bar moving instead of parking it at 98% (players and the operator, 2026-09-24).
-    const x = elapsed / est;
-    const byClock = x <= 0.8 ? x : 0.8 + 0.19 * (1 - Math.exp(-(x - 0.8) / 0.35));
-    // The clock may run ahead of the rows (a slow candidate) or behind them (a fast one); take the larger, but
-    // never claim the next row is done before it is.
-    return Math.max(byRows, Math.min(byClock, (done + 0.99) / total));
+    return done / total;
   }
   static ZONE_PACE_KEY = "gts.zone.pace.v1";
   zonePace() {
@@ -4637,7 +4625,10 @@ class Component extends DCLogic {
     const candNoteText = Component.tf("{n} of {max} queued", { n: nf(cands.length), max: nf(MAX_CANDIDATES) }) + (cands.length >= MAX_CANDIDATES ? Component.t(" · the server's row cap for one board") : reqCount > 1 ? Component.tf(" · over {ch} candidate-hours at {h} h, so {req} requests of up to {rows}", { ch: nf(LIM.maxCandidateHours), h: nf(hours, hours < 1 ? 2 : 0), req: nf(reqCount), rows: nf(chunkRows) }) : "");
     const runNoteText = s.zoneRunning
       ? (s.zoneProgress
-          ? Component.tf("{done} of {total} done{est}. Results appear as each one finishes; Stop keeps what is done.", { done: s.zoneProgress.done, total: s.zoneProgress.total, est: s.zoneProgress.estimatedSeconds != null ? Component.tf(" · {t} in total", { t: secText(s.zoneProgress.estimatedSeconds) }) : "" })
+          ? Component.tf("{done} of {total} sims{est}. Results appear as each one finishes; Stop keeps what is done.", { done: s.zoneProgress.done, total: s.zoneProgress.total,
+            // Time left from this run's own pace only (operator, 2026-11-28): done sims took the elapsed time, so the rest take that per sim.
+            est: (() => { const d = Number(s.zoneProgress.done) || 0, t = Number(s.zoneProgress.total) || 0, el = this._zoneRunStart ? (Date.now() - this._zoneRunStart) / 1000 : 0;
+              return d > 0 && t > d && el > 0 ? Component.tf(" · about {t} left", { t: secText(el * (t - d) / d) }) : ""; })() })
           : Component.tf("Takes {t}. You can keep editing while it runs.", { t: secText(estSec) }))
       : cands.length ? (cands.length === 1 ? Component.tf("1 zone × {h} simulated hours · takes {t}.", { h: nf(candHours, candHours < 1 ? 2 : 0), t: secText(estSec) })
         : uniformHours ? Component.tf("{n} zones × {h} simulated hours · takes {t}.", { n: cands.length, h: nf(candHours / cands.length, candHours / cands.length < 1 ? 2 : 0), t: secText(estSec) })

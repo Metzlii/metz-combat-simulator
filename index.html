@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="79b10eb7469b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="86f2e235b9ec"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=79b10eb7469b"></script>
+<script src="./support.js?v=86f2e235b9ec"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=79b10eb7469b">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=86f2e235b9ec">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=79b10eb7469b">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=79b10eb7469b"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=86f2e235b9ec">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=86f2e235b9ec"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -800,9 +800,13 @@
           <div style="display:flex;flex-direction:column;gap:var(--space-3)">
             <sc-if value="{{ up.onLoadouts }}" hint-placeholder-val="{{ false }}">
               <sc-if value="{{ up.ld.running }}" hint-placeholder-val="{{ false }}">
-                <div style="display:flex;gap:9px;align-items:center;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 14%, transparent)">
-                  <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
-                  <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.ld.stage }}</span>
+                <div style="display:flex;flex-direction:column;gap:6px;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 14%, transparent)">
+                  <div style="display:flex;gap:9px;align-items:center">
+                    <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.ld.stage }}</span>
+                  </div>
+                  <div style="height:4px;border-radius:2px;background:color-mix(in srgb, var(--color-neutral-700) 60%, transparent);overflow:hidden"><div style="height:100%;width:{{ up.ld.pct }};background:var(--color-accent);box-shadow:0 0 8px var(--color-accent)"></div></div>
+                  <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ up.ld.sims }}</span>
                 </div>
               </sc-if>
               <sc-if value="{{ up.ld.error }}" hint-placeholder-val="{{ false }}">
@@ -888,6 +892,7 @@
                 <div style="height:4px;border-radius:2px;background:color-mix(in srgb, var(--color-neutral-700) 60%, transparent);overflow:hidden">
                   <div style="height:100%;width:{{ up.pct }};background:var(--color-accent);box-shadow:0 0 8px var(--color-accent)"></div>
                 </div>
+                <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ up.sims }}</span>
               </div>
             </sc-if>
 
@@ -1021,9 +1026,13 @@
             </sc-if>            </sc-if>
             <sc-if value="{{ up.trigView }}" hint-placeholder-val="{{ false }}">
               <sc-if value="{{ up.trig.running }}" hint-placeholder-val="{{ false }}">
-                <div style="display:flex;gap:9px;align-items:center;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
-                  <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
-                  <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.trig.stage }}</span>
+                <div style="display:flex;flex-direction:column;gap:6px;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
+                  <div style="display:flex;gap:9px;align-items:center">
+                    <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.trig.stage }}</span>
+                  </div>
+                  <div style="height:4px;border-radius:2px;background:color-mix(in srgb, var(--color-neutral-700) 60%, transparent);overflow:hidden"><div style="height:100%;width:{{ up.trig.pct }};background:var(--color-accent);box-shadow:0 0 8px var(--color-accent)"></div></div>
+                  <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ up.trig.sims }}</span>
                 </div>
               </sc-if>
               <sc-if value="{{ up.trig.noClears }}" hint-placeholder-val="{{ false }}">
@@ -1093,9 +1102,13 @@
             </sc-if>
             <sc-if value="{{ up.onSkills }}" hint-placeholder-val="{{ false }}">
               <sc-if value="{{ up.skills.running }}" hint-placeholder-val="{{ false }}">
-                <div style="display:flex;gap:9px;align-items:center;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
-                  <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
-                  <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.skills.stage }}</span>
+                <div style="display:flex;flex-direction:column;gap:6px;padding:9px 11px;border:1px solid var(--color-accent-800);border-radius:var(--radius-sm);background:color-mix(in srgb, var(--color-accent-800) 18%, transparent)">
+                  <div style="display:flex;gap:9px;align-items:center">
+                    <span aria-hidden="true" style="flex:none;width:12px;height:12px;border-radius:50%;border:2px solid var(--color-accent-800);border-top-color:var(--color-accent);animation:gtsSpin 0.9s linear infinite"></span>
+                    <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.skills.stage }}</span>
+                  </div>
+                  <div style="height:4px;border-radius:2px;background:color-mix(in srgb, var(--color-neutral-700) 60%, transparent);overflow:hidden"><div style="height:100%;width:{{ up.skills.pct }};background:var(--color-accent);box-shadow:0 0 8px var(--color-accent)"></div></div>
+                  <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ up.skills.sims }}</span>
                 </div>
               </sc-if>
               <sc-if value="{{ up.skills.noClears }}" hint-placeholder-val="{{ false }}">
@@ -1187,6 +1200,7 @@
                     <span style="font-size:13px;font-variant-numeric:tabular-nums">{{ up.food.stage }}</span>
                   </div>
                   <div style="height:4px;border-radius:2px;background:var(--color-divider);overflow:hidden"><div style="height:100%;width:{{ up.food.pct }};background:var(--color-accent)"></div></div>
+                  <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ up.food.sims }}</span>
                 </div>
               </sc-if>
               <sc-if value="{{ up.food.error }}" hint-placeholder-val="{{ false }}"><div style="color:var(--color-danger-300);font-size:13px">{{ up.food.error }}</div></sc-if>
@@ -1321,6 +1335,10 @@
               <button class="btn btn-ghost" style="padding:3px 12px;font-size:13px" title="Remove this tool's last answer from the page" onClick="{{ dev.clearResults }}">Clear results</button>
             </sc-if>
           </div>
+          <sc-if value="{{ dev.running }}" hint-placeholder-val="{{ false }}">
+            <div style="height:4px;border-radius:2px;background:color-mix(in srgb, var(--color-neutral-700) 60%, transparent);overflow:hidden"><div style="height:100%;width:{{ dev.pct }};background:var(--color-accent);box-shadow:0 0 8px var(--color-accent)"></div></div>
+            <span class="text-muted" style="font-size:12px;font-variant-numeric:tabular-nums">{{ dev.sims }}</span>
+          </sc-if>
           <sc-if value="{{ up.hasOptSaves }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex;flex-direction:column;gap:4px;width:100%">
               <button class="btn btn-ghost" style="display:flex;gap:9px;align-items:baseline;justify-content:flex-start;width:100%;padding:3px 6px;margin:0 -6px;border:0;background:transparent;text-align:left" onClick="{{ up.toggleOptSaves }}">
@@ -1382,6 +1400,7 @@
                     <div style="font-size:13px;font-variant-numeric:tabular-nums;text-wrap:pretty"><span class="text-muted">{{ t.label }}</span> {{ t.lines }}</div>
                   </sc-for>
                   <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.bestSetTotal }}</div>
+                  <sc-if value="{{ dev.bestSetCompare }}" hint-placeholder-val="{{ false }}"><div style="font-size:12.5px;text-wrap:pretty">{{ dev.bestSetCompare }}</div></sc-if>
                   <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
                     <button class="btn btn-secondary" style="padding:3px 12px;font-size:13px" title="Put this belt and these talismans on the player in Setup, so the next run fights with them" onClick="{{ dev.equipBestSet }}">Equip in Setup</button>
                     <sc-if value="{{ dev.canSimulateSet }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:3px 12px;font-size:13px" title="Builds the set line by line on top of the ones already chosen, so diminishing returns such as Accuracy's count. Each step is a quick check of the line the weights put next; only a line that falls short is re-measured against the others." onClick="{{ dev.simulateSet }}">Simulate the set</button></sc-if>
@@ -1624,6 +1643,15 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-28</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.74</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>Every progress bar counts sims done out of sims expected, with the time left worked out from the run's own pace. Trigger values, Skill levelling, Loadouts × planets and Talisman Stat Weighting have bars now, and the counts move as results land.</li>
+                <li>Simulate the set also measures the set the weights alone would give, on the same seeds, and shows both gains and which lines differ.</li>
+                <li>Saved results keep 20 automatic answers per tool, and a talisman answer with a simulated set says so in its name.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-28</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.73</b></div>
@@ -2692,7 +2720,7 @@ class Component extends DCLogic {
           note: u ? (u.source === "your price" ? "" : u.coins != null ? Component.t("market") : Component.tf("no price (vendor {v})", { v: Component.coinsText(u.vendor) })) : "" }; }),
       run: () => this.devRollRun(), running: !!s.devRollRunning,
       progressPct: `${Math.round(100 * (s.devRollProgress?.total ? s.devRollProgress.done / s.devRollProgress.total : 0))}%`,
-      progressText: s.devRollProgress?.total ? Component.tf("Working out the odds: {p}", { p: `${Math.round(100 * s.devRollProgress.done / s.devRollProgress.total)}%` }) : Component.t("Starting…"), runDisabled: !!s.devRollRunning || !done?.ranked?.length || !s.client?.zoneTalismanRolls,
+      progressText: s.devRollProgress?.total ? Component.tf("Working out the odds: {done} of {total} rolls", { done: Math.round(s.devRollProgress.done).toLocaleString("en-US"), total: Math.round(s.devRollProgress.total).toLocaleString("en-US") }) : Component.t("Starting…"), runDisabled: !!s.devRollRunning || !done?.ranked?.length || !s.client?.zoneTalismanRolls,
       error: s.devRollError || "", hasOut: !!out,
       ...(() => {
         // Keep the current lines or take the new roll: the likelier best plan wins; within 2 points, the cheaper one.
@@ -2916,8 +2944,14 @@ class Component extends DCLogic {
       if ((done.goal?.metric || ranMetric) !== view.unit) return null;
       if (!view.xp && t.some(x => (x.modifiers || []).some(m => isXp(m)))) return null;
       const f = { eph: "deltaEph", xp: "deltaXp", profit: "deltaProfit" }[view.unit], sf = `${f}SE`;
+      // The set the original weights give, measured on the same seeds (operator, 2026-11-28: report the gain against it).
+      const ws = done.weightsSet, wc = ws?.combined;
+      const names = ls => { const c = {}; for (const l of ls || []) { const nm = Component.t(mods.find(m => m.hrid === l.hrid)?.name || String(l.hrid).split("/").pop()); c[nm] = (c[nm] || 0) + 1; } return c; };
+      const a = names(done.lines), b = names(ws?.lines), diffText = (x, y, sign) => Object.entries(x).flatMap(([k, v]) => { const d = v - (y[k] || 0); return d > 0 ? [`${sign}${k}${d > 1 ? ` ×${d}` : ""}`] : []; });
       return { simulated: true, player: done.player, belt: { itemHrid: done.belt.hrid, enhancementLevel: done.belt.enhancementLevel }, grade: done.grade, talismans: t,
-        hasTotal: !!comb, total: Number(comb?.[f] ?? comb?.delta) || 0, se: Number(comb?.[sf] ?? comb?.deltaSE) || 0 }; })();
+        hasTotal: !!comb, total: Number(comb?.[f] ?? comb?.delta) || 0, se: Number(comb?.[sf] ?? comb?.deltaSE) || 0,
+        weights: ws ? { same: !!ws.same, measured: !!wc, total: Number(wc?.[f] ?? wc?.delta) || 0, se: Number(wc?.[sf] ?? wc?.deltaSE) || 0,
+          changes: [...diffText(a, b, "+"), ...diffText(b, a, "−")].join(", ") } : null }; })();
     const shownSet = simSet || bestSet;
     // Which set an Equip note belongs to: a note from another player, measure or set is not shown.
     const setKey = shownSet ? [shownSet.player, view.unit, view.xp ? 1 : 0, shownSet.simulated ? "sim" : "w", ...shownSet.talismans.flatMap(t => (t.modifiers || []).map(m => m.hrid))].join("|") : "";
@@ -2943,6 +2977,8 @@ class Component extends DCLogic {
       beltNote: belt ? Component.tf("{slots} talismans, up to {lines} lines", { slots: belt.slots, lines: belt.slots * ch.info.maxModifierCount }) + (Number.isFinite(power) ? ` \u00b7 ${Component.tf("Talisman Power {p}%", { p: (100 * power).toFixed(1) })}` : "") : "",
       running: !!s.devRunning, runDisabled: !!s.devRunning || onCount === 0 || !names.length || !this.upVal("zone") || !s.client?.zoneTalismansStream,
       run: () => this.devRun(), stop: () => this.devStop(), stage, error: s.devError || "",
+      // Progress bar (2026-11-28): the runs the search planned (baseline, every line alone, the build's checks).
+      pct: `${((Component.planShare(head) ?? 0) * 100).toFixed(1)}%`, sims: Component.simsText(head?.jobsDone, head?.plannedJobs, head?.elapsedMs),
       hasSet: !!(done && (done.talismans || []).length) && !simSet,
       setTitle: done ? Component.tf("The set for {name}", { name: done.player || "" }) : "",
       combined: comb ? `${fmt(comb.delta)} ${unit}${share(comb.delta) ? ` (${share(comb.delta)})` : ""} \u00b1 ${Number(comb.deltaSE || 0).toFixed(2)}` : "",
@@ -2976,6 +3012,10 @@ class Component extends DCLogic {
       bestSetTotal: !shownSet ? "" : shownSet.simulated
         ? (shownSet.hasTotal ? Component.tf("{gain} {unit} ({pct}) \u00b1 {se} for the whole set, measured on fresh seeds", { gain: fmt(shownSet.total), unit, pct: share(shownSet.total) || "\u2013", se: shownSet.se.toFixed(2) }) : "")
         : Component.tf("{gain} {unit} by the weights ({pct}), lines added up; the set as a whole was not simulated", { gain: fmt(shownSet.total), unit, pct: share(shownSet.total) || "\u2013" }),
+      bestSetCompare: !shownSet?.simulated || !shownSet.weights ? "" : shownSet.weights.same ? Component.t("The same set the weights alone give.")
+        : shownSet.weights.measured ? Component.tf("The set from the weights alone: {gain} {unit} ({pct}) ± {se} on the same seeds, so line by line gains {diff} ({dpct}). Lines that differ: {changes}.", {
+          gain: fmt(shownSet.weights.total), unit, pct: share(shownSet.weights.total) || "–", se: shownSet.weights.se.toFixed(2),
+          diff: fmt(shownSet.total - shownSet.weights.total), dpct: share(shownSet.total - shownSet.weights.total) || "–", changes: shownSet.weights.changes || "–" }) : "",
       bestSetTalismans: (shownSet?.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: (t.modifiers || []).map(m => `${Component.t(m.name)} ${val(m)}`).join(" \u00b7 ") })),
       equipBestSet: () => shownSet && globalThis.dispatchEvent?.(new CustomEvent("zone-apply-talismans", { detail: { key: setKey, player: shownSet.player, belt: shownSet.belt, talismans: shownSet.talismans } })),
       // Simulate the set: the search again with the set built line by line, judged by the measure the table shows.
@@ -2983,7 +3023,7 @@ class Component extends DCLogic {
       simulateSet: () => { this.setDev({ player: done.player, belt: done.belt.hrid, level: done.belt.enhancementLevel, grade: done.grade }); this._devSim = { metric: view.unit, noXp: !view.xp };
         setTimeout(() => { try { this.devRun(); } finally { this._devSim = null; } }, 0); },
       talApplyNote: (() => { const a = s.talApplied; if (!a || a.key !== setKey) return "";
-        return a.applied ? Component.tf("{n} talismans put on {name} in Setup. Reset in the player's Belt and talismans section brings the imported belt back; Save loadout keeps this one.", { n: a.count, name: a.player || "" })
+        return a.applied ? Component.tf("{n} talismans put on {name} in Setup. Reset in the player's Belt and talismans section brings the imported belt back.", { n: a.count, name: a.player || "" })
           : Component.tf("{name} is no longer in the party on Setup, so nothing was changed.", { name: a.player || "" }); })(),
       hasTalApplyNote: !!s.talApplied && s.talApplied.key === setKey,
       hasRows: rows.length > 0,
@@ -3015,7 +3055,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=79b10eb7469b");
+      const i18n = await import("./i18n.js?v=86f2e235b9ec");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -3039,7 +3079,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=79b10eb7469b");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=86f2e235b9ec");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -3182,7 +3222,8 @@ class Component extends DCLogic {
   static OPT_SAVES_KEY = "gts.zone.optimize.saves.v1";
   // How many AUTOMATIC answers to keep per tool. Small on purpose: these accumulate without anyone asking, and
   // a list nobody curates is one nobody reads. A pressed Save is exempt and never pruned.
-  static AUTO_SAVE_KEEP = 5;
+  // 20 a tool (operator, 2026-11-28: a whole party's weights and line-by-line sets is ten answers on its own).
+  static AUTO_SAVE_KEEP = 20;
   static OPT_MODE_LABEL = { upgrades: "Upgrades", triggers: "Trigger values", skills: "Skill levelling", food: "Food & drinks", loadouts: "Loadouts × planets", talWeights: "Talisman Stat Weighting" };
   loadOptSaves() {
     try { const list = JSON.parse(localStorage.getItem(Component.OPT_SAVES_KEY) || "[]"); if (Array.isArray(list)) this.setState({ optSaves: list }); } catch {}
@@ -3327,7 +3368,9 @@ class Component extends DCLogic {
     const zone = (this.state.zones || []).find(z => z.hrid === head.zone);
     const where = zone ? `${Component.t(zone.name)} T${head.difficultyTier ?? 0}` : "";
     const who = (x.mode === "talWeights" && d.devDone?.player) || head.player || Component.t("whole party");
-    return [Component.t(Component.OPT_MODE_LABEL[x.mode] || ""), where, who].filter(Boolean).join(" \u00b7 ");
+    // A talisman answer with the set built line by line says so (operator, 2026-11-28).
+    const lineByLine = x.mode === "talWeights" && (d.devDone?.talismans || []).length > 0;
+    return [Component.t(Component.OPT_MODE_LABEL[x.mode] || ""), lineByLine ? Component.t("set simulated line by line") : "", where, who].filter(Boolean).join(" \u00b7 ");
   }
   /** The record for one answer. A hand save and an automatic one are the same thing but for `auto`. */
   optSaveRecord(mode, auto) {
@@ -3338,7 +3381,7 @@ class Component extends DCLogic {
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     const where = zone ? `${zone.name} T${head?.difficultyTier ?? 0}` : "";
     const who = head?.player || "whole party";
-    const name = [Component.OPT_MODE_LABEL[mode], where, who].filter(Boolean).join(" \u00b7 ");
+    const name = [Component.OPT_MODE_LABEL[mode], mode === "talWeights" && (done?.talismans || []).length ? "set simulated line by line" : "", where, who].filter(Boolean).join(" \u00b7 ");
     // What makes two records the same ANSWER rather than two runs of it. `ms` is the search's own duration, so
     // it separates two searches of the same party and zone while staying identical across a reload -- which is
     // what stops a restored answer being saved again every time the page opens.
@@ -3377,8 +3420,12 @@ class Component extends DCLogic {
     const saves = this.state.optSaves || [];
     if (saves.some(x => x.sig === rec.sig)) return;
     const mine = saves.filter(x => x.auto && x.mode === mode);
-    const drop = new Set(mine.slice(Component.AUTO_SAVE_KEEP - 1).map(x => x.id));
-    this.writeOptSaves([rec, ...saves.filter(x => !drop.has(x.id))]);
+    // Kept up to AUTO_SAVE_KEEP a tool; when the browser's storage is full, this tool's oldest automatic saves go one at
+    // a time until the new one fits (a hand-saved result is never dropped for an automatic one).
+    for (let keep = Component.AUTO_SAVE_KEEP - 1; keep >= 0; keep--) {
+      const drop = new Set(mine.slice(keep).map(x => x.id));
+      if (this.writeOptSaves([rec, ...saves.filter(x => !drop.has(x.id))])) return;
+    }
   }
   // Whether a tool's search is running: its saved answers cannot be opened meanwhile (operator, 2026-11-25: a result
   // opened mid-run took the running search's rows and answer, and was saved again under the opened one's player).
@@ -3400,7 +3447,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=79b10eb7469b");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=86f2e235b9ec");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -3421,7 +3468,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=79b10eb7469b");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=86f2e235b9ec");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
@@ -3667,6 +3714,14 @@ class Component extends DCLogic {
     return Number(plan.jobs) * (Number(plan.hours) || 0) * spch / lanes * 1000;
   }
   /** How far along a running upgrade or food search is: runs done of the planned ones, 0..1 (null before the plan). */
+  // "N of M sims" under a progress bar (operator, 2026-11-28): the sims done and the sims the run expects, the total
+  // growing when a run adds sims part-way; a run with no total yet says how many are done.
+  // Time left from this run's own pace only (operator, 2026-11-28): N of M sims took this long, so the rest takes about
+  // that times (M - N) / N. No stored pace: those carry everything outside the sim (the machine, other tabs, throttling).
+  static simsText(done, total, elapsedMs) { const nf = v => Math.round(Number(v) || 0).toLocaleString("en-US"), d = Number(done) || 0, t = Math.max(d, Number(total) || 0);
+    const left = d > 0 && t > d && Number(elapsedMs) > 0 ? Number(elapsedMs) * (t - d) / d : null;
+    const base = t > 0 ? Component.tf("{done} of {total} sims", { done: nf(d), total: nf(t) }) : Component.tf("{done} sims", { done: nf(d) });
+    return left != null ? `${base}${Component.tf(" · about {t} left", { t: Component.durText(left) })}` : base; }
   static planShare(head) { const done = Number(head?.jobsDone) || 0, plan = Number(head?.plannedJobs) || 0; return plan > 0 ? Math.min(1, done / plan) : null; }
   upEnhancer() {
     const d = { ...Component.UP_DEFAULTS.enhancer, ...(this.state.limits?.upgrades?.enhancer || {}) };
@@ -4174,7 +4229,7 @@ class Component extends DCLogic {
       error: s.foodError || "", rows: shownList.map(r => ({ isRow: !r.divider, ...r })), hasRows: rows.length > 0,
       idle: !rows.length && !s.foodRunning && !s.foodError,
       stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.foodRunning ? ` \u00b7 ${this.trigClock(head, this.upCap())}` : ""}` : Component.t("screening every food and drink\u2026"),
-      pct: `${((share ?? 0) * 100).toFixed(1)}%`,
+      pct: `${((share ?? 0) * 100).toFixed(1)}%`, sims: Component.simsText(head?.jobsDone, head?.plannedJobs, head?.elapsedMs),
       gainHead: isMana ? Component.t("Food cost") : `\u0394 ${unit}`,
       rankNote: isMana ? `${s.foodRunning ? Component.t("cheapest so far \u2014 rows re-rank as rounds add seeds") : Component.t("cheapest first, among the setups that lose no casts \u2014 food and drinks only, keys left out")}${needNote ? ` \u00b7 ${needNote}` : ""}`
         : s.foodRunning ? Component.t("best so far \u2014 rows re-rank as rounds add seeds") : Component.t("by gain \u2014 the \u00b1 says how sure each row is"),
@@ -4307,6 +4362,8 @@ class Component extends DCLogic {
       error: s.trigError || "", noClears: gm === "eph" ? this.noClearsNote(s, head, "triggers") : "",
       run: () => this.runMode("triggers"),
       stage: head ? `${Component.stageText(head.stage || "measuring", head.current)}${head.partyDps ? Component.tf(" \u00b7 party DPS {n}", { n: nf(head.partyDps) }) : ""}${s.trigRunning ? ` \u00b7 ${this.trigClock(head)}` : ""}` : Component.t("measuring the party as it stands\u2026"),
+      // Progress bar (2026-11-28): the runs the search planned, as on Upgrades and Food & drinks.
+      pct: `${((Component.planShare(head) ?? 0) * 100).toFixed(1)}%`, sims: Component.simsText(head?.jobsDone, head?.plannedJobs, head?.elapsedMs),
       targets, hasTargets: targets.length > 0,
       steps, hasSteps: steps.length > 0, walkPasses: passes,
       combined: combined && gm !== "eph" ? goalCombined(combined) : combined ? `${(t => (t ? `${t.withError} \u00b7 ${t.from} \u2192 ${t.to}` : Component.tf("{d} encounters per hour \u00b1 {se}", { d: d(combined.delta ?? combined.deltaEph), se: (Number(combined.deltaSE) || 0).toFixed(2) })))(this.runTimeOf(base, combined.delta ?? combined.deltaEph, combined.deltaSE))}${combined.deltaXp == null ? "" : Component.tf(" \u00b7 {xp} XP / h \u00b1 {se}", { xp: xpd(combined.deltaXp / (xpEach ? partyN : 1)), se: nf((Number(combined.deltaXpSE) || 0) / (xpEach ? partyN : 1)) }) + (scope ? ` ${scope}` : "")}${(head?.foodRestore || done?.foodRestore) === "hp" && combined.deathsPerHour != null && base?.deathsPerHour != null
@@ -4406,6 +4463,8 @@ class Component extends DCLogic {
       run: () => this.runMode("loadouts"), running: !!s.ldRunning, error: s.ldError || "",
       idle: !s.ldRunning && !done && !rows.length && !s.ldError,
       stage: `${Component.stageText(head?.stage || "starting\u2026")}${head?.live ? Component.tf(" \u00b7 {n} runs", { n: nf(head.live) }) : ""}${head?.jobsDone ? Component.tf(" \u00b7 {n} done", { n: nf(head.jobsDone) }) : ""}${s.ldRunning ? ` \u00b7 ${this.runClock()}` : ""}`,
+      // Progress bar (2026-11-28): sims done out of the sims the search expects (its estimate firms up phase by phase).
+      pct: `${((Component.planShare(head) ?? 0) * 100).toFixed(1)}%`, sims: Component.simsText(head?.jobsDone, head?.plannedJobs, head?.elapsedMs),
       hasRanked: ranked.length > 0 || live.length > 0, ranked: ranked.length ? ranked : live, rankedTitle: done ? Component.t("Best combinations, confirmed") : Component.t("Leading so far (screen)"),
       hasMatrix: matrix.length > 0, matrix, matrixOpen: !!s.ldMatrixOpen, toggleMatrix: () => this.setState({ ldMatrixOpen: !s.ldMatrixOpen }), matrixCaret: s.ldMatrixOpen ? "\u25be" : "\u25b8", matrixCount: nf(matrix.length),
       hasPruned: pruned.length > 0, pruned, prunedOpen: !!s.ldPrunedOpen, togglePruned: () => this.setState({ ldPrunedOpen: !s.ldPrunedOpen }), prunedCaret: s.ldPrunedOpen ? "\u25be" : "\u25b8", prunedCount: nf(pruned.length),
@@ -4592,6 +4651,10 @@ class Component extends DCLogic {
       idle: !s.skillRunning && !rows.length && !done && !s.skillError,
       run: () => this.runMode("skills"),
       stage: `${Component.t(s.skillHead?.stage || "measuring how fast each skill levels\u2026")}${s.skillRunning ? ` \u00b7 ${this.runClock()}` : ""}`,
+      // Progress bar (2026-11-28): the search ends when every point is within the precision target, and the error falls with
+      // the square root of the runs, so the share done is about (target / worst error)^2.
+      ...(() => { const h = s.skillHead, share = h?.targetSE > 0 && h?.worstSE > 0 ? Math.min(1, (h.targetSE / h.worstSE) ** 2) : 0, done = Number(h?.jobsDone) || 0;
+        return { pct: `${(share * 100).toFixed(1)}%`, sims: Component.simsText(done, share > 0 ? Math.round(done / share) : 0, h?.elapsedMs) }; })(),
       lines, hasCurves: lines.length > 0,
       axisY: `${metric === "xp" ? nf(maxY) : asTime ? maxY.toFixed(1) : (maxY >= 1 ? maxY.toFixed(2) : maxY.toFixed(3))} ${unit}`, axisX: Component.tf("{n} days", { n: horizon }),
       // Same reason: "0 to X · up to Y" is a range, and where the word "to" sits inside one is the language's
@@ -5013,7 +5076,7 @@ class Component extends DCLogic {
       error: s.upError || "",
       stage: head ? `${Component.stageText(head.stage)}${head.refining ? Component.t(" \u00b7 refining") : ""}${Component.tf(" \u00b7 {n} left \u00b7 {seeds} seeds each", { n: nf(head.live), seeds: nf(head.seedsPerCandidate) })}${s.upRunning ? ` \u00b7 ${this.trigClock(head, upCap)}` : ""}`
         : Component.t("screening every upgrade\u2026"),
-      pct: `${((upShare ?? 0) * 100).toFixed(1)}%`,
+      pct: `${((upShare ?? 0) * 100).toFixed(1)}%`, sims: Component.simsText(head?.jobsDone, head?.plannedJobs, head?.elapsedMs),
       idle: !rows.length && !s.upRunning && !s.upError,
       hasRows: priced.length > 0,
       // The finalists (the rows the search measured furthest, as many as the search was asked to keep) stay on top in their own order; every
