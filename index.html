@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head><script>window.__siteVersion="d560064c0810"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
+<head><script>window.__siteVersion="79b10eb7469b"</script><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23d3a13a%22%20stroke-width%3D%221.6%22%20stroke-linecap%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%228.5%22%2F%3E%3Cpath%20d%3D%22M6.6%2015.4c2.1-1.5%203.1-3.6%203.4-6%20.3-2.2-.2-4-.9-5.3%22%2F%3E%3Cpath%20d%3D%22M17.4%208.6c-2.1%201.5-3.1%203.6-3.4%206-.3%202.2.2%204%20.9%205.3%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%221.7%22%20fill%3D%22%23d3a13a%22%20stroke%3D%22none%22%2F%3E%3C%2Fsvg%3E"><script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js":"vendor/react-18.3.1-umd-react.production.min.js","https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js":"vendor/react-dom-18.3.1-umd-react-dom.production.min.js","https://unpkg.com/@babel/standalone@7.29.0/babel.min.js":"vendor/babel-standalone-7.29.0-babel.min.js"};</script><title>Metz Combat Simulator</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The page is dark by design. Dark Reader rewrote the inline style of buttons mounted after load (the Rank by toggles lost
      their colours in Firefox, 2026-09-30); this tag asks it to leave the page alone. -->
 <meta name="darkreader-lock">
-<script src="./support.js?v=d560064c0810"></script>
+<script src="./support.js?v=79b10eb7469b"></script>
 </head>
 <body>
 <x-dc>
@@ -17,12 +17,12 @@
      fetched components, whose text it wraps itself before parsing. -->
 
 <helmet>
-  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=d560064c0810">
+  <link rel="stylesheet" href="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/styles.css?v=79b10eb7469b">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css">
-  <link rel="stylesheet" href="spira-theme.css?v=d560064c0810">
-  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=d560064c0810"></script>
+  <link rel="stylesheet" href="spira-theme.css?v=79b10eb7469b">
+  <script src="_ds/nocturne-f8e0c7c8-c4ee-48b0-8fe1-8869f08dd92c/_ds_bundle.js?v=79b10eb7469b"></script>
   <style>
     html, body { margin: 0; min-height: 100%; }
     a { color: var(--color-accent-300); }
@@ -1329,7 +1329,7 @@
               </button>
               <sc-if value="{{ up.optSavesOpen }}" hint-placeholder-val="{{ false }}">
                 <sc-for list="{{ up.optSaves }}" as="sv" hint-placeholder-count="2">
-                  <div style="display:flex;gap:10px;align-items:center;padding:2px 0;font-size:12.5px">
+                  <div style="display:flex;gap:10px;align-items:baseline;padding:2px 0;font-size:12.5px">
                     <span style="display:flex;flex-direction:column;min-width:0" title="{{ sv.name }}"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ sv.name }}</span><sc-if value="{{ sv.party }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:11.5px;text-wrap:pretty">{{ sv.party }}</span></sc-if></span><span class="text-muted" style="flex:none">{{ sv.when }}</span>
                     <button class="btn btn-ghost" style="padding:1px 9px;font-size:12.5px" title="{{ sv.openTip }}" disabled="{{ sv.openDisabled }}" onClick="{{ sv.open }}">Open</button>
                     <button class="btn btn-ghost" style="padding:0 5px;font-size:12px" title="Delete this saved result" onClick="{{ sv.remove }}">✕</button>
@@ -1384,6 +1384,7 @@
                   <div class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.bestSetTotal }}</div>
                   <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
                     <button class="btn btn-secondary" style="padding:3px 12px;font-size:13px" title="Put this belt and these talismans on the player in Setup, so the next run fights with them" onClick="{{ dev.equipBestSet }}">Equip in Setup</button>
+                    <sc-if value="{{ dev.canSimulateSet }}" hint-placeholder-val="{{ false }}"><button class="btn btn-ghost" style="padding:3px 12px;font-size:13px" title="Builds the set line by line on top of the ones already chosen, so diminishing returns such as Accuracy's count. Each step is a quick check of the line the weights put next; only a line that falls short is re-measured against the others." onClick="{{ dev.simulateSet }}">Simulate the set</button></sc-if>
                     <sc-if value="{{ dev.hasTalApplyNote }}" hint-placeholder-val="{{ false }}"><span class="text-muted" style="font-size:12.5px;text-wrap:pretty">{{ dev.talApplyNote }}</span></sc-if>
                   </div>
                 </div>
@@ -1623,6 +1624,14 @@
         <details class="about-fold">
           <summary>Changelog</summary>
           <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:14px;font-size:13.5px;align-items:baseline;padding-top:4px">
+            <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-28</span>
+            <div>
+              <div style="text-wrap:pretty"><b>1.0.73</b></div>
+              <ul class="about-list" style="margin-top:4px;font-size:13.5px">
+                <li>Simulate the set, beside Equip in Setup: builds the talismans line by line on top of the ones already chosen, so diminishing returns such as Accuracy's count. Every unique in the top six goes on first; each further step is a quick check of the line the weights put next, and only a line that falls short is measured against the others. The simulated set then replaces the weights' estimate and is what Equip in Setup uses.</li>
+                <li>Saved results show their time on the headline's line.</li>
+              </ul>
+            </div>
             <span class="text-muted" style="font-size:12.5px;font-variant-numeric:tabular-nums">2026-11-28</span>
             <div>
               <div style="text-wrap:pretty"><b>1.0.72</b></div>
@@ -2468,7 +2477,8 @@ class Component extends DCLogic {
     const num = (v, fb) => { const n = Number(v); return Number.isFinite(n) ? n : fb; };
     return { players: this.state.party, zone: this.upVal("zone"), difficultyTier: num(this.upVal("tier"), 0), player: this.devVal("player"), development: true,
       belt: { itemHrid: this.devVal("belt"), enhancementLevel: Math.max(0, Math.min(20, Math.floor(num(this.devVal("level"), 0)))) }, grade: num(this.devVal("grade"), 6),
-      goal: { metric: this.devVal("metric") }, exclude: Object.keys(this.devOff()), accountBuffs: this.state.buffs || null, ...(this.state.measure || {}),
+      goal: { metric: this._devSim?.metric || this.devVal("metric") }, ...(this._devSim ? { build: true } : {}),
+      exclude: [...new Set([...Object.keys(this.devOff()), ...(this._devSim?.noXp ? (this.state.devChoices?.modifiers || []).filter(m => m.purpose === "experience").map(m => m.hrid) : [])])], accountBuffs: this.state.buffs || null, ...(this.state.measure || {}),
       hours: num(this.devVal("hours"), 1000), seeds: num(this.devVal("seeds"), 8) };
   }
   async devRun() {
@@ -2898,6 +2908,20 @@ class Component extends DCLogic {
         talismans: used.map(x => ({ modifiers: x.map(r => ({ hrid: r.hrid, grade: done.grade, name: r.name, value: r.value, isPercent: r.isPercent })) })) } : null; })();
     const steps = done?.steps || s.devSteps || [];
     const comb = done?.combined || null;
+    // OPTION 2 (operator, 2026-11-28: three Magic Accuracy lines cannot stay good under accuracy's diminishing returns):
+    // the set built line by line in the run itself (`build: true`), each line measured on top of the ones already
+    // chosen, then the whole set on fresh seeds. Shown in place of the weights' set while it answers the measure the
+    // table shows and holds no Experience line the table hides; otherwise the weights' set, and Simulate the set.
+    const simSet = (() => { const t = done?.talismans || []; if (!t.length || !done?.belt?.hrid) return null;
+      if ((done.goal?.metric || ranMetric) !== view.unit) return null;
+      if (!view.xp && t.some(x => (x.modifiers || []).some(m => isXp(m)))) return null;
+      const f = { eph: "deltaEph", xp: "deltaXp", profit: "deltaProfit" }[view.unit], sf = `${f}SE`;
+      return { simulated: true, player: done.player, belt: { itemHrid: done.belt.hrid, enhancementLevel: done.belt.enhancementLevel }, grade: done.grade, talismans: t,
+        hasTotal: !!comb, total: Number(comb?.[f] ?? comb?.delta) || 0, se: Number(comb?.[sf] ?? comb?.deltaSE) || 0 }; })();
+    const shownSet = simSet || bestSet;
+    // Which set an Equip note belongs to: a note from another player, measure or set is not shown.
+    const setKey = shownSet ? [shownSet.player, view.unit, view.xp ? 1 : 0, shownSet.simulated ? "sim" : "w", ...shownSet.talismans.flatMap(t => (t.modifiers || []).map(m => m.hrid))].join("|") : "";
+    const viewName = Component.t({ eph: "Run time", xp: "XP / h", profit: "Profit" }[view.unit] || view.unit), viewXpText = view.xp ? "" : Component.t(", without Experience lines");
     const el = this._devT0 ? Date.now() - this._devT0 : 0;
     const stage = s.devRunning ? `${head.stage ? String(head.stage).trim() : Component.t("starting\u2026")} \u00b7 ${Component.tf("{n} runs", { n: Number(head.jobsDone) || 0 })} \u00b7 ${Component.tf("{elapsed} elapsed", { elapsed: Component.durText(el) })}`
       : done ? (done.stopped ? Component.t("stopped") : Component.tf("done in {t} \u00b7 {n} runs", { t: Component.durText(Number(done.ms) || 0), n: Number(done.jobs) || 0 })) : "";
@@ -2919,13 +2943,13 @@ class Component extends DCLogic {
       beltNote: belt ? Component.tf("{slots} talismans, up to {lines} lines", { slots: belt.slots, lines: belt.slots * ch.info.maxModifierCount }) + (Number.isFinite(power) ? ` \u00b7 ${Component.tf("Talisman Power {p}%", { p: (100 * power).toFixed(1) })}` : "") : "",
       running: !!s.devRunning, runDisabled: !!s.devRunning || onCount === 0 || !names.length || !this.upVal("zone") || !s.client?.zoneTalismansStream,
       run: () => this.devRun(), stop: () => this.devStop(), stage, error: s.devError || "",
-      hasSet: !!(done && (done.talismans || []).length),
+      hasSet: !!(done && (done.talismans || []).length) && !simSet,
       setTitle: done ? Component.tf("The set for {name}", { name: done.player || "" }) : "",
       combined: comb ? `${fmt(comb.delta)} ${unit}${share(comb.delta) ? ` (${share(comb.delta)})` : ""} \u00b1 ${Number(comb.deltaSE || 0).toFixed(2)}` : "",
       talismans: (done?.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: t.modifiers.map(m => `${Component.t(m.name)} ${val(m)}`).join(" \u00b7 ") })),
       setNote: done ? Component.tf("Against the same belt with nothing in it, every line at grade {g}. The search ended: {why}.", { g: done.grade, why: Component.t(done.stoppedBy || "stopped") }) : "",
       hasSteps: steps.length > 0,
-      steps: steps.map(st => ({ n: `${st.step}.`, name: `${Component.t(st.name)}${st.copy > 1 ? ` \u00d7${st.copy}` : ""}`, gain: `${fmt(st.delta)}${share(st.delta) ? ` (${share(st.delta)})` : ""}` })),
+      steps: steps.map(st => ({ n: `${st.step}.`, name: `${Component.t(st.name)}${st.copy > 1 ? ` \u00d7${st.copy}` : ""}${st.placedFirst ? Component.t(" (unique, placed first: its gain alone)") : ""}${st.escalated ? Component.t(" (fell short of its weight: the step was re-measured)") : ""}`, gain: `${fmt(st.delta)}${share(st.delta) ? ` (${share(st.delta)})` : ""}` })),
       pools, poolsOpen: !!s.devPoolsOpen, poolsCaret: s.devPoolsOpen ? "\u25be" : "\u25b8", togglePools: () => this.setState(x => ({ devPoolsOpen: !x.devPoolsOpen })),
       poolsSummary: Component.tf("{n} of {m} measured", { n: onCount, m: mods.length }), noneOn: mods.length > 0 && onCount === 0,
       imported: (s.party || []).filter(p => p?.loadout?.belt || (p?.loadout?.talismans || []).length).map(p => {
@@ -2945,16 +2969,23 @@ class Component extends DCLogic {
       sendTitle: Component.t("Send these weights to the game through the Metz Combat Sim Helper: the talisman window, tooltips and the Talismans tab show what each line is worth"),
       sendToGame: () => { const d = s.devDone; if (d?.ranked) this.devSendToGame(this.devAdvicePackage(this.devWeightingOf(d)), "weights"); },
       sendNote: s.devSendNote?.key === "weights" ? s.devSendNote.text : "",
-      hasBestSet: !!bestSet && !s.devRunning,
-      bestSetTitle: bestSet ? Component.tf("Best talismans for {name} from these weights, by {view}{xp}", { name: bestSet.player || "",
-        view: Component.t({ eph: "Run time", xp: "XP / h", profit: "Profit" }[view.unit] || view.unit), xp: view.xp ? "" : Component.t(", without Experience lines") }) : "",
-      bestSetTotal: bestSet ? Component.tf("{gain} {unit} by the weights ({pct}), lines added up; the set as a whole was not simulated", { gain: fmt(bestSet.total), unit, pct: share(bestSet.total) || "\u2013" }) : "",
-      bestSetTalismans: (bestSet?.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: t.modifiers.map(m => `${Component.t(m.name)} ${val(m)}`).join(" \u00b7 ") })),
-      equipBestSet: () => bestSet && globalThis.dispatchEvent?.(new CustomEvent("zone-apply-talismans", { detail: { player: bestSet.player, belt: bestSet.belt, talismans: bestSet.talismans } })),
-      talApplyNote: (() => { const a = s.talApplied; if (!a) return "";
+      hasBestSet: !!shownSet && !s.devRunning,
+      bestSetTitle: !shownSet ? "" : shownSet.simulated
+        ? Component.tf("Best talismans for {name}, simulated line by line, by {view}{xp}", { name: shownSet.player || "", view: viewName, xp: viewXpText })
+        : Component.tf("Best talismans for {name} from these weights, by {view}{xp}", { name: shownSet.player || "", view: viewName, xp: viewXpText }),
+      bestSetTotal: !shownSet ? "" : shownSet.simulated
+        ? (shownSet.hasTotal ? Component.tf("{gain} {unit} ({pct}) \u00b1 {se} for the whole set, measured on fresh seeds", { gain: fmt(shownSet.total), unit, pct: share(shownSet.total) || "\u2013", se: shownSet.se.toFixed(2) }) : "")
+        : Component.tf("{gain} {unit} by the weights ({pct}), lines added up; the set as a whole was not simulated", { gain: fmt(shownSet.total), unit, pct: share(shownSet.total) || "\u2013" }),
+      bestSetTalismans: (shownSet?.talismans || []).map((t, i) => ({ label: Component.tf("Talisman {n}:", { n: i + 1 }), lines: (t.modifiers || []).map(m => `${Component.t(m.name)} ${val(m)}`).join(" \u00b7 ") })),
+      equipBestSet: () => shownSet && globalThis.dispatchEvent?.(new CustomEvent("zone-apply-talismans", { detail: { key: setKey, player: shownSet.player, belt: shownSet.belt, talismans: shownSet.talismans } })),
+      // Simulate the set: the search again with the set built line by line, judged by the measure the table shows.
+      canSimulateSet: !simSet && !!done && !s.devRunning,
+      simulateSet: () => { this.setDev({ player: done.player, belt: done.belt.hrid, level: done.belt.enhancementLevel, grade: done.grade }); this._devSim = { metric: view.unit, noXp: !view.xp };
+        setTimeout(() => { try { this.devRun(); } finally { this._devSim = null; } }, 0); },
+      talApplyNote: (() => { const a = s.talApplied; if (!a || a.key !== setKey) return "";
         return a.applied ? Component.tf("{n} talismans put on {name} in Setup. Reset in the player's Belt and talismans section brings the imported belt back; Save loadout keeps this one.", { n: a.count, name: a.player || "" })
           : Component.tf("{name} is no longer in the party on Setup, so nothing was changed.", { name: a.player || "" }); })(),
-      hasTalApplyNote: !!s.talApplied,
+      hasTalApplyNote: !!s.talApplied && s.talApplied.key === setKey,
       hasRows: rows.length > 0,
       rowsNote: Component.tf("Each modifier as the only talisman line, against no talismans at all, in {unit}; every line on the same runs.", { unit }),
       rows: rows.map(r => ({ name: Component.t(r.name), value: val(r), cells: gradeCells(r.hrid), gain: r.seeds ? `${fmt(gainOf(r))} \u00b1 ${seOf(r) >= 1000 ? Math.round(seOf(r)).toLocaleString("en-US") : seOf(r).toFixed(seOf(r) >= 100 ? 0 : 2)}` : "\u2026", share: r.seeds ? share(gainOf(r)) : "",
@@ -2984,7 +3015,7 @@ class Component extends DCLogic {
     // Before anything else renders, so the first paint is already in the reader's language rather than flashing
     // English at them. A failure here must never stop the page: the site in English beats no site.
     try {
-      const i18n = await import("./i18n.js?v=d560064c0810");
+      const i18n = await import("./i18n.js?v=79b10eb7469b");
       Component.t = i18n.t;
       this._i18n = i18n;
       await i18n.start();
@@ -3008,7 +3039,7 @@ class Component extends DCLogic {
     try {
       // The browser client fetches the game data and the kernel once (~1.8 MB compressed) and answers every
       // zone request in this page. zoneApi.js imports nothing else, so nothing else is on the wire.
-      const { connectZoneOnly } = await import("./zoneApi.js?v=d560064c0810");
+      const { connectZoneOnly } = await import("./zoneApi.js?v=79b10eb7469b");
       const client = await connectZoneOnly();
       this.setState({ client, booting: false });
       // Setup > Advanced > Workers changed the pool: the header's lane count and Optimize's estimates follow.
@@ -3369,7 +3400,7 @@ class Component extends DCLogic {
     const s = this.state, head = s.skillHead || null;
     const zone = (s.zones || []).find(z => z.hrid === head?.zone);
     try {
-      const { toCsv } = await import("./server/zoneCsv.mjs?v=d560064c0810");
+      const { toCsv } = await import("./server/zoneCsv.mjs?v=79b10eb7469b");
       const text = toCsv({ mode: "skills", head: { ...head, zoneName: zone?.name },
         ranked: s.skillDone?.ranked || s.skillRows || [], curves: s.skillDone?.curves || [],
         measuredAt: s.optRestoredAt || Date.now() });
@@ -3390,7 +3421,7 @@ class Component extends DCLogic {
     // Cleared straight away, so picking the SAME file twice still fires a change and re-reads it.
     input.value = "";
     try {
-      const { fromCsv } = await import("./server/zoneCsv.mjs?v=d560064c0810");
+      const { fromCsv } = await import("./server/zoneCsv.mjs?v=79b10eb7469b");
       const { meta, ranked, curves } = fromCsv(await file.text());
       if (meta.mode && meta.mode !== "skills") throw new Error(Component.tf("that CSV is a {mode} answer, and this is the skill tool", { mode: meta.mode }));
       this.setState({
